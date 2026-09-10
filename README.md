@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 系统分析师 · 刷题站（Next.js）
 
-## Getting Started
+软考「系统分析师」备考刷题站点，由原本地静态页迁移为 **Next.js 15（App Router + 静态导出）**，可一键部署到 **EdgeOne Makers**。
 
-First, run the development server:
+## 功能
+
+- **刷题**：自编练习 / 真题选择题 / 出题工坊；筛选、连续通关、本地进度
+- **案例**：100 套案例分析练习卡（背景 + 三问 + 参考要点）
+- **知识点**：正式精炼 Markdown 站内阅读
+- **关于**：合规与部署说明
+
+## 本地开发
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 构建（EdgeOne / 静态托管）
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+# 产物目录：out/
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`edgeone.json` 已配置：
 
-## Learn More
+| 项 | 值 |
+|----|-----|
+| installCommand | `npm install` |
+| buildCommand | `npm run build` |
+| outputDirectory | `out` |
+| framework | nextjs |
 
-To learn more about Next.js, take a look at the following resources:
+## 部署到 EdgeOne Makers
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. 将本仓库推送到 GitHub
+2. 打开 [EdgeOne Makers](https://pages.edgeone.ai/) → Import Git Repository → 授权 GitHub → 选本仓库
+3. 确认构建命令与输出目录（可直接使用 `edgeone.json`）
+4. Start Deployment；之后每次 push 自动重新部署
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 数据
 
-## Deploy on Vercel
+题库与知识点镜像在 `public/data` 与 `public/kb`（来自知识点精炼正式发布产物）。
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 合规
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+仅供个人学习；真题内容请勿商用或二次传播。

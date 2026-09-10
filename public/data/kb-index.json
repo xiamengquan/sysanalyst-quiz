@@ -1,0 +1,302 @@
+{
+  "meta": {
+    "version": "v1.0",
+    "effective": "2026-09-10",
+    "audit": "甲通过 / 乙通过 / 丙通过",
+    "manifest": "知识点工坊/审计委员会/正式发布/知识点精炼-正式清单-v1.0.md",
+    "announcement": "知识点工坊/审计委员会/正式发布/发布公告-v1.0.md"
+  },
+  "sections": [
+    {
+      "id": "root",
+      "title": "入口",
+      "items": [
+        {
+          "id": "map",
+          "title": "使用说明与知识地图",
+          "path": "00-使用说明与知识地图.md",
+          "status": "正式",
+          "kind": "entry"
+        },
+        {
+          "id": "case-tutorial",
+          "title": "案例分析答题教程",
+          "path": "案例分析答题教程.md",
+          "status": "正式",
+          "kind": "entry",
+          "note": "科目2 方法"
+        }
+      ]
+    },
+    {
+      "id": "part1",
+      "title": "第一篇 · 基础知识（第1—9章）",
+      "items": [
+        {
+          "id": "p1-index",
+          "title": "篇索引",
+          "path": "第一篇-基础知识/第一篇-第1至9章.md",
+          "status": "正式",
+          "kind": "index"
+        },
+        {
+          "id": "ch01",
+          "title": "第01章 · 绪论",
+          "path": "第一篇-基础知识/第01章-绪论.md",
+          "status": "正式",
+          "kind": "chapter",
+          "chapter": 1
+        },
+        {
+          "id": "ch02",
+          "title": "第02章 · 数学与工程基础",
+          "path": "第一篇-基础知识/第02章-数学与工程基础.md",
+          "status": "正式",
+          "kind": "chapter",
+          "chapter": 2
+        },
+        {
+          "id": "ch03",
+          "title": "第03章 · 计算机系统",
+          "path": "第一篇-基础知识/第03章-计算机系统.md",
+          "status": "正式",
+          "kind": "chapter",
+          "chapter": 3
+        },
+        {
+          "id": "ch04",
+          "title": "第04章 · 计算机网络与分布式系统",
+          "path": "第一篇-基础知识/第04章-计算机网络与分布式系统.md",
+          "status": "正式",
+          "kind": "chapter",
+          "chapter": 4
+        },
+        {
+          "id": "ch05",
+          "title": "第05章 · 数据库系统",
+          "path": "第一篇-基础知识/第05章-数据库系统.md",
+          "status": "正式",
+          "kind": "chapter",
+          "chapter": 5
+        },
+        {
+          "id": "ch06",
+          "title": "第06章 · 企业信息化",
+          "path": "第一篇-基础知识/第06章-企业信息化.md",
+          "status": "正式",
+          "kind": "chapter",
+          "chapter": 6
+        },
+        {
+          "id": "ch07",
+          "title": "第07章 · 软件工程",
+          "path": "第一篇-基础知识/第07章-软件工程.md",
+          "status": "正式",
+          "kind": "chapter",
+          "chapter": 7
+        },
+        {
+          "id": "ch08",
+          "title": "第08章 · 项目管理",
+          "path": "第一篇-基础知识/第08章-项目管理.md",
+          "status": "正式",
+          "kind": "chapter",
+          "chapter": 8
+        },
+        {
+          "id": "ch09",
+          "title": "第09章 · 信息安全",
+          "path": "第一篇-基础知识/第09章-信息安全.md",
+          "status": "正式",
+          "kind": "chapter",
+          "chapter": 9
+        },
+        {
+          "id": "p1-appendix",
+          "title": "附录 · 第一篇跨章高频对比速查",
+          "path": "第一篇-基础知识/附录-第一篇跨章高频对比速查.md",
+          "status": "正式",
+          "kind": "appendix"
+        }
+      ]
+    },
+    {
+      "id": "part2",
+      "title": "第二篇 · 关键技术（第10—15章）",
+      "items": [
+        {
+          "id": "p2-index",
+          "title": "篇索引",
+          "path": "第二篇-关键技术/第二篇-第10至15章.md",
+          "status": "正式",
+          "kind": "index"
+        },
+        {
+          "id": "ch10",
+          "title": "第10章 · 系统规划与分析",
+          "path": "第二篇-关键技术/第10章-系统规划与分析.md",
+          "status": "正式",
+          "kind": "chapter",
+          "chapter": 10
+        },
+        {
+          "id": "ch11",
+          "title": "第11章 · 软件需求工程",
+          "path": "第二篇-关键技术/第11章-软件需求工程.md",
+          "status": "正式",
+          "kind": "chapter",
+          "chapter": 11
+        },
+        {
+          "id": "ch12",
+          "title": "第12章 · 软件架构设计",
+          "path": "第二篇-关键技术/第12章-软件架构设计.md",
+          "status": "正式",
+          "kind": "chapter",
+          "chapter": 12
+        },
+        {
+          "id": "ch13",
+          "title": "第13章 · 系统设计",
+          "path": "第二篇-关键技术/第13章-系统设计.md",
+          "status": "正式",
+          "kind": "chapter",
+          "chapter": 13
+        },
+        {
+          "id": "ch14",
+          "title": "第14章 · 软件实现与测试",
+          "path": "第二篇-关键技术/第14章-软件实现与测试.md",
+          "status": "正式",
+          "kind": "chapter",
+          "chapter": 14
+        },
+        {
+          "id": "ch15",
+          "title": "第15章 · 系统运行与维护",
+          "path": "第二篇-关键技术/第15章-系统运行与维护.md",
+          "status": "正式",
+          "kind": "chapter",
+          "chapter": 15
+        },
+        {
+          "id": "p2-appendix",
+          "title": "附录 · 跨章综合速查",
+          "path": "第二篇-关键技术/附录-跨章综合速查.md",
+          "status": "正式",
+          "kind": "appendix"
+        }
+      ]
+    },
+    {
+      "id": "part3",
+      "title": "第三篇 · 案例实践（第16—22章）",
+      "items": [
+        {
+          "id": "p3-index",
+          "title": "篇索引",
+          "path": "第三篇-案例实践/第三篇-第16至22章.md",
+          "status": "正式",
+          "kind": "index"
+        },
+        {
+          "id": "ch16",
+          "title": "第16章 · Web应用系统分析与设计",
+          "path": "第三篇-案例实践/第16章-Web应用系统分析与设计.md",
+          "status": "正式",
+          "kind": "chapter",
+          "chapter": 16
+        },
+        {
+          "id": "ch17",
+          "title": "第17章 · 嵌入式系统分析与设计",
+          "path": "第三篇-案例实践/第17章-嵌入式系统分析与设计.md",
+          "status": "正式",
+          "kind": "chapter",
+          "chapter": 17
+        },
+        {
+          "id": "ch18",
+          "title": "第18章 · 移动应用系统分析与设计",
+          "path": "第三篇-案例实践/第18章-移动应用系统分析与设计.md",
+          "status": "正式",
+          "kind": "chapter",
+          "chapter": 18
+        },
+        {
+          "id": "ch19",
+          "title": "第19章 · 大数据处理系统分析与设计",
+          "path": "第三篇-案例实践/第19章-大数据处理系统分析与设计.md",
+          "status": "正式",
+          "kind": "chapter",
+          "chapter": 19
+        },
+        {
+          "id": "ch20",
+          "title": "第20章 · 微服务系统分析与设计",
+          "path": "第三篇-案例实践/第20章-微服务系统分析与设计.md",
+          "status": "正式",
+          "kind": "chapter",
+          "chapter": 20
+        },
+        {
+          "id": "ch21",
+          "title": "第21章 · 信息物理系统分析与设计",
+          "path": "第三篇-案例实践/第21章-信息物理系统分析与设计.md",
+          "status": "正式",
+          "kind": "chapter",
+          "chapter": 21
+        },
+        {
+          "id": "ch22",
+          "title": "第22章 · 系统分析师论文写作要点",
+          "path": "第三篇-案例实践/第22章-系统分析师论文写作要点.md",
+          "status": "正式",
+          "kind": "chapter",
+          "chapter": 22
+        }
+      ]
+    },
+    {
+      "id": "quick",
+      "title": "速查",
+      "items": [
+        {
+          "id": "quick-outline",
+          "title": "大纲考点对照",
+          "path": "速查/大纲考点对照.md",
+          "status": "正式",
+          "kind": "quick"
+        },
+        {
+          "id": "quick-compare",
+          "title": "高频对比速查表",
+          "path": "速查/高频对比速查表.md",
+          "status": "正式",
+          "kind": "quick"
+        },
+        {
+          "id": "quick-essay",
+          "title": "近五年论文范围分析",
+          "path": "速查/近五年论文范围分析.md",
+          "status": "正式",
+          "kind": "quick"
+        }
+      ]
+    },
+    {
+      "id": "essay",
+      "title": "论文范文",
+      "items": [
+        {
+          "id": "essay-dir",
+          "title": "论文范文目录",
+          "path": "论文范文/",
+          "status": "正式",
+          "kind": "entry",
+          "note": "练习用，已登记地图"
+        }
+      ]
+    }
+  ]
+}
