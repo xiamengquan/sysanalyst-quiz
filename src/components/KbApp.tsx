@@ -1,13 +1,39 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
-import { marked } from "marked";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { marked, Renderer } from "marked";
 import type { KbIndex, KbItem } from "@/lib/types";
+import {
+  filterCatalogItems,
+  searchKbDocs,
+  type KbSearchHit,
+  type KbSearchIndex,
+} from "@/lib/kb-search";
+
+const KIND_OPTS = [
+  { value: "all", label: "全部类型" },
+  { value: "chapter", label: "章节" },
+  { value: "quick", label: "速查" },
+  { value: "appendix", label: "附录" },
+  { value: "index", label: "篇索引" },
+  { value: "entry", label: "入口" },
+];
+
+function hitLabel(kind: string) {
+  if (kind === "title") return "目录";
+  if (kind === "heading") return "标题";
+  return "正文";
+}
 
 export function KbCatalog() {
   const [data, setData] = useState<KbIndex | null>(null);
+  const [searchIdx, setSearchIdx] = useState<KbSearchIndex | null>(null);
   const [err, setErr] = useState("");
+  const [query, setQuery] = useState("");
+  const [kind, setKind] = useState("all");
+  const [sectionId, setSectionId] = useState("all");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     fetch("/data/kb-index.json")
@@ -17,7 +43,67 @@ export function KbCatalog() {
       })
       .then(setData)
       .catch((e) => setErr(e.message));
+    fetch("/data/kb-search-index.json")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => d && setSearchIdx(d))
+      .catch(() => {});
   }, []);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        inputRef.current?.focus();
+        inputRef.current?.select();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  const flat = useMemo(() => {
+    if (!data) return [];
+    return data.sections.flatMap((sec) =>
+      (sec.items || []).map((item) => ({
+        ...item,
+        sectionId: sec.id,
+        sectionTitle: sec.title,
+      })),
+    );
+  }, [data]);
+
+  const q = query.trim();
+  const catalogFiltered = useMemo(
+    () => filterCatalogItems(flat, q, kind, sectionId),
+    [flat, q, kind, sectionId],
+  );
+
+  const hits = useMemo((): KbSearchHit[] => {
+    if (!q) return [];
+    if (searchIdx?.docs?.length) return searchKbDocs(searchIdx.docs, q, kind, sectionId);
+    return catalogFiltered.map((it) => ({
+      id: it.id,
+      title: it.title,
+      kind: it.kind,
+      note: it.note,
+      status: it.status,
+      chapter: it.chapter,
+      sectionTitle: it.sectionTitle,
+      hitKind: "title" as const,
+      score: 1,
+      snippet: it.note || it.sectionTitle,
+    }));
+  }, [q, searchIdx, kind, sectionId, catalogFiltered]);
+
+  const grouped = useMemo(() => {
+    if (!data || q) return [];
+    return data.sections
+      .map((sec) => ({
+        ...sec,
+        items: catalogFiltered.filter((i) => i.sectionId === sec.id),
+      }))
+      .filter((sec) => sec.items.length > 0 && (sectionId === "all" || sec.id === sectionId));
+  }, [data, catalogFiltered, q, sectionId]);
 
   if (err) return <p className="text-[var(--bad)]">目录加载失败：{err}</p>;
   if (!data) return <p className="text-[var(--muted)]">正式目录加载中…</p>;
@@ -26,37 +112,145 @@ export function KbCatalog() {
     <>
       <h1 className="mb-1 text-[1.35rem] font-semibold">知识点</h1>
       <p className="mb-4 text-[0.9rem] text-[var(--muted)]">
-        正式发布 {data.meta?.version || "v1.0"} · 点击条目在站内阅读正文
+        正式发布 {data.meta?.version || "v1.0"} · 支持目录 / 标题 / 正文快速搜索
       </p>
+
+      <div className="card mb-4">
+        <div className="grid gap-3 sm:grid-cols-[1.6fr_1fr_1fr]">
+          <label className="block text-[0.82rem] text-[var(--muted)]">
+            搜索
+            <input
+              ref={inputRef}
+              className="field mt-1.5"
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="章节名、考点、标题关键词…（⌘/Ctrl+K）"
+              autoComplete="off"
+            />
+          </label>
+          <label className="block text-[0.82rem] text-[var(--muted)]">
+            类型
+            <select className="field mt-1.5" value={kind} onChange={(e) => setKind(e.target.value)}>
+              {KIND_OPTS.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="block text-[0.82rem] text-[var(--muted)]">
+            篇/分区
+            <select
+              className="field mt-1.5"
+              value={sectionId}
+              onChange={(e) => setSectionId(e.target.value)}
+            >
+              <option value="all">全部</option>
+              {data.sections.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.title}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+        <p className="mt-3 text-[0.9rem] text-[var(--muted)]">
+          {q
+            ? `当前匹配 ${hits.length} 条 · 共 ${flat.length} 条`
+            : `当前显示 ${catalogFiltered.length} 条 · 共 ${flat.length} 条`}
+          {query ? (
+            <button
+              type="button"
+              className="btn btn-ghost ml-2 px-2 py-1 text-[0.8rem]"
+              onClick={() => setQuery("")}
+            >
+              清空
+            </button>
+          ) : null}
+        </p>
+      </div>
+
       <div className="card mb-4 border-[color-mix(in_srgb,var(--accent)_35%,var(--line))] bg-[color-mix(in_srgb,var(--accent)_8%,var(--panel))] text-[0.92rem] leading-relaxed">
         <b>正式发布 {data.meta?.version || "v1.0"}</b>（{data.meta?.effective || "—"}）
         ：审计通过内容；可站内阅读，也可跳转对应章节刷题。
       </div>
-      {data.sections.map((sec) => (
-        <div key={sec.id} className="mb-4">
-          <h3 className="mb-2 text-[0.95rem] text-[var(--muted)]">{sec.title}</h3>
-          <ul className="space-y-2">
-            {sec.items.map((item) => (
-              <li key={item.id}>
-                <Link
-                  href={`/kb/${item.id}/`}
-                  className="flex items-center justify-between rounded-xl border border-[var(--line)] bg-[#121820] px-3.5 py-3 hover:border-[#4a5d73]"
-                >
-                  <div>
-                    <div className="text-[0.95rem]">{item.title}</div>
-                    {item.note ? (
-                      <div className="mt-0.5 text-[0.78rem] text-[var(--muted)]">{item.note}</div>
-                    ) : null}
-                  </div>
-                  <span className="badge shrink-0">{item.status || "正式"}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
+
+      {q ? (
+        <div className="mb-4">
+          <h3 className="mb-2 text-[0.95rem] text-[var(--muted)]">搜索结果</h3>
+          {hits.length === 0 ? (
+            <p className="text-[var(--muted)]">无匹配，试试「架构」「微服务」或章节号「12」</p>
+          ) : (
+            <ul className="space-y-2">
+              {hits.map((hit, i) => (
+                <li key={`${hit.id}-${hit.hitKind}-${hit.heading || ""}-${i}`}>
+                  <Link
+                    href={hit.slug ? `/kb/${hit.id}/#${hit.slug}` : `/kb/${hit.id}/`}
+                    className="flex items-start justify-between gap-3 rounded-xl border border-[var(--line)] bg-[#121820] px-3.5 py-3 hover:border-[#4a5d73]"
+                  >
+                    <div className="min-w-0">
+                      <div className="text-[0.95rem]">{hit.title}</div>
+                      <div className="mt-0.5 text-[0.78rem] text-[var(--muted)]">
+                        <span className="badge">{hitLabel(hit.hitKind)}</span>
+                        {hit.sectionTitle}
+                        {hit.heading ? ` · ${hit.heading}` : ""}
+                      </div>
+                      {hit.snippet ? (
+                        <div className="mt-1 truncate text-[0.8rem] text-[#a8b8c8]">{hit.snippet}</div>
+                      ) : null}
+                    </div>
+                    <span className="badge shrink-0">{hit.status || "正式"}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
-      ))}
+      ) : (
+        grouped.map((sec) => (
+          <div key={sec.id} className="mb-4">
+            <h3 className="mb-2 text-[0.95rem] text-[var(--muted)]">{sec.title}</h3>
+            <ul className="space-y-2">
+              {sec.items.map((item) => (
+                <li key={item.id}>
+                  <Link
+                    href={`/kb/${item.id}/`}
+                    className="flex items-center justify-between rounded-xl border border-[var(--line)] bg-[#121820] px-3.5 py-3 hover:border-[#4a5d73]"
+                  >
+                    <div>
+                      <div className="text-[0.95rem]">{item.title}</div>
+                      {item.note ? (
+                        <div className="mt-0.5 text-[0.78rem] text-[var(--muted)]">{item.note}</div>
+                      ) : null}
+                    </div>
+                    <span className="badge shrink-0">{item.status || "正式"}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      )}
     </>
   );
+}
+
+function mdWithHeadingIds(md: string) {
+  const renderer = new Renderer();
+  renderer.heading = ({ text, depth }) => {
+    const plain = String(text).replace(/<[^>]+>/g, "");
+    const id = plain
+      .trim()
+      .toLowerCase()
+      .replace(/[`*_~]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/[^\w\u4e00-\u9fff-]+/g, "")
+      .slice(0, 80);
+    return `<h${depth} id="${id}">${text}</h${depth}>\n`;
+  };
+  marked.setOptions({ gfm: true, breaks: false });
+  return marked.parse(md, { renderer }) as string;
 }
 
 export function KbReader({ id }: { id: string }) {
@@ -89,8 +283,7 @@ export function KbReader({ id }: { id: string }) {
         return fetch(url).then(async (res) => {
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
           const md = await res.text();
-          marked.setOptions({ gfm: true, breaks: false });
-          setHtml(marked.parse(md) as string);
+          setHtml(mdWithHeadingIds(md));
           setStatus("ok");
         });
       })
@@ -99,6 +292,22 @@ export function KbReader({ id }: { id: string }) {
         setMsg(e.message);
       });
   }, [id, map]);
+
+  useEffect(() => {
+    if (status !== "ok") return;
+    const hash = typeof window !== "undefined" ? window.location.hash.slice(1) : "";
+    if (!hash) return;
+    requestAnimationFrame(() => {
+      const el = document.getElementById(decodeURIComponent(hash));
+      const box = document.querySelector(".md-body") as HTMLElement | null;
+      if (!el) return;
+      if (box && box.contains(el)) {
+        box.scrollTop = el.offsetTop - box.offsetTop - 12;
+      } else {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  }, [status, html]);
 
   return (
     <>

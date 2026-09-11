@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "sync:data": "node scripts/sync-from-notes.mjs"
+    "sync:data": "node scripts/sync-from-notes.mjs",
+    "build:kb-search": "node scripts/build-kb-search.mjs"
   },
   "dependencies": {
     "marked": "^15.0.12",
