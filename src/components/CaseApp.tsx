@@ -167,7 +167,7 @@ export function CaseApp() {
                 />
               </label>
             </div>
-            <div className="flex flex-wrap gap-2">
+            <div className="btn-row">
               <button type="button" className="btn btn-primary" onClick={() => startPool(filtered)}>
                 列出练习
               </button>
@@ -180,7 +180,7 @@ export function CaseApp() {
                   }
                 }}
               >
-                清空本机作答草稿
+                清空草稿
               </button>
             </div>
             <p className="text-[0.9rem] text-[var(--muted)]">
@@ -199,7 +199,7 @@ export function CaseApp() {
                   <li key={p.id}>
                     <button
                       type="button"
-                      className="w-full rounded-xl border border-[var(--line)] bg-[#121820] px-3.5 py-3 text-left hover:border-[#4a5d73]"
+                      className="min-h-14 w-full rounded-xl border border-[var(--line)] bg-[#121820] px-3.5 py-3.5 text-left hover:border-[#4a5d73]"
                       onClick={() => startPack(p)}
                     >
                       <div className="text-[0.95rem]">{p.title}</div>
@@ -226,7 +226,7 @@ export function CaseApp() {
               <li key={c.id}>
                 <button
                   type="button"
-                  className="w-full rounded-xl border border-[var(--line)] bg-[#121820] px-3.5 py-3 text-left hover:border-[#4a5d73]"
+                  className="min-h-14 w-full rounded-xl border border-[var(--line)] bg-[#121820] px-3.5 py-3.5 text-left hover:border-[#4a5d73]"
                   onClick={() => {
                     setIdx(i);
                     setReveal(false);
@@ -265,23 +265,24 @@ export function CaseApp() {
               第{current.chapter}章 · {CH_NAMES[current.chapter] || ""}
             </span>
           </div>
-          <div className="mb-4 whitespace-pre-wrap rounded-[10px] border border-[var(--line)] bg-[#121820] p-3 leading-relaxed">
+          <div className="mb-4 whitespace-pre-wrap break-words rounded-[10px] border border-[var(--line)] bg-[#121820] p-3 text-[0.95rem] leading-relaxed sm:text-[1rem]">
             {current.stem}
           </div>
           <div className="space-y-4">
             {current.questions.map((qq) => (
               <div key={qq.qnum}>
-                <h4 className="mb-2 text-[0.95rem]">
+                <h4 className="mb-2 text-[0.95rem] leading-snug">
                   问题{qq.qnum}　{qq.prompt}
                 </h4>
                 <textarea
-                  className="field min-h-[88px]"
-                  placeholder="在此作答（草稿仅存本机 IndexedDB）…"
+                  className="field"
+                  rows={5}
+                  placeholder="在此作答（草稿仅存本机）…"
                   value={drafts[current.id]?.[qq.qnum] || ""}
                   onChange={(e) => updateAns(current.id, qq.qnum, e.target.value)}
                 />
                 {reveal && (
-                  <div className="mt-2 rounded-[10px] border border-[color-mix(in_srgb,var(--ok)_40%,var(--line))] bg-[#143028] p-3 text-[0.9rem] leading-relaxed">
+                  <div className="mt-2 rounded-[10px] border border-[color-mix(in_srgb,var(--ok)_40%,var(--line))] bg-[#143028] p-3 text-[0.9rem] leading-relaxed break-words">
                     <b style={{ color: "var(--ok)" }}>参考要点（非唯一）</b>
                     <br />
                     {qq.rubric?.sample || "（无）"}
@@ -296,7 +297,7 @@ export function CaseApp() {
               </div>
             ))}
           </div>
-          <div className="mt-3 flex flex-wrap gap-2">
+          <div className="sticky-actions">
             <button
               type="button"
               className="btn"
@@ -320,17 +321,17 @@ export function CaseApp() {
               下一套
             </button>
             <button type="button" className="btn" onClick={() => setReveal(true)}>
-              查看参考要点
+              看要点
             </button>
             <button
               type="button"
               className="btn btn-ghost"
               onClick={() => void storageSet(CASE_STORAGE_KEY, drafts)}
             >
-              保存草稿
+              保存
             </button>
             <button type="button" className="btn btn-ghost" onClick={() => setPhase("list")}>
-              返回列表
+              列表
             </button>
           </div>
         </div>

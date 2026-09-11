@@ -125,8 +125,12 @@ export function KbCatalog() {
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="章节名、考点、标题关键词…（⌘/Ctrl+K）"
+              placeholder="搜章节、考点、关键词…"
+              enterKeyHint="search"
               autoComplete="off"
+              autoCapitalize="off"
+              autoCorrect="off"
+              spellCheck={false}
             />
           </label>
           <label className="block text-[0.82rem] text-[var(--muted)]">
@@ -187,7 +191,7 @@ export function KbCatalog() {
                 <li key={`${hit.id}-${hit.hitKind}-${hit.heading || ""}-${i}`}>
                   <Link
                     href={hit.slug ? `/kb/${hit.id}/#${hit.slug}` : `/kb/${hit.id}/`}
-                    className="flex items-start justify-between gap-3 rounded-xl border border-[var(--line)] bg-[#121820] px-3.5 py-3 hover:border-[#4a5d73]"
+                    className="flex min-h-12 items-start justify-between gap-3 rounded-xl border border-[var(--line)] bg-[#121820] px-3.5 py-3.5 hover:border-[#4a5d73]"
                   >
                     <div className="min-w-0">
                       <div className="text-[0.95rem]">{hit.title}</div>
@@ -216,7 +220,7 @@ export function KbCatalog() {
                 <li key={item.id}>
                   <Link
                     href={`/kb/${item.id}/`}
-                    className="flex items-center justify-between rounded-xl border border-[var(--line)] bg-[#121820] px-3.5 py-3 hover:border-[#4a5d73]"
+                    className="flex min-h-12 items-center justify-between gap-3 rounded-xl border border-[var(--line)] bg-[#121820] px-3.5 py-3.5 hover:border-[#4a5d73]"
                   >
                     <div>
                       <div className="text-[0.95rem]">{item.title}</div>
@@ -250,7 +254,8 @@ function mdWithHeadingIds(md: string) {
     return `<h${depth} id="${id}">${text}</h${depth}>\n`;
   };
   marked.setOptions({ gfm: true, breaks: false });
-  return marked.parse(md, { renderer }) as string;
+  const html = marked.parse(md, { renderer }) as string;
+  return html.replace(/<table[\s\S]*?<\/table>/gi, (table) => `<div class="table-wrap">${table}</div>`);
 }
 
 export function KbReader({ id }: { id: string }) {
@@ -311,20 +316,20 @@ export function KbReader({ id }: { id: string }) {
 
   return (
     <>
-      <div className="mb-3 flex flex-wrap gap-2">
+      <div className="mb-3 btn-row">
         <Link href="/kb/" className="btn btn-ghost">
           返回目录
         </Link>
         {item?.chapter ? (
           <Link href={`/?chapter=${item.chapter}&bank=practice`} className="btn btn-primary">
-            在本章刷题（第{String(item.chapter).padStart(2, "0")}章）
+            本章刷题
           </Link>
         ) : null}
       </div>
       <div className="card">
-        <h1 className="mb-2 text-[1.2rem] font-semibold">{item?.title || id}</h1>
+        <h1 className="mb-2 text-[1.15rem] font-semibold leading-snug sm:text-[1.2rem]">{item?.title || id}</h1>
         {item?.path ? (
-          <p className="mb-2 text-[0.85rem] text-[var(--muted)]">
+          <p className="mb-2 break-all text-[0.8rem] text-[var(--muted)] sm:text-[0.85rem]">
             <span className="badge">{item.status || "正式"}</span>
             <code className="text-[0.8em]">{item.path}</code>
           </p>

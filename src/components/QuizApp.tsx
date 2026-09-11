@@ -224,18 +224,15 @@ export function QuizApp() {
               />
             </label>
           </div>
-          <div className="flex flex-wrap gap-2 pt-1">
+          <div className="btn-row pt-1">
             <button type="button" className="btn btn-primary" onClick={() => void start()}>
               开始答题
             </button>
-            <button type="button" className="btn btn-primary" onClick={() => void start()}>
-              连续通关 · 当前筛选
-            </button>
-            <button type="button" className="btn btn-ghost" onClick={() => void start({ resume: true })}>
+            <button type="button" className="btn" onClick={() => void start({ resume: true })}>
               从断点继续
             </button>
             <button type="button" className="btn btn-ghost" onClick={() => setShuffle((s) => !s)}>
-              随机打乱：{shuffle ? "开" : "关"}
+              随机：{shuffle ? "开" : "关"}
             </button>
           </div>
           <p className="text-[0.9rem] text-[var(--muted)]">当前筛选 {filtered.length} 题 · 进度存 IndexedDB</p>
@@ -264,15 +261,18 @@ export function QuizApp() {
             <span className="badge">{q.diff}</span>
             <span className="badge">{q.bank}</span>
           </div>
-          <div className="mb-4 text-[1.05rem] leading-relaxed">{q.stem}</div>
-          <div className="space-y-2">
+          <div className="mb-4 text-[1.02rem] leading-relaxed sm:text-[1.05rem]">{q.stem}</div>
+          <div className="space-y-2.5">
             {["A", "B", "C", "D"].map((k) => {
               if (!q.opts[k]) return null;
-              let cls =
-                "block w-full rounded-xl border border-[var(--line)] bg-[#121820] px-3.5 py-3 text-left hover:border-[#4a5d73]";
-              if (chosen === k) cls += " border-[var(--accent)] bg-[#173049]";
-              if (shown && k === q.ans) cls += " border-[var(--ok)] bg-[#143028]";
-              if (shown && chosen === k && k !== q.ans) cls += " border-[var(--bad)] bg-[#2a1719]";
+              const cls = [
+                "opt-btn",
+                chosen === k ? "is-chosen" : "",
+                shown && k === q.ans ? "is-ok" : "",
+                shown && chosen === k && k !== q.ans ? "is-bad" : "",
+              ]
+                .filter(Boolean)
+                .join(" ");
               return (
                 <button key={k} type="button" className={cls} onClick={() => choose(k)}>
                   <b className="mr-2">{k}.</b>
@@ -283,7 +283,7 @@ export function QuizApp() {
           </div>
           {shown && (
             <div
-              className={`mt-3 rounded-[10px] border bg-[#121820] p-3 leading-relaxed ${
+              className={`mt-3 rounded-[10px] border bg-[#121820] p-3 text-[0.92rem] leading-relaxed sm:text-[1rem] ${
                 chosen === q.ans
                   ? "border-[color-mix(in_srgb,var(--ok)_50%,var(--line))]"
                   : "border-[color-mix(in_srgb,var(--bad)_50%,var(--line))]"
@@ -301,7 +301,7 @@ export function QuizApp() {
               {q.exp}
             </div>
           )}
-          <div className="mt-3 flex flex-wrap gap-2">
+          <div className="sticky-actions">
             <button type="button" className="btn" disabled={idx <= 0} onClick={() => setIdx((i) => i - 1)}>
               上一题
             </button>
@@ -320,13 +320,13 @@ export function QuizApp() {
               className="btn"
               onClick={() => setRevealed((r) => ({ ...r, [q.no]: true }))}
             >
-              查看答案
+              看答案
             </button>
             <button type="button" className="btn btn-ghost" onClick={() => void persist()}>
-              保存进度
+              保存
             </button>
             <button type="button" className="btn btn-ghost" onClick={() => setPhase("setup")}>
-              返回设置
+              设置
             </button>
           </div>
         </div>
@@ -351,15 +351,15 @@ export function QuizApp() {
               </div>
             ))}
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="btn-row">
             <button type="button" className="btn btn-primary" onClick={() => void start({ fromWrong: true })}>
               只做错题
             </button>
-            <button type="button" className="btn" onClick={() => void start({ resume: true })}>
-              从断点继续
-            </button>
             <button type="button" className="btn" onClick={() => void start()}>
               再来一轮
+            </button>
+            <button type="button" className="btn" onClick={() => void start({ resume: true })}>
+              断点继续
             </button>
             <button type="button" className="btn btn-ghost" onClick={() => setPhase("setup")}>
               返回设置
