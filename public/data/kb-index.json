@@ -262,6 +262,14 @@
       "title": "速查",
       "items": [
         {
+          "id": "quick-req-five",
+          "title": "案例必答 · 需求获取五法对比卡",
+          "path": "速查/案例必答-需求获取五法对比卡.md",
+          "status": "正式",
+          "kind": "quick",
+          "note": "加练·约25分"
+        },
+        {
           "id": "quick-outline",
           "title": "大纲考点对照",
           "path": "速查/大纲考点对照.md",

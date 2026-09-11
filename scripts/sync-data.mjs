@@ -51,6 +51,8 @@ function buildQuestions() {
       origin_chapter: o.origin_chapter,
       audience: o.audience,
       math_level: o.math_level,
+      intensity: o.intensity,
+      style_track: o.style_track,
     }));
 
   const real = loadJsonl(path.join(BANKS, "real/上午真题.jsonl")).map((q, i) => ({
@@ -169,10 +171,18 @@ function buildCases() {
   copyCasePacks();
 }
 
+function copyPaperBank() {
+  const src = path.join(BANKS, "paper/all.jsonl");
+  if (!fs.existsSync(src)) return;
+  const rows = loadJsonl(src);
+  writeJson(path.join(OUT, "paper.json"), rows);
+}
+
 function main() {
   const qMeta = buildQuestions();
   buildCases();
-  console.log({ questions: qMeta, cases: "public/data/cases.json" });
+  copyPaperBank();
+  console.log({ questions: qMeta, cases: "public/data/cases.json", paper: "public/data/paper.json" });
 }
 
 main();

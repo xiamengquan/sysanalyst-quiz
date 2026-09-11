@@ -40,6 +40,8 @@ export type Question = {
   origin_chapter?: number;
   audience?: string[];
   math_level?: string;
+  intensity?: "boost" | "stable" | string;
+  style_track?: string;
 };
 
 export type CaseItem = {

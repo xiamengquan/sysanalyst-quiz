@@ -123,6 +123,31 @@ export function CaseApp() {
 
       {phase === "setup" && (
         <div className="space-y-4">
+          {packs.length > 0 && (
+            <div className="card space-y-3 border-[color-mix(in_srgb,var(--accent)_35%,var(--line))]">
+              <h2 className="text-[1rem] font-medium">五选三模拟包（优先 · 约 75 分）</h2>
+              <p className="text-[0.85rem] text-[var(--muted)]">
+                大分值加练：每包 5 题（第 1 题必答≈25 分，其余选答 2 题≈50 分）。建议先开模拟包，再散刷领域。
+              </p>
+              <ul className="space-y-2">
+                {packs.map((p) => (
+                  <li key={p.id}>
+                    <button
+                      type="button"
+                      className="min-h-14 w-full rounded-xl border border-[var(--line)] bg-[#121820] px-3.5 py-3.5 text-left hover:border-[#4a5d73]"
+                      onClick={() => startPack(p)}
+                    >
+                      <div className="text-[0.95rem]">{p.title}</div>
+                      <div className="mt-1 text-[0.78rem] text-[var(--muted)]">
+                        {p.cases.join(" · ")}
+                      </div>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           <div className="card space-y-3">
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               <label className="block text-[0.82rem] text-[var(--muted)]">
@@ -187,31 +212,6 @@ export function CaseApp() {
               当前筛选 {filtered.length} 套 · 草稿存 IndexedDB · 默认「推荐主攻」= 需求/Web/移动/微服务/集成
             </p>
           </div>
-
-          {packs.length > 0 && (
-            <div className="card space-y-3">
-              <h2 className="text-[1rem] font-medium">五选三模拟包</h2>
-              <p className="text-[0.85rem] text-[var(--muted)]">
-                每包 5 题：第 1 题必答，其余 4 题选答 2 题；练习时建议 60 秒选题。
-              </p>
-              <ul className="space-y-2">
-                {packs.map((p) => (
-                  <li key={p.id}>
-                    <button
-                      type="button"
-                      className="min-h-14 w-full rounded-xl border border-[var(--line)] bg-[#121820] px-3.5 py-3.5 text-left hover:border-[#4a5d73]"
-                      onClick={() => startPack(p)}
-                    >
-                      <div className="text-[0.95rem]">{p.title}</div>
-                      <div className="mt-1 text-[0.78rem] text-[var(--muted)]">
-                        {p.cases.join(" · ")}
-                      </div>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
         </div>
       )}
 

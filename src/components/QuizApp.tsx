@@ -21,7 +21,9 @@ export function QuizApp() {
   const [year, setYear] = useState("all");
   const [chapter, setChapter] = useState("all");
   const [diff, setDiff] = useState("all");
-  const [path, setPath] = useState<"all" | "frontend" | "math_easy">("frontend");
+  const [path, setPath] = useState<"all" | "frontend" | "math_easy" | "roi_boost" | "roi_stable">(
+    "roi_boost",
+  );
   const [mode, setMode] = useState<"continuous" | "practice" | "exam">("continuous");
   const [limit, setLimit] = useState(0);
   const [shuffle, setShuffle] = useState(false);
@@ -36,8 +38,25 @@ export function QuizApp() {
     Promise.all([
       fetch("/data/questions.json").then((r) => r.json()),
       fetch("/data/question-meta.json").then((r) => r.json()),
-    ]).then(([qs, m]) => {
-      setAll(qs);
+      fetch("/data/paper.json")
+        .then((r) => (r.ok ? r.json() : []))
+        .catch(() => []),
+    ]).then(([qs, m, paper]) => {
+      const paperQs = (Array.isArray(paper) ? paper : []).map((o: Record<string, unknown>, i: number) => ({
+        no: Number(o.no) || 900000 + i,
+        ch: Number(o.chapter) || 22,
+        point: String(o.point || "论文"),
+        stem: String(o.stem || ""),
+        opts: (o.options || o.opts || {}) as Record<string, string>,
+        ans: String(o.answer || o.ans || ""),
+        exp: String(o.explain || o.exp || ""),
+        diff: String(o.difficulty || o.diff || "basic"),
+        bank: "paper",
+        source: String(o.source || "论文自测"),
+        id: o.id ? String(o.id) : undefined,
+        intensity: "boost" as const,
+      }));
+      setAll([...qs, ...paperQs]);
       setMeta(m);
       setLoading(false);
     });
@@ -58,14 +77,16 @@ export function QuizApp() {
   const filtered = useMemo(() => {
     const feCh = new Set([4, 7, 9, 12, 13, 14, 15]);
     let list = all.filter((q) => {
+      if (bank === "paper") return q.bank === "paper";
       if (bank !== "all" && q.bank !== bank) return false;
+      if (bank === "all" && q.bank === "paper" && path !== "roi_boost" && path !== "all") return false;
       if (bank === "real" && year !== "all" && String(q.year) !== year) return false;
       if ((bank === "practice" || bank === "all") && chapter !== "all" && String(q.ch) !== chapter) {
+        if (q.bank === "paper") return path === "roi_boost" || path === "all";
         return false;
       }
       if (diff !== "all" && q.diff !== diff) return false;
       if (path === "frontend") {
-        // 真题不做路径裁剪；自编/工坊优先前端相关章 + 打标题
         if (q.bank === "real") return true;
         const tagged = Array.isArray(q.audience) && q.audience.includes("frontend");
         if (!feCh.has(q.ch) && !tagged) return false;
@@ -75,6 +96,20 @@ export function QuizApp() {
         if (q.ch === 2) return q.math_level === "intuition" || q.diff === "basic";
         if (feCh.has(q.ch)) return true;
         return Array.isArray(q.audience) && q.audience.includes("frontend");
+      }
+      if (path === "roi_boost") {
+        if (q.bank === "real") return true;
+        if (q.bank === "paper") return true;
+        // 大分值：加练章 + 绑案例的规划/需求
+        const boostCh = new Set([3, 4, 5, 7, 9, 10, 11, 12, 14]);
+        if (q.intensity === "boost") return true;
+        return boostCh.has(q.ch);
+      }
+      if (path === "roi_stable") {
+        if (q.bank === "real") return true;
+        const stableCh = new Set([0, 1, 2, 6, 8, 13, 15]);
+        if (q.intensity === "stable") return stableCh.has(q.ch) || q.ch === 1;
+        return stableCh.has(q.ch);
       }
       return true;
     });
@@ -171,7 +206,7 @@ export function QuizApp() {
         {meta?.total ?? all.length}
         <br />
         <span className="text-[0.82rem]">
-          默认「前端友好路径」：网络/安全/架构/工程/测试优先；数学弱项可选「数学先易后难」
+          默认「分值加练」：对准卷面大权重（网络/库/架构/安全/测试等）；可用「稳练扫盲」补法规项管
         </span>
       </p>
 
@@ -186,10 +221,12 @@ export function QuizApp() {
                 onChange={(e) => {
                   const v = e.target.value as typeof path;
                   setPath(v);
-                  if (v === "frontend" || v === "math_easy") setBank("practice");
+                  if (v !== "all") setBank(v === "roi_boost" || v === "roi_stable" || v === "frontend" || v === "math_easy" ? "practice" : bank);
                 }}
               >
-                <option value="frontend">前端友好（推荐）</option>
+                <option value="roi_boost">分值加练（推荐）</option>
+                <option value="roi_stable">稳练扫盲（低权重防挂）</option>
+                <option value="frontend">前端友好</option>
                 <option value="math_easy">数学先易后难</option>
                 <option value="all">不限路径</option>
               </select>
@@ -200,7 +237,8 @@ export function QuizApp() {
                 <option value="practice">自编练习</option>
                 <option value="workshop">出题工坊（新题）</option>
                 <option value="real">真题选择题</option>
-                <option value="all">全部</option>
+                <option value="paper">论文自测（结构要点）</option>
+                <option value="all">全部（含论文自测）</option>
               </select>
             </label>
             <label className="block text-[0.82rem] text-[var(--muted)]">
