@@ -2,10 +2,17 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { CH_NAMES, type Question } from "@/lib/types";
-
-const STORAGE_KEY = "sysanalyst_quiz_v3";
+import { QUIZ_STORAGE_KEY, storageGet, storageSet } from "@/lib/storage";
 
 type Meta = { practice: number; real: number; workshop: number; total: number };
+
+type QuizPersist = {
+  poolNos?: number[];
+  idx?: number;
+  answers?: Record<number, string>;
+  revealed?: Record<number, boolean>;
+  mode?: string;
+};
 
 export function QuizApp() {
   const [all, setAll] = useState<Question[]>([]);
@@ -60,13 +67,27 @@ export function QuizApp() {
     return list;
   }, [all, bank, year, chapter, diff, shuffle, limit]);
 
+  const persist = useCallback(async () => {
+    try {
+      await storageSet(QUIZ_STORAGE_KEY, {
+        poolNos: pool.map((q) => q.no),
+        idx,
+        answers,
+        revealed,
+        mode,
+      });
+    } catch {
+      /* ignore */
+    }
+  }, [pool, idx, answers, revealed, mode]);
+
   const start = useCallback(
-    (opts?: { fromWrong?: boolean; resume?: boolean }) => {
+    async (opts?: { fromWrong?: boolean; resume?: boolean }) => {
       let list = filtered;
       if (opts?.fromWrong) {
         list = pool.filter((q) => answers[q.no] && answers[q.no] !== q.ans);
       }
-      if (!list.length) {
+      if (!list.length && !opts?.resume) {
         alert("当前筛选无题目");
         return;
       }
@@ -75,19 +96,20 @@ export function QuizApp() {
       let rev = {} as Record<number, boolean>;
       if (opts?.resume) {
         try {
-          const raw = localStorage.getItem(STORAGE_KEY);
-          if (raw) {
-            const p = JSON.parse(raw);
-            if (Array.isArray(p.poolNos)) {
-              const map = new Map(all.map((q) => [q.no, q]));
-              list = p.poolNos.map((n: number) => map.get(n)).filter(Boolean);
-              startIdx = p.idx || 0;
-              ans = p.answers || {};
-              rev = p.revealed || {};
-            }
+          const p = await storageGet<QuizPersist>(QUIZ_STORAGE_KEY);
+          if (p && Array.isArray(p.poolNos)) {
+            const map = new Map(all.map((q) => [q.no, q]));
+            list = p.poolNos.map((n) => map.get(n)).filter(Boolean) as Question[];
+            startIdx = p.idx || 0;
+            ans = p.answers || {};
+            rev = p.revealed || {};
           }
         } catch {
           /* ignore */
+        }
+        if (!list.length) {
+          alert("没有可恢复的进度");
+          return;
         }
       }
       setPool(list);
@@ -99,26 +121,13 @@ export function QuizApp() {
     [filtered, pool, answers, all],
   );
 
-  const persist = useCallback(() => {
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify({
-        poolNos: pool.map((q) => q.no),
-        idx,
-        answers,
-        revealed,
-        mode,
-      }),
-    );
-  }, [pool, idx, answers, revealed, mode]);
-
   useEffect(() => {
-    if (phase === "quiz") persist();
+    if (phase === "quiz") void persist();
   }, [phase, persist]);
 
   const q = pool[idx];
   const chosen = q ? answers[q.no] : undefined;
-  const shown = q ? !!revealed[q.no] || mode === "practice" && !!chosen : false;
+  const shown = q ? !!revealed[q.no] || (mode === "practice" && !!chosen) : false;
 
   const choose = (letter: string) => {
     if (!q) return;
@@ -216,17 +225,20 @@ export function QuizApp() {
             </label>
           </div>
           <div className="flex flex-wrap gap-2 pt-1">
-            <button type="button" className="btn btn-primary" onClick={() => start()}>
+            <button type="button" className="btn btn-primary" onClick={() => void start()}>
               开始答题
             </button>
-            <button type="button" className="btn btn-primary" onClick={() => start()}>
+            <button type="button" className="btn btn-primary" onClick={() => void start()}>
               连续通关 · 当前筛选
+            </button>
+            <button type="button" className="btn btn-ghost" onClick={() => void start({ resume: true })}>
+              从断点继续
             </button>
             <button type="button" className="btn btn-ghost" onClick={() => setShuffle((s) => !s)}>
               随机打乱：{shuffle ? "开" : "关"}
             </button>
           </div>
-          <p className="text-[0.9rem] text-[var(--muted)]">当前筛选 {filtered.length} 题</p>
+          <p className="text-[0.9rem] text-[var(--muted)]">当前筛选 {filtered.length} 题 · 进度存 IndexedDB</p>
         </div>
       )}
 
@@ -272,7 +284,9 @@ export function QuizApp() {
           {shown && (
             <div
               className={`mt-3 rounded-[10px] border bg-[#121820] p-3 leading-relaxed ${
-                chosen === q.ans ? "border-[color-mix(in_srgb,var(--ok)_50%,var(--line))]" : "border-[color-mix(in_srgb,var(--bad)_50%,var(--line))]"
+                chosen === q.ans
+                  ? "border-[color-mix(in_srgb,var(--ok)_50%,var(--line))]"
+                  : "border-[color-mix(in_srgb,var(--bad)_50%,var(--line))]"
               }`}
             >
               {chosen === q.ans ? (
@@ -296,7 +310,6 @@ export function QuizApp() {
               className="btn btn-primary"
               onClick={() => {
                 if (idx < pool.length - 1) setIdx((i) => i + 1);
-                else if (mode === "exam") setPhase("result");
                 else setPhase("result");
               }}
             >
@@ -309,7 +322,7 @@ export function QuizApp() {
             >
               查看答案
             </button>
-            <button type="button" className="btn btn-ghost" onClick={persist}>
+            <button type="button" className="btn btn-ghost" onClick={() => void persist()}>
               保存进度
             </button>
             <button type="button" className="btn btn-ghost" onClick={() => setPhase("setup")}>
@@ -329,20 +342,23 @@ export function QuizApp() {
               ["正确率", pool.length ? `${Math.round((correctCount / pool.length) * 100)}%` : "0%"],
               ["已答", Object.keys(answers).length],
             ].map(([k, v]) => (
-              <div key={String(k)} className="rounded-[10px] border border-[var(--line)] bg-[#121820] p-2.5 text-center">
+              <div
+                key={String(k)}
+                className="rounded-[10px] border border-[var(--line)] bg-[#121820] p-2.5 text-center"
+              >
                 <span className="text-[0.75rem] text-[var(--muted)]">{k}</span>
                 <b className="mt-0.5 block text-[1.2rem]">{v}</b>
               </div>
             ))}
           </div>
           <div className="flex flex-wrap gap-2">
-            <button type="button" className="btn btn-primary" onClick={() => start({ fromWrong: true })}>
+            <button type="button" className="btn btn-primary" onClick={() => void start({ fromWrong: true })}>
               只做错题
             </button>
-            <button type="button" className="btn" onClick={() => start({ resume: true })}>
+            <button type="button" className="btn" onClick={() => void start({ resume: true })}>
               从断点继续
             </button>
-            <button type="button" className="btn" onClick={() => start()}>
+            <button type="button" className="btn" onClick={() => void start()}>
               再来一轮
             </button>
             <button type="button" className="btn btn-ghost" onClick={() => setPhase("setup")}>

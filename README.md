@@ -1,48 +1,53 @@
 # 系统分析师 · 刷题站（Next.js）
 
-软考「系统分析师」备考刷题站点，由原本地静态页迁移为 **Next.js 15（App Router + 静态导出）**，可一键部署到 **EdgeOne Makers**。
+软考「系统分析师」备考站点：**题库 + 案例 + 知识点** 同源入库，静态导出可部署 EdgeOne Makers。
 
 ## 功能
 
-- **刷题**：自编练习 / 真题选择题 / 出题工坊；筛选、连续通关、本地进度
-- **案例**：100 套案例分析练习卡（背景 + 三问 + 参考要点）
-- **知识点**：正式精炼 Markdown 站内阅读
-- **关于**：合规与部署说明
+- **刷题**：自编 / 真题 / 出题工坊；筛选、连续通关、IndexedDB 进度
+- **案例**：100 套案例分析练习卡
+- **知识点**：正式精炼站内阅读 + 标题/正文快速搜索
+- **配套服务**：内容源、合并脚本、出题/知识点工坊文档均在本仓库
 
-## 本地开发
+## 目录
+
+```
+content/          # 源：知识点、题库 JSONL、案例 MD、工坊新题
+public/           # 构建产物：data/*.json + kb/**
+scripts/          # sync-kb / sync-data / build-kb-search / python/*
+docs/             # 知识点工坊、出题工坊、网站小组文档
+src/              # Next.js 前端
+```
+
+## 常用命令
 
 ```bash
 npm install
-npm run dev
-# http://localhost:3000
+npm run sync:all      # 知识点 + 题库/案例 → public/
+npm run dev           # http://localhost:3000
+npm run build         # 静态导出 → out/
 ```
 
-## 构建（EdgeOne / 静态托管）
+分项：
 
-```bash
-npm run build
-# 产物目录：out/
-```
+| 脚本 | 作用 |
+|------|------|
+| `npm run sync:kb` | `content/kb` → `public/kb` + 搜索索引 |
+| `npm run sync:data` | 合并选择题 / 构建案例 JSON |
+| `npm run build:kb-search` | 仅重建知识点搜索索引 |
 
-`edgeone.json` 已配置：
+Python 辅助（仓库相对路径）：
 
-| 项 | 值 |
-|----|-----|
-| installCommand | `npm install` |
-| buildCommand | `npm run build` |
-| outputDirectory | `out` |
-| framework | nextjs |
+- `scripts/python/build_cases_jsonl.py`
+- `scripts/python/merge_to_quiz.py`
+- `scripts/python/rewrite_cases_v2.py`
+- `scripts/python/audit_practice.py`
 
-## 部署到 EdgeOne Makers
+## 部署（EdgeOne Makers）
 
-1. 将本仓库推送到 GitHub
-2. 打开 [EdgeOne Makers](https://pages.edgeone.ai/) → Import Git Repository → 授权 GitHub → 选本仓库
-3. 确认构建命令与输出目录（可直接使用 `edgeone.json`）
-4. Start Deployment；之后每次 push 自动重新部署
-
-## 数据
-
-题库与知识点镜像在 `public/data` 与 `public/kb`（来自知识点精炼正式发布产物）。
+1. 导入 GitHub 仓库 [xiamengquan/sysanalyst-quiz](https://github.com/xiamengquan/sysanalyst-quiz)
+2. 构建：`npm run build`（输出 `out/`，见 `edgeone.json`）
+3. push `main` 自动重新部署
 
 ## 合规
 

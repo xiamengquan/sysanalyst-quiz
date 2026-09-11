@@ -1,13 +1,15 @@
 {
   "name": "sysanalyst-quiz",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run sync:all && next build",
     "start": "next start",
     "lint": "eslint",
-    "sync:data": "node scripts/sync-from-notes.mjs",
+    "sync:kb": "node scripts/sync-kb.mjs",
+    "sync:data": "node scripts/sync-data.mjs",
+    "sync:all": "npm run sync:kb && npm run sync:data",
     "build:kb-search": "node scripts/build-kb-search.mjs"
   },
   "dependencies": {

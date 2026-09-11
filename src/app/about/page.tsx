@@ -13,16 +13,20 @@ export default function AboutPage() {
         <h2 className="text-[1.05rem] text-[var(--text)]">站点说明</h2>
         <p>
           Next.js 静态导出站点：选择题刷题、案例分析练习卡、知识点精炼站内阅读。进度与案例草稿保存在浏览器
-          localStorage。
+          IndexedDB（首次自动从旧版 localStorage 迁移）。
         </p>
       </div>
 
       <div className="card space-y-2 text-[0.92rem] leading-relaxed text-[var(--muted)]">
         <h2 className="text-[1.05rem] text-[var(--text)]">数据来源</h2>
         <ul className="list-disc space-y-1 pl-5">
-          <li>自编练习 / 真题选择题 / 出题工坊 → <code>public/data/questions.json</code></li>
-          <li>案例分析 → <code>public/data/cases.json</code></li>
-          <li>知识点正式稿 → <code>public/kb/**</code> + <code>kb-index.json</code></li>
+          <li>
+            源内容：<code>content/</code>（知识点、题库 JSONL、案例 MD、工坊新题）
+          </li>
+          <li>
+            构建：<code>npm run sync:all</code> → <code>public/data/*.json</code> + <code>public/kb/**</code>
+          </li>
+          <li>工坊文档：<code>docs/kb-workshop</code> · <code>docs/question-workshop</code> · <code>docs/web-team</code></li>
         </ul>
       </div>
 
@@ -61,7 +65,7 @@ export default function AboutPage() {
 
       <div className="card text-[0.92rem] text-[var(--muted)]">
         <h2 className="mb-2 text-[1.05rem] text-[var(--text)]">版本</h2>
-        <p>站点 v0.3.1 · Next.js 15 · 知识点精炼 v1.0 · 出题细则 v1.1</p>
+        <p>站点 v0.4.0 · Next.js 15 · 内容与配套服务已迁入本仓库 · 知识点精炼 v1.0 · 出题细则 v1.1</p>
       </div>
     </>
   );

@@ -2,8 +2,9 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { CH_NAMES, type CaseItem } from "@/lib/types";
+import { CASE_STORAGE_KEY, storageGet, storageRemove, storageSet } from "@/lib/storage";
 
-const CASE_STORAGE_KEY = "sysanalyst_case_v1";
+type CaseDrafts = Record<string, Record<number, string>>;
 
 export function CaseApp() {
   const [all, setAll] = useState<CaseItem[]>([]);
@@ -13,19 +14,24 @@ export function CaseApp() {
   const [phase, setPhase] = useState<"setup" | "list" | "quiz">("setup");
   const [pool, setPool] = useState<CaseItem[]>([]);
   const [idx, setIdx] = useState(0);
-  const [drafts, setDrafts] = useState<Record<string, Record<number, string>>>({});
+  const [drafts, setDrafts] = useState<CaseDrafts>({});
   const [reveal, setReveal] = useState(false);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    fetch("/data/cases.json")
-      .then((r) => r.json())
-      .then(setAll);
-    try {
-      const raw = localStorage.getItem(CASE_STORAGE_KEY);
-      if (raw) setDrafts(JSON.parse(raw));
-    } catch {
-      /* ignore */
-    }
+    let cancelled = false;
+    Promise.all([
+      fetch("/data/cases.json").then((r) => r.json()),
+      storageGet<CaseDrafts>(CASE_STORAGE_KEY).catch(() => null),
+    ]).then(([cases, saved]) => {
+      if (cancelled) return;
+      setAll(cases);
+      if (saved && typeof saved === "object") setDrafts(saved);
+      setReady(true);
+    });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const domains = useMemo(() => [...new Set(all.map((c) => c.domain))].sort(), [all]);
@@ -42,15 +48,21 @@ export function CaseApp() {
 
   const current = pool[idx];
 
-  const saveDrafts = (next: typeof drafts) => {
+  const saveDrafts = async (next: CaseDrafts) => {
     setDrafts(next);
-    localStorage.setItem(CASE_STORAGE_KEY, JSON.stringify(next));
+    try {
+      await storageSet(CASE_STORAGE_KEY, next);
+    } catch {
+      /* ignore */
+    }
   };
 
   const updateAns = (qid: string, qnum: number, val: string) => {
     const bag = { ...(drafts[qid] || {}), [qnum]: val };
-    saveDrafts({ ...drafts, [qid]: bag });
+    void saveDrafts({ ...drafts, [qid]: bag });
   };
+
+  if (!ready) return <p className="text-[var(--muted)]">加载案例中…</p>;
 
   return (
     <>
@@ -109,14 +121,16 @@ export function CaseApp() {
               className="btn btn-ghost"
               onClick={() => {
                 if (confirm("清空本机全部案例分析作答草稿？")) {
-                  saveDrafts({});
+                  void storageRemove(CASE_STORAGE_KEY).then(() => setDrafts({}));
                 }
               }}
             >
               清空本机作答草稿
             </button>
           </div>
-          <p className="text-[0.9rem] text-[var(--muted)]">当前筛选 {filtered.length} 套</p>
+          <p className="text-[0.9rem] text-[var(--muted)]">
+            当前筛选 {filtered.length} 套 · 草稿存 IndexedDB
+          </p>
         </div>
       )}
 
@@ -176,7 +190,7 @@ export function CaseApp() {
                 </h4>
                 <textarea
                   className="field min-h-[88px]"
-                  placeholder="在此作答（草稿仅存本机）…"
+                  placeholder="在此作答（草稿仅存本机 IndexedDB）…"
                   value={drafts[current.id]?.[qq.qnum] || ""}
                   onChange={(e) => updateAns(current.id, qq.qnum, e.target.value)}
                 />
@@ -225,7 +239,7 @@ export function CaseApp() {
             <button
               type="button"
               className="btn btn-ghost"
-              onClick={() => localStorage.setItem(CASE_STORAGE_KEY, JSON.stringify(drafts))}
+              onClick={() => void storageSet(CASE_STORAGE_KEY, drafts)}
             >
               保存草稿
             </button>
