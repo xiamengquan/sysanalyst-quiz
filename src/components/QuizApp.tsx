@@ -21,9 +21,9 @@ export function QuizApp() {
   const [year, setYear] = useState("all");
   const [chapter, setChapter] = useState("all");
   const [diff, setDiff] = useState("all");
-  const [path, setPath] = useState<"all" | "frontend" | "math_easy" | "roi_boost" | "roi_stable">(
-    "roi_boost",
-  );
+  const [path, setPath] = useState<
+    "all" | "frontend" | "math_easy" | "roi_boost" | "roi_stable" | "scenario"
+  >("scenario");
   const [mode, setMode] = useState<"continuous" | "practice" | "exam">("continuous");
   const [limit, setLimit] = useState(0);
   const [shuffle, setShuffle] = useState(false);
@@ -110,6 +110,10 @@ export function QuizApp() {
         const stableCh = new Set([0, 1, 2, 6, 8, 13, 15]);
         if (q.intensity === "stable") return stableCh.has(q.ch) || q.ch === 1;
         return stableCh.has(q.ch);
+      }
+      if (path === "scenario") {
+        if (q.bank !== "practice" && q.bank !== "workshop") return false;
+        return q.style_track === "scenario";
       }
       return true;
     });
@@ -206,7 +210,7 @@ export function QuizApp() {
         {meta?.total ?? all.length}
         <br />
         <span className="text-[0.82rem]">
-          默认「分值加练」：对准卷面大权重（网络/库/架构/安全/测试等）；可用「稳练扫盲」补法规项管
+          默认「场景混淆」：专练情景题与易混选项；也可用「分值加练 / 稳练扫盲」
         </span>
       </p>
 
@@ -221,10 +225,11 @@ export function QuizApp() {
                 onChange={(e) => {
                   const v = e.target.value as typeof path;
                   setPath(v);
-                  if (v !== "all") setBank(v === "roi_boost" || v === "roi_stable" || v === "frontend" || v === "math_easy" ? "practice" : bank);
+                  if (v !== "all") setBank("practice");
                 }}
               >
-                <option value="roi_boost">分值加练（推荐）</option>
+                <option value="scenario">场景混淆（推荐）</option>
+                <option value="roi_boost">分值加练</option>
                 <option value="roi_stable">稳练扫盲（低权重防挂）</option>
                 <option value="frontend">前端友好</option>
                 <option value="math_easy">数学先易后难</option>
