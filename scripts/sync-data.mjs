@@ -118,29 +118,41 @@ function buildQuestions() {
   return meta;
 }
 
+function copyCasePacks() {
+  const src = path.join(BANKS, "cases/packs/wuxuan-san.json");
+  if (!fs.existsSync(src)) return;
+  fs.mkdirSync(OUT, { recursive: true });
+  fs.copyFileSync(src, path.join(OUT, "case-packs.json"));
+}
+
 function buildCases() {
   // Prefer regenerating from MD via Python; fallback to existing all.jsonl
   const py = path.join(ROOT, "scripts/python/build_cases_jsonl.py");
   if (fs.existsSync(py)) {
     const r = spawnSync("python3", [py], { cwd: ROOT, stdio: "inherit" });
-    if (r.status === 0) return;
-    console.warn("build_cases_jsonl.py failed, falling back to all.jsonl");
+    if (r.status !== 0) {
+      console.warn("build_cases_jsonl.py failed, falling back to all.jsonl");
+      const rows = loadJsonl(path.join(BANKS, "cases/all.jsonl"));
+      const domains = {};
+      const types = {};
+      for (const c of rows) {
+        domains[c.domain] = (domains[c.domain] || 0) + 1;
+        types[c.case_type] = (types[c.case_type] || 0) + 1;
+      }
+      writeJson(path.join(OUT, "cases.json"), rows);
+      writeJson(path.join(OUT, "case-meta.json"), {
+        practice: rows.length,
+        real: 0,
+        total: rows.length,
+        domains,
+        types,
+      });
+    }
+  } else {
+    const rows = loadJsonl(path.join(BANKS, "cases/all.jsonl"));
+    writeJson(path.join(OUT, "cases.json"), rows);
   }
-  const rows = loadJsonl(path.join(BANKS, "cases/all.jsonl"));
-  const domains = {};
-  const types = {};
-  for (const c of rows) {
-    domains[c.domain] = (domains[c.domain] || 0) + 1;
-    types[c.case_type] = (types[c.case_type] || 0) + 1;
-  }
-  writeJson(path.join(OUT, "cases.json"), rows);
-  writeJson(path.join(OUT, "case-meta.json"), {
-    practice: rows.length,
-    real: 0,
-    total: rows.length,
-    domains,
-    types,
-  });
+  copyCasePacks();
 }
 
 function main() {

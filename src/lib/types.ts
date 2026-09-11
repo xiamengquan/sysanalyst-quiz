@@ -46,6 +46,9 @@ export type CaseItem = {
   domain: string;
   case_type: string;
   point: string;
+  track?: "P0" | "P1" | "P2" | string;
+  stop_loss?: boolean;
+  depth?: string;
   stem: string;
   questions: {
     qnum: number;
@@ -57,6 +60,16 @@ export type CaseItem = {
   }[];
   source?: string;
   time_limit_min?: number;
+};
+
+export type CasePack = {
+  id: string;
+  title: string;
+  rule?: string;
+  mandatory?: number;
+  elective?: number[];
+  select_hint?: string;
+  cases: string[];
 };
 
 export type KbItem = {
