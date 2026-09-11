@@ -22,7 +22,7 @@ export function QuizApp() {
   const [chapter, setChapter] = useState("all");
   const [diff, setDiff] = useState("all");
   const [path, setPath] = useState<
-    "all" | "frontend" | "math_easy" | "roi_boost" | "roi_stable" | "scenario"
+    "all" | "frontend" | "math_easy" | "roi_boost" | "roi_stable" | "scenario" | "req_learn"
   >("scenario");
   const [mode, setMode] = useState<"continuous" | "practice" | "exam">("continuous");
   const [limit, setLimit] = useState(0);
@@ -115,9 +115,24 @@ export function QuizApp() {
         if (q.bank !== "practice" && q.bank !== "workshop") return false;
         return q.style_track === "scenario";
       }
+      if (path === "req_learn") {
+        if (q.bank !== "practice" && q.bank !== "workshop") return false;
+        if (q.ch !== 11 && q.learn_path !== "req") return false;
+        return true;
+      }
       return true;
     });
-    if (shuffle) list = [...list].sort(() => Math.random() - 0.5);
+    if (path === "req_learn") {
+      const stageRank: Record<string, number> = { L0: 0, L1: 1, L2: 2, L3: 3, L4: 4 };
+      list = [...list].sort((a, b) => {
+        const ra = stageRank[String(a.learn_stage || "")] ?? 9;
+        const rb = stageRank[String(b.learn_stage || "")] ?? 9;
+        if (ra !== rb) return ra - rb;
+        return a.no - b.no;
+      });
+    } else if (shuffle) {
+      list = [...list].sort(() => Math.random() - 0.5);
+    }
     if (limit > 0) list = list.slice(0, limit);
     return list;
   }, [all, bank, year, chapter, diff, path, shuffle, limit]);
@@ -210,7 +225,7 @@ export function QuizApp() {
         {meta?.total ?? all.length}
         <br />
         <span className="text-[0.82rem]">
-          默认「场景混淆」：专练情景题与易混选项；也可用「分值加练 / 稳练扫盲」
+          默认「场景混淆」；需求专攻可选「需求工程（L0→L4）」按关卡顺序学（建议关随机）
         </span>
       </p>
 
@@ -226,9 +241,15 @@ export function QuizApp() {
                   const v = e.target.value as typeof path;
                   setPath(v);
                   if (v !== "all") setBank("practice");
+                  if (v === "req_learn") {
+                    setShuffle(false);
+                    setChapter("11");
+                    setBank("practice");
+                  }
                 }}
               >
                 <option value="scenario">场景混淆（推荐）</option>
+                <option value="req_learn">需求工程（L0→L4）</option>
                 <option value="roi_boost">分值加练</option>
                 <option value="roi_stable">稳练扫盲（低权重防挂）</option>
                 <option value="frontend">前端友好</option>
@@ -335,6 +356,7 @@ export function QuizApp() {
           <div className="mb-2">
             <span className="badge">第{q.ch}章</span>
             <span className="badge">{q.point}</span>
+            {q.learn_stage ? <span className="badge">{q.learn_stage}</span> : null}
             <span className="badge">{q.diff}</span>
             <span className="badge">{q.bank}</span>
           </div>

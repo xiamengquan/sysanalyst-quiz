@@ -270,6 +270,14 @@
           "note": "加练·约25分"
         },
         {
+          "id": "quick-req-learn",
+          "title": "需求工程 · 体系化学习路径（L0→L4）",
+          "path": "速查/需求工程-体系化学习路径.md",
+          "status": "正式",
+          "kind": "quick",
+          "note": "教程化问答 · 对齐大纲§9"
+        },
+        {
           "id": "quick-outline",
           "title": "大纲考点对照",
           "path": "速查/大纲考点对照.md",

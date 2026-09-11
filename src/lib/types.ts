@@ -42,6 +42,8 @@ export type Question = {
   math_level?: string;
   intensity?: "boost" | "stable" | string;
   style_track?: string;
+  learn_path?: string;
+  learn_stage?: string;
 };
 
 export type CaseItem = {

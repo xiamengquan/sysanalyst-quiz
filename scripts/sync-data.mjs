@@ -53,6 +53,8 @@ function buildQuestions() {
       math_level: o.math_level,
       intensity: o.intensity,
       style_track: o.style_track,
+      learn_path: o.learn_path,
+      learn_stage: o.learn_stage,
     }));
 
   const real = loadJsonl(path.join(BANKS, "real/上午真题.jsonl")).map((q, i) => ({
