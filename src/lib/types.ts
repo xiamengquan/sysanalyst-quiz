@@ -37,6 +37,9 @@ export type Question = {
   source?: string;
   year?: string;
   id?: string;
+  origin_chapter?: number;
+  audience?: string[];
+  math_level?: string;
 };
 
 export type CaseItem = {

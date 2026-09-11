@@ -17,10 +17,11 @@ type QuizPersist = {
 export function QuizApp() {
   const [all, setAll] = useState<Question[]>([]);
   const [meta, setMeta] = useState<Meta | null>(null);
-  const [bank, setBank] = useState("workshop");
+  const [bank, setBank] = useState("practice");
   const [year, setYear] = useState("all");
   const [chapter, setChapter] = useState("all");
   const [diff, setDiff] = useState("all");
+  const [path, setPath] = useState<"all" | "frontend" | "math_easy">("frontend");
   const [mode, setMode] = useState<"continuous" | "practice" | "exam">("continuous");
   const [limit, setLimit] = useState(0);
   const [shuffle, setShuffle] = useState(false);
@@ -55,17 +56,32 @@ export function QuizApp() {
   }, [all]);
 
   const filtered = useMemo(() => {
+    const feCh = new Set([4, 7, 9, 12, 13, 14, 15]);
     let list = all.filter((q) => {
       if (bank !== "all" && q.bank !== bank) return false;
       if (bank === "real" && year !== "all" && String(q.year) !== year) return false;
-      if (bank === "practice" && chapter !== "all" && String(q.ch) !== chapter) return false;
+      if ((bank === "practice" || bank === "all") && chapter !== "all" && String(q.ch) !== chapter) {
+        return false;
+      }
       if (diff !== "all" && q.diff !== diff) return false;
+      if (path === "frontend") {
+        // 真题不做路径裁剪；自编/工坊优先前端相关章 + 打标题
+        if (q.bank === "real") return true;
+        const tagged = Array.isArray(q.audience) && q.audience.includes("frontend");
+        if (!feCh.has(q.ch) && !tagged) return false;
+      }
+      if (path === "math_easy") {
+        if (q.bank === "real") return true;
+        if (q.ch === 2) return q.math_level === "intuition" || q.diff === "basic";
+        if (feCh.has(q.ch)) return true;
+        return Array.isArray(q.audience) && q.audience.includes("frontend");
+      }
       return true;
     });
     if (shuffle) list = [...list].sort(() => Math.random() - 0.5);
     if (limit > 0) list = list.slice(0, limit);
     return list;
-  }, [all, bank, year, chapter, diff, shuffle, limit]);
+  }, [all, bank, year, chapter, diff, path, shuffle, limit]);
 
   const persist = useCallback(async () => {
     try {
@@ -153,16 +169,36 @@ export function QuizApp() {
       <p className="mb-5 text-[0.9rem] text-[var(--muted)]">
         自编 {meta?.practice ?? "—"} · 真题 {meta?.real ?? "—"} · 工坊 {meta?.workshop ?? "—"} · 合计{" "}
         {meta?.total ?? all.length}
+        <br />
+        <span className="text-[0.82rem]">
+          默认「前端友好路径」：网络/安全/架构/工程/测试优先；数学弱项可选「数学先易后难」
+        </span>
       </p>
 
       {phase === "setup" && (
         <div className="card space-y-3">
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <label className="block text-[0.82rem] text-[var(--muted)]">
+              学习路径
+              <select
+                className="field mt-1.5"
+                value={path}
+                onChange={(e) => {
+                  const v = e.target.value as typeof path;
+                  setPath(v);
+                  if (v === "frontend" || v === "math_easy") setBank("practice");
+                }}
+              >
+                <option value="frontend">前端友好（推荐）</option>
+                <option value="math_easy">数学先易后难</option>
+                <option value="all">不限路径</option>
+              </select>
+            </label>
             <label className="block text-[0.82rem] text-[var(--muted)]">
               题库
               <select className="field mt-1.5" value={bank} onChange={(e) => setBank(e.target.value)}>
-                <option value="workshop">出题工坊（新题）</option>
                 <option value="practice">自编练习</option>
+                <option value="workshop">出题工坊（新题）</option>
                 <option value="real">真题选择题</option>
                 <option value="all">全部</option>
               </select>
@@ -199,8 +235,6 @@ export function QuizApp() {
                 <option value="real">仅真题</option>
               </select>
             </label>
-          </div>
-          <div className="grid gap-3 sm:grid-cols-2">
             <label className="block text-[0.82rem] text-[var(--muted)]">
               模式
               <select

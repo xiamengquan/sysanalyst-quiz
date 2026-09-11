@@ -281,6 +281,36 @@
           "path": "速查/近五年论文范围分析.md",
           "status": "正式",
           "kind": "quick"
+        },
+        {
+          "id": "quick-math-plain",
+          "title": "前端友好 · 数学白话卡",
+          "path": "速查/前端友好-数学白话卡.md",
+          "status": "正式",
+          "kind": "quick",
+          "note": "数学弱项"
+        },
+        {
+          "id": "quick-net-abbr",
+          "title": "前端友好 · 网络英文缩写卡",
+          "path": "速查/前端友好-网络英文缩写卡.md",
+          "status": "正式",
+          "kind": "quick",
+          "note": "英语弱项"
+        },
+        {
+          "id": "quick-http-cache",
+          "title": "前端友好 · HTTP缓存对照卡",
+          "path": "速查/前端友好-HTTP缓存对照卡.md",
+          "status": "正式",
+          "kind": "quick"
+        },
+        {
+          "id": "quick-auth-sec",
+          "title": "前端友好 · 鉴权与安全卡",
+          "path": "速查/前端友好-鉴权与安全卡.md",
+          "status": "正式",
+          "kind": "quick"
         }
       ]
     },

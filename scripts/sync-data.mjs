@@ -29,19 +29,29 @@ function writeJson(fp, data) {
 }
 
 function buildQuestions() {
-  const practice = loadJsonl(path.join(BANKS, "practice/all.jsonl")).map((o) => ({
-    no: o.no,
-    ch: o.chapter ?? o.ch ?? 0,
-    point: o.point || "",
-    stem: o.stem,
-    opts: o.options || o.opts,
-    ans: o.answer || o.ans,
-    exp: o.explain || o.exp || "",
-    diff: o.difficulty || o.diff || "basic",
-    bank: "practice",
-    source: "自编练习",
-    year: "",
-  }));
+  // 出题细则 §3.1：上午选择题 chapter∈{0…15}；§3.3 论文不纳入
+  const practice = loadJsonl(path.join(BANKS, "practice/all.jsonl"))
+    .filter((o) => {
+      const ch = o.chapter ?? o.ch ?? 0;
+      return ch >= 0 && ch <= 15;
+    })
+    .map((o) => ({
+      no: o.no,
+      ch: o.chapter ?? o.ch ?? 0,
+      point: o.point || "",
+      stem: o.stem,
+      opts: o.options || o.opts,
+      ans: o.answer || o.ans,
+      exp: o.explain || o.exp || "",
+      diff: o.difficulty || o.diff || "basic",
+      bank: "practice",
+      source: "自编练习",
+      year: "",
+      id: o.id,
+      origin_chapter: o.origin_chapter,
+      audience: o.audience,
+      math_level: o.math_level,
+    }));
 
   const real = loadJsonl(path.join(BANKS, "real/上午真题.jsonl")).map((q, i) => ({
     no: 100000 + i + 1,
@@ -102,15 +112,19 @@ function buildQuestions() {
         source: o.source || path.basename(name, ".jsonl"),
         year: "",
         id: qid,
+        origin_chapter: o.origin_chapter,
       });
     });
   }
 
-  const combined = [...practice, ...real, ...workshop];
+  // 工坊题同样拦截 16–22（论文/案例主章节号）
+  const workshopOk = workshop.filter((q) => q.ch >= 0 && q.ch <= 15);
+
+  const combined = [...practice, ...real, ...workshopOk];
   const meta = {
     practice: practice.length,
     real: real.length,
-    workshop: workshop.length,
+    workshop: workshopOk.length,
     total: combined.length,
   };
   writeJson(path.join(OUT, "questions.json"), combined);
