@@ -27,6 +27,29 @@ export default function AboutPage() {
       </div>
 
       <div className="card space-y-2 text-[0.92rem] leading-relaxed text-[var(--muted)]">
+        <h2 className="text-[1.05rem] text-[var(--text)]">访问入口</h2>
+        <p>
+          请使用远程仓库部署站点，不再依赖本机 <code>./启动.sh</code> / <code>127.0.0.1:8765</code>。
+        </p>
+        <ul className="list-disc space-y-1 pl-5">
+          <li>
+            代码仓库：
+            <a
+              className="text-[var(--accent)] underline"
+              href="https://github.com/xiamengquan/sysanalyst-quiz"
+              target="_blank"
+              rel="noreferrer"
+            >
+              github.com/xiamengquan/sysanalyst-quiz
+            </a>
+          </li>
+          <li>
+            生产访问：在 EdgeOne Makers 导入上述仓库后使用其分配域名（push <code>main</code> 自动构建）
+          </li>
+        </ul>
+      </div>
+
+      <div className="card space-y-2 text-[0.92rem] leading-relaxed text-[var(--muted)]">
         <h2 className="text-[1.05rem] text-[var(--text)]">EdgeOne Makers 部署</h2>
         <ol className="list-decimal space-y-1 pl-5">
           <li>将本仓库导入 EdgeOne Makers（GitHub）</li>
