@@ -278,6 +278,14 @@
           "note": "教程化问答 · 对齐大纲§9"
         },
         {
+          "id": "quick-uml-learn",
+          "title": "UML · 体系化学习指南（由简入深）",
+          "path": "速查/UML-体系化学习指南.md",
+          "status": "正式",
+          "kind": "quick",
+          "note": "补第7章概要 · 对齐 UML 2.5.1"
+        },
+        {
           "id": "quick-outline",
           "title": "大纲考点对照",
           "path": "速查/大纲考点对照.md",
