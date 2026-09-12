@@ -137,39 +137,75 @@ function buildQuestions() {
 }
 
 function copyCasePacks() {
-  const src = path.join(BANKS, "cases/packs/wuxuan-san.json");
-  if (!fs.existsSync(src)) return;
+  const practicePack = path.join(BANKS, "cases/packs/wuxuan-san.json");
+  const realDir = path.join(BANKS, "real/案例分析");
   fs.mkdirSync(OUT, { recursive: true });
-  fs.copyFileSync(src, path.join(OUT, "case-packs.json"));
+  let packs = [];
+  if (fs.existsSync(realDir)) {
+    const realPacks = fs
+      .readdirSync(realDir)
+      .filter((n) => n.endsWith("-pack.json"))
+      .sort()
+      .reverse() // 新卷在前
+      .map((n) => JSON.parse(fs.readFileSync(path.join(realDir, n), "utf8")));
+    packs = packs.concat(realPacks);
+  }
+  if (fs.existsSync(practicePack)) {
+    const data = JSON.parse(fs.readFileSync(practicePack, "utf8"));
+    packs = packs.concat(Array.isArray(data.packs) ? data.packs : []);
+  }
+  if (!packs.length) return;
+  writeJson(path.join(OUT, "case-packs.json"), { version: "v1", packs });
+}
+
+function summarizeCases(rows) {
+  const domains = {};
+  const types = {};
+  let practice = 0;
+  let real = 0;
+  for (const c of rows) {
+    domains[c.domain] = (domains[c.domain] || 0) + 1;
+    types[c.case_type] = (types[c.case_type] || 0) + 1;
+    if (c.bank === "real") real += 1;
+    else practice += 1;
+  }
+  return {
+    practice,
+    real,
+    total: rows.length,
+    domains,
+    types,
+    tracks: rows.reduce((acc, c) => {
+      const t = c.track || "—";
+      acc[t] = (acc[t] || 0) + 1;
+      return acc;
+    }, {}),
+  };
 }
 
 function buildCases() {
-  // Prefer regenerating from MD via Python; fallback to existing all.jsonl
+  // Prefer regenerating practice from MD via Python; then append real 真题
   const py = path.join(ROOT, "scripts/python/build_cases_jsonl.py");
+  let practiceRows = [];
   if (fs.existsSync(py)) {
     const r = spawnSync("python3", [py], { cwd: ROOT, stdio: "inherit" });
     if (r.status !== 0) {
       console.warn("build_cases_jsonl.py failed, falling back to all.jsonl");
-      const rows = loadJsonl(path.join(BANKS, "cases/all.jsonl"));
-      const domains = {};
-      const types = {};
-      for (const c of rows) {
-        domains[c.domain] = (domains[c.domain] || 0) + 1;
-        types[c.case_type] = (types[c.case_type] || 0) + 1;
-      }
-      writeJson(path.join(OUT, "cases.json"), rows);
-      writeJson(path.join(OUT, "case-meta.json"), {
-        practice: rows.length,
-        real: 0,
-        total: rows.length,
-        domains,
-        types,
-      });
+      practiceRows = loadJsonl(path.join(BANKS, "cases/all.jsonl"));
+    } else {
+      practiceRows = loadJsonl(path.join(BANKS, "cases/all.jsonl"));
     }
   } else {
-    const rows = loadJsonl(path.join(BANKS, "cases/all.jsonl"));
-    writeJson(path.join(OUT, "cases.json"), rows);
+    practiceRows = loadJsonl(path.join(BANKS, "cases/all.jsonl"));
   }
+  for (const c of practiceRows) {
+    if (!c.bank) c.bank = "practice";
+  }
+
+  const realRows = loadJsonl(path.join(BANKS, "real/案例分析/all.jsonl"));
+  const rows = [...practiceRows, ...realRows];
+  writeJson(path.join(OUT, "cases.json"), rows);
+  writeJson(path.join(OUT, "case-meta.json"), summarizeCases(rows));
   copyCasePacks();
 }
 

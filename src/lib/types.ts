@@ -49,6 +49,11 @@ export type Question = {
 export type CaseItem = {
   no: number;
   id: string;
+  subject?: string;
+  bank?: "practice" | "real" | "workshop" | string;
+  year?: string;
+  half?: string;
+  exam_no?: number;
   chapter: number;
   domain: string;
   case_type: string;
@@ -62,6 +67,7 @@ export type CaseItem = {
     prompt: string;
     answer_type?: string;
     word_limit?: number;
+    score?: number;
     rubric?: { must_hit?: string[]; sample?: string };
     hint?: string;
   }[];
@@ -77,6 +83,9 @@ export type CasePack = {
   elective?: number[];
   select_hint?: string;
   cases: string[];
+  bank?: string;
+  year?: string;
+  half?: string;
 };
 
 export type KbItem = {

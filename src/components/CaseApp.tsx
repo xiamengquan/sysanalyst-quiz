@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { CH_NAMES, type CaseItem, type CasePack } from "@/lib/types";
 import { CASE_STORAGE_KEY, storageGet, storageRemove, storageSet } from "@/lib/storage";
 
@@ -12,9 +12,41 @@ const TRACK_LABEL: Record<string, string> = {
   P2: "P2 止损",
 };
 
+const IMG_RE = /!\[([^\]]*)\]\(([^)]+)\)/g;
+
+function RichText({ text, className }: { text: string; className?: string }) {
+  const nodes: ReactNode[] = [];
+  let last = 0;
+  let m: RegExpExecArray | null;
+  const re = new RegExp(IMG_RE.source, "g");
+  while ((m = re.exec(text))) {
+    if (m.index > last) nodes.push(text.slice(last, m.index));
+    nodes.push(
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        key={`${m.index}-${m[2]}`}
+        src={m[2]}
+        alt={m[1] || "配图"}
+        className="my-2 max-h-[480px] w-auto max-w-full rounded-md border border-[var(--line)] bg-white"
+        loading="lazy"
+        referrerPolicy="no-referrer"
+      />,
+    );
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) nodes.push(text.slice(last));
+  return (
+    <div className={className ?? "whitespace-pre-wrap break-words"}>
+      {nodes.length ? nodes : text}
+    </div>
+  );
+}
+
 export function CaseApp() {
   const [all, setAll] = useState<CaseItem[]>([]);
   const [packs, setPacks] = useState<CasePack[]>([]);
+  const [bank, setBank] = useState<"all" | "practice" | "real">("all");
+  const [yearHalf, setYearHalf] = useState("all");
   const [domain, setDomain] = useState("all");
   const [typ, setTyp] = useState("all");
   const [track, setTrack] = useState("frontend");
@@ -49,17 +81,35 @@ export function CaseApp() {
 
   const domains = useMemo(() => [...new Set(all.map((c) => c.domain))].sort(), [all]);
   const byId = useMemo(() => new Map(all.map((c) => [c.id, c])), [all]);
-
-  const trackCounts = useMemo(() => {
-    const c = { P0: 0, P1: 0, P2: 0 };
-    for (const x of all) {
-      if (x.track === "P0" || x.track === "P1" || x.track === "P2") c[x.track] += 1;
+  const yearOptions = useMemo(() => {
+    const s = new Set<string>();
+    for (const c of all) {
+      if (c.bank === "real" && c.year) s.add(`${c.year}${c.half || ""}`);
     }
-    return c;
+    return [...s].sort().reverse();
+  }, [all]);
+
+  const counts = useMemo(() => {
+    let practice = 0;
+    let real = 0;
+    const tracks = { P0: 0, P1: 0, P2: 0 };
+    for (const x of all) {
+      if (x.bank === "real") real += 1;
+      else practice += 1;
+      if (x.track === "P0" || x.track === "P1" || x.track === "P2") tracks[x.track] += 1;
+    }
+    return { practice, real, tracks };
   }, [all]);
 
   const filtered = useMemo(() => {
     let list = all.filter((c) => {
+      const b = c.bank || "practice";
+      if (bank === "practice" && b !== "practice") return false;
+      if (bank === "real" && b !== "real") return false;
+      if (yearHalf !== "all") {
+        const yh = `${c.year || ""}${c.half || ""}`;
+        if (yh !== yearHalf) return false;
+      }
       if (domain !== "all" && c.domain !== domain) return false;
       if (typ !== "all" && c.case_type !== typ) return false;
       if (track === "frontend") {
@@ -73,7 +123,7 @@ export function CaseApp() {
     });
     if (limit > 0) list = list.slice(0, limit);
     return list;
-  }, [all, domain, typ, track, limit]);
+  }, [all, bank, yearHalf, domain, typ, track, limit]);
 
   const current = pool[idx];
 
@@ -117,17 +167,17 @@ export function CaseApp() {
     <>
       <h1 className="mb-1 text-[1.35rem] font-semibold">案例分析</h1>
       <p className="mb-5 text-[0.9rem] text-[var(--muted)]">
-        自编 {all.length} 套 · 前端五选三路径加深 · P0 {trackCounts.P0} / P1 {trackCounts.P1} / P2{" "}
-        {trackCounts.P2}
+        练习 {counts.practice} · 真题 {counts.real} · 合计 {all.length} · P0 {counts.tracks.P0} / P1{" "}
+        {counts.tracks.P1} / P2 {counts.tracks.P2}
       </p>
 
       {phase === "setup" && (
         <div className="space-y-4">
           {packs.length > 0 && (
             <div className="card space-y-3 border-[color-mix(in_srgb,var(--accent)_35%,var(--line))]">
-              <h2 className="text-[1rem] font-medium">五选三模拟包（优先 · 约 75 分）</h2>
+              <h2 className="text-[1rem] font-medium">模拟包 / 真题卷</h2>
               <p className="text-[0.85rem] text-[var(--muted)]">
-                大分值加练：每包 5 题（第 1 题必答≈25 分，其余选答 2 题≈50 分）。建议先开模拟包，再散刷领域。
+                真题包按卷演练；自编五选三包：第 1 题必答，其余选答两题。
               </p>
               <ul className="space-y-2">
                 {packs.map((p) => (
@@ -149,9 +199,41 @@ export function CaseApp() {
           )}
 
           <div className="card space-y-3">
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
               <label className="block text-[0.82rem] text-[var(--muted)]">
-                前端路径
+                题库
+                <select
+                  className="field mt-1.5"
+                  value={bank}
+                  onChange={(e) => {
+                    const v = e.target.value as "all" | "practice" | "real";
+                    setBank(v);
+                    if (v !== "real") setYearHalf("all");
+                  }}
+                >
+                  <option value="all">全部</option>
+                  <option value="practice">练习（自编）</option>
+                  <option value="real">真题</option>
+                </select>
+              </label>
+              <label className="block text-[0.82rem] text-[var(--muted)]">
+                年份
+                <select
+                  className="field mt-1.5"
+                  value={yearHalf}
+                  onChange={(e) => setYearHalf(e.target.value)}
+                  disabled={bank === "practice"}
+                >
+                  <option value="all">全部年份</option>
+                  {yearOptions.map((y) => (
+                    <option key={y} value={y}>
+                      {y}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="block text-[0.82rem] text-[var(--muted)]">
+                路径
                 <select className="field mt-1.5" value={track} onChange={(e) => setTrack(e.target.value)}>
                   <option value="frontend">推荐主攻（P0）</option>
                   <option value="P0">仅 P0</option>
@@ -209,7 +291,7 @@ export function CaseApp() {
               </button>
             </div>
             <p className="text-[0.9rem] text-[var(--muted)]">
-              当前筛选 {filtered.length} 套 · 草稿存 IndexedDB · 默认「推荐主攻」= 需求/Web/移动/微服务/集成
+              当前筛选 {filtered.length} 套 · 草稿存 IndexedDB · 真题配图可能为外链
             </p>
           </div>
         </div>
@@ -238,6 +320,7 @@ export function CaseApp() {
                     {i === 0 && packHint.includes("必答") ? "（建议必答）" : ""}
                   </div>
                   <div className="mt-1 text-[0.78rem] text-[var(--muted)]">
+                    {c.bank === "real" ? "真题 · " : ""}
                     {c.track ? TRACK_LABEL[c.track] || c.track : ""}
                     {c.stop_loss ? " · 止损" : ""} · 第{c.chapter}章 · 建议 {c.time_limit_min || 25} 分钟
                   </div>
@@ -257,6 +340,7 @@ export function CaseApp() {
             <span>建议用时 {current.time_limit_min || 25} 分钟</span>
           </div>
           <div className="mb-3 flex flex-wrap gap-1.5">
+            {current.bank === "real" ? <span className="badge">真题</span> : <span className="badge">练习</span>}
             <span className="badge">{current.domain}</span>
             <span className="badge">{current.case_type}</span>
             {current.track ? <span className="badge">{TRACK_LABEL[current.track] || current.track}</span> : null}
@@ -265,14 +349,16 @@ export function CaseApp() {
               第{current.chapter}章 · {CH_NAMES[current.chapter] || ""}
             </span>
           </div>
-          <div className="mb-4 whitespace-pre-wrap break-words rounded-[10px] border border-[var(--line)] bg-[#121820] p-3 text-[0.95rem] leading-relaxed sm:text-[1rem]">
-            {current.stem}
-          </div>
+          <RichText
+            text={current.stem}
+            className="mb-4 whitespace-pre-wrap break-words rounded-[10px] border border-[var(--line)] bg-[#121820] p-3 text-[0.95rem] leading-relaxed sm:text-[1rem]"
+          />
           <div className="space-y-4">
             {current.questions.map((qq) => (
               <div key={qq.qnum}>
                 <h4 className="mb-2 text-[0.95rem] leading-snug">
-                  问题{qq.qnum}　{qq.prompt}
+                  问题{qq.qnum}　
+                  <RichText text={qq.prompt} className="inline whitespace-pre-wrap break-words" />
                 </h4>
                 <textarea
                   className="field"
@@ -284,13 +370,12 @@ export function CaseApp() {
                 {reveal && (
                   <div className="mt-2 rounded-[10px] border border-[color-mix(in_srgb,var(--ok)_40%,var(--line))] bg-[#143028] p-3 text-[0.9rem] leading-relaxed break-words">
                     <b style={{ color: "var(--ok)" }}>参考要点（非唯一）</b>
-                    <br />
-                    {qq.rubric?.sample || "（无）"}
+                    <RichText
+                      text={qq.rubric?.sample || "（无）"}
+                      className="mt-1 whitespace-pre-wrap break-words"
+                    />
                     {qq.hint ? (
-                      <>
-                        <br />
-                        <span className="text-[var(--muted)]">提示：{qq.hint}</span>
-                      </>
+                      <p className="mt-1 text-[var(--muted)]">提示：{qq.hint}</p>
                     ) : null}
                   </div>
                 )}
