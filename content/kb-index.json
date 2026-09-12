@@ -286,6 +286,14 @@
           "note": "补第7章概要 · 对齐 UML 2.5.1"
         },
         {
+          "id": "quick-sao-learn",
+          "title": "结构化与面向对象分析 · 体系化学习路径（L0→L4）",
+          "path": "速查/结构化与面向对象分析-体系化学习路径.md",
+          "status": "正式",
+          "kind": "quick",
+          "note": "SA/DFD + OOA/用例 · 对齐第11章"
+        },
+        {
           "id": "quick-outline",
           "title": "大纲考点对照",
           "path": "速查/大纲考点对照.md",

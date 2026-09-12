@@ -22,7 +22,14 @@ export function QuizApp() {
   const [chapter, setChapter] = useState("all");
   const [diff, setDiff] = useState("all");
   const [path, setPath] = useState<
-    "all" | "frontend" | "math_easy" | "roi_boost" | "roi_stable" | "scenario" | "req_learn"
+    | "all"
+    | "frontend"
+    | "math_easy"
+    | "roi_boost"
+    | "roi_stable"
+    | "scenario"
+    | "req_learn"
+    | "sao_learn"
   >("scenario");
   const [mode, setMode] = useState<"continuous" | "practice" | "exam">("continuous");
   const [limit, setLimit] = useState(0);
@@ -120,9 +127,13 @@ export function QuizApp() {
         if (q.ch !== 11 && q.learn_path !== "req") return false;
         return true;
       }
+      if (path === "sao_learn") {
+        if (q.bank !== "practice" && q.bank !== "workshop") return false;
+        return q.learn_path === "sao";
+      }
       return true;
     });
-    if (path === "req_learn") {
+    if (path === "req_learn" || path === "sao_learn") {
       const stageRank: Record<string, number> = { L0: 0, L1: 1, L2: 2, L3: 3, L4: 4 };
       list = [...list].sort((a, b) => {
         const ra = stageRank[String(a.learn_stage || "")] ?? 9;
@@ -241,7 +252,7 @@ export function QuizApp() {
                   const v = e.target.value as typeof path;
                   setPath(v);
                   if (v !== "all") setBank("practice");
-                  if (v === "req_learn") {
+                  if (v === "req_learn" || v === "sao_learn") {
                     setShuffle(false);
                     setChapter("11");
                     setBank("practice");
@@ -250,6 +261,7 @@ export function QuizApp() {
               >
                 <option value="scenario">场景混淆（推荐）</option>
                 <option value="req_learn">需求工程（L0→L4）</option>
+                <option value="sao_learn">结构化与OO分析（L0→L4）</option>
                 <option value="roi_boost">分值加练</option>
                 <option value="roi_stable">稳练扫盲（低权重防挂）</option>
                 <option value="frontend">前端友好</option>
