@@ -318,3 +318,46 @@ textarea.field {
   max-width: 100%;
   height: auto;
 }
+.md-body .mermaid-wrap {
+  margin: 0.85rem 0 1.1rem;
+  padding: 0.85rem 0.75rem;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #0f141c;
+}
+.md-body .mermaid {
+  display: flex;
+  justify-content: center;
+}
+.md-body .mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+.md-body .uml-figure {
+  margin: 0.85rem 0 1.1rem;
+  padding: 0.9rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #121820;
+}
+.md-body .uml-figure figcaption {
+  margin-top: 0.55rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+  text-align: center;
+}
+.md-body .uml-figure svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+.md-body pre.uml-ascii {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  white-space: pre;
+  overflow-x: auto;
+  color: #d7e0ea;
+}

@@ -240,6 +240,15 @@ export function KbCatalog() {
   );
 }
 
+function decodeHtmlEntities(s: string) {
+  return s
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+}
+
 function mdWithHeadingIds(md: string) {
   const renderer = new Renderer();
   renderer.heading = ({ text, depth }) => {
@@ -254,8 +263,34 @@ function mdWithHeadingIds(md: string) {
     return `<h${depth} id="${id}">${text}</h${depth}>\n`;
   };
   marked.setOptions({ gfm: true, breaks: false });
-  const html = marked.parse(md, { renderer }) as string;
-  return html.replace(/<table[\s\S]*?<\/table>/gi, (table) => `<div class="table-wrap">${table}</div>`);
+  let html = marked.parse(md, { renderer }) as string;
+  html = html.replace(/<table[\s\S]*?<\/table>/gi, (table) => `<div class="table-wrap">${table}</div>`);
+  // Mermaid：把 ```mermaid 代码块改成可渲染容器
+  html = html.replace(
+    /<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/gi,
+    (_m, code) => `<div class="mermaid-wrap"><div class="mermaid">${decodeHtmlEntities(code)}</div></div>`,
+  );
+  return html;
+}
+
+let mermaidMod: typeof import("mermaid").default | null = null;
+let mermaidLoader: Promise<typeof import("mermaid").default> | null = null;
+
+function ensureMermaid() {
+  if (mermaidMod) return Promise.resolve(mermaidMod);
+  if (mermaidLoader) return mermaidLoader;
+  mermaidLoader = import("mermaid").then((m) => {
+    const mermaid = m.default;
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: "dark",
+      securityLevel: "strict",
+      fontFamily: "ui-sans-serif, system-ui, sans-serif",
+    });
+    mermaidMod = mermaid;
+    return mermaid;
+  });
+  return mermaidLoader;
 }
 
 export function KbReader({ id }: { id: string }) {
@@ -312,6 +347,25 @@ export function KbReader({ id }: { id: string }) {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     });
+  }, [status, html]);
+
+  useEffect(() => {
+    if (status !== "ok" || !html.includes('class="mermaid"')) return;
+    let cancelled = false;
+    void ensureMermaid()
+      .then(async (mermaid) => {
+        if (cancelled) return;
+        const nodes = document.querySelectorAll<HTMLElement>(".md-body .mermaid");
+        // 重新渲染前去掉 data-processed，避免切换章节时不刷新
+        nodes.forEach((n) => n.removeAttribute("data-processed"));
+        if (nodes.length) await mermaid.run({ nodes });
+      })
+      .catch(() => {
+        /* 渲染失败时保留源码文本，不阻断阅读 */
+      });
+    return () => {
+      cancelled = true;
+    };
   }, [status, html]);
 
   return (
