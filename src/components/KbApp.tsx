@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { marked, Renderer } from "marked";
+import { useCallback, useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import type { KbIndex, KbItem } from "@/lib/types";
 import {
   filterCatalogItems,
@@ -10,6 +9,9 @@ import {
   type KbSearchHit,
   type KbSearchIndex,
 } from "@/lib/kb-search";
+import { renderKbMarkdown, runMermaidIn } from "@/lib/kb-md";
+import { parseKbHref, resolveKbRef } from "@/lib/kb-resolve";
+import { KbPreviewDrawer, useKbCatalog } from "@/components/KbPreviewDrawer";
 
 const KIND_OPTS = [
   { value: "all", label: "全部类型" },
@@ -177,7 +179,7 @@ export function KbCatalog() {
 
       <div className="card mb-4 border-[color-mix(in_srgb,var(--accent)_35%,var(--line))] bg-[color-mix(in_srgb,var(--accent)_8%,var(--panel))] text-[0.92rem] leading-relaxed">
         <b>正式发布 {data.meta?.version || "v1.0"}</b>（{data.meta?.effective || "—"}）
-        ：审计通过内容；可站内阅读，也可跳转对应章节刷题。
+        ：审计通过内容；可站内阅读，也可跳转对应章节刷题。正文内关联知识点以抽屉预览。
       </div>
 
       {q ? (
@@ -240,98 +242,50 @@ export function KbCatalog() {
   );
 }
 
-function decodeHtmlEntities(s: string) {
-  return s
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&amp;/g, "&")
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'");
-}
-
-function mdWithHeadingIds(md: string) {
-  const renderer = new Renderer();
-  renderer.heading = ({ text, depth }) => {
-    const plain = String(text).replace(/<[^>]+>/g, "");
-    const id = plain
-      .trim()
-      .toLowerCase()
-      .replace(/[`*_~]/g, "")
-      .replace(/\s+/g, "-")
-      .replace(/[^\w\u4e00-\u9fff-]+/g, "")
-      .slice(0, 80);
-    return `<h${depth} id="${id}">${text}</h${depth}>\n`;
-  };
-  marked.setOptions({ gfm: true, breaks: false });
-  let html = marked.parse(md, { renderer }) as string;
-  html = html.replace(/<table[\s\S]*?<\/table>/gi, (table) => `<div class="table-wrap">${table}</div>`);
-  // Mermaid：把 ```mermaid 代码块改成可渲染容器
-  html = html.replace(
-    /<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/gi,
-    (_m, code) => `<div class="mermaid-wrap"><div class="mermaid">${decodeHtmlEntities(code)}</div></div>`,
-  );
-  return html;
-}
-
-let mermaidMod: typeof import("mermaid").default | null = null;
-let mermaidLoader: Promise<typeof import("mermaid").default> | null = null;
-
-function ensureMermaid() {
-  if (mermaidMod) return Promise.resolve(mermaidMod);
-  if (mermaidLoader) return mermaidLoader;
-  mermaidLoader = import("mermaid").then((m) => {
-    const mermaid = m.default;
-    mermaid.initialize({
-      startOnLoad: false,
-      theme: "dark",
-      securityLevel: "strict",
-      fontFamily: "ui-sans-serif, system-ui, sans-serif",
-    });
-    mermaidMod = mermaid;
-    return mermaid;
-  });
-  return mermaidLoader;
-}
-
 export function KbReader({ id }: { id: string }) {
+  const catalog = useKbCatalog();
   const [item, setItem] = useState<KbItem | null>(null);
   const [html, setHtml] = useState("");
   const [status, setStatus] = useState<"loading" | "ok" | "err">("loading");
   const [msg, setMsg] = useState("");
-  const map = useMemo(() => new Map<string, KbItem>(), []);
+  const [toast, setToast] = useState("");
+  const [stack, setStack] = useState<{ id: string; title: string }[]>([]);
+  const bodyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetch("/data/kb-index.json")
-      .then((r) => r.json())
-      .then((data: KbIndex) => {
-        for (const sec of data.sections || []) {
-          for (const it of sec.items || []) map.set(it.id, it);
-        }
-        const found = map.get(id) || null;
-        setItem(found);
-        if (!found) {
-          setStatus("err");
-          setMsg("未找到该知识点条目");
-          return;
-        }
-        if (!found.path || found.path.endsWith("/")) {
-          setStatus("err");
-          setMsg("该项为目录入口，请选择具体章节阅读。");
-          return;
-        }
-        const url = "/kb/" + found.path.split("/").map(encodeURIComponent).join("/");
-        return fetch(url).then(async (res) => {
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          const md = await res.text();
-          setHtml(mdWithHeadingIds(md));
-          setStatus("ok");
-        });
+    if (!catalog.length) return;
+    const found = catalog.find((it) => it.id === id) || null;
+    setItem(found);
+    if (!found) {
+      setStatus("err");
+      setMsg("未找到该知识点条目");
+      return;
+    }
+    if (!found.path || found.path.endsWith("/")) {
+      setStatus("err");
+      setMsg("该项为目录入口，请选择具体章节阅读。");
+      return;
+    }
+    let cancelled = false;
+    setStatus("loading");
+    const url = "/kb/" + found.path.split("/").map(encodeURIComponent).join("/");
+    fetch(url)
+      .then(async (res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const md = await res.text();
+        if (cancelled) return;
+        setHtml(renderKbMarkdown(md, catalog, found.id));
+        setStatus("ok");
       })
       .catch((e) => {
+        if (cancelled) return;
         setStatus("err");
         setMsg(e.message);
       });
-  }, [id, map]);
+    return () => {
+      cancelled = true;
+    };
+  }, [id, catalog]);
 
   useEffect(() => {
     if (status !== "ok") return;
@@ -339,9 +293,9 @@ export function KbReader({ id }: { id: string }) {
     if (!hash) return;
     requestAnimationFrame(() => {
       const el = document.getElementById(decodeURIComponent(hash));
-      const box = document.querySelector(".md-body") as HTMLElement | null;
-      if (!el) return;
-      if (box && box.contains(el)) {
+      const box = bodyRef.current;
+      if (!el || !box) return;
+      if (box.contains(el)) {
         box.scrollTop = el.offsetTop - box.offsetTop - 12;
       } else {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -351,22 +305,61 @@ export function KbReader({ id }: { id: string }) {
 
   useEffect(() => {
     if (status !== "ok" || !html.includes('class="mermaid"')) return;
-    let cancelled = false;
-    void ensureMermaid()
-      .then(async (mermaid) => {
-        if (cancelled) return;
-        const nodes = document.querySelectorAll<HTMLElement>(".md-body .mermaid");
-        // 重新渲染前去掉 data-processed，避免切换章节时不刷新
-        nodes.forEach((n) => n.removeAttribute("data-processed"));
-        if (nodes.length) await mermaid.run({ nodes });
-      })
-      .catch(() => {
-        /* 渲染失败时保留源码文本，不阻断阅读 */
-      });
-    return () => {
-      cancelled = true;
-    };
+    void runMermaidIn(bodyRef.current).catch(() => {});
   }, [status, html]);
+
+  const openPreview = useCallback(
+    (targetId: string) => {
+      if (targetId === id) {
+        setToast("已在当前页阅读该篇");
+        window.setTimeout(() => setToast(""), 2200);
+        return;
+      }
+      const hit = catalog.find((c) => c.id === targetId);
+      if (!hit) {
+        setToast("未找到对应知识点");
+        window.setTimeout(() => setToast(""), 2200);
+        return;
+      }
+      setStack((prev) => {
+        const last = prev[prev.length - 1];
+        if (last?.id === targetId) return prev;
+        return [...prev, { id: hit.id, title: hit.title }];
+      });
+    },
+    [catalog, id],
+  );
+
+  const onBodyClick = useCallback(
+    (e: MouseEvent) => {
+      const a = (e.target as HTMLElement).closest("a") as HTMLAnchorElement | null;
+      if (!a) return;
+      const kbId = a.getAttribute("data-kb-id");
+      if (kbId) {
+        e.preventDefault();
+        openPreview(kbId);
+        return;
+      }
+      const path = a.getAttribute("data-kb-path");
+      if (path) {
+        e.preventDefault();
+        const hit = resolveKbRef(catalog, path, { excludeId: id });
+        if (hit) openPreview(hit.id);
+        else {
+          setToast("未找到对应知识点");
+          window.setTimeout(() => setToast(""), 2200);
+        }
+        return;
+      }
+      const href = a.getAttribute("href") || "";
+      const parsed = parseKbHref(href);
+      if (parsed && catalog.some((c) => c.id === parsed.id)) {
+        e.preventDefault();
+        openPreview(parsed.id);
+      }
+    },
+    [catalog, id, openPreview],
+  );
 
   return (
     <>
@@ -391,8 +384,26 @@ export function KbReader({ id }: { id: string }) {
         {item?.note ? <p className="mb-2 text-[0.85rem] text-[var(--muted)]">{item.note}</p> : null}
         {status === "loading" && <p className="text-[var(--muted)]">正在加载正文…</p>}
         {status === "err" && <p className="text-[var(--bad)]">{msg}</p>}
-        {status === "ok" && <div className="md-body" dangerouslySetInnerHTML={{ __html: html }} />}
+        {status === "ok" && (
+          <div
+            ref={bodyRef}
+            className="md-body"
+            onClick={onBodyClick}
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
+        )}
       </div>
+
+      {toast ? <div className="kb-toast" role="status">{toast}</div> : null}
+
+      <KbPreviewDrawer
+        open={stack.length > 0}
+        stack={stack}
+        catalog={catalog}
+        onClose={() => setStack([])}
+        onBack={() => setStack((s) => s.slice(0, -1))}
+        onOpenRef={openPreview}
+      />
     </>
   );
 }
