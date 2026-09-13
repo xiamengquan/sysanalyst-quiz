@@ -13,6 +13,7 @@
     "build:kb-search": "node scripts/build-kb-search.mjs"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.116.0",
     "lucide-react": "^1.45.0",
     "marked": "^15.0.12",
     "mermaid": "^12.0.0",

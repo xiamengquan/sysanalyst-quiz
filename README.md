@@ -23,6 +23,7 @@ src/              # Next.js 前端
 
 ```bash
 npm install
+cp .env.example .env.local   # 可选：配置 Supabase（见 docs/web-team/程序/supabase.md）
 npm run sync:all      # 知识点 + 题库/案例 → public/
 npm run dev           # http://localhost:3000
 npm run build         # 静态导出 → out/
