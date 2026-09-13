@@ -171,163 +171,188 @@ export function CaseApp() {
         {counts.tracks.P1} / P2 {counts.tracks.P2}
       </p>
 
-      {phase === "setup" && (
-        <div className="stack">
-          {packs.length > 0 && (
-            <div className="card space-y-4 border-[color-mix(in_srgb,var(--accent)_35%,var(--line))]">
-              <h2 className="text-[1rem] font-medium">模拟包 / 真题卷</h2>
-              <p className="text-[0.85rem] leading-relaxed text-[var(--muted)]">
-                真题包按卷演练；自编五选三包：第 1 题必答，其余选答两题。
-              </p>
-              <ul className="list-gap">
-                {packs.map((p) => (
-                  <li key={p.id}>
-                    <button
-                      type="button"
-                      className="min-h-14 w-full rounded-xl border border-[var(--line)] bg-[#121820] px-4 py-4 text-left hover:border-[#4a5d73]"
-                      onClick={() => startPack(p)}
-                    >
-                      <div className="text-[0.95rem]">{p.title}</div>
-                      <div className="mt-1.5 text-[0.78rem] leading-relaxed text-[var(--muted)]">
-                        {p.cases.join(" · ")}
-                      </div>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          <div className="card space-y-4">
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-              <label className="block text-[0.82rem] text-[var(--muted)]">
-                题库
-                <select
-                  className="field mt-1.5"
-                  value={bank}
-                  onChange={(e) => {
-                    const v = e.target.value as "all" | "practice" | "real";
-                    setBank(v);
-                    if (v !== "real") setYearHalf("all");
-                  }}
-                >
-                  <option value="all">全部</option>
-                  <option value="practice">练习（自编）</option>
-                  <option value="real">真题</option>
-                </select>
-              </label>
-              <label className="block text-[0.82rem] text-[var(--muted)]">
-                年份
-                <select
-                  className="field mt-1.5"
-                  value={yearHalf}
-                  onChange={(e) => setYearHalf(e.target.value)}
-                  disabled={bank === "practice"}
-                >
-                  <option value="all">全部年份</option>
-                  {yearOptions.map((y) => (
-                    <option key={y} value={y}>
-                      {y}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label className="block text-[0.82rem] text-[var(--muted)]">
-                路径
-                <select className="field mt-1.5" value={track} onChange={(e) => setTrack(e.target.value)}>
-                  <option value="frontend">推荐主攻（P0）</option>
-                  <option value="P0">仅 P0</option>
-                  <option value="P1">仅 P1 保底</option>
-                  <option value="P2">仅 P2 止损</option>
-                  <option value="stop_loss">止损域（嵌入式/CPS）</option>
-                  <option value="all">全部路径</option>
-                </select>
-              </label>
-              <label className="block text-[0.82rem] text-[var(--muted)]">
-                领域
-                <select className="field mt-1.5" value={domain} onChange={(e) => setDomain(e.target.value)}>
-                  <option value="all">全部领域</option>
-                  {domains.map((d) => (
-                    <option key={d} value={d}>
-                      {d}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label className="block text-[0.82rem] text-[var(--muted)]">
-                题型
-                <select className="field mt-1.5" value={typ} onChange={(e) => setTyp(e.target.value)}>
-                  <option value="all">全部题型</option>
-                  <option value="方案对比">方案对比</option>
-                  <option value="架构设计">架构设计</option>
-                  <option value="分析改进">分析改进</option>
-                </select>
-              </label>
-              <label className="block text-[0.82rem] text-[var(--muted)]">
-                题量（0=全部）
-                <input
-                  className="field mt-1.5"
-                  type="number"
-                  min={0}
-                  value={limit}
-                  onChange={(e) => setLimit(Number(e.target.value) || 0)}
-                />
-              </label>
-            </div>
-            <div className="btn-row">
-              <button type="button" className="btn btn-primary" onClick={() => startPool(filtered)}>
-                列出练习
-              </button>
-              <button
-                type="button"
-                className="btn btn-ghost"
-                onClick={() => {
-                  if (confirm("清空本机全部案例分析作答草稿？")) {
-                    void storageRemove(CASE_STORAGE_KEY).then(() => setDrafts({}));
-                  }
-                }}
-              >
-                清空草稿
-              </button>
-            </div>
-            <p className="text-[0.9rem] text-[var(--muted)]">
-              当前筛选 {filtered.length} 套 · 草稿存 IndexedDB · 真题配图可能为外链
-            </p>
-          </div>
-        </div>
-      )}
-
-      {phase === "list" && (
-        <div className="card">
-          <button type="button" className="btn btn-ghost mb-4" onClick={() => setPhase("setup")}>
-            返回筛选
-          </button>
-          {packHint ? <p className="mb-4 text-[0.85rem] leading-relaxed text-[var(--muted)]">{packHint}</p> : null}
-          <ul className="list-gap">
-            {pool.map((c, i) => (
-              <li key={c.id}>
+      {(phase === "setup" || phase === "list") && (
+        <div className="layout-split">
+          <aside className="layout-aside" aria-label="案例筛选">
+            <div className="card space-y-4">
+              <h2 className="text-[1rem] font-medium">筛选</h2>
+              <div className="filter-stack">
+                <label className="block text-[0.82rem] text-[var(--muted)]">
+                  题库
+                  <select
+                    className="field mt-1.5"
+                    value={bank}
+                    onChange={(e) => {
+                      const v = e.target.value as "all" | "practice" | "real";
+                      setBank(v);
+                      if (v !== "real") setYearHalf("all");
+                    }}
+                  >
+                    <option value="all">全部</option>
+                    <option value="practice">练习（自编）</option>
+                    <option value="real">真题</option>
+                  </select>
+                </label>
+                <label className="block text-[0.82rem] text-[var(--muted)]">
+                  年份
+                  <select
+                    className="field mt-1.5"
+                    value={yearHalf}
+                    onChange={(e) => setYearHalf(e.target.value)}
+                    disabled={bank === "practice"}
+                  >
+                    <option value="all">全部年份</option>
+                    {yearOptions.map((y) => (
+                      <option key={y} value={y}>
+                        {y}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="block text-[0.82rem] text-[var(--muted)]">
+                  路径
+                  <select className="field mt-1.5" value={track} onChange={(e) => setTrack(e.target.value)}>
+                    <option value="frontend">推荐主攻（P0）</option>
+                    <option value="P0">仅 P0</option>
+                    <option value="P1">仅 P1 保底</option>
+                    <option value="P2">仅 P2 止损</option>
+                    <option value="stop_loss">止损域（嵌入式/CPS）</option>
+                    <option value="all">全部路径</option>
+                  </select>
+                </label>
+                <label className="block text-[0.82rem] text-[var(--muted)]">
+                  领域
+                  <select className="field mt-1.5" value={domain} onChange={(e) => setDomain(e.target.value)}>
+                    <option value="all">全部领域</option>
+                    {domains.map((d) => (
+                      <option key={d} value={d}>
+                        {d}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="block text-[0.82rem] text-[var(--muted)]">
+                  题型
+                  <select className="field mt-1.5" value={typ} onChange={(e) => setTyp(e.target.value)}>
+                    <option value="all">全部题型</option>
+                    <option value="方案对比">方案对比</option>
+                    <option value="架构设计">架构设计</option>
+                    <option value="分析改进">分析改进</option>
+                  </select>
+                </label>
+                <label className="block text-[0.82rem] text-[var(--muted)]">
+                  题量（0=全部）
+                  <input
+                    className="field mt-1.5"
+                    type="number"
+                    min={0}
+                    value={limit}
+                    onChange={(e) => setLimit(Number(e.target.value) || 0)}
+                  />
+                </label>
+              </div>
+              <div className="btn-row">
                 <button
                   type="button"
-                  className="min-h-14 w-full rounded-xl border border-[var(--line)] bg-[#121820] px-4 py-4 text-left hover:border-[#4a5d73]"
+                  className="btn btn-primary"
+                  onClick={() => startPool(filtered)}
+                >
+                  列出练习
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-ghost"
                   onClick={() => {
-                    setIdx(i);
-                    setReveal(false);
-                    setPhase("quiz");
+                    if (confirm("清空本机全部案例分析作答草稿？")) {
+                      void storageRemove(CASE_STORAGE_KEY).then(() => setDrafts({}));
+                    }
                   }}
                 >
-                  <div className="text-[0.95rem]">
-                    {c.id} · {c.point}
-                    {i === 0 && packHint.includes("必答") ? "（建议必答）" : ""}
-                  </div>
-                  <div className="mt-1.5 text-[0.78rem] leading-relaxed text-[var(--muted)]">
-                    {c.bank === "real" ? "真题 · " : ""}
-                    {c.track ? TRACK_LABEL[c.track] || c.track : ""}
-                    {c.stop_loss ? " · 止损" : ""} · 第{c.chapter}章 · 建议 {c.time_limit_min || 25} 分钟
-                  </div>
+                  清空草稿
                 </button>
-              </li>
-            ))}
-          </ul>
+              </div>
+              <p className="text-[0.85rem] leading-relaxed text-[var(--muted)]">
+                当前筛选 {filtered.length} 套 · 草稿存 IndexedDB
+              </p>
+            </div>
+          </aside>
+
+          <div className="layout-main">
+            {phase === "setup" && (
+              <div className="stack">
+                {packs.length > 0 && (
+                  <div className="card space-y-4 border-[color-mix(in_srgb,var(--accent)_35%,var(--line))]">
+                    <h2 className="text-[1rem] font-medium">模拟包 / 真题卷</h2>
+                    <p className="text-[0.85rem] leading-relaxed text-[var(--muted)]">
+                      真题包按卷演练；自编五选三包：第 1 题必答，其余选答两题。
+                    </p>
+                    <ul className="list-gap">
+                      {packs.map((p) => (
+                        <li key={p.id}>
+                          <button
+                            type="button"
+                            className="min-h-14 w-full rounded-xl border border-[var(--line)] bg-[#121820] px-4 py-4 text-left hover:border-[#4a5d73]"
+                            onClick={() => startPack(p)}
+                          >
+                            <div className="text-[0.95rem]">{p.title}</div>
+                            <div className="mt-1.5 text-[0.78rem] leading-relaxed text-[var(--muted)]">
+                              {p.cases.join(" · ")}
+                            </div>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                <div className="card space-y-3">
+                  <h2 className="text-[1rem] font-medium">自由练习</h2>
+                  <p className="text-[0.9rem] leading-relaxed text-[var(--muted)]">
+                    左侧调筛选后点「列出练习」；真题配图可能为外链。
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {phase === "list" && (
+              <div className="card">
+                <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                  <h2 className="text-[1rem] font-medium">练习列表</h2>
+                  <button type="button" className="btn btn-ghost" onClick={() => setPhase("setup")}>
+                    返回概览
+                  </button>
+                </div>
+                {packHint ? (
+                  <p className="mb-4 text-[0.85rem] leading-relaxed text-[var(--muted)]">{packHint}</p>
+                ) : null}
+                <ul className="list-gap">
+                  {pool.map((c, i) => (
+                    <li key={c.id}>
+                      <button
+                        type="button"
+                        className="min-h-14 w-full rounded-xl border border-[var(--line)] bg-[#121820] px-4 py-4 text-left hover:border-[#4a5d73]"
+                        onClick={() => {
+                          setIdx(i);
+                          setReveal(false);
+                          setPhase("quiz");
+                        }}
+                      >
+                        <div className="text-[0.95rem]">
+                          {c.id} · {c.point}
+                          {i === 0 && packHint.includes("必答") ? "（建议必答）" : ""}
+                        </div>
+                        <div className="mt-1.5 text-[0.78rem] leading-relaxed text-[var(--muted)]">
+                          {c.bank === "real" ? "真题 · " : ""}
+                          {c.track ? TRACK_LABEL[c.track] || c.track : ""}
+                          {c.stop_loss ? " · 止损" : ""} · 第{c.chapter}章 · 建议{" "}
+                          {c.time_limit_min || 25} 分钟
+                        </div>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
       )}
 

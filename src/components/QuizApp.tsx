@@ -241,111 +241,124 @@ export function QuizApp() {
       </p>
 
       {phase === "setup" && (
-        <div className="card space-y-4">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
-            <label className="block text-[0.82rem] text-[var(--muted)]">
-              学习路径
-              <select
-                className="field mt-1.5"
-                value={path}
-                onChange={(e) => {
-                  const v = e.target.value as typeof path;
-                  setPath(v);
-                  if (v !== "all") setBank("practice");
-                  if (v === "req_learn" || v === "sao_learn") {
-                    setShuffle(false);
-                    setChapter("11");
-                    setBank("all");
-                  }
-                }}
-              >
-                <option value="scenario">场景混淆（推荐）</option>
-                <option value="req_learn">需求工程（L0→L4）</option>
-                <option value="sao_learn">结构化与OO分析（L0→L4）</option>
-                <option value="roi_boost">分值加练</option>
-                <option value="roi_stable">稳练扫盲（低权重防挂）</option>
-                <option value="frontend">前端友好</option>
-                <option value="math_easy">数学先易后难</option>
-                <option value="all">不限路径</option>
-              </select>
-            </label>
-            <label className="block text-[0.82rem] text-[var(--muted)]">
-              题库
-              <select className="field mt-1.5" value={bank} onChange={(e) => setBank(e.target.value)}>
-                <option value="practice">自编练习</option>
-                <option value="workshop">出题工坊（新题）</option>
-                <option value="real">真题选择题</option>
-                <option value="paper">论文自测（结构要点）</option>
-                <option value="all">全部（含论文自测）</option>
-              </select>
-            </label>
-            <label className="block text-[0.82rem] text-[var(--muted)]">
-              年份（真题）
-              <select className="field mt-1.5" value={year} onChange={(e) => setYear(e.target.value)}>
-                <option value="all">全部年份</option>
-                {years.map((y) => (
-                  <option key={y} value={y}>
-                    {y}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="block text-[0.82rem] text-[var(--muted)]">
-              章节（自编）
-              <select className="field mt-1.5" value={chapter} onChange={(e) => setChapter(e.target.value)}>
-                <option value="all">全部章节</option>
-                {chapters.map((c) => (
-                  <option key={c} value={c}>
-                    第{String(c).padStart(2, "0")}章 {CH_NAMES[c] || ""}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="block text-[0.82rem] text-[var(--muted)]">
-              难度
-              <select className="field mt-1.5" value={diff} onChange={(e) => setDiff(e.target.value)}>
-                <option value="all">全部难度</option>
-                <option value="basic">仅基础</option>
-                <option value="medium">仅中等</option>
-                <option value="deep">仅深度</option>
-                <option value="real">仅真题</option>
-              </select>
-            </label>
-            <label className="block text-[0.82rem] text-[var(--muted)]">
-              模式
-              <select
-                className="field mt-1.5"
-                value={mode}
-                onChange={(e) => setMode(e.target.value as typeof mode)}
-              >
-                <option value="continuous">连续通关</option>
-                <option value="practice">练习（即时看答案）</option>
-                <option value="exam">模拟（交卷后看结果）</option>
-              </select>
-            </label>
-            <label className="block text-[0.82rem] text-[var(--muted)]">
-              题量（0=全部）
-              <input
-                className="field mt-1.5"
-                type="number"
-                min={0}
-                value={limit}
-                onChange={(e) => setLimit(Number(e.target.value) || 0)}
-              />
-            </label>
+        <div className="layout-split">
+          <aside className="layout-aside" aria-label="刷题筛选">
+            <div className="card">
+              <h2 className="mb-4 text-[1rem] font-medium">筛选</h2>
+              <div className="filter-stack">
+                <label className="block text-[0.82rem] text-[var(--muted)]">
+                  学习路径
+                  <select
+                    className="field mt-1.5"
+                    value={path}
+                    onChange={(e) => {
+                      const v = e.target.value as typeof path;
+                      setPath(v);
+                      if (v !== "all") setBank("practice");
+                      if (v === "req_learn" || v === "sao_learn") {
+                        setShuffle(false);
+                        setChapter("11");
+                        setBank("all");
+                      }
+                    }}
+                  >
+                    <option value="scenario">场景混淆（推荐）</option>
+                    <option value="req_learn">需求工程（L0→L4）</option>
+                    <option value="sao_learn">结构化与OO分析（L0→L4）</option>
+                    <option value="roi_boost">分值加练</option>
+                    <option value="roi_stable">稳练扫盲（低权重防挂）</option>
+                    <option value="frontend">前端友好</option>
+                    <option value="math_easy">数学先易后难</option>
+                    <option value="all">不限路径</option>
+                  </select>
+                </label>
+                <label className="block text-[0.82rem] text-[var(--muted)]">
+                  题库
+                  <select className="field mt-1.5" value={bank} onChange={(e) => setBank(e.target.value)}>
+                    <option value="practice">自编练习</option>
+                    <option value="workshop">出题工坊（新题）</option>
+                    <option value="real">真题选择题</option>
+                    <option value="paper">论文自测（结构要点）</option>
+                    <option value="all">全部（含论文自测）</option>
+                  </select>
+                </label>
+                <label className="block text-[0.82rem] text-[var(--muted)]">
+                  年份（真题）
+                  <select className="field mt-1.5" value={year} onChange={(e) => setYear(e.target.value)}>
+                    <option value="all">全部年份</option>
+                    {years.map((y) => (
+                      <option key={y} value={y}>
+                        {y}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="block text-[0.82rem] text-[var(--muted)]">
+                  章节（自编）
+                  <select className="field mt-1.5" value={chapter} onChange={(e) => setChapter(e.target.value)}>
+                    <option value="all">全部章节</option>
+                    {chapters.map((c) => (
+                      <option key={c} value={c}>
+                        第{String(c).padStart(2, "0")}章 {CH_NAMES[c] || ""}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="block text-[0.82rem] text-[var(--muted)]">
+                  难度
+                  <select className="field mt-1.5" value={diff} onChange={(e) => setDiff(e.target.value)}>
+                    <option value="all">全部难度</option>
+                    <option value="basic">仅基础</option>
+                    <option value="medium">仅中等</option>
+                    <option value="deep">仅深度</option>
+                    <option value="real">仅真题</option>
+                  </select>
+                </label>
+                <label className="block text-[0.82rem] text-[var(--muted)]">
+                  模式
+                  <select
+                    className="field mt-1.5"
+                    value={mode}
+                    onChange={(e) => setMode(e.target.value as typeof mode)}
+                  >
+                    <option value="continuous">连续通关</option>
+                    <option value="practice">练习（即时看答案）</option>
+                    <option value="exam">模拟（交卷后看结果）</option>
+                  </select>
+                </label>
+                <label className="block text-[0.82rem] text-[var(--muted)]">
+                  题量（0=全部）
+                  <input
+                    className="field mt-1.5"
+                    type="number"
+                    min={0}
+                    value={limit}
+                    onChange={(e) => setLimit(Number(e.target.value) || 0)}
+                  />
+                </label>
+              </div>
+            </div>
+          </aside>
+
+          <div className="layout-main">
+            <div className="card space-y-4">
+              <h2 className="text-[1rem] font-medium">开始本轮</h2>
+              <p className="text-[0.92rem] leading-relaxed text-[var(--muted)]">
+                当前筛选 <b className="text-[var(--text)]">{filtered.length}</b> 题 · 进度存 IndexedDB
+              </p>
+              <div className="btn-row">
+                <button type="button" className="btn btn-primary" onClick={() => void start()}>
+                  开始答题
+                </button>
+                <button type="button" className="btn" onClick={() => void start({ resume: true })}>
+                  从断点继续
+                </button>
+                <button type="button" className="btn btn-ghost" onClick={() => setShuffle((s) => !s)}>
+                  随机：{shuffle ? "开" : "关"}
+                </button>
+              </div>
+            </div>
           </div>
-          <div className="btn-row pt-1">
-            <button type="button" className="btn btn-primary" onClick={() => void start()}>
-              开始答题
-            </button>
-            <button type="button" className="btn" onClick={() => void start({ resume: true })}>
-              从断点继续
-            </button>
-            <button type="button" className="btn btn-ghost" onClick={() => setShuffle((s) => !s)}>
-              随机：{shuffle ? "开" : "关"}
-            </button>
-          </div>
-          <p className="text-[0.9rem] text-[var(--muted)]">当前筛选 {filtered.length} 题 · 进度存 IndexedDB</p>
         </div>
       )}
 

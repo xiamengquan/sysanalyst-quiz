@@ -72,71 +72,82 @@ export function KbCatalog() {
         <kbd className="gs-kbd-inline">Ctrl+K</kbd> / <kbd className="gs-kbd-inline">⌘K</kbd>
       </p>
 
-      <div className="card">
-        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-          <p className="text-[0.88rem] leading-relaxed text-[var(--muted)]">按类型 / 分区浏览目录；搜标题与正文请打开全局搜索。</p>
-          <GlobalSearchHintButton />
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <label className="block text-[0.82rem] text-[var(--muted)]">
-            类型
-            <select className="field mt-1.5" value={kind} onChange={(e) => setKind(e.target.value)}>
-              {KIND_OPTS.map((o) => (
-                <option key={o.value} value={o.value}>
-                  {o.label}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="block text-[0.82rem] text-[var(--muted)]">
-            篇/分区
-            <select
-              className="field mt-1.5"
-              value={sectionId}
-              onChange={(e) => setSectionId(e.target.value)}
-            >
-              <option value="all">全部</option>
-              {data.sections.map((s) => (
-                <option key={s.id} value={s.id}>
-                  {s.title}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-        <p className="mt-4 text-[0.9rem] text-[var(--muted)]">
-          当前显示 {catalogFiltered.length} 条 · 共 {flat.length} 条
-        </p>
-      </div>
-
-      <div className="card mb-4 border-[color-mix(in_srgb,var(--accent)_35%,var(--line))] bg-[color-mix(in_srgb,var(--accent)_8%,var(--panel))] text-[0.92rem] leading-relaxed">
-        <b>正式发布 {data.meta?.version || "v1.0"}</b>（{data.meta?.effective || "—"}）
-        ：审计通过内容；可站内阅读，也可跳转对应章节刷题。正文内关联知识点以抽屉预览。
-      </div>
-
-      {grouped.map((sec) => (
-        <div key={sec.id} className="mb-6">
-          <h3 className="mb-3 text-[0.95rem] font-medium tracking-wide text-[var(--muted)]">{sec.title}</h3>
-          <ul className="list-gap">
-            {sec.items.map((item) => (
-              <li key={item.id}>
-                <Link
-                  href={`/kb/${item.id}/`}
-                  className="flex min-h-14 items-center justify-between gap-3 rounded-xl border border-[var(--line)] bg-[#121820] px-4 py-4 hover:border-[#4a5d73]"
+      <div className="layout-split">
+        <aside className="layout-aside" aria-label="知识点筛选">
+          <div className="card space-y-4">
+            <h2 className="text-[1rem] font-medium">筛选</h2>
+            <p className="text-[0.85rem] leading-relaxed text-[var(--muted)]">
+              按类型 / 分区浏览；搜标题与正文请用全局搜索。
+            </p>
+            <div className="filter-stack">
+              <label className="block text-[0.82rem] text-[var(--muted)]">
+                类型
+                <select className="field mt-1.5" value={kind} onChange={(e) => setKind(e.target.value)}>
+                  {KIND_OPTS.map((o) => (
+                    <option key={o.value} value={o.value}>
+                      {o.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="block text-[0.82rem] text-[var(--muted)]">
+                篇/分区
+                <select
+                  className="field mt-1.5"
+                  value={sectionId}
+                  onChange={(e) => setSectionId(e.target.value)}
                 >
-                  <div>
-                    <div className="text-[0.95rem]">{item.title}</div>
-                    {item.note ? (
-                      <div className="mt-0.5 text-[0.78rem] text-[var(--muted)]">{item.note}</div>
-                    ) : null}
-                  </div>
-                  <span className="badge shrink-0">{item.status || "正式"}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
+                  <option value="all">全部</option>
+                  {data.sections.map((s) => (
+                    <option key={s.id} value={s.id}>
+                      {s.title}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <p className="text-[0.85rem] text-[var(--muted)]">
+                显示 {catalogFiltered.length} / {flat.length}
+              </p>
+              <GlobalSearchHintButton />
+            </div>
+          </div>
+        </aside>
+
+        <div className="layout-main">
+          <div className="card mb-4 border-[color-mix(in_srgb,var(--accent)_35%,var(--line))] bg-[color-mix(in_srgb,var(--accent)_8%,var(--panel))] text-[0.92rem] leading-relaxed">
+            <b>正式发布 {data.meta?.version || "v1.0"}</b>（{data.meta?.effective || "—"}）
+            ：审计通过内容；可站内阅读，也可跳转对应章节刷题。正文内关联知识点以抽屉预览。
+          </div>
+
+          {grouped.map((sec) => (
+            <div key={sec.id} className="mb-6">
+              <h3 className="mb-3 text-[0.95rem] font-medium tracking-wide text-[var(--muted)]">
+                {sec.title}
+              </h3>
+              <ul className="list-gap">
+                {sec.items.map((item) => (
+                  <li key={item.id}>
+                    <Link
+                      href={`/kb/${item.id}/`}
+                      className="flex min-h-14 items-center justify-between gap-3 rounded-xl border border-[var(--line)] bg-[#121820] px-4 py-4 hover:border-[#4a5d73]"
+                    >
+                      <div>
+                        <div className="text-[0.95rem]">{item.title}</div>
+                        {item.note ? (
+                          <div className="mt-0.5 text-[0.78rem] text-[var(--muted)]">{item.note}</div>
+                        ) : null}
+                      </div>
+                      <span className="badge shrink-0">{item.status || "正式"}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </>
   );
 }

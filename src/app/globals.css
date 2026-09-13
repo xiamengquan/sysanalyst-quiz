@@ -142,6 +142,51 @@ button,
   gap: 0.75rem;
 }
 
+/* 筛选侧栏 + 主内容：窄屏上下，≥960px 左右 */
+.layout-split {
+  display: grid;
+  gap: var(--space-4);
+  align-items: start;
+}
+@media (min-width: 960px) {
+  .layout-split {
+    grid-template-columns: minmax(240px, 300px) minmax(0, 1fr);
+    gap: var(--space-5);
+  }
+}
+@media (min-width: 1280px) {
+  .layout-split {
+    grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
+  }
+}
+.layout-aside {
+  min-width: 0;
+}
+@media (min-width: 960px) {
+  .layout-aside {
+    position: sticky;
+    top: calc(var(--safe-t) + 4.75rem);
+    max-height: calc(100dvh - var(--safe-t) - 5.5rem);
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+.layout-aside .card {
+  margin-bottom: 0;
+}
+.layout-aside .filter-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.layout-main {
+  min-width: 0;
+}
+.layout-main > .card:last-child,
+.layout-main > .stack > .card:last-child {
+  margin-bottom: 0;
+}
+
 .card {
   background: var(--panel);
   border: 1px solid var(--line);
