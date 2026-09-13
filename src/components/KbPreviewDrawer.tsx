@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useId, useRef, useState, type MouseEvent } from "react";
+import { ChevronLeft, ExternalLink, Pin, PinOff, X } from "lucide-react";
 import { renderKbMarkdown, runMermaidIn } from "@/lib/kb-md";
 import {
   flattenKbIndex,
@@ -105,7 +106,6 @@ export function KbPreviewDrawer({
       }
     };
     window.addEventListener("keydown", onKey);
-    // 固钉态不锁滚动，便于对照作答
     if (pinned) {
       return () => window.removeEventListener("keydown", onKey);
     }
@@ -166,21 +166,34 @@ export function KbPreviewDrawer({
           {onPinnedChange ? (
             <button
               type="button"
-              className={`btn px-2.5 py-1.5 text-[0.85rem]${pinned ? " btn-primary" : " btn-ghost"}`}
+              className={`btn btn-icon px-2.5 py-1.5 text-[0.85rem]${pinned ? " btn-primary" : " btn-ghost"}`}
               aria-pressed={pinned}
               title={pinned ? "取消固钉，恢复浮层" : "固钉到内容区右侧"}
               onClick={() => onPinnedChange(!pinned)}
             >
-              {pinned ? "取消固钉" : "固钉"}
+              {pinned ? <PinOff size={16} strokeWidth={2} aria-hidden /> : <Pin size={16} strokeWidth={2} aria-hidden />}
+              <span className="hidden sm:inline">{pinned ? "取消固钉" : "固钉"}</span>
             </button>
           ) : null}
           {stack.length > 1 ? (
-            <button type="button" className="btn btn-ghost px-2.5 py-1.5 text-[0.85rem]" onClick={onBack}>
-              返回上篇
+            <button
+              type="button"
+              className="btn btn-ghost btn-icon px-2.5 py-1.5 text-[0.85rem]"
+              onClick={onBack}
+              title="返回上篇"
+            >
+              <ChevronLeft size={16} strokeWidth={2} aria-hidden />
+              <span className="hidden sm:inline">返回</span>
             </button>
           ) : null}
-          <button type="button" className="btn btn-ghost px-2.5 py-1.5 text-[0.85rem]" onClick={onClose}>
-            关闭
+          <button
+            type="button"
+            className="btn btn-ghost btn-icon btn-icon-only px-2.5 py-1.5 text-[0.85rem]"
+            onClick={onClose}
+            aria-label="关闭"
+            title="关闭"
+          >
+            <X size={16} strokeWidth={2} aria-hidden />
           </button>
         </div>
       </header>
@@ -209,7 +222,7 @@ export function KbPreviewDrawer({
         {!current ? (
           <div className="space-y-3 text-[0.92rem] leading-relaxed text-[var(--muted)]">
             <p>{emptyHint}</p>
-            <Link href="/kb/" className="btn btn-primary inline-flex" onClick={onClose}>
+            <Link href="/kb/" className="btn btn-primary btn-icon inline-flex" onClick={onClose}>
               打开知识点目录
             </Link>
           </div>
@@ -223,7 +236,8 @@ export function KbPreviewDrawer({
       </div>
       <footer className="kb-drawer-foot">
         {current ? (
-          <Link href={`/kb/${current.id}/`} className="btn btn-primary" onClick={onClose}>
+          <Link href={`/kb/${current.id}/`} className="btn btn-primary btn-icon" onClick={onClose}>
+            <ExternalLink size={16} strokeWidth={2} aria-hidden />
             整页打开
           </Link>
         ) : (

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { BookOpen } from "lucide-react";
 import { CH_NAMES, type Question } from "@/lib/types";
 import { QUIZ_STORAGE_KEY, storageGet, storageSet } from "@/lib/storage";
 import { KbPreviewDrawer, useKbCatalog } from "@/components/KbPreviewDrawer";
@@ -510,7 +511,8 @@ export function QuizApp() {
             >
               看答案
             </button>
-            <button type="button" className="btn" onClick={openRelatedKb}>
+            <button type="button" className="btn btn-icon" onClick={openRelatedKb}>
+              <BookOpen size={16} strokeWidth={2} aria-hidden />
               知识点{relatedKb.length ? ` · ${relatedKb.length}` : ""}
             </button>
             <button type="button" className="btn btn-ghost" onClick={() => void persist()}>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
+import { BookOpen } from "lucide-react";
 import { CH_NAMES, type CaseItem, type CasePack } from "@/lib/types";
 import { CASE_STORAGE_KEY, storageGet, storageRemove, storageSet } from "@/lib/storage";
 import { KbPreviewDrawer, useKbCatalog } from "@/components/KbPreviewDrawer";
@@ -497,7 +498,8 @@ export function CaseApp() {
             <button type="button" className="btn" onClick={() => setReveal(true)}>
               看要点
             </button>
-            <button type="button" className="btn" onClick={openRelatedKb}>
+            <button type="button" className="btn btn-icon" onClick={openRelatedKb}>
+              <BookOpen size={16} strokeWidth={2} aria-hidden />
               知识点{relatedKb.length ? ` · ${relatedKb.length}` : ""}
             </button>
             <button
