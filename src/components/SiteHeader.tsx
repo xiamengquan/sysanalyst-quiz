@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { GlobalSearch } from "@/components/GlobalSearch";
 
 const tabs = [
   { href: "/", label: "刷题", short: "刷题" },
@@ -24,33 +25,35 @@ export function SiteHeader() {
         className="sticky top-0 z-50 border-b border-[var(--line)] bg-[color-mix(in_srgb,var(--panel)_92%,transparent)] backdrop-blur-md"
         style={{ paddingTop: "var(--safe-t)" }}
       >
-        <div className="mx-auto flex max-w-[820px] items-center justify-between gap-3 px-4 py-3">
+        <div className="mx-auto flex max-w-[820px] items-center justify-between gap-2 px-4 py-3 sm:gap-3">
           <Link href="/" className="min-w-0 truncate text-[1rem] font-semibold text-[var(--text)]">
             <span className="hidden sm:inline">系统分析师 · 刷题站</span>
             <span className="sm:hidden">系分刷题</span>
           </Link>
-          {/* 桌面顶栏导航；移动端改用底部 Tab */}
-          <nav className="hidden shrink-0 gap-1 sm:flex" aria-label="主导航">
-            {tabs.map((t) => {
-              const active = isActive(pathname, t.href);
-              return (
-                <Link
-                  key={t.href}
-                  href={t.href}
-                  className={`rounded-full border px-3.5 py-2 text-[0.88rem] transition ${
-                    active
-                      ? "border-[color-mix(in_srgb,var(--accent)_45%,var(--line))] bg-[color-mix(in_srgb,var(--accent)_12%,transparent)] text-[var(--accent)]"
-                      : "border-transparent text-[var(--muted)] hover:border-[var(--line)] hover:text-[var(--text)]"
-                  }`}
-                >
-                  {t.label}
-                </Link>
-              );
-            })}
-          </nav>
-          <span className="sm:hidden text-[0.78rem] text-[var(--muted)]">
-            {tabs.find((t) => isActive(pathname, t.href))?.label || ""}
-          </span>
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
+            <GlobalSearch />
+            <nav className="hidden shrink-0 gap-1 sm:flex" aria-label="主导航">
+              {tabs.map((t) => {
+                const active = isActive(pathname, t.href);
+                return (
+                  <Link
+                    key={t.href}
+                    href={t.href}
+                    className={`rounded-full border px-3.5 py-2 text-[0.88rem] transition ${
+                      active
+                        ? "border-[color-mix(in_srgb,var(--accent)_45%,var(--line))] bg-[color-mix(in_srgb,var(--accent)_12%,transparent)] text-[var(--accent)]"
+                        : "border-transparent text-[var(--muted)] hover:border-[var(--line)] hover:text-[var(--text)]"
+                    }`}
+                  >
+                    {t.label}
+                  </Link>
+                );
+              })}
+            </nav>
+            <span className="sm:hidden text-[0.78rem] text-[var(--muted)]">
+              {tabs.find((t) => isActive(pathname, t.href))?.label || ""}
+            </span>
+          </div>
         </div>
       </header>
 

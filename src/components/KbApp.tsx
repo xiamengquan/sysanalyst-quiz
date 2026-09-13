@@ -3,16 +3,12 @@
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import type { KbIndex, KbItem } from "@/lib/types";
-import {
-  filterCatalogItems,
-  searchKbDocs,
-  type KbSearchHit,
-  type KbSearchIndex,
-} from "@/lib/kb-search";
+import { filterCatalogItems } from "@/lib/kb-search";
 import { renderKbMarkdown, runMermaidIn } from "@/lib/kb-md";
 import { parseKbHref, resolveKbRef } from "@/lib/kb-resolve";
 import { KbPreviewDrawer, useKbCatalog } from "@/components/KbPreviewDrawer";
 import { KbQuickIndex } from "@/components/KbQuickIndex";
+import { GlobalSearchHintButton } from "@/components/GlobalSearch";
 
 const KIND_OPTS = [
   { value: "all", label: "全部类型" },
@@ -23,20 +19,11 @@ const KIND_OPTS = [
   { value: "entry", label: "入口" },
 ];
 
-function hitLabel(kind: string) {
-  if (kind === "title") return "目录";
-  if (kind === "heading") return "标题";
-  return "正文";
-}
-
 export function KbCatalog() {
   const [data, setData] = useState<KbIndex | null>(null);
-  const [searchIdx, setSearchIdx] = useState<KbSearchIndex | null>(null);
   const [err, setErr] = useState("");
-  const [query, setQuery] = useState("");
   const [kind, setKind] = useState("all");
   const [sectionId, setSectionId] = useState("all");
-  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     fetch("/data/kb-index.json")
@@ -46,22 +33,6 @@ export function KbCatalog() {
       })
       .then(setData)
       .catch((e) => setErr(e.message));
-    fetch("/data/kb-search-index.json")
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d) => d && setSearchIdx(d))
-      .catch(() => {});
-  }, []);
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
-        e.preventDefault();
-        inputRef.current?.focus();
-        inputRef.current?.select();
-      }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
   }, []);
 
   const flat = useMemo(() => {
@@ -75,38 +46,20 @@ export function KbCatalog() {
     );
   }, [data]);
 
-  const q = query.trim();
   const catalogFiltered = useMemo(
-    () => filterCatalogItems(flat, q, kind, sectionId),
-    [flat, q, kind, sectionId],
+    () => filterCatalogItems(flat, "", kind, sectionId),
+    [flat, kind, sectionId],
   );
 
-  const hits = useMemo((): KbSearchHit[] => {
-    if (!q) return [];
-    if (searchIdx?.docs?.length) return searchKbDocs(searchIdx.docs, q, kind, sectionId);
-    return catalogFiltered.map((it) => ({
-      id: it.id,
-      title: it.title,
-      kind: it.kind,
-      note: it.note,
-      status: it.status,
-      chapter: it.chapter,
-      sectionTitle: it.sectionTitle,
-      hitKind: "title" as const,
-      score: 1,
-      snippet: it.note || it.sectionTitle,
-    }));
-  }, [q, searchIdx, kind, sectionId, catalogFiltered]);
-
   const grouped = useMemo(() => {
-    if (!data || q) return [];
+    if (!data) return [];
     return data.sections
       .map((sec) => ({
         ...sec,
         items: catalogFiltered.filter((i) => i.sectionId === sec.id),
       }))
       .filter((sec) => sec.items.length > 0 && (sectionId === "all" || sec.id === sectionId));
-  }, [data, catalogFiltered, q, sectionId]);
+  }, [data, catalogFiltered, sectionId]);
 
   if (err) return <p className="text-[var(--bad)]">目录加载失败：{err}</p>;
   if (!data) return <p className="text-[var(--muted)]">正式目录加载中…</p>;
@@ -115,27 +68,16 @@ export function KbCatalog() {
     <>
       <h1 className="mb-1 text-[1.35rem] font-semibold">知识点</h1>
       <p className="mb-4 text-[0.9rem] text-[var(--muted)]">
-        正式发布 {data.meta?.version || "v1.0"} · 支持目录 / 标题 / 正文快速搜索
+        正式发布 {data.meta?.version || "v1.0"} · 全文搜索请用顶栏或{" "}
+        <kbd className="gs-kbd-inline">Ctrl+K</kbd> / <kbd className="gs-kbd-inline">⌘K</kbd>
       </p>
 
       <div className="card mb-4">
-        <div className="grid gap-3 sm:grid-cols-[1.6fr_1fr_1fr]">
-          <label className="block text-[0.82rem] text-[var(--muted)]">
-            搜索
-            <input
-              ref={inputRef}
-              className="field mt-1.5"
-              type="search"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="搜章节、考点、关键词…"
-              enterKeyHint="search"
-              autoComplete="off"
-              autoCapitalize="off"
-              autoCorrect="off"
-              spellCheck={false}
-            />
-          </label>
+        <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+          <p className="text-[0.88rem] text-[var(--muted)]">按类型 / 分区浏览目录；搜标题与正文请打开全局搜索。</p>
+          <GlobalSearchHintButton />
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2">
           <label className="block text-[0.82rem] text-[var(--muted)]">
             类型
             <select className="field mt-1.5" value={kind} onChange={(e) => setKind(e.target.value)}>
@@ -163,18 +105,7 @@ export function KbCatalog() {
           </label>
         </div>
         <p className="mt-3 text-[0.9rem] text-[var(--muted)]">
-          {q
-            ? `当前匹配 ${hits.length} 条 · 共 ${flat.length} 条`
-            : `当前显示 ${catalogFiltered.length} 条 · 共 ${flat.length} 条`}
-          {query ? (
-            <button
-              type="button"
-              className="btn btn-ghost ml-2 px-2 py-1 text-[0.8rem]"
-              onClick={() => setQuery("")}
-            >
-              清空
-            </button>
-          ) : null}
+          当前显示 {catalogFiltered.length} 条 · 共 {flat.length} 条
         </p>
       </div>
 
@@ -183,62 +114,29 @@ export function KbCatalog() {
         ：审计通过内容；可站内阅读，也可跳转对应章节刷题。正文内关联知识点以抽屉预览。
       </div>
 
-      {q ? (
-        <div className="mb-4">
-          <h3 className="mb-2 text-[0.95rem] text-[var(--muted)]">搜索结果</h3>
-          {hits.length === 0 ? (
-            <p className="text-[var(--muted)]">无匹配，试试「架构」「微服务」或章节号「12」</p>
-          ) : (
-            <ul className="space-y-2">
-              {hits.map((hit, i) => (
-                <li key={`${hit.id}-${hit.hitKind}-${hit.heading || ""}-${i}`}>
-                  <Link
-                    href={hit.slug ? `/kb/${hit.id}/#${hit.slug}` : `/kb/${hit.id}/`}
-                    className="flex min-h-12 items-start justify-between gap-3 rounded-xl border border-[var(--line)] bg-[#121820] px-3.5 py-3.5 hover:border-[#4a5d73]"
-                  >
-                    <div className="min-w-0">
-                      <div className="text-[0.95rem]">{hit.title}</div>
-                      <div className="mt-0.5 text-[0.78rem] text-[var(--muted)]">
-                        <span className="badge">{hitLabel(hit.hitKind)}</span>
-                        {hit.sectionTitle}
-                        {hit.heading ? ` · ${hit.heading}` : ""}
-                      </div>
-                      {hit.snippet ? (
-                        <div className="mt-1 truncate text-[0.8rem] text-[#a8b8c8]">{hit.snippet}</div>
-                      ) : null}
-                    </div>
-                    <span className="badge shrink-0">{hit.status || "正式"}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          )}
+      {grouped.map((sec) => (
+        <div key={sec.id} className="mb-4">
+          <h3 className="mb-2 text-[0.95rem] text-[var(--muted)]">{sec.title}</h3>
+          <ul className="space-y-2">
+            {sec.items.map((item) => (
+              <li key={item.id}>
+                <Link
+                  href={`/kb/${item.id}/`}
+                  className="flex min-h-12 items-center justify-between gap-3 rounded-xl border border-[var(--line)] bg-[#121820] px-3.5 py-3.5 hover:border-[#4a5d73]"
+                >
+                  <div>
+                    <div className="text-[0.95rem]">{item.title}</div>
+                    {item.note ? (
+                      <div className="mt-0.5 text-[0.78rem] text-[var(--muted)]">{item.note}</div>
+                    ) : null}
+                  </div>
+                  <span className="badge shrink-0">{item.status || "正式"}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
-      ) : (
-        grouped.map((sec) => (
-          <div key={sec.id} className="mb-4">
-            <h3 className="mb-2 text-[0.95rem] text-[var(--muted)]">{sec.title}</h3>
-            <ul className="space-y-2">
-              {sec.items.map((item) => (
-                <li key={item.id}>
-                  <Link
-                    href={`/kb/${item.id}/`}
-                    className="flex min-h-12 items-center justify-between gap-3 rounded-xl border border-[var(--line)] bg-[#121820] px-3.5 py-3.5 hover:border-[#4a5d73]"
-                  >
-                    <div>
-                      <div className="text-[0.95rem]">{item.title}</div>
-                      {item.note ? (
-                        <div className="mt-0.5 text-[0.78rem] text-[var(--muted)]">{item.note}</div>
-                      ) : null}
-                    </div>
-                    <span className="badge shrink-0">{item.status || "正式"}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))
-      )}
+      ))}
     </>
   );
 }
