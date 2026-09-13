@@ -255,7 +255,7 @@ export function QuizApp() {
                   if (v === "req_learn" || v === "sao_learn") {
                     setShuffle(false);
                     setChapter("11");
-                    setBank("practice");
+                    setBank("all");
                   }
                 }}
               >

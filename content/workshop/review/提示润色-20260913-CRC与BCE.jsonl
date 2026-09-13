@@ -1,0 +1,7 @@
+{"id":"WS-CRC-BCE-07","explain":"控制管流程怎么走，实体管业务数据与规则——上帝类应拆成控制+实体。A 混责；B 缺控制层、全当边界；C 错把编排写到外部实体。"}
+{"id":"WS-CRC-BCE-09","explain":"BCE 与 MVC 可类比（视图≈边界、控制器≈控制、模型≈实体），但软考 OOA 答卷以 B/C/E 为准。A 错误禁止 BCE；C/D 映射关系均错。"}
+{"id":"WS-CRC-BCE-12","explain":"责任栏写行为与知识（能做什么/知道什么），不是只抄属性名。A 仅列字段；B 把参与者职责误写到类上；D 混淆 OOA 的 CRC 与循环冗余校验。"}
+{"id":"WS-CRC-BCE-15","explain":"软考 OOA 语境下 CRC 默认指 Class-Responsibility-Collaborator；循环冗余校验属网络/存储检错。A/C/D 均把两种 CRC 混为一谈。"}
+{"id":"WS-CRC-BCE-16","explain":"CRC 找类与职责协作，BCE 贴界面/编排/存业务角色标签，二者互补而非互斥。B 错误对立；C/D 越级或替代关系不对。"}
+{"id":"WS-CRC-BCE-18","explain":"页面收发请求是边界；编排校验与回滚步骤是控制；订单、库存是持久业务对象即实体。A/C 过度合并；B 三类职责全贴错。"}
+{"id":"WS-CRC-BCE-20","explain":"BCE 是分析期职责标签，OOD 可拆成多个设计类并补充框架、持久化等实现细节。A 把分析类当最终源码；C 强行改名 MVC；D 破坏三层分工。"}

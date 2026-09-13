@@ -117,6 +117,11 @@ function buildQuestions() {
         year: "",
         id: qid,
         origin_chapter: o.origin_chapter,
+        audience: o.audience,
+        intensity: o.intensity,
+        style_track: o.style_track,
+        learn_path: o.learn_path,
+        learn_stage: o.learn_stage,
       });
     });
   }
