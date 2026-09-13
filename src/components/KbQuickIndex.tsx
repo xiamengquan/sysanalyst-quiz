@@ -9,7 +9,7 @@ export type KbTocHeading = {
 };
 
 type Props = {
-  /** 正文滚动容器（.md-body） */
+  /** 正文容器（.md-body）；流式布局时滚动发生在窗口 */
   bodyRef: RefObject<HTMLDivElement | null>;
   /** 正文 HTML 变化时重建目录 */
   html: string;
@@ -30,6 +30,14 @@ function collectHeadings(root: HTMLElement | null): KbTocHeading[] {
     out.push({ id, text, level });
   });
   return out;
+}
+
+function usesSelfScroll(el: HTMLElement | null) {
+  if (!el) return false;
+  const style = window.getComputedStyle(el);
+  const oy = style.overflowY;
+  if (oy !== "auto" && oy !== "scroll") return false;
+  return el.scrollHeight > el.clientHeight + 8;
 }
 
 export function KbQuickIndex({ bodyRef, html, enabled = true }: Props) {
@@ -74,29 +82,49 @@ export function KbQuickIndex({ bodyRef, html, enabled = true }: Props) {
     if (!box || headings.length === 0) return;
 
     const updateActive = () => {
-      const top = box.scrollTop + 28;
+      if (usesSelfScroll(box)) {
+        const top = box.scrollTop + 28;
+        let current = headings[0]?.id || "";
+        for (const h of headings) {
+          const el = document.getElementById(h.id);
+          if (!el || !box.contains(el)) continue;
+          const y = el.offsetTop - box.offsetTop;
+          if (y <= top) current = h.id;
+          else break;
+        }
+        setActiveId(current);
+        return;
+      }
+      const mark = 96;
       let current = headings[0]?.id || "";
       for (const h of headings) {
         const el = document.getElementById(h.id);
-        if (!el || !box.contains(el)) continue;
-        const y = el.offsetTop - box.offsetTop;
-        if (y <= top) current = h.id;
+        if (!el) continue;
+        if (el.getBoundingClientRect().top <= mark) current = h.id;
         else break;
       }
       setActiveId(current);
     };
 
     updateActive();
-    box.addEventListener("scroll", updateActive, { passive: true });
-    return () => box.removeEventListener("scroll", updateActive);
+    if (usesSelfScroll(box)) {
+      box.addEventListener("scroll", updateActive, { passive: true });
+      return () => box.removeEventListener("scroll", updateActive);
+    }
+    window.addEventListener("scroll", updateActive, { passive: true });
+    return () => window.removeEventListener("scroll", updateActive);
   }, [bodyRef, headings]);
 
   const scrollTo = useCallback(
     (hid: string) => {
       const box = bodyRef.current;
       const el = document.getElementById(hid);
-      if (!box || !el || !box.contains(el)) return;
-      box.scrollTo({ top: Math.max(0, el.offsetTop - box.offsetTop - 12), behavior: "smooth" });
+      if (!el) return;
+      if (box && usesSelfScroll(box) && box.contains(el)) {
+        box.scrollTo({ top: Math.max(0, el.offsetTop - box.offsetTop - 12), behavior: "smooth" });
+      } else {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
       try {
         history.replaceState(null, "", `#${encodeURIComponent(hid)}`);
       } catch {
@@ -119,11 +147,7 @@ export function KbQuickIndex({ bodyRef, html, enabled = true }: Props) {
   return (
     <div className={`kb-toc-fab${open ? " is-open" : ""}`} ref={wrapRef}>
       {open ? (
-        <nav
-          id={panelId}
-          className="kb-toc-panel"
-          aria-label="本页知识点快速索引"
-        >
+        <nav id={panelId} className="kb-toc-panel" aria-label="本页知识点快速索引">
           <div className="kb-toc-panel-hd">
             <span>本页索引</span>
             <button type="button" className="kb-toc-close" onClick={() => setOpen(false)} aria-label="关闭索引">

@@ -204,12 +204,18 @@ export function KbReader({ id }: { id: string }) {
     requestAnimationFrame(() => {
       const el = document.getElementById(decodeURIComponent(hash));
       const box = bodyRef.current;
-      if (!el || !box) return;
-      if (box.contains(el)) {
-        box.scrollTop = el.offsetTop - box.offsetTop - 12;
-      } else {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (!el) return;
+      if (box && box.contains(el)) {
+        const style = window.getComputedStyle(box);
+        const nested =
+          (style.overflowY === "auto" || style.overflowY === "scroll") &&
+          box.scrollHeight > box.clientHeight + 8;
+        if (nested) {
+          box.scrollTop = el.offsetTop - box.offsetTop - 12;
+          return;
+        }
       }
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   }, [status, html]);
 
@@ -273,38 +279,42 @@ export function KbReader({ id }: { id: string }) {
 
   return (
     <>
-      <div className="mb-4 btn-row">
-        <Link href="/kb/" className="btn btn-ghost">
-          返回目录
-        </Link>
-        {item?.chapter ? (
-          <Link href={`/?chapter=${item.chapter}&bank=practice`} className="btn btn-primary">
-            本章刷题
-          </Link>
-        ) : null}
-      </div>
-      <div className="layout-full">
-      <div className="card">
-        <h1 className="mb-3 text-[1.2rem] font-semibold leading-snug sm:text-[1.28rem]">{item?.title || id}</h1>
-        {item?.path ? (
-          <p className="mb-3 break-all text-[0.8rem] leading-relaxed text-[var(--muted)] sm:text-[0.85rem]">
-            <span className="badge">{item.status || "正式"}</span>
-            <code className="text-[0.8em]">{item.path}</code>
-          </p>
-        ) : null}
-        {item?.note ? <p className="mb-3 text-[0.88rem] leading-relaxed text-[var(--muted)]">{item.note}</p> : null}
+      <article className="kb-reader layout-full">
+        <header className="kb-reader-head">
+          <h1>{item?.title || id}</h1>
+          {item?.path ? (
+            <p className="mb-3 break-all text-[0.8rem] leading-relaxed text-[var(--muted)] sm:text-[0.85rem]">
+              <span className="badge">{item.status || "正式"}</span>
+              <code className="text-[0.8em]">{item.path}</code>
+            </p>
+          ) : null}
+          {item?.note ? (
+            <p className="text-[0.88rem] leading-relaxed text-[var(--muted)]">{item.note}</p>
+          ) : null}
+        </header>
+
         {status === "loading" && <p className="text-[var(--muted)]">正在加载正文…</p>}
         {status === "err" && <p className="text-[var(--bad)]">{msg}</p>}
         {status === "ok" && (
           <div
             ref={bodyRef}
-            className="md-body"
+            className="md-body is-fluid"
             onClick={onBodyClick}
             dangerouslySetInnerHTML={{ __html: html }}
           />
         )}
-      </div>
-      </div>
+      </article>
+
+      <nav className="kb-nav-fab" aria-label="阅读页快捷操作">
+        {item?.chapter ? (
+          <Link href={`/?chapter=${item.chapter}&bank=practice`} className="kb-fab-btn is-primary">
+            本章刷题
+          </Link>
+        ) : null}
+        <Link href="/kb/" className="kb-fab-btn">
+          返回目录
+        </Link>
+      </nav>
 
       {status === "ok" ? <KbQuickIndex bodyRef={bodyRef} html={html} /> : null}
 

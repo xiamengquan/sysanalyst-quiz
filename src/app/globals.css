@@ -388,6 +388,96 @@ textarea.field {
     font-size: 1rem;
   }
 }
+
+/* 知识点阅读页：整页流式，不嵌套滚动盒 */
+.md-body.is-fluid {
+  margin-top: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  max-height: none;
+  overflow: visible;
+  -webkit-overflow-scrolling: auto;
+}
+
+.kb-reader {
+  width: 100%;
+  max-width: none;
+  padding-bottom: calc(var(--tabbar-h) + var(--safe-b) + 4.5rem);
+}
+.kb-reader-head {
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--line);
+}
+.kb-reader-head h1 {
+  margin: 0 0 var(--space-3);
+  font-size: 1.35rem;
+  font-weight: 650;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+@media (min-width: 640px) {
+  .kb-reader-head h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* 左侧导航悬浮（返回目录 / 本章刷题），与右侧索引对称 */
+.kb-nav-fab {
+  position: fixed;
+  left: max(0.85rem, env(safe-area-inset-left, 0px));
+  bottom: calc(var(--tabbar-h) + var(--safe-b) + 0.85rem);
+  z-index: 85;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+  max-width: min(92vw, 220px);
+  pointer-events: none;
+}
+.kb-nav-fab > * {
+  pointer-events: auto;
+}
+.kb-fab-btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--panel) 92%, #0f1419);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.55rem 0.95rem;
+  border-radius: 999px;
+  min-height: 44px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.38);
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.kb-fab-btn:hover {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+  color: #d7ebff;
+}
+.kb-fab-btn:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+.kb-fab-btn.is-primary {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+  background: color-mix(in srgb, var(--accent) 16%, var(--panel));
+  color: #d7ebff;
+}
+@media (min-width: 960px) {
+  .kb-nav-fab {
+    left: max(1.25rem, calc((100vw - var(--content-max)) / 2 - 12px));
+  }
+}
 .md-body > * + * {
   margin-top: 1em;
 }
