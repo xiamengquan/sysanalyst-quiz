@@ -16,7 +16,6 @@
   /* 排版节奏（v1.1 留白增强） */
   /* 壳层流体宽：随视口增长，上限 1600px */
   --content-max: 1600px;
-  --measure-prose: 72ch;
   --space-1: 0.35rem;
   --space-2: 0.65rem;
   --space-3: 1rem;
@@ -121,7 +120,7 @@ button,
   font-size: 0.92rem;
   line-height: var(--leading-ui);
   color: var(--muted);
-  max-width: 42rem;
+  max-width: none;
 }
 
 .stack {
@@ -142,20 +141,21 @@ button,
   gap: 0.75rem;
 }
 
-/* 筛选侧栏 + 主内容：窄屏上下，≥960px 左右 */
+/* 筛选侧栏 + 主内容：窄屏上下；有侧栏时 ≥960px 左右；无侧栏时主栏占满 */
 .layout-split {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-4);
   align-items: start;
 }
 @media (min-width: 960px) {
-  .layout-split {
+  .layout-split:has(> .layout-aside) {
     grid-template-columns: minmax(240px, 300px) minmax(0, 1fr);
     gap: var(--space-5);
   }
 }
 @media (min-width: 1280px) {
-  .layout-split {
+  .layout-split:has(> .layout-aside) {
     grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
   }
 }
@@ -181,10 +181,21 @@ button,
 }
 .layout-main {
   min-width: 0;
+  width: 100%;
 }
 .layout-main > .card:last-child,
 .layout-main > .stack > .card:last-child {
   margin-bottom: 0;
+}
+
+/* 无筛选侧栏的内容页：题干/结果/阅读等占满壳层 */
+.layout-full {
+  display: block;
+  width: 100%;
+  max-width: none;
+}
+.layout-full > .card {
+  width: 100%;
 }
 
 .card {
@@ -362,8 +373,9 @@ textarea.field {
   border: 1px solid var(--line);
   line-height: 1.8;
   font-size: 0.98rem;
-  /* 壳层可至 1600px；正文保持舒适行宽 */
-  max-width: var(--measure-prose);
+  /* 无侧栏时随内容栏占满；阅读节奏靠行高与段落间距 */
+  width: 100%;
+  max-width: none;
   max-height: min(78dvh, 980px);
   overflow: auto;
   -webkit-overflow-scrolling: touch;

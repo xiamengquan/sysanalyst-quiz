@@ -357,6 +357,7 @@ export function CaseApp() {
       )}
 
       {phase === "quiz" && current && (
+        <div className="layout-full">
         <div className="card">
           <div className="mb-3 flex justify-between text-[0.85rem] text-[var(--muted)]">
             <span>
@@ -444,6 +445,7 @@ export function CaseApp() {
               列表
             </button>
           </div>
+        </div>
         </div>
       )}
     </>

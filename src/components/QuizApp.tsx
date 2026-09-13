@@ -363,6 +363,7 @@ export function QuizApp() {
       )}
 
       {phase === "quiz" && q && (
+        <div className="layout-full">
         <div className="card">
           <div className="mb-3 flex justify-between text-[0.85rem] text-[var(--muted)]">
             <span>
@@ -454,9 +455,11 @@ export function QuizApp() {
             </button>
           </div>
         </div>
+        </div>
       )}
 
       {phase === "result" && (
+        <div className="layout-full">
         <div className="card">
           <h2 className="mb-4 text-[1.15rem]">本轮结果</h2>
           <div className="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -489,6 +492,7 @@ export function QuizApp() {
               返回设置
             </button>
           </div>
+        </div>
         </div>
       )}
     </>

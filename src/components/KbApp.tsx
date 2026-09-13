@@ -283,6 +283,7 @@ export function KbReader({ id }: { id: string }) {
           </Link>
         ) : null}
       </div>
+      <div className="layout-full">
       <div className="card">
         <h1 className="mb-3 text-[1.2rem] font-semibold leading-snug sm:text-[1.28rem]">{item?.title || id}</h1>
         {item?.path ? (
@@ -302,6 +303,7 @@ export function KbReader({ id }: { id: string }) {
             dangerouslySetInnerHTML={{ __html: html }}
           />
         )}
+      </div>
       </div>
 
       {status === "ok" ? <KbQuickIndex bodyRef={bodyRef} html={html} /> : null}
