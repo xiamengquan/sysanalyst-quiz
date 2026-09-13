@@ -353,10 +353,18 @@
         {
           "id": "essay-dir",
           "title": "论文范文目录",
-          "path": "论文范文/",
+          "path": "论文范文/README.md",
           "status": "正式",
           "kind": "entry",
           "note": "练习用，已登记地图"
+        },
+        {
+          "id": "essay-arch-style",
+          "title": "论软件架构风格",
+          "path": "论文范文/论软件架构风格.md",
+          "status": "正式",
+          "kind": "appendix",
+          "note": "练习范文"
         }
       ]
     }
