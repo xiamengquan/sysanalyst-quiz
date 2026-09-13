@@ -1,8 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import { CH_NAMES, type CaseItem, type CasePack } from "@/lib/types";
 import { CASE_STORAGE_KEY, storageGet, storageRemove, storageSet } from "@/lib/storage";
+import { KbPreviewDrawer, useKbCatalog } from "@/components/KbPreviewDrawer";
+import { findRelatedKbForCase } from "@/lib/quiz-kb";
+import type { KbSearchDoc, KbSearchIndex } from "@/lib/kb-search";
 
 type CaseDrafts = Record<string, Record<number, string>>;
 
@@ -58,6 +61,10 @@ export function CaseApp() {
   const [reveal, setReveal] = useState(false);
   const [ready, setReady] = useState(false);
   const [packHint, setPackHint] = useState("");
+  const catalog = useKbCatalog();
+  const [kbDocs, setKbDocs] = useState<KbSearchDoc[]>([]);
+  const [kbOpen, setKbOpen] = useState(false);
+  const [kbStack, setKbStack] = useState<{ id: string; title: string }[]>([]);
 
   useEffect(() => {
     let cancelled = false;
@@ -67,11 +74,16 @@ export function CaseApp() {
         .then((r) => (r.ok ? r.json() : { packs: [] }))
         .catch(() => ({ packs: [] })),
       storageGet<CaseDrafts>(CASE_STORAGE_KEY).catch(() => null),
-    ]).then(([cases, packData, saved]) => {
+      fetch("/data/kb-search-index.json")
+        .then((r) => (r.ok ? r.json() : null))
+        .catch(() => null),
+    ]).then(([cases, packData, saved, kbIdx]) => {
       if (cancelled) return;
       setAll(cases);
       setPacks(Array.isArray(packData?.packs) ? packData.packs : []);
       if (saved && typeof saved === "object") setDrafts(saved);
+      const docs = (kbIdx as KbSearchIndex | null)?.docs;
+      setKbDocs(Array.isArray(docs) ? docs : []);
       setReady(true);
     });
     return () => {
@@ -160,6 +172,55 @@ export function CaseApp() {
       .join(" · ");
     startPool(list, hint);
   };
+
+  const relatedKb = useMemo(() => {
+    if (!current || catalog.length === 0) return [];
+    return findRelatedKbForCase(current, catalog, kbDocs, 6);
+  }, [current, catalog, kbDocs]);
+
+  const relatedChips = useMemo(
+    () =>
+      relatedKb.map((r) => ({
+        id: r.item.id,
+        title: r.item.title,
+        reason: r.reason,
+      })),
+    [relatedKb],
+  );
+
+  const kbContextHint = current
+    ? `本案 · ${current.point || current.domain || "考点"} · 第${current.chapter}章${
+        CH_NAMES[current.chapter] ? ` ${CH_NAMES[current.chapter]}` : ""
+      }`
+    : undefined;
+
+  const openRelatedKb = useCallback(() => {
+    const top = relatedKb[0]?.item;
+    setKbStack(top ? [{ id: top.id, title: top.title }] : []);
+    setKbOpen(true);
+  }, [relatedKb]);
+
+  const openKbRef = useCallback(
+    (id: string) => {
+      const hit = catalog.find((c) => c.id === id) || relatedKb.find((r) => r.item.id === id)?.item;
+      if (!hit) return;
+      setKbStack((prev) => {
+        const last = prev[prev.length - 1];
+        if (last?.id === id) return prev;
+        const isRelatedRoot = relatedKb.some((r) => r.item.id === id);
+        if (isRelatedRoot) return [{ id: hit.id, title: hit.title }];
+        return [...prev, { id: hit.id, title: hit.title }];
+      });
+      setKbOpen(true);
+    },
+    [catalog, relatedKb],
+  );
+
+  useEffect(() => {
+    if (!kbOpen || phase !== "quiz" || !current) return;
+    const top = relatedKb[0]?.item;
+    setKbStack(top ? [{ id: top.id, title: top.title }] : []);
+  }, [current?.id, phase, kbOpen, relatedKb]);
 
   if (!ready) return <p className="text-[var(--muted)]">加载案例中…</p>;
 
@@ -434,6 +495,9 @@ export function CaseApp() {
             <button type="button" className="btn" onClick={() => setReveal(true)}>
               看要点
             </button>
+            <button type="button" className="btn" onClick={openRelatedKb}>
+              知识点{relatedKb.length ? ` · ${relatedKb.length}` : ""}
+            </button>
             <button
               type="button"
               className="btn btn-ghost"
@@ -448,6 +512,20 @@ export function CaseApp() {
         </div>
         </div>
       )}
+
+      <KbPreviewDrawer
+        open={kbOpen && phase === "quiz"}
+        stack={kbStack}
+        catalog={catalog}
+        related={relatedChips}
+        contextHint={kbContextHint}
+        onClose={() => {
+          setKbOpen(false);
+          setKbStack([]);
+        }}
+        onBack={() => setKbStack((s) => (s.length > 1 ? s.slice(0, -1) : s))}
+        onOpenRef={openKbRef}
+      />
     </>
   );
 }
