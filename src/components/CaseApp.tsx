@@ -165,30 +165,30 @@ export function CaseApp() {
 
   return (
     <>
-      <h1 className="mb-1 text-[1.35rem] font-semibold">案例分析</h1>
-      <p className="mb-5 text-[0.9rem] text-[var(--muted)]">
+      <h1 className="page-title">案例分析</h1>
+      <p className="page-lead">
         练习 {counts.practice} · 真题 {counts.real} · 合计 {all.length} · P0 {counts.tracks.P0} / P1{" "}
         {counts.tracks.P1} / P2 {counts.tracks.P2}
       </p>
 
       {phase === "setup" && (
-        <div className="space-y-4">
+        <div className="stack">
           {packs.length > 0 && (
-            <div className="card space-y-3 border-[color-mix(in_srgb,var(--accent)_35%,var(--line))]">
+            <div className="card space-y-4 border-[color-mix(in_srgb,var(--accent)_35%,var(--line))]">
               <h2 className="text-[1rem] font-medium">模拟包 / 真题卷</h2>
-              <p className="text-[0.85rem] text-[var(--muted)]">
+              <p className="text-[0.85rem] leading-relaxed text-[var(--muted)]">
                 真题包按卷演练；自编五选三包：第 1 题必答，其余选答两题。
               </p>
-              <ul className="space-y-2">
+              <ul className="list-gap">
                 {packs.map((p) => (
                   <li key={p.id}>
                     <button
                       type="button"
-                      className="min-h-14 w-full rounded-xl border border-[var(--line)] bg-[#121820] px-3.5 py-3.5 text-left hover:border-[#4a5d73]"
+                      className="min-h-14 w-full rounded-xl border border-[var(--line)] bg-[#121820] px-4 py-4 text-left hover:border-[#4a5d73]"
                       onClick={() => startPack(p)}
                     >
                       <div className="text-[0.95rem]">{p.title}</div>
-                      <div className="mt-1 text-[0.78rem] text-[var(--muted)]">
+                      <div className="mt-1.5 text-[0.78rem] leading-relaxed text-[var(--muted)]">
                         {p.cases.join(" · ")}
                       </div>
                     </button>
@@ -198,8 +198,8 @@ export function CaseApp() {
             </div>
           )}
 
-          <div className="card space-y-3">
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+          <div className="card space-y-4">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
               <label className="block text-[0.82rem] text-[var(--muted)]">
                 题库
                 <select
@@ -299,16 +299,16 @@ export function CaseApp() {
 
       {phase === "list" && (
         <div className="card">
-          <button type="button" className="btn btn-ghost mb-3" onClick={() => setPhase("setup")}>
+          <button type="button" className="btn btn-ghost mb-4" onClick={() => setPhase("setup")}>
             返回筛选
           </button>
-          {packHint ? <p className="mb-3 text-[0.85rem] text-[var(--muted)]">{packHint}</p> : null}
-          <ul className="space-y-2">
+          {packHint ? <p className="mb-4 text-[0.85rem] leading-relaxed text-[var(--muted)]">{packHint}</p> : null}
+          <ul className="list-gap">
             {pool.map((c, i) => (
               <li key={c.id}>
                 <button
                   type="button"
-                  className="min-h-14 w-full rounded-xl border border-[var(--line)] bg-[#121820] px-3.5 py-3.5 text-left hover:border-[#4a5d73]"
+                  className="min-h-14 w-full rounded-xl border border-[var(--line)] bg-[#121820] px-4 py-4 text-left hover:border-[#4a5d73]"
                   onClick={() => {
                     setIdx(i);
                     setReveal(false);
@@ -319,7 +319,7 @@ export function CaseApp() {
                     {c.id} · {c.point}
                     {i === 0 && packHint.includes("必答") ? "（建议必答）" : ""}
                   </div>
-                  <div className="mt-1 text-[0.78rem] text-[var(--muted)]">
+                  <div className="mt-1.5 text-[0.78rem] leading-relaxed text-[var(--muted)]">
                     {c.bank === "real" ? "真题 · " : ""}
                     {c.track ? TRACK_LABEL[c.track] || c.track : ""}
                     {c.stop_loss ? " · 止损" : ""} · 第{c.chapter}章 · 建议 {c.time_limit_min || 25} 分钟
@@ -333,13 +333,13 @@ export function CaseApp() {
 
       {phase === "quiz" && current && (
         <div className="card">
-          <div className="mb-2 flex justify-between text-[0.85rem] text-[var(--muted)]">
+          <div className="mb-3 flex justify-between text-[0.85rem] text-[var(--muted)]">
             <span>
               第 {idx + 1} / {pool.length} 套
             </span>
             <span>建议用时 {current.time_limit_min || 25} 分钟</span>
           </div>
-          <div className="mb-3 flex flex-wrap gap-1.5">
+          <div className="mb-4 flex flex-wrap gap-1.5">
             {current.bank === "real" ? <span className="badge">真题</span> : <span className="badge">练习</span>}
             <span className="badge">{current.domain}</span>
             <span className="badge">{current.case_type}</span>
@@ -351,12 +351,12 @@ export function CaseApp() {
           </div>
           <RichText
             text={current.stem}
-            className="mb-4 whitespace-pre-wrap break-words rounded-[10px] border border-[var(--line)] bg-[#121820] p-3 text-[0.95rem] leading-relaxed sm:text-[1rem]"
+            className="mb-5 whitespace-pre-wrap break-words rounded-[12px] border border-[var(--line)] bg-[#121820] p-4 text-[0.95rem] leading-[1.7] sm:text-[1rem]"
           />
-          <div className="space-y-4">
+          <div className="space-y-5">
             {current.questions.map((qq) => (
               <div key={qq.qnum}>
-                <h4 className="mb-2 text-[0.95rem] leading-snug">
+                <h4 className="mb-3 text-[0.95rem] leading-snug">
                   问题{qq.qnum}　
                   <RichText text={qq.prompt} className="inline whitespace-pre-wrap break-words" />
                 </h4>
@@ -368,14 +368,14 @@ export function CaseApp() {
                   onChange={(e) => updateAns(current.id, qq.qnum, e.target.value)}
                 />
                 {reveal && (
-                  <div className="mt-2 rounded-[10px] border border-[color-mix(in_srgb,var(--ok)_40%,var(--line))] bg-[#143028] p-3 text-[0.9rem] leading-relaxed break-words">
+                  <div className="mt-3 rounded-[12px] border border-[color-mix(in_srgb,var(--ok)_40%,var(--line))] bg-[#143028] p-4 text-[0.9rem] leading-relaxed break-words">
                     <b style={{ color: "var(--ok)" }}>参考要点（非唯一）</b>
                     <RichText
                       text={qq.rubric?.sample || "（无）"}
-                      className="mt-1 whitespace-pre-wrap break-words"
+                      className="mt-2 whitespace-pre-wrap break-words"
                     />
                     {qq.hint ? (
-                      <p className="mt-1 text-[var(--muted)]">提示：{qq.hint}</p>
+                      <p className="mt-2 text-[var(--muted)]">提示：{qq.hint}</p>
                     ) : null}
                   </div>
                 )}

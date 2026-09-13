@@ -25,7 +25,7 @@ export function SiteHeader() {
         className="sticky top-0 z-50 border-b border-[var(--line)] bg-[color-mix(in_srgb,var(--panel)_92%,transparent)] backdrop-blur-md"
         style={{ paddingTop: "var(--safe-t)" }}
       >
-        <div className="mx-auto flex max-w-[820px] items-center justify-between gap-2 px-4 py-3 sm:gap-3">
+        <div className="mx-auto flex items-center justify-between gap-2 px-4 py-3.5 sm:gap-3 sm:px-6 sm:py-4" style={{ maxWidth: "var(--content-max)" }}>
           <Link href="/" className="min-w-0 truncate text-[1rem] font-semibold text-[var(--text)]">
             <span className="hidden sm:inline">系统分析师 · 刷题站</span>
             <span className="sm:hidden">系分刷题</span>
@@ -63,8 +63,8 @@ export function SiteHeader() {
         aria-label="底部导航"
       >
         <div
-          className="mx-auto grid max-w-[820px] grid-cols-4"
-          style={{ height: "var(--tabbar-h)" }}
+          className="mx-auto grid grid-cols-4"
+          style={{ height: "var(--tabbar-h)", maxWidth: "var(--content-max)" }}
         >
           {tabs.map((t) => {
             const active = isActive(pathname, t.href);

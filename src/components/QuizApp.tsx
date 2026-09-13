@@ -230,8 +230,8 @@ export function QuizApp() {
 
   return (
     <>
-      <h1 className="mb-1 text-[1.35rem] font-semibold">刷题</h1>
-      <p className="mb-5 text-[0.9rem] text-[var(--muted)]">
+      <h1 className="page-title">刷题</h1>
+      <p className="page-lead">
         自编 {meta?.practice ?? "—"} · 真题 {meta?.real ?? "—"} · 工坊 {meta?.workshop ?? "—"} · 合计{" "}
         {meta?.total ?? all.length}
         <br />
@@ -241,8 +241,8 @@ export function QuizApp() {
       </p>
 
       {phase === "setup" && (
-        <div className="card space-y-3">
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="card space-y-4">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <label className="block text-[0.82rem] text-[var(--muted)]">
               学习路径
               <select
@@ -351,7 +351,7 @@ export function QuizApp() {
 
       {phase === "quiz" && q && (
         <div className="card">
-          <div className="mb-2 flex justify-between text-[0.85rem] text-[var(--muted)]">
+          <div className="mb-3 flex justify-between text-[0.85rem] text-[var(--muted)]">
             <span>
               {idx + 1} / {pool.length}
             </span>
@@ -359,21 +359,21 @@ export function QuizApp() {
               已答 {Object.keys(answers).length} · 正确 {correctCount}
             </span>
           </div>
-          <div className="mb-3 h-2 overflow-hidden rounded-full bg-[#121820]">
+          <div className="mb-4 h-2 overflow-hidden rounded-full bg-[#121820]">
             <i
               className="block h-full bg-gradient-to-r from-[#2f7fd4] to-[#3ecf8e]"
               style={{ width: `${((idx + 1) / pool.length) * 100}%` }}
             />
           </div>
-          <div className="mb-2">
+          <div className="mb-3 flex flex-wrap gap-1.5">
             <span className="badge">第{q.ch}章</span>
             <span className="badge">{q.point}</span>
             {q.learn_stage ? <span className="badge">{q.learn_stage}</span> : null}
             <span className="badge">{q.diff}</span>
             <span className="badge">{q.bank}</span>
           </div>
-          <div className="mb-4 text-[1.02rem] leading-relaxed sm:text-[1.05rem]">{q.stem}</div>
-          <div className="space-y-2.5">
+          <div className="mb-5 text-[1.02rem] leading-[1.7] sm:text-[1.05rem]">{q.stem}</div>
+          <div className="space-y-3">
             {["A", "B", "C", "D"].map((k) => {
               if (!q.opts[k]) return null;
               const cls = [
@@ -394,7 +394,7 @@ export function QuizApp() {
           </div>
           {shown && (
             <div
-              className={`mt-3 rounded-[10px] border bg-[#121820] p-3 text-[0.92rem] leading-relaxed sm:text-[1rem] ${
+              className={`mt-4 rounded-[12px] border bg-[#121820] p-4 text-[0.92rem] leading-relaxed sm:text-[1rem] ${
                 chosen === q.ans
                   ? "border-[color-mix(in_srgb,var(--ok)_50%,var(--line))]"
                   : "border-[color-mix(in_srgb,var(--bad)_50%,var(--line))]"
@@ -445,8 +445,8 @@ export function QuizApp() {
 
       {phase === "result" && (
         <div className="card">
-          <h2 className="mb-3 text-[1.15rem]">本轮结果</h2>
-          <div className="mb-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
+          <h2 className="mb-4 text-[1.15rem]">本轮结果</h2>
+          <div className="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {[
               ["题量", pool.length],
               ["正确", correctCount],
@@ -455,10 +455,10 @@ export function QuizApp() {
             ].map(([k, v]) => (
               <div
                 key={String(k)}
-                className="rounded-[10px] border border-[var(--line)] bg-[#121820] p-2.5 text-center"
+                className="rounded-[12px] border border-[var(--line)] bg-[#121820] p-3.5 text-center"
               >
                 <span className="text-[0.75rem] text-[var(--muted)]">{k}</span>
-                <b className="mt-0.5 block text-[1.2rem]">{v}</b>
+                <b className="mt-1 block text-[1.2rem]">{v}</b>
               </div>
             ))}
           </div>

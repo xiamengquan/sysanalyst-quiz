@@ -66,18 +66,18 @@ export function KbCatalog() {
 
   return (
     <>
-      <h1 className="mb-1 text-[1.35rem] font-semibold">知识点</h1>
-      <p className="mb-4 text-[0.9rem] text-[var(--muted)]">
+      <h1 className="page-title">知识点</h1>
+      <p className="page-lead">
         正式发布 {data.meta?.version || "v1.0"} · 全文搜索请用顶栏或{" "}
         <kbd className="gs-kbd-inline">Ctrl+K</kbd> / <kbd className="gs-kbd-inline">⌘K</kbd>
       </p>
 
-      <div className="card mb-4">
-        <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-          <p className="text-[0.88rem] text-[var(--muted)]">按类型 / 分区浏览目录；搜标题与正文请打开全局搜索。</p>
+      <div className="card">
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+          <p className="text-[0.88rem] leading-relaxed text-[var(--muted)]">按类型 / 分区浏览目录；搜标题与正文请打开全局搜索。</p>
           <GlobalSearchHintButton />
         </div>
-        <div className="grid gap-3 sm:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2">
           <label className="block text-[0.82rem] text-[var(--muted)]">
             类型
             <select className="field mt-1.5" value={kind} onChange={(e) => setKind(e.target.value)}>
@@ -104,7 +104,7 @@ export function KbCatalog() {
             </select>
           </label>
         </div>
-        <p className="mt-3 text-[0.9rem] text-[var(--muted)]">
+        <p className="mt-4 text-[0.9rem] text-[var(--muted)]">
           当前显示 {catalogFiltered.length} 条 · 共 {flat.length} 条
         </p>
       </div>
@@ -115,14 +115,14 @@ export function KbCatalog() {
       </div>
 
       {grouped.map((sec) => (
-        <div key={sec.id} className="mb-4">
-          <h3 className="mb-2 text-[0.95rem] text-[var(--muted)]">{sec.title}</h3>
-          <ul className="space-y-2">
+        <div key={sec.id} className="mb-6">
+          <h3 className="mb-3 text-[0.95rem] font-medium tracking-wide text-[var(--muted)]">{sec.title}</h3>
+          <ul className="list-gap">
             {sec.items.map((item) => (
               <li key={item.id}>
                 <Link
                   href={`/kb/${item.id}/`}
-                  className="flex min-h-12 items-center justify-between gap-3 rounded-xl border border-[var(--line)] bg-[#121820] px-3.5 py-3.5 hover:border-[#4a5d73]"
+                  className="flex min-h-14 items-center justify-between gap-3 rounded-xl border border-[var(--line)] bg-[#121820] px-4 py-4 hover:border-[#4a5d73]"
                 >
                   <div>
                     <div className="text-[0.95rem]">{item.title}</div>
@@ -262,7 +262,7 @@ export function KbReader({ id }: { id: string }) {
 
   return (
     <>
-      <div className="mb-3 btn-row">
+      <div className="mb-4 btn-row">
         <Link href="/kb/" className="btn btn-ghost">
           返回目录
         </Link>
@@ -273,14 +273,14 @@ export function KbReader({ id }: { id: string }) {
         ) : null}
       </div>
       <div className="card">
-        <h1 className="mb-2 text-[1.15rem] font-semibold leading-snug sm:text-[1.2rem]">{item?.title || id}</h1>
+        <h1 className="mb-3 text-[1.2rem] font-semibold leading-snug sm:text-[1.28rem]">{item?.title || id}</h1>
         {item?.path ? (
-          <p className="mb-2 break-all text-[0.8rem] text-[var(--muted)] sm:text-[0.85rem]">
+          <p className="mb-3 break-all text-[0.8rem] leading-relaxed text-[var(--muted)] sm:text-[0.85rem]">
             <span className="badge">{item.status || "正式"}</span>
             <code className="text-[0.8em]">{item.path}</code>
           </p>
         ) : null}
-        {item?.note ? <p className="mb-2 text-[0.85rem] text-[var(--muted)]">{item.note}</p> : null}
+        {item?.note ? <p className="mb-3 text-[0.88rem] leading-relaxed text-[var(--muted)]">{item.note}</p> : null}
         {status === "loading" && <p className="text-[var(--muted)]">正在加载正文…</p>}
         {status === "err" && <p className="text-[var(--bad)]">{msg}</p>}
         {status === "ok" && (
