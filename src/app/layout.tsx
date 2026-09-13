@@ -29,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteHeader />
         <div className="site-main">{children}</div>
         <footer
-          className="mx-auto hidden px-6 pb-10 text-[0.8rem] leading-relaxed text-[var(--muted)] sm:block"
+          className="mx-auto hidden w-full px-6 pb-10 text-[0.8rem] leading-relaxed text-[var(--muted)] sm:block lg:px-8 xl:px-10"
           style={{ maxWidth: "var(--content-max)" }}
         >
           个人学习用途 · EdgeOne / 本地均可部署 · 数据来自知识点精炼与出题工坊正式产物

@@ -242,7 +242,7 @@ export function QuizApp() {
 
       {phase === "setup" && (
         <div className="card space-y-4">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
             <label className="block text-[0.82rem] text-[var(--muted)]">
               学习路径
               <select

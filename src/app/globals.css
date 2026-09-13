@@ -14,7 +14,9 @@
   --safe-b: env(safe-area-inset-bottom, 0px);
   --safe-t: env(safe-area-inset-top, 0px);
   /* 排版节奏（v1.1 留白增强） */
-  --content-max: 880px;
+  /* 壳层流体宽：随视口增长，上限 1600px */
+  --content-max: 1600px;
+  --measure-prose: 72ch;
   --space-1: 0.35rem;
   --space-2: 0.65rem;
   --space-3: 1rem;
@@ -73,7 +75,7 @@ button,
 }
 
 .site-main {
-  width: 100%;
+  width: min(100%, var(--content-max));
   max-width: var(--content-max);
   margin-inline: auto;
   padding-top: var(--space-5);
@@ -89,6 +91,20 @@ button,
     padding-left: max(1.5rem, env(safe-area-inset-left));
     padding-right: max(1.5rem, env(safe-area-inset-right));
     padding-bottom: 5.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-main {
+    padding-left: max(2rem, env(safe-area-inset-left));
+    padding-right: max(2rem, env(safe-area-inset-right));
+  }
+}
+
+@media (min-width: 1440px) {
+  .site-main {
+    padding-left: max(2.5rem, env(safe-area-inset-left));
+    padding-right: max(2.5rem, env(safe-area-inset-right));
   }
 }
 
@@ -301,6 +317,8 @@ textarea.field {
   border: 1px solid var(--line);
   line-height: 1.8;
   font-size: 0.98rem;
+  /* 壳层可至 1600px；正文保持舒适行宽 */
+  max-width: var(--measure-prose);
   max-height: min(78dvh, 980px);
   overflow: auto;
   -webkit-overflow-scrolling: touch;
