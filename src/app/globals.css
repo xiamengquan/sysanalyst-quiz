@@ -622,11 +622,35 @@ textarea.field {
 }
 
 /* —— 知识点关联预览抽屉 —— */
+.kb-dock-layout {
+  display: grid;
+  gap: var(--space-4);
+  align-items: start;
+  width: 100%;
+}
+.kb-dock-main {
+  min-width: 0;
+  width: 100%;
+}
+@media (min-width: 960px) {
+  .kb-dock-layout.is-docked {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 36%);
+    gap: var(--space-5);
+  }
+}
 .kb-drawer-root {
   position: fixed;
   inset: 0;
   z-index: 80;
   pointer-events: none;
+}
+.kb-drawer-root.is-docked {
+  position: relative;
+  inset: auto;
+  z-index: 1;
+  pointer-events: auto;
+  width: 100%;
+  min-width: 0;
 }
 .kb-drawer-backdrop {
   position: absolute;
@@ -648,8 +672,27 @@ textarea.field {
   box-shadow: -8px 0 32px rgba(0, 0, 0, 0.35);
   color: var(--text);
 }
+.kb-drawer-panel.is-docked {
+  position: sticky;
+  top: calc(var(--safe-t) + 4.75rem);
+  right: auto;
+  left: auto;
+  bottom: auto;
+  width: 100%;
+  max-height: calc(100dvh - var(--safe-t) - 5.5rem - var(--tabbar-h));
+  border-radius: var(--radius-card);
+  box-shadow: none;
+  animation: none;
+}
+@media (max-width: 959px) {
+  .kb-drawer-panel.is-docked {
+    position: relative;
+    top: auto;
+    max-height: min(70dvh, 640px);
+  }
+}
 @media (max-width: 639px) {
-  .kb-drawer-panel {
+  .kb-drawer-root:not(.is-docked) .kb-drawer-panel {
     left: 0;
     right: 0;
     bottom: 0;
@@ -659,7 +702,7 @@ textarea.field {
   }
 }
 @media (min-width: 640px) {
-  .kb-drawer-panel {
+  .kb-drawer-root:not(.is-docked) .kb-drawer-panel {
     top: 0;
     right: 0;
     bottom: 0;

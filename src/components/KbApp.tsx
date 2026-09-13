@@ -160,7 +160,9 @@ export function KbReader({ id }: { id: string }) {
   const [msg, setMsg] = useState("");
   const [toast, setToast] = useState("");
   const [stack, setStack] = useState<{ id: string; title: string }[]>([]);
+  const [kbPinned, setKbPinned] = useState(false);
   const bodyRef = useRef<HTMLDivElement>(null);
+  const previewOpen = stack.length > 0;
 
   useEffect(() => {
     if (!catalog.length) return;
@@ -279,31 +281,47 @@ export function KbReader({ id }: { id: string }) {
 
   return (
     <>
-      <article className="kb-reader layout-full">
-        <header className="kb-reader-head">
-          <h1>{item?.title || id}</h1>
-          {item?.path ? (
-            <p className="mb-3 break-all text-[0.8rem] leading-relaxed text-[var(--muted)] sm:text-[0.85rem]">
-              <span className="badge">{item.status || "正式"}</span>
-              <code className="text-[0.8em]">{item.path}</code>
-            </p>
-          ) : null}
-          {item?.note ? (
-            <p className="text-[0.88rem] leading-relaxed text-[var(--muted)]">{item.note}</p>
-          ) : null}
-        </header>
+      <div className={`kb-dock-layout${previewOpen && kbPinned ? " is-docked" : ""}`}>
+        <div className="kb-dock-main">
+          <article className="kb-reader layout-full">
+            <header className="kb-reader-head">
+              <h1>{item?.title || id}</h1>
+              {item?.path ? (
+                <p className="mb-3 break-all text-[0.8rem] leading-relaxed text-[var(--muted)] sm:text-[0.85rem]">
+                  <span className="badge">{item.status || "正式"}</span>
+                  <code className="text-[0.8em]">{item.path}</code>
+                </p>
+              ) : null}
+              {item?.note ? (
+                <p className="text-[0.88rem] leading-relaxed text-[var(--muted)]">{item.note}</p>
+              ) : null}
+            </header>
 
-        {status === "loading" && <p className="text-[var(--muted)]">正在加载正文…</p>}
-        {status === "err" && <p className="text-[var(--bad)]">{msg}</p>}
-        {status === "ok" && (
-          <div
-            ref={bodyRef}
-            className="md-body is-fluid"
-            onClick={onBodyClick}
-            dangerouslySetInnerHTML={{ __html: html }}
+            {status === "loading" && <p className="text-[var(--muted)]">正在加载正文…</p>}
+            {status === "err" && <p className="text-[var(--bad)]">{msg}</p>}
+            {status === "ok" && (
+              <div
+                ref={bodyRef}
+                className="md-body is-fluid"
+                onClick={onBodyClick}
+                dangerouslySetInnerHTML={{ __html: html }}
+              />
+            )}
+          </article>
+        </div>
+        {previewOpen && kbPinned ? (
+          <KbPreviewDrawer
+            open
+            pinned
+            onPinnedChange={setKbPinned}
+            stack={stack}
+            catalog={catalog}
+            onClose={() => setStack([])}
+            onBack={() => setStack((s) => s.slice(0, -1))}
+            onOpenRef={openPreview}
           />
-        )}
-      </article>
+        ) : null}
+      </div>
 
       <nav className="kb-nav-fab" aria-label="阅读页快捷操作">
         {item?.chapter ? (
@@ -320,14 +338,18 @@ export function KbReader({ id }: { id: string }) {
 
       {toast ? <div className="kb-toast" role="status">{toast}</div> : null}
 
-      <KbPreviewDrawer
-        open={stack.length > 0}
-        stack={stack}
-        catalog={catalog}
-        onClose={() => setStack([])}
-        onBack={() => setStack((s) => s.slice(0, -1))}
-        onOpenRef={openPreview}
-      />
+      {previewOpen && !kbPinned ? (
+        <KbPreviewDrawer
+          open
+          pinned={false}
+          onPinnedChange={setKbPinned}
+          stack={stack}
+          catalog={catalog}
+          onClose={() => setStack([])}
+          onBack={() => setStack((s) => s.slice(0, -1))}
+          onOpenRef={openPreview}
+        />
+      ) : null}
     </>
   );
 }

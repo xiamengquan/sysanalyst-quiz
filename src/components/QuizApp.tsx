@@ -47,6 +47,7 @@ export function QuizApp() {
   const [kbDocs, setKbDocs] = useState<KbSearchDoc[]>([]);
   const [kbOpen, setKbOpen] = useState(false);
   const [kbStack, setKbStack] = useState<{ id: string; title: string }[]>([]);
+  const [kbPinned, setKbPinned] = useState(false);
 
   useEffect(() => {
     Promise.all([
@@ -424,7 +425,8 @@ export function QuizApp() {
       )}
 
       {phase === "quiz" && q && (
-        <div className="layout-full">
+        <div className={`kb-dock-layout${kbOpen && kbPinned ? " is-docked" : ""}`}>
+          <div className="kb-dock-main layout-full">
         <div className="card">
           <div className="mb-3 flex justify-between text-[0.85rem] text-[var(--muted)]">
             <span>
@@ -519,8 +521,44 @@ export function QuizApp() {
             </button>
           </div>
         </div>
+          </div>
+          {kbOpen && kbPinned ? (
+            <KbPreviewDrawer
+              open
+              pinned
+              onPinnedChange={setKbPinned}
+              stack={kbStack}
+              catalog={catalog}
+              related={relatedChips}
+              contextHint={kbContextHint}
+              onClose={() => {
+                setKbOpen(false);
+                setKbStack([]);
+              }}
+              onBack={() => setKbStack((s) => (s.length > 1 ? s.slice(0, -1) : s))}
+              onOpenRef={openKbRef}
+            />
+          ) : null}
         </div>
       )}
+
+      {phase === "quiz" && kbOpen && !kbPinned ? (
+        <KbPreviewDrawer
+          open
+          pinned={false}
+          onPinnedChange={setKbPinned}
+          stack={kbStack}
+          catalog={catalog}
+          related={relatedChips}
+          contextHint={kbContextHint}
+          onClose={() => {
+            setKbOpen(false);
+            setKbStack([]);
+          }}
+          onBack={() => setKbStack((s) => (s.length > 1 ? s.slice(0, -1) : s))}
+          onOpenRef={openKbRef}
+        />
+      ) : null}
 
       {phase === "result" && (
         <div className="layout-full">
@@ -559,20 +597,6 @@ export function QuizApp() {
         </div>
         </div>
       )}
-
-      <KbPreviewDrawer
-        open={kbOpen && phase === "quiz"}
-        stack={kbStack}
-        catalog={catalog}
-        related={relatedChips}
-        contextHint={kbContextHint}
-        onClose={() => {
-          setKbOpen(false);
-          setKbStack([]);
-        }}
-        onBack={() => setKbStack((s) => (s.length > 1 ? s.slice(0, -1) : s))}
-        onOpenRef={openKbRef}
-      />
     </>
   );
 }
