@@ -698,6 +698,55 @@ textarea.field {
   border-bottom: 1px solid var(--line);
   background: color-mix(in srgb, var(--panel) 88%, #0f1419);
 }
+.kb-drawer-related {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.45rem;
+  padding: 0.65rem 0.85rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--panel) 94%, #0a0e12);
+}
+.kb-related-chip {
+  appearance: none;
+  flex: 0 0 auto;
+  max-width: 11.5rem;
+  text-align: left;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #121820;
+  color: var(--text);
+  font: inherit;
+  padding: 0.45rem 0.65rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.kb-related-chip-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.kb-related-chip-reason {
+  font-size: 0.7rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.kb-related-chip:hover {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+}
+.kb-related-chip.is-active {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+  background: color-mix(in srgb, var(--accent) 14%, #121820);
+}
 .kb-drawer-body {
   flex: 1;
   overflow: auto;

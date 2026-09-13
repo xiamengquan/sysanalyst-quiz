@@ -3,6 +3,9 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { CH_NAMES, type Question } from "@/lib/types";
 import { QUIZ_STORAGE_KEY, storageGet, storageSet } from "@/lib/storage";
+import { KbPreviewDrawer, useKbCatalog } from "@/components/KbPreviewDrawer";
+import { findRelatedKbForQuestion } from "@/lib/quiz-kb";
+import type { KbSearchDoc, KbSearchIndex } from "@/lib/kb-search";
 
 type Meta = { practice: number; real: number; workshop: number; total: number };
 
@@ -40,6 +43,10 @@ export function QuizApp() {
   const [revealed, setRevealed] = useState<Record<number, boolean>>({});
   const [phase, setPhase] = useState<"setup" | "quiz" | "result">("setup");
   const [loading, setLoading] = useState(true);
+  const catalog = useKbCatalog();
+  const [kbDocs, setKbDocs] = useState<KbSearchDoc[]>([]);
+  const [kbOpen, setKbOpen] = useState(false);
+  const [kbStack, setKbStack] = useState<{ id: string; title: string }[]>([]);
 
   useEffect(() => {
     Promise.all([
@@ -48,7 +55,10 @@ export function QuizApp() {
       fetch("/data/paper.json")
         .then((r) => (r.ok ? r.json() : []))
         .catch(() => []),
-    ]).then(([qs, m, paper]) => {
+      fetch("/data/kb-search-index.json")
+        .then((r) => (r.ok ? r.json() : null))
+        .catch(() => null),
+    ]).then(([qs, m, paper, kbIdx]) => {
       const paperQs = (Array.isArray(paper) ? paper : []).map((o: Record<string, unknown>, i: number) => ({
         no: Number(o.no) || 900000 + i,
         ch: Number(o.chapter) || 22,
@@ -65,6 +75,8 @@ export function QuizApp() {
       }));
       setAll([...qs, ...paperQs]);
       setMeta(m);
+      const docs = (kbIdx as KbSearchIndex | null)?.docs;
+      setKbDocs(Array.isArray(docs) ? docs : []);
       setLoading(false);
     });
   }, []);
@@ -225,6 +237,55 @@ export function QuizApp() {
   };
 
   const correctCount = pool.filter((x) => answers[x.no] === x.ans).length;
+
+  const relatedKb = useMemo(() => {
+    if (!q || catalog.length === 0) return [];
+    return findRelatedKbForQuestion(q, catalog, kbDocs, 6);
+  }, [q, catalog, kbDocs]);
+
+  const relatedChips = useMemo(
+    () =>
+      relatedKb.map((r) => ({
+        id: r.item.id,
+        title: r.item.title,
+        reason: r.reason,
+      })),
+    [relatedKb],
+  );
+
+  const kbContextHint = q
+    ? `本题 · ${q.point || "考点"} · 第${q.ch}章${CH_NAMES[q.ch] ? ` ${CH_NAMES[q.ch]}` : ""}`
+    : undefined;
+
+  const openRelatedKb = useCallback(() => {
+    const top = relatedKb[0]?.item;
+    setKbStack(top ? [{ id: top.id, title: top.title }] : []);
+    setKbOpen(true);
+  }, [relatedKb]);
+
+  const openKbRef = useCallback(
+    (id: string) => {
+      const hit = catalog.find((c) => c.id === id) || relatedKb.find((r) => r.item.id === id)?.item;
+      if (!hit) return;
+      setKbStack((prev) => {
+        const last = prev[prev.length - 1];
+        if (last?.id === id) return prev;
+        // 相关芯片切换：替换根篇；正文内链：压栈
+        const isRelatedRoot = relatedKb.some((r) => r.item.id === id);
+        if (isRelatedRoot) return [{ id: hit.id, title: hit.title }];
+        return [...prev, { id: hit.id, title: hit.title }];
+      });
+      setKbOpen(true);
+    },
+    [catalog, relatedKb],
+  );
+
+  // 切题时若抽屉已开，同步到新题相关内容
+  useEffect(() => {
+    if (!kbOpen || phase !== "quiz" || !q) return;
+    const top = relatedKb[0]?.item;
+    setKbStack(top ? [{ id: top.id, title: top.title }] : []);
+  }, [q?.no, phase, kbOpen, relatedKb]);
 
   if (loading) return <p className="text-[var(--muted)]">加载题库中…</p>;
 
@@ -447,6 +508,9 @@ export function QuizApp() {
             >
               看答案
             </button>
+            <button type="button" className="btn" onClick={openRelatedKb}>
+              知识点{relatedKb.length ? ` · ${relatedKb.length}` : ""}
+            </button>
             <button type="button" className="btn btn-ghost" onClick={() => void persist()}>
               保存
             </button>
@@ -495,6 +559,20 @@ export function QuizApp() {
         </div>
         </div>
       )}
+
+      <KbPreviewDrawer
+        open={kbOpen && phase === "quiz"}
+        stack={kbStack}
+        catalog={catalog}
+        related={relatedChips}
+        contextHint={kbContextHint}
+        onClose={() => {
+          setKbOpen(false);
+          setKbStack([]);
+        }}
+        onBack={() => setKbStack((s) => (s.length > 1 ? s.slice(0, -1) : s))}
+        onOpenRef={openKbRef}
+      />
     </>
   );
 }
