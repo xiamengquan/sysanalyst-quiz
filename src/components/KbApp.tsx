@@ -12,6 +12,7 @@ import {
 import { renderKbMarkdown, runMermaidIn } from "@/lib/kb-md";
 import { parseKbHref, resolveKbRef } from "@/lib/kb-resolve";
 import { KbPreviewDrawer, useKbCatalog } from "@/components/KbPreviewDrawer";
+import { KbQuickIndex } from "@/components/KbQuickIndex";
 
 const KIND_OPTS = [
   { value: "all", label: "全部类型" },
@@ -393,6 +394,8 @@ export function KbReader({ id }: { id: string }) {
           />
         )}
       </div>
+
+      {status === "ok" ? <KbQuickIndex bodyRef={bodyRef} html={html} /> : null}
 
       {toast ? <div className="kb-toast" role="status">{toast}</div> : null}
 

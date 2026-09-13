@@ -477,3 +477,128 @@ textarea.field {
   font-size: 0.88rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
+
+/* —— 知识点快速索引悬浮栏 —— */
+.kb-toc-fab {
+  position: fixed;
+  right: max(0.85rem, env(safe-area-inset-right, 0px));
+  bottom: calc(var(--tabbar-h) + var(--safe-b) + 0.85rem);
+  z-index: 85;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.45rem;
+  max-width: min(92vw, 320px);
+}
+.kb-toc-trigger {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--panel) 92%, #0f1419);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.55rem 0.95rem;
+  border-radius: 999px;
+  min-height: 44px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.38);
+  cursor: pointer;
+}
+.kb-toc-trigger:hover {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+  color: #d7ebff;
+}
+.kb-toc-trigger:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 2px;
+}
+.kb-toc-fab.is-open .kb-toc-trigger {
+  border-color: color-mix(in srgb, var(--accent) 50%, var(--line));
+  background: #243041;
+}
+.kb-toc-panel {
+  width: min(92vw, 300px);
+  max-height: min(52dvh, 420px);
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--panel) 96%, #0a0e12);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+.kb-toc-panel-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.55rem 0.75rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+.kb-toc-close {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0.2rem 0.35rem;
+  min-height: 36px;
+}
+.kb-toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.35rem 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.kb-toc-item button {
+  appearance: none;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.84rem;
+  line-height: 1.35;
+  padding: 0.45rem 0.75rem;
+  cursor: pointer;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.kb-toc-item.lv-2 button {
+  padding-left: 1.15rem;
+  color: #d5e2ef;
+}
+.kb-toc-item.lv-3 button {
+  padding-left: 1.55rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.kb-toc-item button:hover {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: #eaf4ff;
+}
+.kb-toc-item.is-active button {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: #eaf4ff;
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+@media (min-width: 960px) {
+  .kb-toc-fab {
+    right: max(1.25rem, calc((100vw - 820px) / 2 - 12px));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kb-toc-panel {
+    transition: none;
+  }
+}
