@@ -6,6 +6,8 @@
 
 把浮层从页面内容树抽离到统一通道 `#app-portal-channel`，避免被父级 `overflow` / `transform` / 层叠上下文裁剪或遮挡。
 
+**层级**：`.portal-channel` 使用 `z-index: 200`（高于 `SiteHeader` 顶栏/底栏 `z-50`）。勿把通道降到导航之下，否则矮视口下浮层会被导航盖住。
+
 ## 结构
 
 | 模块 | 路径 | 说明 |

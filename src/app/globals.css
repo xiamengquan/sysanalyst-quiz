@@ -623,9 +623,14 @@ textarea.field {
 
 /* —— Portal 通道（Modal / Drawer / Overlay） —— */
 .portal-channel {
-  /* 挂载点：子层均为 fixed，不占文档流 */
+  /* 挂载点：子层多为 fixed。通道本身须高于顶栏/底栏 sticky·fixed z-50，
+     否则整层叠上下文会被导航盖住（矮屏尤为明显）。 */
   position: relative;
-  z-index: 0;
+  z-index: 200;
+  pointer-events: none;
+}
+.portal-channel > * {
+  pointer-events: auto;
 }
 .portal-overlay {
   position: fixed;
