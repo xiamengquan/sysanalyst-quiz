@@ -11,6 +11,7 @@ import {
   type KbFlatItem,
 } from "@/lib/kb-resolve";
 import type { KbIndex } from "@/lib/types";
+import { Overlay, useEscapeKey } from "@/components/portal";
 
 type StackEntry = { id: string; title: string };
 
@@ -93,29 +94,15 @@ export function KbPreviewDrawer({
     void runMermaidIn(bodyRef.current).catch(() => {});
   }, [open, status, html]);
 
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        e.preventDefault();
-        if (pinned && onPinnedChange) {
-          onPinnedChange(false);
-          return;
-        }
-        onClose();
-      }
-    };
-    window.addEventListener("keydown", onKey);
-    if (pinned) {
-      return () => window.removeEventListener("keydown", onKey);
+  const onEscape = useCallback(() => {
+    if (pinned && onPinnedChange) {
+      onPinnedChange(false);
+      return;
     }
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = prev;
-    };
-  }, [open, onClose, pinned, onPinnedChange]);
+    onClose();
+  }, [pinned, onPinnedChange, onClose]);
+
+  useEscapeKey(open, onEscape);
 
   const onBodyClick = useCallback(
     (e: MouseEvent) => {
@@ -258,10 +245,17 @@ export function KbPreviewDrawer({
   }
 
   return (
-    <div className="kb-drawer-root" role="presentation">
-      <button type="button" className="kb-drawer-backdrop" aria-label="关闭预览" onClick={onClose} />
+    <Overlay
+      open={open}
+      onClose={onClose}
+      className="kb-drawer-root"
+      backdropClassName="kb-drawer-backdrop"
+      backdropLabel="关闭预览"
+      lockScroll
+      closeOnEscape={false}
+    >
       {panel}
-    </div>
+    </Overlay>
   );
 }
 

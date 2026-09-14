@@ -36,6 +36,7 @@ cd 题库/答题网页 && python3 -m http.server 8765
   README.md              # 本文件：启动说明、目录规划、与基线关系
   ROLE.md                # 程序席位职责（镜像 skill）
   supabase.md            # Supabase SDK 接入（静态导出 · 浏览器端）
+  portal.md              # Portal 通道：Modal / Drawer / Overlay
   site/                  # （可选）较大改版时的开发副本，稳定后同步至 答题网页/
   scripts/               # （可选）构建、知识点预编译等辅助脚本
 

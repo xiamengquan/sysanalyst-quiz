@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
+import { PortalHost } from "@/components/portal";
 
 export const metadata: Metadata = {
   title: "系统分析师 · 刷题站",
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           个人学习用途 · EdgeOne / 本地均可部署 · 数据来自知识点精炼与出题工坊正式产物
         </footer>
+        <PortalHost />
       </body>
     </html>
   );

@@ -11,6 +11,7 @@ import {
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
 import { searchKbDocs, type KbSearchHit, type KbSearchIndex } from "@/lib/kb-search";
+import { Modal } from "@/components/portal";
 
 const KIND_OPTS = [
   { value: "all", label: "全部类型" },
@@ -108,12 +109,7 @@ export function GlobalSearch() {
       inputRef.current?.focus();
       inputRef.current?.select();
     }, 30);
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      window.clearTimeout(t);
-      document.body.style.overflow = prev;
-    };
+    return () => window.clearTimeout(t);
   }, [open]);
 
   useEffect(() => {
@@ -238,15 +234,7 @@ export function GlobalSearch() {
         <kbd className="gs-kbd">{modHint}</kbd>
       </button>
 
-      {open ? (
-        <div className="gs-root" role="presentation">
-          <button type="button" className="gs-backdrop" aria-label="关闭搜索" onClick={close} />
-          <div
-            className="gs-dialog"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby={titleId}
-          >
+      <Modal open={open} onClose={close} labelledBy={titleId} backdropLabel="关闭搜索">
             <div className="gs-hd">
               <h2 id={titleId} className="sr-only">
                 全局搜索
@@ -366,9 +354,7 @@ export function GlobalSearch() {
               <span>Enter 打开</span>
               <span>{modHint} 开关</span>
             </div>
-          </div>
-        </div>
-      ) : null}
+      </Modal>
     </>
   );
 }

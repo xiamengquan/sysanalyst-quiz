@@ -621,6 +621,27 @@ textarea.field {
   color: #d7e0ea;
 }
 
+/* —— Portal 通道（Modal / Drawer / Overlay） —— */
+.portal-channel {
+  /* 挂载点：子层均为 fixed，不占文档流 */
+  position: relative;
+  z-index: 0;
+}
+.portal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+}
+.portal-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.45);
+}
+
 /* —— 知识点关联预览抽屉 —— */
 .kb-dock-layout {
   display: grid;
