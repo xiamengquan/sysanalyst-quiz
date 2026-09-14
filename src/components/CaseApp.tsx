@@ -1,10 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { BookOpen } from "lucide-react";
 import { CH_NAMES, type CaseItem, type CasePack } from "@/lib/types";
 import { CASE_STORAGE_KEY, storageGet, storageRemove, storageSet } from "@/lib/storage";
 import { KbPreviewDrawer, useKbCatalog } from "@/components/KbPreviewDrawer";
+import { RichText } from "@/components/RichText";
 import { findRelatedKbForCase } from "@/lib/quiz-kb";
 import type { KbSearchDoc, KbSearchIndex } from "@/lib/kb-search";
 
@@ -15,36 +16,6 @@ const TRACK_LABEL: Record<string, string> = {
   P1: "P1 保底",
   P2: "P2 止损",
 };
-
-const IMG_RE = /!\[([^\]]*)\]\(([^)]+)\)/g;
-
-function RichText({ text, className }: { text: string; className?: string }) {
-  const nodes: ReactNode[] = [];
-  let last = 0;
-  let m: RegExpExecArray | null;
-  const re = new RegExp(IMG_RE.source, "g");
-  while ((m = re.exec(text))) {
-    if (m.index > last) nodes.push(text.slice(last, m.index));
-    nodes.push(
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
-        key={`${m.index}-${m[2]}`}
-        src={m[2]}
-        alt={m[1] || "配图"}
-        className="my-2 max-h-[480px] w-auto max-w-full rounded-md border border-[var(--line)] bg-white"
-        loading="lazy"
-        referrerPolicy="no-referrer"
-      />,
-    );
-    last = m.index + m[0].length;
-  }
-  if (last < text.length) nodes.push(text.slice(last));
-  return (
-    <div className={className ?? "whitespace-pre-wrap break-words"}>
-      {nodes.length ? nodes : text}
-    </div>
-  );
-}
 
 export function CaseApp() {
   const [all, setAll] = useState<CaseItem[]>([]);

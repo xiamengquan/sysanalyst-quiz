@@ -57,19 +57,27 @@ function buildQuestions() {
       learn_stage: o.learn_stage,
     }));
 
-  const real = loadJsonl(path.join(BANKS, "real/上午真题.jsonl")).map((q, i) => ({
+  // Prefer 综合知识/all.jsonl (raw 导入)；兼容旧路径 上午真题.jsonl
+  const realPrimary = path.join(BANKS, "real/综合知识/all.jsonl");
+  const realFallback = path.join(BANKS, "real/上午真题.jsonl");
+  const realPath = fs.existsSync(realPrimary) ? realPrimary : realFallback;
+  const real = loadJsonl(realPath).map((q, i) => ({
     no: 100000 + i + 1,
     ch: 99,
-    point: `${q.year || ""}${q.half ? `年${q.half}半年` : ""}·第${q.qnum || ""}题`,
+    point: `${q.year || ""}${q.half ? `${q.half}` : ""}·第${q.qnum || ""}题${
+      q.blank ? `·空${q.blank}` : ""
+    }`,
     stem: q.stem,
     opts: q.opts,
     ans: q.ans,
-    exp: q.exp || q.source || "",
+    exp: q.exp || "",
     diff: "real",
     bank: "real",
     source: q.source || "真题",
     year: String(q.year || ""),
+    half: q.half || "",
     qnum: q.qnum,
+    id: q.id,
   }));
 
   const reject = new Set();

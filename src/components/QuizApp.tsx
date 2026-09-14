@@ -5,6 +5,7 @@ import { BookOpen } from "lucide-react";
 import { CH_NAMES, type Question } from "@/lib/types";
 import { QUIZ_STORAGE_KEY, storageGet, storageSet } from "@/lib/storage";
 import { KbPreviewDrawer, useKbCatalog } from "@/components/KbPreviewDrawer";
+import { RichText } from "@/components/RichText";
 import { findRelatedKbForQuestion } from "@/lib/quiz-kb";
 import type { KbSearchDoc, KbSearchIndex } from "@/lib/kb-search";
 
@@ -450,7 +451,10 @@ export function QuizApp() {
             <span className="badge">{q.diff}</span>
             <span className="badge">{q.bank}</span>
           </div>
-          <div className="mb-5 text-[1.02rem] leading-[1.7] sm:text-[1.05rem]">{q.stem}</div>
+          <RichText
+            text={q.stem}
+            className="mb-5 text-[1.02rem] leading-[1.7] sm:text-[1.05rem] whitespace-pre-wrap break-words"
+          />
           <div className="space-y-3">
             {["A", "B", "C", "D"].map((k) => {
               if (!q.opts[k]) return null;
