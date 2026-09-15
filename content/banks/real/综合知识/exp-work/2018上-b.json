@@ -1,0 +1,446 @@
+[
+  {
+    "id": "ZT-2018上-039-23094cc9",
+    "qnum": 39,
+    "stem": "界面是系统与用户交互的最直接的层面。Theo Mandel 博士在界面设计中，提出著名的人 机交互\"黄金三原则\"，包括保持界面一致、减轻用户的记忆负担和（ ）。",
+    "opts": {
+      "A": "遵循用户认知理解",
+      "B": "降低用户培训成本",
+      "C": "置于用户控制之下",
+      "D": "注意资源协调方式"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2018上-040-5fee7375",
+    "qnum": 40,
+    "stem": "典型的事务服务器系统包括多个在共享内存中访问数据的进程，其中（ ）监控其它进程， 一旦进程失败，它将为该失败进程执行恢复动作，并重启该进程。",
+    "opts": {
+      "A": "检查点进程",
+      "B": "数据库写进程",
+      "C": "进程监控进程",
+      "D": "锁管理器进程"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2018上-041-56f2eaa3",
+    "qnum": 41,
+    "stem": "给定关系模式 R;其中 U 为属性集，F 是 U 上的一组函数依赖，那么 Armstroog 公理系统的增广律是指（ ）。",
+    "opts": {
+      "A": "若 X→Y，X→Z，则 X→YZ 为 F 所蕴涵",
+      "B": "若 X→Y，WY→Z，则 XW→Z 为 F 所蕴涵",
+      "C": "若 X→Y，Y→Z 为 F 所蕴涵，则 X→Z 为 F 所蕴涵",
+      "D": "若 X→Y，为 F 所蕴涵，且 Z包含于属性集U,则入 XZ→YZ 为 F 所蕴涵"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2018上-042-93eeb56a",
+    "qnum": 42,
+    "stem": "某集团公司下属有多个超市，假设公司高管需要从时间、地区和商品种类三个维度来分析某电器商品销售数据，那么应采用 （ ）来完成。",
+    "opts": {
+      "A": "数据挖掘",
+      "B": "OLAP",
+      "C": "OLTP",
+      "D": "ETL"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2018上-043-6e217b33",
+    "qnum": 43,
+    "stem": "若某企业信息系统的数据库需要开放给多个第三方查询，那么用户权限管理的方案适合采用 （18） 。",
+    "opts": {
+      "A": "针对所有人员建立用户名并授权",
+      "B": "建立用户角色并授权",
+      "C": "建立每类人员的视图并授权给每个人",
+      "D": "对关系进行分解，每类人员对应一组关系"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2018上-044-302810c5",
+    "qnum": 44,
+    "stem": "采用微内核结构的操作系统设计的基本思想是内核只完成操作系统最基本的功能并在核心态下运行，其他功能运行在用户态，其结构图如下所示。图中空(a)、(b)、(c)和(d)应分别选择如下所示①~④中的哪一项? （ ）。 ①核心态 ②用户态 ③文件和存储器服务器 ④进程调度及进程问通信\n\n![](https://s1.51ctocdn.cn//images/20180907/1536304434789072.jpg)",
+    "opts": {
+      "A": "①、②、③和④",
+      "B": "④、③、②和①",
+      "C": "③、④、②和①",
+      "D": "③、①、④和②"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2018上-045-2c81a094",
+    "qnum": 45,
+    "stem": "在支持多线程的操作系统中，假设进程 P 创建了若干个线程，那么（ ）是不能被其他线程共享的。",
+    "opts": {
+      "A": "该进程的代码段",
+      "B": "该进程中打开的文件",
+      "C": "该进程的全局变量",
+      "D": "该进程中线程的栈指针"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2018上-046-b9f081c9",
+    "qnum": 46,
+    "stem": "前趋图是一个有向无环图，记为：→=(P i ，P j )|P i 完成时间先于 P j 开始时间}。假设系统中进程 P=(P 1 ，P2， P3， P 4 ， P 5 ，P 6 ， P 7 ，P 8 }且进程的前趋图如下：\n\n![](http://s2.51cto.com/images/20180907/1536304497936852.jpg)\n\n那么，该前驱图可记为（）。",
+    "opts": {
+      "A": "→={(P1,P2),(P1,P3),(P1,P4 ),(P2,P5),（P3,P2）,（P3,P4）,（P3,P6）,（P4,P7）,（P5,P8）,（P5,P6）,（P7,P8）}",
+      "B": "→={(P1,P2),(P1,P3),(P1,P4),(P2,P5),（P3,P2）,（P3,P4）,（P3,P6）,（P4,P7）,（P5,P8）,（P6,P8）,（P7,P8）}",
+      "C": "→={(P1,P2),(P1,P3),(P1,P4),(P2,P5),（P3,P2）,（P3,P4）,（P3,P5）,（P4,P6）,（P4,P7）,（P6,P8）,（P7,P8）}",
+      "D": "→={(P1,P2),(P1,P3),(P1,P4),(P2,P5),（P3,P2）,（P3,P4）,（P3,P5）,（P4,P6）,（P4,P7）,（P7,P8）,（P6,P8）}"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2018上-047-5f3de53f",
+    "qnum": 47,
+    "stem": "假设磁盘块与缓冲区大小相同，每个盘块读入缓冲区的时间为 16us, 由缓冲区送至用户区的时间是 5us,在用户区内系统对每块数据的处理时间为 1us.若用户需要将大小为 10 个磁盘 块的 Doc1 文件逐块从磁盘读入缓冲区，并送至用户区进行处理，那么采用单缓冲区需要花费的时间为（ 请作答此空）us: 采用双缓冲区需要花费的时间为，（）us.",
+    "opts": {
+      "A": "160",
+      "B": "161",
+      "C": "166",
+      "D": "211"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2018上-048-304678bd",
+    "qnum": 48,
+    "stem": "假设磁盘块与缓冲区大小相同，每个盘块读入缓冲区的时间为 16us, 由缓冲区送至用户区的时间是 5us,在用户区内系统对每块数据的处理时间为 1us.若用户需要将大小为 10 个磁盘 块的 Doc1 文件逐块从磁盘读入缓冲区，并送至用户区进行处理，那么采用单缓冲区需要花费的时间为（）us: 采用双缓冲区需要花费的时间为，（请作答此空 ）us.",
+    "opts": {
+      "A": "160",
+      "B": "161",
+      "C": "166",
+      "D": "211"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2018上-049-f9114198",
+    "qnum": 49,
+    "stem": "某系统磁盘数据块的大小为 1024KB,系绕磁盘管理采用索引文件结构，每个索引指针占用 4 个字节。一个索引文件的索引节点有 8 个直接块地址、1 个一级间接块地址、1 个二级间接块地址和 1 个三级间接块地址。假设索引节点已经在内存中，那么访问该文件偏移地址 9089 字节的数据需要再访问（ ）次磁盘。",
+    "opts": {
+      "A": "1",
+      "B": "2",
+      "C": "3",
+      "D": "4"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2018上-050-35856571",
+    "qnum": 50,
+    "stem": "某系统采用请求页式存储管理方案。假设某进程有 6 个页面，系统给该进程分配了 4 个 存储块，其页面变换表如下表所示，表中的状态位等于 1 和 0 分别表示页面在内存或不在内 存。当该进程访问的第 4 号页面不在内存时，应该淘汰表中页面号为（ ）的页面。\n\n![](https://s1.51ctocdn.cn//images/20180907/1536304705896989.jpg)",
+    "opts": {
+      "A": "1",
+      "B": "2",
+      "C": "3",
+      "D": "5"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2018上-051-b16e34cc",
+    "qnum": 51,
+    "stem": "某厂拥有三种资源 A. B、C.生产甲、乙两种产品。生产每吨产品需要消耗的资源、可以获 得的利润见下表。日前，该厂拥有资源 A、资源 B 和资源 C 分別为 12 吨，7 吨和 12 吨。根 据上述说明，适当安排甲、乙两种产品的生产量，就能获得最大总利润（请作答此空 ）。如果生产计 划只受资源 A 和 C 的约束，资源 B 很容易从市场上以每吨 0.5 百万元购得，则该厂宜再购买 （）资源 B，以获得最大的总利润。\n\n![](https://s1.51ctocdn.cn//images/20180907/1536304747854130.jpg)",
+    "opts": {
+      "A": "16 百万元",
+      "B": "18 百万元",
+      "C": "19 百万元",
+      "D": "20 百万元"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2018上-052-1292e5b9",
+    "qnum": 52,
+    "stem": "某厂拥有三种资源 A. B、C.生产中、乙两种产品。生产每吨产品需要消耗的资源、可以获 得的利润见下表。日前，该厂拥有资源 A、资源 B 和资源 C 分別为 12 吨，7 吨和 12 吨。根 据上述说明，适当安排甲、乙两种产品的生产量，就能获得最大总利润（）。如果生产计 划只受资源 A 和 C 的约束，资源 B 很容易从市场上以每吨 0.5 百万元购得，则该厂宜再购买 （ 请作答此空）资源 B，以获得最大的总利润。\n\n![](http://s2.51cto.com/images/20180907/1536304817293090.jpg)",
+    "opts": {
+      "A": "1 吨",
+      "B": "2 吨",
+      "C": "3 吨",
+      "D": "4 吨"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2018上-053-2f1cd5f3",
+    "qnum": 53,
+    "stem": "设三个煤场 A、B、C 分别能供应煤 12、14、 10 万吨，三个工厂 X、Y、Z 分别需要煤 11、 12、13 万吨，从各煤场到各工厂运煤的单价(百元/吨)见下表方框内的数字。只要选择最优 的运输方案，总的运输成本就能降到（ ）百万元。\n\n![](http://s2.51cto.com/images/20180907/1536304867193587.jpg)",
+    "opts": {
+      "A": "83",
+      "B": "91",
+      "C": "113",
+      "D": "153"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2018上-054-b2eb0ba3",
+    "qnum": 54,
+    "stem": "某项目有 A~H 八个作业，各作业所需时间(单位:周)以及紧前作业如下表:\n\n![](https://s1.51ctocdn.cn//images/20180907/1536304916418389.jpg)\n\n该项目的工期为（请作答此空 ）周。",
+    "opts": {
+      "A": "12",
+      "B": "13",
+      "C": "14",
+      "D": "15"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2018上-055-4ae5a924",
+    "qnum": 55,
+    "stem": "某项目有 A~H 八个作业，各作业所需时间(单位:周)以及紧前作业如下表:\n\n![](https://s1.51ctocdn.cn//images/20180907/1536304978873115.jpg)\n\n如果作业 C 拖延 3 周完成，则该项目的工期（请作答此空）。",
+    "opts": {
+      "A": "不变",
+      "B": "拖延 1 周",
+      "C": "拖延 2 周",
+      "D": "拖延 3 周"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2018上-056-7919939e",
+    "qnum": 56,
+    "stem": "下表记录了六个结点 A、B、C、D、E、F 之间的路径方向和距离。从 A 到 F 的最短距离是 ( )。\n\n![](https://s2.51cto.com/images/20191116/1573885322524509.jpg)",
+    "opts": {
+      "A": "38",
+      "B": "40",
+      "C": "44",
+      "D": "46"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2018上-057-071c7799",
+    "qnum": 57,
+    "stem": "某小区有七栋楼房①~⑦(见下图)，各楼房之间可修燃气管道路线的长度(单位:百米)已标 记在连线旁。为修建连通各个楼房的燃气管道，该小区内部煤气管道的总长度至少为（ ） 百米。\n\n![](https://s2.51cto.com/images/20191116/1573885371563256.jpg)",
+    "opts": {
+      "A": "23",
+      "B": "25",
+      "C": "27",
+      "D": "29"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2018上-058-42291a93",
+    "qnum": 58,
+    "stem": "信息系统的性能评价指标是客观评价信息系统性能的依据，其中，（13）是指系统同时能处理的请求数量。",
+    "opts": {
+      "A": "系统响应时间",
+      "B": "吞吐量",
+      "C": "资源利用率",
+      "D": "并发用户数"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2018上-059-41484bad",
+    "qnum": 59,
+    "stem": "商业智能系统主要包括数据预处理、建立数据仓库、数据分析和数据展现四个主要阶段。其中，数据预处理主要包括(请作答此空 ) ;建立数据仓库是处理海量数据的基础;数据分析一般采用（ ) 来实现；数据展现则主要是保障系统分析结果的可视化。",
+    "opts": {
+      "A": "联机分析处理(OLAP)",
+      "B": "联机事务处理(OLTP)",
+      "C": "抽取、转换和加载(ETL)",
+      "D": "数据聚集和汇总(DCS)"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2018上-060-b04a4ee9",
+    "qnum": 60,
+    "stem": "商业智能系统主要包括数据预处理、建立数据仓库、数据分析和数据展现四个主要阶段。其中，数据预处理主要包括() ;建立数据仓库是处理海量数据的基础;数据分析一般采用（ 请作答此空) 来实现；数据展现则主要是保障系统分析结果的可视化。",
+    "opts": {
+      "A": "数据仓库和智能分析",
+      "B": "数据抽取和报表分析",
+      "C": "联机分析处理和数据挖掘",
+      "D": "业务集成和知识形成与转化"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2018上-061-bca6db72",
+    "qnum": 61,
+    "stem": "运用互联网技术，在系统性能评价中通常用平均无故障时间(MTBF)和平均故障修复时间 (MTTR) 分别表示计算机系统的可靠性和可用性，下列（ ） 表示系统具有高可靠性和高可用性。",
+    "opts": {
+      "A": "MTBF 小，MTTR 小",
+      "B": "MTBF 大，MTTR 小",
+      "C": "MTBF 大，MTTR 大",
+      "D": "MTBF 小，MTTR 大"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2018上-062-95987445",
+    "qnum": 62,
+    "stem": "MPEG-7 是 ISO 制定的（ ） 标准。",
+    "opts": {
+      "A": "多媒体视频压缩编码",
+      "B": "多媒体音频压缩编码",
+      "C": "多媒体音、视频压缩编码",
+      "D": "多媒体内容描述接口"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2018上-063-b264226c",
+    "qnum": 63,
+    "stem": "彩色视频信号数字化的过程中， 利用图像子采样技术通过降低对（ ）的采样频率，以 达到减少编码数据量的目的。",
+    "opts": {
+      "A": "色度信号",
+      "B": "饱和度信号",
+      "C": "同步信号",
+      "D": "亮度信号"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2018上-064-98413244",
+    "qnum": 64,
+    "stem": "主机host1对host2进行域名查询的过程如下图所示，下列说法中正确的是（）。\n\n![](https://s1.51ctocdn.cn//images/20190328/1553738181150524.png)",
+    "opts": {
+      "A": "本地域名服务器采用迭代算法",
+      "B": "中介域名服务器采用迭代算法",
+      "C": "根域名服务器采用递归算法",
+      "D": "授权域名服务器采用何种算法不确定"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2018上-065-c905829d",
+    "qnum": 65,
+    "stem": "某公司网络的地址是 192.168.192.0/20,要把该网络分成 32 个子网，则对应的子网掩码应该是（请作答此空 ） ，每个子网可分配的主机地址数是 （）。",
+    "opts": {
+      "A": "255.255.252.0",
+      "B": "255.255.254.0",
+      "C": "255.255.255.0",
+      "D": "255.255.255.128"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2018上-066-f3bfac5b",
+    "qnum": 66,
+    "stem": "某公司网络的地址是 192.168.192.0/20,要把该网络分成 32 个子网，则对应的子网掩码应该是（） ，每个子网可分配的主机地址数是 （ 请作答此空）。",
+    "opts": {
+      "A": "62",
+      "B": "126",
+      "C": "254",
+      "D": "510"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2018上-067-13342859",
+    "qnum": 67,
+    "stem": "以下关于网络布线子系统的说法中，错误的是（ ）。",
+    "opts": {
+      "A": "工作区子系统指终端到信息插座的区域",
+      "B": "水平子系统实现计算机设备与各管理子系统间的连接",
+      "C": "干线子系统用于连接楼层之间的设备间",
+      "D": "建筑群子系统连接建筑物"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2018上-068-100382d1",
+    "qnum": 68,
+    "stem": "在层次化园区网络设计中，（27）是汇聚层的功能。",
+    "opts": {
+      "A": "高速数据传输",
+      "B": "出口路由",
+      "C": "路由选择执行",
+      "D": "MAC 地址过滤"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2018上-069-526942c9",
+    "qnum": 69,
+    "stem": "假如有 3 块 80T 的硬盘，采用 RAID5 的容量是（ ）。",
+    "opts": {
+      "A": "40T",
+      "B": "80T",
+      "C": "160T",
+      "D": "240T"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2018上-070-61e43781",
+    "qnum": 70,
+    "stem": "网络安全体系设计可从物理线路安全、网络安全、系统安全、应用安全等方面来进行。 其中，数据库容灾属于（ ）。",
+    "opts": {
+      "A": "物理线路安全和网络安全",
+      "B": "应用安全和网络安全",
+      "C": "系统安全和网络安全",
+      "D": "系统安全和应用安全"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2018上-071-d6f07f83",
+    "qnum": 71,
+    "stem": "During the systems analysis phase, greater user involvement usually results in better communication, faster development times, and more satisfied users.There are three common team-based approaches that encourage system users to participate actively in various development tasks.1) (请作答此空) is a popular fact-finding technique that brings users into the development process as active participants. The end product of the approach is a requirements model.2) () is a team-based technique that speeds up i",
+    "opts": {
+      "A": "Questionnaires\n问卷调查",
+      "B": "Joint application development\n联合应用开发",
+      "C": "Interviews\n访谈",
+      "D": "Prototyping\n原型设计"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2018上-072-2f849d82",
+    "qnum": 72,
+    "stem": "During the systems analysis phase, greater user involvement usually results in better communication, faster development times, and more satisfied users.There are three common team-based approaches that encourage system users to participate actively in various development tasks.1) () is a popular fact-finding technique that brings users into the development process as active participants. The end product of the approach is a requirements model.2) (请作答此空 ) is a team-based technique that speeds up ",
+    "opts": {
+      "A": "Object-oriented development\n面向对象开发",
+      "B": "Model-driven development\n模型驱动开发",
+      "C": "Rapid application development\n快速应用开发",
+      "D": "Commercial Application package\n商业套件"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2018上-073-389941c9",
+    "qnum": 73,
+    "stem": "During the systems analysis phase, greater user involvement usually results in better communication, faster development times, and more satisfied users.There are three common team-based approaches that encourage system users to participate actively in various development tasks.1) () is a popular fact-finding technique that brings users into the development process as active participants. The end product of the approach is a requirements model.2) () is a team-based technique that speeds up inform",
+    "opts": {
+      "A": "requirements planning phase\n需求计划阶段",
+      "B": "business process modeling\n业务流程建模",
+      "C": "business process improvement\n业务流程优化",
+      "D": "scope definition phase\n范围定义阶段"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2018上-074-09bc9ab4",
+    "qnum": 74,
+    "stem": "During the systems analysis phase, greater user involvement usually results in better communication, faster development times, and more satisfied users.There are three common team-based approaches that encourage system users to participate actively in various development tasks.1) () is a popular fact-finding technique that brings users into the development process as active participants. The end product of the approach is a requirements model.2) () is a team-based technique that speeds up inform",
+    "opts": {
+      "A": "physical architecure design\n物理架构设计",
+      "B": "object design\n对象设计",
+      "C": "prototypes design\n原型设计",
+      "D": "user design phase\n用户设计阶段"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2018上-075-4540c5d4",
+    "qnum": 75,
+    "stem": "During the systems analysis phase, greater user involvement usually results in better communication, faster development times, and more satisfied users.There are three common team-based approaches that encourage system users to participate actively in various development tasks.1) () is a popular fact-finding technique that brings users into the development process as active participants. The end product of the approach is a requirements model.2) () is a team-based technique that speeds up inform",
+    "opts": {
+      "A": "Agile methods\n敏捷方法",
+      "B": "The FAST framework\n快速框架",
+      "C": "Reverse Engineering\n逆向工程",
+      "D": "Reengineering\n重构"
+    },
+    "ans": "A"
+  }
+]

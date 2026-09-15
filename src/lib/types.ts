@@ -36,7 +36,13 @@ export type Question = {
   bank: string;
   source?: string;
   year?: string;
+  half?: string;
+  qnum?: number;
   id?: string;
+  edition?: string;
+  /** 选项级解答：对项写「对：…」，错项写「错：…」 */
+  opt_exp?: Record<string, string>;
+  exp_edition?: string;
   origin_chapter?: number;
   audience?: string[];
   math_level?: string;

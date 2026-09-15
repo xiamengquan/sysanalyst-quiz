@@ -126,5 +126,5 @@ export async function storageRemove(key: string): Promise<void> {
   clearLocalStorageKey(key);
 }
 
-export const QUIZ_STORAGE_KEY = "sysanalyst_quiz_v3";
+export const QUIZ_STORAGE_KEY = "sysanalyst_quiz_v4";
 export const CASE_STORAGE_KEY = "sysanalyst_case_v1";

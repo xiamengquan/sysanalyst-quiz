@@ -1,0 +1,446 @@
+[
+  {
+    "id": "ZT-2014上-039-d6cc51aa",
+    "qnum": 39,
+    "stem": "实施企业信息战略规划有多种方法，其中（39）主要以企业内部管理信息系统为核心，围绕企业整体需求进行信息系统规划。",
+    "opts": {
+      "A": "企业系统规划",
+      "B": "关键成功因素法",
+      "C": "信息工程法",
+      "D": "价值链分析法"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2014上-040-54ca3e5a",
+    "qnum": 40,
+    "stem": "在数据库系统中，数据库的视图、基本表和存储文件的结构分别与（40）对应。",
+    "opts": {
+      "A": "模式、外模式、内模式",
+      "B": "模式、内模式、外模式",
+      "C": "外模式、模式、内模式",
+      "D": "外模式、内模式、模式"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2014上-041-6a0f5ef2",
+    "qnum": 41,
+    "stem": "在数据库系统中，数据的物理独立性和数据的逻辑独立性是分别通过修改（41）来完成的。",
+    "opts": {
+      "A": "模式与内模式之间的映像、外模式与模式之间的映像",
+      "B": "外模式与内模式之间的映像、外模式与模式之间的映像",
+      "C": "外模式与模式之间的映像、模式与内模式之间的映像",
+      "D": "外模式与内模式之间的映像、模式与内模式之间的映像"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2014上-042-55c20745",
+    "qnum": 42,
+    "stem": "给定关系模式R(U,F)，U={A,B,C,D}，F={AB→C,CD→B}。关系R（42）。",
+    "opts": {
+      "A": "只有1个候选关键字ACB",
+      "B": "只有1个候选关键字BCD",
+      "C": "有2个候选关键字ACD和ABD",
+      "D": "有2个候选关键字ACB和BCD"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2014上-043-ce6bea6b",
+    "qnum": 43,
+    "stem": "给定关系模式R(U,F)，U={A,B,C,D}，F={AB→C,CD→B}。关系R有（43）。",
+    "opts": {
+      "A": "0个非主属性和4个主属性",
+      "B": "1个非主属性和3个主属性",
+      "C": "2个非主属性和2个主属性",
+      "D": "3个非主属性和1个主属性"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2014上-044-79a7fcaa",
+    "qnum": 44,
+    "stem": "销售公司数据库中的关系零件为P(Pno,Pname,Sname,City,Qty)，Pno表示零件号，Pname表示零件名称，Sname表示供应商，City表示所在地，Qty表示库存量。其函数依赖集F={Pno→Pname，(Pno,Sname)→Qty，Sname→City}。关系P为（44）。",
+    "opts": {
+      "A": "1NF",
+      "B": "2NF",
+      "C": "3NF",
+      "D": "4NF"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2014上-045-48e6328a",
+    "qnum": 45,
+    "stem": "销售公司数据库中的关系零件为P(Pno,Pname,Sname,City,Qty)，Pno表示零件号，Pname表示零件名称，Sname表示供应商，City表示所在地，Qty表示库存量。其函数依赖集F={Pno→Pname，(Pno,Sname)→Qty，Sname→City}。关系P存在冗余度大、修改操作不一致、插入异常和删除异常的问题。若将P分解为（45），则可以解决这一问题。",
+    "opts": {
+      "A": "P1(Pname,Qty)、P2(Pno,Sname,City)",
+      "B": "P1(Pname,Pname)、P2(Sname,City,Qty)",
+      "C": "P1(Pno,Pname)、P2(Pno,Sname,Qty)、P3(Sname,City)",
+      "D": "P1(Pno,Pname)、P2(Pno,Qty)、P3(Sname,City)、P4(City,Qty)"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2014上-046-ffb55afa",
+    "qnum": 46,
+    "stem": "进程P1、P2、P3、P4、P5和P6的前趋图如下所示：\n\n![](https://s2.51cto.com/images/201803/562c52358aafc90a361594431fbfa50f838e45.png)\n\n若用PV操作控制这6个进程的同步与互斥的程序如下，那么程序中的空a、空b和空c处应分别为（46）。\n\n![](https://s2.51cto.com/images/201803/d18299e41249cac8edc011665ec79e91ef3b7f.png)",
+    "opts": {
+      "A": "V(S3)、P(S2)和V(S4)V(S5)",
+      "B": "P(S3)、P(S2)和V(S4)V(S5)",
+      "C": "V(S2)、P(S3)和P(S4)P(S3)",
+      "D": "V(S2)、V(S3)和P(S3)P(S4)"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2014上-047-13250c44",
+    "qnum": 47,
+    "stem": "进程P1、P2、P3、P4、P5和P6的前趋图如下所示：\n\n![](https://s2.51cto.com/images/201803/19c086542e450d324088755656287b3f6d1eb6.png)\n\n若用PV操作控制这6个进程的同步与互斥的程序如下，空d和空e处应分别为（47）。\n\n![](https://s2.51cto.com/images/201803/517dd6862c00dfce7f3975d57117b6c8ef3432.png)",
+    "opts": {
+      "A": "V(S3)V(S4)和V(S6)",
+      "B": "P(S3)P(S4)和V(S6)",
+      "C": "P(S3)V(S4)和V(S6)",
+      "D": "P(S3)V(S4)和P(S6)"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2014上-048-8df77cb5",
+    "qnum": 48,
+    "stem": "进程P1、P2、P3、P4、P5和P6的前趋图如下所示：\n\n![](https://s2.51cto.com/images/201803/9639223415d1bf7bac9276dc9afcbbca8e41ec.png)\n\n若用PV操作控制这6个进程的同步与互斥的程序如下，空f和空g处应分别为（48）。\n\n![](https://s2.51cto.com/images/201803/083538035b623470d92928901a435e043ea999.png)",
+    "opts": {
+      "A": "V(S5)和V(S7)",
+      "B": "P(S5)和P(S7)",
+      "C": "P(S5)和V(S7)",
+      "D": "V(S5)和P(S7)"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2014上-049-474faeb2",
+    "qnum": 49,
+    "stem": "某系统采用请求页式存储管理方案，假设某进程有6个页面，系统给该进程分配了4个存储块，其页面变换表如下表所示，表中的状态位等于1和0分别表示页面在内存或不在内存。当该进程访问的第3号页面不在内存时，应该淘汰表中页面号为（10）的页面。\n\n![](https://s2.51cto.com/images/20211009/1633779619410897.jpg)",
+    "opts": {
+      "A": "0",
+      "B": "2",
+      "C": "4",
+      "D": "5"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2014上-050-4d815e0d",
+    "qnum": 50,
+    "stem": "某风险投资公司拥有的总资金数为25，分期为项目P1、P2、P3、P4投资，各项目投资情况如下表所示。公司的可用资金数为（50）。\n\n![](https://s2.51cto.com/images/201803/e39ce0020e5005b60f127608dab81c16576d0d.png)",
+    "opts": {
+      "A": "0",
+      "B": "1",
+      "C": "2",
+      "D": "3"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2014上-051-5c3ec601",
+    "qnum": 51,
+    "stem": "某风险投资公司拥有的总资金数为25，分期为项目P1、P2、P3、P4投资，各项目投资情况如下表所示。若P1和P3分别申请资金数1和2，则公司资金管理处（51）。\n\n![](https://s2.51cto.com/images/201803/e13df0c27e2c05fac7c5690df4776db019a6ba.png)",
+    "opts": {
+      "A": "只能先为项目P1进行投资，因为投资后公司资金周转状态是安全的",
+      "B": "只能先为项目P3进行投资，因为投资后公司资金周转状态是安全的",
+      "C": "可以同时为项目P1、P3进行投资，因为投资后公司资金周转状态是安全的",
+      "D": "不能先为项目P3进行投资，因为投资后公司资金周转状态是不安全的"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2014上-052-ed16bc5b",
+    "qnum": 52,
+    "stem": "某部门邀请3位专家对12个项目进行评选，每个专家选了5个项目。评选的结果中，有a个项目被3人都选中，有b个项目被2个选中，有c个项目被1人选中，有2个项目无人选中。据此，可以推断（52）。",
+    "opts": {
+      "A": "a>2",
+      "B": "b>5",
+      "C": "b为偶数",
+      "D": "c≥a+b"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2014上-053-9c2a9cab",
+    "qnum": 53,
+    "stem": "设甲乙丙三人独立解决某个问题的概率分别为0.45、0.55、0.6，则三人一起解决该问题的概率约为（53）。",
+    "opts": {
+      "A": "0.53",
+      "B": "0.7",
+      "C": "0.8",
+      "D": "0.9"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2014上-054-858733c1",
+    "qnum": 54,
+    "stem": "某厂准备生产甲、乙、丙三种产品，生产每件产品所需的A、B两种原料数量，能获得的利润，以及工厂拥有的原料数量如下表：\n\n![](https://s2.51cto.com/images/201803/769282f14dec062ce1574099ab5b04e2c8cff6.png)\n\n根据该表，只要安排好生产计划，就能获得最大利润（54）万元。",
+    "opts": {
+      "A": "25",
+      "B": "26",
+      "C": "27",
+      "D": "28"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2014上-055-ca1bfa22",
+    "qnum": 55,
+    "stem": "某工程项目包括8个作业A～H。各作业的紧前作业、所需天数、所需人数见下表：\n\n![](https://s2.51cto.com/images/201803/d5537cd8534cdca3ee417395b95660e56c8146.png)\n\n该项目共有10人，各作业必须连续进行，至少需要（55）天才能完成。",
+    "opts": {
+      "A": "11",
+      "B": "12",
+      "C": "13",
+      "D": "14"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2014上-056-d9ee5dc2",
+    "qnum": 56,
+    "stem": "下面的网络图表示从城市A到城市B运煤的各种路线。各线段上的数字表示该线段运煤所需的费用（百元/车）。城市A有三个装货点，城市B有三个卸货点，各点旁标注的数字表示装/卸煤所需的费用（百元/车）。根据该图，从城市A的一个装卸点经过一条路线到城市B的一个卸货点所需的装、运、卸总费用至少为（56）（百元/车）。\n\n![](https://s2.51cto.com/images/201803/19a714f042584c21557023e02cf965ce7b7780.png)",
+    "opts": {
+      "A": "19",
+      "B": "20",
+      "C": "21",
+      "D": "22"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2014上-057-1a8af657",
+    "qnum": 57,
+    "stem": "某批发站准备向甲、乙、丙、丁四家小商店供应5箱商品。批发站能取得的利润（单位：百元）与分配的箱数有关（见下表）。\n\n![](https://s2.51cto.com/images/201803/6457bb778f8f5c8fba3745849cc7b0cd5bee37.png)\n\n批发站为取得最大总利润，应分配__(57)__。",
+    "opts": {
+      "A": "给甲、丙各1箱",
+      "B": "给乙2箱",
+      "C": "给丙2箱",
+      "D": "给丁2箱"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2014上-058-8362dd89",
+    "qnum": 58,
+    "stem": "流水线技术是通过并行硬件来提高系统性能的常用方法。对于一个k段流水线，假设其各段的执行时间均相等（设为t），输入到流水线中的任务是连续的理想情况下，完成n个连续任务需要的总时间为（58）。",
+    "opts": {
+      "A": "nkt",
+      "B": "(k+n-1)t",
+      "C": "(n-k)kt",
+      "D": "(k+n+1)t"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2014上-059-4399e709",
+    "qnum": 59,
+    "stem": "流水线技术是通过并行硬件来提高系统性能的常用方法。对于一个k段流水线，假设其各段的执行时间均相等（设为t），输入到流水线中的任务是连续的理想情况下，完成n个连续任务需要的总时间为（ ）。若某流水线浮点加法运算器分为5段，所需要的时间分别是6ns、7ns、8ns、9ns和6ns，则其最da加速比为（请作答此空）。",
+    "opts": {
+      "A": "4",
+      "B": "5",
+      "C": "6",
+      "D": "7"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2014上-060-3e97f8a2",
+    "qnum": 60,
+    "stem": "总线规范会详细描述总线各方面的特性，其中（60）特性规定了总线的线数，以及总线的插头、插座的形状、尺寸和信号线的排列方式等要素。总线带宽定义为总线的最大数据传输速率，即每秒传输的字节数。",
+    "opts": {
+      "A": "物理",
+      "B": "电气",
+      "C": "功能",
+      "D": "时间"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2014上-061-d2eefbcc",
+    "qnum": 61,
+    "stem": "总线规范会详细描述总线各方面的特性，总线带宽定义为总线的最大数据传输速率，即每秒传输的字节数。假设某系统总线在一个总周期中并行传输4B信息，一个总线周期占用2个时钟周期，总线时钟频率为10MHz，则总线带宽为（61）MBps。",
+    "opts": {
+      "A": "20",
+      "B": "40",
+      "C": "60",
+      "D": "80"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2014上-062-3bd73f0a",
+    "qnum": 62,
+    "stem": "以下压缩音频编码方法，（62）编码使用了心理声学模型，从而实现了高效率的数字音频压缩。",
+    "opts": {
+      "A": "PCM",
+      "B": "MPEG音频",
+      "C": "ADPCM",
+      "D": "LPC"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2014上-063-356a1158",
+    "qnum": 63,
+    "stem": "彩色视频信号数字化的过程中，利用图像子采样技术通过降低对（63）的采样频率，以达到减少数据量的目的。",
+    "opts": {
+      "A": "亮度信号",
+      "B": "饱和度信号",
+      "C": "同步信号",
+      "D": "色度信号"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2014上-064-b4fafd14",
+    "qnum": 64,
+    "stem": "在地面上相距2000公里的两地之间利用电缆传输4000比特长的数据包，数据速率为64kb/s，从开始发送到接收完成需要的时间为（64）。",
+    "opts": {
+      "A": "48ms",
+      "B": "640ms",
+      "C": "62.5ms",
+      "D": "72.5ms"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2014上-065-f80b5908",
+    "qnum": 65,
+    "stem": "ICMP协议属于英特网中的（65）协议。",
+    "opts": {
+      "A": "数据链路层",
+      "B": "网络层",
+      "C": "传输层",
+      "D": "会话层"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2014上-066-f933d5c2",
+    "qnum": 66,
+    "stem": "ICMP协议数据单元封装在（66）中传送。",
+    "opts": {
+      "A": "以太帧",
+      "B": "TCP段",
+      "C": "UDP数据报",
+      "D": "IP数据报"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2014上-067-72824049",
+    "qnum": 67,
+    "stem": "假设网络的生产管理系统采用B/S工作方式，经常上网的用户数为100个，每个用户每分钟产生11个事务处理，平均每个事务处理的数据量大小为0.06MB，则这个系统需要的信息传输速率为（67）。",
+    "opts": {
+      "A": "5.28Mb/s",
+      "B": "8.8Mb/s",
+      "C": "66Mb/s",
+      "D": "528Mb/s"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2014上-068-67ded300",
+    "qnum": 68,
+    "stem": "中国自主研发的3G通信标准是（68）。",
+    "opts": {
+      "A": "CDMA2000",
+      "B": "TD-SCDMA",
+      "C": "WCDMA",
+      "D": "WiMAX"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2014上-069-e86a8605",
+    "qnum": 69,
+    "stem": "网络系统设计过程中，物理网络设计阶段的任务是（69）。",
+    "opts": {
+      "A": "依据逻辑网络设计的要求，确定设备的具体物理分布和运行环境",
+      "B": "分析现有网络和新网络的各类资源分布，掌握网络所处的状态",
+      "C": "根据需求规范和通信规范，实施资源分配和安全规划",
+      "D": "理解网络应该具有的功能和性能，最终设计出符合用户需求的网络"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2014上-070-d1b1dc60",
+    "qnum": 70,
+    "stem": "2014年1月，由于DNS根服务器被攻击，国内许多互联网用户无法访问.com域名网站，这种恶意攻击可能造成的危害是（70）。",
+    "opts": {
+      "A": "创造条件，攻击相应的服务器",
+      "B": "快速入侵互联网用户的计算机",
+      "C": "将正常网站的域名解析到错误的地址",
+      "D": "以上都是"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2014上-071-b27cc617",
+    "qnum": 71,
+    "stem": "A requirement is simply a statement of what the system must do or what characteristics it needs to have. Requirements written from the perspective of user and focus on user needs are called __(71)__. Requirements written from the developer's perspective and describe how the system will be implemented are called __(72)__. Requirements evolve from detailed statemens of business capabilities that a system should have to detailed statements of the technical way in whick the capabilities will be impl",
+    "opts": {
+      "A": "operational requirements",
+      "B": "business requirements",
+      "C": "technical requirements",
+      "D": "system requirements"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2014上-072-1786aee5",
+    "qnum": 72,
+    "stem": "A requirement is simply a statement of what the system must do or what characteristics it needs to have. Requirements written from the perspective of user and focus on user needs are called __(71)__. Requirements written from the developer's perspective and describe how the system will be implemented are called __(72)__. Requirements evolve from detailed statemens of business capabilities that a system should have to detailed statements of the technical way in whick the capabilities will be impl",
+    "opts": {
+      "A": "operational requirements",
+      "B": "business requirements",
+      "C": "technical requirements",
+      "D": "system requirements"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2014上-073-60c6413e",
+    "qnum": 73,
+    "stem": "A requirement is simply a statement of what the system must do or what characteristics it needs to have. Requirements written from the perspective of user and focus on user needs are called __(71)__. Requirements written from the developer's perspective and describe how the system will be implemented are called __(72)__. Requirements evolve from detailed statemens of business capabilities that a system should have to detailed statements of the technical way in whick the capabilities will be impl",
+    "opts": {
+      "A": "a functional requirements",
+      "B": "a technical requirements",
+      "C": "an operational requirements",
+      "D": "a service requirements"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2014上-074-5e2967fb",
+    "qnum": 74,
+    "stem": "A requirement is simply a statement of what the system must do or what characteristics it needs to have. Requirements written from the perspective of user and focus on user needs are called __(71)__. Requirements written from the developer's perspective and describe how the system will be implemented are called __(72)__. Requirements evolve from detailed statemens of business capabilities that a system should have to detailed statements of the technical way in whick the capabilities will be impl",
+    "opts": {
+      "A": "functional requirements",
+      "B": "technical requirements",
+      "C": "operational requirements",
+      "D": "information requirements"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2014上-075-66f185be",
+    "qnum": 75,
+    "stem": "A requirement is simply a statement of what the system must do or what characteristics it needs to have. Requirements written from the perspective of user and focus on user needs are called __(71)__. Requirements written from the developer's perspective and describe how the system will be implemented are called __(72)__. Requirements evolve from detailed statemens of business capabilities that a system should have to detailed statements of the technical way in whick the capabilities will be impl",
+    "opts": {
+      "A": ".information requirements",
+      "B": "system performance",
+      "C": "secrity and control",
+      "D": "cultural and political"
+    },
+    "ans": "D"
+  }
+]

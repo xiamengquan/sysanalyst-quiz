@@ -47,10 +47,10 @@ cd 题库/答题网页 && python3 -m http.server 8765
   kb-index.json          # 知识点正式目录（对齐审计发布清单 v1.0）
   启动.sh                # 本地 HTTP 服务入口
 
-题库/综合知识/all.jsonl   # 自编练习源
-题库/真题/上午真题.jsonl  # 真题源
-题库/出题工坊/新题/*-passed.jsonl
-知识点工坊/审计委员会/正式发布/   # 知识点正式稿（发布门禁）
+content/banks/practice/all.jsonl          # 自编练习源
+content/banks/real/综合知识/all.jsonl     # 综合知识真题（数据版，现行）
+content/workshop/new/*-passed.jsonl
+docs/kb-workshop/审计委员会/正式发布/     # 知识点正式稿（发布门禁）
 ```
 
 ## 题库数据更新

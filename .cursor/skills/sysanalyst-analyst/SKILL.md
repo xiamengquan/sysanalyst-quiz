@@ -13,7 +13,7 @@ description: >-
 
 ## 输入（按存在性读取）
 
-1. `content/banks/real/上午真题.jsonl` — 已解析选择题
+1. `content/banks/real/综合知识/all.jsonl` — 综合知识真题（数据版）
 2. `content/banks/real/案例分析/` — 案例原文抽样
 3. `content/banks/real/00-真题索引.md`、`catalog.json`
 4. 可选：`content/banks/practice/all.jsonl`（自编题，仅作对照，不当作真题规律）

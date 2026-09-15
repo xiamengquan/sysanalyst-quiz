@@ -46,6 +46,29 @@ def strip_html(s: str) -> str:
     return s.strip()
 
 
+WATERMARK_RE = re.compile(
+    r"^【[^】]*51CTO[^】]*】\s*"
+    r"|^【\s*学员回忆版\s*】\s*"
+    r"|^【\s*回忆版\s*】\s*",
+    re.I,
+)
+
+
+def clean_stem(s: str) -> str:
+    s = strip_html(s)
+    for _ in range(5):
+        s2 = WATERMARK_RE.sub("", s).strip()
+        s2 = re.sub(r"(【空（\d+）】)\s*【[^】]*51CTO[^】]*】\s*", r"\1", s2, flags=re.I)
+        s2 = re.sub(r"(【空（\d+）】)\s*【\s*学员回忆版\s*】\s*", r"\1", s2)
+        s2 = re.sub(r"【[^】]*51CTO[^】]*】\s*", "", s2, flags=re.I)
+        # 缺左括号的残缺水印
+        s2 = re.sub(r"^51CTO[^】\n]{0,40}】\s*", "", s2, flags=re.I)
+        if s2 == s:
+            break
+        s = s2
+    return s.strip()
+
+
 def parse_year_half(name: str) -> tuple[str, str]:
     """Accept 2026上 / 2025下 / 202605 / 202511."""
     m = re.match(r"^(\d{4})([上下])$", name)
@@ -98,8 +121,8 @@ def convert_file(fp: Path) -> list[dict]:
         qnum = int(r.get("index") or 0)
         if qnum <= 0:
             continue
-        stem = strip_html(r.get("question_title") or "")
-        material = strip_html(r.get("material_text") or "")
+        stem = clean_stem(r.get("question_title") or "")
+        material = clean_stem(r.get("material_text") or "")
         if material and material not in stem:
             stem = f"{material}\n\n{stem}".strip()
 
@@ -109,6 +132,7 @@ def convert_file(fp: Path) -> list[dict]:
             marker = f"（{int(sort_son)}）"
             if f"【空{marker}】" not in stem:
                 stem = f"【空{marker}】{stem}"
+            stem = clean_stem(stem)
 
         opts = letters_opts(r.get("option") or [])
         if len(opts) < 2:
@@ -144,6 +168,8 @@ def convert_file(fp: Path) -> list[dict]:
                 "no": qnum,
                 "show_type": r.get("show_type_name") or "单选题",
                 "blank": int(sort_son) if sort_son.isdigit() and int(sort_son) > 0 else 0,
+                "bank": "real",
+                "edition": "data-v1",
             }
         )
     return items

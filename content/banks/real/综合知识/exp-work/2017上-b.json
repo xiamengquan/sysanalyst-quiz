@@ -1,0 +1,446 @@
+[
+  {
+    "id": "ZT-2017上-039-4b438fa0",
+    "qnum": 39,
+    "stem": "决策支持系统的基本组成部分包括（39）。",
+    "opts": {
+      "A": "数据库子系统、模型库子系统、数据解析子系统和数据查询子系统",
+      "B": "数据库、数据字典、数据解析模块和数据查询模块",
+      "C": "数据库子系统、模型库子系统、决策算法子系统",
+      "D": "数据库子系统、模型库子系统、推理部分和用户接口子系统"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2017上-040-158c8658",
+    "qnum": 40,
+    "stem": "数据库概念结构设计阶段的工作步骤依次为（40）。",
+    "opts": {
+      "A": "设计局部视图→抽象数据→修改重构消除冗余→合并取消冲突",
+      "B": "设计局部视图→抽象数据→合并取消冲突→修改重构消除冗余",
+      "C": "抽象数据→设计局部视图→合并取消冲突→修改重构消除冗余",
+      "D": "抽象数据→设计局部视图→修改重构消除冗余→合并取消冲突"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2017上-041-1768fdbd",
+    "qnum": 41,
+    "stem": "设有员工关系 Emp (员工号，姓名，性别，年龄，电话，家庭住址，家庭成员，关系，联系电话〉。其中，“家庭成员，关系，联系电话”分别记录了员工亲属的姓名、 与员工的关系以及联系电话，且一个员工允许有多个家庭成员。为使数据库模式设计更合理，对于员工关系 Emp（41）。",
+    "opts": {
+      "A": "只允许记录一个亲属的姓名、与员工的关系以及联系电话",
+      "B": "可以不作任何处理，因为该关系模式达到了 3NF",
+      "C": "增加多个家庭成员、关系及联系电话字段",
+      "D": "应该将家庭成员、关系及联系电话加上员工号设计成一个独立的模式"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2017上-042-08af6cf5",
+    "qnum": 42,
+    "stem": "给定关系模式 R ， U= {A，B，C，D ，E} ， F = {B→A ，D→A ，A→E ，AC→B }，则 R 的候选关键字为（请作答此空），分解ρ= {Rl（ABCE），R2（CD)} ( 43)。",
+    "opts": {
+      "A": "CD",
+      "B": "ABD",
+      "C": "ACD",
+      "D": "ADE"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2017上-043-0d26ad9a",
+    "qnum": 43,
+    "stem": "给定关系模式 R ， U= {A，B，C，D ，E} ， F = {B→A ，D→A ，A→E ，AC→B }，则 R 的候选关键字为（42），分解ρ= {Rl（ABCE），R2（CD)} ( 请作答此空)。",
+    "opts": {
+      "A": "具有无损连接性，且保持函数依赖",
+      "B": "不具有无损连接性，但保持函数依赖",
+      "C": "具有无损连接性，但不保持函数依赖",
+      "D": "不具有无损连接性，也不保持函数依赖"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2017上-044-eebf196d",
+    "qnum": 44,
+    "stem": "![](https://s2.51cto.com/images/201804/a1882f78823b047325d684af9a185688d126b1.png)",
+    "opts": {
+      "A": "π1,4（σ2<＇2017＇∨4=＇95＇(R⋈S))",
+      "B": "π1,6(σ2<＇2017＇(R)Íσ3=＇95＇(S))",
+      "C": "π1,4(σ2<＇2017＇(R)Íσ6=＇95＇(S))",
+      "D": "π1,6(σ2=4∧3=5(σ2<＇2017＇(R))Íσ3=＇95＇(S)))"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2017上-045-526a3c83",
+    "qnum": 45,
+    "stem": "![](https://s2.51cto.com/images/201804/d2161ca6769cc010b7b1736717b1a1d4a0fe48.png)",
+    "opts": {
+      "A": "A",
+      "B": "B",
+      "C": "C",
+      "D": "D"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2017上-046-af37f5b0",
+    "qnum": 46,
+    "stem": "假设某文件系统的文件索引表有 i-addr[0]，i-addr[1] ，...，i-addr[7]共 8 个地址项，每个地址项大小为 4 字节，其中 5 个地址项 （i-addr[0]~i-addr[4] )为直接地址索引，2 个地址项(i-addr[5]~i-addr[6]) 是 一 级 间 接 地 址 索 引 ， 1 个 地 址 项(i-addr[7] )是二级间接地址索引，磁盘索引块和磁盘数据块大小均为 1KB。若要访问文件的逻辑块号分别为 5 和 518，则系统应分别采用（46）。",
+    "opts": {
+      "A": "直接地址索引和一级间接地址索引",
+      "B": "直接地址索引和二级间接地址索引",
+      "C": "一级间接地址索引和二级间接地址索引",
+      "D": "二级间接地址索引和一级间接地址索引"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2017上-047-eddb08cd",
+    "qnum": 47,
+    "stem": "在一个单 CPU 的计算机系统中，采用可剥夺式(也称抢占式)优先级的进程调度方案，且所有任务可以并行使用 I/O 设备。下表列出了三个任务 T1、 T2 、T3 的优先级、独立运行时占用 CPU 和 I/O 设备的时间。如果操作系统的开销忽略不计，这三个任务从同时启动到全部结束的总时间为（请作答此空）ms ，CPU 的空闲时间共有（48）ms 。\n\n![](https://s2.51cto.com/images/20210418/1618739489649311.png)",
+    "opts": {
+      "A": "41",
+      "B": "71",
+      "C": "87",
+      "D": "123"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2017上-048-67170e68",
+    "qnum": 48,
+    "stem": "在一个单CPU的计算机系统中，采用可剥夺式(也称抢占式)优先级的进程调度方案，且所有任务可以并行使用 I/O 设备。下表列出了三个任务 T1、 T2 、T3 的优先级、独立运行时占用 CPU 和 I/O 设备的时间。如果操作系统的开销忽略不计，这三个任务从同时启动到全部结束的总时间为（47）ms ，CPU 的空闲时间共有（作答此空）ms 。\n\n![](https://s2.51cto.com/images/20191118/1574051522497863.png)",
+    "opts": {
+      "A": "15",
+      "B": "18",
+      "C": "24",
+      "D": "54"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2017上-049-df5e57c1",
+    "qnum": 49,
+    "stem": "进程Pl、P2、P3、P4、P5和P6的前趋图如下图所示：\n\n![](https://s2.51cto.com/images/20210419/1618814966101360.png)\n\n若用PV操作控制这6个进程的同步与互斥的程序如下，那么程序中的空①和空②处应分别为（请作答此空）；空③和空④处应分别为（2）；空⑤和空⑥处应分别为（3）。\n（1）A．V(S1)V(S2)和P(S2）B．P(S1)P(S2)和V(S2)\nC．V(S1)V(S2)和P(S1）D．P(S1)P(S2)和V(S1)\n\nbegin\n S1，S2，S3，S4，S5，S6，S7，S8：semaphore； //定义信号量\n S1:=0；S2：=0；S3:=0；S4=0；S5:=0；S6:=0；S7:=0；S8:=0；\n Cobegin\n\nprocess P1\nprocess P2\nprocess P3\nprocess P4\nprocess P5\nprocess P6\nbegin\nbegin\nbegin\nbegin\nbegin\nbegin\nP1执行；\n（2）；\nP（S2）；\nP（S4）；\nP（S6）；\n（6）\n（1",
+    "opts": {
+      "A": "A",
+      "B": "B",
+      "C": "C",
+      "D": "D"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2017上-050-70eb973c",
+    "qnum": 50,
+    "stem": "进程P1、P2、P3、P4、P5和P6的前趋图如下所示：\n\n![](https://s2.51cto.com/images/20200912/1599877075202059.jpg)\n\n若用PV操作控制这6个进程的同步与互斥的程序如下，那么程序中的空a、空b和空c处应分别为（请作答此空）；空d和空e处应分别为（）；空f和空g处应分别为（）。\n\nbegin\n S1，S2，S3，S4，S5，S6，S7：semaphore； //定义信号量\n S1:=0；S2：=0；S3:=0；S4=0；S5:=0；S6:=0；S7:=0；\n Cobegin\n\n![](https://s2.51cto.com/images/20200912/1599877117584581.jpg)\n\nCoend；\nend",
+    "opts": {
+      "A": "V(S3)、P(S2)和V(S4)V(S5）",
+      "B": "P(S3)、P(S2)和V(S4)V(S5)",
+      "C": "V(S2)、P(S3)和P(S4)P(S3）",
+      "D": "V(S2)、V(S3)和P(S3)P(S4)"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2017上-051-a006c5c4",
+    "qnum": 51,
+    "stem": "进程Pl、P2、P3、P4、P5和P6的前趋图如下图所示：\n\n![](https://s2.51cto.com/images/20211118/1637219897789425.png)\n\n若用PV操作控制这6个进程的同步与互斥的程序如下，那么程序中的空①和空②处应分别为（1）；空③和空④处应分别为（2）；空⑤和空⑥处应分别为（请作答此空）。\n（3）A．P(S6)和P(S7)V(S8）B．V(S6)和V(S7)V(S8)\n\nC．P(S6)和P(S7)P(S8）D．V(S7)和P(S7)P(S8)\n\nbegin\n S1，S2，S3，S4，S5，S6，S7，S8：semaphore； //定义信号量\n S1:=0；S2：=0；S3:=0；S4=0；S5:=0；S6:=0；S7:=0；S8:=0；\n Cobegin\nprocess P1\nprocess P2process P3process P4process P5process P6begin\nbegin\nbegin\nbegin\nbegin\nbegin\n P1执行；\n （2）；\nP（S2）；\nP（S4）；\nP（S6）；\n（6）\n （1）；",
+    "opts": {
+      "A": "A",
+      "B": "B",
+      "C": "C",
+      "D": "D"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2017上-052-c1686f86",
+    "qnum": 52,
+    "stem": "线性规划问题由线性的目标函数和线性的约束条件（包括变量非负条件）组成。满足约束条件的所有解的集合称为可行解区。既满足约束条件，又使目标函数达到极值的解，称为最优解。以下关于可行解区和最优解的叙述中，不正确的是 （66） 。",
+    "opts": {
+      "A": "线性规划问题的可行解区不一定存在",
+      "B": "即使可行解区存在，也可能无界",
+      "C": "如果可行解区存在但无界，则一定不存在最优解",
+      "D": "如果最优解存在，则一定会在可行解区的某个顶点处达到"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2017上-053-46e98e4e",
+    "qnum": 53,
+    "stem": "数据分析工作通常包括①~⑤五个阶段。目前，自动化程度比较低的两个阶段是（53）。①发现并提出问题 ②获取并清洗数据 ③按数学模型计算 ④调整并优化模型 ⑤解释输出的结论",
+    "opts": {
+      "A": "①②",
+      "B": "①⑤",
+      "C": "③④",
+      "D": "④⑤"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2017上-054-85690ad1",
+    "qnum": 54,
+    "stem": "![](https://s2.51cto.com/images/20210420/1618907658654410.png)\n\n按照上述计划，该工程的总工期预计为（请作答此空）周。在工程实施了10周后，经理对进度进行了检查，结果是：作业A和B已经完成，作业D完成了30%，作业E完成了25%，其他作业都还没有开始。如果随后完全按原计划实施，则总工期将（2）完成。\n（1）A．20 B．25 C．33 D．41\n（2）A．提前1周 B．推迟l周 C．推迟2周 D．推迟3周",
+    "opts": {
+      "A": "20",
+      "B": "25",
+      "C": "33",
+      "D": "41"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2017上-055-acb4d7e0",
+    "qnum": 55,
+    "stem": "![](https://s2.51cto.com/images/201804/f4f149e0043d9e2111944273487aaf0fce546b.png)",
+    "opts": {
+      "A": "提前 1 周",
+      "B": "推迟 l 周",
+      "C": "推迟 2 周",
+      "D": "推迟 3 周"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2017上-056-14895e9c",
+    "qnum": 56,
+    "stem": "![](https://s2.51cto.com/images/201804/010958f266fc24a48a789917a1b25390d76906.png)",
+    "opts": {
+      "A": "120",
+      "B": "130",
+      "C": "140",
+      "D": "150"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2017上-057-73ae443d",
+    "qnum": 57,
+    "stem": "根据历史统计情况，某超市某种面包的日销量为 100、110、120、130、140 个的概率相同，每个面包的进价为 4 元，销售价为 5 元，但如果当天没有卖完，剩余的面包次日将以每个 3 元处理。为取得最大利润，该超市每天应进货这种面包（57）个。(57)A.110 B.120 C.130 D. 140",
+    "opts": {
+      "A": "A",
+      "B": "B",
+      "C": "C",
+      "D": "D"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2017上-058-8c10f492",
+    "qnum": 58,
+    "stem": "![](https://s2.51cto.com/images/201804/551f2558997eab74112174530eeac4c31aec50.png)",
+    "opts": {
+      "A": "5",
+      "B": "9",
+      "C": "10",
+      "D": "11"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2017上-059-df05b517",
+    "qnum": 59,
+    "stem": "![](https://s2.51cto.com/images/201805/a7c2443934a2a151f15568651309c1ec2f7469.png)",
+    "opts": {
+      "A": "A",
+      "B": "B",
+      "C": "C",
+      "D": "D"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2017上-060-13727a6a",
+    "qnum": 60,
+    "stem": "计算机系统的性能一般包括两个大的方面。一个方面是它的（61请作答此空 ），也就是计算机系统能正常工作的时间，其指标可以是能够持续工作的时间长度，也可以是在一段时间内，能正常工作的时间所占的百分比;另一个方面是处理能力，这又可分为三类指标，第一类指标是吞吐率，第二类指标是响应时间，第三类指标是资源利用率，即在给定时间区间中，各种部件被使用的时间与整个时间之比。",
+    "opts": {
+      "A": "可用性",
+      "B": "安全性",
+      "C": "健壮性",
+      "D": "可伸缩性"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2017上-061-38685ed8",
+    "qnum": 61,
+    "stem": "计算机系统的性能一般包括两个大的方面。一个方面是它的（60），也就是计算机系统能正常工作的时间，其指标可以是能够持续工作的时间长度，也可以是在一段时间内，能正常工作的时间所占的百分比;另一个方面是处理能力，这又可分为三类指标，第一类指标是吞吐率，第二类指标是响应时间，第三类指标是（请作答此空），即在给定时间区间中，各种部件被使用的时间与整个时间之比。",
+    "opts": {
+      "A": "可靠性",
+      "B": "资源利用率",
+      "C": "系统负载",
+      "D": "吞吐量"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2017上-062-f5701b02",
+    "qnum": 62,
+    "stem": "（62）图像通过使用彩色查找表来获得图像颜色。",
+    "opts": {
+      "A": "真彩色",
+      "B": "伪彩色",
+      "C": "直接色",
+      "D": "矢量"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2017上-063-38e70244",
+    "qnum": 63,
+    "stem": "以下文件格式中，属于视频文件格式的是（63）",
+    "opts": {
+      "A": "RTF",
+      "B": "WAV",
+      "C": "MPG",
+      "D": "JPG"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2017上-064-b6921dee",
+    "qnum": 64,
+    "stem": "以下关于光纤的说法中，错误的是（64）。",
+    "opts": {
+      "A": "单模光纤的纤芯直径更细",
+      "B": "单模光纤采用LED为光源",
+      "C": "多模光纤比单模光纤的传输距离近",
+      "D": "多模光纤中光波在光导纤维中以多种模式传播"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2017上-065-21ea0396",
+    "qnum": 65,
+    "stem": "RIPv2 对 RIPv1 协议的改进之一为路由器必须有选择地将路由表中的信息发送给邻居，而不是发送整个路由表。具体地说，一条路由信息不会被发送给该信息的来源，这种方案称为（请作答此空），其作用是（66）。",
+    "opts": {
+      "A": "反向毒化",
+      "B": "乒乓反弹",
+      "C": "水平分割法",
+      "D": "垂直划分法"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2017上-066-660698e3",
+    "qnum": 66,
+    "stem": "RIPv2 对 RIPv1 协议的改进之一为路由器必须有选择地将路由表中的信息发送给邻居，而不是发送整个路由表。具体地说，一条路由信息不会被发送给该信息的来源，这种方案称为（65），其作用是（请作答此空）。",
+    "opts": {
+      "A": "支持 CIDR",
+      "B": "解决路由环路",
+      "C": "扩大最大跳步数",
+      "D": "不使用广播方式更新报文"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2017上-067-4b5e2dad",
+    "qnum": 67,
+    "stem": "OSPF 协议把网络划分成4种区域（Area），其中（67）不接受本地自治系统以外的路由信息，对自治系统以外的目标采用默认路由0.0.0.0。",
+    "opts": {
+      "A": "分支区域",
+      "B": "标准区域",
+      "C": "主干区域",
+      "D": "存根区域"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2017上-068-33f55544",
+    "qnum": 68,
+    "stem": "在Linux中，可以使用（68）命令为计算机配置IP地址。",
+    "opts": {
+      "A": "ifconfig",
+      "B": "config",
+      "C": "ip-address",
+      "D": "ipconfig"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2017上-069-34df0bf1",
+    "qnum": 69,
+    "stem": "据统计，截至2017年2月，全球一半以上的网站已使用HTTPS协议进行数据传输，原HTTP协议默认使用（请作答此空）端口，HTTPS使用（70）作为加密协议，默认使用443端口。",
+    "opts": {
+      "A": "80",
+      "B": "88",
+      "C": "8080",
+      "D": "880"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2017上-070-09fc33e5",
+    "qnum": 70,
+    "stem": "据统计，截至2017年2月，全球一半以上的网站已使用HTTPS协议进行数据传输，原HTTP协议默认使用（69）端口，HTTPS使用（请作答此空）作为加密协议，默认使用443端口。",
+    "opts": {
+      "A": "RSA",
+      "B": "SSL",
+      "C": "SSH",
+      "D": "SHA-1"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2017上-071-8b759a31",
+    "qnum": 71,
+    "stem": "The purpose of the systems analysis phase is to build a logical model of the new system.The first step is（请作答此空），where you investigate business processes and document what the new system must do to satisfy users. This step continues the investigation that began during the（72）. You use the fact-finding results to build business models，data and process models，and object models. The deliverable for the systems analysis phase is the（73），which describes management and user requirements，costs and bene",
+    "opts": {
+      "A": "system logical modeling",
+      "B": "use case modeling",
+      "C": "requirements modeling",
+      "D": "application modeling"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2017上-072-ec6e0db8",
+    "qnum": 72,
+    "stem": "The purpose of the systems analysis phase is to build a logical model of the new system.The first step is（71），where you investigate business processes and document what the new system must do to satisfy users. This step continues the investigation that began during the（请作答此空）. You use the fact-finding results to build business models，data and process models，and object models. The deliverable for the systems analysis phase is the（73），which describes management and user requirements，costs and bene",
+    "opts": {
+      "A": "systems planning phase",
+      "B": "systems modeling phase",
+      "C": "systems analysis phase",
+      "D": "systems design phase"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2017上-073-39ba31c7",
+    "qnum": 73,
+    "stem": "The purpose of the systems analysis phase is to build a logical model of the new system.The first step is（71），where you investigate business processes and document what the new system must do to satisfy users. This step continues the investigation that began during the（72）. You use the fact-finding results to build business models，data and process models，and object models. The deliverable for the systems analysis phase is the（请作答此空），which describes management and user requirements，costs and bene",
+    "opts": {
+      "A": "system charter",
+      "B": "system scope definition",
+      "C": "system blueprint",
+      "D": "system requirements document"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2017上-074-be41f16d",
+    "qnum": 74,
+    "stem": "The purpose of the systems analysis phase is to build a logical model of the new system.The first step is（71），where you investigate business processes and document what the new system must do to satisfy users. This step continues the investigation that began during the（72）. You use the fact-finding results to build business models，data and process models，and object models. The deliverable for the systems analysis phase is the（73），which describes management and user requirements，costs and benefit",
+    "opts": {
+      "A": "application architecture",
+      "B": "system data model",
+      "C": "system process model",
+      "D": "implement environment"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2017上-075-1f58b5ce",
+    "qnum": 75,
+    "stem": "The purpose of the systems analysis phase is to build a logical model of the new system.The first step is（71），where you investigate business processes and document what the new system must do to satisfy users. This step continues the investigation that began during the（72）. You use the fact-finding results to build business models，data and process models，and object models. The deliverable for the systems analysis phase is the（73），which describes management and user requirements，costs and benefit",
+    "opts": {
+      "A": "system architecture description",
+      "B": "system design specification",
+      "C": "system technique architecture",
+      "D": "physical deployment architecture"
+    },
+    "ans": "B"
+  }
+]

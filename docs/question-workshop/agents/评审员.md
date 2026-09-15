@@ -18,7 +18,7 @@ description: >-
 2. 待审材料（按任务指定），常见路径：
    - 旧题：`content/banks/practice/all.jsonl`
    - 新题：`content/workshop/new/*.jsonl`
-   - 真题解析库：`content/banks/real/上午真题.jsonl`（只评「解析质量/结构化」，不评官方命题对错）
+   - 真题解析库：`content/banks/real/综合知识/all.jsonl`（只评「解析质量/结构化」，不评官方命题对错）
 
 ## 评审维度（必须逐项）
 

@@ -23,7 +23,7 @@ export function QuizApp() {
   const [all, setAll] = useState<Question[]>([]);
   const [meta, setMeta] = useState<Meta | null>(null);
   const [bank, setBank] = useState("practice");
-  const [year, setYear] = useState("all");
+  const [yearHalf, setYearHalf] = useState("all");
   const [chapter, setChapter] = useState("all");
   const [diff, setDiff] = useState("all");
   const [path, setPath] = useState<
@@ -84,10 +84,12 @@ export function QuizApp() {
     });
   }, []);
 
-  const years = useMemo(() => {
+  const yearHalves = useMemo(() => {
     const s = new Set<string>();
-    all.filter((q) => q.bank === "real" && q.year).forEach((q) => s.add(String(q.year)));
-    return [...s].sort();
+    all
+      .filter((q) => q.bank === "real" && q.year)
+      .forEach((q) => s.add(`${q.year}${q.half || ""}`));
+    return [...s].sort((a, b) => b.localeCompare(a, "zh"));
   }, [all]);
 
   const chapters = useMemo(() => {
@@ -102,14 +104,18 @@ export function QuizApp() {
       if (bank === "paper") return q.bank === "paper";
       if (bank !== "all" && q.bank !== bank) return false;
       if (bank === "all" && q.bank === "paper" && path !== "roi_boost" && path !== "all") return false;
-      if (bank === "real" && year !== "all" && String(q.year) !== year) return false;
+      if (bank === "real" && yearHalf !== "all") {
+        const yh = `${q.year || ""}${q.half || ""}`;
+        if (yh !== yearHalf) return false;
+      }
       if ((bank === "practice" || bank === "all") && chapter !== "all" && String(q.ch) !== chapter) {
         if (q.bank === "paper") return path === "roi_boost" || path === "all";
         return false;
       }
       if (diff !== "all" && q.diff !== diff) return false;
+      // 综合知识真题库：不受自编学习路径限制
+      if (bank === "real") return true;
       if (path === "frontend") {
-        if (q.bank === "real") return true;
         const tagged = Array.isArray(q.audience) && q.audience.includes("frontend");
         if (!feCh.has(q.ch) && !tagged) return false;
       }
@@ -156,12 +162,20 @@ export function QuizApp() {
         if (ra !== rb) return ra - rb;
         return a.no - b.no;
       });
+    } else if (bank === "real") {
+      // 真题：按场次 + 题号顺序（数据版卷面序）
+      list = [...list].sort((a, b) => {
+        const ya = `${a.year || ""}${a.half || ""}`;
+        const yb = `${b.year || ""}${b.half || ""}`;
+        if (ya !== yb) return yb.localeCompare(ya, "zh");
+        return (a.qnum || a.no) - (b.qnum || b.no);
+      });
     } else if (shuffle) {
       list = [...list].sort(() => Math.random() - 0.5);
     }
     if (limit > 0) list = list.slice(0, limit);
     return list;
-  }, [all, bank, year, chapter, diff, path, shuffle, limit]);
+  }, [all, bank, yearHalf, chapter, diff, path, shuffle, limit]);
 
   const persist = useCallback(async () => {
     try {
@@ -338,19 +352,36 @@ export function QuizApp() {
                 </label>
                 <label className="block text-[0.82rem] text-[var(--muted)]">
                   题库
-                  <select className="field mt-1.5" value={bank} onChange={(e) => setBank(e.target.value)}>
+                  <select
+                    className="field mt-1.5"
+                    value={bank}
+                    onChange={(e) => {
+                      const v = e.target.value;
+                      setBank(v);
+                      if (v === "real") {
+                        setPath("all");
+                        setShuffle(false);
+                        setDiff("all");
+                      }
+                    }}
+                  >
                     <option value="practice">自编练习</option>
                     <option value="workshop">出题工坊（新题）</option>
-                    <option value="real">真题选择题</option>
+                    <option value="real">综合知识真题</option>
                     <option value="paper">论文自测（结构要点）</option>
                     <option value="all">全部（含论文自测）</option>
                   </select>
                 </label>
                 <label className="block text-[0.82rem] text-[var(--muted)]">
-                  年份（真题）
-                  <select className="field mt-1.5" value={year} onChange={(e) => setYear(e.target.value)}>
-                    <option value="all">全部年份</option>
-                    {years.map((y) => (
+                  场次（综合知识真题）
+                  <select
+                    className="field mt-1.5"
+                    value={yearHalf}
+                    onChange={(e) => setYearHalf(e.target.value)}
+                    disabled={bank !== "real"}
+                  >
+                    <option value="all">全部场次</option>
+                    {yearHalves.map((y) => (
                       <option key={y} value={y}>
                         {y}
                       </option>
@@ -445,8 +476,17 @@ export function QuizApp() {
             />
           </div>
           <div className="mb-3 flex flex-wrap gap-1.5">
-            <span className="badge">第{q.ch}章</span>
-            <span className="badge">{q.point}</span>
+            {q.bank === "real" ? (
+              <>
+                <span className="badge">真题</span>
+                <span className="badge">{q.source || q.point}</span>
+              </>
+            ) : (
+              <>
+                <span className="badge">第{q.ch}章</span>
+                <span className="badge">{q.point}</span>
+              </>
+            )}
             {q.learn_stage ? <span className="badge">{q.learn_stage}</span> : null}
             <span className="badge">{q.diff}</span>
             <span className="badge">{q.bank}</span>
@@ -490,8 +530,30 @@ export function QuizApp() {
                   <b>{q.ans}</b>
                 </>
               )}
-              <br />
-              {q.exp}
+              {q.opt_exp && Object.keys(q.opt_exp).length > 0 ? (
+                <ul className="mt-3 space-y-2 text-[0.9rem] leading-relaxed text-[var(--text)]">
+                  {["A", "B", "C", "D"].map((k) => {
+                    if (!q.opts[k] || !q.opt_exp?.[k]) return null;
+                    const ok = k === q.ans;
+                    return (
+                      <li key={k} className="flex gap-2">
+                        <span
+                          className="shrink-0 font-semibold"
+                          style={{ color: ok ? "var(--ok)" : "var(--muted)" }}
+                        >
+                          {k}.
+                        </span>
+                        <span>{q.opt_exp[k]}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              ) : q.exp ? (
+                <>
+                  <br />
+                  {q.exp}
+                </>
+              ) : null}
             </div>
           )}
           <div className="sticky-actions">

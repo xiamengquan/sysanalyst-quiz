@@ -1,0 +1,446 @@
+[
+  {
+    "id": "ZT-2016上-039-4c08fffb",
+    "qnum": 39,
+    "stem": "EAI（企业应用集成）可以包括表示集成、数据集成、控制集成和业务流程集成等多个层次和方面，下图所便是的是（38），适合于使用这种集成方式的情况是（请作答此空）。\n\n![](https://s2.51cto.com/images/20200518/1589796219731802.png)",
+    "opts": {
+      "A": "要对多种信息源产生的数据进行综合分析和决策",
+      "B": "为用户提供一个看上去统一，但是由多个系统组成的应用系统",
+      "C": "在现有的基于终端的应用系统上配置基于 PC 的用户界面",
+      "D": "当只有可能在显示界面上实现集成时"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2016上-040-0bb8a6ad",
+    "qnum": 40,
+    "stem": "在采用三级模式结构的数据库系统中，如果对数据库中的表 Emp 创建聚簇索引，那么改变的是数据库的（40）。",
+    "opts": {
+      "A": "模式",
+      "B": "内模式",
+      "C": "外模式",
+      "D": "用户模式"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2016上-041-8ec242a1",
+    "qnum": 41,
+    "stem": "分布式事务的执行可能会涉及到多个站点上的数据操作，在两阶段提交协议中，当事务 Ti的所有读写操作执行结束后，事务 Ti 的发起者协调器 Ci 向所有参与 Ti 的执行站点发送epare Ti>的消息，当收到所有执行站点返回的消息后，Ci 再向所有执行站点发送消息。若参与事务 Ti 执行的某个站点故障恢复后日志中有记录，而没有记录，则（41）。",
+    "opts": {
+      "A": "事务 Ti 已完成提交，该站点无需做任何操作",
+      "B": "事务 Ti 已完成提交，该站点应做 REDO 操作",
+      "C": "事务 Ti 未完成提交，该站点应做 UNDO 操作",
+      "D": "应向协调器询问以决定 Ti 的最终结果"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2016上-042-c6841802",
+    "qnum": 42,
+    "stem": "假设关系 R(A1,A2,A3)上的一个分解为ρ={(A1,A2),(A1,A3)}，下表是关系 R 上的一个实例，根据实例推出 R 的函数依赖集 F 为（请作答此空），分解 p（43）。\n\n![](https://s2.51cto.com/images/201803/4891c5706b5cb8485f6907fce7bcad7672ea48.png)",
+    "opts": {
+      "A": "A．F={A1→A2}",
+      "B": "F={A1A3→A2,A1A2→A3}",
+      "C": "F={A1→A3}",
+      "D": "F={A1→A2,A1→A3}"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2016上-043-fd3dad51",
+    "qnum": 43,
+    "stem": "假设关系 R(A1,A2,A3)上的一个分解为ρ={(A1,A2),(A1,A3)}，下表是关系 R 上的一个实例，根据实例推出 R 的函数依赖集 F 为（42），分解 p（请作答此空）。\n\n![](https://s2.51cto.com/images/201803/531ca762990b05cc79932138abb0177ca269fe.png)",
+    "opts": {
+      "A": "是无损联接的",
+      "B": "是保持函数依赖的",
+      "C": "是有损联接的",
+      "D": "无法确定是否保持函数依赖"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2016上-044-263c2e3c",
+    "qnum": 44,
+    "stem": "![](https://s2.51cto.com/images/201803/c2ae22605208d33c0273693e75e073e3958db8.png)",
+    "opts": {
+      "A": "4",
+      "B": "5",
+      "C": "6",
+      "D": "7"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2016上-045-7fbe7a82",
+    "qnum": 45,
+    "stem": "![](https://s2.51cto.com/images/201803/774f3036372b80787bf33706ba1d8643e02574.png)",
+    "opts": {
+      "A": "A",
+      "B": "B",
+      "C": "C",
+      "D": "D"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2016上-046-f3c1261d",
+    "qnum": 46,
+    "stem": "某文件管理系统在磁盘上建立了位示图(bitmap)，记录磁盘的使用情况。若磁盘上物理块的编号依次为：0、1、2、…；系统中的字长为 32 位，字的编号依次为：0、1、2、…，字中的一位对应文件存储器上的一个物理块，取值 0 和 1 分别表示空闲和占用，如下图所示。假设操作系统将 2053 号物理块分配给某文件，那么该物理块的使用情况在位示图中编号为（请作答此空）的字中描述；系统应该将（47）。\n\n![](https://s2.51cto.com/images/201803/b7dbb15238091d2c496553c4b0bbc04747b1f5.png)",
+    "opts": {
+      "A": "32",
+      "B": "33",
+      "C": "64",
+      "D": "65"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2016上-047-41c46011",
+    "qnum": 47,
+    "stem": "某文件管理系统在磁盘上建立了位示图(bitmap)，记录磁盘的使用情况。若磁盘上物理块的编号依次为：0、1、2、…；系统中的字长为 32 位，字的编号依次为：0、1、2、…，字中的一位对应文件存储器上的一个物理块，取值 0 和 1 分别表示空闲和占用，如下图所示。假设操作系统将 2053 号物理块分配给某文件，那么该物理块的使用情况在位示图中编号为（46）的字中描述；系统应该将（请作答此空）。\n\n![](https://s2.51cto.com/images/201803/94b59ce86d17e777f29027e680aa324eec2022.png)",
+    "opts": {
+      "A": "该字的位号 5 的位置“0”",
+      "B": "该字的位号 5 的位置“1”",
+      "C": "该字的位号 6 的位置“0”",
+      "D": "该字的位号 6 的位置“1”"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2016上-048-453de1f9",
+    "qnum": 48,
+    "stem": "![](https://s2.51cto.com/images/20210630/1625036575916215.png)",
+    "opts": {
+      "A": "V(S1)和 P(S2)",
+      "B": "P(S1)和 V(S2)",
+      "C": "V(S1)和 V(S2)",
+      "D": "V(S1)V(S2)和 P(S1)"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2016上-049-ee57aced",
+    "qnum": 49,
+    "stem": "![](https://s2.51cto.com/images/20210630/1625042515593780.png)",
+    "opts": {
+      "A": "V(S3)和 V(S5)",
+      "B": "P(S3)和 V(S5)",
+      "C": "V(S3)和 P(S5)",
+      "D": "P(S3)和 P(S5)"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2016上-050-8a3150dc",
+    "qnum": 50,
+    "stem": "![](https://s2.51cto.com/images/20210630/1625042418426719.png)",
+    "opts": {
+      "A": "P(S6)和 P(S5)V(S6)",
+      "B": "V(S5)和 V(S5)V(S6)",
+      "C": "V(S6)和 P(S5)P(S6)",
+      "D": "P(S6)和 P(S5)P(S6)"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2016上-051-e6aebd5b",
+    "qnum": 51,
+    "stem": "![](https://s2.51cto.com/images/201803/d4f60e5219e8a6c50bd85097ed16bbd7e22113.png)",
+    "opts": {
+      "A": "设备驱动程序、虚设备管理、与设备无关的系统软件",
+      "B": "设备驱动程序、与设备无关的系统软件、虚设备管理",
+      "C": "中断处理程序、与设备无关的系统软件、设备驱动程序",
+      "D": "中断处理程序、设备驱动程序、与设备无关的系统软件"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2016上-052-531d2e0f",
+    "qnum": 52,
+    "stem": "某市场上某种零件由甲、乙、丙、丁四厂供货，供货数量之比为 4:3:2:1。各厂产品的合格率分别为 99%、 98%、97.5%和 95%。某抽检员发现了一件次品，它属于（52）厂的概率最大。",
+    "opts": {
+      "A": "甲",
+      "B": "乙",
+      "C": "丙",
+      "D": "丁"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2016上-053-5fa721cf",
+    "qnum": 53,
+    "stem": "![](https://s2.51cto.com/images/201803/c1431e4133bbf838dbd177b96046f308e846f8.png)",
+    "opts": {
+      "A": "30",
+      "B": "40",
+      "C": "50",
+      "D": "61"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2016上-054-68624a8a",
+    "qnum": 54,
+    "stem": "![](https://s2.51cto.com/images/201803/51e9609471e5f5aa993926489485841ebbaf75.png)",
+    "opts": {
+      "A": "530",
+      "B": "534",
+      "C": "536",
+      "D": "538"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2016上-055-a682ef93",
+    "qnum": 55,
+    "stem": "某工程包括 A、B、C、D、E、F 六个作业，分别需要 5、7、3、4、15、12 天。A 必须在 C、D 开始之前完成，B、D 必须在 E 开始之前完成，C 必须在 F 开始之前完成，F 不能在 B、D 完成之前开始。该工程的工期至少需要（55）天。若作业 E 缩短 4 天，则整个工期可以缩短（请作答此空）天。",
+    "opts": {
+      "A": "1",
+      "B": "2",
+      "C": "3",
+      "D": "4"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2016上-056-4edbfbe1",
+    "qnum": 56,
+    "stem": "某工程包括 A、B、C、D、E、F 六个作业，分别需要 5、7、3、4、15、12 天。A 必须在 C、D 开始之前完成，B、D 必须在 E 开始之前完成，C 必须在 F 开始之前完成，F 不能在 B、D 完成之前开始。该工程的工期至少需要（请作答此空）天。若作业 E 缩短 4 天，则整个工期可以缩短（56）天。",
+    "opts": {
+      "A": "21",
+      "B": "22",
+      "C": "24",
+      "D": "46"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2016上-057-0e003154",
+    "qnum": 57,
+    "stem": "![](https://s2.51cto.com/images/201803/d70eda7590b134ab88a2415052bd936ec8e17d.png)",
+    "opts": {
+      "A": "甲选择策略 B，乙选择策略Ⅲ",
+      "B": "甲选择策略 A，乙选择策略Ⅱ",
+      "C": "甲选择策略 B，乙选择策略Ⅱ",
+      "D": "甲选择策略 C，乙选择策略Ⅲ"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2016上-058-20abd899",
+    "qnum": 58,
+    "stem": "某工厂每年需要铁矿原料 100 万吨，且假设全年对这种原料的消耗是均匀的。为了减少库存费用，准备平均分多批进货。库存费按平均年库存量（每次进货量的一半）以每万吨 500元计算。由于每次进货需要额外支出订单费 1000 元，所以每次进货次数也不能太多。为节省库存费和订货费总支出，最经济的办法是（58）。",
+    "opts": {
+      "A": "每年进货 2 次，每次进货 50 万吨",
+      "B": "每年进货 4 次，每次进货 25 万吨",
+      "C": "每年进货 5 次，每次进货 20 万吨",
+      "D": "每年进货 10 次，每次进货 10 万吨"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2016上-059-cb45a111",
+    "qnum": 59,
+    "stem": "某学校希望通过问卷调查了解学生考试作弊的真实情况。若直接在问卷调查中问：“你作弊了吗？”，极少有入真实做答。为此，专家设计的问卷调查表中包括两个问题：①你是男生吗？②你作弊了吗？而每个学生需要利用给自己配发的电子随机选题器选择一题并回答“是”或“否”。学校按照学生实际的男女比例，随机选择了 60 名男生和 40 名女生参与匿名答题，而电子随机选题器选择题 1 和题 2 的概率相同。学生们认为，此次调查不但匿名，还不透露自己选择了哪题，因此都如实做答。最后，学校回收到 35 份回答“是”，65 份回答“否”，因此计算出考试作弊的比例大致为（59）。",
+    "opts": {
+      "A": "10%",
+      "B": "15%",
+      "C": "20%",
+      "D": "25%"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2016上-060-457600e8",
+    "qnum": 60,
+    "stem": "使用 Cache 改善系统性能的依据是程序的局部性原理。程序中大部分指令是（请作答此题）的。设某计算机主存的读／写时间为 100ns，有一个指令和数据合一的 Cache，已知该 Cache的读／写时间为 10ns，取指令的命中率为 98%，取数的命中率为 95%。在执行某类程序时，约有 1/5 指令需要额外存／取一个操作数。假设指令流水线在任何时候都不阻塞，则设置 Cache 后，每条指令的平均读取时间约为（61）ns。",
+    "opts": {
+      "A": "顺序存储、顺序执行",
+      "B": "随机存储、顺序执行",
+      "C": "顺序存储、随机执行",
+      "D": "随机存储、随机执行"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2016上-061-00e28177",
+    "qnum": 61,
+    "stem": "使用 Cache 改善系统性能的依据是程序的局部性原理。程序中大部分指令是（60）的。设某计算机主存的读／写时间为 100ns，有一个指令和数据合一的 Cache，已知该 Cache的读／写时间为 10ns，取指令的命中率为 98%，取数的命中率为 95%。在执行某类程序时，约有 1/5 指令需要额外存／取一个操作数。假设指令流水线在任何时候都不阻塞，则设置 Cache 后，每条指令的平均读取时间约为（61）ns。",
+    "opts": {
+      "A": "12.3",
+      "B": "14.7",
+      "C": "23.4",
+      "D": "26.3"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2016上-062-cf33b182",
+    "qnum": 62,
+    "stem": "MPEG-1 视频中的帧间编码主要采用了（请作答此空），帧内编码主要采用了（63）。",
+    "opts": {
+      "A": "算术编码",
+      "B": "基于帧间预测的霍夫曼编码",
+      "C": "行程编码",
+      "D": "基于运动补偿的帧间预测编码"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2016上-063-014e4cc0",
+    "qnum": 63,
+    "stem": "MPEG-1 视频中的帧间编码主要采用了（62），帧内编码主要采用了（请作答此空）",
+    "opts": {
+      "A": "变换编码",
+      "B": "帧内预测行程编码",
+      "C": "运动补偿编码",
+      "D": "词典编码"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2016上-064-bd5da0d6",
+    "qnum": 64,
+    "stem": "在浏览器的地址栏中输入 xxxyftp.abc.com.cn，该 URL 中（64）是要访问的主机名。",
+    "opts": {
+      "A": "xxxyftp",
+      "B": "abc",
+      "C": "com",
+      "D": "cn"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2016上-065-9245f105",
+    "qnum": 65,
+    "stem": "SNMP 采用 UDP 提供的数据报服务，这是由于（65）。",
+    "opts": {
+      "A": "UDP 比 TCP 更加可靠",
+      "B": "UDP 数据报文可以比 TCP 数据报文大",
+      "C": "UDP 是面向连接的传输方式",
+      "D": "采用 UDP 实现网络管理不会太多增加网络负载"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2016上-066-865acded",
+    "qnum": 66,
+    "stem": "客户端采用 ping 命令检测网络连接故障时，可以 ping 通 127.0.0.1 及本机的 IP 地址，但无法 ping 通同一网段内其他工作正常的计算机的 IP 地址。该客户端的故障可能是（66）。",
+    "opts": {
+      "A": "TCP/IP 协议不能正常工作",
+      "B": "本机网卡不能正常工作",
+      "C": "本机网络线路故障",
+      "D": "本机 DNS 服务器地址设置错误"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2016上-067-d4aea10e",
+    "qnum": 67,
+    "stem": "使用 ADSL 拨号上网，需要在用户端安装（67）协议。",
+    "opts": {
+      "A": "PPP",
+      "B": "SLIP",
+      "C": "PPTP",
+      "D": "PPPoE"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2016上-068-ea450bcb",
+    "qnum": 68,
+    "stem": "在网络中分配 IP 地址可以采用静态地址或动态地址方案。下面关于两种地址分配方案的论述中，错误的是（68）。",
+    "opts": {
+      "A": "采用动态地址分配方案可避免地址资源的浪费",
+      "B": "路由器、交换机等连网设备适合采用静态 IP 地址",
+      "C": "各种服务器设备适合采用动态口地址分配方案",
+      "D": "学生客户机最好采用动态口地址"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2016上-069-92b1e36c",
+    "qnum": 69,
+    "stem": "网络设计过程包括逻辑网络设计和物理网络设计两个阶段，各个阶段都要产生相应的文档，下面的选项中，属于逻辑网络设计文档的是（69请作答此处），属于物理网络设计文档的是（70）。",
+    "opts": {
+      "A": "网络IP 地址分配方案",
+      "B": "设备列表清单",
+      "C": "集中访谈的信息资料",
+      "D": "网络内部的通信流量分布"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2016上-070-603c32f4",
+    "qnum": 70,
+    "stem": "网络设计过程包括逻辑网络设计和物理网络设计两个阶段，各个阶段都要产生相应的文档，下面的选项中，属于逻辑网络设计文档的是 ，属于物理网络设计文档的是（请作答此空）。",
+    "opts": {
+      "A": "网络 IP 地址分配方案",
+      "B": "设备列表清单",
+      "C": "集中访谈的信息资料",
+      "D": "网络内部的通信流量分布"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2016上-071-4fabcbd3",
+    "qnum": 71,
+    "stem": "A variety of tools is available to help the analyst to discover the users' true needs.These tools are grouped into three broad techniques that are based on the degree of change anticipated in the to-be system . Business process（71） is used when the basic business Requirements outlined in the system request focus on employing computer technology in some aspect of the business process. Two popular activities used in the technique are（72）. Business process（73请作答此空）means that the basic business requ",
+    "opts": {
+      "A": "automation",
+      "B": "modeling",
+      "C": "improvement",
+      "D": "reengineering"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2016上-072-77df05a3",
+    "qnum": 72,
+    "stem": "A variety of tools is available to help the analyst to discover the users' true needs.These tools are grouped into three broad techniques that are based on the degree of change anticipated in the to-be system . Business process（71） is used when the basic business Requirements outlined in the system request focus on employing computer technology in some aspect of the business process. Two popular activities used in the technique are（请作答此空）. Business process（73）means that the basic business requir",
+    "opts": {
+      "A": "duration analysis and outcome analysis",
+      "B": "problem analysis and root cause analysis",
+      "C": "technology analysis and activity elimination",
+      "D": "activity-based costing and informal bench marking"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2016上-073-3c10e2d0",
+    "qnum": 73,
+    "stem": "A variety of tools is available to help the analyst to discover the users' true needs.These tools are grouped into three broad techniques that are based on the degree of change anticipated in the to-be system . Business process（71） is used when the basic business Requirements outlined in the system request focus on employing computer technology in some aspect of the business process. Two popular activities used in the technique are（72）. Business process（请作答此空）means that the basic business requir",
+    "opts": {
+      "A": "automation",
+      "B": "modeling",
+      "C": "improvement",
+      "D": "reengineering"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2016上-074-d1e132d7",
+    "qnum": 74,
+    "stem": "A variety of tools is available to help the analyst to discover the users' true needs.These tools are grouped into three broad techniques that are based on the degree of change anticipated in the to-be system . Business process（71） is used when the basic business Requirements outlined in the system request focus on employing computer technology in some aspect of the business process. Two popular activities used in the technique are（72）. Business process（73）means that the basic business requireme",
+    "opts": {
+      "A": "Duration analysis, activity-based costing and informal bench marking",
+      "B": "Outcome analysis, technology analysis and activity elimination",
+      "C": "Problem analysis, root cause analysis and critical path analysis",
+      "D": "Cost-benefit analysis, schedule analysis and risk analysis"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2016上-075-11f58f0c",
+    "qnum": 75,
+    "stem": "A variety of tools is available to help the analyst to discover the users' true needs.These tools are grouped into three broad techniques that are based on the degree of change anticipated in the to-be system . Business process（请作答此空） is used when the basic business Requirements outlined in the system request focus on employing computer technology in some aspect of the business process. Two popular activities used in the technique are（72）. Business process（73）means that the basic business requir",
+    "opts": {
+      "A": "automation",
+      "B": "modeling",
+      "C": "improvement",
+      "D": "re-engineering"
+    },
+    "ans": "D"
+  }
+]

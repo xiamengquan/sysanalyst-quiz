@@ -1,0 +1,446 @@
+[
+  {
+    "id": "ZT-2019上-039-4b1d6c62",
+    "qnum": 39,
+    "stem": "软件能力成熟度模型提供了一个软件能力成熟度的框架。她将软件过程改进的步骤组织成五个成熟度等级。其中，软件过程已建立了基本的项目管理过程。可用于对成本，进度和功能特性进行跟踪。说明软件已达到（）成熟度等级。",
+    "opts": {
+      "A": "已定义级",
+      "B": "优化级",
+      "C": "已管理级",
+      "D": "可重复级"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2019上-040-b7d2b8f2",
+    "qnum": 40,
+    "stem": "描述企业应用中的实体及其联系，属于数据库设计的（）阶段。",
+    "opts": {
+      "A": "需求分析",
+      "B": "概念设计",
+      "C": "逻辑设计",
+      "D": "物理设计"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2019上-041-ad376d9c",
+    "qnum": 41,
+    "stem": "某企业信息系统采用分布式数据库系统，“该系统中每节点对本地数据都能独立管理”和“当某一场地故障时系统可以使用其他场地的副本而不至于使整个系统瘫痪”分别称为分布式数据库的（）",
+    "opts": {
+      "A": "共享性和分布性",
+      "B": "自治性和分布性",
+      "C": "自治性和可用性",
+      "D": "分布性和可用性。"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2019上-042-90bf6e4b",
+    "qnum": 42,
+    "stem": "给定关系模式R ，其中，属性集u={A、B、C、D、E}。函数依赖集F={AC-B,B-DE}。关系R（请作答此空）且分别有（ ）",
+    "opts": {
+      "A": "只有一个候选关键字AC。",
+      "B": "只有一个候选关键字AB。",
+      "C": "有两个候选关键字AC、BC。",
+      "D": "有两个候选关键字AC、AB"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2019上-043-e831ff07",
+    "qnum": 43,
+    "stem": "给定关系模式R ，其中，属性集u={A、B、C、D、E}。函数依赖集F={AC-B,B-DE}。关系R（ ）且分别有（请作答此空）",
+    "opts": {
+      "A": "一个非主属性和四个主属性。",
+      "B": "两个非主属性和三个主属性。",
+      "C": "三个非主属性和两个主属性。",
+      "D": "四个非主属性和一个主属性。"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2019上-044-a0f97ba8",
+    "qnum": 44,
+    "stem": "若要将部门表Demp中name列的修改权限赋予用户Ming。并允许Ming将该权限授予他人。实现的SQL语句如下。GRANT（请作答此空）ON TABLE Demp TO Ming（ ）",
+    "opts": {
+      "A": "SELECT（name）",
+      "B": "UPDATE(name)",
+      "C": "INSERT（name）",
+      "D": "ALL PRIVILEGES（name）"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2019上-045-646eb2eb",
+    "qnum": 45,
+    "stem": "若要将部门表Demp中name列的修改权限赋予用户Ming。并允许Ming将该权限授予他人。实现的SQL语句如下。GRANT（ ）ON TABLE Demp TO Ming（请作答此空）",
+    "opts": {
+      "A": "FOR ALL",
+      "B": "CASCADE",
+      "C": "WITH GRANT OPTION",
+      "D": "WITH CHECK OPTION"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2019上-046-f85aa319",
+    "qnum": 46,
+    "stem": "前趋图是一个有效无环图,记为-={pi,pj，pi完成时间先于pj开始时间}。假设系统中进P={p1,p2,p3,p4,p5,p6,p7,p8}，且进程的前趋图如下。那么该前驱图可记为（请作答此空）图中（ ）\n\n![](https://s2.51cto.com/images/20210303/1614761281539236.png)",
+    "opts": {
+      "A": "-={(P1,P2),(P1,P3),(P1,P4)(P2,P5),(P3,P2),(P3,P4),(P3,P6),(P4,P7),(P5,P6)",
+      "B": "-={(P1,P2),(P1,P4),(P2,P3)(P2,P5),(P3,P4),(P3,P6),(P4,P7),(P5,P6),(P6,P8)(p7,p6)}",
+      "C": "-={(P1,P2),(P1,P4),(P2,P5)(P3,P2),(P3,P4),(P3,P6),(P4,P6),(P4,P7),(P6,P8)(p7,p8)}",
+      "D": "-={(P1,P2),(P1,P3),(P2,P4)(P2,P5),(P3,P2),(P3,P4),(P3,P5),(P4,P7),(P6,P8)(p7,p8)}"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2019上-047-986ed1fb",
+    "qnum": 47,
+    "stem": "前趋图是一个有效无环图,记为-={pi,pj，pi完成时间先于pj开始时间}。假设系统中进P={p1,p2,p3,p4,p5,p6,p7,p8}，且进程的前趋图如下。那么该前驱图可记为（ ）图中（请作答此空）\n\n![](https://s2.51cto.com/images/20210303/1614761055116144.png)",
+    "opts": {
+      "A": "存在着十个前驱关系。p1为初始节点。p2p4为终止节点。",
+      "B": "存在着两个前驱关系。p6为初始节点，p2p4为终止节点。",
+      "C": "存在着九个前驱关系。p6为初始节点，p8为终止节点。",
+      "D": "存在着十个前驱关系。p1为初始节点，p8为终止节点。"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2019上-048-151b1b4d",
+    "qnum": 48,
+    "stem": "某文件管理系统在磁盘上建立了位示图（bitmap），记录磁盘的使用情况。若磁盘上物理块的编号依次为0、1、2、....。系统中的字长为64位，字的编号依次为0、1、2、...。字中的一位对应文件存储器上的一个物理块。取值0和1分别表示空闲和占用。如下图所示。假设操作系统将256号物理块分配给某文件，那么该物理块的使用情况在位示图中编号为（请作答此空）的字中描述，系统应该将（ ）\n\n![](https://s2.51cto.com/images/20190622/1561189196766197.jpg)",
+    "opts": {
+      "A": "3",
+      "B": "4",
+      "C": "5",
+      "D": "6"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2019上-049-7696a3d3",
+    "qnum": 49,
+    "stem": "某文件管理系统在磁盘上建立了位示图（bitmap），记录磁盘的使用情况。若磁盘上物理块的编号依次为0、1、2、....。系统中的字长为64位，字的编号依次为0、1、2、...。字中的一位对应文件存储器上的一个物理块。取值0和1分别表示空闲和占用。如下图所示。假设操作系统将256号物理块分配给某文件，那么该物理块的使用情况在位示图中编号为（ ）的字中描述，系统应该将（请作答此空）\n\n![](https://s2.51cto.com/images/20190528/1559051262767899.jpg)",
+    "opts": {
+      "A": "该字的0号位置“1”",
+      "B": "该字的63号位置“1”",
+      "C": "该字的0号位置“0”",
+      "D": "该字的63号位置“0”"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2019上-050-69a6ed9a",
+    "qnum": 50,
+    "stem": "假设计算机系统中有三类互斥资源R1、R2和R3。可用资源数分别为9、5和3。若在TO时刻系统中有p1p2p3p4和p5 5个进程，这些进程对资源的最大需求量和已分配资源数如下表所示。在TO时刻，系统剩余的可用资源数分别为（请作答此空），如果进程按（）序列执行，那么系统状态是安全的。\n\n![](https://s2.51cto.com/images/20190528/1559051286423958.jpg)",
+    "opts": {
+      "A": "1、1和0",
+      "B": "1、1和1",
+      "C": "2、1和0",
+      "D": "2、0和1"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2019上-051-29346c4f",
+    "qnum": 51,
+    "stem": "假设计算机系统中有三类互斥资源R1、R2和R3。可用资源数分别为9、5和3。若在TO时刻系统中有p1、p2、p3、p4和p5五个进程，这些进程对资源的最*大需求量和已分配资源数如下表所示。在TO时刻，系统剩余的可用资源数分别为（ ），如果进程按（请作答此空）序列执行，那么系统状态是安全的。\n\n![](https://s2.51cto.com/images/20210303/1614760589671193.png)",
+    "opts": {
+      "A": "p1-p2-p4-p5-p3",
+      "B": "p4-p2-p1-p5-p3",
+      "C": "p5-p2-p4-p3-p1",
+      "D": "p5-p1-p4-p2-p3"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2019上-052-e4d20a29",
+    "qnum": 52,
+    "stem": "从减少成本和缩短研发周期考虑，要求嵌入式操作系统能运行在不同的微处理器平台上。能针对硬件变化进行结构与功能上的配置，是属于嵌入式操作系统（）特点。",
+    "opts": {
+      "A": "可定制",
+      "B": "实时性",
+      "C": "可靠性",
+      "D": "易移植性"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2019上-053-9bb8be91",
+    "qnum": 53,
+    "stem": "设三个煤场A.B.C分别能供应煤12/14/10万吨，三个工厂X.Y.Z分别需要煤11.12.13万吨，从个煤场到个工厂运煤的单价（百元吨）见下表方框内的数字，只要选择最优的运输方案，总的运输成本就能降到（）百万元。\n\n![](https://s2.51cto.com/images/20190528/1559051391266433.jpg)",
+    "opts": {
+      "A": "83",
+      "B": "91",
+      "C": "113",
+      "D": "153"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2019上-054-1ade489e",
+    "qnum": 54,
+    "stem": "某项目有 A~H 八个作业,各作业所需时间(单位:周)以及紧前作业如下表\n\n![](https://s2.51cto.com/images/20190528/1559051448217865.jpg)\n\n该项目的工期为()周。如果作业C 拖延3 周完成,则该项目的工期( 请作答此空)",
+    "opts": {
+      "A": "12",
+      "B": "13",
+      "C": "14",
+      "D": "15"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2019上-055-27194fd2",
+    "qnum": 55,
+    "stem": "某项目有 A~H 八个作业,各作业所需时间(单位:周)以及紧前作业如下表\n\n![](https://s2.51cto.com/images/20190528/1559051476376905.jpg)\n\n该项目的工期为( )周。如果作业C 拖延3 周完成,则该项目的工期(请作答此空)",
+    "opts": {
+      "A": "不变",
+      "B": "拖延1周",
+      "C": "拖延2周",
+      "D": "拖延3周"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2019上-056-35a4e28b",
+    "qnum": 56,
+    "stem": "下表记录了六个结点：A、B、C、D、E、F之间的路径方向和距离，从A到F的最短距离是（）\n\n![](https://s2.51cto.com/images/20190528/1559051512784794.jpg)",
+    "opts": {
+      "A": "38",
+      "B": "40",
+      "C": "44",
+      "D": "46"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2019上-057-42291a93",
+    "qnum": 57,
+    "stem": "信息系统的性能评价指标是客观评价信息系统性能的依据，其中，（13）是指系统同时能处理的请求数量。",
+    "opts": {
+      "A": "系统响应时间",
+      "B": "吞吐量",
+      "C": "资源利用率",
+      "D": "并发用户数"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2019上-058-6efa4aae",
+    "qnum": 58,
+    "stem": "运用互联网技术,在系统性能评价中通常用平均无故障时间(MTBF)和平均故修复时间(MTTR)分别表示计算机系统的可靠性和可用性，( )表示系统具有高可靠性和高可用性。",
+    "opts": {
+      "A": "MTBF小,MTTR小",
+      "B": "MTBF大,MTTR小",
+      "C": "MTBF大,MTTR大",
+      "D": "MTBF小,MTTR大"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2019上-059-981707e0",
+    "qnum": 59,
+    "stem": "矢量图是常用的图形图像表示形式,( )是描述矢量图的基本组成单位。",
+    "opts": {
+      "A": "像素",
+      "B": "像素点",
+      "C": "图元",
+      "D": "二进制位"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2019上-060-e533f40f",
+    "qnum": 60,
+    "stem": "使用( )DPI 分辨率的扫描仪扫描一幅 2x4 英寸的照片,可直接得到 300x600 像素的图像。",
+    "opts": {
+      "A": "100",
+      "B": "150",
+      "C": "300",
+      "D": "600"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2019上-061-3af86743",
+    "qnum": 61,
+    "stem": "( )防火墙是内部网和外部网的隔离点,它可对应用层的通信数据流进行监控和过滤。",
+    "opts": {
+      "A": "包过滤",
+      "B": "应用网关",
+      "C": "数据库",
+      "D": "WEB"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2019上-062-39dca326",
+    "qnum": 62,
+    "stem": "在以太网标准中规定的最小帧长是（请作答此空）字节。最小帧长是根据（）来定的。",
+    "opts": {
+      "A": "20",
+      "B": "64",
+      "C": "128",
+      "D": "1518"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2019上-063-4f17477e",
+    "qnum": 63,
+    "stem": "在以太网标准中规定的最小帧长是（ ）字节。最小帧长是根据（请作答此空）来定的。",
+    "opts": {
+      "A": "网络中传送的最小信息单位",
+      "B": "物理层可以区分的信息长度",
+      "C": "网终中发生冲突的最短时间",
+      "D": "网络中检测冲突的最长时间"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2019上-064-df644eee",
+    "qnum": 64,
+    "stem": "假设模拟信号的频率为 10~16MH,采样频率必须大于( )时,才能使得的样本信号不失真.",
+    "opts": {
+      "A": "8MHZ",
+      "B": "10MHZ",
+      "C": "20MHZ",
+      "D": "32MHZ"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2019上-065-67846e31",
+    "qnum": 65,
+    "stem": "TcP和 UDP 协议均提供了( )能力。",
+    "opts": {
+      "A": "连接管理",
+      "B": "差错校验和重传",
+      "C": "流量控制",
+      "D": "端口寻址"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2019上-066-42f685a6",
+    "qnum": 66,
+    "stem": "建立TCP连接时，一端主动打开后所处的状态为（）",
+    "opts": {
+      "A": "SYNSENT",
+      "B": "ESTABUISHED",
+      "C": "CLOSE-WAIT",
+      "D": "LAST-ACK"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2019上-067-b69c67d1",
+    "qnum": 67,
+    "stem": "配置POP3服务器时，邮件服务器中默认开放TCP的( )端口。",
+    "opts": {
+      "A": "21",
+      "B": "25",
+      "C": "53",
+      "D": "110"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2019上-068-d24f1446",
+    "qnum": 68,
+    "stem": "某校园网的地址是 202.115.192.0/19 要把该网络分成 32 个子网,则子网掩码该是()",
+    "opts": {
+      "A": "255.255.200.0",
+      "B": "255.255.224.0",
+      "C": "255.255.254.0",
+      "D": "255.255.255.0"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2019上-069-0c824c94",
+    "qnum": 69,
+    "stem": "下列无线网路技术中,覆盖范围最小的是()",
+    "opts": {
+      "A": "80215.1 蓝牙",
+      "B": "80211n 无线局域网",
+      "C": "802.15. 4ZaBee",
+      "D": "80216m 无铁城域网"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2019上-070-9ab98849",
+    "qnum": 70,
+    "stem": "2019 年我国将在多地展开5 试点,届时将在人口密集区为用户提供()bps的用户体验速率。",
+    "opts": {
+      "A": "100M",
+      "B": "1G",
+      "C": "10G",
+      "D": "1T"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2019上-071-4097387f",
+    "qnum": 71,
+    "stem": "During the systems planning phase. a systems analyst conducts a（请作答此空）activity to study the systems request and recommend specific action. After obtaining an authonzation to proceed. the analyst interacts with( ) to gather facts about the problem of opportunity, project scope and constraints, project benefits, and estimated development time and costs. In many cases. the\nsystems request does not reveal the underying problem, but only a symptom. A popular technique for investigating causesand effe",
+    "opts": {
+      "A": "case study",
+      "B": "requirements discovery",
+      "C": "preliminary investigation",
+      "D": "business understanding"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2019上-072-1def8ddc",
+    "qnum": 72,
+    "stem": "During the systems planning phase. a systems analyst conducts a（ ）activity to study the systems request and recommend specific action. After obtaining an authonzation to proceed. the analyst interacts with(请作答此空) to gather facts about the problem of opportunity, project scope and constraints, project benefits, and estimated development time and costs. In many cases. the\nsystems request does not reveal the underying problem, but only a symptom. A popular technique for investigating causesand effe",
+    "opts": {
+      "A": "system users",
+      "B": "system owner",
+      "C": "managers and users",
+      "D": "business analysts"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2019上-073-64691865",
+    "qnum": 73,
+    "stem": "During the systems planning phase. a systems analyst conducts a（ ）activity to study the systems request and recommend specific action. After obtaining an authonzation to proceed. the analyst interacts with( ) to gather facts about the problem of opportunity, project scope and constraints, project benefits, and estimated development time and costs. In many cases. the\nsystems request does not reveal the underying problem, but only a symptom. A popular technique for investigating causesand effects ",
+    "opts": {
+      "A": "fishbone diagram",
+      "B": "PERT diagram",
+      "C": "Gantt diagram",
+      "D": "use case diagram"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2019上-074-a5051553",
+    "qnum": 74,
+    "stem": "During the systems planning phase. a systems analyst conducts a（ ）activity to study the systems request and recommend specific action. After obtaining an authonzation to proceed. the analyst interacts with( ) to gather facts about the problem of opportunity, project scope and constraints, project benefits, and estimated development time and costs. In many cases. the\nsystems request does not reveal the underying problem, but only a symptom. A popular technique for investigating causesand effects ",
+    "opts": {
+      "A": "feasibility analysis",
+      "B": "requirement analysis",
+      "C": "system proposal",
+      "D": "fact-finding"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2019上-075-ed7679f1",
+    "qnum": 75,
+    "stem": "During the systems planning phase. a systems analyst conducts a（ ）activity to study the systems request and recommend specific action. After obtaining an authonzation to proceed. the analyst interacts with( ) to gather facts about the problem of opportunity, project scope and constraints, project benefits, and estimated development time and costs. In many cases. the\nsystems request does not reveal the underying problem, but only a symptom. A popular technique for investigating causesand effects ",
+    "opts": {
+      "A": "a report to management",
+      "B": "a requirement definition",
+      "C": "a project charter",
+      "D": "a request for proposal"
+    },
+    "ans": "C"
+  }
+]

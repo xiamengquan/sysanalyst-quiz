@@ -1,0 +1,446 @@
+[
+  {
+    "id": "ZT-2021上-039-fb45f38c",
+    "qnum": 39,
+    "stem": "【空（2）】在软件逆向工程的相关概念中， （1） 是指借助工具从已有程序中抽象出有关数据设计、总体结构设计和过程设计等方面的信息； （2） 是指不仅从现有系统中恢复设计信息，而且使用该信息去改变或重构现有系统，以改善其整体质量。",
+    "opts": {
+      "A": "设计重构",
+      "B": "双向工程",
+      "C": "正向工程",
+      "D": "再工程"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2021上-040-c2e3fbff",
+    "qnum": 40,
+    "stem": "在数据库系统中，一般将事务的执行状态分为五种。若“事务的最后一条语句自动执行后”，事务处于 （40） 状态。",
+    "opts": {
+      "A": "活动",
+      "B": "部分提交",
+      "C": "提交",
+      "D": "失败"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2021上-041-858831a7",
+    "qnum": 41,
+    "stem": "某证券公司股票交易系统采用分布式数据库，这样本地客户的交易业务能够在本地正常进行，而不需要依赖于其他场地数据库，这属于分布式数据库的 （41） 特点",
+    "opts": {
+      "A": "共享性",
+      "B": "分布性",
+      "C": "可用性",
+      "D": "自治性"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2021上-042-5aaec20e",
+    "qnum": 42,
+    "stem": "在数据库系统中，视图实际上是一个 （42） 。",
+    "opts": {
+      "A": "真实存在的表，并保存了待查询的数据",
+      "B": "真实存在的表，只有部分数据来源于基本表",
+      "C": "虚拟表，查询时只能从1个基本表中导出的表",
+      "D": "虚拟表，查询时可以从1个或多个基本表或视图中导出的表"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2021上-043-ddc191f6",
+    "qnum": 43,
+    "stem": "【空（1）】给定关系模式R（U，F），其中：属性集U = {A，B，C，D，E，G}，函数依赖集F={A→BC，C→D，A→D，E→G}。关系R中 （1） ，函数依赖集F 中 （2） 。",
+    "opts": {
+      "A": "有1个候选码A",
+      "B": "有1个候选码AE",
+      "C": "有2个候选码AC和AE",
+      "D": "有2个候选码CE和AE"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2021上-044-e697fa6e",
+    "qnum": 44,
+    "stem": "【空（2）】给定关系模式R（U，F），其中：属性集U = {A，B，C，D，E，G}，函数依赖集F={A→BC，C→D，A→D，E→G}。关系R中 （1） ，函数依赖集F 中 （2） 。",
+    "opts": {
+      "A": "存在传递依赖，但不存在冗余函数依赖",
+      "B": "既不存在传递依赖，也不存在冗余函数依赖",
+      "C": "存在传递依赖，并且存在冗余函数依赖A→D",
+      "D": "不存在传递依赖，但存在冗余函数依赖A→D"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2021上-045-4277825f",
+    "qnum": 45,
+    "stem": "分布式数据库系统中的两阶段提交（Two Phase Commit，2PC）协议包含协调者和参与者，通常有如下操作指令。满足2PC的正常序列是 （45） 。\n①协调者向参与者发prepare消息\n②参与者向协调者发回ready消息\n③参与者向协调者发回abort消息\n④协调者向参与者发commit消息\n⑤协调者向参与者发rollback消息",
+    "opts": {
+      "A": "①②④",
+      "B": "①②⑤",
+      "C": "②③④",
+      "D": "②③⑤"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2021上-046-1b157b18",
+    "qnum": 46,
+    "stem": "在支持多线程的操作系统中，假设进程P1创建了线程T1和T2，进程P2创建了线程 T3和T4，那么以下说法错误的是 （46） 。",
+    "opts": {
+      "A": "线程T1和T2可以共享P1的数据段",
+      "B": "线程T3和T4可以共享P2的数据段",
+      "C": "线程T1和T2可以共享P1中任何一个线程打开的文件",
+      "D": "线程T3可以共享线程T4的栈指针"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2021上-047-bc4b4c0f",
+    "qnum": 47,
+    "stem": "嵌入式系统初始化过程通常包括三个环节：片级初始化、板级初始化和系统初始化。以下关于系统级初始化主要任务的描述，准确的是 （47） 。",
+    "opts": {
+      "A": "完成嵌入式微处理器的初始化",
+      "B": "以软件初始化为主，主要进行操作系统的初始化",
+      "C": "完成嵌入式微处理器以外的其他硬件设备的初始化",
+      "D": "设置嵌入式微处理器的核心寄存器和控制寄存器工作状态"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2021上-048-ee66ad13",
+    "qnum": 48,
+    "stem": "某文件系统采用索引节点管理，其磁盘索引块和磁盘数据块大小均为4KB字节，且每个文件索引节点有8个地址项iaddr[0]~iaddr[7]，每个地址项大小为4字节，其中iaddr[0]~iaddr[4]采用直接地址索引，iaddr[5]和iaddr[6]采用一级间接地址索引，iaddr[7]采用二级间接地址索引。若用户要访问文件fileX中逻辑块号为5和2056的信息，则系统应分别釆用 （48） 物理块。",
+    "opts": {
+      "A": "直接地址访问和直接地址访问",
+      "B": "直接地址访问和一级间接地址访问",
+      "C": "一级间接地址访问和一级间接地址访问",
+      "D": "一级间接地址访问和二级间接地址访问"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2021上-049-d4b1fa7e",
+    "qnum": 49,
+    "stem": "【空（2）】进程P1、P2、P3、P4、P5和P6的前趋图如图1-1所示：\n\n![](https://s2.51cto.com/images/20231126/1701012460365092.png)\n\n图1-1 前趋图\n若用PV操作控制这6个进程的同步与互斥的程序如下，那么程序中的空①和空②处应分别为 （1） ；空③和空④处应分别为 （2） ；空⑤和空⑥处应分别为 （3） 。\n\n![](https://s2.51cto.com/images/20240126/1706238954378916.png)",
+    "opts": {
+      "A": "V（S4）V（S5）和P（S3）",
+      "B": "P（S4）和V（S4）V（S5）",
+      "C": "P（S4）P（S5）和V（S3）",
+      "D": "V（S4）和V（S5）P（S5）"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2021上-050-b674ebfe",
+    "qnum": 50,
+    "stem": "【空（1）】进程P1、P2、P3、P4、P5和P6的前趋图如图1-1所示：\n\n![](https://s2.51cto.com/images/20231126/1701012460365092.png)\n\n图1-1 前趋图\n若用PV操作控制这6个进程的同步与互斥的程序如下，那么程序中的空①和空②处应分别为 （1） ；空③和空④处应分别为 （2） ；空⑤和空⑥处应分别为 （3） 。\n\n![](https://s2.51cto.com/images/20240126/1706238954378916.png)",
+    "opts": {
+      "A": "V（S1）和P（S2）P（S3）",
+      "B": "P（S1）和V（S2）V（S3）",
+      "C": "V（S1）和V（S2）V（S3）",
+      "D": "P（S1）和P（S2）P（S3）"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2021上-051-08bd213e",
+    "qnum": 51,
+    "stem": "【空（3）】进程P1、P2、P3、P4、P5和P6的前趋图如图1-1所示：\n\n![](https://s2.51cto.com/images/20231126/1701012460365092.png)\n\n图1-1 前趋图\n若用PV操作控制这6个进程的同步与互斥的程序如下，那么程序中的空①和空②处应分别为 （1） ；空③和空④处应分别为 （2） ；空⑤和空⑥处应分别为 （3） 。\n\n![](https://s2.51cto.com/images/20240126/1706238954378916.png)",
+    "opts": {
+      "A": "P（S5）和P（S7）",
+      "B": "P（S6）和P（S7）",
+      "C": "V（S6）和V（S7）",
+      "D": "P（S6）和V（S7）"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2021上-052-0e237dae",
+    "qnum": 52,
+    "stem": "以下关于数学建模的叙述中，不正确的是 （52） 。",
+    "opts": {
+      "A": "数学建模用数学的语言量化现实世界的现象并分析其行为",
+      "B": "数学建模用数学来探索和发展我们对现实世界问题的理解",
+      "C": "数学建模往往是对实际问题迭代求解的过程",
+      "D": "人们常把示例问题用作所有数学建模的模板"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2021上-053-440d6093",
+    "qnum": 53,
+    "stem": "某项目包括8个作业A~H，每天需要间接费用5万元，完成各作业所需的时间与直接费用、赶进度时每天需要増加的费用以及作业之间的衔接关系见表1-1。根据这些数据，以最低成本完成该项目需要 （53） 天。\n\n![](https://s2.51cto.com/images/20231206/1701831958505812.png)",
+    "opts": {
+      "A": "13",
+      "B": "14",
+      "C": "15",
+      "D": "16"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2021上-054-58caa8be",
+    "qnum": 54,
+    "stem": "以下关于线性规划模型的叙述中，不正确的是 （54） 。",
+    "opts": {
+      "A": "决策目标是使若干决策变量的线性函数达到极值",
+      "B": "一组决策变量的线性等式或不等式构成约束条件",
+      "C": "单纯形法是求解线性规划问题的一种方法",
+      "D": "线性规划模型是运输问题的一类特殊情形"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2021上-055-2c9b1b1a",
+    "qnum": 55,
+    "stem": "某企业招聘英语翻译2人，日语、德语、俄语翻译各1人。经过统-测试的十分制评分， 有5名应聘者A、B、C、D、E通过初选进入候选定岗。已知这5人的得分如表1-2。\n\n![](https://s2.51cto.com/images/20231206/1701832159141718.png)\n根据此表，可以获得这5人最大总分为 （55） 的最优录用定岗方案（每人一岗）。",
+    "opts": {
+      "A": "34",
+      "B": "35",
+      "C": "37",
+      "D": "38"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2021上-056-4f173cfc",
+    "qnum": 56,
+    "stem": "某项目要求在指定日期从结点A沿多条线路运输到结点F，其运输路线图（包括A~F的6个结点以及9段线路）如图1-2所示。每段线路都标注了两个数字：前一个数字是该段线路上单位运输量所需的费用（单位：万元/万吨），后一个数字是每天允许通过该段线路的最大运输量（万吨）。如果对该图釆用最小费用最大流算法，那么该项目可以用最低的总费用，在指定日期分多条路线运输总计 （56） 万吨的货物。\n\n![](https://s2.51cto.com/images/20231126/1701013307713478.png)",
+    "opts": {
+      "A": "11",
+      "B": "12",
+      "C": "13",
+      "D": "14"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2021上-057-c980d1fe",
+    "qnum": 57,
+    "stem": "某工厂分配四个工人甲、乙、丙、丁同时去操作四台机床A、B、C、D，每人分配其中的一台。己知每个工人操作每台机床每小时的效益值如表1-3所示，则总效益最高的最优分配方案共有 （57） 个。\n\n![](https://s2.51cto.com/images/20231126/1701013424656263.png)",
+    "opts": {
+      "A": "1",
+      "B": "2",
+      "C": "3",
+      "D": "4"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2021上-058-d66f220d",
+    "qnum": 58,
+    "stem": "某班级某次考试由于教师出题太难导致大多数人的卷面百分制成绩不及格（低于60分），成绩较高的与较低的学生都很少。为了控制及格率，教师根据卷面成绩x做了函数变换y=f（x），得到最终的百分制成绩y，使及格率大为提高。比较公平合理的函数变换为 （58） 。",
+    "opts": {
+      "A": "y=x+20",
+      "B": "y=1.2x",
+      "C": "![](https://s2.51cto.com/images/20231126/1701012171282115.png)",
+      "D": "![](https://s2.51cto.com/images/20231126/1701012179859173.png)"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2021上-059-510e43be",
+    "qnum": 59,
+    "stem": "【空（1）】系统可靠性是系统在规定时间内及规定的环境条件下，完成规定功能的能力。系统可靠性包含四个子特征，其中 （1） 是指系统避免因错误的发生而导致失效的能力； （2） 是指系统依附于与可靠性相关的标准、约定或规定的能力。",
+    "opts": {
+      "A": "成熟",
+      "B": "容错性",
+      "C": "易恢复性",
+      "D": "可靠性的依从性"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2021上-060-b0d2351a",
+    "qnum": 60,
+    "stem": "【空（2）】系统可靠性是系统在规定时间内及规定的环境条件下，完成规定功能的能力。系统可靠性包含四个子特征，其中 （1） 是指系统避免因错误的发生而导致失效的能力； （2） 是指系统依附于与可靠性相关的标准、约定或规定的能力。",
+    "opts": {
+      "A": "容错性",
+      "B": "成熟性",
+      "C": "易恢复性",
+      "D": "可靠性的依从性"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2021上-061-1eace57a",
+    "qnum": 61,
+    "stem": "【空（1）】组相联映射是常见的Cache映射方法。如果容量为64块的Cache采用组相联方式映射，每块大小为128个字，每4块为一组，即Cache分为 （1） 组。若主存容量为4096块，且以字编址。根据主存与Cache块的容量需一致，即每个内存页的大小是 （2） 个字，主存地址需要 （3） 位，主存组号需 （4） 位。",
+    "opts": {
+      "A": "8",
+      "B": "16",
+      "C": "32",
+      "D": "4"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2021上-062-b6a632f6",
+    "qnum": 62,
+    "stem": "【空（2）】组相联映射是常见的Cache映射方法。如果容量为64块的Cache采用组相联方式映射，每块大小为128个字，每4块为一组，即Cache分为 （1） 组。若主存容量为4096块，且以字编址。根据主存与Cache块的容量需一致，即每个内存页的大小是 （2） 个字，主存地址需要 （3） 位，主存组号需 （4） 位。",
+    "opts": {
+      "A": "128",
+      "B": "64",
+      "C": "4096",
+      "D": "1024"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2021上-063-3a33e7ea",
+    "qnum": 63,
+    "stem": "【空（3）】组相联映射是常见的Cache映射方法。如果容量为64块的Cache采用组相联方式映射，每块大小为128个字，每4块为一组，即Cache分为 （1） 组。若主存容量为4096块，且以字编址。根据主存与Cache块的容量需一致，即每个内存页的大小是 （2） 个字，主存地址需要 （3） 位，主存组号需 （4） 位。",
+    "opts": {
+      "A": "256",
+      "B": "19",
+      "C": "128",
+      "D": "8"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2021上-064-46509bb2",
+    "qnum": 64,
+    "stem": "【空（4）】组相联映射是常见的Cache映射方法。如果容量为64块的Cache采用组相联方式映射，每块大小为128个字，每4块为一组，即Cache分为 （1） 组。若主存容量为4096块，且以字编址。根据主存与Cache块的容量需一致，即每个内存页的大小是 （2） 个字，主存地址需要 （3） 位，主存组号需 （4） 位。",
+    "opts": {
+      "A": "8",
+      "B": "16",
+      "C": "19",
+      "D": "4"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2021上-065-bbdef57d",
+    "qnum": 65,
+    "stem": "通常使用 （65） 为IP数据报文进行加密。",
+    "opts": {
+      "A": "IPSec",
+      "B": "PP2P",
+      "C": "HTTPS",
+      "D": "TLS"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2021上-066-adcfe17f",
+    "qnum": 66,
+    "stem": "数据包通过防火墙时，不能依据 （66） 进行过滤。",
+    "opts": {
+      "A": "源和目的IP地址",
+      "B": "源和目的端口",
+      "C": "IP协议号",
+      "D": "负载内容"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2021上-067-90761485",
+    "qnum": 67,
+    "stem": "以下关于AES加密算法的描述中，错误的是 （67） 。",
+    "opts": {
+      "A": "AES的分组长度可以是256比特",
+      "B": "AES的密钥长度可以是128比特",
+      "C": "AES所用S盒的输入为8比特",
+      "D": "AES是一种确定性的加密算法"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2021上-068-44cda611",
+    "qnum": 68,
+    "stem": "在对服务器的日志进行分析时，发现某一时间段，网络中有大量包含“USER”、“PASS”负载的数据，该异常行为最可能是 （68） 。",
+    "opts": {
+      "A": "ICMP泛洪攻击",
+      "B": "端口扫描",
+      "C": "弱口令扫描",
+      "D": "TCP泛洪攻击"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2021上-069-70fd6398",
+    "qnum": 69,
+    "stem": "某主机无法上网，查看“本地连接”属性中的数据发送情况，发现只有发送没有接收，造成该主机网络故障的原因最有可能是 （69） 。",
+    "opts": {
+      "A": "IP地址配置错误",
+      "B": "网络协议配置错误",
+      "C": "网络没有物理连接",
+      "D": "DNS配置不正确"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2021上-070-b1d4e9bc",
+    "qnum": 70,
+    "stem": "某公司的员工区域使用的IP地址段是172.16.133.128/23，该地址段中最多能够容纳的有效主机数量是 （70） 台。",
+    "opts": {
+      "A": "254",
+      "B": "510",
+      "C": "1022",
+      "D": "2046"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2021上-071-5cd003e6",
+    "qnum": 71,
+    "stem": "【空（1）】The objective of the systems analysis phase is to understand the proposed project，ensure that it will support business requirements，and build a solid foundation for system development. The systems analysis phase includes four main activities. （1） involves fact-finding to describe the current system and identification of the requirements for the new system，such as outputs， inputs，processes，performance，and security. （2） refer to the logical rules that are applied to transform the data into m",
+    "opts": {
+      "A": "System logical modeling",
+      "B": "Use case modeling",
+      "C": "Requirement modeling",
+      "D": "Application modeling"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2021上-072-5470b7a7",
+    "qnum": 72,
+    "stem": "【空（2）】The objective of the systems analysis phase is to understand the proposed project，ensure that it will support business requirements，and build a solid foundation for system development. The systems analysis phase includes four main activities. （1） involves fact-finding to describe the current system and identification of the requirements for the new system，such as outputs， inputs，processes，performance，and security. （2） refer to the logical rules that are applied to transform the data into m",
+    "opts": {
+      "A": "Outputs",
+      "B": "Inputs",
+      "C": "Processes",
+      "D": "Models"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2021上-073-4bf4ccca",
+    "qnum": 73,
+    "stem": "【空（3）】The objective of the systems analysis phase is to understand the proposed project，ensure that it will support business requirements，and build a solid foundation for system development. The systems analysis phase includes four main activities. （1） involves fact-finding to describe the current system and identification of the requirements for the new system，such as outputs， inputs，processes，performance，and security. （2） refer to the logical rules that are applied to transform the data into m",
+    "opts": {
+      "A": "Business modeling",
+      "B": "Database modeling",
+      "C": "Structure modeling",
+      "D": "Data and process modeling"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2021上-074-d86d0fea",
+    "qnum": 74,
+    "stem": "【空（4）】The objective of the systems analysis phase is to understand the proposed project，ensure that it will support business requirements，and build a solid foundation for system development. The systems analysis phase includes four main activities. （1） involves fact-finding to describe the current system and identification of the requirements for the new system，such as outputs， inputs，processes，performance，and security. （2） refer to the logical rules that are applied to transform the data into m",
+    "opts": {
+      "A": "Object modeling",
+      "B": "Domain analysis",
+      "C": "Component modeling",
+      "D": "Behavior modeling"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2021上-075-8b12f8b2",
+    "qnum": 75,
+    "stem": "【空（5）】The objective of the systems analysis phase is to understand the proposed project，ensure that it will support business requirements，and build a solid foundation for system development. The systems analysis phase includes four main activities. （1） involves fact-finding to describe the current system and identification of the requirements for the new system，such as outputs， inputs，processes，performance，and security. （2） refer to the logical rules that are applied to transform the data into m",
+    "opts": {
+      "A": "feasibility analysis",
+      "B": "development strategies",
+      "C": "architecture design",
+      "D": "technique outline"
+    },
+    "ans": "B"
+  }
+]

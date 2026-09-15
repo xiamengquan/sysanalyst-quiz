@@ -57,27 +57,31 @@ function buildQuestions() {
       learn_stage: o.learn_stage,
     }));
 
-  // Prefer 综合知识/all.jsonl (raw 导入)；兼容旧路径 上午真题.jsonl
+  // 综合知识真题唯一权威源（数据版）；上午真题.jsonl 仅作兼容镜像
   const realPrimary = path.join(BANKS, "real/综合知识/all.jsonl");
   const realFallback = path.join(BANKS, "real/上午真题.jsonl");
   const realPath = fs.existsSync(realPrimary) ? realPrimary : realFallback;
+  if (!fs.existsSync(realPath)) {
+    console.warn("no real MCQ bank at", realPrimary);
+  }
   const real = loadJsonl(realPath).map((q, i) => ({
     no: 100000 + i + 1,
     ch: 99,
-    point: `${q.year || ""}${q.half ? `${q.half}` : ""}·第${q.qnum || ""}题${
-      q.blank ? `·空${q.blank}` : ""
-    }`,
+    point: `${q.year || ""}${q.half || ""}·第${q.qnum || ""}题${q.blank ? `·空${q.blank}` : ""}`,
     stem: q.stem,
     opts: q.opts,
     ans: q.ans,
     exp: q.exp || "",
     diff: "real",
     bank: "real",
-    source: q.source || "真题",
+    source: q.source || "综合知识真题",
     year: String(q.year || ""),
     half: q.half || "",
     qnum: q.qnum,
     id: q.id,
+    edition: q.edition || "data-v1",
+    opt_exp: q.opt_exp || undefined,
+    exp_edition: q.exp_edition || undefined,
   }));
 
   const reject = new Set();

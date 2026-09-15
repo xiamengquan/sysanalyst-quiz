@@ -1,0 +1,446 @@
+[
+  {
+    "id": "ZT-2015上-039-b1d6204b",
+    "qnum": 39,
+    "stem": "在综合考虑企业内外环境，以集成为核心，围绕企业战略需求进行信息系统规划时，适合于采用的方法是（）。",
+    "opts": {
+      "A": "战略栅格法",
+      "B": "价值链分析法",
+      "C": "信息工程法",
+      "D": "战略集合转化法"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2015上-040-5946ab29",
+    "qnum": 40,
+    "stem": "数据仓库中数据（40）的特点是指数据一旦进入数据仓库后，将被长期保留并定期加载和刷新，可以进行各种查询操作，但很少对数据进行修改和删除操作。",
+    "opts": {
+      "A": "面向主题",
+      "B": "集成性",
+      "C": "相对稳定性",
+      "D": "反映历史变化"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2015上-041-b0dfd1bb",
+    "qnum": 41,
+    "stem": "数据挖掘的分析方法可以划分为关联分析、序列模式分析、分类分析和聚类分析四种。如果某方法需要一个示例库（该库中的每个元组都有一个给定的类标识）做训练集时，这种分析方法属于（41）。",
+    "opts": {
+      "A": "关联分析",
+      "B": "序列模式分析",
+      "C": "分类分析",
+      "D": "聚类分析"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2015上-042-ee855d8e",
+    "qnum": 42,
+    "stem": "给定关系模式R(A1，A2，A3，A4)，R上的函数依赖集F={A1A3→A2，A2→A3}，则R（42）。",
+    "opts": {
+      "A": "有一个候选关键字A1A3",
+      "B": "有一个候选关键字A1A2A3",
+      "C": "有两个候选关键字A1A3A4和A1A2A4",
+      "D": "有三个候选关键字A1A2、A1A3和A1A4"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2015上-043-d3661ce0",
+    "qnum": 43,
+    "stem": "给定关系模式R(A1，A2，A3，A4)，R上的函数依赖集F={A1A3→A2，A2→A3}，若将R分解为p={(A1A2)，(A1，A3)}，那么该分解（43）。",
+    "opts": {
+      "A": "是无损联接的",
+      "B": "是保持函数依赖的",
+      "C": "既是无损联接又保持函数依赖",
+      "D": "既是有损联接又不保持函数依赖"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2015上-044-ca20e1d8",
+    "qnum": 44,
+    "stem": "关系R、S如下表所示，R÷（πA1,A2(σ 1(44)。\n\n![](https://s2.51cto.com/images/20210422/1619063270821793.png)",
+    "opts": {
+      "A": "{4}",
+      "B": "{3,4}",
+      "C": "{3,4,7}",
+      "D": "{(1,2),(2,1),(3,4),(4,7)}"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2015上-045-17dc68ce",
+    "qnum": 45,
+    "stem": "关系R、S如下表所示，R÷（πA1,A2(σ 1，R、S的左外联接、右外联接和完全外联接的元组个数分别为(45)。\n\n![](https://s2.51cto.com/images/20231220/1703078866225657.png)",
+    "opts": {
+      "A": "2,2,4",
+      "B": "2,2,6",
+      "C": "4,4,4",
+      "D": "4,4,6"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2015上-046-369ae9d1",
+    "qnum": 46,
+    "stem": "当用户开机按下PC机电源开关对，PC机首先执行的是（46）",
+    "opts": {
+      "A": "硬盘上主引导记录",
+      "B": "硬盘上分区引导记录",
+      "C": "主板上的BIOS引导程序",
+      "D": "软盘上的引导记录"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2015上-047-97b21687",
+    "qnum": 47,
+    "stem": "当用户开机按下PC机电源开关对，每当开机时自动执行BIOS引导程序，然后加载（47）。",
+    "opts": {
+      "A": "相关支撑软件，如各种设备驱动程序",
+      "B": "分区引导记录、配置系统，并执行分区引导记录",
+      "C": "操作系统，如Windows XP、Windows 7、UNIX等",
+      "D": "主引导记录和引导驱动器的分区表，并执行主引导记录"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2015上-048-ee4fc935",
+    "qnum": 48,
+    "stem": "进程P1、P2、P3、P4、P5和P6的前趋图如下所示：\n\n![](https://s2.51cto.com/images/201803/2647e0e45601e617678297d0e042f609894e53.png)\n\n若用PV操作控制这6个进程的同步与互斥的程序如下，那么程序中的空①和空②处应分别为（48）\n\n![](https://s2.51cto.com/images/201803/f54fe9067182ba1a2c9640b37a991a84aa2f85.png)",
+    "opts": {
+      "A": "V(S1)和P(S2)",
+      "B": "P(S1)和V(S2)",
+      "C": "V(S1)和V(S2)",
+      "D": "V(S2)和P(S1)"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2015上-049-3fa253fd",
+    "qnum": 49,
+    "stem": "进程P1、P2、P3、P4、P5和P6的前趋图如下所示：\n\n![](https://s2.51cto.com/images/201803/49da5c7069f52d78240745cdd657f83566fd2f.png)\n\n若用PV操作控制这6个进程的同步与互斥的程序如下，空③和空④处应分别为（49）。\n\n![](https://s2.51cto.com/images/201803/a56f81019dd17fd5ac71381b0adbeedf69e4e0.png)",
+    "opts": {
+      "A": "V(S4)V(S5)和P(S3)",
+      "B": "P(S4)P(S5)和V(S3)",
+      "C": "V(S3)V(S4)和V(S5)",
+      "D": "P(S3)V(S4)和P(S3)"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2015上-050-fdee0805",
+    "qnum": 50,
+    "stem": "进程P1、P2、P3、P4、P5和P6的前趋图如下所示：\n\n![](https://s2.51cto.com/images/201803/a10efe429cf5eefd2f6374dc460b9c8a791a2d.png)\n\n若用PV操作控制这6个进程的同步与互斥的程序如下，空⑤和空⑥处应分别为（50）。\n\n![](https://s2.51cto.com/images/201803/29022ca20bac621a537775874923b97edd49a5.png)",
+    "opts": {
+      "A": "P(S6)和V(S5)",
+      "B": "P(S6)和P(S5)",
+      "C": "V(S5)和V(S6)",
+      "D": "V(S6)和P(S5)"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2015上-051-a658d230",
+    "qnum": 51,
+    "stem": "嵌入式系统初始化过程主要有3个环节，按照自底向上、从硬件到软件的次序依次为（51）。",
+    "opts": {
+      "A": "片级初始化→系统级初始化→板级初始化",
+      "B": "片级初始化→板级初始化→系统级初始化",
+      "C": "系统级初始化→板级初始化→片级初始化",
+      "D": "系统级初始化→片级初始化→板级初始化"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2015上-052-19696929",
+    "qnum": 52,
+    "stem": "线性规划问题不可能（52）。",
+    "opts": {
+      "A": "没有最优解",
+      "B": "只有一个最优解",
+      "C": "只有2个最优解",
+      "D": "有无穷多个最优解"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2015上-053-ae496b29",
+    "qnum": 53,
+    "stem": "某工程的进度计划网络图如下，其中包含了①～⑩10个结点，结点之间的箭线表示作业及其进度方向，箭线旁标注了作业所需的时间（单位：周）。设起始结点①的时间为0，则结点⑤的最早时间和最迟时间分别为（53）周。\n\n![](https://s2.51cto.com/images/201803/052edb92688a194e259660be662e6f85e49e89.png)",
+    "opts": {
+      "A": "9,19",
+      "B": "9,18",
+      "C": "15,17",
+      "D": "15,16"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2015上-054-7771a584",
+    "qnum": 54,
+    "stem": "某石油管理公司拥有下图所示的输油管道网。其中有6个站点，标记为①～⑥。站点①是唯一的供油站。各站点之间的箭线表示输油管道和流向。箭线边上标注的数字表示该管道的最大流量（单位：百吨／小时）。据此可算出，从站点①到达站点⑥的最大流量为（54）百吨/小时。\n\n![](https://s2.51cto.com/images/201803/745505a58dd7a3d3591388dd06118fc7c386ff.png)",
+    "opts": {
+      "A": "14",
+      "B": "15",
+      "C": "16",
+      "D": "18"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2015上-055-b857ee1a",
+    "qnum": 55,
+    "stem": "某石油管理公司拥有下图所示的输油管道网。其中有6个站点，标记为①～⑥。站点①是唯一的供油站。各站点之间的箭线表示输油管道和流向。箭线边上标注的数字表示该管道的最大流量（单位：百吨／小时）。据此可算出，当管道（55）关闭维修时管道网仍可按该最大流量值向站点⑥供油。\n\n![](https://s2.51cto.com/images/20200306/1583504533190244.png)",
+    "opts": {
+      "A": "②→③",
+      "B": "②→⑤",
+      "C": "③→④",
+      "D": "⑤→④"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2015上-056-52b7893f",
+    "qnum": 56,
+    "stem": "某公司拟将5百万元资金投放下属A、B、C三个子公司（以百万元的倍数分配投资），各子公司获得部分投资后的收益如下表所示（以百万元为单位）。该公司投资的总收益至多为（56）百万元。\n\n![](https://s2.51cto.com/images/201803/355e8516874ce7dfa6e2332a6333f9aebe8d94.png)",
+    "opts": {
+      "A": "4.8",
+      "B": "5",
+      "C": "5.2",
+      "D": "5.5"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2015上-057-56de413a",
+    "qnum": 57,
+    "stem": "已知17个自然数（可有重复）的最小值是30，平均值是34，中位数是35，所有各数到38的距离之和比到35的距离之和多5，由此可以推断，这17个数中只有1个（57）。",
+    "opts": {
+      "A": "30",
+      "B": "34",
+      "C": "36",
+      "D": "37"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2015上-058-94ddadbb",
+    "qnum": 58,
+    "stem": "某团队希望在未来18天内串行选做若干个作业。供选各作业所需的实施时间（天数）、截止时间（最迟必须在指定的数天内完工）以及利润见下表：\n\n![](https://s2.51cto.com/images/201803/c7b174d172164b823fc3175a0089cf1d371d62.png)\n\n该团队只要能适当选择若干个作业依次实施，就能获得最大利润（58）万元。",
+    "opts": {
+      "A": "23",
+      "B": "24",
+      "C": "25",
+      "D": "26"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2015上-059-0ce31e63",
+    "qnum": 59,
+    "stem": "某博览会每天8:00开始让观众通过各入口处检票进场，8:00前已经有很多观众在排队等候。假设8:00后还有不少观众均匀地陆续到达，而每个入口处对每个人的检票速度都相同。根据以往经验，若开设8个入口，则需要60分钟才能让排队观众全部入场；若开设10个入口，则需要40分钟才能消除排队现象。为以尽量少的入口数确保20分钟后消除排队现象，博览会应在8:00和8:20开设的入口数分别为（ ）",
+    "opts": {
+      "A": "12,2",
+      "B": "14,4",
+      "C": "16,4",
+      "D": "18,6"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2015上-060-f128882b",
+    "qnum": 60,
+    "stem": "计算机系统性能评估中，（60）考虑了各类指令在程序中所占的比例。",
+    "opts": {
+      "A": "时钟频率法",
+      "B": "等效指令速度法",
+      "C": "综合理论性能法",
+      "D": "基准程序法"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2015上-061-2b634a9d",
+    "qnum": 61,
+    "stem": "计算机系统性能评估中，（61）考虑了诸如I/O结构、操作系统、编译程序的效率对系统性能的影响，可以较为准确评估计算机系统的实际性能。",
+    "opts": {
+      "A": "时钟频率法",
+      "B": "等效指令速度法",
+      "C": "综合理论性能法",
+      "D": "基准程序法"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2015上-062-7fd5d52a",
+    "qnum": 62,
+    "stem": "MPEG-1视频编码标准中定义了（62）种不同类型的视频帧。",
+    "opts": {
+      "A": "2",
+      "B": "3",
+      "C": "4",
+      "D": "5"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2015上-063-155882bd",
+    "qnum": 63,
+    "stem": "MPEG-1视频编码标准中没有使用帧间编码能够直接作为索引点的是（63）。",
+    "opts": {
+      "A": "I帧",
+      "B": "P帧",
+      "C": "B帧",
+      "D": "S帧"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2015上-064-151af9b5",
+    "qnum": 64,
+    "stem": "网络管理系统中故障管理的目标是（64）。",
+    "opts": {
+      "A": "自动排除故障",
+      "B": "优化网络性能",
+      "C": "提升网络安全",
+      "D": "自动监测故障"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2015上-065-4ee3a0ca",
+    "qnum": 65,
+    "stem": "使用netstat-o命令可（65）。",
+    "opts": {
+      "A": "显示所测试网络的IP、ICMP、TCP、UDP协议的统计信息",
+      "B": "显示以太网统计信息",
+      "C": "以数字格式显示所有连接、地址及端口",
+      "D": "显示每个连接的进程ID"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2015上-066-5ec0e841",
+    "qnum": 66,
+    "stem": "所列出的4个IPv6地址中，无效的地址是（66）。",
+    "opts": {
+      "A": "::192:168:0:1",
+      "B": ":2001:3452:4955:2367::",
+      "C": "2002:c0a8:101::43",
+      "D": "2003:dead:beef:4dad:23:34:bb:101"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2015上-067-86144bba",
+    "qnum": 67,
+    "stem": "IPv6站点通过IPv4网络通信需要使用隧道技术，常用的3种自动隧道技术是（67）。",
+    "opts": {
+      "A": "VPN隧道、PPTP隧道和IPsec隧道",
+      "B": "6to4隧道、6over4隧道和ISATAP隧道",
+      "C": "VPN隧道、PPP隧道和ISATAP隧道",
+      "D": "IPsec隧道、6over4隧道和PPTP隧道"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2015上-068-d00819e2",
+    "qnum": 68,
+    "stem": "如果在网络的入口处通过设置ACL封锁了TCP和UDP端口21、23和25，则能够访问该网络的应用是（68）。",
+    "opts": {
+      "A": "FTP",
+      "B": "DNS",
+      "C": "SMTP",
+      "D": "Telnet"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2015上-069-06686390",
+    "qnum": 69,
+    "stem": "4G移动通信标准TD-LTE与LTE FDD的区别是（69）。",
+    "opts": {
+      "A": "频率的利用方式不同",
+      "B": "划分上下行信道的方式不同",
+      "C": "采用的调制方式有区别",
+      "D": "拥有专利技术的厂家不同"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2015上-070-72b594d9",
+    "qnum": 70,
+    "stem": "如果发现网络的数据传输很慢，服务质量也达不到要求，应该首先检查（70）的工作情况。",
+    "opts": {
+      "A": "物理层",
+      "B": "会话层",
+      "C": "网络层",
+      "D": "传输层"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2015上-071-6de04eb7",
+    "qnum": 71,
+    "stem": "A requirement is simply a statement of what the system must do or what characteristics it needs to have. Requirements evolve from broad statements of overall （71）from the system to detailed statements of the business capabilities that a system should support to detailed technical statements of the way in which the capabilities will be implemented in the new system. （ ）focus on describing how to create the software product that will be produced from the project. Nonfunctional requirements are pri",
+    "opts": {
+      "A": "business needs",
+      "B": "operation processes",
+      "C": "technical specification",
+      "D": "function components"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2015上-072-7bfa49a7",
+    "qnum": 72,
+    "stem": "A requirement is simply a statement of what the system must do or what characteristics it needs to have. Requirements evolve from broad statements of overall （ 71）from the system to detailed statements of the business capabilities that a system should support to detailed technical statements of the way in which the capabilities will be implemented in the new system. （72）focus on describing how to create the software product that will be produced from the project. Nonfunctional requirements are p",
+    "opts": {
+      "A": "User requirements",
+      "B": "Business requirements",
+      "C": "Function requirements",
+      "D": "System requirements"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2015上-073-01f7842b",
+    "qnum": 73,
+    "stem": "A requirement is simply a statement of what the system must do or what characteristics it needs to have. Requirements evolve from broad statements of overall （71）from the system to detailed statements of the business capabilities that a system should support to detailed technical statements of the way in which the capabilities will be implemented in the new system. （72）focus on describing how to create the software product that will be produced from the project Nonfunctional requirements are pri",
+    "opts": {
+      "A": "a functional requirement",
+      "B": "a technical requirement",
+      "C": "an operational requirement",
+      "D": "a service requirement"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2015上-074-86d1c918",
+    "qnum": 74,
+    "stem": "A requirement is simply a statement of what the system must do or what characteristics it needs to have. Requirements evolve from broad statements of overall （71）from the system to detailed statements of the business capabilities that a system should support to detailed technical statements of the way in which the capabilities will be implemented in the new system. （72）focus on describing how to create the software product that will be produced from the project. Nonfunctional requirements are pr",
+    "opts": {
+      "A": "security requirement",
+      "B": "performance requirement",
+      "C": "technical requirement",
+      "D": "information requirement"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2015上-075-f83aaf16",
+    "qnum": 75,
+    "stem": "A requirement is simply a statement of what the system must do or what characteristics it needs to have. Requirements evolve from broad statements of overall （71）from the system to detailed statements of the business capabilities that a system should support to detailed technical statements of the way in which the capabilities will be implemented in the new system. （72）focus on describing how to create the software product that will be produced from the project. Nonfunctional requirements are pr",
+    "opts": {
+      "A": "System constraint",
+      "B": "Cultural requirement",
+      "C": "Control requirement",
+      "D": "Security requirement"
+    },
+    "ans": "D"
+  }
+]

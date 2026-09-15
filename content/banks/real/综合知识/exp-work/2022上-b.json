@@ -1,0 +1,446 @@
+[
+  {
+    "id": "ZT-2022上-039-6796292b",
+    "qnum": 39,
+    "stem": "【空（2）】在软件逆向工程的相关概念中，（1）是指借助工具从已有程序中抽象出有关数据设计、总体结构设计和过程设计等方面的信息；（2）指不仅从现有系统中恢复设计信息，而且使用该信息去改变或重构现有系统，以改善其整体质量。",
+    "opts": {
+      "A": "再工程",
+      "B": "需求工程",
+      "C": "正向工程",
+      "D": "逆向工程"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2022上-040-296dbca1",
+    "qnum": 40,
+    "stem": "在数据库设计的需求分析、概念结构设计、逻辑结构设计和物理结构设计的四个阶段中，基本E-R图是（40）。",
+    "opts": {
+      "A": "需求分析阶段形成的文档，并作为概念结构设计阶段的设计依据",
+      "B": "逻辑结构设计阶段形成的文档，并作为概念结构设计阶段的设计依据",
+      "C": "概念结构设计阶段形成的文档，并作为逻辑结构设计阶段的设计依据",
+      "D": "概念结构设计阶段形成的文档，并作为物理设计阶段的设计依据"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2022上-041-e07ea5aa",
+    "qnum": 41,
+    "stem": "某高校信息系统采用分布式数据库系统，该系统中\"当某一场地故障时，系统可以使用其它场地上的副本而不至于使整个系统瘫痪\"和\"数据在不同场地上的存储\"分别称为分布式数据库的（41）。",
+    "opts": {
+      "A": "共享性和分布性",
+      "B": "自治性和分布性",
+      "C": "自治性和可用性",
+      "D": "可用性和分布性"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2022上-042-04f01d6d",
+    "qnum": 42,
+    "stem": "给定关系R（A，B，C，D，E）和关系S（D，E，F，G），对其进行自然连接运算R ▷◁S后结果集的属性列为（42）。",
+    "opts": {
+      "A": "R.A,R.B,R.C,R.D,R.E,S.D,S.E",
+      "B": "R.A,R.B,RC,R.D,R.E,S.F,S.G",
+      "C": "R.A,R.B,R.C,R.D,R.E,S.E,S.F",
+      "D": "R.A,R.B,R.C,R.D,R.E,S.D,S.E,S.F,S.G"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2022上-043-0430d8ab",
+    "qnum": 43,
+    "stem": "【空（1）】给定关系模式R（U,F），U={A₁,A₂,A₃,A4}， F={A₁→A₂A₃, A₂A₃→A4}，那么在关系R中（1）。以下说法错误的是（2）。",
+    "opts": {
+      "A": "有1个候选关键字A₁",
+      "B": "有1个候选关键字A₂A₃",
+      "C": "有2个候选关键字A₂和A₃",
+      "D": "有2个候选关键字A₁和A₂A₃"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2022上-044-a204edb5",
+    "qnum": 44,
+    "stem": "【空（2）】给定关系模式R（U,F），U={A₁,A₂,A₃,A4}， F={A₁→A₂A₃, A₂A₃→A4}，那么在关系R中（1）。以下说法错误的是（2）。",
+    "opts": {
+      "A": "根据F中\"A₁→A₂A₃\"，可以得出\"A₁→A₂\"",
+      "B": "根据F中\"A₁→A₂A₃\"，可以得出\"A₁→A₃\"",
+      "C": "根据F中\"A₂A₃→A4\"，可以得出\"A₂→A4，A₃→A4\"",
+      "D": "根据F中\"A₁→A₂A₃, A₂A₃→A4\"，可以得出\"A₁→A4\""
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2022上-045-54d9b3b4",
+    "qnum": 45,
+    "stem": "在数据库的安全机制中，通过提供 （45） 供第三方开发人员调用进行数据更新，从而保证数据库的关系模式不被第三方所获取。",
+    "opts": {
+      "A": "索引",
+      "B": "视图",
+      "C": "触发器",
+      "D": "存储过程"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2022上-046-2c9a7426",
+    "qnum": 46,
+    "stem": "某系统子中有5个并发进程竞争资源R，假设每个进程都需要3个R，那么最少需要有（46）个R，才能保证系统不会发生死锁。",
+    "opts": {
+      "A": "10",
+      "B": "11",
+      "C": "12",
+      "D": "13"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2022上-047-6ed561c0",
+    "qnum": 47,
+    "stem": "【空（1）】某文件管理系统在磁盘上建立了位示图（bitmap），记录磁盘的使用情况。若磁盘上物理块的编号依次为：0、1、2、…；系统中的字长为32位，字的编号依次为：0、1、2、…，字中的一位对应文件存储器上的一个物理块，取值0表示该物理块空闲，取值1表示该物理块占用，如图1所示。\n\n![](https://s2.51cto.com/images/20240425/1714034675951504.png)\n假设操作系统将4096号物理块分配给某文件，那么该物理块的使用情况在位示图中编号为 （1） 的字中描述；系统应该将 （2） 。",
+    "opts": {
+      "A": "126",
+      "B": "127",
+      "C": "128",
+      "D": "129"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2022上-048-3208b0e7",
+    "qnum": 48,
+    "stem": "【空（2）】某文件管理系统在磁盘上建立了位示图（bitmap），记录磁盘的使用情况。若磁盘上物理块的编号依次为：0、1、2、…；系统中的字长为32位，字的编号依次为：0、1、2、…，字中的一位对应文件存储器上的一个物理块，取值0表示该物理块空闲，取值1表示该物理块占用，如图1所示。\n\n![](https://s2.51cto.com/images/20240425/1714034675951504.png)\n假设操作系统将4096号物理块分配给某文件，那么该物理块的使用情况在位示图中编号为 （1） 的字中描述；系统应该将 （2） 。",
+    "opts": {
+      "A": "该字的位号32的位置“1”",
+      "B": "该字的位号0的位置“1”",
+      "C": "该字的位号32的位置“0”",
+      "D": "该字的位号0的位置“0”"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2022上-049-390e3f62",
+    "qnum": 49,
+    "stem": "【空（1）】进程P1、P2、P3、P4、P5和P6的前趋图如下所示:\n\n![](https://s2.51cto.com/images/20240425/1714034441580170.png)\n\n若用PV操作控制进程Pl、P2、P3、P4、P5和P6并发执行的过程，则需要设置8个信号量S1、S2、S3、S4、S5、S6、S7和S8，且信号量S1~S8的初值都等于零。如下的进程执行图中，a和b处应分别填写 （1） ；c和d处应分别填写 （2） ，e和f处应分别填写 （3） 。\n\n![](https://s2.51cto.com/images/20240425/1714034474560581.png)",
+    "opts": {
+      "A": "P（S1）和V（S2）V（S3）",
+      "B": "V（S1）和P（S2）V（S3）",
+      "C": "P（S1）和P（S2）V（S3）",
+      "D": "V（S1）和V（S2）V（S3）"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2022上-050-f3b0f502",
+    "qnum": 50,
+    "stem": "【空（2）】进程P1、P2、P3、P4、P5和P6的前趋图如下所示:\n\n![](https://s2.51cto.com/images/20240425/1714034441580170.png)\n\n若用PV操作控制进程Pl、P2、P3、P4、P5和P6并发执行的过程，则需要设置8个信号量S1、S2、S3、S4、S5、S6、S7和S8，且信号量S1~S8的初值都等于零。如下的进程执行图中，a和b处应分别填写 （1） ；c和d处应分别填写 （2） ，e和f处应分别填写 （3） 。\n\n![](https://s2.51cto.com/images/20240425/1714034474560581.png)",
+    "opts": {
+      "A": "V（S4）和P（S3）P（S4）",
+      "B": "P（S4）和P（S3）P（S4）",
+      "C": "P（S3）和V（S4）V（S5）",
+      "D": "V（S4）V（S5）和P（S3）P（S4）"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2022上-051-0437774b",
+    "qnum": 51,
+    "stem": "【空（3）】进程P1、P2、P3、P4、P5和P6的前趋图如下所示:\n\n![](https://s2.51cto.com/images/20240425/1714034441580170.png)\n\n若用PV操作控制进程Pl、P2、P3、P4、P5和P6并发执行的过程，则需要设置8个信号量S1、S2、S3、S4、S5、S6、S7和S8，且信号量S1~S8的初值都等于零。如下的进程执行图中，a和b处应分别填写 （1） ；c和d处应分别填写 （2） ，e和f处应分别填写 （3） 。\n\n![](https://s2.51cto.com/images/20240425/1714034474560581.png)",
+    "opts": {
+      "A": "P(S6)和P(S6)V(S7)",
+      "B": "V(S6)和P(S6)P(S7)",
+      "C": "V(S7)和P(S7)P(S8)",
+      "D": "V(S8)和P(S7)P(S8)"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2022上-052-f9170622",
+    "qnum": 52,
+    "stem": "各种线性规划模型都可以将其标准化。线性规划模型标准形式的特点不包括（52）。",
+    "opts": {
+      "A": "目标函数达到最大化（或最小化）",
+      "B": "约束条件都是线性等式",
+      "C": "约束条件中的常数系数均为非负",
+      "D": "所有的决策变量均为非负"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2022上-053-bf881d46",
+    "qnum": 53,
+    "stem": "【空（1）】某项目有8个作业A~H,每个作业的紧前作业、所需天数和所需人数见下表。由于整个项目团队总共只有10人，各个作业都必须连续进行，中途不能停止，因此需要适当安排施工方案，使该项目能尽快在（1）内完工。在该方案中，作业A应安排在（2）内进行。\n\n![](https://s2.51cto.com/images/20220528/1653725639215220.png)",
+    "opts": {
+      "A": "10天",
+      "B": "11天",
+      "C": "12天",
+      "D": "13天"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2022上-054-c4323e3e",
+    "qnum": 54,
+    "stem": "【空（2）】某项目有8个作业A~H,每个作业的紧前作业、所需天数和所需人数见下表。由于整个项目团队总共只有10人，各个作业都必须连续进行，中途不能停止，因此需要适当安排施工方案，使该项目能尽快在（1）内完工。在该方案中，作业A应安排在（2）内进行。\n\n![](https://s2.51cto.com/images/20220528/1653725639215220.png)",
+    "opts": {
+      "A": "第1~5天",
+      "B": "第3~7天",
+      "C": "第5~9天",
+      "D": "第8~12天"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2022上-055-a52da783",
+    "qnum": 55,
+    "stem": "【空（1）】某乡有7个小山村A〜G，村与村之间原有小路可加宽修建公路的线路如下图所示(路边的数字表示路长的公里数)。为实现村村通公路，修建公路总长至少 （1） 公里。若在 （2） 村新建一所中学，则可以使人们从离它最远的村到该校所走的优化路程最短。\n\n![](https://s2.51cto.com/images/20220528/1653725720580771.png)",
+    "opts": {
+      "A": "13.8",
+      "B": "14.3",
+      "C": "14.8",
+      "D": "15.3"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2022上-056-6680f1dc",
+    "qnum": 56,
+    "stem": "【空（2）】某乡有7个小山村A〜G，村与村之间原有小路可加宽修建公路的线路如下图所示(路边的数字表示路长的公里数)。为实现村村通公路，修建公路总长至少 （1） 公里。若在 （2） 村新建一所中学，则可以使人们从离它最远的村到该校所走的优化路程最短。\n\n![](https://s2.51cto.com/images/20220528/1653725720580771.png)",
+    "opts": {
+      "A": "A",
+      "B": "C",
+      "C": "D",
+      "D": "E"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2022上-057-4a059b9c",
+    "qnum": 57,
+    "stem": "某地天然气输送管线网络图如下，每段管线旁边数字表示输气能力（单位：万立方米/小时）。根据该图，从源s到目的地T的最大输气能力为（57）位：万立方米/小时。\n\n![](https://s2.51cto.com/images/20220528/1653725796257985.png)",
+    "opts": {
+      "A": "4",
+      "B": "8",
+      "C": "9",
+      "D": "10"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2022上-058-f52ee854",
+    "qnum": 58,
+    "stem": "根据历史数据和理论推导可知，某应用中，随机变量s的分布密度函数为f(x)=3x^2，(0<x<1)。这意味着，当△x充分小时，随机变量s落在区间(x,x+△x)内的概率约等于f(x)△X。为此，开发该应用的仿真系统时，可用 （58） 来模拟该随机变量，其中，r1,r2,r3,...为计算机逐个产生的、均匀分布在(0,1)区间内的互相独立的伪随机数。",
+    "opts": {
+      "A": "max（r1,r2,r3）",
+      "B": "min（r1,r2,r3）",
+      "C": "r1*r2*r3",
+      "D": "（r1+r2+r3）/3"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2022上-059-d3f9a7e3",
+    "qnum": 59,
+    "stem": "【空（1）】计算机系统性能评估中，（59请作答此空）通常采用加法指令的运算速度来衡量计算机的速度。（1）首先计算出处理部件每个计算单元的有效计算率，再按不同字长加以调整，得出该计算单元的理论性能，所有组成该处理部件的计算单元的理论性能之和即为最终的计算机性能。",
+    "opts": {
+      "A": "指令执行速度法",
+      "B": "等效指令速度法",
+      "C": "综合理论性能法",
+      "D": "基准程序法"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2022上-060-e05e02b7",
+    "qnum": 60,
+    "stem": "【空（2）】计算机系统性能评估中，（59请作答此空）通常采用加法指令的运算速度来衡量计算机的速度。（1）首先计算出处理部件每个计算单元的有效计算率，再按不同字长加以调整，得出该计算单元的理论性能，所有组成该处理部件的计算单元的理论性能之和即为最终的计算机性能。",
+    "opts": {
+      "A": "指令执行速度法",
+      "B": "等效指令速度法",
+      "C": "综合理论性能法",
+      "D": "基准程序法"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2022上-061-c72d8800",
+    "qnum": 61,
+    "stem": "【空（1）】信息系统的安全是个复杂的综合体，涉及系统的方方面面， 其中（1）是指保护计算机设备、设施和其他媒体免遭地震、水灾、火灾、有害气体和其他环境事故（例如，电磁辐射等）破坏的措施和过程。（2）是计算机信息系统安全的重要环节，其实质是保证系统的正常运行，不因偶然的或恶意的侵扰而遭到破坏，使系统可靠、连续地运行，服务不被中断。",
+    "opts": {
+      "A": "信息安全",
+      "B": "人员安全",
+      "C": "运行安全",
+      "D": "实体安全"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2022上-062-34d365d5",
+    "qnum": 62,
+    "stem": "【空（2）】信息系统的安全是个复杂的综合体，涉及系统的方方面面， 其中（1）是指保护计算机设备、设施和其他媒体免遭地震、水灾、火灾、有害气体和其他环境事故（例如，电磁辐射等）破坏的措施和过程。（2）是计算机信息系统安全的重要环节，其实质是保证系统的正常运行，不因偶然的或恶意的侵扰而遭到破坏，使系统可靠、连续地运行，服务不被中断。",
+    "opts": {
+      "A": "信息安全",
+      "B": "人员安全",
+      "C": "运行安全",
+      "D": "实体安全"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2022上-063-ce992d50",
+    "qnum": 63,
+    "stem": "【空（1）】遗留系统 （Legacy System）是指任何基本上不能进行修改和演化以满足新的业务需求变化的信息系统。针对遗留系统的再利用问题，通常从技术水平和业务价值两个维度进行考量，对于高水平、低价值的遗留系统，通常采用 （1）策略；对于高水平、高价值的遗留系统，通常采用（2）策略。",
+    "opts": {
+      "A": "淘汰",
+      "B": "继承",
+      "C": "改造",
+      "D": "集成"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2022上-064-4ed65a57",
+    "qnum": 64,
+    "stem": "【空（2）】遗留系统 （Legacy System）是指任何基本上不能进行修改和演化以满足新的业务需求变化的信息系统。针对遗留系统的再利用问题，通常从技术水平和业务价值两个维度进行考量，对于高水平、低价值的遗留系统，通常采用 （1）策略；对于高水平、高价值的遗留系统，通常采用（2）策略。",
+    "opts": {
+      "A": "淘汰",
+      "B": "继承",
+      "C": "改造",
+      "D": "集成"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2022上-065-6905c196",
+    "qnum": 65,
+    "stem": "下列协议中， 可以用于文件安全传输的是 （65）。",
+    "opts": {
+      "A": "FTP",
+      "B": "SFTP",
+      "C": "TFTP",
+      "D": "ICMP"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2022上-066-5e1a5629",
+    "qnum": 66,
+    "stem": "DNS 协议的功能是（66）。",
+    "opts": {
+      "A": "将域名解析为IP地址",
+      "B": "将MAC地址解析为IP地址",
+      "C": "将P地址解析为MAC地址。",
+      "D": "将主机名解析为IP地址"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2022上-067-2061f540",
+    "qnum": 67,
+    "stem": "下列协议中，不属于电子邮件收发协议的是（67）。",
+    "opts": {
+      "A": "SMTP",
+      "B": "POP",
+      "C": "IMAP",
+      "D": "FTP"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2022上-068-7fd69242",
+    "qnum": 68,
+    "stem": "某信息系统不断受到SQL注入攻击，应部署（68）进行安全防护，实时阻断攻击行为。",
+    "opts": {
+      "A": "防火墙",
+      "B": "WEB 防火墙",
+      "C": "入侵检测系统",
+      "D": "堡垒机"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2022上-069-44ccfe76",
+    "qnum": 69,
+    "stem": "IP地址10.10.33.66/16的网络地址是 （69） 。",
+    "opts": {
+      "A": "10.10.0.0",
+      "B": "10.0.0.0",
+      "C": "10.10.33.0",
+      "D": "10.10.33.1"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2022上-070-a44530d0",
+    "qnum": 70,
+    "stem": "IP报文首部不包含（70）",
+    "opts": {
+      "A": "版本号",
+      "B": "源目的MAC",
+      "C": "生存时间",
+      "D": "源/目的IP"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2022上-071-e7bd7fc5",
+    "qnum": 71,
+    "stem": "【空（1）】Requirements validation is the process of checking that requirements actually define the system that the customer really wants. It overlaps with analysis as it is concerned with finding problems with the requirements. Requirements validation is important because errors in a requirements document can lead to extensive rework costs when these problems are discovered during development or after the system is in service. The cost of fixing a requirements problem by making a system change is us",
+    "opts": {
+      "A": "Security checks",
+      "B": "Validity checks",
+      "C": "Consistency checks",
+      "D": "Completeness checks"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2022上-072-b05b03c9",
+    "qnum": 72,
+    "stem": "【空（2）】Requirements validation is the process of checking that requirements actually define the system that the customer really wants. It overlaps with analysis as it is concerned with finding problems with the requirements. Requirements validation is important because errors in a requirements document can lead to extensive rework costs when these problems are discovered during development or after the system is in service. The cost of fixing a requirements problem by making a system change is us",
+    "opts": {
+      "A": "Security checks",
+      "B": "Safety checks",
+      "C": "Consistency checks",
+      "D": "Usability checks"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2022上-073-d1de1030",
+    "qnum": 73,
+    "stem": "【空（3）】Requirements validation is the process of checking that requirements actually define the system that the customer really wants. It overlaps with analysis as it is concerned with finding problems with the requirements. Requirements validation is important because errors in a requirements document can lead to extensive rework costs when these problems are discovered during development or after the system is in service. The cost of fixing a requirements problem by making a system change is us",
+    "opts": {
+      "A": "Consistency checks",
+      "B": "Usability checks",
+      "C": "Operational checks",
+      "D": "Completeness checks"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2022上-074-6876148e",
+    "qnum": 74,
+    "stem": "【空（4）】Requirements validation is the process of checking that requirements actually define the system that the customer really wants. It overlaps with analysis as it is concerned with finding problems with the requirements. Requirements validation is important because errors in a requirements document can lead to extensive rework costs when these problems are discovered during development or after the system is in service. The cost of fixing a requirements problem by making a system change is us",
+    "opts": {
+      "A": "tools",
+      "B": "tests",
+      "C": "models",
+      "D": "budget and schedule"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2022上-075-3b56d9e8",
+    "qnum": 75,
+    "stem": "【空（5）】Requirements validation is the process of checking that requirements actually define the system that the customer really wants. It overlaps with analysis as it is concerned with finding problems with the requirements. Requirements validation is important because errors in a requirements document can lead to extensive rework costs when these problems are discovered during development or after the system is in service. The cost of fixing a requirements problem by making a system change is us",
+    "opts": {
+      "A": "requirement",
+      "B": "model",
+      "C": "design",
+      "D": "implementation"
+    },
+    "ans": "A"
+  }
+]

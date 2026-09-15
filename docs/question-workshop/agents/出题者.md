@@ -16,7 +16,7 @@ description: >-
 
 1. `docs/question-workshop/reports/出题细则报告.md`（若缺失，先提示运行分析师 Agent；正式稿见 `docs/question-workshop/委员会/正式发布/`）
 2. 相关章节精炼笔记（`content/kb/`）
-3. 可选对照：`content/banks/practice/all.jsonl`、`content/banks/real/上午真题.jsonl`（只学风格，不抄原文）
+3. 可选对照：`content/banks/practice/all.jsonl`、`content/banks/real/综合知识/all.jsonl`（只学风格，不抄原文）
 
 ## 出题要求
 

@@ -1,0 +1,446 @@
+[
+  {
+    "id": "ZT-2026上-039-3f1a9796",
+    "qnum": 39,
+    "stem": "在软件开发模型中，（本题） 强调将软件功能分解为多个增量模块，逐步开发并交付，每个增量都包含完整的开发流程；（ ） 打破传统阶段划分，允许分析、设计、编码等活动迭代重叠进行，适用于面向对象开发；（ ） 以用户需求动态变化为核心，通过快速响应变化和持续交付价值提升开发效率。",
+    "opts": {
+      "A": "增量模型",
+      "B": "瀑布模型",
+      "C": "原型模型",
+      "D": "变换模型"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2026上-040-126b1b12",
+    "qnum": 40,
+    "stem": "在软件开发模型中，（ ） 强调将软件功能分解为多个增量模块，逐步开发并交付，每个增量都包含完整的开发流程；（本题） 打破传统阶段划分，允许分析、设计、编码等活动迭代重叠进行，适用于面向对象开发；（ ） 以用户需求动态变化为核心，通过快速响应变化和持续交付价值提升开发效率。",
+    "opts": {
+      "A": "螺旋模型",
+      "B": "喷泉模型",
+      "C": "增量模型",
+      "D": "瀑布模型"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2026上-041-3f79b58a",
+    "qnum": 41,
+    "stem": "在软件开发模型中，（ ） 强调将软件功能分解为多个增量模块，逐步开发并交付，每个增量都包含完整的开发流程；（ ） 打破传统阶段划分，允许分析、设计、编码等活动迭代重叠进行，适用于面向对象开发；（本题） 以用户需求动态变化为核心，通过快速响应变化和持续交付价值提升开发效率。",
+    "opts": {
+      "A": "原型模型",
+      "B": "变换模型",
+      "C": "敏捷模型",
+      "D": "喷泉模型"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2026上-042-dcb42582",
+    "qnum": 42,
+    "stem": "数据库三级模式中，（ ）是用户看到的数据视图，（ ）是全局逻辑结构描述。",
+    "opts": {
+      "A": "外模式，内模式",
+      "B": "模式，内模式",
+      "C": "外模式，模式",
+      "D": "模式，外模式"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2026上-043-5751f871",
+    "qnum": 43,
+    "stem": "以下关于数字签名流程及功能的说法，正确的是（ ）。\n\n![](https://s2.51cto.com/images/20260703/1783062247661840.png)",
+    "opts": {
+      "A": "原文经过 SHA - 1 处理后，直接用私钥加密得到数字签名",
+      "B": "数字签名验证时，是用公钥解密后与原文直接对比",
+      "C": "数字签名主要实现身份认证、不可否认性和数据完整性功能",
+      "D": "私钥加密后的内容，只能用私钥解密来验证"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2026上-044-b6a191bf",
+    "qnum": 44,
+    "stem": "在软件能力成熟度模型（CMM）中，（本题）阶段软件过程无秩序、混乱，依赖个别努力；（ ）阶段过程可度量、可量化，有质量目标、数据采集、统计管理 。",
+    "opts": {
+      "A": "初始级",
+      "B": "可重复级",
+      "C": "已定义级",
+      "D": "已管理级"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2026上-045-fd3bb8ca",
+    "qnum": 45,
+    "stem": "在软件能力成熟度模型（CMM）中，（ ）阶段软件过程无秩序、混乱，依赖个别努力；（本题）阶段过程可度量、可量化，有质量目标、数据采集、统计管理 。",
+    "opts": {
+      "A": "初始级",
+      "B": "可重复级",
+      "C": "已定义级",
+      "D": "已管理级"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2026上-046-e348a3d9",
+    "qnum": 46,
+    "stem": "在 UML 图中，（本题）用于描述一组用例、参与者及它们之间的关系；（ ）用于描述对象在不同状态下的转换过程，以及触发状态转换的事件。",
+    "opts": {
+      "A": "用例图",
+      "B": "类图",
+      "C": "时序图",
+      "D": "状态图"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2026上-047-50aa659c",
+    "qnum": 47,
+    "stem": "在 UML 图中，（ ）用于描述一组用例、参与者及它们之间的关系；（本题）用于描述对象在不同状态下的转换过程，以及触发状态转换的事件。",
+    "opts": {
+      "A": "活动图",
+      "B": "部署图",
+      "C": "状态图",
+      "D": "协作图"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2026上-048-baf6ec27",
+    "qnum": 48,
+    "stem": "新系统与旧系统功能差异大，且无兼容需求，应采用（本题）转换策略；某企业有一遗留系统，技术含量低但商业价值高，当前业务高度依赖它，适合采用的演化策略及对应内容是（ ）。",
+    "opts": {
+      "A": "并行转换",
+      "B": "直接置换",
+      "C": "分段转换",
+      "D": "增量转换"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2026上-049-2ad8283e",
+    "qnum": 49,
+    "stem": "新系统与旧系统功能差异大，且无兼容需求，应采用（ ）转换策略；某企业有一遗留系统，技术含量低但商业价值高，当前业务高度依赖它，适合采用的演化策略及对应内容是（本题）。",
+    "opts": {
+      "A": "淘汰策略，避免完全废弃，借鉴功能设计新系统",
+      "B": "继承策略，新系统兼容功能与数据模型，并行运行后切换",
+      "C": "改造策略，增强功能、改造数据模型",
+      "D": "集成策略，集成多系统消除信息孤岛"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2026上-050-af52a66b",
+    "qnum": 50,
+    "stem": "关于黑盒测试，下列说法正确的是（ ）。",
+    "opts": {
+      "A": "黑盒测试方法不包括等价类划分法",
+      "B": "对 “10 < x < 30” 进行边界值分析时，不能选取 11 作为测试数据",
+      "C": "因果图设计测试用例时，无需考虑输入条件的组合情况",
+      "D": "因果图需将因果关系转换为鱼刺图来设计测试用例"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2026上-051-dbc63dba",
+    "qnum": 51,
+    "stem": "在 UML 的顺序图和协作图中，顺序图可（本题），其消息（ ）；协作图用于（ ）。",
+    "opts": {
+      "A": "展示对象关系和协作，不强调时间",
+      "B": "展示用例行为顺序与对象交互，强调时间顺序",
+      "C": "仅显示对象链接，无交互体现",
+      "D": "侧重单个对象生命周期，忽略交互"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2026上-052-f9a26f91",
+    "qnum": 52,
+    "stem": "在 UML 的顺序图和协作图中，顺序图可（ ），其消息（本题）；协作图用于（ ）。",
+    "opts": {
+      "A": "按时间顺序从上到下排列",
+      "B": "用编号显示发送顺序",
+      "C": "随机排列，无顺序要求",
+      "D": "仅展示接收消息，不体现发送"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2026上-053-425c0a29",
+    "qnum": 53,
+    "stem": "在 UML 的顺序图和协作图中，顺序图可（ ），其消息（ ）；协作图用于（本题）。",
+    "opts": {
+      "A": "展示对象间关系和交互，强调链接协作",
+      "B": "专注于时间顺序，忽略对象关系",
+      "C": "只呈现对象实例，无协作内容",
+      "D": "侧重修改对象属性，不关注交互"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2026上-054-0c155657",
+    "qnum": 54,
+    "stem": "下列属于 “运行安全” 分类下的内容是（ ）。",
+    "opts": {
+      "A": "环境安全",
+      "B": "审计跟踪",
+      "C": "数据加密",
+      "D": "安全意识"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2026上-055-c847dbe4",
+    "qnum": 55,
+    "stem": "分布式数据库的特点不包括（ ）。",
+    "opts": {
+      "A": "数据分布透明性",
+      "B": "集中与自治结合的控制",
+      "C": "无数据冗余",
+      "D": "全局一致性保障"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2026上-056-0a8a0f00",
+    "qnum": 56,
+    "stem": "软件著作权的保护期从（本题）起算，（ ）的保护期不受限制。",
+    "opts": {
+      "A": "登记之日",
+      "B": "开发完成之日",
+      "C": "发表之日",
+      "D": "申请之日"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2026上-057-a9365412",
+    "qnum": 57,
+    "stem": "软件著作权的保护期从（ ）起算，（本题）的保护期不受限制。",
+    "opts": {
+      "A": "复制权",
+      "B": "修改权",
+      "C": "发行权",
+      "D": "出租权"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2026上-058-3eb1afab",
+    "qnum": 58,
+    "stem": "在银行转账场景中：A 账户有 100 元，B 账户有 100 元，总额 200 元。A 向 B 转账 50 元。若系统只执行了 “A 扣 50 元”，但未执行 “B 加 50 元” 就异常中断，导致总额变为 150 元。此时主要违反了数据库事务的哪一特性（ ）。",
+    "opts": {
+      "A": "原子性",
+      "B": "一致性",
+      "C": "隔离性",
+      "D": "持久性"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2026上-059-2c1f8c6a",
+    "qnum": 59,
+    "stem": "（ ）架构风格的特点是共享数据区，谁感兴趣谁处理；管道 - 过滤器风格的核心是（ ）。",
+    "opts": {
+      "A": "黑板风格，数据流式处理",
+      "B": "过程调用，数据流式处理",
+      "C": "共享内存，数据流式处理",
+      "D": "消息传递，共享内存"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2026上-060-eb34718b",
+    "qnum": 60,
+    "stem": "某工厂生产 A、B 两种产品，A 需 4 台时设备和 3kg 材料，B 需 2 台时设备和 1kg 材料，设备限额 24 台时，材料限额 15kg，A 利润 3 万元 / 件，B 利润 5 万元 / 件，最大利润为（ ）万元。",
+    "opts": {
+      "A": "27",
+      "B": "30",
+      "C": "33",
+      "D": "39"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2026上-061-9a6a4080",
+    "qnum": 61,
+    "stem": "某商店出售的灯泡由甲、乙、丙三家工厂生产，产品比例为：甲：70%，乙：20%，丙：10%。三家工厂的次品率分别为：甲：1%，乙：3%，丙：4%。\n从中随机购买一只灯泡，发现是次品，则这只灯泡最可能是（ ）工厂生产的。",
+    "opts": {
+      "A": "甲厂",
+      "B": "乙厂",
+      "C": "丙厂",
+      "D": "无法判断"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2026上-062-46fafedf",
+    "qnum": 62,
+    "stem": "某地区有 5 个村庄（分别记为 A、B、C、D、E），各村庄之间修建道路的建材用量（单位：吨）对应道路权重，且所有村庄目前未连通。若采用最小生成树（MST）方案规划道路修建，核心目标是通过最少的建材连接所有村庄，下列关于该方案的说法正确的是（ ）。",
+    "opts": {
+      "A": "最终修建的道路总建材用量等于所有村庄间道路建材用量的总和",
+      "B": "若某条道路的建材用量是所有道路中最大的，则该道路一定不会被纳入最小生成树",
+      "C": "最终修建的道路数量与村庄数量相等，即需要修建 5 条道路",
+      "D": "若村庄 A 与 B 之间的道路建材用量是所有道路中最小的，则该道路必然会被纳入最小生成树"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2026上-063-265b340b",
+    "qnum": 63,
+    "stem": "某厂生产的某种电视机，销售价为每台 2500 元，去年的总销售量为 25000 台，固定成本总额为 250 万元，可变成本总额为 4000 万元，税率为 16%，则该产品年销售量的盈亏平衡点为（ ）台 (只有在年销售量超过它时才能盈利)",
+    "opts": {
+      "A": "5000",
+      "B": "10000",
+      "C": "15000",
+      "D": "20000"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2026上-064-2621b4a0",
+    "qnum": 64,
+    "stem": "在微服务系统架构原则中，关于 “隔离性原则” 的描述，下列说法正确的是（ ）。",
+    "opts": {
+      "A": "聚焦于一个业务领域，提供单一功能",
+      "B": "独立管理生命周期、状态和行为",
+      "C": "拥有独立数据库和资源，避免故障传播",
+      "D": "可根据负载动态扩展或缩减服务实例"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2026上-065-a548ea05",
+    "qnum": 65,
+    "stem": "某系统设计中，当用户点击 “保存” 按钮时，系统不直接调用数据写入函数，而是触发一个 “保存事件”；凡是注册过关心此事件的模块（如日志记录、数据持久化、权限检查）都会自动执行自己的处理逻辑。这种架构风格属于（ ）。",
+    "opts": {
+      "A": "管道 - 过滤器风格",
+      "B": "隐式调用（事件驱动）风格",
+      "C": "分层架构风格",
+      "D": "黑板风格"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2026上-066-c1a5494f",
+    "qnum": 66,
+    "stem": "在面向对象设计过程的“设计用例实现方案”步骤中，UML的（本题）适于表示用例实现方案，该方案第一步是（ ），第三步是（ ）。",
+    "opts": {
+      "A": "类图",
+      "B": "交互图（顺序图、协作图）",
+      "C": "状态图",
+      "D": "活动图"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2026上-067-acc58023",
+    "qnum": 67,
+    "stem": "在面向对象设计过程的“设计用例实现方案”步骤中，UML的（ ）适于表示用例实现方案，该方案第一步是（本题），第三步是（ ）。",
+    "opts": {
+      "A": "构造交互图",
+      "B": "提取边界类、实体类和控制类",
+      "C": "根据交互图精化类图",
+      "D": "定义对象消息传递通道"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2026上-068-91f8f09a",
+    "qnum": 68,
+    "stem": "在面向对象设计过程的“设计用例实现方案”步骤中，UML的（ ）适于表示用例实现方案，该方案第一步是（ ），第三步是（本题）。",
+    "opts": {
+      "A": "构造交互图",
+      "B": "提取边界类、实体类和控制类",
+      "C": "根据交互图精化类图",
+      "D": "定义对象消息传递通道"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2026上-069-c3e6f42c",
+    "qnum": 69,
+    "stem": "下列关于AI 智能体（Agent）的描述，结合应用场景，说法错误的是（ ）",
+    "opts": {
+      "A": "智能体可以感知环境、自主决策并执行动作，是一种具有自主性的计算实体",
+      "B": "在智能办公场景中，智能体可以自动读取会议纪要、生成待办、定时提醒，体现了自主性",
+      "C": "在自动驾驶中，智能体通过摄像头、雷达感知路况，体现了反应性 / 感知能力",
+      "D": "大模型时代的智能体只具备对话生成能力，不能自主规划任务、调用工具"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2026上-070-5990e3ed",
+    "qnum": 70,
+    "stem": "在智能运维（AIOps）场景中，关于大模型应用的描述，最恰当的是（ ）。",
+    "opts": {
+      "A": "仅用来替代人工编写代码，完成业务系统开发",
+      "B": "对系统日志、告警、指标进行自然语言理解，自动定位故障根因",
+      "C": "只负责数据存储与备份，不参与运维决策",
+      "D": "完全替代硬件设备，实现物理服务器的虚拟化"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2026上-071-70297ffe",
+    "qnum": 71,
+    "stem": "Cyber Physical Systems (CPS) integrates computing, communication, and physical entities deeply. It builds a closed loop enabling system with real time（本题）, scientific decision making, and precise（ ）to solve uncertainties of complex systems and improve resource utilization efficiency.\nKey features include:\n Deep integration: Combining cyber space and physical space via 3C technologies (computing, communication, （ ）;\n Real time feedback: Closed loop feedback based on perception, analysis, decision",
+    "opts": {
+      "A": "ignorance",
+      "B": "sensing",
+      "C": "neglecting",
+      "D": "ignoring"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2026上-072-8f7037b0",
+    "qnum": 72,
+    "stem": "Cyber Physical Systems (CPS) integrates computing, communication, and physical entities deeply. It builds a closed loop enabling system with real time（ ）, scientific decision making, and precise（本题）to solve uncertainties of complex systems and improve resource utilization efficiency.\nKey features include:\n Deep integration: Combining cyber space and physical space via 3C technologies (computing, communication, （ ）;\n Real time feedback: Closed loop feedback based on perception, analysis, decision",
+    "opts": {
+      "A": "control",
+      "B": "adjustment",
+      "C": "operation",
+      "D": "management"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2026上-073-2e22f248",
+    "qnum": 73,
+    "stem": "Cyber Physical Systems (CPS) integrates computing, communication, and physical entities deeply. It builds a closed loop enabling system with real time（ ）, scientific decision making, and precise（ ）to solve uncertainties of complex systems and improve resource utilization efficiency.\nKey features include:\n Deep integration: Combining cyber space and physical space via 3C technologies (computing, communication, （本题）;\n Real time feedback: Closed loop feedback based on perception, analysis, decision",
+    "opts": {
+      "A": "command",
+      "B": "regulation",
+      "C": "supervision",
+      "D": "control"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2026上-074-140c12af",
+    "qnum": 74,
+    "stem": "Cyber Physical Systems (CPS) integrates computing, communication, and physical entities deeply. It builds a closed loop enabling system with real time（ ）, scientific decision making, and precise（ ）to solve uncertainties of complex systems and improve resource utilization efficiency.\nKey features include:\n Deep integration: Combining cyber space and physical space via 3C technologies (computing, communication, （ ）;\n Real time feedback: Closed loop feedback based on perception, analysis, decision ",
+    "opts": {
+      "A": "execution",
+      "B": "domination",
+      "C": "governance",
+      "D": "regulation"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2026上-075-c5812b15",
+    "qnum": 75,
+    "stem": "Cyber Physical Systems (CPS) integrates computing, communication, and physical entities deeply. It builds a closed loop enabling system with real time（ ）, scientific decision making, and precise（ ）to solve uncertainties of complex systems and improve resource utilization efficiency.\nKey features include:\n Deep integration: Combining cyber space and physical space via 3C technologies (computing, communication, （ ）;\n Real time feedback: Closed loop feedback based on perception, analysis, decision ",
+    "opts": {
+      "A": "automatic",
+      "B": "artificial",
+      "C": "arbitrary",
+      "D": "amateur"
+    },
+    "ans": "A"
+  }
+]

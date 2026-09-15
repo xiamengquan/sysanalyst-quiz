@@ -16,7 +16,7 @@ description: >-
 ## 必读
 
 - 待审稿：`docs/question-workshop/reports/出题细则报告.md`
-- `content/banks/real/上午真题.jsonl`（可抽样/脚本复核关键百分比）
+- `content/banks/real/综合知识/all.jsonl`（可抽样/脚本复核关键百分比）
 - `docs/question-workshop/委员会/00-委员会章程.md`
 
 ## 审计要点

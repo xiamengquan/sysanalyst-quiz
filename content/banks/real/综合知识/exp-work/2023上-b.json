@@ -1,0 +1,446 @@
+[
+  {
+    "id": "ZT-2023上-039-9d53edb5",
+    "qnum": 39,
+    "stem": "软件能力成熟度模型(Capability Maturity Model，CMM)是一个概念模型，模型框架和表示是刚性的，不能随意改变，但模型的解释和实现有一定弹性。CMM提了一个软件能力成熟度的框架，它将软件过程改进的步骤组织成5个成熟度等级，为软件过程不断改进奠定了一个循序渐进的基础。其中，(39)是规则化的过程，软件过程已建立了基本的项目管理过程，可用于对成本、进度和功能特性进行跟踪。对类似的应用项目，有章可循并能重复以往所取得的成功。",
+    "opts": {
+      "A": "初始级",
+      "B": "可重复级",
+      "C": "已定义级",
+      "D": "已管理级"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2023上-040-9a4988bd",
+    "qnum": 40,
+    "stem": "在数据库的安全机制中，通过建立(40)使用户只能看到部分数据，从而保护了其它数据的安全性。",
+    "opts": {
+      "A": "索引",
+      "B": "视图",
+      "C": "触发器",
+      "D": "存储过程"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2023上-041-3723b89a",
+    "qnum": 41,
+    "stem": "事务的(41)是指“当多个事务并发执行时，任一事务的更新操作直到其成功提交的整个过程，对其他事务都是不可见的”。",
+    "opts": {
+      "A": "原子性",
+      "B": "一致性",
+      "C": "隔离性",
+      "D": "持久性"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2023上-042-ae120ce1",
+    "qnum": 42,
+    "stem": "给定关系模式R(U，F)，其中U为属性集，U={X，Y，Z}，F是U上的一组函数依赖。函数依赖的公理系统(Armstrong公理系统)中的(42)是指“若X→Y， X→Z ，则 X→YZ 为F所蕴涵”。",
+    "opts": {
+      "A": "自反率",
+      "B": "传递率",
+      "C": "增广律",
+      "D": "合并规则"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2023上-043-07cea1a5",
+    "qnum": 43,
+    "stem": "【空（1）】在关系R(A1，A2，A3)和S(A2，A3，A4)上进行关系运算的4个等价的表达式E1、E2、E3和E4如下所示：\n\n![](https://s2.51cto.com/images/20240208/1707325184113597.png)\n\n如果严格按照表达式运算顺序，则查询效率最高的是(43)，将该查询转换为等价的SQL 语句为：SELECT A1， A4 FROM R，S WHERE(44)。",
+    "opts": {
+      "A": "E1",
+      "B": "E2",
+      "C": "E3",
+      "D": "E4"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2023上-044-7101a228",
+    "qnum": 44,
+    "stem": "【空（2）】在关系R(A1，A2，A3)和S(A2，A3，A4)上进行关系运算的4个等价的表达式E1、E2、E3和E4如下所示：\n\n![](https://s2.51cto.com/images/20240208/1707325184113597.png)\n\n如果严格按照表达式运算顺序，则查询效率最高的是(43)，将该查询转换为等价的SQL 语句为：SELECT A1， A4 FROM R，S WHERE(44)。",
+    "opts": {
+      "A": "R.A2 <'2022' OR S.A4 ='95'",
+      "B": "R.A2 <'2022' AND S.A4 ='95'",
+      "C": "R.A2 <'2022' OR S.A4 ='95' OR R.A3=S.A3",
+      "D": "R.A2 <'2022' AND S.A4 ='95' AND R.A3=S.A3"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2023上-045-8ccae921",
+    "qnum": 45,
+    "stem": "某银行信息管理系统采用分布式数据库系统，以便对本地储户的存储业务能够在本地正常进行而不依赖于其他场地的数据库，这种情况称为分布式数据库的（45)。",
+    "opts": {
+      "A": "分布性",
+      "B": "共享性",
+      "C": "可用性",
+      "D": "自治性"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2023上-046-67b30727",
+    "qnum": 46,
+    "stem": "某系统中有6个并发进程竞争资源 R 。假设每个进程都需要3个 R ，那么最少需要有（46)个 R ．才能保证系统不会发生死锁。",
+    "opts": {
+      "A": "12",
+      "B": "13",
+      "C": "15",
+      "D": "16"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2023上-047-1b115316",
+    "qnum": 47,
+    "stem": "某系统采用请求页式存储管理方案，假设进程 P 有6个页面，系统给 P 分配了4个存储块，其页面变换表如下表所示。表中的状态位等于1/0分别表示页面在内存／不在内存。当 P 访问的页面2不在内存时，应该淘汰表中页号为(47)的页面。\n\n![](https://s2.51cto.com/images/20230527/1685172022938604.png)",
+    "opts": {
+      "A": "0",
+      "B": "3",
+      "C": "4",
+      "D": "5"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2023上-048-68351d8b",
+    "qnum": 48,
+    "stem": "在嵌入式操作系统中，通常采用硬件抽象层（ Hardware Abstraction Level , HAL )和板级支撑包（ Board Support Package , BSP ）的底层设计技术，目的是为了提高操作系统的（48)。",
+    "opts": {
+      "A": "可定制",
+      "B": "实时性",
+      "C": "可靠性",
+      "D": "可移植性"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2023上-049-c7769893",
+    "qnum": 49,
+    "stem": "【空（1）】进程P1、P2、P3、P4、P5和P6的前趋图如下所示：\n![](https://s2.51cto.com/images/20230527/1685172311731182.png)\n\n若用 PV 操作控制这6个进程的同步与互斥的程序如下，那么程序中的空①和空②分别为（49)；空③和空④处应分别为（50)；空⑤和空⑥处应分别为（51)。\n\n![](https://s2.51cto.com/images/20240120/1705757672171720.png)",
+    "opts": {
+      "A": "V(SI)和V(S3)V(S4)",
+      "B": "P(S1)和V(S3)V(S4)",
+      "C": "V(SI)和P(S3)P(S4)",
+      "D": ".P(SI)和P(S3)P(S4)"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2023上-050-dbf3ca4f",
+    "qnum": 50,
+    "stem": "【空（2）】进程P1、P2、P3、P4、P5和P6的前趋图如下所示：\n![](https://s2.51cto.com/images/20230527/1685172311731182.png)\n\n若用 PV 操作控制这6个进程的同步与互斥的程序如下，那么程序中的空①和空②分别为（49)；空③和空④处应分别为（50)；空⑤和空⑥处应分别为（51)。\n\n![](https://s2.51cto.com/images/20240120/1705757672171720.png)",
+    "opts": {
+      "A": "V(S3)和V(S5)",
+      "B": "P(S3)和V(S5)",
+      "C": "V(S3)和P(S5)",
+      "D": "P(S3)和P(S5)"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2023上-051-c0defa1e",
+    "qnum": 51,
+    "stem": "【空（3）】进程P1、P2、P3、P4、P5和P6的前趋图如下所示：\n![](https://s2.51cto.com/images/20230527/1685172311731182.png)\n\n若用 PV 操作控制这6个进程的同步与互斥的程序如下，那么程序中的空①和空②分别为（49)；空③和空④处应分别为（50)；空⑤和空⑥处应分别为（51)。\n\n![](https://s2.51cto.com/images/20240120/1705757672171720.png)",
+    "opts": {
+      "A": "P(S5)P(S6)和P(S7)",
+      "B": "V(S5)V(S6)和V(S7)",
+      "C": "P(S5)P(S6)和V(S7)",
+      "D": "V(S5)V(S6)和P(S7)"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2023上-052-15c8b485",
+    "qnum": 52,
+    "stem": "运用数学模型来描述实际事物的主要优点不包括(52)。",
+    "opts": {
+      "A": "可以对决策进行事前分析，尽量避免决策失误造成损失",
+      "B": "可以对决策进行事后评价，便于总结经验改进管理工作",
+      "C": "有利于对事物做更好的描述和理解，便于人们互相交流",
+      "D": "便于研究事物之间的共性，使模型更具简洁性和适应性"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2023上-053-6187a7e5",
+    "qnum": 53,
+    "stem": "线性规划模型的特点不包括(53)。",
+    "opts": {
+      "A": "用一组未知的决策变量来表示所需求解的决策方案",
+      "B": "用若干条直线段来描述项目内各个作业所需持续的时间",
+      "C": "在决策变量之间存在若干个线性约束条件(等式或不等式)",
+      "D": "有决策变量的线性目标函数，要求其达到极小值或极大值"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2023上-054-ae20aa52",
+    "qnum": 54,
+    "stem": "【空（1）】某项目共有A~G七道工序，各道工序所需的时间(天数)以及工序之间的行关系如下表。该项目计划的最短工期为(54)_天。假设每道工序只需要一人做，人都可以做所有各道工序，但不能同时做多道工序，那么该项目至少需要(55)\n\n![](https://s2.51cto.com/images/20230527/1685172773547715.png)",
+    "opts": {
+      "A": "11",
+      "B": "19",
+      "C": "22",
+      "D": "24"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2023上-055-7a6058cb",
+    "qnum": 55,
+    "stem": "【空（2）】某项目共有A~G七道工序，各道工序所需的时间(天数)以及工序之间的行关系如下表。该项目计划的最短工期为(54)_天。假设每道工序只需要一人做，人都可以做所有各道工序，但不能同时做多道工序，那么该项目至少需要(55)\n\n![](https://s2.51cto.com/images/20230527/1685172773547715.png)",
+    "opts": {
+      "A": "1",
+      "B": "2",
+      "C": "3",
+      "D": "4"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2023上-056-650de64d",
+    "qnum": 56,
+    "stem": "某企业打算从部门中选择五个部门下月做甲、乙、丙、丁四项工作，每个部门做一项工作。已知每个部门做每项工作所需的成本(单位:万元)\n\n![](https://s2.51cto.com/images/20231219/1702987815228775.png)\n在总成本最低的方案中,（56)。",
+    "opts": {
+      "A": "选择部门A、B、C、D做工作，安排部门A做工作甲",
+      "B": "选择部门A、B、D、E做工作，安排部门A做工作乙",
+      "C": "选择部门A、B、C、E做工作，安排部门A做工作丙",
+      "D": "选择部门B、C、D、E做工作，安排部门B做工作甲"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2023上-057-18d2c343",
+    "qnum": 57,
+    "stem": "某企业有三种方案A1，A2，A3可供选择，各种方案面对三种可能的市场状态S1 ，S2，S3可以获得的利润F(Ai，Sj)如下表所示（单位:负值表示损额):\n\n![](https://s2.51cto.com/images/20231202/1701516635160523.png)\n企业应依据合适的决策准则来选择方案。以下对决策过程的叙述中，(57)并不正确：",
+    "opts": {
+      "A": "根据乐观准则maxmaxF((Ai，Sj)，应选择方案A3",
+      "B": "根据保守准则maxminF((Ai，Sj)，应选择方案A2",
+      "C": "根据市场状态等可能性准则，应选择期望利润最大的方案A1",
+      "D": "根据市场状态折衷准则(乐观系数0.6，保守系数0.4)，应选择方案A2"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2023上-058-d0ffec21",
+    "qnum": 58,
+    "stem": "信息系统的性能评价指标是客观评价信息系统性能的依据，其中，（58）是指系统在单位时间内处理请求的数量。",
+    "opts": {
+      "A": "系统响应时间",
+      "B": "吞吐量",
+      "C": "资源利用率",
+      "D": "并发用户数"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2023上-059-a42c1a54",
+    "qnum": 59,
+    "stem": "【空（1）】计机系系统的（1)描述了计算机系统能正常工作的时间，其指标可以是能够持续工作的时间长度，也可以是在一段时间内，能够正常工作的时间所占的百分比；计算机系统的（2)，通常用吞吐率、响应时间和资源利用率等三类指标进行衡量。",
+    "opts": {
+      "A": "可靠性",
+      "B": "性能",
+      "C": "易用性",
+      "D": "可测试性"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2023上-060-0d91e6f2",
+    "qnum": 60,
+    "stem": "【空（2）】计机系系统的（1)描述了计算机系统能正常工作的时间，其指标可以是能够持续工作的时间长度，也可以是在一段时间内，能够正常工作的时间所占的百分比；计算机系统的（2)，通常用吞吐率、响应时间和资源利用率等三类指标进行衡量。",
+    "opts": {
+      "A": "可靠性",
+      "B": "性能",
+      "C": "易用性",
+      "D": "可测试性"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2023上-061-449649c8",
+    "qnum": 61,
+    "stem": "【空（1）】面向对象方法是企业信息系统的主流开发方法，该方法可分为多个阶段，其中面向对象的(61)阶段的任务是了解问题域所涉及的对象，对象间的关系和操作，然后构造问题的对象模型。面向对象的(62)阶段的任务是在对象模型的基础上，设计出各个对象、对象之间的关系和通信方式等",
+    "opts": {
+      "A": "需求",
+      "B": "分析",
+      "C": "设计",
+      "D": "实现"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2023上-062-f1fa3b07",
+    "qnum": 62,
+    "stem": "【空（2）】面向对象方法是企业信息系统的主流开发方法，该方法可分为多个阶段，其中面向对象的(61)阶段的任务是了解问题域所涉及的对象，对象间的关系和操作，然后构造问题的对象模型。面向对象的(62)阶段的任务是在对象模型的基础上，设计出各个对象、对象之间的关系和通信方式等",
+    "opts": {
+      "A": "需求",
+      "B": "实现",
+      "C": "设计",
+      "D": "分析"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2023上-063-8e20cb1c",
+    "qnum": 63,
+    "stem": "【空（1）】面向服务的信息系统开发方法有三个主要的抽象级别，其中操作级别代表单个逻辑单元的事务，事务触发后通常会导致读、写或修改一个或多个持久性数据;(63）级别代表操作的逻辑分组:最高层的(64)是为了实现特定业务目标而执行的一长期运行的动作或活动，包括依据一组业务规则按照有序序列执行的一系列操作。",
+    "opts": {
+      "A": "对象",
+      "B": "功能",
+      "C": "流程",
+      "D": "服务"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2023上-064-25ad5ef3",
+    "qnum": 64,
+    "stem": "【空（2）】面向服务的信息系统开发方法有三个主要的抽象级别，其中操作级别代表单个逻辑单元的事务，事务触发后通常会导致读、写或修改一个或多个持久性数据;(63）级别代表操作的逻辑分组:最高层的(64)是为了实现特定业务目标而执行的一长期运行的动作或活动，包括依据一组业务规则按照有序序列执行的一系列操作。",
+    "opts": {
+      "A": "对象",
+      "B": "功能",
+      "C": "流程",
+      "D": "服务"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2023上-065-11d5e477",
+    "qnum": 65,
+    "stem": "【空（1）】在Linux操作系统中通常使用(65) 作为Web服务器， 其默认的Web站点的目录为(66)",
+    "opts": {
+      "A": "IIS",
+      "B": "Apache",
+      "C": "NFS",
+      "D": "MySQL"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2023上-066-af7db1b6",
+    "qnum": 66,
+    "stem": "【空（2）】在Linux操作系统中通常使用(65) 作为Web服务器， 其默认的Web站点的目录为(66)",
+    "opts": {
+      "A": "/etc/httpd",
+      "B": "/var/log/httpd",
+      "C": "/etc/home",
+      "D": "/home/httpd"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2023上-067-63ee1bb6",
+    "qnum": 67,
+    "stem": "【空（1）】FTP服务可以开启匿名登录功能，其用户名是(67) ，若要上传文件，应使用(68)命令",
+    "opts": {
+      "A": "root",
+      "B": "user",
+      "C": "guest",
+      "D": "anonymous"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2023上-068-cb32892a",
+    "qnum": 68,
+    "stem": "【空（2）】FTP服务可以开启匿名登录功能，其用户名是(67) ，若要上传文件，应使用(68)命令",
+    "opts": {
+      "A": "copy",
+      "B": "paste",
+      "C": "put",
+      "D": "get"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2023上-069-5327e4ff",
+    "qnum": 69,
+    "stem": "邮件客户端使用(69)协议同步服务器和客户端之间的邮件列表。",
+    "opts": {
+      "A": "POP",
+      "B": "SMTP",
+      "C": "IMAP",
+      "D": "SSL"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2023上-070-15381071",
+    "qnum": 70,
+    "stem": "路由器收到一个目标地址为201.46.17.4的数据包，应将该数据包发往(70)网",
+    "opts": {
+      "A": "201.46.0.0/21",
+      "B": "201.46.16.0/20",
+      "C": "201.46.8.0/22",
+      "D": "201.46.20.0/22"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2023上-071-cb703b17",
+    "qnum": 71,
+    "stem": "【空（1）】Safety critical systems are systems in which failures may affect the environment of the system and cause injury or death to the people in that environment. The principal concern of safety specification is to identify requirements that will minimize the probability that such system failures will occur. Safety requirements are primarily protection requirements and are concerned with normal system operation. They may specify that the system should be shut down so that safety is maintained. In",
+    "opts": {
+      "A": "Risk decomposition",
+      "B": "Risk analysis",
+      "C": "Risk reduction",
+      "D": "Risk identification"
+    },
+    "ans": "D"
+  },
+  {
+    "id": "ZT-2023上-072-55d5edf1",
+    "qnum": 72,
+    "stem": "【空（2）】Safety critical systems are systems in which failures may affect the environment of the system and cause injury or death to the people in that environment. The principal concern of safety specification is to identify requirements that will minimize the probability that such system failures will occur. Safety requirements are primarily protection requirements and are concerned with normal system operation. They may specify that the system should be shut down so that safety is maintained. In",
+    "opts": {
+      "A": "Risk decomposition",
+      "B": "Risk analysis",
+      "C": "Risk reduction",
+      "D": "Risk identification"
+    },
+    "ans": "B"
+  },
+  {
+    "id": "ZT-2023上-073-82a32a0c",
+    "qnum": 73,
+    "stem": "【空（3）】Safety critical systems are systems in which failures may affect the environment of the system and cause injury or death to the people in that environment. The principal concern of safety specification is to identify requirements that will minimize the probability that such system failures will occur. Safety requirements are primarily protection requirements and are concerned with normal system operation. They may specify that the system should be shut down so that safety is maintained. In",
+    "opts": {
+      "A": "Risk decomposition",
+      "B": "Risk specification",
+      "C": "Risk reduction",
+      "D": "Risk identification"
+    },
+    "ans": "C"
+  },
+  {
+    "id": "ZT-2023上-074-177dc50e",
+    "qnum": 74,
+    "stem": "【空（4）】Safety critical systems are systems in which failures may affect the environment of the system and cause injury or death to the people in that environment. The principal concern of safety specification is to identify requirements that will minimize the probability that such system failures will occur. Safety requirements are primarily protection requirements and are concerned with normal system operation. They may specify that the system should be shut down so that safety is maintained. In",
+    "opts": {
+      "A": "Risk decomposition",
+      "B": "Risk analysis",
+      "C": "Risk reduction",
+      "D": "Risk identification"
+    },
+    "ans": "A"
+  },
+  {
+    "id": "ZT-2023上-075-6a4d4c16",
+    "qnum": 75,
+    "stem": "【空（5）】Safety critical systems are systems in which failures may affect the environment of the system and cause injury or death to the people in that environment. The principal concern of safety specification is to identify requirements that will minimize the probability that such system failures will occur. Safety requirements are primarily protection requirements and are concerned with normal system operation. They may specify that the system should be shut down so that safety is maintained. In",
+    "opts": {
+      "A": "hazard identification",
+      "B": "hazard assessment",
+      "C": "safety specification",
+      "D": "hazard analysis"
+    },
+    "ans": "B"
+  }
+]
