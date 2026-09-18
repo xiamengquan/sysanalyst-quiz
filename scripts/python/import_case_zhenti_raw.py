@@ -264,6 +264,24 @@ def convert_file(fp: Path, start_no: int) -> tuple[list[dict], list[dict]]:
             uniq_q.append(q)
         questions = uniq_q
 
+        from seven_steps_lib import build_seven_steps
+
+        exam_label = exam_no
+        year_label = f"{year}{half}"
+        role = (
+            f"真题 {year_label} · 试题一（建议必答）"
+            if exam_label == 1
+            else f"真题 {year_label} · 试题{exam_label}（选答候选；60 秒扫标题再定）"
+        )
+        seven_steps = build_seven_steps(
+            case_id=f"ZT-{year}{half}-案例{exam_no:02d}",
+            domain=domain,
+            case_type=case_type,
+            stem=stem,
+            questions=questions,
+            pack_role=role,
+        )
+
         # title from stem first line
         title_m = re.search(r"试题[一二三四五六七八九十\d]+[^\n]{0,40}", stem)
         short = title_m.group(0) if title_m else f"试题{exam_no}"
@@ -285,6 +303,7 @@ def convert_file(fp: Path, start_no: int) -> tuple[list[dict], list[dict]]:
                 "depth": "real",
                 "stem": stem,
                 "questions": questions,
+                "seven_steps": seven_steps,
                 "source": f"{year}年{'上' if half == '上' else '下'}半年系统分析师·案例分析真题",
                 "time_limit_min": 25,
                 "raw_file": fp.name,
