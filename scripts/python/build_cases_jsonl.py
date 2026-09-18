@@ -51,6 +51,7 @@ def parse_md(path: Path) -> dict:
     stem = section("题干")
     qblock = section("问题")
     rblock = section("参考作答要点（非唯一答案）") or section("参考作答要点")
+    seven_block = section("七步法")
 
     prompts = re.findall(r"\*\*问题(\d+)\*\*\s*(.+?)(?=\n\*\*问题|\Z)", qblock, re.S)
     rubrics = re.findall(r"\*\*问题(\d+)要点[：:]\*\*\s*(.+?)(?=\n\*\*问题|\n\*\*领域|\Z)", rblock, re.S)
@@ -78,6 +79,31 @@ def parse_md(path: Path) -> dict:
             "hint": domain_hint or "回扣题干约束；措施具体可落地",
         })
 
+    seven_steps = []
+    if seven_block:
+        # ### ① 先看问题  ... **怎么做：** ... **为什么：** ...
+        parts = re.split(r"\n###\s+", seven_block)
+        for part in parts:
+            part = part.strip()
+            if not part or part.startswith(">"):
+                # skip intro-only chunk without title
+                if part.startswith(">"):
+                    continue
+                continue
+            title_m = re.match(r"(.+?)\n", part + "\n")
+            if not title_m:
+                continue
+            title = title_m.group(1).strip()
+            how_m = re.search(r"\*\*怎么做[：:]\*\*\s*(.+?)(?=\n\*\*为什么|\Z)", part, re.S)
+            why_m = re.search(r"\*\*为什么[：:]\*\*\s*(.+?)(?=\Z)", part, re.S)
+            if not how_m:
+                continue
+            seven_steps.append({
+                "title": title,
+                "how": how_m.group(1).strip(),
+                "why": (why_m.group(1).strip() if why_m else ""),
+            })
+
     return {
         "no": no,
         "id": f"CA-{no:03d}",
@@ -92,6 +118,7 @@ def parse_md(path: Path) -> dict:
         "depth": depth,
         "stem": stem,
         "questions": questions,
+        "seven_steps": seven_steps,
         "source": "自编案例分析",
         "year": "",
         "time_limit_min": 25,

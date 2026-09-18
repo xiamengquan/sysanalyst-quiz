@@ -31,6 +31,7 @@ export function CaseApp() {
   const [idx, setIdx] = useState(0);
   const [drafts, setDrafts] = useState<CaseDrafts>({});
   const [reveal, setReveal] = useState(false);
+  const [quizTab, setQuizTab] = useState<"answer" | "seven">("answer");
   const [ready, setReady] = useState(false);
   const [packHint, setPackHint] = useState("");
   const catalog = useKbCatalog();
@@ -367,6 +368,7 @@ export function CaseApp() {
                         onClick={() => {
                           setIdx(i);
                           setReveal(false);
+                          setQuizTab("answer");
                           setPhase("quiz");
                         }}
                       >
@@ -414,7 +416,66 @@ export function CaseApp() {
             text={current.stem}
             className="mb-5 whitespace-pre-wrap break-words rounded-[12px] border border-[var(--line)] bg-[#121820] p-4 text-[0.95rem] leading-[1.7] sm:text-[1rem]"
           />
-          <div className="space-y-5">
+
+          <div className="mb-4 flex gap-1 border-b border-[var(--line)]" role="tablist" aria-label="答题视图">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={quizTab === "answer"}
+              className={`rounded-t-lg px-3.5 py-2 text-[0.88rem] transition ${
+                quizTab === "answer"
+                  ? "border border-b-transparent border-[var(--line)] bg-[var(--panel)] text-[var(--accent)]"
+                  : "text-[var(--muted)] hover:text-[var(--text)]"
+              }`}
+              onClick={() => setQuizTab("answer")}
+            >
+              作答
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={quizTab === "seven"}
+              disabled={!current.seven_steps?.length}
+              className={`rounded-t-lg px-3.5 py-2 text-[0.88rem] transition disabled:cursor-not-allowed disabled:opacity-40 ${
+                quizTab === "seven"
+                  ? "border border-b-transparent border-[var(--line)] bg-[var(--panel)] text-[var(--accent)]"
+                  : "text-[var(--muted)] hover:text-[var(--text)]"
+              }`}
+              onClick={() => setQuizTab("seven")}
+              title={current.seven_steps?.length ? "按教程七步法拆解本题" : "本题暂无七步法"}
+            >
+              七步法
+            </button>
+          </div>
+
+          {quizTab === "seven" && current.seven_steps?.length ? (
+            <div className="mb-5 space-y-4" role="tabpanel">
+              <p className="text-[0.82rem] leading-relaxed text-[var(--muted)]">
+                依据《案例分析答题教程》单题 7 步法，结合本题题干与设问整理。可与「作答」页对照练习。
+              </p>
+              {current.seven_steps.map((step, i) => (
+                <div
+                  key={`${step.title}-${i}`}
+                  className="rounded-[12px] border border-[var(--line)] bg-[#121820] p-4"
+                >
+                  <h4 className="mb-2 text-[0.95rem] font-medium text-[var(--accent)]">{step.title}</h4>
+                  <div className="space-y-2 text-[0.88rem] leading-relaxed">
+                    <div>
+                      <span className="text-[var(--muted)]">怎么做 · </span>
+                      <RichText text={step.how} className="inline whitespace-pre-wrap break-words" />
+                    </div>
+                    {step.why ? (
+                      <div>
+                        <span className="text-[var(--muted)]">为什么 · </span>
+                        <RichText text={step.why} className="inline whitespace-pre-wrap break-words" />
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+          <div className="space-y-5" role="tabpanel">
             {current.questions.map((qq) => (
               <div key={qq.qnum}>
                 <h4 className="mb-3 text-[0.95rem] leading-snug">
@@ -443,6 +504,7 @@ export function CaseApp() {
               </div>
             ))}
           </div>
+          )}
           <div className="sticky-actions">
             <button
               type="button"
@@ -450,6 +512,7 @@ export function CaseApp() {
               disabled={idx <= 0}
               onClick={() => {
                 setReveal(false);
+                setQuizTab("answer");
                 setIdx((i) => i - 1);
               }}
             >
@@ -461,12 +524,13 @@ export function CaseApp() {
               disabled={idx >= pool.length - 1}
               onClick={() => {
                 setReveal(false);
+                setQuizTab("answer");
                 setIdx((i) => i + 1);
               }}
             >
               下一套
             </button>
-            <button type="button" className="btn" onClick={() => setReveal(true)}>
+            <button type="button" className="btn" onClick={() => setReveal(true)} disabled={quizTab !== "answer"}>
               看要点
             </button>
             <button type="button" className="btn btn-icon" onClick={openRelatedKb}>

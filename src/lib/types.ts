@@ -77,6 +77,8 @@ export type CaseItem = {
     rubric?: { must_hit?: string[]; sample?: string };
     hint?: string;
   }[];
+  /** 《案例分析答题教程》单题 7 步法（针对本题） */
+  seven_steps?: { title: string; how: string; why: string }[];
   source?: string;
   time_limit_min?: number;
 };
