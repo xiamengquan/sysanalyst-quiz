@@ -112,9 +112,32 @@ export async function storageGet<T>(key: string): Promise<T | null> {
   return legacy as T;
 }
 
+/** 读取含 updatedAt 的元数据（无数据返回 null） */
+export async function storageGetMeta(key: string): Promise<{ value: unknown; updatedAt: number } | null> {
+  try {
+    const row = await idbGetRaw(key);
+    if (row && row.value !== undefined && row.value !== null) {
+      return { value: row.value, updatedAt: row.updatedAt || 0 };
+    }
+  } catch {
+    /* ignore */
+  }
+  return null;
+}
+
+/** 写入且不触发云端同步（用于 pull 落地、同步开关本身） */
+export async function storageSetQuiet(key: string, value: unknown): Promise<void> {
+  await idbPut(key, value);
+  clearLocalStorageKey(key);
+}
+
 export async function storageSet(key: string, value: unknown): Promise<void> {
   await idbPut(key, value);
   clearLocalStorageKey(key);
+  if (key === QUIZ_STORAGE_KEY || key === CASE_STORAGE_KEY) {
+    // 动态导入避免与 cloud-sync 循环依赖
+    void import("@/lib/cloud-sync").then((m) => m.scheduleCloudPush(key)).catch(() => undefined);
+  }
 }
 
 export async function storageRemove(key: string): Promise<void> {

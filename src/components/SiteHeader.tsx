@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { AuthButton } from "@/components/AuthButton";
 import { GlobalSearch } from "@/components/GlobalSearch";
 
 const tabs = [
@@ -34,6 +35,7 @@ export function SiteHeader() {
             <span className="sm:hidden">系分刷题</span>
           </Link>
           <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
+            <AuthButton />
             <GlobalSearch />
             <nav className="hidden shrink-0 gap-1 sm:flex" aria-label="主导航">
               {tabs.map((t) => {
