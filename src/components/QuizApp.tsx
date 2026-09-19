@@ -474,7 +474,7 @@ export function QuizApp() {
           </div>
           <div className="mb-4 h-2 overflow-hidden rounded-full bg-muted/40">
             <i
-              className="block h-full bg-gradient-to-r from-[#2f7fd4] to-[#3ecf8e]"
+              className="block h-full bg-gradient-to-r from-primary to-[var(--ok)]"
               style={{ width: `${((idx + 1) / pool.length) * 100}%` }}
             />
           </div>

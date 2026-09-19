@@ -493,7 +493,7 @@ export function CaseApp() {
                   onChange={(e) => updateAns(current.id, qq.qnum, e.target.value)}
                 />
                 {reveal && (
-                  <div className="mt-3 rounded-[12px] border border-[color-mix(in_srgb,var(--ok)_40%,var(--border))] bg-primary/10 p-4 text-[0.9rem] leading-relaxed break-words">
+                  <div className="mt-3 rounded-[12px] border border-[color-mix(in_srgb,var(--ok)_40%,var(--border))] bg-[color-mix(in_srgb,var(--ok)_12%,var(--card))] p-4 text-[0.9rem] leading-relaxed break-words">
                     <b style={{ color: "var(--ok)" }}>参考要点（非唯一）</b>
                     <RichText
                       text={qq.rubric?.sample || "（无）"}

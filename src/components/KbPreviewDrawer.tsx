@@ -367,13 +367,13 @@ export function KbPreviewDrawer({
         showCloseButton={false}
         overlayClassName={
           isMobile
-            ? "z-[55] bg-black/25 dark:bg-black/45"
-            : "z-[55] top-[calc(var(--safe-t)+3.75rem)] bg-black/20 dark:bg-black/45"
+            ? "!z-[60] bg-black/25 dark:bg-black/45"
+            : "!z-[60] top-[calc(var(--safe-t)+3.75rem)] bg-black/20 dark:bg-black/45"
         }
         className={
           isMobile
-            ? "kb-drawer-panel z-[60] gap-0 border-border bg-card p-0 text-card-foreground max-h-[min(88dvh,720px)] rounded-t-2xl pb-[max(0.5rem,var(--safe-b))]"
-            : "kb-drawer-panel z-[60] w-full gap-0 border-border bg-card p-0 text-card-foreground sm:max-w-md data-[side=right]:inset-y-auto data-[side=right]:top-[calc(var(--safe-t)+3.75rem)] data-[side=right]:bottom-0 data-[side=right]:h-[calc(100dvh-var(--safe-t)-3.75rem)]"
+            ? "kb-drawer-panel !z-[65] gap-0 border-border bg-card p-0 text-card-foreground max-h-[min(88dvh,720px)] rounded-t-2xl pb-[max(0.5rem,var(--safe-b))]"
+            : "kb-drawer-panel !z-[65] w-full gap-0 border-border bg-card p-0 text-card-foreground sm:max-w-md data-[side=right]:inset-y-auto data-[side=right]:top-[calc(var(--safe-t)+3.75rem)] data-[side=right]:bottom-0 data-[side=right]:h-[calc(100dvh-var(--safe-t)-3.75rem)]"
         }
       >
         <SheetHeader className="sr-only">

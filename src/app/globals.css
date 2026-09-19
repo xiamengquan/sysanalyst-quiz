@@ -144,6 +144,12 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* asChild 链到 <a> 时须走 Button variant 色，勿被 inherit 盖掉 */
+a[data-slot="button"] {
+  color: unset;
+  text-decoration: none;
+}
+
 button,
 .btn,
 .opt-btn {
@@ -348,6 +354,11 @@ button,
   appearance: none;
   -webkit-appearance: none;
 }
+.field:focus-visible {
+  outline: none;
+  border-color: var(--ring);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 35%, transparent);
+}
 select.field {
   background-image: linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
     linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
@@ -390,14 +401,11 @@ textarea.field {
   font: inherit;
   line-height: 1.55;
   cursor: pointer;
+  touch-action: manipulation;
 }
 .opt-btn:hover {
-  border-color: var(--border);
-}
-
-.opt-btn {
-  min-height: 48px;
-  touch-action: manipulation;
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
+  background: color-mix(in srgb, var(--primary) 8%, var(--surface));
 }
 @media (min-width: 640px) {
   .opt-btn {
@@ -435,7 +443,8 @@ textarea.field {
 }
 
 .sticky-actions [data-slot="button"],
-.btn-row [data-slot="button"] {
+.btn-row [data-slot="button"],
+.kb-drawer-foot [data-slot="button"] {
   /* 覆盖 Button 默认 h-8，保证同一行高度一致 */
   min-height: 2.75rem !important;
   height: 2.75rem !important;
@@ -448,7 +457,8 @@ textarea.field {
     bottom: 0;
   }
   .sticky-actions [data-slot="button"],
-  .btn-row [data-slot="button"] {
+  .btn-row [data-slot="button"],
+  .kb-drawer-foot [data-slot="button"] {
     min-height: 2.25rem !important;
     height: 2.25rem !important;
   }
@@ -934,6 +944,10 @@ textarea.field {
   border-top: 1px solid var(--border);
   background: color-mix(in srgb, var(--card) 88%, var(--background));
   flex-shrink: 0;
+}
+.kb-drawer-foot [data-slot="button"] {
+  flex: 1 1 auto;
+  width: 100%;
 }
 
 /* 图标按钮（lucide-react） */

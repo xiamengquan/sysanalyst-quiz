@@ -73,7 +73,7 @@ export function UpdateNotice() {
     >
       <DialogContent className={cn(dialogMobileSheetClassName, "sm:max-w-md")}>
         <DialogHeader>
-          <DialogTitle className="flex flex-wrap items-baseline justify-between gap-2 pr-6">
+          <DialogTitle className="flex flex-wrap items-baseline justify-between gap-2 pr-10">
             <span>{notes.title || "站点更新"}</span>
             <span className="text-sm font-normal text-muted-foreground tabular-nums">
               v{notes.version}
