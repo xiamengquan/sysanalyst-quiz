@@ -23,6 +23,7 @@ function isActive(pathname: string, href: string) {
 
 export function SiteHeader() {
   const pathname = usePathname() || "/";
+  const currentTab = tabs.find((t) => isActive(pathname, t.href));
 
   return (
     <>
@@ -31,14 +32,24 @@ export function SiteHeader() {
         style={{ paddingTop: "var(--safe-t)" }}
       >
         <div
-          className="mx-auto flex w-full items-center justify-between gap-2 px-4 py-3.5 sm:gap-3 sm:px-6 sm:py-4 lg:px-8 xl:px-10"
+          className="mx-auto flex w-full min-w-0 items-center justify-between gap-2 px-3 py-2.5 sm:gap-3 sm:px-6 sm:py-4 lg:px-8 xl:px-10"
           style={{ maxWidth: "var(--content-max)" }}
         >
-          <Link href="/" className="min-w-0 truncate text-[1rem] font-semibold text-foreground">
-            <span className="hidden sm:inline">系统分析师 · 刷题站</span>
-            <span className="sm:hidden">系分刷题</span>
-          </Link>
-          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
+          <div className="flex min-w-0 flex-1 items-baseline gap-2 sm:flex-none">
+            <Link
+              href="/"
+              className="min-w-0 truncate text-[0.95rem] font-semibold text-foreground sm:text-[1rem]"
+            >
+              <span className="hidden sm:inline">系统分析师 · 刷题站</span>
+              <span className="sm:hidden">系分刷题</span>
+            </Link>
+            {currentTab ? (
+              <span className="truncate text-[0.78rem] font-medium text-primary sm:hidden" aria-current="page">
+                {currentTab.label}
+              </span>
+            ) : null}
+          </div>
+          <div className="flex shrink-0 items-center gap-1 sm:gap-2">
             <AuthButton />
             <ThemeToggle />
             <GlobalSearch />
@@ -58,9 +69,6 @@ export function SiteHeader() {
                 );
               })}
             </nav>
-            <span className="text-[0.78rem] text-muted-foreground sm:hidden">
-              {tabs.find((t) => isActive(pathname, t.href))?.label || ""}
-            </span>
           </div>
         </div>
       </header>
@@ -81,7 +89,7 @@ export function SiteHeader() {
                 key={t.href}
                 href={t.href}
                 className={cn(
-                  "flex flex-col items-center justify-center gap-0.5 text-[0.72rem] font-medium",
+                  "flex min-h-[44px] flex-col items-center justify-center gap-0.5 text-[0.72rem] font-medium",
                   active ? "text-primary" : "text-muted-foreground",
                 )}
               >

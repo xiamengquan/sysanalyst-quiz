@@ -9,6 +9,8 @@ import {
   setCloudSyncEnabled,
 } from "@/lib/cloud-sync";
 import { getSupabase, isSupabaseConfigured } from "@/lib/supabase/client";
+import { dialogMobileSheetClassName } from "@/lib/dialog-mobile";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -244,11 +246,16 @@ export function AuthButton() {
   if (!user) {
     return (
       <>
-        <Button variant="outline" size="sm" className="rounded-full" onClick={() => setLoginOpen(true)}>
+        <Button
+          variant="outline"
+          size="sm"
+          className="h-11 min-h-11 rounded-full px-3 touch-manipulation sm:h-9 sm:min-h-9"
+          onClick={() => setLoginOpen(true)}
+        >
           登录
         </Button>
         <Dialog open={loginOpen} onOpenChange={(v) => (!v ? closeLogin() : setLoginOpen(true))}>
-          <DialogContent className="sm:max-w-md">
+          <DialogContent className={cn(dialogMobileSheetClassName, "sm:max-w-md")}>
             <DialogHeader>
               <DialogTitle>登录账户</DialogTitle>
               <DialogDescription>
@@ -342,14 +349,14 @@ export function AuthButton() {
       <Button
         variant="outline"
         size="sm"
-        className="max-w-[9.5rem] truncate rounded-full"
+        className="h-11 max-w-[6.5rem] truncate rounded-full px-2.5 touch-manipulation sm:h-9 sm:max-w-[9.5rem] sm:px-3"
         onClick={() => setPanelOpen(true)}
         title={user.email || "账户"}
       >
         {shortEmail(user.email)}
       </Button>
       <Dialog open={panelOpen} onOpenChange={setPanelOpen}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className={cn(dialogMobileSheetClassName, "sm:max-w-md")}>
           <DialogHeader>
             <DialogTitle>账户与同步</DialogTitle>
             <DialogDescription className="break-all">{user.email}</DialogDescription>

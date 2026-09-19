@@ -196,6 +196,7 @@ export function CaseApp() {
     if (!kbOpen || phase !== "quiz" || !current) return;
     const top = relatedKb[0]?.item;
     setKbStack(top ? [{ id: top.id, title: top.title }] : []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- 仅随案例 id 切换同步
   }, [current?.id, phase, kbOpen, relatedKb]);
 
   if (!ready) return <p className="text-muted-foreground">加载案例中…</p>;

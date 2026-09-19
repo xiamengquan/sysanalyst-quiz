@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { SITE_VERSION } from "@/lib/site-version";
 
 export default function AboutPage() {
   return (
@@ -130,7 +131,7 @@ export default function AboutPage() {
           </CardHeader>
           <CardContent className="text-[0.92rem] leading-relaxed text-muted-foreground">
             <p>
-              当前 v0.6.0 · Next.js 15 · shadcn/ui · 完整变更见{" "}
+              当前 v{SITE_VERSION} · Next.js 15 · shadcn/ui · 完整变更见{" "}
               <a className="text-primary underline" href="/changelog/">
                 更新日志
               </a>

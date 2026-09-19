@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { pickLatestRelease, type ReleaseEntry, type ReleaseNotesFile } from "@/lib/release-notes";
+import { dialogMobileSheetClassName } from "@/lib/dialog-mobile";
+import { cn } from "@/lib/utils";
 
 const SEEN_KEY = "sysanalyst_release_seen";
 
@@ -69,7 +71,7 @@ export function UpdateNotice() {
         else setOpen(true);
       }}
     >
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className={cn(dialogMobileSheetClassName, "sm:max-w-md")}>
         <DialogHeader>
           <DialogTitle className="flex flex-wrap items-baseline justify-between gap-2 pr-6">
             <span>{notes.title || "站点更新"}</span>

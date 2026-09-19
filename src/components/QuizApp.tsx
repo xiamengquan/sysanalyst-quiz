@@ -299,11 +299,12 @@ export function QuizApp() {
     [catalog, relatedKb],
   );
 
-  // 切题时若抽屉已开，同步到新题相关内容
+  // 切题时若抽屉已开，同步到新题相关内容（以题号为键，避免整对象依赖）
   useEffect(() => {
     if (!kbOpen || phase !== "quiz" || !q) return;
     const top = relatedKb[0]?.item;
     setKbStack(top ? [{ id: top.id, title: top.title }] : []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- 仅随题号切换同步
   }, [q?.no, phase, kbOpen, relatedKb]);
 
   if (loading) return <p className="text-muted-foreground">加载题库中…</p>;

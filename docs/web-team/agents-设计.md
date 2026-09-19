@@ -1,23 +1,8 @@
----
-name: sysanalyst-web-design
-description: >-
-  题库网站小组·设计：负责题库站点信息架构、线框与视觉交互规范。
-  用户提到题库网站设计、IA、线框、UI规范时使用。
----
+# 设计席位说明（agents）
 
-# 网站设计
+原 `sysanalyst-web-design` 已拆分：
 
-## 产出
+- **体验设计** → `.cursor/skills/sysanalyst-web-ux/SKILL.md`
+- **界面设计** → `.cursor/skills/sysanalyst-web-ui/SKILL.md`
 
-写入 `docs/web-team/设计/`：
-
-1. `信息架构.md` — 站点地图与导航  
-2. `页面说明.md` — 各页目标、组件、空态  
-3. `视觉与交互规范.md` — 色板、字体、按钮、进度条（延续现有站点视觉语言，避免套用常见 AI 紫白模板）  
-
-## 约束
-
-- 第一屏聚焦「开始刷题」，不要做成杂乱仪表盘  
-- 知识点页以阅读为主；刷题页保留连续通关/筛选  
-- 合规页：个人学习、勿外传真题资料  
-- 实现基线：`src/`（Next.js 静态导出）；规范须可被程序席位直接落地
+详见 `00-网站小组章程.md`。

@@ -1,7 +1,8 @@
 # 题库网站 · 程序
 
 > 现行基线：仓库根目录 Next.js 15（`output: "export"`）· 站点版本见 `package.json`  
-> 设计：`../设计/` · 发布：`../发布/`
+> 席位：架构设计 `sysanalyst-web-arch` · 功能实现 `sysanalyst-web-impl`  
+> 体验/界面：`../设计/` · 发布：`../发布/`
 
 ## 快速启动
 

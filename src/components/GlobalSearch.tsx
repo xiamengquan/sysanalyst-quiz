@@ -11,6 +11,8 @@ import {
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
 import { searchKbDocs, type KbSearchHit, type KbSearchIndex } from "@/lib/kb-search";
+import { dialogMobileSheetClassName } from "@/lib/dialog-mobile";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -235,7 +237,7 @@ export function GlobalSearch() {
         type="button"
         variant="outline"
         size="sm"
-        className="gs-trigger h-8 gap-2 rounded-full px-3"
+        className="gs-trigger h-11 min-h-11 gap-1.5 rounded-full px-3 touch-manipulation sm:h-9 sm:min-h-9 sm:gap-2"
         onClick={openModal}
         aria-label="打开搜索"
         title={`${modHint} 搜索`}
@@ -253,7 +255,11 @@ export function GlobalSearch() {
       >
         <DialogContent
           showCloseButton={false}
-          className="gs-dialog top-[12%] max-h-[min(72vh,640px)] w-[min(560px,calc(100vw-1.5rem))] translate-y-0 gap-0 overflow-hidden p-0 sm:max-w-[560px]"
+          className={cn(
+            "gs-dialog fixed z-50 grid gap-0 overflow-hidden p-0",
+            dialogMobileSheetClassName,
+            "sm:top-[min(12vh,5rem)] sm:left-1/2 sm:w-[min(560px,calc(100vw-1.5rem))] sm:max-w-[560px] sm:-translate-x-1/2 sm:translate-y-0",
+          )}
           aria-describedby={undefined}
         >
           <DialogTitle id={titleId} className="sr-only">

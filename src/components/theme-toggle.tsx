@@ -31,7 +31,7 @@ export function ThemeToggle() {
         <Button
           variant="outline"
           size="icon"
-          className="size-9 rounded-full"
+          className="size-11 shrink-0 rounded-full touch-manipulation sm:size-9"
           aria-label="切换主题"
           title="切换主题"
         >

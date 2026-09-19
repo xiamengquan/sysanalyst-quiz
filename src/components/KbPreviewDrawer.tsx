@@ -55,6 +55,7 @@ function DrawerChrome({
   docked,
   pinned,
   onPinnedChange,
+  hidePin = false,
   stack,
   onBack,
   onClose,
@@ -74,6 +75,8 @@ function DrawerChrome({
   docked: boolean;
   pinned: boolean;
   onPinnedChange?: (pinned: boolean) => void;
+  /** 窄屏隐藏固钉 */
+  hidePin?: boolean;
   stack: StackEntry[];
   onBack: () => void;
   onClose: () => void;
@@ -111,12 +114,12 @@ function DrawerChrome({
           ) : null}
         </div>
         <div className="btn-row shrink-0">
-          {onPinnedChange ? (
+          {onPinnedChange && !hidePin ? (
             <Button
               type="button"
               variant={pinned ? "default" : "ghost"}
               size="sm"
-              className="gap-1 px-2.5"
+              className="hidden min-h-11 gap-1 px-2.5 sm:inline-flex sm:min-h-0"
               aria-pressed={pinned}
               title={pinned ? "取消固钉，恢复浮层" : "固钉到内容区右侧"}
               onClick={() => onPinnedChange(!pinned)}
@@ -126,12 +129,27 @@ function DrawerChrome({
             </Button>
           ) : null}
           {stack.length > 1 ? (
-            <Button type="button" variant="ghost" size="sm" className="gap-1 px-2.5" onClick={onBack} title="返回上篇">
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="min-h-11 gap-1 px-2.5 sm:min-h-0"
+              onClick={onBack}
+              title="返回上篇"
+            >
               <ChevronLeft size={16} strokeWidth={2} aria-hidden />
               <span className="hidden sm:inline">返回</span>
             </Button>
           ) : null}
-          <Button type="button" variant="ghost" size="icon-sm" onClick={onClose} aria-label="关闭" title="关闭">
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="size-11 touch-manipulation sm:size-8"
+            onClick={onClose}
+            aria-label="关闭"
+            title="关闭"
+          >
             <X size={16} strokeWidth={2} aria-hidden />
           </Button>
         </div>
@@ -217,6 +235,19 @@ export function KbPreviewDrawer({
   const [html, setHtml] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "err">("idle");
   const [msg, setMsg] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 639px)");
+    const apply = () => setIsMobile(mq.matches);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile && pinned && onPinnedChange) onPinnedChange(false);
+  }, [isMobile, pinned, onPinnedChange]);
 
   useEffect(() => {
     if (!open || !item?.path) {
@@ -290,6 +321,7 @@ export function KbPreviewDrawer({
       docked={docked}
       pinned={pinned}
       onPinnedChange={onPinnedChange}
+      hidePin={isMobile}
       stack={stack}
       onBack={onBack}
       onClose={onClose}
@@ -322,9 +354,13 @@ export function KbPreviewDrawer({
   return (
     <Sheet open={open} onOpenChange={(next) => !next && onClose()}>
       <SheetContent
-        side="right"
+        side={isMobile ? "bottom" : "right"}
         showCloseButton={false}
-        className="kb-drawer-panel w-full gap-0 p-0 sm:max-w-md"
+        className={
+          isMobile
+            ? "kb-drawer-panel gap-0 p-0 max-h-[min(88dvh,720px)] rounded-t-2xl"
+            : "kb-drawer-panel w-full gap-0 p-0 sm:max-w-md"
+        }
       >
         <SheetHeader className="sr-only">
           <SheetTitle>{item?.title || current?.title || "相关知识点"}</SheetTitle>

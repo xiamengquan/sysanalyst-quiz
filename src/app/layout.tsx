@@ -48,7 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <SiteHeader />
-          <div className="site-main">{children}</div>
+          <main className="site-main">{children}</main>
           <footer
             className="mx-auto hidden w-full px-6 pb-10 text-[0.8rem] leading-relaxed text-muted-foreground sm:block lg:px-8 xl:px-10"
             style={{ maxWidth: "var(--content-max)" }}
