@@ -9,6 +9,7 @@ const tabs = [
   { href: "/", label: "刷题", short: "刷题" },
   { href: "/case/", label: "案例", short: "案例" },
   { href: "/kb/", label: "知识点", short: "知识" },
+  { href: "/changelog/", label: "更新", short: "更新" },
   { href: "/about/", label: "关于", short: "关于" },
 ];
 
@@ -68,7 +69,7 @@ export function SiteHeader() {
         aria-label="底部导航"
       >
         <div
-          className="mx-auto grid grid-cols-4"
+          className="mx-auto grid grid-cols-5"
           style={{ height: "var(--tabbar-h)", maxWidth: "var(--content-max)" }}
         >
           {tabs.map((t) => {

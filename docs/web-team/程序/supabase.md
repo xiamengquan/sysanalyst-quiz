@@ -7,7 +7,7 @@
 
 | 做 | 不做 |
 |----|------|
-| 邮箱 Magic Link 登录 | GitHub OAuth（表结构可后续加） |
+| 邮箱密码登录 / 注册 + Magic Link | GitHub OAuth（表结构可后续加） |
 | 可选云端同步刷题进度 + 案例草稿 | 题干 / 解析 / 知识点正文入库存 |
 | 每用户一行 JSONB（`user_progress`） | 逐题明细大表、Storage Bucket |
 | IndexedDB 本机优先；显式开启才上传 | 强制全员上云 |
@@ -40,16 +40,22 @@ npm run dev
 
 未配置时 `getSupabase()` 返回 `null`，刷题/案例仍走 IndexedDB。
 
-## 2. Auth（Magic Link）
+## 2. Auth（邮箱密码 + Magic Link）
 
-Dashboard → **Authentication** → **URL Configuration**：
+Dashboard → **Authentication** → **Providers** → **Email**：
+
+1. 启用 Email provider  
+2. 允许邮箱密码注册/登录（Email + Password）  
+3. 「Confirm email」可按需要开关：开启则注册后须点确认邮件；关闭则可立即密码登录  
+
+**URL Configuration**：
 
 | 项 | 本地 | 线上（本站） |
 |----|------|------|
 | Site URL | `http://127.0.0.1:3000` | `https://maintruly.top` |
 | Redirect URLs | `http://127.0.0.1:3000/**` | `https://maintruly.top/**` |
 
-启用 **Email** provider（Magic Link）。用户点邮件链接回到任意页即可恢复会话（客户端 `detectSessionInUrl`）。
+前端登录框支持三种方式：**密码登录 / 注册 / Magic Link**。Magic Link 回到任意页即可恢复会话（`detectSessionInUrl`）。
 
 ## 3. 建表与 RLS
 

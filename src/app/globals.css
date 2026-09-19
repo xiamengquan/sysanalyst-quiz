@@ -48,8 +48,9 @@ body {
     radial-gradient(1200px 600px at 10% -10%, #1b2a3d, transparent),
     radial-gradient(900px 500px at 100% 0%, #1a2e28, transparent),
     var(--bg);
+  /* IBM Plex 在前：数字/英文走等宽数字字形；中文回落到系统黑体 */
   font-family:
-    "SF Pro Text",
+    var(--font-plex),
     "PingFang SC",
     "Hiragino Sans GB",
     "Microsoft YaHei",
@@ -57,6 +58,8 @@ body {
   font-size: 16px;
   line-height: var(--leading-body);
   letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
   overscroll-behavior-y: none;
 }
 

@@ -1,7 +1,17 @@
 import type { Metadata, Viewport } from "next";
+import { IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
+import { UpdateNotice } from "@/components/UpdateNotice";
 import { PortalHost } from "@/components/portal";
+
+/** 拉丁数字优先走此字体，配合 tabular-nums，避免「1」过窄 */
+const plexSans = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-plex",
+});
 
 export const metadata: Metadata = {
   title: "系统分析师 · 刷题站",
@@ -25,7 +35,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="zh-CN">
+    <html lang="zh-CN" className={plexSans.variable}>
       <body>
         <SiteHeader />
         <div className="site-main">{children}</div>
@@ -36,6 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           个人学习用途 · EdgeOne / 本地均可部署 · 数据来自知识点精炼与出题工坊正式产物
         </footer>
         <PortalHost />
+        <UpdateNotice />
       </body>
     </html>
   );

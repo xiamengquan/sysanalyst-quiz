@@ -11,7 +11,8 @@ import {
 } from "@/lib/cloud-sync";
 import { getSupabase, isSupabaseConfigured } from "@/lib/supabase/client";
 
-type Status = "idle" | "sending" | "sent" | "syncing" | "error";
+type Status = "idle" | "busy" | "sent" | "syncing" | "error";
+type AuthMode = "password" | "register" | "magic";
 
 function shortEmail(email: string | undefined) {
   if (!email) return "已登录";
@@ -35,6 +36,16 @@ async function applyPull(reloadIfCloud: boolean): Promise<string> {
   return "未同步（需登录并开启云同步）";
 }
 
+const fieldClass =
+  "rounded-lg border border-[var(--line)] bg-[color-mix(in_srgb,var(--panel)_80%,#0a0e12)] px-3 py-2.5 text-[0.95rem] text-[var(--text)] outline-none focus:border-[var(--accent)]";
+
+const tabClass = (active: boolean) =>
+  `rounded-full border px-3 py-1.5 text-[0.8rem] transition ${
+    active
+      ? "border-[color-mix(in_srgb,var(--accent)_45%,var(--line))] bg-[color-mix(in_srgb,var(--accent)_12%,transparent)] text-[var(--accent)]"
+      : "border-transparent text-[var(--muted)] hover:border-[var(--line)] hover:text-[var(--text)]"
+  }`;
+
 export function AuthButton() {
   const titleId = useId();
   const [ready, setReady] = useState(false);
@@ -43,7 +54,9 @@ export function AuthButton() {
   const [syncOn, setSyncOn] = useState(false);
   const [panelOpen, setPanelOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
+  const [mode, setMode] = useState<AuthMode>("password");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
 
@@ -98,19 +111,85 @@ export function AuthButton() {
     setLoginOpen(false);
     setStatus("idle");
     setMessage("");
+    setPassword("");
   };
 
-  const sendMagicLink = async () => {
+  const switchMode = (next: AuthMode) => {
+    setMode(next);
+    setStatus("idle");
+    setMessage("");
+  };
+
+  const validateEmail = () => {
     const trimmed = email.trim();
     if (!trimmed || !trimmed.includes("@")) {
       setStatus("error");
       setMessage("请输入有效邮箱");
+      return null;
+    }
+    return trimmed;
+  };
+
+  const signInPassword = async () => {
+    const trimmed = validateEmail();
+    if (!trimmed) return;
+    if (password.length < 6) {
+      setStatus("error");
+      setMessage("密码至少 6 位");
       return;
     }
     const sb = getSupabase();
     if (!sb) return;
+    setStatus("busy");
+    setMessage("");
+    const { error } = await sb.auth.signInWithPassword({ email: trimmed, password });
+    if (error) {
+      setStatus("error");
+      setMessage(error.message || "登录失败");
+      return;
+    }
+    closeLogin();
+  };
 
-    setStatus("sending");
+  const signUpPassword = async () => {
+    const trimmed = validateEmail();
+    if (!trimmed) return;
+    if (password.length < 6) {
+      setStatus("error");
+      setMessage("密码至少 6 位");
+      return;
+    }
+    const sb = getSupabase();
+    if (!sb) return;
+    setStatus("busy");
+    setMessage("");
+    const redirectTo =
+      typeof window !== "undefined" ? `${window.location.origin}${window.location.pathname}` : undefined;
+    const { data, error } = await sb.auth.signUp({
+      email: trimmed,
+      password,
+      options: { emailRedirectTo: redirectTo },
+    });
+    if (error) {
+      setStatus("error");
+      setMessage(error.message || "注册失败");
+      return;
+    }
+    if (data.session) {
+      closeLogin();
+      return;
+    }
+    setStatus("sent");
+    setMessage("注册成功。若已开启邮箱确认，请查收邮件后再登录；否则可直接用密码登录。");
+  };
+
+  const sendMagicLink = async () => {
+    const trimmed = validateEmail();
+    if (!trimmed) return;
+    const sb = getSupabase();
+    if (!sb) return;
+
+    setStatus("busy");
     setMessage("");
     const redirectTo =
       typeof window !== "undefined" ? `${window.location.origin}${window.location.pathname}` : undefined;
@@ -125,6 +204,12 @@ export function AuthButton() {
     }
     setStatus("sent");
     setMessage("邮件已发送，请点击链接完成登录");
+  };
+
+  const submitLogin = () => {
+    if (mode === "password") void signInPassword();
+    else if (mode === "register") void signUpPassword();
+    else void sendMagicLink();
   };
 
   const toggleSync = async (next: boolean) => {
@@ -189,11 +274,24 @@ export function AuthButton() {
         <Modal open={loginOpen} onClose={closeLogin} labelledBy={titleId}>
           <div className="flex flex-col gap-3 p-1">
             <h2 id={titleId} className="text-[1.05rem] font-semibold text-[var(--text)]">
-              邮箱登录
+              登录账户
             </h2>
             <p className="text-[0.85rem] leading-relaxed text-[var(--muted)]">
-              使用 Magic Link，无需密码。默认只存本机；登录后可自行开启云同步。
+              默认进度只存本机；登录后可自行开启云同步。支持密码登录或 Magic Link。
             </p>
+
+            <div className="flex flex-wrap gap-1" role="tablist" aria-label="登录方式">
+              <button type="button" role="tab" aria-selected={mode === "password"} className={tabClass(mode === "password")} onClick={() => switchMode("password")}>
+                密码登录
+              </button>
+              <button type="button" role="tab" aria-selected={mode === "register"} className={tabClass(mode === "register")} onClick={() => switchMode("register")}>
+                注册
+              </button>
+              <button type="button" role="tab" aria-selected={mode === "magic"} className={tabClass(mode === "magic")} onClick={() => switchMode("magic")}>
+                Magic Link
+              </button>
+            </div>
+
             <label className="flex flex-col gap-1.5 text-[0.82rem] text-[var(--muted)]">
               邮箱
               <input
@@ -202,12 +300,30 @@ export function AuthButton() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter") void sendMagicLink();
+                  if (e.key === "Enter") submitLogin();
                 }}
                 placeholder="you@example.com"
-                className="rounded-lg border border-[var(--line)] bg-[color-mix(in_srgb,var(--panel)_80%,#0a0e12)] px-3 py-2.5 text-[0.95rem] text-[var(--text)] outline-none focus:border-[var(--accent)]"
+                className={fieldClass}
               />
             </label>
+
+            {mode !== "magic" ? (
+              <label className="flex flex-col gap-1.5 text-[0.82rem] text-[var(--muted)]">
+                密码
+                <input
+                  type="password"
+                  autoComplete={mode === "register" ? "new-password" : "current-password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") submitLogin();
+                  }}
+                  placeholder="至少 6 位"
+                  className={fieldClass}
+                />
+              </label>
+            ) : null}
+
             {message ? (
               <p
                 className={`text-[0.82rem] ${status === "error" ? "text-red-400" : "text-[var(--muted)]"}`}
@@ -216,6 +332,7 @@ export function AuthButton() {
                 {message}
               </p>
             ) : null}
+
             <div className="flex justify-end gap-2 pt-1">
               <button
                 type="button"
@@ -226,11 +343,19 @@ export function AuthButton() {
               </button>
               <button
                 type="button"
-                onClick={() => void sendMagicLink()}
-                disabled={status === "sending"}
+                onClick={submitLogin}
+                disabled={status === "busy"}
                 className="rounded-full border border-[color-mix(in_srgb,var(--accent)_45%,var(--line))] bg-[color-mix(in_srgb,var(--accent)_16%,transparent)] px-3.5 py-2 text-[0.85rem] text-[var(--accent)] disabled:opacity-60"
               >
-                {status === "sending" ? "发送中…" : status === "sent" ? "已发送" : "发送链接"}
+                {status === "busy"
+                  ? "请稍候…"
+                  : mode === "password"
+                    ? "登录"
+                    : mode === "register"
+                      ? "注册"
+                      : status === "sent"
+                        ? "已发送"
+                        : "发送链接"}
               </button>
             </div>
           </div>

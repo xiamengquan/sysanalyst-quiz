@@ -26,6 +26,7 @@ const QUICK_LINKS = [
   { href: "/", label: "刷题", hint: "选择题练习" },
   { href: "/case/", label: "案例", hint: "案例分析" },
   { href: "/kb/", label: "知识点", hint: "精炼目录" },
+  { href: "/changelog/", label: "更新日志", hint: "历次发版要点" },
   { href: "/about/", label: "关于", hint: "说明与合规" },
 ];
 

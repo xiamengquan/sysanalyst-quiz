@@ -88,5 +88,30 @@ python3 题库/出题工坊/scripts/merge_to_quiz.py
 | `../设计/信息架构.md` | 顶栏 IA、路由约定 |
 | `../设计/页面说明.md` | 组件与空态 |
 | `../发布/版本说明-*.md` | 发布检查、版本号对齐 |
+| `public/data/release-notes.json` | **站点更新弹窗**：改 `version` + `highlights` 后重新部署，用户首次打开会看到 |
+
+## 版本更新通知
+
+文件：`public/data/release-notes.json`
+
+```json
+{
+  "latest": "0.5.1",
+  "releases": [
+    {
+      "version": "0.5.1",
+      "date": "2026-09-19",
+      "title": "站点更新",
+      "highlights": ["要点一", "要点二"]
+    }
+  ]
+}
+```
+
+- 发版时：把新条目插到 `releases` **最前**，并改 `latest` 为该 version  
+- `latest` / `releases[0]` 与本机 `localStorage` 键 `sysanalyst_release_seen` 不同时弹窗  
+- 点「知道了」后写入该 version，同版本不再提示  
+- 完整列表页：`/changelog/`（组件 `ChangelogApp`）  
+- 首次弹窗：`src/components/UpdateNotice.tsx`（挂在根 layout）
 
 内容问题（题目对错、知识点审计）不在本目录修改，提工单至出题工坊 / 知识点工坊。
