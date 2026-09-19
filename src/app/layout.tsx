@@ -4,7 +4,6 @@ import "./globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { ThemeProvider } from "@/components/theme-provider";
 import { UpdateNotice } from "@/components/UpdateNotice";
-import { PortalHost } from "@/components/portal";
 import { cn } from "@/lib/utils";
 
 /** 拉丁数字优先走此字体，配合 tabular-nums */
@@ -56,7 +55,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           >
             个人学习用途 · EdgeOne / 本地均可部署 · 数据来自知识点精炼与出题工坊正式产物
           </footer>
-          <PortalHost />
           <UpdateNotice />
         </ThemeProvider>
       </body>

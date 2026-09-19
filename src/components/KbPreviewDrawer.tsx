@@ -20,7 +20,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { useEscapeKey } from "@/components/portal";
+import { useEscapeKey } from "@/lib/use-escape-key";
 
 type StackEntry = { id: string; title: string };
 

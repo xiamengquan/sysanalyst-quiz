@@ -1,117 +1,87 @@
 # 题库网站 · 程序
 
-本地静态站点实现，基线演进自 [`题库/答题网页/`](../../答题网页/)。设计见 [`../设计/`](../设计/)。
+> 现行基线：仓库根目录 Next.js 15（`output: "export"`）· 站点版本见 `package.json`  
+> 设计：`../设计/` · 发布：`../发布/`
 
 ## 快速启动
 
-在仓库根目录或答题网页目录执行：
-
 ```bash
-cd 题库/答题网页
-./启动.sh          # 默认端口 8765
-# 或指定端口
-./启动.sh 8080
+cp .env.example .env.local   # 可选：填入 Supabase 公开配置
+npm install
+npm run dev                  # http://localhost:3000
 ```
 
-浏览器打开 **http://127.0.0.1:8765/**。须通过 HTTP 服务访问（不可直接 `file://` 打开），否则 `questions.js`、`meta.json` 与 `kb-index.json` 无法加载。
-
-### 修改后如何生效
-
-| 改了什么 | 操作 |
-|----------|------|
-| `index.html` / `kb-index.json` | 浏览器刷新即可（服务可保持运行） |
-| `questions.js`（merge 后） | 刷新浏览器 |
-| 端口被占用 / 服务未启动 | 先 `Ctrl+C` 停旧进程，再 `./启动.sh` 或 `./启动.sh 8080` |
-
-等价命令：
+静态导出预览：
 
 ```bash
-cd 题库/答题网页 && python3 -m http.server 8765
+npm run build
+npx serve out
 ```
 
-## 目录规划
+发版检查：
+
+```bash
+npm run check:release              # 版本 / 数据文件
+npm run check:release -- --strict-out   # 另要求已有 out/
+```
+
+完整发布步骤见 [`../发布/静态托管发布清单.md`](../发布/静态托管发布清单.md)。
+
+## 常用脚本
+
+| 命令 | 作用 |
+|------|------|
+| `npm run sync:kb` | `content/kb/` → `public/kb/` + `kb-index` / 搜索索引 |
+| `npm run sync:data` | 题库 / 案例 JSONL → `public/data/*.json` |
+| `npm run sync:all` | 上述二者 |
+| `npm run build` | sync:all + Next 静态导出 → `out/` |
+| `npm run check:release` | 发版前静态校验 |
+
+## 目录要点
 
 ```text
-题库/网站小组/程序/
-  README.md              # 本文件：启动说明、目录规划、与基线关系
-  ROLE.md                # 程序席位职责（镜像 skill）
-  supabase.md            # Supabase SDK 接入（静态导出 · 浏览器端）
-  portal.md              # Portal 通道：Modal / Drawer / Overlay
-  site/                  # （可选）较大改版时的开发副本，稳定后同步至 答题网页/
-  scripts/               # （可选）构建、知识点预编译等辅助脚本
-
-题库/答题网页/            # ★ 当前运行基线（优先在此演进）
-  index.html             # 单页：刷题 / 知识点 / 关于（hash 路由）
-  questions.js           # merge 产物，勿手改
-  meta.json              # 题量摘要
-  kb-index.json          # 知识点正式目录（对齐审计发布清单 v1.0）
-  启动.sh                # 本地 HTTP 服务入口
-
-content/banks/practice/all.jsonl          # 自编练习源
-content/banks/real/综合知识/all.jsonl     # 综合知识真题（数据版，现行）
-content/workshop/new/*-passed.jsonl
-docs/kb-workshop/审计委员会/正式发布/     # 知识点正式稿（发布门禁）
+src/app/                 # App Router 页面
+src/components/          # QuizApp / CaseApp / Kb* / ui(shadcn) / …
+src/lib/                 # storage(IndexedDB) · cloud-sync · supabase · use-escape-key
+public/data/             # questions / cases / release-notes / kb-*
+public/kb/               # 正式知识点 Markdown（sync 产物）
+content/banks/           # 题库源
+content/workshop/new/    # 工坊通过题
+content/kb/              # 知识点权威源（仅正式稿可 sync 挂站）
+scripts/check-release.mjs
 ```
 
-## 题库数据更新
+## 路由
 
-`questions.js` 由 merge 脚本生成，**不要手动编辑**：
+| 路径 | 页面 |
+|------|------|
+| `/` | 刷题 |
+| `/case/` | 案例分析 |
+| `/kb/` · `/kb/[id]/` | 知识点目录 / 正文 |
+| `/changelog/` | 更新日志 |
+| `/about/` | 关于 |
 
-```bash
-python3 题库/出题工坊/scripts/merge_to_quiz.py
-# 输出至 题库/答题网页/questions.js
-```
+进度默认 IndexedDB；登录且开启云同步后见 `supabase.md`。
 
-合并后刷新浏览器即可。页内 `QUESTION_META` 与页脚题量摘要会随新文件更新。
+## 浮层约定（v0.6+）
 
-## 路由与页面
-
-| Hash | 页面 | 说明 |
-|------|------|------|
-| `#/` | 刷题 | 默认首页；设置 / 答题 / 结果三态 |
-| `#/kb` | 知识点 | 读取 `kb-index.json` 展示正式目录；点击条目见仓库路径 |
-| `#/kb/:id` | 知识点详情 | 路径指引 + 可选「在本章刷题」 |
-| `#/about` | 关于 | 合规声明、数据来源、隐私与组织说明 |
-
-刷题进度存 `localStorage`（key: `sysanalyst_quiz_v3`），切换顶栏不丢进度。
-
-## 知识点发布门禁
-
-- **v1.0 已发布**（2026-09-10）：`kb-index.json` 仅登记 `知识点精炼-正式清单-v1.0.md` 内路径，`status: 正式`。
-- 站点暂不内嵌 Markdown 正文；更新清单时同步改 `kb-index.json`，**禁止**将编制草稿或送审稿标为正式。
-- 后续预编译脚本可放在 `scripts/`，输出 HTML 至 `答题网页/kb/`。
-
-## 与网站小组其他产出
-
-| 来源 | 消费方式 |
-|------|----------|
-| `../设计/信息架构.md` | 顶栏 IA、路由约定 |
-| `../设计/页面说明.md` | 组件与空态 |
-| `../发布/版本说明-*.md` | 发布检查、版本号对齐 |
-| `public/data/release-notes.json` | **站点更新弹窗**：改 `version` + `highlights` 后重新部署，用户首次打开会看到 |
+- 模态 / 抽屉：shadcn **Dialog** / **Sheet**（登录、更新提示、全局搜索、知识点预览）
+- Esc：`src/lib/use-escape-key.ts`（固钉抽屉等）
+- Toast：`.kb-toast` 固定定位，不进独立 Portal 通道  
+- 历史 `src/components/portal/` 已移除（见本目录归档说明 `portal.md`）
 
 ## 版本更新通知
 
-文件：`public/data/release-notes.json`
+`public/data/release-notes.json`：`latest` 与 `releases[0]` 对齐 `package.json` version；用户首次见新版本弹窗。详情页 `/changelog/`。
 
-```json
-{
-  "latest": "0.6.0",
-  "releases": [
-    {
-      "version": "0.6.0",
-      "date": "2026-09-19",
-      "title": "站点更新",
-      "highlights": ["要点一", "要点二"]
-    }
-  ]
-}
-```
+## 与其他产出
 
-- 发版时：把新条目插到 `releases` **最前**，并改 `latest` 为该 version  
-- `latest` / `releases[0]` 与本机 `localStorage` 键 `sysanalyst_release_seen` 不同时弹窗  
-- 点「知道了」后写入该 version，同版本不再提示  
-- 完整列表页：`/changelog/`（组件 `ChangelogApp`）  
-- 首次弹窗：`src/components/UpdateNotice.tsx`（挂在根 layout）
+| 来源 | 消费方式 |
+|------|----------|
+| `../设计/信息架构.md` | 导航与路由 |
+| `../设计/页面说明.md` | 页面组件与空态 |
+| `../设计/视觉与交互规范.md` | 主题令牌与 shadcn 用法 |
+| `../发布/版本说明-*.md` · `静态托管发布清单.md` | 发版 |
+| `supabase.md` | Auth / 同步 |
 
-内容问题（题目对错、知识点审计）不在本目录修改，提工单至出题工坊 / 知识点工坊。
+内容对错问题提工单至出题工坊 / 知识点工坊。

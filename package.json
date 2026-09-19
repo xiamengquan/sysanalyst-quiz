@@ -10,6 +10,7 @@
     "sync:kb": "node scripts/sync-kb.mjs",
     "sync:data": "node scripts/sync-data.mjs",
     "sync:all": "npm run sync:kb && npm run sync:data",
+    "check:release": "node scripts/check-release.mjs",
     "build:kb-search": "node scripts/build-kb-search.mjs"
   },
   "dependencies": {

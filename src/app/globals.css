@@ -696,32 +696,6 @@ textarea.field {
   color: #d7e0ea;
 }
 
-/* —— Portal 通道（Modal / Drawer / Overlay） —— */
-.portal-channel {
-  /* 挂载点：子层多为 fixed。通道本身须高于顶栏/底栏 sticky·fixed z-50，
-     否则整层叠上下文会被导航盖住（矮屏尤为明显）。 */
-  position: relative;
-  z-index: 200;
-  pointer-events: none;
-}
-.portal-channel > * {
-  pointer-events: auto;
-}
-.portal-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 120;
-}
-.portal-backdrop {
-  position: absolute;
-  inset: 0;
-  border: 0;
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-  background: rgba(0, 0, 0, 0.45);
-}
-
 /* —— 知识点关联预览抽屉 —— */
 .kb-dock-layout {
   display: grid;

@@ -7,7 +7,6 @@ import { filterCatalogItems } from "@/lib/kb-search";
 import { renderKbMarkdown, runMermaidIn } from "@/lib/kb-md";
 import { parseKbHref, resolveKbRef } from "@/lib/kb-resolve";
 import { KbPreviewDrawer, useKbCatalog } from "@/components/KbPreviewDrawer";
-import { Portal } from "@/components/portal";
 import { KbQuickIndex } from "@/components/KbQuickIndex";
 import { GlobalSearchHintButton } from "@/components/GlobalSearch";
 import { Card } from "@/components/ui/card";
@@ -339,11 +338,9 @@ export function KbReader({ id }: { id: string }) {
       {status === "ok" ? <KbQuickIndex bodyRef={bodyRef} html={html} /> : null}
 
       {toast ? (
-        <Portal>
-          <div className="kb-toast" role="status">
-            {toast}
-          </div>
-        </Portal>
+        <div className="kb-toast" role="status">
+          {toast}
+        </div>
       ) : null}
 
       {previewOpen && !kbPinned ? (
