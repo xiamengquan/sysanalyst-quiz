@@ -1,8 +1,7 @@
 "use client";
 
 import type { Session, User } from "@supabase/supabase-js";
-import { useCallback, useEffect, useId, useState } from "react";
-import { Modal } from "@/components/portal";
+import { useCallback, useEffect, useState } from "react";
 import {
   isCloudSyncEnabled,
   pullAndApplyProgress,
@@ -10,6 +9,19 @@ import {
   setCloudSyncEnabled,
 } from "@/lib/cloud-sync";
 import { getSupabase, isSupabaseConfigured } from "@/lib/supabase/client";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 type Status = "idle" | "busy" | "sent" | "syncing" | "error";
 type AuthMode = "password" | "register" | "magic";
@@ -36,18 +48,7 @@ async function applyPull(reloadIfCloud: boolean): Promise<string> {
   return "未同步（需登录并开启云同步）";
 }
 
-const fieldClass =
-  "rounded-lg border border-[var(--line)] bg-[color-mix(in_srgb,var(--panel)_80%,#0a0e12)] px-3 py-2.5 text-[0.95rem] text-[var(--text)] outline-none focus:border-[var(--accent)]";
-
-const tabClass = (active: boolean) =>
-  `rounded-full border px-3 py-1.5 text-[0.8rem] transition ${
-    active
-      ? "border-[color-mix(in_srgb,var(--accent)_45%,var(--line))] bg-[color-mix(in_srgb,var(--accent)_12%,transparent)] text-[var(--accent)]"
-      : "border-transparent text-[var(--muted)] hover:border-[var(--line)] hover:text-[var(--text)]"
-  }`;
-
 export function AuthButton() {
-  const titleId = useId();
   const [ready, setReady] = useState(false);
   const [configured, setConfigured] = useState(false);
   const [user, setUser] = useState<User | null>(null);
@@ -77,19 +78,16 @@ export function AuthButton() {
       return;
     }
 
-    let unsub = () => undefined;
-
     void (async () => {
       const { data } = await sb.auth.getSession();
       setUser(data.session?.user ?? null);
       await refreshSyncFlag();
       setReady(true);
-
       if (data.session?.user && (await isCloudSyncEnabled())) {
         try {
           await applyPull(true);
         } catch {
-          /* ignore boot pull errors */
+          /* ignore */
         }
       }
     })();
@@ -98,11 +96,7 @@ export function AuthButton() {
       setUser(session?.user ?? null);
       void refreshSyncFlag();
     });
-    unsub = () => {
-      sub.subscription.unsubscribe();
-    };
-
-    return () => unsub();
+    return () => sub.subscription.unsubscribe();
   }, [refreshSyncFlag]);
 
   if (!ready || !configured) return null;
@@ -112,12 +106,6 @@ export function AuthButton() {
     setStatus("idle");
     setMessage("");
     setPassword("");
-  };
-
-  const switchMode = (next: AuthMode) => {
-    setMode(next);
-    setStatus("idle");
-    setMessage("");
   };
 
   const validateEmail = () => {
@@ -188,7 +176,6 @@ export function AuthButton() {
     if (!trimmed) return;
     const sb = getSupabase();
     if (!sb) return;
-
     setStatus("busy");
     setMessage("");
     const redirectTo =
@@ -218,12 +205,7 @@ export function AuthButton() {
     try {
       await setCloudSyncEnabled(next);
       setSyncOn(next);
-      if (next) {
-        const msg = await applyPull(true);
-        setMessage(msg);
-      } else {
-        setMessage("已关闭云同步（本机进度仍保留）");
-      }
+      setMessage(next ? await applyPull(true) : "已关闭云同步（本机进度仍保留）");
       setStatus("idle");
     } catch (e) {
       setStatus("error");
@@ -244,9 +226,7 @@ export function AuthButton() {
       const pushed = await pushProgressNow();
       setMessage(pushed ? `${pulled}；已推送本机` : pulled);
       setStatus("idle");
-      if (pulled.includes("云端写入")) {
-        window.location.reload();
-      }
+      if (pulled.includes("云端写入")) window.location.reload();
     } catch (e) {
       setStatus("error");
       setMessage(e instanceof Error ? e.message : "同步失败");
@@ -264,89 +244,82 @@ export function AuthButton() {
   if (!user) {
     return (
       <>
-        <button
-          type="button"
-          onClick={() => setLoginOpen(true)}
-          className="rounded-full border border-[var(--line)] px-3 py-2 text-[0.82rem] text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--text)]"
-        >
+        <Button variant="outline" size="sm" className="rounded-full" onClick={() => setLoginOpen(true)}>
           登录
-        </button>
-        <Modal open={loginOpen} onClose={closeLogin} labelledBy={titleId}>
-          <div className="flex flex-col gap-3 p-1">
-            <h2 id={titleId} className="text-[1.05rem] font-semibold text-[var(--text)]">
-              登录账户
-            </h2>
-            <p className="text-[0.85rem] leading-relaxed text-[var(--muted)]">
-              默认进度只存本机；登录后可自行开启云同步。支持密码登录或 Magic Link。
-            </p>
-
-            <div className="flex flex-wrap gap-1" role="tablist" aria-label="登录方式">
-              <button type="button" role="tab" aria-selected={mode === "password"} className={tabClass(mode === "password")} onClick={() => switchMode("password")}>
-                密码登录
-              </button>
-              <button type="button" role="tab" aria-selected={mode === "register"} className={tabClass(mode === "register")} onClick={() => switchMode("register")}>
-                注册
-              </button>
-              <button type="button" role="tab" aria-selected={mode === "magic"} className={tabClass(mode === "magic")} onClick={() => switchMode("magic")}>
-                Magic Link
-              </button>
-            </div>
-
-            <label className="flex flex-col gap-1.5 text-[0.82rem] text-[var(--muted)]">
-              邮箱
-              <input
-                type="email"
-                autoComplete="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") submitLogin();
-                }}
-                placeholder="you@example.com"
-                className={fieldClass}
-              />
-            </label>
-
-            {mode !== "magic" ? (
-              <label className="flex flex-col gap-1.5 text-[0.82rem] text-[var(--muted)]">
-                密码
-                <input
-                  type="password"
-                  autoComplete={mode === "register" ? "new-password" : "current-password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") submitLogin();
-                  }}
-                  placeholder="至少 6 位"
-                  className={fieldClass}
-                />
-              </label>
-            ) : null}
-
+        </Button>
+        <Dialog open={loginOpen} onOpenChange={(v) => (!v ? closeLogin() : setLoginOpen(true))}>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>登录账户</DialogTitle>
+              <DialogDescription>
+                默认进度只存本机；登录后可自行开启云同步。支持密码或 Magic Link。
+              </DialogDescription>
+            </DialogHeader>
+            <Tabs
+              value={mode}
+              onValueChange={(v) => {
+                setMode(v as AuthMode);
+                setStatus("idle");
+                setMessage("");
+              }}
+            >
+              <TabsList className="grid w-full grid-cols-3">
+                <TabsTrigger value="password">密码登录</TabsTrigger>
+                <TabsTrigger value="register">注册</TabsTrigger>
+                <TabsTrigger value="magic">Magic Link</TabsTrigger>
+              </TabsList>
+              <div className="mt-4 space-y-3">
+                <div className="space-y-2">
+                  <Label htmlFor="auth-email">邮箱</Label>
+                  <Input
+                    id="auth-email"
+                    type="email"
+                    autoComplete="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && submitLogin()}
+                    placeholder="you@example.com"
+                  />
+                </div>
+                <TabsContent value="password" className="mt-0 space-y-2">
+                  <Label htmlFor="auth-password">密码</Label>
+                  <Input
+                    id="auth-password"
+                    type="password"
+                    autoComplete="current-password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && submitLogin()}
+                    placeholder="至少 6 位"
+                  />
+                </TabsContent>
+                <TabsContent value="register" className="mt-0 space-y-2">
+                  <Label htmlFor="auth-password-new">密码</Label>
+                  <Input
+                    id="auth-password-new"
+                    type="password"
+                    autoComplete="new-password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && submitLogin()}
+                    placeholder="至少 6 位"
+                  />
+                </TabsContent>
+                <TabsContent value="magic" className="mt-0 text-sm text-muted-foreground">
+                  将向邮箱发送登录链接，无需密码。
+                </TabsContent>
+              </div>
+            </Tabs>
             {message ? (
-              <p
-                className={`text-[0.82rem] ${status === "error" ? "text-red-400" : "text-[var(--muted)]"}`}
-                role="status"
-              >
+              <p className={`text-sm ${status === "error" ? "text-destructive" : "text-muted-foreground"}`} role="status">
                 {message}
               </p>
             ) : null}
-
-            <div className="flex justify-end gap-2 pt-1">
-              <button
-                type="button"
-                onClick={closeLogin}
-                className="rounded-full border border-[var(--line)] px-3.5 py-2 text-[0.85rem] text-[var(--muted)]"
-              >
+            <DialogFooter>
+              <Button variant="outline" onClick={closeLogin}>
                 取消
-              </button>
-              <button
-                type="button"
-                onClick={submitLogin}
-                disabled={status === "busy"}
-                className="rounded-full border border-[color-mix(in_srgb,var(--accent)_45%,var(--line))] bg-[color-mix(in_srgb,var(--accent)_16%,transparent)] px-3.5 py-2 text-[0.85rem] text-[var(--accent)] disabled:opacity-60"
-              >
+              </Button>
+              <Button onClick={submitLogin} disabled={status === "busy"}>
                 {status === "busy"
                   ? "请稍候…"
                   : mode === "password"
@@ -356,74 +329,53 @@ export function AuthButton() {
                       : status === "sent"
                         ? "已发送"
                         : "发送链接"}
-              </button>
-            </div>
-          </div>
-        </Modal>
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </>
     );
   }
 
   return (
     <>
-      <button
-        type="button"
+      <Button
+        variant="outline"
+        size="sm"
+        className="max-w-[9.5rem] truncate rounded-full"
         onClick={() => setPanelOpen(true)}
-        className="max-w-[9.5rem] truncate rounded-full border border-[var(--line)] px-3 py-2 text-[0.78rem] text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--text)]"
         title={user.email || "账户"}
       >
         {shortEmail(user.email)}
-      </button>
-      <Modal open={panelOpen} onClose={() => setPanelOpen(false)} labelledBy={titleId}>
-        <div className="flex flex-col gap-3 p-1">
-          <h2 id={titleId} className="text-[1.05rem] font-semibold text-[var(--text)]">
-            账户与同步
-          </h2>
-          <p className="break-all text-[0.85rem] text-[var(--muted)]">{user.email}</p>
-
-          <label className="flex items-center justify-between gap-3 rounded-lg border border-[var(--line)] px-3 py-2.5 text-[0.88rem] text-[var(--text)]">
-            <span>
-              云同步
-              <span className="mt-0.5 block text-[0.75rem] text-[var(--muted)]">
-                开启后上传刷题进度与案例草稿
-              </span>
-            </span>
-            <input
-              type="checkbox"
-              checked={syncOn}
-              onChange={(e) => void toggleSync(e.target.checked)}
-              className="h-4 w-4 accent-[var(--accent)]"
-            />
-          </label>
-
+      </Button>
+      <Dialog open={panelOpen} onOpenChange={setPanelOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>账户与同步</DialogTitle>
+            <DialogDescription className="break-all">{user.email}</DialogDescription>
+          </DialogHeader>
+          <div className="flex items-center justify-between gap-3 rounded-lg border border-border px-3 py-3">
+            <div>
+              <div className="text-sm font-medium">云同步</div>
+              <p className="text-xs text-muted-foreground">开启后上传刷题进度与案例草稿</p>
+            </div>
+            <Switch checked={syncOn} onCheckedChange={(v) => void toggleSync(v)} />
+          </div>
           {message ? (
-            <p
-              className={`text-[0.82rem] ${status === "error" ? "text-red-400" : "text-[var(--muted)]"}`}
-              role="status"
-            >
+            <p className={`text-sm ${status === "error" ? "text-destructive" : "text-muted-foreground"}`} role="status">
               {message}
             </p>
           ) : null}
-
-          <div className="flex flex-wrap justify-end gap-2 pt-1">
-            <button
-              type="button"
-              onClick={() => void syncNow()}
-              disabled={status === "syncing" || !syncOn}
-              className="rounded-full border border-[var(--line)] px-3.5 py-2 text-[0.85rem] text-[var(--muted)] disabled:opacity-50"
-            >
+          <DialogFooter>
+            <Button variant="outline" onClick={() => void syncNow()} disabled={status === "syncing" || !syncOn}>
               {status === "syncing" ? "同步中…" : "立即同步"}
-            </button>
-            <button
-              type="button"
-              onClick={() => void signOut()}
-              className="rounded-full border border-[var(--line)] px-3.5 py-2 text-[0.85rem] text-[var(--muted)] hover:text-[var(--text)]"
-            >
+            </Button>
+            <Button variant="secondary" onClick={() => void signOut()}>
               退出
-            </button>
-          </div>
-        </div>
-      </Modal>
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

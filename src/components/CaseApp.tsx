@@ -8,6 +8,8 @@ import { KbPreviewDrawer, useKbCatalog } from "@/components/KbPreviewDrawer";
 import { RichText } from "@/components/RichText";
 import { findRelatedKbForCase } from "@/lib/quiz-kb";
 import type { KbSearchDoc, KbSearchIndex } from "@/lib/kb-search";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
 type CaseDrafts = Record<string, Record<number, string>>;
 
@@ -196,7 +198,7 @@ export function CaseApp() {
     setKbStack(top ? [{ id: top.id, title: top.title }] : []);
   }, [current?.id, phase, kbOpen, relatedKb]);
 
-  if (!ready) return <p className="text-[var(--muted)]">加载案例中…</p>;
+  if (!ready) return <p className="text-muted-foreground">加载案例中…</p>;
 
   return (
     <>
@@ -209,10 +211,10 @@ export function CaseApp() {
       {(phase === "setup" || phase === "list") && (
         <div className="layout-split">
           <aside className="layout-aside" aria-label="案例筛选">
-            <div className="card space-y-4">
+            <Card className="space-y-4 px-(--card-spacing) mb-4">
               <h2 className="text-[1rem] font-medium">筛选</h2>
               <div className="filter-stack">
-                <label className="block text-[0.82rem] text-[var(--muted)]">
+                <label className="block text-[0.82rem] text-muted-foreground">
                   题库
                   <select
                     className="field mt-1.5"
@@ -228,7 +230,7 @@ export function CaseApp() {
                     <option value="real">真题</option>
                   </select>
                 </label>
-                <label className="block text-[0.82rem] text-[var(--muted)]">
+                <label className="block text-[0.82rem] text-muted-foreground">
                   年份
                   <select
                     className="field mt-1.5"
@@ -244,7 +246,7 @@ export function CaseApp() {
                     ))}
                   </select>
                 </label>
-                <label className="block text-[0.82rem] text-[var(--muted)]">
+                <label className="block text-[0.82rem] text-muted-foreground">
                   路径
                   <select className="field mt-1.5" value={track} onChange={(e) => setTrack(e.target.value)}>
                     <option value="frontend">推荐主攻（P0）</option>
@@ -255,7 +257,7 @@ export function CaseApp() {
                     <option value="all">全部路径</option>
                   </select>
                 </label>
-                <label className="block text-[0.82rem] text-[var(--muted)]">
+                <label className="block text-[0.82rem] text-muted-foreground">
                   领域
                   <select className="field mt-1.5" value={domain} onChange={(e) => setDomain(e.target.value)}>
                     <option value="all">全部领域</option>
@@ -266,7 +268,7 @@ export function CaseApp() {
                     ))}
                   </select>
                 </label>
-                <label className="block text-[0.82rem] text-[var(--muted)]">
+                <label className="block text-[0.82rem] text-muted-foreground">
                   题型
                   <select className="field mt-1.5" value={typ} onChange={(e) => setTyp(e.target.value)}>
                     <option value="all">全部题型</option>
@@ -275,7 +277,7 @@ export function CaseApp() {
                     <option value="分析改进">分析改进</option>
                   </select>
                 </label>
-                <label className="block text-[0.82rem] text-[var(--muted)]">
+                <label className="block text-[0.82rem] text-muted-foreground">
                   题量（0=全部）
                   <input
                     className="field mt-1.5"
@@ -287,16 +289,16 @@ export function CaseApp() {
                 </label>
               </div>
               <div className="btn-row">
-                <button
+                <Button
                   type="button"
-                  className="btn btn-primary"
+                   variant="default"
                   onClick={() => startPool(filtered)}
                 >
                   列出练习
-                </button>
-                <button
+                </Button>
+                <Button
                   type="button"
-                  className="btn btn-ghost"
+                   variant="ghost"
                   onClick={() => {
                     if (confirm("清空本机全部案例分析作答草稿？")) {
                       void storageRemove(CASE_STORAGE_KEY).then(() => setDrafts({}));
@@ -304,21 +306,21 @@ export function CaseApp() {
                   }}
                 >
                   清空草稿
-                </button>
+                </Button>
               </div>
-              <p className="text-[0.85rem] leading-relaxed text-[var(--muted)]">
+              <p className="text-[0.85rem] leading-relaxed text-muted-foreground">
                 当前筛选 {filtered.length} 套 · 草稿存 IndexedDB
               </p>
-            </div>
+            </Card>
           </aside>
 
           <div className="layout-main">
             {phase === "setup" && (
               <div className="stack">
                 {packs.length > 0 && (
-                  <div className="card space-y-4 border-[color-mix(in_srgb,var(--accent)_35%,var(--line))]">
+                  <Card className="space-y-4 border-[color-mix(in_srgb,var(--primary)_35%,var(--border))] px-(--card-spacing) mb-4">
                     <h2 className="text-[1rem] font-medium">模拟包 / 真题卷</h2>
-                    <p className="text-[0.85rem] leading-relaxed text-[var(--muted)]">
+                    <p className="text-[0.85rem] leading-relaxed text-muted-foreground">
                       真题包按卷演练；自编五选三包：第 1 题必答，其余选答两题。
                     </p>
                     <ul className="list-gap">
@@ -326,45 +328,45 @@ export function CaseApp() {
                         <li key={p.id}>
                           <button
                             type="button"
-                            className="min-h-14 w-full rounded-xl border border-[var(--line)] bg-[#121820] px-4 py-4 text-left hover:border-[#4a5d73]"
+                            className="min-h-14 w-full rounded-xl border border-border bg-muted/40 px-4 py-4 text-left hover:border-border"
                             onClick={() => startPack(p)}
                           >
                             <div className="text-[0.95rem]">{p.title}</div>
-                            <div className="mt-1.5 text-[0.78rem] leading-relaxed text-[var(--muted)]">
+                            <div className="mt-1.5 text-[0.78rem] leading-relaxed text-muted-foreground">
                               {p.cases.join(" · ")}
                             </div>
                           </button>
                         </li>
                       ))}
                     </ul>
-                  </div>
+                  </Card>
                 )}
-                <div className="card space-y-3">
+                <Card className="space-y-3 px-(--card-spacing) mb-4">
                   <h2 className="text-[1rem] font-medium">自由练习</h2>
-                  <p className="text-[0.9rem] leading-relaxed text-[var(--muted)]">
+                  <p className="text-[0.9rem] leading-relaxed text-muted-foreground">
                     左侧调筛选后点「列出练习」；真题配图可能为外链。
                   </p>
-                </div>
+                </Card>
               </div>
             )}
 
             {phase === "list" && (
-              <div className="card">
+              <Card className="px-(--card-spacing) mb-4">
                 <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                   <h2 className="text-[1rem] font-medium">练习列表</h2>
-                  <button type="button" className="btn btn-ghost" onClick={() => setPhase("setup")}>
+                  <Button type="button" variant="ghost" onClick={() => setPhase("setup")}>
                     返回概览
-                  </button>
+                  </Button>
                 </div>
                 {packHint ? (
-                  <p className="mb-4 text-[0.85rem] leading-relaxed text-[var(--muted)]">{packHint}</p>
+                  <p className="mb-4 text-[0.85rem] leading-relaxed text-muted-foreground">{packHint}</p>
                 ) : null}
                 <ul className="list-gap">
                   {pool.map((c, i) => (
                     <li key={c.id}>
                       <button
                         type="button"
-                        className="min-h-14 w-full rounded-xl border border-[var(--line)] bg-[#121820] px-4 py-4 text-left hover:border-[#4a5d73]"
+                        className="min-h-14 w-full rounded-xl border border-border bg-muted/40 px-4 py-4 text-left hover:border-border"
                         onClick={() => {
                           setIdx(i);
                           setReveal(false);
@@ -376,7 +378,7 @@ export function CaseApp() {
                           {c.id} · {c.point}
                           {i === 0 && packHint.includes("必答") ? "（建议必答）" : ""}
                         </div>
-                        <div className="mt-1.5 text-[0.78rem] leading-relaxed text-[var(--muted)]">
+                        <div className="mt-1.5 text-[0.78rem] leading-relaxed text-muted-foreground">
                           {c.bank === "real" ? "真题 · " : ""}
                           {c.track ? TRACK_LABEL[c.track] || c.track : ""}
                           {c.stop_loss ? " · 止损" : ""} · 第{c.chapter}章 · 建议{" "}
@@ -386,7 +388,7 @@ export function CaseApp() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </Card>
             )}
           </div>
         </div>
@@ -395,8 +397,8 @@ export function CaseApp() {
       {phase === "quiz" && current && (
         <div className={`kb-dock-layout${kbOpen && kbPinned ? " is-docked" : ""}`}>
           <div className="kb-dock-main layout-full">
-        <div className="card">
-          <div className="mb-3 flex justify-between text-[0.85rem] text-[var(--muted)]">
+        <Card className="px-(--card-spacing) mb-4">
+          <div className="mb-3 flex justify-between text-[0.85rem] text-muted-foreground">
             <span>
               第 {idx + 1} / {pool.length} 套
             </span>
@@ -414,18 +416,18 @@ export function CaseApp() {
           </div>
           <RichText
             text={current.stem}
-            className="mb-5 whitespace-pre-wrap break-words rounded-[12px] border border-[var(--line)] bg-[#121820] p-4 text-[0.95rem] leading-[1.7] sm:text-[1rem]"
+            className="mb-5 whitespace-pre-wrap break-words rounded-[12px] border border-border bg-muted/40 p-4 text-[0.95rem] leading-[1.7] sm:text-[1rem]"
           />
 
-          <div className="mb-4 flex gap-1 border-b border-[var(--line)]" role="tablist" aria-label="答题视图">
+          <div className="mb-4 flex gap-1 border-b border-border" role="tablist" aria-label="答题视图">
             <button
               type="button"
               role="tab"
               aria-selected={quizTab === "answer"}
               className={`rounded-t-lg px-3.5 py-2 text-[0.88rem] transition ${
                 quizTab === "answer"
-                  ? "border border-b-transparent border-[var(--line)] bg-[var(--panel)] text-[var(--accent)]"
-                  : "text-[var(--muted)] hover:text-[var(--text)]"
+                  ? "border border-b-transparent border-border bg-card text-primary"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
               onClick={() => setQuizTab("answer")}
             >
@@ -438,8 +440,8 @@ export function CaseApp() {
               disabled={!current.seven_steps?.length}
               className={`rounded-t-lg px-3.5 py-2 text-[0.88rem] transition disabled:cursor-not-allowed disabled:opacity-40 ${
                 quizTab === "seven"
-                  ? "border border-b-transparent border-[var(--line)] bg-[var(--panel)] text-[var(--accent)]"
-                  : "text-[var(--muted)] hover:text-[var(--text)]"
+                  ? "border border-b-transparent border-border bg-card text-primary"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
               onClick={() => setQuizTab("seven")}
               title={current.seven_steps?.length ? "按教程七步法拆解本题" : "本题暂无七步法"}
@@ -450,23 +452,23 @@ export function CaseApp() {
 
           {quizTab === "seven" && current.seven_steps?.length ? (
             <div className="mb-5 space-y-4" role="tabpanel">
-              <p className="text-[0.82rem] leading-relaxed text-[var(--muted)]">
+              <p className="text-[0.82rem] leading-relaxed text-muted-foreground">
                 依据《案例分析答题教程》单题 7 步法，结合本题题干与设问整理。可与「作答」页对照练习。
               </p>
               {current.seven_steps.map((step, i) => (
                 <div
                   key={`${step.title}-${i}`}
-                  className="rounded-[12px] border border-[var(--line)] bg-[#121820] p-4"
+                  className="rounded-[12px] border border-border bg-muted/40 p-4"
                 >
-                  <h4 className="mb-2 text-[0.95rem] font-medium text-[var(--accent)]">{step.title}</h4>
+                  <h4 className="mb-2 text-[0.95rem] font-medium text-primary">{step.title}</h4>
                   <div className="space-y-2 text-[0.88rem] leading-relaxed">
                     <div>
-                      <span className="text-[var(--muted)]">怎么做 · </span>
+                      <span className="text-muted-foreground">怎么做 · </span>
                       <RichText text={step.how} className="inline whitespace-pre-wrap break-words" />
                     </div>
                     {step.why ? (
                       <div>
-                        <span className="text-[var(--muted)]">为什么 · </span>
+                        <span className="text-muted-foreground">为什么 · </span>
                         <RichText text={step.why} className="inline whitespace-pre-wrap break-words" />
                       </div>
                     ) : null}
@@ -490,14 +492,14 @@ export function CaseApp() {
                   onChange={(e) => updateAns(current.id, qq.qnum, e.target.value)}
                 />
                 {reveal && (
-                  <div className="mt-3 rounded-[12px] border border-[color-mix(in_srgb,var(--ok)_40%,var(--line))] bg-[#143028] p-4 text-[0.9rem] leading-relaxed break-words">
+                  <div className="mt-3 rounded-[12px] border border-[color-mix(in_srgb,var(--ok)_40%,var(--border))] bg-primary/10 p-4 text-[0.9rem] leading-relaxed break-words">
                     <b style={{ color: "var(--ok)" }}>参考要点（非唯一）</b>
                     <RichText
                       text={qq.rubric?.sample || "（无）"}
                       className="mt-2 whitespace-pre-wrap break-words"
                     />
                     {qq.hint ? (
-                      <p className="mt-2 text-[var(--muted)]">提示：{qq.hint}</p>
+                      <p className="mt-2 text-muted-foreground">提示：{qq.hint}</p>
                     ) : null}
                   </div>
                 )}
@@ -506,9 +508,9 @@ export function CaseApp() {
           </div>
           )}
           <div className="sticky-actions">
-            <button
+            <Button
               type="button"
-              className="btn"
+               variant="outline"
               disabled={idx <= 0}
               onClick={() => {
                 setReveal(false);
@@ -517,10 +519,10 @@ export function CaseApp() {
               }}
             >
               上一套
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
-              className="btn btn-primary"
+               variant="default"
               disabled={idx >= pool.length - 1}
               onClick={() => {
                 setReveal(false);
@@ -529,26 +531,26 @@ export function CaseApp() {
               }}
             >
               下一套
-            </button>
-            <button type="button" className="btn" onClick={() => setReveal(true)} disabled={quizTab !== "answer"}>
+            </Button>
+            <Button type="button" variant="outline" onClick={() => setReveal(true)} disabled={quizTab !== "answer"}>
               看要点
-            </button>
-            <button type="button" className="btn btn-icon" onClick={openRelatedKb}>
+            </Button>
+            <Button type="button" variant="outline" size="sm" onClick={openRelatedKb}>
               <BookOpen size={16} strokeWidth={2} aria-hidden />
               知识点{relatedKb.length ? ` · ${relatedKb.length}` : ""}
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
-              className="btn btn-ghost"
+               variant="ghost"
               onClick={() => void storageSet(CASE_STORAGE_KEY, drafts)}
             >
               保存
-            </button>
-            <button type="button" className="btn btn-ghost" onClick={() => setPhase("list")}>
+            </Button>
+            <Button type="button" variant="ghost" onClick={() => setPhase("list")}>
               列表
-            </button>
+            </Button>
           </div>
-        </div>
+        </Card>
           </div>
           {kbOpen && kbPinned ? (
             <KbPreviewDrawer

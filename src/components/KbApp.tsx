@@ -10,6 +10,7 @@ import { KbPreviewDrawer, useKbCatalog } from "@/components/KbPreviewDrawer";
 import { Portal } from "@/components/portal";
 import { KbQuickIndex } from "@/components/KbQuickIndex";
 import { GlobalSearchHintButton } from "@/components/GlobalSearch";
+import { Card } from "@/components/ui/card";
 
 const KIND_OPTS = [
   { value: "all", label: "全部类型" },
@@ -63,7 +64,7 @@ export function KbCatalog() {
   }, [data, catalogFiltered, sectionId]);
 
   if (err) return <p className="text-[var(--bad)]">目录加载失败：{err}</p>;
-  if (!data) return <p className="text-[var(--muted)]">正式目录加载中…</p>;
+  if (!data) return <p className="text-muted-foreground">正式目录加载中…</p>;
 
   return (
     <>
@@ -75,13 +76,13 @@ export function KbCatalog() {
 
       <div className="layout-split">
         <aside className="layout-aside" aria-label="知识点筛选">
-          <div className="card space-y-4">
+          <Card className="space-y-4 px-(--card-spacing) mb-4">
             <h2 className="text-[1rem] font-medium">筛选</h2>
-            <p className="text-[0.85rem] leading-relaxed text-[var(--muted)]">
+            <p className="text-[0.85rem] leading-relaxed text-muted-foreground">
               按类型 / 分区浏览；搜标题与正文请用全局搜索。
             </p>
             <div className="filter-stack">
-              <label className="block text-[0.82rem] text-[var(--muted)]">
+              <label className="block text-[0.82rem] text-muted-foreground">
                 类型
                 <select className="field mt-1.5" value={kind} onChange={(e) => setKind(e.target.value)}>
                   {KIND_OPTS.map((o) => (
@@ -91,7 +92,7 @@ export function KbCatalog() {
                   ))}
                 </select>
               </label>
-              <label className="block text-[0.82rem] text-[var(--muted)]">
+              <label className="block text-[0.82rem] text-muted-foreground">
                 篇/分区
                 <select
                   className="field mt-1.5"
@@ -108,23 +109,23 @@ export function KbCatalog() {
               </label>
             </div>
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <p className="text-[0.85rem] text-[var(--muted)]">
+              <p className="text-[0.85rem] text-muted-foreground">
                 显示 {catalogFiltered.length} / {flat.length}
               </p>
               <GlobalSearchHintButton />
             </div>
-          </div>
+          </Card>
         </aside>
 
         <div className="layout-main">
-          <div className="card mb-4 border-[color-mix(in_srgb,var(--accent)_35%,var(--line))] bg-[color-mix(in_srgb,var(--accent)_8%,var(--panel))] text-[0.92rem] leading-relaxed">
+          <Card className="mb-4 border-[color-mix(in_srgb,var(--primary)_35%,var(--border))] bg-[color-mix(in_srgb,var(--primary)_8%,var(--card))] text-[0.92rem] leading-relaxed px-(--card-spacing) mb-4">
             <b>正式发布 {data.meta?.version || "v1.0"}</b>（{data.meta?.effective || "—"}）
             ：审计通过内容；可站内阅读，也可跳转对应章节刷题。正文内关联知识点以抽屉预览。
-          </div>
+          </Card>
 
           {grouped.map((sec) => (
             <div key={sec.id} className="mb-6">
-              <h3 className="mb-3 text-[0.95rem] font-medium tracking-wide text-[var(--muted)]">
+              <h3 className="mb-3 text-[0.95rem] font-medium tracking-wide text-muted-foreground">
                 {sec.title}
               </h3>
               <ul className="list-gap">
@@ -132,12 +133,12 @@ export function KbCatalog() {
                   <li key={item.id}>
                     <Link
                       href={`/kb/${item.id}/`}
-                      className="flex min-h-14 items-center justify-between gap-3 rounded-xl border border-[var(--line)] bg-[#121820] px-4 py-4 hover:border-[#4a5d73]"
+                      className="flex min-h-14 items-center justify-between gap-3 rounded-xl border border-border bg-muted/40 px-4 py-4 hover:border-border"
                     >
                       <div>
                         <div className="text-[0.95rem]">{item.title}</div>
                         {item.note ? (
-                          <div className="mt-0.5 text-[0.78rem] text-[var(--muted)]">{item.note}</div>
+                          <div className="mt-0.5 text-[0.78rem] text-muted-foreground">{item.note}</div>
                         ) : null}
                       </div>
                       <span className="badge shrink-0">{item.status || "正式"}</span>
@@ -288,17 +289,17 @@ export function KbReader({ id }: { id: string }) {
             <header className="kb-reader-head">
               <h1>{item?.title || id}</h1>
               {item?.path ? (
-                <p className="mb-3 break-all text-[0.8rem] leading-relaxed text-[var(--muted)] sm:text-[0.85rem]">
+                <p className="mb-3 break-all text-[0.8rem] leading-relaxed text-muted-foreground sm:text-[0.85rem]">
                   <span className="badge">{item.status || "正式"}</span>
                   <code className="text-[0.8em]">{item.path}</code>
                 </p>
               ) : null}
               {item?.note ? (
-                <p className="text-[0.88rem] leading-relaxed text-[var(--muted)]">{item.note}</p>
+                <p className="text-[0.88rem] leading-relaxed text-muted-foreground">{item.note}</p>
               ) : null}
             </header>
 
-            {status === "loading" && <p className="text-[var(--muted)]">正在加载正文…</p>}
+            {status === "loading" && <p className="text-muted-foreground">正在加载正文…</p>}
             {status === "err" && <p className="text-[var(--bad)]">{msg}</p>}
             {status === "ok" && (
               <div

@@ -11,7 +11,16 @@ import {
   type KbFlatItem,
 } from "@/lib/kb-resolve";
 import type { KbIndex } from "@/lib/types";
-import { Overlay, useEscapeKey } from "@/components/portal";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
+import { useEscapeKey } from "@/components/portal";
 
 type StackEntry = { id: string; title: string };
 
@@ -37,6 +46,154 @@ type Props = {
   pinned?: boolean;
   onPinnedChange?: (pinned: boolean) => void;
 };
+
+function DrawerChrome({
+  titleId,
+  item,
+  current,
+  contextHint,
+  docked,
+  pinned,
+  onPinnedChange,
+  stack,
+  onBack,
+  onClose,
+  related,
+  onOpenRef,
+  bodyRef,
+  onBodyClick,
+  emptyHint,
+  status,
+  msg,
+  html,
+}: {
+  titleId: string;
+  item: KbFlatItem | null;
+  current: StackEntry | null;
+  contextHint?: string;
+  docked: boolean;
+  pinned: boolean;
+  onPinnedChange?: (pinned: boolean) => void;
+  stack: StackEntry[];
+  onBack: () => void;
+  onClose: () => void;
+  related: KbRelatedChip[];
+  onOpenRef: (id: string) => void;
+  bodyRef: React.RefObject<HTMLDivElement | null>;
+  onBodyClick: (e: MouseEvent) => void;
+  emptyHint: string;
+  status: "idle" | "loading" | "ok" | "err";
+  msg: string;
+  html: string;
+}) {
+  return (
+    <>
+      <header className="kb-drawer-head">
+        <div className="min-w-0 flex-1">
+          <h2 id={titleId} className="truncate text-[1.05rem] font-semibold leading-snug">
+            {item?.title || current?.title || "相关知识点"}
+          </h2>
+          {contextHint ? (
+            <p className="mt-0.5 text-[0.78rem] leading-snug text-muted-foreground">{contextHint}</p>
+          ) : null}
+          {item?.path ? (
+            <p className="mt-0.5 truncate text-[0.75rem] text-muted-foreground">
+              <Badge variant="secondary" className="mr-1 align-middle">
+                {item.status || "正式"}
+              </Badge>
+              {docked ? (
+                <Badge variant="secondary" className="mr-1 align-middle">
+                  已固钉
+                </Badge>
+              ) : null}
+              <code className="text-[0.85em]">{item.path}</code>
+            </p>
+          ) : null}
+        </div>
+        <div className="btn-row shrink-0">
+          {onPinnedChange ? (
+            <Button
+              type="button"
+              variant={pinned ? "default" : "ghost"}
+              size="sm"
+              className="gap-1 px-2.5"
+              aria-pressed={pinned}
+              title={pinned ? "取消固钉，恢复浮层" : "固钉到内容区右侧"}
+              onClick={() => onPinnedChange(!pinned)}
+            >
+              {pinned ? <PinOff size={16} strokeWidth={2} aria-hidden /> : <Pin size={16} strokeWidth={2} aria-hidden />}
+              <span className="hidden sm:inline">{pinned ? "取消固钉" : "固钉"}</span>
+            </Button>
+          ) : null}
+          {stack.length > 1 ? (
+            <Button type="button" variant="ghost" size="sm" className="gap-1 px-2.5" onClick={onBack} title="返回上篇">
+              <ChevronLeft size={16} strokeWidth={2} aria-hidden />
+              <span className="hidden sm:inline">返回</span>
+            </Button>
+          ) : null}
+          <Button type="button" variant="ghost" size="icon-sm" onClick={onClose} aria-label="关闭" title="关闭">
+            <X size={16} strokeWidth={2} aria-hidden />
+          </Button>
+        </div>
+      </header>
+
+      {related.length > 0 ? (
+        <div className="kb-drawer-related" aria-label="本题相关知识点">
+          {related.map((r) => {
+            const active = current?.id === r.id;
+            return (
+              <button
+                key={r.id}
+                type="button"
+                className={`kb-related-chip${active ? " is-active" : ""}`}
+                title={r.reason || r.title}
+                onClick={() => onOpenRef(r.id)}
+              >
+                <span className="kb-related-chip-title">{r.title}</span>
+                {r.reason ? <span className="kb-related-chip-reason">{r.reason}</span> : null}
+              </button>
+            );
+          })}
+        </div>
+      ) : null}
+
+      <div ref={bodyRef} className="kb-drawer-body md-body" onClick={onBodyClick}>
+        {!current ? (
+          <div className="space-y-3 text-[0.92rem] leading-relaxed text-muted-foreground">
+            <p>{emptyHint}</p>
+            <Button asChild>
+              <Link href="/kb/" onClick={onClose}>
+                打开知识点目录
+              </Link>
+            </Button>
+          </div>
+        ) : (
+          <>
+            {status === "loading" && <p className="text-muted-foreground">正在加载关联知识点…</p>}
+            {status === "err" && <p className="text-destructive">{msg}</p>}
+            {status === "ok" && <div dangerouslySetInnerHTML={{ __html: html }} />}
+          </>
+        )}
+      </div>
+      <footer className="kb-drawer-foot">
+        {current ? (
+          <Button asChild>
+            <Link href={`/kb/${current.id}/`} onClick={onClose}>
+              <ExternalLink size={16} strokeWidth={2} aria-hidden />
+              整页打开
+            </Link>
+          </Button>
+        ) : (
+          <Button asChild>
+            <Link href="/kb/" onClick={onClose}>
+              打开目录
+            </Link>
+          </Button>
+        )}
+      </footer>
+    </>
+  );
+}
 
 export function KbPreviewDrawer({
   open,
@@ -102,7 +259,7 @@ export function KbPreviewDrawer({
     onClose();
   }, [pinned, onPinnedChange, onClose]);
 
-  useEscapeKey(open, onEscape);
+  useEscapeKey(docked, onEscape);
 
   const onBodyClick = useCallback(
     (e: MouseEvent) => {
@@ -124,138 +281,58 @@ export function KbPreviewDrawer({
     [catalog, onOpenRef],
   );
 
-  if (!open) return null;
-
-  const panel = (
-    <aside
-      className={`kb-drawer-panel${docked ? " is-docked" : ""}`}
-      role="dialog"
-      aria-modal={!docked}
-      aria-labelledby={titleId}
-    >
-      <header className="kb-drawer-head">
-        <div className="min-w-0 flex-1">
-          <h2 id={titleId} className="truncate text-[1.05rem] font-semibold leading-snug">
-            {item?.title || current?.title || "相关知识点"}
-          </h2>
-          {contextHint ? (
-            <p className="mt-0.5 text-[0.78rem] leading-snug text-[var(--muted)]">{contextHint}</p>
-          ) : null}
-          {item?.path ? (
-            <p className="mt-0.5 truncate text-[0.75rem] text-[var(--muted)]">
-              <span className="badge">{item.status || "正式"}</span>
-              {docked ? <span className="badge">已固钉</span> : null}
-              <code className="text-[0.85em]">{item.path}</code>
-            </p>
-          ) : null}
-        </div>
-        <div className="btn-row shrink-0">
-          {onPinnedChange ? (
-            <button
-              type="button"
-              className={`btn btn-icon px-2.5 py-1.5 text-[0.85rem]${pinned ? " btn-primary" : " btn-ghost"}`}
-              aria-pressed={pinned}
-              title={pinned ? "取消固钉，恢复浮层" : "固钉到内容区右侧"}
-              onClick={() => onPinnedChange(!pinned)}
-            >
-              {pinned ? <PinOff size={16} strokeWidth={2} aria-hidden /> : <Pin size={16} strokeWidth={2} aria-hidden />}
-              <span className="hidden sm:inline">{pinned ? "取消固钉" : "固钉"}</span>
-            </button>
-          ) : null}
-          {stack.length > 1 ? (
-            <button
-              type="button"
-              className="btn btn-ghost btn-icon px-2.5 py-1.5 text-[0.85rem]"
-              onClick={onBack}
-              title="返回上篇"
-            >
-              <ChevronLeft size={16} strokeWidth={2} aria-hidden />
-              <span className="hidden sm:inline">返回</span>
-            </button>
-          ) : null}
-          <button
-            type="button"
-            className="btn btn-ghost btn-icon btn-icon-only px-2.5 py-1.5 text-[0.85rem]"
-            onClick={onClose}
-            aria-label="关闭"
-            title="关闭"
-          >
-            <X size={16} strokeWidth={2} aria-hidden />
-          </button>
-        </div>
-      </header>
-
-      {related.length > 0 ? (
-        <div className="kb-drawer-related" aria-label="本题相关知识点">
-          {related.map((r) => {
-            const active = current?.id === r.id;
-            return (
-              <button
-                key={r.id}
-                type="button"
-                className={`kb-related-chip${active ? " is-active" : ""}`}
-                title={r.reason || r.title}
-                onClick={() => onOpenRef(r.id)}
-              >
-                <span className="kb-related-chip-title">{r.title}</span>
-                {r.reason ? <span className="kb-related-chip-reason">{r.reason}</span> : null}
-              </button>
-            );
-          })}
-        </div>
-      ) : null}
-
-      <div ref={bodyRef} className="kb-drawer-body md-body" onClick={onBodyClick}>
-        {!current ? (
-          <div className="space-y-3 text-[0.92rem] leading-relaxed text-[var(--muted)]">
-            <p>{emptyHint}</p>
-            <Link href="/kb/" className="btn btn-primary btn-icon inline-flex" onClick={onClose}>
-              打开知识点目录
-            </Link>
-          </div>
-        ) : (
-          <>
-            {status === "loading" && <p className="text-[var(--muted)]">正在加载关联知识点…</p>}
-            {status === "err" && <p className="text-[var(--bad)]">{msg}</p>}
-            {status === "ok" && <div dangerouslySetInnerHTML={{ __html: html }} />}
-          </>
-        )}
-      </div>
-      <footer className="kb-drawer-foot">
-        {current ? (
-          <Link href={`/kb/${current.id}/`} className="btn btn-primary btn-icon" onClick={onClose}>
-            <ExternalLink size={16} strokeWidth={2} aria-hidden />
-            整页打开
-          </Link>
-        ) : (
-          <Link href="/kb/" className="btn btn-primary" onClick={onClose}>
-            打开目录
-          </Link>
-        )}
-      </footer>
-    </aside>
+  const chrome = (
+    <DrawerChrome
+      titleId={titleId}
+      item={item}
+      current={current}
+      contextHint={contextHint}
+      docked={docked}
+      pinned={pinned}
+      onPinnedChange={onPinnedChange}
+      stack={stack}
+      onBack={onBack}
+      onClose={onClose}
+      related={related}
+      onOpenRef={onOpenRef}
+      bodyRef={bodyRef}
+      onBodyClick={onBodyClick}
+      emptyHint={emptyHint}
+      status={status}
+      msg={msg}
+      html={html}
+    />
   );
 
   if (docked) {
     return (
       <div className="kb-drawer-root is-docked" role="presentation">
-        {panel}
+        <aside
+          className="kb-drawer-panel is-docked"
+          role="dialog"
+          aria-modal={false}
+          aria-labelledby={titleId}
+        >
+          {chrome}
+        </aside>
       </div>
     );
   }
 
   return (
-    <Overlay
-      open={open}
-      onClose={onClose}
-      className="kb-drawer-root"
-      backdropClassName="kb-drawer-backdrop"
-      backdropLabel="关闭预览"
-      lockScroll
-      closeOnEscape={false}
-    >
-      {panel}
-    </Overlay>
+    <Sheet open={open} onOpenChange={(next) => !next && onClose()}>
+      <SheetContent
+        side="right"
+        showCloseButton={false}
+        className="kb-drawer-panel w-full gap-0 p-0 sm:max-w-md"
+      >
+        <SheetHeader className="sr-only">
+          <SheetTitle>{item?.title || current?.title || "相关知识点"}</SheetTitle>
+          <SheetDescription>{contextHint || "知识点预览"}</SheetDescription>
+        </SheetHeader>
+        {chrome}
+      </SheetContent>
+    </Sheet>
   );
 }
 

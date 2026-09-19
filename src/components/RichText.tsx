@@ -18,7 +18,7 @@ export function RichText({ text, className }: { text: string; className?: string
         key={`${m.index}-${m[2]}`}
         src={m[2]}
         alt={m[1] || "配图"}
-        className="my-2 max-h-[480px] w-auto max-w-full rounded-md border border-[var(--line)] bg-white"
+        className="my-2 max-h-[480px] w-auto max-w-full rounded-md border border-border bg-white"
         loading="lazy"
         referrerPolicy="no-referrer"
       />,

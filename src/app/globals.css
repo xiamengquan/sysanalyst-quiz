@@ -1,20 +1,14 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
+@custom-variant dark (&:is(.dark *));
+
+/* 布局节奏（站点壳层） */
 :root {
-  --bg: #0f1419;
-  --panel: #1a222c;
-  --line: #2a3542;
-  --text: #e7eef6;
-  --muted: #8fa3b8;
-  --accent: #3d9cf0;
-  --ok: #3ecf8e;
-  --bad: #f07178;
-  --warn: #e6c07b;
   --tabbar-h: 3.5rem;
   --safe-b: env(safe-area-inset-bottom, 0px);
   --safe-t: env(safe-area-inset-top, 0px);
-  /* 排版节奏（v1.1 留白增强） */
-  /* 壳层流体宽：随视口增长，上限 1600px */
   --content-max: 1600px;
   --space-1: 0.35rem;
   --space-2: 0.65rem;
@@ -25,6 +19,85 @@
   --leading-body: 1.7;
   --leading-ui: 1.5;
   --radius-card: 16px;
+  --ok: oklch(0.72 0.14 155);
+  --bad: oklch(0.68 0.16 25);
+  --warn: oklch(0.82 0.12 85);
+}
+
+/* Light */
+:root {
+  --background: oklch(0.985 0.005 240);
+  --foreground: oklch(0.22 0.02 250);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.02 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.02 250);
+  --primary: oklch(0.58 0.14 245);
+  --primary-foreground: oklch(0.99 0.01 240);
+  --secondary: oklch(0.95 0.01 240);
+  --secondary-foreground: oklch(0.28 0.02 250);
+  --muted: oklch(0.95 0.01 240);
+  --muted-foreground: oklch(0.5 0.03 250);
+  --accent: oklch(0.94 0.02 245);
+  --accent-foreground: oklch(0.28 0.04 245);
+  --destructive: oklch(0.58 0.2 25);
+  --border: oklch(0.88 0.015 250);
+  --input: oklch(0.88 0.015 250);
+  --ring: oklch(0.58 0.14 245);
+  --surface: oklch(0.97 0.008 240);
+  --bg-glow-1: oklch(0.92 0.03 245);
+  --bg-glow-2: oklch(0.93 0.025 160);
+  --chart-1: oklch(0.58 0.14 245);
+  --chart-2: oklch(0.65 0.12 160);
+  --chart-3: oklch(0.7 0.1 85);
+  --chart-4: oklch(0.55 0.12 300);
+  --chart-5: oklch(0.45 0.08 250);
+  --radius: 0.65rem;
+  --sidebar: oklch(0.98 0.005 240);
+  --sidebar-foreground: oklch(0.22 0.02 250);
+  --sidebar-primary: oklch(0.58 0.14 245);
+  --sidebar-primary-foreground: oklch(0.99 0.01 240);
+  --sidebar-accent: oklch(0.94 0.02 245);
+  --sidebar-accent-foreground: oklch(0.28 0.04 245);
+  --sidebar-border: oklch(0.88 0.015 250);
+  --sidebar-ring: oklch(0.58 0.14 245);
+}
+
+.dark {
+  --background: oklch(0.16 0.02 250);
+  --foreground: oklch(0.94 0.01 240);
+  --card: oklch(0.2 0.02 250);
+  --card-foreground: oklch(0.94 0.01 240);
+  --popover: oklch(0.2 0.02 250);
+  --popover-foreground: oklch(0.94 0.01 240);
+  --primary: oklch(0.7 0.12 245);
+  --primary-foreground: oklch(0.18 0.03 250);
+  --secondary: oklch(0.26 0.025 250);
+  --secondary-foreground: oklch(0.92 0.01 240);
+  --muted: oklch(0.26 0.025 250);
+  --muted-foreground: oklch(0.7 0.03 245);
+  --accent: oklch(0.28 0.04 245);
+  --accent-foreground: oklch(0.92 0.01 240);
+  --destructive: oklch(0.68 0.16 25);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.7 0.12 245);
+  --surface: oklch(0.18 0.02 250);
+  --bg-glow-1: oklch(0.28 0.05 250);
+  --bg-glow-2: oklch(0.26 0.04 160);
+  --chart-1: oklch(0.7 0.12 245);
+  --chart-2: oklch(0.72 0.12 160);
+  --chart-3: oklch(0.8 0.1 85);
+  --chart-4: oklch(0.65 0.12 300);
+  --chart-5: oklch(0.55 0.06 250);
+  --sidebar: oklch(0.18 0.02 250);
+  --sidebar-foreground: oklch(0.94 0.01 240);
+  --sidebar-primary: oklch(0.7 0.12 245);
+  --sidebar-primary-foreground: oklch(0.18 0.03 250);
+  --sidebar-accent: oklch(0.28 0.04 245);
+  --sidebar-accent-foreground: oklch(0.92 0.01 240);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: oklch(0.7 0.12 245);
 }
 
 *,
@@ -38,19 +111,17 @@ html {
   text-size-adjust: 100%;
 }
 
-html,
 body {
   margin: 0;
   min-height: 100%;
   min-height: 100dvh;
-  color: var(--text);
   background:
-    radial-gradient(1200px 600px at 10% -10%, #1b2a3d, transparent),
-    radial-gradient(900px 500px at 100% 0%, #1a2e28, transparent),
-    var(--bg);
-  /* IBM Plex 在前：数字/英文走等宽数字字形；中文回落到系统黑体 */
+    radial-gradient(1200px 600px at 10% -10%, var(--bg-glow-1), transparent),
+    radial-gradient(900px 500px at 100% 0%, var(--bg-glow-2), transparent),
+    var(--background);
   font-family:
     var(--font-plex),
+    var(--font-sans),
     "PingFang SC",
     "Hiragino Sans GB",
     "Microsoft YaHei",
@@ -75,6 +146,7 @@ button,
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
+
 
 .site-main {
   width: min(100%, var(--content-max));
@@ -122,7 +194,7 @@ button,
   margin: 0 0 var(--space-5);
   font-size: 0.92rem;
   line-height: var(--leading-ui);
-  color: var(--muted);
+  color: var(--muted-foreground);
   max-width: none;
 }
 
@@ -202,8 +274,8 @@ button,
 }
 
 .card {
-  background: var(--panel);
-  border: 1px solid var(--line);
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: var(--radius-card);
   padding: 1.05rem 1.1rem;
   margin-bottom: var(--space-4);
@@ -226,9 +298,9 @@ button,
 .btn {
   cursor: pointer;
   border-radius: 10px;
-  border: 1px solid var(--line);
-  background: #243041;
-  color: var(--text);
+  border: 1px solid var(--border);
+  background: var(--secondary);
+  color: var(--foreground);
   padding: 11px 14px;
   min-height: 44px;
   font: inherit;
@@ -238,16 +310,16 @@ button,
   gap: 0.35rem;
 }
 .btn:hover {
-  border-color: var(--accent);
+  border-color: var(--primary);
 }
 .btn:disabled {
   opacity: 0.45;
   cursor: not-allowed;
 }
 .btn-primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #061018;
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-foreground);
   font-weight: 600;
 }
 .btn-ghost {
@@ -258,9 +330,9 @@ button,
   width: 100%;
   max-width: 100%;
   border-radius: 10px;
-  border: 1px solid var(--line);
-  background: #121820;
-  color: var(--text);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--foreground);
   padding: 11px 12px;
   /* iOS 避免聚焦自动放大 */
   font-size: 16px;
@@ -270,8 +342,8 @@ button,
   -webkit-appearance: none;
 }
 select.field {
-  background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%),
-    linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-image: linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
   background-position:
     calc(100% - 18px) 50%,
     calc(100% - 12px) 50%;
@@ -291,8 +363,8 @@ textarea.field {
   font-size: 0.75rem;
   padding: 2px 8px;
   border-radius: 999px;
-  background: #243041;
-  color: var(--muted);
+  background: var(--secondary);
+  color: var(--muted-foreground);
   margin-right: 6px;
   margin-bottom: 4px;
 }
@@ -303,9 +375,9 @@ textarea.field {
   width: 100%;
   text-align: left;
   border-radius: 12px;
-  border: 1px solid var(--line);
-  background: #121820;
-  color: var(--text);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--foreground);
   padding: 0.95rem 1rem;
   min-height: 52px;
   font: inherit;
@@ -313,15 +385,15 @@ textarea.field {
   cursor: pointer;
 }
 .opt-btn:hover {
-  border-color: #4a5d73;
+  border-color: var(--border);
 }
 .opt-btn.is-chosen {
-  border-color: var(--accent);
+  border-color: var(--primary);
   background: #173049;
 }
 .opt-btn.is-ok {
   border-color: var(--ok);
-  background: #143028;
+  background: color-mix(in oklch, var(--ok) 18%, var(--card));
 }
 .opt-btn.is-bad {
   border-color: var(--bad);
@@ -338,8 +410,8 @@ textarea.field {
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
-  background: color-mix(in srgb, var(--panel) 92%, transparent);
-  border-top: 1px solid var(--line);
+  background: color-mix(in srgb, var(--card) 92%, transparent);
+  border-top: 1px solid var(--border);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
@@ -372,8 +444,8 @@ textarea.field {
   margin-top: var(--space-4);
   padding: 1.05rem 1.1rem;
   border-radius: 14px;
-  background: #121820;
-  border: 1px solid var(--line);
+  background: var(--surface);
+  border: 1px solid var(--border);
   line-height: 1.8;
   font-size: 0.98rem;
   /* 无侧栏时随内容栏占满；阅读节奏靠行高与段落间距 */
@@ -412,7 +484,7 @@ textarea.field {
 .kb-reader-head {
   margin-bottom: var(--space-5);
   padding-bottom: var(--space-4);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--border);
 }
 .kb-reader-head h1 {
   margin: 0 0 var(--space-3);
@@ -448,9 +520,9 @@ textarea.field {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--panel) 92%, #0f1419);
-  color: var(--text);
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--card) 92%, var(--background));
+  color: var(--foreground);
   font: inherit;
   font-size: 0.86rem;
   font-weight: 600;
@@ -464,16 +536,16 @@ textarea.field {
   white-space: nowrap;
 }
 .kb-fab-btn:hover {
-  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+  border-color: color-mix(in srgb, var(--primary) 55%, var(--border));
   color: #d7ebff;
 }
 .kb-fab-btn:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline: 2px solid color-mix(in srgb, var(--primary) 55%, transparent);
   outline-offset: 2px;
 }
 .kb-fab-btn.is-primary {
-  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
-  background: color-mix(in srgb, var(--accent) 16%, var(--panel));
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
+  background: color-mix(in srgb, var(--primary) 16%, var(--card));
   color: #d7ebff;
 }
 @media (min-width: 960px) {
@@ -504,7 +576,7 @@ textarea.field {
 .md-body h2 {
   font-size: 1.14rem;
   margin: 1.75em 0 0.8em;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--border);
   padding-bottom: 0.5em;
   line-height: 1.4;
 }
@@ -529,14 +601,14 @@ textarea.field {
 }
 .md-body th,
 .md-body td {
-  border: 1px solid var(--line);
+  border: 1px solid var(--border);
   padding: 0.55rem 0.75rem;
   text-align: left;
   vertical-align: top;
 }
 .md-body th {
   background: #1a2836;
-  color: var(--muted);
+  color: var(--muted-foreground);
 }
 .md-body code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -547,7 +619,7 @@ textarea.field {
 }
 .md-body pre {
   background: #0e141c;
-  border: 1px solid var(--line);
+  border: 1px solid var(--border);
   border-radius: 10px;
   padding: 0.95rem 1rem;
   overflow: auto;
@@ -558,23 +630,23 @@ textarea.field {
 .md-body blockquote {
   margin: 1em 0;
   padding: 0.75rem 1rem;
-  border-left: 3px solid var(--accent);
+  border-left: 3px solid var(--primary);
   background: #173049;
-  color: var(--muted);
+  color: var(--muted-foreground);
   border-radius: 0 8px 8px 0;
 }
 .md-body a {
-  color: var(--accent);
+  color: var(--primary);
 }
 .md-body a.kb-ref {
   text-decoration: underline;
   text-underline-offset: 0.15em;
-  text-decoration-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  text-decoration-color: color-mix(in srgb, var(--primary) 55%, transparent);
   cursor: pointer;
 }
 .md-body a.kb-ref code {
   color: inherit;
-  background: color-mix(in srgb, var(--accent) 14%, #121820);
+  background: color-mix(in srgb, var(--primary) 14%, var(--surface));
 }
 .md-body img {
   max-width: 100%;
@@ -584,7 +656,7 @@ textarea.field {
   margin: 0.85rem 0 1.1rem;
   padding: 0.85rem 0.75rem;
   overflow-x: auto;
-  border: 1px solid var(--line);
+  border: 1px solid var(--border);
   border-radius: 10px;
   background: #0f141c;
 }
@@ -599,14 +671,14 @@ textarea.field {
 .md-body .uml-figure {
   margin: 0.85rem 0 1.1rem;
   padding: 0.9rem 0.85rem;
-  border: 1px solid var(--line);
+  border: 1px solid var(--border);
   border-radius: 10px;
-  background: #121820;
+  background: var(--surface);
 }
 .md-body .uml-figure figcaption {
   margin-top: 0.55rem;
   font-size: 0.82rem;
-  color: var(--muted);
+  color: var(--muted-foreground);
   text-align: center;
 }
 .md-body .uml-figure svg {
@@ -696,10 +768,10 @@ textarea.field {
   position: absolute;
   display: flex;
   flex-direction: column;
-  background: var(--panel);
-  border: 1px solid var(--line);
+  background: var(--card);
+  border: 1px solid var(--border);
   box-shadow: -8px 0 32px rgba(0, 0, 0, 0.35);
-  color: var(--text);
+  color: var(--foreground);
 }
 .kb-drawer-panel.is-docked {
   position: sticky;
@@ -769,8 +841,8 @@ textarea.field {
   align-items: flex-start;
   gap: 0.75rem;
   padding: 0.9rem 1rem;
-  border-bottom: 1px solid var(--line);
-  background: color-mix(in srgb, var(--panel) 88%, #0f1419);
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--card) 88%, var(--background));
   flex-shrink: 0;
 }
 .kb-drawer-related {
@@ -780,8 +852,8 @@ textarea.field {
   padding: 0.65rem 0.85rem;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  border-bottom: 1px solid var(--line);
-  background: color-mix(in srgb, var(--panel) 94%, #0a0e12);
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--card) 94%, var(--background));
   flex-shrink: 0;
   min-height: 3.25rem;
   align-items: stretch;
@@ -793,10 +865,10 @@ textarea.field {
   min-width: 5.5rem;
   min-height: 2.75rem;
   text-align: left;
-  border: 1px solid var(--line);
+  border: 1px solid var(--border);
   border-radius: 12px;
-  background: #121820;
-  color: var(--text);
+  background: var(--surface);
+  color: var(--foreground);
   font: inherit;
   padding: 0.45rem 0.65rem;
   cursor: pointer;
@@ -818,17 +890,17 @@ textarea.field {
 }
 .kb-related-chip-reason {
   font-size: 0.7rem;
-  color: var(--muted);
+  color: var(--muted-foreground);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .kb-related-chip:hover {
-  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
 }
 .kb-related-chip.is-active {
-  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
-  background: color-mix(in srgb, var(--accent) 14%, #121820);
+  border-color: color-mix(in srgb, var(--primary) 55%, var(--border));
+  background: color-mix(in srgb, var(--primary) 14%, var(--surface));
 }
 .kb-drawer-body {
   flex: 1 1 auto;
@@ -841,8 +913,8 @@ textarea.field {
   display: flex;
   gap: 0.5rem;
   padding: 0.75rem 1rem calc(0.75rem + var(--safe-b));
-  border-top: 1px solid var(--line);
-  background: color-mix(in srgb, var(--panel) 88%, #0f1419);
+  border-top: 1px solid var(--border);
+  background: color-mix(in srgb, var(--card) 88%, var(--background));
   flex-shrink: 0;
 }
 
@@ -870,9 +942,9 @@ textarea.field {
   max-width: min(90vw, 360px);
   padding: 0.55rem 0.9rem;
   border-radius: 10px;
-  border: 1px solid var(--line);
-  background: #243041;
-  color: var(--text);
+  border: 1px solid var(--border);
+  background: var(--secondary);
+  color: var(--foreground);
   font-size: 0.88rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
@@ -891,9 +963,9 @@ textarea.field {
 }
 .kb-toc-trigger {
   appearance: none;
-  border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--panel) 92%, #0f1419);
-  color: var(--text);
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--card) 92%, var(--background));
+  color: var(--foreground);
   font: inherit;
   font-size: 0.86rem;
   font-weight: 600;
@@ -905,16 +977,16 @@ textarea.field {
   cursor: pointer;
 }
 .kb-toc-trigger:hover {
-  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+  border-color: color-mix(in srgb, var(--primary) 55%, var(--border));
   color: #d7ebff;
 }
 .kb-toc-trigger:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline: 2px solid color-mix(in srgb, var(--primary) 55%, transparent);
   outline-offset: 2px;
 }
 .kb-toc-fab.is-open .kb-toc-trigger {
-  border-color: color-mix(in srgb, var(--accent) 50%, var(--line));
-  background: #243041;
+  border-color: color-mix(in srgb, var(--primary) 50%, var(--border));
+  background: var(--secondary);
 }
 .kb-toc-panel {
   width: min(92vw, 300px);
@@ -922,8 +994,8 @@ textarea.field {
   display: flex;
   flex-direction: column;
   border-radius: 14px;
-  border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--panel) 96%, #0a0e12);
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--card) 96%, var(--background));
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
   overflow: hidden;
 }
@@ -933,16 +1005,16 @@ textarea.field {
   justify-content: space-between;
   gap: 0.5rem;
   padding: 0.55rem 0.75rem;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--border);
   font-size: 0.82rem;
   font-weight: 600;
-  color: var(--muted);
+  color: var(--muted-foreground);
 }
 .kb-toc-close {
   appearance: none;
   border: 0;
   background: transparent;
-  color: var(--accent);
+  color: var(--primary);
   font: inherit;
   font-size: 0.8rem;
   cursor: pointer;
@@ -962,7 +1034,7 @@ textarea.field {
   text-align: left;
   border: 0;
   background: transparent;
-  color: var(--text);
+  color: var(--foreground);
   font: inherit;
   font-size: 0.84rem;
   line-height: 1.35;
@@ -980,16 +1052,16 @@ textarea.field {
 .kb-toc-item.lv-3 button {
   padding-left: 1.55rem;
   font-size: 0.8rem;
-  color: var(--muted);
+  color: var(--muted-foreground);
 }
 .kb-toc-item button:hover {
-  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
   color: #eaf4ff;
 }
 .kb-toc-item.is-active button {
-  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  background: color-mix(in srgb, var(--primary) 18%, transparent);
   color: #eaf4ff;
-  box-shadow: inset 3px 0 0 var(--accent);
+  box-shadow: inset 3px 0 0 var(--primary);
 }
 @media (min-width: 960px) {
   .kb-toc-fab {
@@ -1022,16 +1094,16 @@ textarea.field {
   min-height: 36px;
   padding: 0.3rem 0.55rem 0.3rem 0.75rem;
   border-radius: 999px;
-  border: 1px solid var(--line);
-  background: #121820;
-  color: var(--muted);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted-foreground);
   font: inherit;
   font-size: 0.82rem;
   cursor: pointer;
 }
 .gs-trigger:hover {
-  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
-  color: var(--text);
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
+  color: var(--foreground);
 }
 .gs-trigger-label {
   display: none;
@@ -1046,9 +1118,9 @@ textarea.field {
   display: inline-block;
   padding: 0.12rem 0.4rem;
   border-radius: 6px;
-  border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--panel) 80%, #0a0e12);
-  color: var(--muted);
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--card) 80%, var(--background));
+  color: var(--muted-foreground);
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 0.72rem;
   line-height: 1.2;
@@ -1077,8 +1149,8 @@ textarea.field {
   display: flex;
   flex-direction: column;
   border-radius: 16px;
-  border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--panel) 96%, #0a0e12);
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--card) 96%, var(--background));
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
   overflow: hidden;
 }
@@ -1087,7 +1159,7 @@ textarea.field {
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 0.85rem;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--border);
 }
 .gs-input {
   flex: 1;
@@ -1095,19 +1167,19 @@ textarea.field {
   appearance: none;
   border: 0;
   background: transparent;
-  color: var(--text);
+  color: var(--foreground);
   font: inherit;
   font-size: 1.02rem;
   outline: none;
 }
 .gs-input::placeholder {
-  color: var(--muted);
+  color: var(--muted-foreground);
 }
 .gs-esc {
   appearance: none;
-  border: 1px solid var(--line);
-  background: #243041;
-  color: var(--muted);
+  border: 1px solid var(--border);
+  background: var(--secondary);
+  color: var(--muted-foreground);
   font: inherit;
   font-size: 0.75rem;
   padding: 0.25rem 0.45rem;
@@ -1120,15 +1192,15 @@ textarea.field {
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
   padding: 0.55rem 0.85rem;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--border);
 }
 .gs-select {
   appearance: none;
   width: 100%;
-  border: 1px solid var(--line);
+  border: 1px solid var(--border);
   border-radius: 8px;
-  background: #121820;
-  color: var(--text);
+  background: var(--surface);
+  color: var(--foreground);
   font: inherit;
   font-size: 0.8rem;
   padding: 0.4rem 0.55rem;
@@ -1143,7 +1215,7 @@ textarea.field {
 .gs-empty {
   margin: 0;
   padding: 1.25rem 1rem;
-  color: var(--muted);
+  color: var(--muted-foreground);
   font-size: 0.9rem;
 }
 .gs-list {
@@ -1155,7 +1227,7 @@ textarea.field {
   padding: 0.55rem 0.95rem 0.25rem;
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--muted);
+  color: var(--muted-foreground);
   letter-spacing: 0.02em;
 }
 .gs-item {
@@ -1166,7 +1238,7 @@ textarea.field {
   border: 0;
   border-radius: 10px;
   background: transparent;
-  color: var(--text);
+  color: var(--foreground);
   font: inherit;
   padding: 0.55rem 0.7rem;
   cursor: pointer;
@@ -1176,7 +1248,7 @@ textarea.field {
 }
 .gs-item:hover,
 .gs-item.is-active {
-  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  background: color-mix(in srgb, var(--primary) 16%, transparent);
 }
 .gs-item-title {
   font-size: 0.92rem;
@@ -1184,7 +1256,7 @@ textarea.field {
 }
 .gs-item-meta {
   font-size: 0.78rem;
-  color: var(--muted);
+  color: var(--muted-foreground);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1192,7 +1264,7 @@ textarea.field {
 }
 .gs-item-snip {
   font-size: 0.8rem;
-  color: #a8b8c8;
+  color: var(--muted-foreground);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -1203,7 +1275,61 @@ textarea.field {
   flex-wrap: wrap;
   gap: 0.75rem;
   padding: 0.45rem 0.95rem calc(0.55rem + env(safe-area-inset-bottom, 0px));
-  border-top: 1px solid var(--line);
-  color: var(--muted);
+  border-top: 1px solid var(--border);
+  color: var(--muted-foreground);
   font-size: 0.72rem;
+}
+
+
+
+@theme inline {
+  --font-heading: var(--font-plex), var(--font-sans);
+  --font-sans: var(--font-plex), var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

@@ -1,6 +1,16 @@
 {
-  "latest": "0.5.1",
+  "latest": "0.6.0",
   "releases": [
+    {
+      "version": "0.6.0",
+      "date": "2026-09-19",
+      "title": "shadcn/ui 壳层与主题",
+      "highlights": [
+        "整体壳层基于 shadcn/ui（Radix）重建：Button / Dialog / Tabs / Card 等",
+        "支持浅色 / 深色 / 跟随系统主题切换，默认深色，本机记忆偏好",
+        "登录与更新弹窗改为 shadcn Dialog；顶栏导航与主题切换器接入设计系统"
+      ]
+    },
     {
       "version": "0.5.1",
       "date": "2026-09-19",

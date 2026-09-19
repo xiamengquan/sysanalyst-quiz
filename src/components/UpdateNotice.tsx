@@ -1,8 +1,16 @@
 "use client";
 
-import { useEffect, useId, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Modal } from "@/components/portal";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import { pickLatestRelease, type ReleaseEntry, type ReleaseNotesFile } from "@/lib/release-notes";
 
 const SEEN_KEY = "sysanalyst_release_seen";
@@ -24,12 +32,7 @@ function writeSeen(version: string) {
   }
 }
 
-/**
- * 新部署版本首次打开时弹出更新说明。
- * 数据源：`/data/release-notes.json`（发版时改 latest + releases）。
- */
 export function UpdateNotice() {
-  const titleId = useId();
   const [notes, setNotes] = useState<ReleaseEntry | null>(null);
   const [open, setOpen] = useState(false);
 
@@ -41,8 +44,7 @@ export function UpdateNotice() {
         if (cancelled) return;
         const latest = pickLatestRelease(data);
         if (!latest) return;
-        const seen = readSeen();
-        if (seen === latest.version) return;
+        if (readSeen() === latest.version) return;
         setNotes(latest);
         setOpen(true);
       })
@@ -60,40 +62,38 @@ export function UpdateNotice() {
   if (!notes) return null;
 
   return (
-    <Modal open={open} onClose={dismiss} labelledBy={titleId}>
-      <div className="flex flex-col gap-3 p-1">
-        <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h2 id={titleId} className="text-[1.05rem] font-semibold text-[var(--text)]">
-            {notes.title || "站点更新"}
-          </h2>
-          <span className="text-[0.78rem] text-[var(--muted)]" style={{ fontVariantNumeric: "tabular-nums" }}>
-            v{notes.version}
-            {notes.date ? ` · ${notes.date}` : ""}
-          </span>
-        </div>
-        <p className="text-[0.85rem] leading-relaxed text-[var(--muted)]">本版更新要点：</p>
-        <ul className="m-0 list-disc space-y-2 pl-5 text-[0.9rem] leading-relaxed text-[var(--text)]">
+    <Dialog
+      open={open}
+      onOpenChange={(v) => {
+        if (!v) dismiss();
+        else setOpen(true);
+      }}
+    >
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle className="flex flex-wrap items-baseline justify-between gap-2 pr-6">
+            <span>{notes.title || "站点更新"}</span>
+            <span className="text-sm font-normal text-muted-foreground tabular-nums">
+              v{notes.version}
+              {notes.date ? ` · ${notes.date}` : ""}
+            </span>
+          </DialogTitle>
+          <DialogDescription>本版更新要点：</DialogDescription>
+        </DialogHeader>
+        <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed">
           {notes.highlights.map((h) => (
             <li key={h}>{h}</li>
           ))}
         </ul>
-        <div className="flex flex-wrap items-center justify-between gap-2 pt-2">
-          <Link
-            href="/changelog/"
-            className="text-[0.85rem] text-[var(--accent)] underline-offset-2 hover:underline"
-            onClick={dismiss}
-          >
-            查看全部更新日志
-          </Link>
-          <button
-            type="button"
-            className="rounded-full border border-[color-mix(in_srgb,var(--accent)_45%,var(--line))] bg-[color-mix(in_srgb,var(--accent)_16%,transparent)] px-4 py-2 text-[0.88rem] text-[var(--accent)]"
-            onClick={dismiss}
-          >
-            知道了
-          </button>
-        </div>
-      </div>
-    </Modal>
+        <DialogFooter className="flex-row flex-wrap items-center justify-between gap-2 sm:justify-between">
+          <Button variant="link" className="h-auto px-0" asChild>
+            <Link href="/changelog/" onClick={dismiss}>
+              查看全部更新日志
+            </Link>
+          </Button>
+          <Button onClick={dismiss}>知道了</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }

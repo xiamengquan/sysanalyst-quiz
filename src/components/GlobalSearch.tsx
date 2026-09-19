@@ -11,7 +11,14 @@ import {
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
 import { searchKbDocs, type KbSearchHit, type KbSearchIndex } from "@/lib/kb-search";
-import { Modal } from "@/components/portal";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 
 const KIND_OPTS = [
   { value: "all", label: "全部类型" },
@@ -224,146 +231,160 @@ export function GlobalSearch() {
 
   return (
     <>
-      <button
+      <Button
         type="button"
-        className="gs-trigger"
+        variant="outline"
+        size="sm"
+        className="gs-trigger h-8 gap-2 rounded-full px-3"
         onClick={openModal}
         aria-label="打开搜索"
         title={`${modHint} 搜索`}
       >
         <span className="gs-trigger-label">搜索</span>
         <kbd className="gs-kbd">{modHint}</kbd>
-      </button>
+      </Button>
 
-      <Modal open={open} onClose={close} labelledBy={titleId} backdropLabel="关闭搜索">
-            <div className="gs-hd">
-              <h2 id={titleId} className="sr-only">
-                全局搜索
-              </h2>
-              <input
-                ref={inputRef}
-                className="gs-input"
-                type="search"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                onKeyDown={onInputKeyDown}
-                placeholder="搜知识点、标题、正文，或跳转页面…"
-                enterKeyHint="search"
-                autoComplete="off"
-                autoCapitalize="off"
-                autoCorrect="off"
-                spellCheck={false}
-              />
-              <button type="button" className="gs-esc" onClick={close}>
-                Esc
-              </button>
-            </div>
+      <Dialog
+        open={open}
+        onOpenChange={(next) => {
+          if (!next) close();
+          else openModal();
+        }}
+      >
+        <DialogContent
+          showCloseButton={false}
+          className="gs-dialog top-[12%] max-h-[min(72vh,640px)] w-[min(560px,calc(100vw-1.5rem))] translate-y-0 gap-0 overflow-hidden p-0 sm:max-w-[560px]"
+          aria-describedby={undefined}
+        >
+          <DialogTitle id={titleId} className="sr-only">
+            全局搜索
+          </DialogTitle>
+          <DialogDescription className="sr-only">搜索知识点或跳转页面</DialogDescription>
 
-            <div className="gs-filters">
-              <select
-                className="gs-select"
-                value={kind}
-                onChange={(e) => setKind(e.target.value)}
-                aria-label="类型"
-              >
-                {KIND_OPTS.map((o) => (
-                  <option key={o.value} value={o.value}>
-                    {o.label}
-                  </option>
-                ))}
-              </select>
-              <select
-                className="gs-select"
-                value={sectionId}
-                onChange={(e) => setSectionId(e.target.value)}
-                aria-label="篇/分区"
-              >
-                <option value="all">全部篇/分区</option>
-                {sections.map((s) => (
-                  <option key={s.id} value={s.id}>
-                    {s.title}
-                  </option>
-                ))}
-              </select>
-            </div>
+          <div className="gs-hd">
+            <Input
+              ref={inputRef}
+              className="gs-input h-11 border-0 bg-transparent shadow-none focus-visible:ring-0"
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={onInputKeyDown}
+              placeholder="搜知识点、标题、正文，或跳转页面…"
+              enterKeyHint="search"
+              autoComplete="off"
+              autoCapitalize="off"
+              autoCorrect="off"
+              spellCheck={false}
+            />
+            <Button type="button" variant="ghost" size="sm" className="gs-esc shrink-0" onClick={close}>
+              Esc
+            </Button>
+          </div>
 
-            <div className="gs-body" ref={listRef}>
-              {loading && !searchIdx ? (
-                <p className="gs-empty">索引加载中…</p>
-              ) : rows.length === 0 ? (
-                <p className="gs-empty">无匹配，试试「分片」「架构」或章节号「12」</p>
-              ) : (
-                <ul className="gs-list">
-                  {indexed.nav.length > 0 ? (
-                    <>
-                      <li className="gs-group">{q ? "页面" : "快捷入口"}</li>
-                      {indexed.nav.map(({ row, i }) => {
-                        if (row.type !== "nav") return null;
-                        return (
-                          <li key={`nav-${row.href}`}>
-                            <button
-                              type="button"
-                              data-idx={i}
-                              className={`gs-item${active === i ? " is-active" : ""}`}
-                              onMouseEnter={() => setActive(i)}
-                              onClick={() => go(row.href)}
-                            >
-                              <span className="gs-item-title">{row.label}</span>
-                              <span className="gs-item-meta">{row.hint}</span>
-                            </button>
-                          </li>
-                        );
-                      })}
-                    </>
-                  ) : null}
-                  {indexed.kb.length > 0 ? (
-                    <>
-                      <li className="gs-group">知识点</li>
-                      {indexed.kb.map(({ row, i }) => {
-                        if (row.type !== "kb") return null;
-                        const { hit } = row;
-                        return (
-                          <li key={`kb-${hit.id}-${hit.hitKind}-${hit.heading || ""}-${i}`}>
-                            <button
-                              type="button"
-                              data-idx={i}
-                              className={`gs-item${active === i ? " is-active" : ""}`}
-                              onMouseEnter={() => setActive(i)}
-                              onClick={() => go(row.href)}
-                            >
-                              <span className="gs-item-title">{hit.title}</span>
-                              <span className="gs-item-meta">
-                                <span className="badge">{hitLabel(hit.hitKind)}</span>
-                                {hit.sectionTitle}
-                                {hit.heading ? ` · ${hit.heading}` : ""}
-                              </span>
-                              {hit.snippet ? (
-                                <span className="gs-item-snip">{hit.snippet}</span>
-                              ) : null}
-                            </button>
-                          </li>
-                        );
-                      })}
-                    </>
-                  ) : null}
-                </ul>
-              )}
-            </div>
+          <div className="gs-filters">
+            <select
+              className="gs-select"
+              value={kind}
+              onChange={(e) => setKind(e.target.value)}
+              aria-label="类型"
+            >
+              {KIND_OPTS.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
+            <select
+              className="gs-select"
+              value={sectionId}
+              onChange={(e) => setSectionId(e.target.value)}
+              aria-label="篇/分区"
+            >
+              <option value="all">全部篇/分区</option>
+              {sections.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.title}
+                </option>
+              ))}
+            </select>
+          </div>
 
-            <div className="gs-ft">
-              <span>↑↓ 选择</span>
-              <span>Enter 打开</span>
-              <span>{modHint} 开关</span>
-            </div>
-      </Modal>
+          <div className="gs-body" ref={listRef}>
+            {loading && !searchIdx ? (
+              <p className="gs-empty">索引加载中…</p>
+            ) : rows.length === 0 ? (
+              <p className="gs-empty">无匹配，试试「分片」「架构」或章节号「12」</p>
+            ) : (
+              <ul className="gs-list">
+                {indexed.nav.length > 0 ? (
+                  <>
+                    <li className="gs-group">{q ? "页面" : "快捷入口"}</li>
+                    {indexed.nav.map(({ row, i }) => {
+                      if (row.type !== "nav") return null;
+                      return (
+                        <li key={`nav-${row.href}`}>
+                          <button
+                            type="button"
+                            data-idx={i}
+                            className={`gs-item${active === i ? " is-active" : ""}`}
+                            onMouseEnter={() => setActive(i)}
+                            onClick={() => go(row.href)}
+                          >
+                            <span className="gs-item-title">{row.label}</span>
+                            <span className="gs-item-meta">{row.hint}</span>
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </>
+                ) : null}
+                {indexed.kb.length > 0 ? (
+                  <>
+                    <li className="gs-group">知识点</li>
+                    {indexed.kb.map(({ row, i }) => {
+                      if (row.type !== "kb") return null;
+                      const { hit } = row;
+                      return (
+                        <li key={`kb-${hit.id}-${hit.hitKind}-${hit.heading || ""}-${i}`}>
+                          <button
+                            type="button"
+                            data-idx={i}
+                            className={`gs-item${active === i ? " is-active" : ""}`}
+                            onMouseEnter={() => setActive(i)}
+                            onClick={() => go(row.href)}
+                          >
+                            <span className="gs-item-title">{hit.title}</span>
+                            <span className="gs-item-meta">
+                              <span className="badge">{hitLabel(hit.hitKind)}</span>
+                              {hit.sectionTitle}
+                              {hit.heading ? ` · ${hit.heading}` : ""}
+                            </span>
+                            {hit.snippet ? <span className="gs-item-snip">{hit.snippet}</span> : null}
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </>
+                ) : null}
+              </ul>
+            )}
+          </div>
+
+          <div className="gs-ft">
+            <span>↑↓ 选择</span>
+            <span>Enter 打开</span>
+            <span>{modHint} 开关</span>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
 
 export function GlobalSearchHintButton({ className = "" }: { className?: string }) {
   return (
-    <button type="button" className={`btn btn-ghost ${className}`.trim()} onClick={openGlobalSearch}>
+    <Button type="button" variant="ghost" className={className} onClick={openGlobalSearch}>
       打开搜索
-    </button>
+    </Button>
   );
 }

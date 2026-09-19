@@ -8,6 +8,8 @@ import { KbPreviewDrawer, useKbCatalog } from "@/components/KbPreviewDrawer";
 import { RichText } from "@/components/RichText";
 import { findRelatedKbForQuestion } from "@/lib/quiz-kb";
 import type { KbSearchDoc, KbSearchIndex } from "@/lib/kb-search";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
 type Meta = { practice: number; real: number; workshop: number; total: number };
 
@@ -304,7 +306,7 @@ export function QuizApp() {
     setKbStack(top ? [{ id: top.id, title: top.title }] : []);
   }, [q?.no, phase, kbOpen, relatedKb]);
 
-  if (loading) return <p className="text-[var(--muted)]">加载题库中…</p>;
+  if (loading) return <p className="text-muted-foreground">加载题库中…</p>;
 
   return (
     <>
@@ -321,10 +323,10 @@ export function QuizApp() {
       {phase === "setup" && (
         <div className="layout-split">
           <aside className="layout-aside" aria-label="刷题筛选">
-            <div className="card">
+            <Card className="px-(--card-spacing) mb-4">
               <h2 className="mb-4 text-[1rem] font-medium">筛选</h2>
               <div className="filter-stack">
-                <label className="block text-[0.82rem] text-[var(--muted)]">
+                <label className="block text-[0.82rem] text-muted-foreground">
                   学习路径
                   <select
                     className="field mt-1.5"
@@ -350,7 +352,7 @@ export function QuizApp() {
                     <option value="all">不限路径</option>
                   </select>
                 </label>
-                <label className="block text-[0.82rem] text-[var(--muted)]">
+                <label className="block text-[0.82rem] text-muted-foreground">
                   题库
                   <select
                     className="field mt-1.5"
@@ -372,7 +374,7 @@ export function QuizApp() {
                     <option value="all">全部（含论文自测）</option>
                   </select>
                 </label>
-                <label className="block text-[0.82rem] text-[var(--muted)]">
+                <label className="block text-[0.82rem] text-muted-foreground">
                   场次（综合知识真题）
                   <select
                     className="field mt-1.5"
@@ -388,7 +390,7 @@ export function QuizApp() {
                     ))}
                   </select>
                 </label>
-                <label className="block text-[0.82rem] text-[var(--muted)]">
+                <label className="block text-[0.82rem] text-muted-foreground">
                   章节（自编）
                   <select className="field mt-1.5" value={chapter} onChange={(e) => setChapter(e.target.value)}>
                     <option value="all">全部章节</option>
@@ -399,7 +401,7 @@ export function QuizApp() {
                     ))}
                   </select>
                 </label>
-                <label className="block text-[0.82rem] text-[var(--muted)]">
+                <label className="block text-[0.82rem] text-muted-foreground">
                   难度
                   <select className="field mt-1.5" value={diff} onChange={(e) => setDiff(e.target.value)}>
                     <option value="all">全部难度</option>
@@ -409,7 +411,7 @@ export function QuizApp() {
                     <option value="real">仅真题</option>
                   </select>
                 </label>
-                <label className="block text-[0.82rem] text-[var(--muted)]">
+                <label className="block text-[0.82rem] text-muted-foreground">
                   模式
                   <select
                     className="field mt-1.5"
@@ -421,7 +423,7 @@ export function QuizApp() {
                     <option value="exam">模拟（交卷后看结果）</option>
                   </select>
                 </label>
-                <label className="block text-[0.82rem] text-[var(--muted)]">
+                <label className="block text-[0.82rem] text-muted-foreground">
                   题量（0=全部）
                   <input
                     className="field mt-1.5"
@@ -432,27 +434,27 @@ export function QuizApp() {
                   />
                 </label>
               </div>
-            </div>
+            </Card>
           </aside>
 
           <div className="layout-main">
-            <div className="card space-y-4">
+            <Card className="space-y-4 px-(--card-spacing) mb-4">
               <h2 className="text-[1rem] font-medium">开始本轮</h2>
-              <p className="text-[0.92rem] leading-relaxed text-[var(--muted)]">
-                当前筛选 <b className="text-[var(--text)]">{filtered.length}</b> 题 · 进度存 IndexedDB
+              <p className="text-[0.92rem] leading-relaxed text-muted-foreground">
+                当前筛选 <b className="text-foreground">{filtered.length}</b> 题 · 进度存 IndexedDB
               </p>
               <div className="btn-row">
-                <button type="button" className="btn btn-primary" onClick={() => void start()}>
+                <Button type="button" variant="default" onClick={() => void start()}>
                   开始答题
-                </button>
-                <button type="button" className="btn" onClick={() => void start({ resume: true })}>
+                </Button>
+                <Button type="button" variant="outline" onClick={() => void start({ resume: true })}>
                   从断点继续
-                </button>
-                <button type="button" className="btn btn-ghost" onClick={() => setShuffle((s) => !s)}>
+                </Button>
+                <Button type="button" variant="ghost" onClick={() => setShuffle((s) => !s)}>
                   随机：{shuffle ? "开" : "关"}
-                </button>
+                </Button>
               </div>
-            </div>
+            </Card>
           </div>
         </div>
       )}
@@ -460,8 +462,8 @@ export function QuizApp() {
       {phase === "quiz" && q && (
         <div className={`kb-dock-layout${kbOpen && kbPinned ? " is-docked" : ""}`}>
           <div className="kb-dock-main layout-full">
-        <div className="card">
-          <div className="mb-3 flex justify-between text-[0.85rem] text-[var(--muted)]">
+        <Card className="px-(--card-spacing) mb-4">
+          <div className="mb-3 flex justify-between text-[0.85rem] text-muted-foreground">
             <span>
               {idx + 1} / {pool.length}
             </span>
@@ -469,7 +471,7 @@ export function QuizApp() {
               已答 {Object.keys(answers).length} · 正确 {correctCount}
             </span>
           </div>
-          <div className="mb-4 h-2 overflow-hidden rounded-full bg-[#121820]">
+          <div className="mb-4 h-2 overflow-hidden rounded-full bg-muted/40">
             <i
               className="block h-full bg-gradient-to-r from-[#2f7fd4] to-[#3ecf8e]"
               style={{ width: `${((idx + 1) / pool.length) * 100}%` }}
@@ -516,10 +518,10 @@ export function QuizApp() {
           </div>
           {shown && (
             <div
-              className={`mt-4 rounded-[12px] border bg-[#121820] p-4 text-[0.92rem] leading-relaxed sm:text-[1rem] ${
+              className={`mt-4 rounded-[12px] border bg-muted/40 p-4 text-[0.92rem] leading-relaxed sm:text-[1rem] ${
                 chosen === q.ans
-                  ? "border-[color-mix(in_srgb,var(--ok)_50%,var(--line))]"
-                  : "border-[color-mix(in_srgb,var(--bad)_50%,var(--line))]"
+                  ? "border-[color-mix(in_srgb,var(--ok)_50%,var(--border))]"
+                  : "border-[color-mix(in_srgb,var(--bad)_50%,var(--border))]"
               }`}
             >
               {chosen === q.ans ? (
@@ -531,7 +533,7 @@ export function QuizApp() {
                 </>
               )}
               {q.opt_exp && Object.keys(q.opt_exp).length > 0 ? (
-                <ul className="mt-3 space-y-2 text-[0.9rem] leading-relaxed text-[var(--text)]">
+                <ul className="mt-3 space-y-2 text-[0.9rem] leading-relaxed text-foreground">
                   {["A", "B", "C", "D"].map((k) => {
                     if (!q.opts[k] || !q.opt_exp?.[k]) return null;
                     const ok = k === q.ans;
@@ -539,7 +541,7 @@ export function QuizApp() {
                       <li key={k} className="flex gap-2">
                         <span
                           className="shrink-0 font-semibold"
-                          style={{ color: ok ? "var(--ok)" : "var(--muted)" }}
+                          style={{ color: ok ? "var(--ok)" : "var(--muted-foreground)" }}
                         >
                           {k}.
                         </span>
@@ -557,38 +559,38 @@ export function QuizApp() {
             </div>
           )}
           <div className="sticky-actions">
-            <button type="button" className="btn" disabled={idx <= 0} onClick={() => setIdx((i) => i - 1)}>
+            <Button type="button" variant="outline" disabled={idx <= 0} onClick={() => setIdx((i) => i - 1)}>
               上一题
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
-              className="btn btn-primary"
+               variant="default"
               onClick={() => {
                 if (idx < pool.length - 1) setIdx((i) => i + 1);
                 else setPhase("result");
               }}
             >
               {idx < pool.length - 1 ? "下一题" : "结束"}
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
-              className="btn"
+               variant="outline"
               onClick={() => setRevealed((r) => ({ ...r, [q.no]: true }))}
             >
               看答案
-            </button>
-            <button type="button" className="btn btn-icon" onClick={openRelatedKb}>
+            </Button>
+            <Button type="button" variant="outline" size="sm" onClick={openRelatedKb}>
               <BookOpen size={16} strokeWidth={2} aria-hidden />
               知识点{relatedKb.length ? ` · ${relatedKb.length}` : ""}
-            </button>
-            <button type="button" className="btn btn-ghost" onClick={() => void persist()}>
+            </Button>
+            <Button type="button" variant="ghost" onClick={() => void persist()}>
               保存
-            </button>
-            <button type="button" className="btn btn-ghost" onClick={() => setPhase("setup")}>
+            </Button>
+            <Button type="button" variant="ghost" onClick={() => setPhase("setup")}>
               设置
-            </button>
+            </Button>
           </div>
-        </div>
+        </Card>
           </div>
           {kbOpen && kbPinned ? (
             <KbPreviewDrawer
@@ -630,7 +632,7 @@ export function QuizApp() {
 
       {phase === "result" && (
         <div className="layout-full">
-        <div className="card">
+        <Card className="px-(--card-spacing) mb-4">
           <h2 className="mb-4 text-[1.15rem]">本轮结果</h2>
           <div className="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {[
@@ -641,28 +643,28 @@ export function QuizApp() {
             ].map(([k, v]) => (
               <div
                 key={String(k)}
-                className="rounded-[12px] border border-[var(--line)] bg-[#121820] p-3.5 text-center"
+                className="rounded-[12px] border border-border bg-muted/40 p-3.5 text-center"
               >
-                <span className="text-[0.75rem] text-[var(--muted)]">{k}</span>
+                <span className="text-[0.75rem] text-muted-foreground">{k}</span>
                 <b className="mt-1 block text-[1.2rem]">{v}</b>
               </div>
             ))}
           </div>
           <div className="btn-row">
-            <button type="button" className="btn btn-primary" onClick={() => void start({ fromWrong: true })}>
+            <Button type="button" variant="default" onClick={() => void start({ fromWrong: true })}>
               只做错题
-            </button>
-            <button type="button" className="btn" onClick={() => void start()}>
+            </Button>
+            <Button type="button" variant="outline" onClick={() => void start()}>
               再来一轮
-            </button>
-            <button type="button" className="btn" onClick={() => void start({ resume: true })}>
+            </Button>
+            <Button type="button" variant="outline" onClick={() => void start({ resume: true })}>
               断点继续
-            </button>
-            <button type="button" className="btn btn-ghost" onClick={() => setPhase("setup")}>
+            </Button>
+            <Button type="button" variant="ghost" onClick={() => setPhase("setup")}>
               返回设置
-            </button>
+            </Button>
           </div>
-        </div>
+        </Card>
         </div>
       )}
     </>

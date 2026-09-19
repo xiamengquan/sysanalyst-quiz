@@ -96,10 +96,10 @@ python3 题库/出题工坊/scripts/merge_to_quiz.py
 
 ```json
 {
-  "latest": "0.5.1",
+  "latest": "0.6.0",
   "releases": [
     {
-      "version": "0.5.1",
+      "version": "0.6.0",
       "date": "2026-09-19",
       "title": "站点更新",
       "highlights": ["要点一", "要点二"]

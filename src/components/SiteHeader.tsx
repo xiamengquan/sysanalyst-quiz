@@ -4,6 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AuthButton } from "@/components/AuthButton";
 import { GlobalSearch } from "@/components/GlobalSearch";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const tabs = [
   { href: "/", label: "刷题", short: "刷题" },
@@ -24,39 +27,38 @@ export function SiteHeader() {
   return (
     <>
       <header
-        className="sticky top-0 z-50 border-b border-[var(--line)] bg-[color-mix(in_srgb,var(--panel)_92%,transparent)] backdrop-blur-md"
+        className="sticky top-0 z-50 border-b border-border/80 bg-background/90 backdrop-blur-md"
         style={{ paddingTop: "var(--safe-t)" }}
       >
         <div
           className="mx-auto flex w-full items-center justify-between gap-2 px-4 py-3.5 sm:gap-3 sm:px-6 sm:py-4 lg:px-8 xl:px-10"
           style={{ maxWidth: "var(--content-max)" }}
         >
-          <Link href="/" className="min-w-0 truncate text-[1rem] font-semibold text-[var(--text)]">
+          <Link href="/" className="min-w-0 truncate text-[1rem] font-semibold text-foreground">
             <span className="hidden sm:inline">系统分析师 · 刷题站</span>
             <span className="sm:hidden">系分刷题</span>
           </Link>
           <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
             <AuthButton />
+            <ThemeToggle />
             <GlobalSearch />
             <nav className="hidden shrink-0 gap-1 sm:flex" aria-label="主导航">
               {tabs.map((t) => {
                 const active = isActive(pathname, t.href);
                 return (
-                  <Link
+                  <Button
                     key={t.href}
-                    href={t.href}
-                    className={`rounded-full border px-3.5 py-2 text-[0.88rem] transition ${
-                      active
-                        ? "border-[color-mix(in_srgb,var(--accent)_45%,var(--line))] bg-[color-mix(in_srgb,var(--accent)_12%,transparent)] text-[var(--accent)]"
-                        : "border-transparent text-[var(--muted)] hover:border-[var(--line)] hover:text-[var(--text)]"
-                    }`}
+                    asChild
+                    variant={active ? "secondary" : "ghost"}
+                    size="sm"
+                    className={cn("rounded-full px-3.5", active && "text-primary")}
                   >
-                    {t.label}
-                  </Link>
+                    <Link href={t.href}>{t.label}</Link>
+                  </Button>
                 );
               })}
             </nav>
-            <span className="sm:hidden text-[0.78rem] text-[var(--muted)]">
+            <span className="text-[0.78rem] text-muted-foreground sm:hidden">
               {tabs.find((t) => isActive(pathname, t.href))?.label || ""}
             </span>
           </div>
@@ -64,7 +66,7 @@ export function SiteHeader() {
       </header>
 
       <nav
-        className="fixed inset-x-0 bottom-0 z-50 border-t border-[var(--line)] bg-[color-mix(in_srgb,var(--panel)_94%,transparent)] backdrop-blur-md sm:hidden"
+        className="fixed inset-x-0 bottom-0 z-50 border-t border-border/80 bg-background/94 backdrop-blur-md sm:hidden"
         style={{ paddingBottom: "var(--safe-b)" }}
         aria-label="底部导航"
       >
@@ -78,12 +80,13 @@ export function SiteHeader() {
               <Link
                 key={t.href}
                 href={t.href}
-                className={`flex flex-col items-center justify-center gap-0.5 text-[0.72rem] font-medium ${
-                  active ? "text-[var(--accent)]" : "text-[var(--muted)]"
-                }`}
+                className={cn(
+                  "flex flex-col items-center justify-center gap-0.5 text-[0.72rem] font-medium",
+                  active ? "text-primary" : "text-muted-foreground",
+                )}
               >
                 <span
-                  className={`h-1 w-5 rounded-full ${active ? "bg-[var(--accent)]" : "bg-transparent"}`}
+                  className={cn("h-1 w-5 rounded-full", active ? "bg-primary" : "bg-transparent")}
                   aria-hidden
                 />
                 {t.short}

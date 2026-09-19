@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { pickLatestRelease, type ReleaseEntry, type ReleaseNotesFile } from "@/lib/release-notes";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export function ChangelogApp() {
   const [releases, setReleases] = useState<ReleaseEntry[]>([]);
@@ -31,44 +33,34 @@ export function ChangelogApp() {
       <h1 className="page-title">更新日志</h1>
       <p className="page-lead">历次部署的变更说明。新版本首次打开站点时也会弹窗提示。</p>
 
-      {error ? <p className="text-[0.9rem] text-red-400">{error}</p> : null}
-
-      {!error && !releases.length ? (
-        <p className="text-[0.9rem] text-[var(--muted)]">加载中…</p>
-      ) : null}
+      {error ? <p className="text-sm text-destructive">{error}</p> : null}
+      {!error && !releases.length ? <p className="text-sm text-muted-foreground">加载中…</p> : null}
 
       <div className="stack-loose">
         {releases.map((r) => {
           const isLatest = r.version === latest;
           return (
-            <article
-              key={r.version}
-              className="card mb-0 space-y-3"
-              id={`v${r.version.replace(/\./g, "-")}`}
-            >
-              <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <h2 className="text-[1.05rem] font-medium text-[var(--text)]">
+            <Card key={r.version} id={`v${r.version.replace(/\./g, "-")}`} className="mb-0">
+              <CardHeader className="flex flex-row flex-wrap items-baseline justify-between gap-2 space-y-0">
+                <CardTitle className="text-lg font-medium">
                   {r.title || `v${r.version}`}
-                  {isLatest ? (
-                    <span className="badge ml-2 align-middle text-[0.72rem]">当前</span>
-                  ) : null}
-                </h2>
-                <span
-                  className="text-[0.8rem] text-[var(--muted)]"
-                  style={{ fontVariantNumeric: "tabular-nums" }}
-                >
+                  {isLatest ? <Badge className="ml-2 align-middle">当前</Badge> : null}
+                </CardTitle>
+                <span className="text-sm text-muted-foreground tabular-nums">
                   v{r.version}
                   {r.date ? ` · ${r.date}` : ""}
                 </span>
-              </div>
-              <ul className="m-0 list-disc space-y-2 pl-5 text-[0.92rem] leading-relaxed text-[var(--muted)]">
-                {r.highlights.map((h) => (
-                  <li key={h} className="text-[var(--text)]">
-                    {h}
-                  </li>
-                ))}
-              </ul>
-            </article>
+              </CardHeader>
+              <CardContent>
+                <ul className="list-disc space-y-2 pl-5 text-[0.92rem] leading-relaxed text-muted-foreground">
+                  {r.highlights.map((h) => (
+                    <li key={h} className="text-foreground">
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
           );
         })}
       </div>
