@@ -19,9 +19,6 @@
   --leading-body: 1.7;
   --leading-ui: 1.5;
   --radius-card: 16px;
-  --ok: oklch(0.72 0.14 155);
-  --bad: oklch(0.68 0.16 25);
-  --warn: oklch(0.82 0.12 85);
 }
 
 /* Light */
@@ -32,21 +29,25 @@
   --card-foreground: oklch(0.22 0.02 250);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.22 0.02 250);
-  --primary: oklch(0.58 0.14 245);
+  --primary: oklch(0.48 0.14 245);
   --primary-foreground: oklch(0.99 0.01 240);
   --secondary: oklch(0.95 0.01 240);
   --secondary-foreground: oklch(0.28 0.02 250);
   --muted: oklch(0.95 0.01 240);
-  --muted-foreground: oklch(0.5 0.03 250);
+  --muted-foreground: oklch(0.45 0.03 250);
   --accent: oklch(0.94 0.02 245);
   --accent-foreground: oklch(0.28 0.04 245);
-  --destructive: oklch(0.58 0.2 25);
-  --border: oklch(0.88 0.015 250);
-  --input: oklch(0.88 0.015 250);
-  --ring: oklch(0.58 0.14 245);
+  --destructive: oklch(0.52 0.2 25);
+  --border: oklch(0.86 0.015 250);
+  --input: oklch(0.86 0.015 250);
+  --ring: oklch(0.48 0.14 245);
   --surface: oklch(0.97 0.008 240);
   --bg-glow-1: oklch(0.92 0.03 245);
   --bg-glow-2: oklch(0.93 0.025 160);
+  /* light：偏深，保证白底对比度 */
+  --ok: oklch(0.48 0.14 155);
+  --bad: oklch(0.5 0.18 25);
+  --warn: oklch(0.58 0.14 85);
   --chart-1: oklch(0.58 0.14 245);
   --chart-2: oklch(0.65 0.12 160);
   --chart-3: oklch(0.7 0.1 85);
@@ -85,6 +86,9 @@
   --surface: oklch(0.18 0.02 250);
   --bg-glow-1: oklch(0.28 0.05 250);
   --bg-glow-2: oklch(0.26 0.04 160);
+  --ok: oklch(0.72 0.14 155);
+  --bad: oklch(0.68 0.16 25);
+  --warn: oklch(0.82 0.12 85);
   --chart-1: oklch(0.7 0.12 245);
   --chart-2: oklch(0.72 0.12 160);
   --chart-3: oklch(0.8 0.1 85);
@@ -432,7 +436,10 @@ textarea.field {
 
 .sticky-actions [data-slot="button"],
 .btn-row [data-slot="button"] {
-  min-height: 44px;
+  /* 覆盖 Button 默认 h-8，保证同一行高度一致 */
+  min-height: 2.75rem !important;
+  height: 2.75rem !important;
+  box-sizing: border-box;
   touch-action: manipulation;
 }
 
@@ -442,7 +449,8 @@ textarea.field {
   }
   .sticky-actions [data-slot="button"],
   .btn-row [data-slot="button"] {
-    min-height: unset;
+    min-height: 2.25rem !important;
+    height: 2.25rem !important;
   }
 }
 
@@ -554,14 +562,14 @@ textarea.field {
   padding: 0.55rem 0.95rem;
   border-radius: 999px;
   min-height: 44px;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.38);
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--foreground) 16%, transparent);
   text-decoration: none;
   cursor: pointer;
   white-space: nowrap;
 }
 .kb-fab-btn:hover {
   border-color: color-mix(in srgb, var(--primary) 55%, var(--border));
-  color: #d7ebff;
+  color: var(--foreground);
 }
 .kb-fab-btn:focus-visible {
   outline: 2px solid color-mix(in srgb, var(--primary) 55%, transparent);
@@ -570,7 +578,7 @@ textarea.field {
 .kb-fab-btn.is-primary {
   border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
   background: color-mix(in srgb, var(--primary) 16%, var(--card));
-  color: #d7ebff;
+  color: var(--foreground);
 }
 @media (min-width: 960px) {
   .kb-nav-fab {
@@ -607,7 +615,7 @@ textarea.field {
 .md-body h3 {
   font-size: 1.05rem;
   margin: 1.4em 0 0.65em;
-  color: #c5d4e4;
+  color: var(--muted-foreground);
   line-height: 1.4;
 }
 .md-body .table-wrap {
@@ -631,18 +639,20 @@ textarea.field {
   vertical-align: top;
 }
 .md-body th {
-  background: #1a2836;
+  background: var(--muted);
   color: var(--muted-foreground);
 }
 .md-body code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 0.86em;
-  background: #0e141c;
+  background: var(--muted);
+  color: var(--foreground);
   padding: 1px 5px;
   border-radius: 4px;
 }
 .md-body pre {
-  background: #0e141c;
+  background: var(--muted);
+  color: var(--foreground);
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 0.95rem 1rem;
@@ -682,7 +692,7 @@ textarea.field {
   overflow-x: auto;
   border: 1px solid var(--border);
   border-radius: 10px;
-  background: #0f141c;
+  background: var(--muted);
 }
 .md-body .mermaid {
   display: flex;
@@ -717,7 +727,7 @@ textarea.field {
   line-height: 1.35;
   white-space: pre;
   overflow-x: auto;
-  color: #d7e0ea;
+  color: var(--foreground);
 }
 
 /* —— 知识点关联预览抽屉 —— */
@@ -759,17 +769,26 @@ textarea.field {
   margin: 0;
   cursor: pointer;
   pointer-events: auto;
+  background: color-mix(in srgb, var(--foreground) 28%, transparent);
+}
+.dark .kb-drawer-backdrop {
   background: rgba(0, 0, 0, 0.45);
 }
 .kb-drawer-panel {
+  /* 浮层定位由 Sheet（fixed）负责；勿写 absolute，否则会盖住顶栏或错位 */
   pointer-events: auto;
-  position: absolute;
   display: flex;
   flex-direction: column;
+  min-height: 0;
   background: var(--card);
-  border: 1px solid var(--border);
-  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.35);
+  border-color: var(--border);
   color: var(--foreground);
+  box-shadow: -8px 0 32px color-mix(in srgb, var(--foreground) 18%, transparent);
+}
+.kb-drawer-root:not(.is-docked) .kb-drawer-panel {
+  position: absolute;
+  border: 1px solid var(--border);
+  background: var(--card);
 }
 .kb-drawer-panel.is-docked {
   position: sticky;
@@ -780,6 +799,7 @@ textarea.field {
   width: 100%;
   height: calc(100dvh - var(--safe-t) - 5.5rem - var(--tabbar-h));
   max-height: calc(100dvh - var(--safe-t) - 5.5rem - var(--tabbar-h));
+  border: 1px solid var(--border);
   border-radius: var(--radius-card);
   box-shadow: none;
   animation: none;
@@ -804,9 +824,9 @@ textarea.field {
 }
 @media (min-width: 640px) {
   .kb-drawer-root:not(.is-docked) .kb-drawer-panel {
-    top: 0;
+    top: calc(var(--safe-t) + 3.75rem);
     right: 0;
-    bottom: 0;
+    bottom: calc(var(--tabbar-h) + var(--safe-b));
     width: min(520px, 92vw);
     border-radius: 0;
     border-right: 0;
@@ -944,7 +964,7 @@ textarea.field {
   background: var(--secondary);
   color: var(--foreground);
   font-size: 0.88rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--foreground) 14%, transparent);
 }
 
 /* —— 知识点快速索引悬浮栏 —— */
@@ -971,12 +991,12 @@ textarea.field {
   padding: 0.55rem 0.95rem;
   border-radius: 999px;
   min-height: 44px;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.38);
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--foreground) 16%, transparent);
   cursor: pointer;
 }
 .kb-toc-trigger:hover {
   border-color: color-mix(in srgb, var(--primary) 55%, var(--border));
-  color: #d7ebff;
+  color: var(--foreground);
 }
 .kb-toc-trigger:focus-visible {
   outline: 2px solid color-mix(in srgb, var(--primary) 55%, transparent);
@@ -994,7 +1014,7 @@ textarea.field {
   border-radius: 14px;
   border: 1px solid var(--border);
   background: color-mix(in srgb, var(--card) 96%, var(--background));
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 16px 40px color-mix(in srgb, var(--foreground) 18%, transparent);
   overflow: hidden;
 }
 .kb-toc-panel-hd {
@@ -1045,7 +1065,7 @@ textarea.field {
 }
 .kb-toc-item.lv-2 button {
   padding-left: 1.15rem;
-  color: #d5e2ef;
+  color: var(--muted-foreground);
 }
 .kb-toc-item.lv-3 button {
   padding-left: 1.55rem;
@@ -1054,11 +1074,11 @@ textarea.field {
 }
 .kb-toc-item button:hover {
   background: color-mix(in srgb, var(--primary) 12%, transparent);
-  color: #eaf4ff;
+  color: var(--foreground);
 }
 .kb-toc-item.is-active button {
   background: color-mix(in srgb, var(--primary) 18%, transparent);
-  color: #eaf4ff;
+  color: var(--foreground);
   box-shadow: inset 3px 0 0 var(--primary);
 }
 @media (min-width: 960px) {
@@ -1143,8 +1163,11 @@ textarea.field {
   position: absolute;
   inset: 0;
   border: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: color-mix(in srgb, var(--foreground) 35%, transparent);
   cursor: pointer;
+}
+.dark .gs-backdrop {
+  background: rgba(0, 0, 0, 0.55);
 }
 .gs-dialog {
   /* 定位由 DialogContent 负责；高度由 TSX 响应式类控制，避免与 max-sm 冲突 */
@@ -1153,8 +1176,11 @@ textarea.field {
   border-radius: 16px;
   border: 1px solid var(--border);
   background: color-mix(in srgb, var(--card) 96%, var(--background));
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 24px 64px color-mix(in srgb, var(--foreground) 18%, transparent);
   overflow: hidden;
+}
+.dark .gs-dialog {
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
 }
 @media (min-width: 640px) {
   .gs-dialog {

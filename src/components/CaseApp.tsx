@@ -511,7 +511,7 @@ export function CaseApp() {
           <div className="sticky-actions">
             <Button
               type="button"
-               variant="outline"
+              variant="outline"
               disabled={idx <= 0}
               onClick={() => {
                 setReveal(false);
@@ -523,7 +523,7 @@ export function CaseApp() {
             </Button>
             <Button
               type="button"
-               variant="default"
+              variant="default"
               disabled={idx >= pool.length - 1}
               onClick={() => {
                 setReveal(false);
@@ -536,13 +536,13 @@ export function CaseApp() {
             <Button type="button" variant="outline" onClick={() => setReveal(true)} disabled={quizTab !== "answer"}>
               看要点
             </Button>
-            <Button type="button" variant="outline" size="sm" onClick={openRelatedKb}>
+            <Button type="button" variant="outline" onClick={openRelatedKb}>
               <BookOpen size={16} strokeWidth={2} aria-hidden />
               知识点{relatedKb.length ? ` · ${relatedKb.length}` : ""}
             </Button>
             <Button
               type="button"
-               variant="ghost"
+              variant="ghost"
               onClick={() => void storageSet(CASE_STORAGE_KEY, drafts)}
             >
               保存

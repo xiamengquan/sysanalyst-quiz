@@ -235,11 +235,17 @@ export function KbPreviewDrawer({
   const [html, setHtml] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "err">("idle");
   const [msg, setMsg] = useState("");
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" ? window.matchMedia("(max-width: 639px)").matches : false,
+  );
+  const [viewportReady, setViewportReady] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 639px)");
-    const apply = () => setIsMobile(mq.matches);
+    const apply = () => {
+      setIsMobile(mq.matches);
+      setViewportReady(true);
+    };
     apply();
     mq.addEventListener("change", apply);
     return () => mq.removeEventListener("change", apply);
@@ -351,15 +357,23 @@ export function KbPreviewDrawer({
     );
   }
 
+  /* 等视口判定后再挂 Sheet，避免窄屏首帧按右侧全高打开导致顶栏/抽屉头被盖住 */
+  if (!viewportReady) return null;
+
   return (
     <Sheet open={open} onOpenChange={(next) => !next && onClose()}>
       <SheetContent
         side={isMobile ? "bottom" : "right"}
         showCloseButton={false}
+        overlayClassName={
+          isMobile
+            ? "z-[55] bg-black/25 dark:bg-black/45"
+            : "z-[55] top-[calc(var(--safe-t)+3.75rem)] bg-black/20 dark:bg-black/45"
+        }
         className={
           isMobile
-            ? "kb-drawer-panel gap-0 p-0 max-h-[min(88dvh,720px)] rounded-t-2xl"
-            : "kb-drawer-panel w-full gap-0 p-0 sm:max-w-md"
+            ? "kb-drawer-panel z-[60] gap-0 border-border bg-card p-0 text-card-foreground max-h-[min(88dvh,720px)] rounded-t-2xl pb-[max(0.5rem,var(--safe-b))]"
+            : "kb-drawer-panel z-[60] w-full gap-0 border-border bg-card p-0 text-card-foreground sm:max-w-md data-[side=right]:inset-y-auto data-[side=right]:top-[calc(var(--safe-t)+3.75rem)] data-[side=right]:bottom-0 data-[side=right]:h-[calc(100dvh-var(--safe-t)-3.75rem)]"
         }
       >
         <SheetHeader className="sr-only">

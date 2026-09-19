@@ -580,7 +580,7 @@ export function QuizApp() {
             >
               看答案
             </Button>
-            <Button type="button" variant="outline" size="sm" onClick={openRelatedKb}>
+            <Button type="button" variant="outline" onClick={openRelatedKb}>
               <BookOpen size={16} strokeWidth={2} aria-hidden />
               知识点{relatedKb.length ? ` · ${relatedKb.length}` : ""}
             </Button>

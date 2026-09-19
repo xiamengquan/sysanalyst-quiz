@@ -28,7 +28,7 @@ export function SiteHeader() {
   return (
     <>
       <header
-        className="sticky top-0 z-50 border-b border-border/80 bg-background/90 backdrop-blur-md"
+        className="sticky top-0 z-[70] border-b border-border/80 bg-background/90 backdrop-blur-md"
         style={{ paddingTop: "var(--safe-t)" }}
       >
         <div
