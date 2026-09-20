@@ -10,6 +10,7 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
+import { Search } from "lucide-react";
 import { searchKbDocs, type KbSearchHit, type KbSearchIndex } from "@/lib/kb-search";
 import { dialogMobileSheetClassName } from "@/lib/dialog-mobile";
 import { cn } from "@/lib/utils";
@@ -242,6 +243,7 @@ export function GlobalSearch() {
         aria-label="打开搜索"
         title={`${modHint} 搜索`}
       >
+        <Search size={18} strokeWidth={2} className="sm:hidden" aria-hidden />
         <span className="gs-trigger-label">搜索</span>
         <kbd className="gs-kbd">{modHint}</kbd>
       </Button>
@@ -256,7 +258,7 @@ export function GlobalSearch() {
         <DialogContent
           showCloseButton={false}
           className={cn(
-            "gs-dialog fixed z-50 grid gap-0 overflow-hidden p-0",
+            "gs-dialog z-[90] gap-0 overflow-hidden p-0",
             dialogMobileSheetClassName,
             "sm:top-[min(12vh,5rem)] sm:left-1/2 sm:w-[min(560px,calc(100vw-1.5rem))] sm:max-w-[560px] sm:-translate-x-1/2 sm:translate-y-0",
           )}

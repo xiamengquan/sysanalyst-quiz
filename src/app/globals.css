@@ -1145,13 +1145,6 @@ textarea.field {
     display: inline;
   }
 }
-/* 窄屏只显示快捷键提示，缩短顶栏占用 */
-@media (max-width: 639px) {
-  .gs-kbd {
-    font-size: 0.68rem;
-    padding: 0.12rem 0.35rem;
-  }
-}
 .gs-kbd,
 .gs-kbd-inline {
   display: inline-block;
@@ -1325,6 +1318,26 @@ textarea.field {
   border-top: 1px solid var(--border);
   color: var(--muted-foreground);
   font-size: 0.72rem;
+}
+@media (max-width: 639px) {
+  .gs-kbd {
+    display: none;
+  }
+  .gs-ft {
+    display: none;
+  }
+  .gs-dialog {
+    border-radius: 16px 16px 0 0;
+  }
+  .gs-esc {
+    min-height: 44px;
+    min-width: 44px;
+    padding-inline: 0.7rem;
+  }
+  .gs-select {
+    min-height: 44px;
+    font-size: 16px;
+  }
 }
 
 
