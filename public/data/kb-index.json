@@ -308,6 +308,14 @@
           "kind": "quick"
         },
         {
+          "id": "quick-web-agent-arch",
+          "title": "Web与AI智能体 · 架构选型四维度卡",
+          "path": "速查/Web与AI智能体-架构选型四维度卡.md",
+          "status": "正式",
+          "kind": "quick",
+          "note": "2026 案例 Web+Agent 四维度对比"
+        },
+        {
           "id": "quick-essay",
           "title": "近五年论文范围分析",
           "path": "速查/近五年论文范围分析.md",
