@@ -2,6 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {
+  ListChecks,
+  FileText,
+  BookOpen,
+  Sparkles,
+  Info,
+} from "lucide-react";
 import { AuthButton } from "@/components/AuthButton";
 import { GlobalSearch } from "@/components/GlobalSearch";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -9,11 +16,11 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const tabs = [
-  { href: "/", label: "刷题", short: "刷题" },
-  { href: "/case/", label: "案例", short: "案例" },
-  { href: "/kb/", label: "知识点", short: "知识" },
-  { href: "/changelog/", label: "更新", short: "更新" },
-  { href: "/about/", label: "关于", short: "关于" },
+  { href: "/", label: "刷题", short: "刷题", icon: ListChecks },
+  { href: "/case/", label: "案例", short: "案例", icon: FileText },
+  { href: "/kb/", label: "知识点", short: "知识", icon: BookOpen },
+  { href: "/changelog/", label: "更新", short: "更新", icon: Sparkles },
+  { href: "/about/", label: "关于", short: "关于", icon: Info },
 ];
 
 function isActive(pathname: string, href: string) {
@@ -102,7 +109,7 @@ export function SiteHeader() {
       </header>
 
       <nav
-        className="fixed inset-x-0 bottom-0 z-50 border-t border-border/70 bg-background/90 backdrop-blur-md sm:hidden"
+        className="fixed inset-x-0 bottom-0 z-50 border-t border-border/80 bg-background/95 backdrop-blur-md sm:hidden"
         style={{ paddingBottom: "var(--safe-b)" }}
         aria-label="底部导航"
       >
@@ -112,13 +119,16 @@ export function SiteHeader() {
         >
           {tabs.map((t) => {
             const active = isActive(pathname, t.href);
+            const Icon = t.icon;
             return (
               <Link
                 key={t.href}
                 href={t.href}
                 className={cn(
-                  "relative flex min-h-[44px] flex-col items-center justify-center gap-1 text-[0.72rem] font-medium transition-colors",
-                  active ? "text-foreground font-semibold" : "text-muted-foreground hover:text-foreground"
+                  "relative flex min-h-[44px] flex-col items-center justify-center gap-1 text-[0.68rem] font-medium transition-colors select-none",
+                  active
+                    ? "text-foreground font-semibold"
+                    : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 {active && (
@@ -127,7 +137,14 @@ export function SiteHeader() {
                     aria-hidden
                   />
                 )}
-                {t.short}
+                <Icon
+                  className={cn(
+                    "size-4 transition-transform",
+                    active ? "scale-105 stroke-[2.2]" : "stroke-[1.75]"
+                  )}
+                  aria-hidden
+                />
+                <span>{t.short}</span>
               </Link>
             );
           })}

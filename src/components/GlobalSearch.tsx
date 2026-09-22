@@ -238,14 +238,14 @@ export function GlobalSearch() {
         type="button"
         variant="outline"
         size="sm"
-        className="gs-trigger h-11 min-h-11 gap-1.5 rounded-full px-3 touch-manipulation sm:h-9 sm:min-h-9 sm:gap-2"
+        className="gs-trigger size-9 rounded-full p-0 touch-manipulation sm:size-auto sm:h-9 sm:min-h-9 sm:px-3 sm:gap-2"
         onClick={openModal}
         aria-label="打开搜索"
         title={`${modHint} 搜索`}
       >
-        <Search size={18} strokeWidth={2} className="sm:hidden" aria-hidden />
-        <span className="gs-trigger-label">搜索</span>
-        <kbd className="gs-kbd">{modHint}</kbd>
+        <Search size={15} strokeWidth={2} aria-hidden />
+        <span className="gs-trigger-label hidden sm:inline">搜索</span>
+        <kbd className="gs-kbd hidden sm:inline-block">{modHint}</kbd>
       </Button>
 
       <Dialog

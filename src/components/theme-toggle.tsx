@@ -29,9 +29,9 @@ export function ThemeToggle() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="ghost"
+          variant="outline"
           size="icon"
-          className="size-8 shrink-0 rounded-md text-muted-foreground hover:text-foreground touch-manipulation"
+          className="size-9 shrink-0 rounded-full text-muted-foreground hover:text-foreground touch-manipulation"
           aria-label="切换主题"
           title="切换主题"
         >

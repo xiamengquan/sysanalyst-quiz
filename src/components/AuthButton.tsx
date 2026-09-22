@@ -250,7 +250,7 @@ export function AuthButton() {
         <Button
           variant="outline"
           size="sm"
-          className="h-11 min-h-11 rounded-full px-3 touch-manipulation sm:h-9 sm:min-h-9"
+          className="h-9 min-h-9 rounded-full px-3 text-xs font-medium touch-manipulation sm:h-9 sm:min-h-9"
           onClick={() => setLoginOpen(true)}
         >
           登录
@@ -350,7 +350,7 @@ export function AuthButton() {
       <Button
         variant="outline"
         size="sm"
-        className="h-11 max-w-[6.5rem] truncate rounded-full px-2.5 touch-manipulation sm:h-9 sm:max-w-[9.5rem] sm:px-3"
+        className="h-9 max-w-[6.5rem] truncate rounded-full px-2.5 text-xs font-medium touch-manipulation sm:h-9 sm:max-w-[9.5rem] sm:px-3"
         onClick={() => setPanelOpen(true)}
         title={user.email || "账户"}
       >
