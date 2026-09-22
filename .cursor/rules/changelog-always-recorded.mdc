@@ -17,10 +17,11 @@ alwaysApply: true
    - 必须在 `public/data/release-notes.json` 中，将本次更新内容写入对应版本（最新版本）的 `highlights` 数组中。
    - 语言简明扼要，直指改动点与用户收益（如：“重构：移除 shadcn 依赖，按 Cursor.com 极简现代风格全面重塑全站 UI”）。
 
-2. **版本号与版本说明对齐**：
-   - 若变动涉及功能、重构、样式体系或新增知识库维度，应适时推进 `package.json` 中的 `version`（如 `0.6.2` → `0.6.3`）。
-   - 在 `docs/web-team/发布/版本说明-vX.Y.Z.md` 中同步归档详细的版本变更要点与验收记录。
-   - 确保 `public/data/release-notes.json` 的 `latest` 与 `package.json` 的 `version` 严格一致。
+2. **版本号与版本说明对齐（修复即升版）**：
+   - **必须推进版本号**：每次有代码变动、缺陷修复、UI微调、知识点增补或功能迭代发布时，**都必须推进 `package.json` 中的版本号**（遵循语义化版本：日常修复/微调推进 Patch 版本号，如 `0.6.3` → `0.6.4`；大模块重构推进 Minor 版本号）。
+   - **机制原因**：站点客户端的更新通知组件（`UpdateNotice`）是依赖检测 `latest.version` 是否发生变化来向用户弹出更新说明的。若不推进版本号，已访问过的用户将无法感知到任何修复与变更。
+   - **文档归档**：在 `docs/web-team/发布/版本说明-vX.Y.Z.md` 中同步归档详细的版本变更要点与验收记录。
+   - **严格对齐**：确保 `public/data/release-notes.json` 的 `latest`、`releases[0].version` 与 `package.json` 的 `version` 严格一致。
 
 3. **发版检查验证**：
    - 任何涉及更新日志的工作完成后，执行 `npm run check:release`，确保 release-notes、版本号与产物文件全部合规。

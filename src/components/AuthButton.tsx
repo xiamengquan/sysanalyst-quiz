@@ -87,7 +87,8 @@ export function AuthButton() {
       setReady(true);
       if (data.session?.user && (await isCloudSyncEnabled())) {
         try {
-          await applyPull(true);
+          /* 静默拉取云端写入本机即可，禁止整页 reload，避免页面初次挂载时出现双重刷新 */
+          await applyPull(false);
         } catch {
           /* ignore */
         }
