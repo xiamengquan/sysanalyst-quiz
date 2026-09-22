@@ -29,9 +29,9 @@ export function ThemeToggle() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="outline"
+          variant="ghost"
           size="icon"
-          className="size-11 shrink-0 rounded-full touch-manipulation sm:size-9"
+          className="size-8 shrink-0 rounded-md text-muted-foreground hover:text-foreground touch-manipulation"
           aria-label="切换主题"
           title="切换主题"
         >
@@ -46,14 +46,14 @@ export function ThemeToggle() {
           </span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="min-w-36">
+      <DropdownMenuContent align="end" className="min-w-32">
         {OPTIONS.map((opt) => (
           <DropdownMenuItem
             key={opt.value}
             onClick={() => setTheme(opt.value)}
-            className={current === opt.value ? "bg-accent" : undefined}
+            className={current === opt.value ? "bg-muted text-foreground" : undefined}
           >
-            <opt.icon className="size-4" />
+            <opt.icon className="size-3.5" />
             {opt.label}
           </DropdownMenuItem>
         ))}

@@ -72,7 +72,7 @@ export default function AboutPage() {
             <div className="space-y-2">
               <h3 className="text-[0.98rem] font-medium text-foreground">界面与主题</h3>
               <ul className="list-disc space-y-1.5 pl-5">
-                <li>整体壳层基于 shadcn/ui（Radix）组件重建</li>
+                <li>界面参照 Cursor.com 极简现代设计语言，自研纯粹轻量组件体系，移除繁重 shadcn 依赖</li>
                 <li>浅色 / 深色 / 跟随系统，默认深色，本机记忆偏好</li>
                 <li>
                   <a className="text-primary underline" href="/changelog/">
@@ -131,7 +131,7 @@ export default function AboutPage() {
           </CardHeader>
           <CardContent className="text-[0.92rem] leading-relaxed text-muted-foreground">
             <p>
-              当前 v{SITE_VERSION} · Next.js 15 · shadcn/ui · 完整变更见{" "}
+              当前 v{SITE_VERSION} · Next.js 15 · Cursor-inspired Design · 完整变更见{" "}
               <a className="text-primary underline" href="/changelog/">
                 更新日志
               </a>
