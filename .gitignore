@@ -43,3 +43,8 @@ next-env.d.ts
 
 out
 .next
+
+# python
+__pycache__/
+*.pyc
+

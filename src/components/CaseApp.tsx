@@ -322,7 +322,7 @@ export function CaseApp() {
             {phase === "setup" && (
               <div className="stack">
                 {packs.length > 0 && (
-                  <Card className="space-y-4 border-[color-mix(in_srgb,var(--primary)_35%,var(--border))] px-(--card-spacing) mb-4">
+                  <Card className="space-y-4 border-border bg-surface/60 px-(--card-spacing) mb-4">
                     <h2 className="text-[1rem] font-medium">模拟包 / 真题卷</h2>
                     <p className="text-[0.85rem] leading-relaxed text-muted-foreground">
                       真题包按卷演练；自编五选三包：第 1 题必答，其余选答两题。

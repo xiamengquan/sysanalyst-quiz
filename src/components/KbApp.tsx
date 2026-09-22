@@ -117,7 +117,7 @@ export function KbCatalog() {
         </aside>
 
         <div className="layout-main">
-          <Card className="mb-4 border-[color-mix(in_srgb,var(--primary)_35%,var(--border))] bg-[color-mix(in_srgb,var(--primary)_8%,var(--card))] text-[0.92rem] leading-relaxed px-(--card-spacing) mb-4">
+          <Card className="mb-4 border-border bg-surface/60 text-[0.92rem] leading-relaxed px-(--card-spacing)">
             <b>正式发布 {data.meta?.version || "v1.0"}</b>（{data.meta?.effective || "—"}）
             ：审计通过内容；可站内阅读，也可跳转对应章节刷题。正文内关联知识点以抽屉预览。
           </Card>
