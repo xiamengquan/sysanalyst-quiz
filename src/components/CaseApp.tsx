@@ -10,6 +10,7 @@ import { findRelatedKbForCase } from "@/lib/quiz-kb";
 import type { KbSearchDoc, KbSearchIndex } from "@/lib/kb-search";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { ExamSprintBanner } from "@/components/ExamCountdown";
 
 type CaseDrafts = Record<string, Record<number, string>>;
 
@@ -210,7 +211,9 @@ export function CaseApp() {
       </p>
 
       {(phase === "setup" || phase === "list") && (
-        <div className="layout-split">
+        <>
+          <ExamSprintBanner />
+          <div className="layout-split">
           <aside className="layout-aside" aria-label="案例筛选">
             <Card className="space-y-4 px-(--card-spacing) mb-4">
               <h2 className="text-[1rem] font-medium">筛选</h2>
@@ -393,6 +396,7 @@ export function CaseApp() {
             )}
           </div>
         </div>
+        </>
       )}
 
       {phase === "quiz" && current && (

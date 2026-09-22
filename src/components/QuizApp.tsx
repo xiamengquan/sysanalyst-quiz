@@ -10,6 +10,7 @@ import { findRelatedKbForQuestion } from "@/lib/quiz-kb";
 import type { KbSearchDoc, KbSearchIndex } from "@/lib/kb-search";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { ExamSprintBanner } from "@/components/ExamCountdown";
 
 type Meta = { practice: number; real: number; workshop: number; total: number };
 
@@ -322,7 +323,9 @@ export function QuizApp() {
       </p>
 
       {phase === "setup" && (
-        <div className="layout-split">
+        <>
+          <ExamSprintBanner />
+          <div className="layout-split">
           <aside className="layout-aside" aria-label="刷题筛选">
             <Card className="px-(--card-spacing) mb-4">
               <h2 className="mb-4 text-[1rem] font-medium">筛选</h2>
@@ -458,6 +461,7 @@ export function QuizApp() {
             </Card>
           </div>
         </div>
+        </>
       )}
 
       {phase === "quiz" && q && (

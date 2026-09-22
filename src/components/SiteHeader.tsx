@@ -10,6 +10,7 @@ import {
   Info,
 } from "lucide-react";
 import { AuthButton } from "@/components/AuthButton";
+import { ExamCountdown } from "@/components/ExamCountdown";
 import { GlobalSearch } from "@/components/GlobalSearch";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
@@ -42,10 +43,10 @@ export function SiteHeader() {
           className="mx-auto flex w-full min-w-0 items-center justify-between gap-3 px-3 py-2 sm:gap-4 sm:px-6 sm:py-3 lg:px-8 xl:px-10"
           style={{ maxWidth: "var(--content-max)" }}
         >
-          <div className="flex min-w-0 items-center gap-3">
+          <div className="flex min-w-0 items-center gap-2 sm:gap-3">
             <Link
               href="/"
-              className="group flex min-w-0 items-center gap-2.5 text-foreground transition-opacity hover:opacity-85"
+              className="group flex shrink-0 items-center gap-2 text-foreground transition-opacity hover:opacity-85 sm:gap-2.5"
             >
               {/* Cursor-style 几何标识 */}
               <div className="flex size-6 shrink-0 items-center justify-center rounded-md border border-border/90 bg-card shadow-xs transition-colors group-hover:border-foreground/30">
@@ -68,8 +69,9 @@ export function SiteHeader() {
                 <span className="sm:hidden">系分刷题</span>
               </span>
             </Link>
+            <ExamCountdown />
             {currentTab ? (
-              <span className="hidden rounded-full border border-border/80 bg-muted/60 px-2 py-0.5 text-[0.7rem] font-medium text-muted-foreground md:inline">
+              <span className="hidden rounded-full border border-border/80 bg-muted/60 px-2 py-0.5 text-[0.7rem] font-medium text-muted-foreground lg:inline">
                 {currentTab.label}
               </span>
             ) : null}
