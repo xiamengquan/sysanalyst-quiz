@@ -139,15 +139,22 @@ body {
 }
 
 a {
-  color: inherit;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
 }
+a:not([data-slot="button"]) {
+  color: inherit;
+}
 
-/* asChild 链到 <a> 时须走 Button variant 色，勿被 inherit 盖掉 */
-a[data-slot="button"] {
-  color: unset;
-  text-decoration: none;
+/* Button variant 为 default 时，保证文字与图标为高对比度背景色，杜绝继承黑色污染 */
+[data-slot="button"][data-variant="default"],
+a[data-slot="button"][data-variant="default"] {
+  color: var(--background) !important;
+}
+[data-slot="button"][data-variant="default"] svg,
+a[data-slot="button"][data-variant="default"] svg {
+  color: var(--background) !important;
+  stroke: var(--background) !important;
 }
 
 button,

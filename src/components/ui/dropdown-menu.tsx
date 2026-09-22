@@ -25,7 +25,7 @@ function DropdownMenuTrigger({
 function DropdownMenuContent({
   className,
   align = "start",
-  sideOffset = 4,
+  sideOffset = 6,
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Content>) {
   return (
@@ -35,7 +35,7 @@ function DropdownMenuContent({
         sideOffset={sideOffset}
         align={align}
         className={cn(
-          "z-50 min-w-32 overflow-hidden rounded-lg border border-border/80 bg-popover/95 p-1 text-popover-foreground shadow-lg backdrop-blur-md outline-none duration-150 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+          "z-[90] min-w-36 overflow-hidden rounded-lg border border-border bg-popover p-1 text-popover-foreground shadow-[0_10px_38px_-10px_rgba(22,23,24,0.18),0_4px_12px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_32px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.08)] outline-none duration-150 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
           className
         )}
         {...props}
@@ -62,7 +62,7 @@ function DropdownMenuItem({
         "relative flex cursor-pointer select-none items-center gap-2 rounded-md px-2.5 py-1.5 text-xs outline-none transition-colors duration-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-40",
         variant === "destructive"
           ? "text-destructive focus:bg-destructive/15 focus:text-destructive"
-          : "text-muted-foreground focus:bg-muted focus:text-foreground",
+          : "text-foreground/90 hover:bg-muted hover:text-foreground focus:bg-muted focus:text-foreground",
         inset && "pl-8",
         className
       )}

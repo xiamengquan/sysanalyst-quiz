@@ -195,16 +195,16 @@ function DrawerChrome({
       </div>
       <footer className="kb-drawer-foot">
         {current ? (
-          <Button asChild>
+          <Button asChild className="w-full gap-2 text-sm font-medium">
             <Link href={`/kb/${current.id}/`} onClick={onClose}>
-              <ExternalLink size={16} strokeWidth={2} aria-hidden />
-              整页打开
+              <ExternalLink className="size-4 shrink-0" strokeWidth={2} aria-hidden />
+              <span>整页打开</span>
             </Link>
           </Button>
         ) : (
-          <Button asChild>
+          <Button asChild className="w-full gap-2 text-sm font-medium">
             <Link href="/kb/" onClick={onClose}>
-              打开目录
+              <span>打开目录</span>
             </Link>
           </Button>
         )}

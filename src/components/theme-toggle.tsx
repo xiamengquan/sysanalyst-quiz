@@ -1,6 +1,6 @@
 "use client";
 
-import { Moon, Sun, Monitor } from "lucide-react";
+import { Moon, Sun, Monitor, Check } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -46,15 +46,20 @@ export function ThemeToggle() {
           </span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="min-w-32">
+      <DropdownMenuContent align="end" className="min-w-36">
         {OPTIONS.map((opt) => (
           <DropdownMenuItem
             key={opt.value}
             onClick={() => setTheme(opt.value)}
-            className={current === opt.value ? "bg-muted text-foreground" : undefined}
+            className="flex items-center justify-between gap-3 font-normal"
           >
-            <opt.icon className="size-3.5" />
-            {opt.label}
+            <span className="flex items-center gap-2">
+              <opt.icon className="size-3.5 text-muted-foreground" />
+              <span>{opt.label}</span>
+            </span>
+            {current === opt.value && (
+              <Check className="size-3.5 text-foreground shrink-0" />
+            )}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
