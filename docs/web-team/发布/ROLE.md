@@ -11,5 +11,5 @@ description: >-
 
 1. 维护 `docs/web-team/发布/需求看板.md`  
 2. 检查：细则正式稿、题库评审、知识点审计通过记录是否齐全再挂站  
-3. 发布说明写入 `docs/web-team/发布/版本说明-*.md`  
+3. 发布说明写入 `docs/web-team/发布/版本说明-*.md`，且严格执行「变更必登日志」，确保任何一点更新均写入 `public/data/release-notes.json`  
 4. 协调体验/界面/架构/实现与测试返工，不代替委员会改内容  
