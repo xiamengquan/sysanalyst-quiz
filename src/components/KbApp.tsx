@@ -343,9 +343,9 @@ export function KbReader({ id }: { id: string }) {
         </div>
       ) : null}
 
-      {previewOpen && !kbPinned ? (
+      {!kbPinned ? (
         <KbPreviewDrawer
-          open
+          open={previewOpen}
           pinned={false}
           onPinnedChange={setKbPinned}
           stack={stack}

@@ -577,9 +577,9 @@ export function CaseApp() {
         </div>
       )}
 
-      {phase === "quiz" && kbOpen && !kbPinned ? (
+      {phase === "quiz" && !kbPinned ? (
         <KbPreviewDrawer
-          open
+          open={kbOpen}
           pinned={false}
           onPinnedChange={setKbPinned}
           stack={kbStack}

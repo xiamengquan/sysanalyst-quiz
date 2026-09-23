@@ -20,9 +20,13 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
 import { useEscapeKey } from "@/lib/use-escape-key";
 
 type StackEntry = { id: string; title: string };
+
+// 模块级内存缓存：在用户刷题/阅读过程中，已拉取过的 markdown 不重复发起 fetch，切换 0ms 瞬间响应
+const kbMarkdownCache = new Map<string, string>();
 
 export type KbRelatedChip = {
   id: string;
@@ -175,7 +179,20 @@ function DrawerChrome({
         </div>
       ) : null}
 
-      <div ref={bodyRef} className="kb-drawer-body md-body" onClick={onBodyClick}>
+      {status === "loading" && html ? (
+        <div className="h-0.5 w-full overflow-hidden bg-muted">
+          <div className="h-full w-2/5 animate-pulse bg-primary" />
+        </div>
+      ) : null}
+
+      <div
+        ref={bodyRef}
+        className={cn(
+          "kb-drawer-body md-body flex-1 overflow-y-auto",
+          status === "loading" && html ? "opacity-60 transition-opacity duration-150" : ""
+        )}
+        onClick={onBodyClick}
+      >
         {!current ? (
           <div className="space-y-3 text-[0.92rem] leading-relaxed text-muted-foreground">
             <p>{emptyHint}</p>
@@ -187,9 +204,18 @@ function DrawerChrome({
           </div>
         ) : (
           <>
-            {status === "loading" && <p className="text-muted-foreground">正在加载关联知识点…</p>}
+            {status === "loading" && !html && (
+              <div className="space-y-4 py-3">
+                <div className="h-5 w-2/5 rounded bg-muted animate-pulse" />
+                <div className="space-y-2.5">
+                  <div className="h-4 w-full rounded bg-muted animate-pulse" />
+                  <div className="h-4 w-11/12 rounded bg-muted animate-pulse" />
+                  <div className="h-4 w-4/5 rounded bg-muted animate-pulse" />
+                </div>
+              </div>
+            )}
             {status === "err" && <p className="text-destructive">{msg}</p>}
-            {status === "ok" && <div dangerouslySetInnerHTML={{ __html: html }} />}
+            {html ? <div dangerouslySetInnerHTML={{ __html: html }} /> : null}
           </>
         )}
       </div>
@@ -236,9 +262,9 @@ export function KbPreviewDrawer({
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "err">("idle");
   const [msg, setMsg] = useState("");
   const [isMobile, setIsMobile] = useState(() =>
-    typeof window !== "undefined" ? window.matchMedia("(max-width: 639px)").matches : false,
+    typeof window !== "undefined" ? window.innerWidth < 640 : false,
   );
-  const [viewportReady, setViewportReady] = useState(false);
+  const [viewportReady, setViewportReady] = useState(() => typeof window !== "undefined");
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 639px)");
@@ -255,12 +281,39 @@ export function KbPreviewDrawer({
     if (isMobile && pinned && onPinnedChange) onPinnedChange(false);
   }, [isMobile, pinned, onPinnedChange]);
 
+  // 静默预热相关条目，确保点击切换选项时秒开无收缩
+  useEffect(() => {
+    if (!open || !related.length) return;
+    for (const r of related) {
+      if (kbMarkdownCache.has(r.id)) continue;
+      const target = catalog.find((c) => c.id === r.id);
+      if (!target?.path) continue;
+      const url = "/kb/" + target.path.split("/").map(encodeURIComponent).join("/");
+      fetch(url)
+        .then((res) => (res.ok ? res.text() : Promise.reject()))
+        .then((md) => {
+          kbMarkdownCache.set(r.id, md);
+        })
+        .catch(() => {});
+    }
+  }, [open, related, catalog]);
+
   useEffect(() => {
     if (!open || !item?.path) {
       setStatus("idle");
       setHtml("");
       return;
     }
+
+    // 优先命中内存缓存：0ms 秒切无收缩
+    if (kbMarkdownCache.has(item.id)) {
+      const cachedMd = kbMarkdownCache.get(item.id)!;
+      setHtml(renderKbMarkdown(cachedMd, catalog, item.id));
+      setStatus("ok");
+      bodyRef.current?.scrollTo({ top: 0, behavior: "instant" });
+      return;
+    }
+
     let cancelled = false;
     setStatus("loading");
     setMsg("");
@@ -270,8 +323,10 @@ export function KbPreviewDrawer({
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const md = await res.text();
         if (cancelled) return;
+        kbMarkdownCache.set(item.id, md);
         setHtml(renderKbMarkdown(md, catalog, item.id));
         setStatus("ok");
+        bodyRef.current?.scrollTo({ top: 0, behavior: "instant" });
       })
       .catch((e) => {
         if (cancelled) return;
@@ -367,13 +422,13 @@ export function KbPreviewDrawer({
         showCloseButton={false}
         overlayClassName={
           isMobile
-            ? "!z-[60] bg-black/25 dark:bg-black/45"
-            : "!z-[60] top-[calc(var(--safe-t)+3.75rem)] bg-black/20 dark:bg-black/45"
+            ? "bg-black/40 backdrop-blur-sm"
+            : "top-[calc(var(--safe-t)+3.75rem)] bg-black/25 dark:bg-black/45"
         }
         className={
           isMobile
-            ? "kb-drawer-panel !z-[65] gap-0 border-border bg-card p-0 text-card-foreground max-h-[min(88dvh,720px)] rounded-t-2xl"
-            : "kb-drawer-panel !z-[65] w-full gap-0 border-border bg-card p-0 text-card-foreground sm:max-w-md data-[side=right]:inset-y-auto data-[side=right]:top-[calc(var(--safe-t)+3.75rem)] data-[side=right]:bottom-0 data-[side=right]:h-[calc(100dvh-var(--safe-t)-3.75rem)]"
+            ? "kb-drawer-panel gap-0 border-border bg-card p-0 text-card-foreground h-[min(85dvh,720px)] max-h-[min(85dvh,720px)] rounded-t-2xl flex flex-col"
+            : "kb-drawer-panel w-full gap-0 border-border bg-card p-0 text-card-foreground sm:max-w-md data-[side=right]:inset-y-auto data-[side=right]:top-[calc(var(--safe-t)+3.75rem)] data-[side=right]:bottom-0 data-[side=right]:h-[calc(100dvh-var(--safe-t)-3.75rem)] flex flex-col"
         }
       >
         <SheetHeader className="sr-only">
