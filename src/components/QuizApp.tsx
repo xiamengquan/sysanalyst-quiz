@@ -525,8 +525,8 @@ export function QuizApp() {
             <div
               className={`mt-4 rounded-[12px] border bg-muted/40 p-4 text-[0.92rem] leading-relaxed sm:text-[1rem] ${
                 chosen === q.ans
-                  ? "border-[color-mix(in_srgb,var(--ok)_50%,var(--border))]"
-                  : "border-[color-mix(in_srgb,var(--bad)_50%,var(--border))]"
+                  ? "border-emerald-500/50 dark:border-emerald-500/40"
+                  : "border-rose-500/50 dark:border-rose-500/40"
               }`}
             >
               {chosen === q.ans ? (

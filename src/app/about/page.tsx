@@ -8,7 +8,7 @@ export default function AboutPage() {
       <p className="page-lead">功能一览 · 合规 · 部署</p>
 
       <div className="stack-loose">
-        <Card className="border-[color-mix(in_srgb,var(--warn)_40%,var(--border))]">
+        <Card className="border-amber-500/40 bg-amber-500/5">
           <CardContent className="pt-6 text-[0.92rem] leading-relaxed">
             <b className="text-[var(--warn)]">合规声明</b>：本站仅供<strong>个人学习</strong>
             。真题及解析请勿对外传播、商用或二次发布。

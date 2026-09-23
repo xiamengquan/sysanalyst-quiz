@@ -346,8 +346,12 @@ button,
   transition: all 0.15s ease;
 }
 .btn:hover {
-  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
-  border-color: color-mix(in srgb, var(--foreground) 18%, var(--border));
+  background: var(--muted);
+  border-color: rgba(0, 0, 0, 0.18);
+}
+.dark .btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.18);
 }
 .btn:disabled {
   opacity: 0.4;
@@ -398,7 +402,7 @@ button,
 .field:focus-visible {
   outline: none;
   border-color: var(--ring);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--ring) 40%, transparent);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.12);
 }
 select.field {
   background-image: linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
@@ -448,8 +452,12 @@ textarea.field {
   transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .opt-btn:hover {
-  border-color: color-mix(in srgb, var(--foreground) 25%, var(--border));
-  background: color-mix(in srgb, var(--foreground) 4%, var(--surface));
+  border-color: rgba(0, 0, 0, 0.22);
+  background: rgba(0, 0, 0, 0.03);
+}
+.dark .opt-btn:hover {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.05);
 }
 @media (min-width: 640px) {
   .opt-btn {
@@ -459,17 +467,32 @@ textarea.field {
 
 .opt-btn.is-chosen {
   border-color: var(--foreground);
-  background: color-mix(in srgb, var(--foreground) 8%, var(--card));
+  background: rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 0 1px var(--foreground);
+}
+.dark .opt-btn.is-chosen {
+  border-color: var(--foreground);
+  background: rgba(255, 255, 255, 0.08);
   box-shadow: 0 0 0 1px var(--foreground);
 }
 .opt-btn.is-ok {
   border-color: var(--ok);
-  background: color-mix(in srgb, var(--ok) 12%, var(--card));
+  background: rgba(34, 197, 94, 0.08);
+  box-shadow: 0 0 0 1px var(--ok);
+}
+.dark .opt-btn.is-ok {
+  border-color: var(--ok);
+  background: rgba(34, 197, 94, 0.14);
   box-shadow: 0 0 0 1px var(--ok);
 }
 .opt-btn.is-bad {
   border-color: var(--bad);
-  background: color-mix(in srgb, var(--bad) 12%, var(--card));
+  background: rgba(239, 68, 68, 0.08);
+  box-shadow: 0 0 0 1px var(--bad);
+}
+.dark .opt-btn.is-bad {
+  border-color: var(--bad);
+  background: rgba(239, 68, 68, 0.14);
   box-shadow: 0 0 0 1px var(--bad);
 }
 
@@ -483,7 +506,7 @@ textarea.field {
   display: flex;
   flex-wrap: wrap;
   gap: 0.45rem;
-  background: color-mix(in srgb, var(--card) 92%, transparent);
+  background: var(--card);
   border-top: 1px solid var(--border);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -1023,7 +1046,7 @@ textarea.field {
   gap: 0.75rem;
   padding: 0.9rem 1rem;
   border-bottom: 1px solid var(--border);
-  background: color-mix(in srgb, var(--card) 88%, var(--background));
+  background: var(--card);
   flex-shrink: 0;
 }
 .kb-drawer-related {
@@ -1034,7 +1057,7 @@ textarea.field {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   border-bottom: 1px solid var(--border);
-  background: color-mix(in srgb, var(--card) 94%, var(--background));
+  background: var(--surface);
   flex-shrink: 0;
   min-height: 3.25rem;
   align-items: stretch;
@@ -1096,7 +1119,7 @@ textarea.field {
   gap: 0.5rem;
   padding: 0.75rem 1rem calc(0.75rem + var(--safe-b));
   border-top: 1px solid var(--border);
-  background: color-mix(in srgb, var(--card) 88%, var(--background));
+  background: var(--card);
   flex-shrink: 0;
 }
 .kb-drawer-foot [data-slot="button"] {
@@ -1304,7 +1327,7 @@ textarea.field {
   transition: all 0.15s ease;
 }
 .gs-trigger:hover {
-  border-color: color-mix(in srgb, var(--foreground) 20%, var(--border));
+  border-color: var(--foreground);
   color: var(--foreground);
   background: var(--muted);
 }
