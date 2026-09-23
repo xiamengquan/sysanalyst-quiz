@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { BookOpen } from "lucide-react";
+import { BookOpen, Dices, Flame, LayoutGrid, Trophy } from "lucide-react";
 import { CH_NAMES, type Question } from "@/lib/types";
 import { QUIZ_STORAGE_KEY, storageGet, storageSet } from "@/lib/storage";
 import { KbPreviewDrawer, useKbCatalog } from "@/components/KbPreviewDrawer";
@@ -10,6 +10,16 @@ import { findRelatedKbForQuestion } from "@/lib/quiz-kb";
 import type { KbSearchDoc, KbSearchIndex } from "@/lib/kb-search";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { dialogMobileSheetClassName } from "@/lib/dialog-mobile";
+import { cn } from "@/lib/utils";
 import { ExamSprintBanner } from "@/components/ExamCountdown";
 
 type Meta = { practice: number; real: number; workshop: number; total: number };
@@ -20,7 +30,18 @@ type QuizPersist = {
   answers?: Record<number, string>;
   revealed?: Record<number, boolean>;
   mode?: string;
+  isRandom75Session?: boolean;
 };
+
+/** Fisher-Yates 洗牌算法，保证无偏均匀随机分布 */
+function shuffleArray<T>(items: T[]): T[] {
+  const result = [...items];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
 
 export function QuizApp() {
   const [all, setAll] = useState<Question[]>([]);
@@ -38,10 +59,13 @@ export function QuizApp() {
     | "scenario"
     | "req_learn"
     | "sao_learn"
+    | "random75"
   >("scenario");
   const [mode, setMode] = useState<"continuous" | "practice" | "exam">("continuous");
   const [limit, setLimit] = useState(0);
   const [shuffle, setShuffle] = useState(false);
+  const [isRandom75Session, setIsRandom75Session] = useState(false);
+  const [sheetCardOpen, setSheetCardOpen] = useState(false);
   const [pool, setPool] = useState<Question[]>([]);
   const [idx, setIdx] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
@@ -101,9 +125,18 @@ export function QuizApp() {
     return [...s].sort((a, b) => a - b);
   }, [all]);
 
+  /** 综合知识纯选择题候选池（排除论文自测题） */
+  const pureChoiceQuestions = useMemo(
+    () => all.filter((q) => q.bank === "real" || q.bank === "practice" || q.bank === "workshop"),
+    [all]
+  );
+
   const filtered = useMemo(() => {
     const feCh = new Set([4, 7, 9, 12, 13, 14, 15]);
     let list = all.filter((q) => {
+      if (path === "random75") {
+        return q.bank === "real" || q.bank === "practice" || q.bank === "workshop";
+      }
       if (bank === "paper") return q.bank === "paper";
       if (bank !== "all" && q.bank !== bank) return false;
       if (bank === "all" && q.bank === "paper" && path !== "roi_boost" && path !== "all") return false;
@@ -157,7 +190,10 @@ export function QuizApp() {
       }
       return true;
     });
-    if (path === "req_learn" || path === "sao_learn") {
+
+    if (shuffle || path === "random75") {
+      list = shuffleArray(list);
+    } else if (path === "req_learn" || path === "sao_learn") {
       const stageRank: Record<string, number> = { L0: 0, L1: 1, L2: 2, L3: 3, L4: 4 };
       list = [...list].sort((a, b) => {
         const ra = stageRank[String(a.learn_stage || "")] ?? 9;
@@ -173,10 +209,10 @@ export function QuizApp() {
         if (ya !== yb) return yb.localeCompare(ya, "zh");
         return (a.qnum || a.no) - (b.qnum || b.no);
       });
-    } else if (shuffle) {
-      list = [...list].sort(() => Math.random() - 0.5);
     }
-    if (limit > 0) list = list.slice(0, limit);
+
+    const effectiveLimit = path === "random75" && limit === 0 ? 75 : limit;
+    if (effectiveLimit > 0) list = list.slice(0, effectiveLimit);
     return list;
   }, [all, bank, yearHalf, chapter, diff, path, shuffle, limit]);
 
@@ -188,17 +224,43 @@ export function QuizApp() {
         answers,
         revealed,
         mode,
+        isRandom75Session,
       });
     } catch {
       /* ignore */
     }
-  }, [pool, idx, answers, revealed, mode]);
+  }, [pool, idx, answers, revealed, mode, isRandom75Session]);
+
+  /** 一键全题库随机抽取 75 题功能 */
+  const startRandom75 = useCallback(
+    async (preferredMode?: "continuous" | "practice" | "exam") => {
+      if (pureChoiceQuestions.length === 0) {
+        alert("题库正在加载中或无可用题目，请稍候…");
+        return;
+      }
+      // 使用 Fisher-Yates 算法无偏洗牌后截取前 75 题
+      const selected = shuffleArray(pureChoiceQuestions).slice(
+        0,
+        Math.min(75, pureChoiceQuestions.length)
+      );
+      setPool(selected);
+      setIdx(0);
+      setAnswers({});
+      setRevealed({});
+      setIsRandom75Session(true);
+      if (preferredMode) setMode(preferredMode);
+      setPhase("quiz");
+    },
+    [pureChoiceQuestions]
+  );
 
   const start = useCallback(
-    async (opts?: { fromWrong?: boolean; resume?: boolean }) => {
+    async (opts?: { fromWrong?: boolean; resume?: boolean; isRandom75?: boolean }) => {
       let list = filtered;
+      let sessionRandom75 = opts?.isRandom75 ?? (path === "random75");
       if (opts?.fromWrong) {
         list = pool.filter((q) => answers[q.no] && answers[q.no] !== q.ans);
+        sessionRandom75 = isRandom75Session;
       }
       if (!list.length && !opts?.resume) {
         alert("当前筛选无题目");
@@ -216,6 +278,9 @@ export function QuizApp() {
             startIdx = p.idx || 0;
             ans = p.answers || {};
             rev = p.revealed || {};
+            if (typeof p.isRandom75Session === "boolean") {
+              sessionRandom75 = p.isRandom75Session;
+            }
           }
         } catch {
           /* ignore */
@@ -229,9 +294,10 @@ export function QuizApp() {
       setIdx(startIdx);
       setAnswers(ans);
       setRevealed(rev);
+      setIsRandom75Session(sessionRandom75);
       setPhase("quiz");
     },
-    [filtered, pool, answers, all],
+    [filtered, pool, answers, all, path, isRandom75Session],
   );
 
   useEffect(() => {
@@ -338,7 +404,16 @@ export function QuizApp() {
                     onChange={(e) => {
                       const v = e.target.value as typeof path;
                       setPath(v);
-                      if (v !== "all") setBank("practice");
+                      if (v === "random75") {
+                        setBank("all");
+                        setChapter("all");
+                        setDiff("all");
+                        setYearHalf("all");
+                        setLimit(75);
+                        setShuffle(true);
+                      } else if (v !== "all") {
+                        setBank("practice");
+                      }
                       if (v === "req_learn" || v === "sao_learn") {
                         setShuffle(false);
                         setChapter("11");
@@ -347,6 +422,7 @@ export function QuizApp() {
                     }}
                   >
                     <option value="scenario">场景混淆（推荐）</option>
+                    <option value="random75">🎲 全库随机 75 题（模考冲刺）</option>
                     <option value="req_learn">需求工程（L0→L4）</option>
                     <option value="sao_learn">结构化与OO分析（L0→L4）</option>
                     <option value="roi_boost">分值加练</option>
@@ -441,11 +517,71 @@ export function QuizApp() {
             </Card>
           </aside>
 
-          <div className="layout-main">
-            <Card className="space-y-4 px-(--card-spacing) mb-4">
-              <h2 className="text-[1rem] font-medium">开始本轮</h2>
+          <div className="layout-main space-y-4">
+            {/* 全真模拟 · 随机 75 题推荐卡片 */}
+            <Card className="border-primary/30 bg-primary/[0.03] dark:bg-primary/[0.05] p-4 sm:p-5 shadow-xs">
+              <div className="flex items-start justify-between gap-3 mb-2.5">
+                <div className="flex items-center gap-2.5">
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
+                    <Dices className="size-4" />
+                  </span>
+                  <div>
+                    <h2 className="text-[1.02rem] font-semibold text-foreground">
+                      全真模拟 · 随机抽取 75 题
+                    </h2>
+                    <p className="text-xs text-muted-foreground mt-0.5">
+                      对标软考系统分析师上午卷综合知识标准规格
+                    </p>
+                  </div>
+                </div>
+                <span className="shrink-0 rounded-full border border-primary/30 bg-primary/10 px-2.5 py-0.5 text-[0.72rem] font-medium text-primary">
+                  150分钟 · 75分及格制
+                </span>
+              </div>
+              <p className="text-[0.88rem] leading-relaxed text-muted-foreground mb-4">
+                从全量 <b className="text-foreground">{pureChoiceQuestions.length || 1935}</b> 道选择题（历年真题、自编精选题与工坊新题）中<b>无偏随机抽取 75 道</b>。45 分合格线，每次抽取均为全新题目组合。
+              </p>
+              <div className="flex flex-wrap items-center gap-2.5">
+                <Button
+                  type="button"
+                  variant="default"
+                  onClick={() => void startRandom75()}
+                  className="gap-2 shadow-xs"
+                >
+                  <Dices className="size-4" />
+                  <span>随机抽取 75 题并开始</span>
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => void startRandom75("exam")}
+                  className="gap-1.5 text-xs"
+                  title="模考模式：答题过程不透露对错与解析，交卷后统一看成绩与及格判定"
+                >
+                  <span>模考交卷模式</span>
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => void startRandom75("practice")}
+                  className="gap-1.5 text-xs"
+                  title="练习模式：每做一题即可即时查看答案与考点解析"
+                >
+                  <span>即时看解析模式</span>
+                </Button>
+              </div>
+            </Card>
+
+            {/* 常规按条件筛选卡片 */}
+            <Card className="space-y-4 px-(--card-spacing)">
+              <div className="flex items-center justify-between">
+                <h2 className="text-[1rem] font-medium">按左侧条件刷题</h2>
+                <span className="text-xs text-muted-foreground">
+                  当前筛选 <b className="text-foreground">{filtered.length}</b> 题
+                </span>
+              </div>
               <p className="text-[0.92rem] leading-relaxed text-muted-foreground">
-                当前筛选 <b className="text-foreground">{filtered.length}</b> 题 · 进度存 IndexedDB
+                可自由组合学习路径、章节、难度与场次 · 进度自动存入本机 IndexedDB
               </p>
               <div className="btn-row">
                 <Button type="button" variant="default" onClick={() => void start()}>
@@ -468,13 +604,34 @@ export function QuizApp() {
         <div className={`kb-dock-layout${kbOpen && kbPinned ? " is-docked" : ""}`}>
           <div className="kb-dock-main layout-full">
         <Card className="px-(--card-spacing) mb-4">
-          <div className="mb-3 flex justify-between text-[0.85rem] text-muted-foreground">
-            <span>
-              {idx + 1} / {pool.length}
-            </span>
-            <span>
-              已答 {Object.keys(answers).length} · 正确 {correctCount}
-            </span>
+          <div className="mb-3 flex items-center justify-between text-[0.85rem] text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <span className="font-medium text-foreground">
+                {idx + 1} / {pool.length}
+              </span>
+              {(isRandom75Session || pool.length === 75) && (
+                <span className="hidden sm:inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-[0.72rem] font-medium text-primary">
+                  <Dices className="size-3" />
+                  全库随机 75 题
+                </span>
+              )}
+            </div>
+            <div className="flex items-center gap-2">
+              <span>
+                已答 {Object.keys(answers).length}
+                {mode !== "exam" ? ` · 正确 ${correctCount}` : ""}
+              </span>
+              <Button
+                type="button"
+                variant="outline"
+                size="xs"
+                onClick={() => setSheetCardOpen(true)}
+                className="h-6 gap-1 px-2 text-[0.72rem]"
+              >
+                <LayoutGrid className="size-3" />
+                <span>答题卡</span>
+              </Button>
+            </div>
           </div>
           <div className="mb-4 h-2 overflow-hidden rounded-full bg-muted/40">
             <i
@@ -482,7 +639,17 @@ export function QuizApp() {
               style={{ width: `${((idx + 1) / pool.length) * 100}%` }}
             />
           </div>
-          <div className="mb-3 flex flex-wrap gap-1.5">
+          <div className="mb-3 flex flex-wrap gap-1.5 items-center">
+            {(isRandom75Session || pool.length === 75) && (
+              <span className="badge border-primary/40 bg-primary/10 text-primary font-medium">
+                🎲 全库随机 75 题
+              </span>
+            )}
+            {mode === "exam" && (
+              <span className="badge border-amber-500/40 bg-amber-500/10 text-amber-600 dark:text-amber-400 font-medium">
+                模考模式 · 交卷看分
+              </span>
+            )}
             {q.bank === "real" ? (
               <>
                 <span className="badge">真题</span>
@@ -584,6 +751,10 @@ export function QuizApp() {
             >
               看答案
             </Button>
+            <Button type="button" variant="outline" onClick={() => setSheetCardOpen(true)}>
+              <LayoutGrid size={15} strokeWidth={2} aria-hidden />
+              答题卡
+            </Button>
             <Button type="button" variant="outline" onClick={openRelatedKb}>
               <BookOpen size={16} strokeWidth={2} aria-hidden />
               知识点{relatedKb.length ? ` · ${relatedKb.length}` : ""}
@@ -635,10 +806,136 @@ export function QuizApp() {
         />
       ) : null}
 
+      {/* 答题卡抽屉弹窗 */}
+      <Dialog open={sheetCardOpen} onOpenChange={setSheetCardOpen}>
+        <DialogContent className={cn(dialogMobileSheetClassName, "sm:max-w-xl max-h-[85dvh] flex flex-col")}>
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-base">
+              <LayoutGrid className="size-4 text-primary" />
+              <span>答题卡</span>
+              <span className="text-xs text-muted-foreground font-normal">
+                （共 {pool.length} 题 · 已答 {Object.keys(answers).length} 题）
+              </span>
+            </DialogTitle>
+            <DialogDescription className="text-xs">
+              点击题号快速定位跳转。灰色为未作答，高亮为已作答。
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="flex items-center gap-4 text-xs text-muted-foreground pb-2 border-b border-border/60">
+            <div className="flex items-center gap-1.5">
+              <span className="size-3 rounded-sm border-2 border-primary bg-primary" />
+              <span>当前题</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="size-3 rounded-sm bg-muted text-foreground border border-border" />
+              <span>已作答</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="size-3 rounded-sm border border-border/80 bg-surface/40" />
+              <span>未作答</span>
+            </div>
+          </div>
+
+          <div className="overflow-y-auto py-2 pr-1 max-h-[50dvh]">
+            <div className="grid grid-cols-5 sm:grid-cols-10 gap-2">
+              {pool.map((item, qIdx) => {
+                const isCurrent = qIdx === idx;
+                const isAnswered = !!answers[item.no];
+                return (
+                  <button
+                    key={item.no}
+                    type="button"
+                    onClick={() => {
+                      setIdx(qIdx);
+                      setSheetCardOpen(false);
+                    }}
+                    className={cn(
+                      "flex h-9 items-center justify-center rounded-lg text-xs font-mono font-medium transition-all active:scale-95",
+                      isCurrent
+                        ? "border-2 border-primary bg-primary text-primary-foreground shadow-xs font-bold"
+                        : isAnswered
+                        ? "border border-border bg-muted/80 text-foreground hover:border-foreground/30 font-semibold"
+                        : "border border-border/70 bg-surface/30 text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                    )}
+                  >
+                    {qIdx + 1}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <DialogFooter className="pt-2 border-t border-border/60 flex sm:justify-between items-center">
+            <span className="text-xs text-muted-foreground">
+              作答进度：{pool.length ? Math.round((Object.keys(answers).length / pool.length) * 100) : 0}%
+            </span>
+            <Button type="button" variant="outline" size="sm" onClick={() => setSheetCardOpen(false)}>
+              关闭
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
       {phase === "result" && (
         <div className="layout-full">
         <Card className="px-(--card-spacing) mb-4">
-          <h2 className="mb-4 text-[1.15rem]">本轮结果</h2>
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-[1.15rem] font-semibold">本轮结果</h2>
+            {(isRandom75Session || pool.length === 75) && (
+              <span className="rounded-full border border-primary/30 bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
+                软考上午卷 · 75 题模拟
+              </span>
+            )}
+          </div>
+
+          {/* 75 题模考专属评定卡片 */}
+          {(isRandom75Session || pool.length === 75) && (
+            <div
+              className={cn(
+                "mb-5 rounded-xl border p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3",
+                correctCount >= 45
+                  ? "border-emerald-500/40 bg-emerald-500/5 dark:bg-emerald-500/10 text-emerald-950 dark:text-emerald-100"
+                  : "border-amber-500/40 bg-amber-500/5 dark:bg-amber-500/10 text-amber-950 dark:text-amber-100"
+              )}
+            >
+              <div className="flex items-center gap-3">
+                <div
+                  className={cn(
+                    "flex size-10 shrink-0 items-center justify-center rounded-lg font-bold text-lg",
+                    correctCount >= 45
+                      ? "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400"
+                      : "bg-amber-500/20 text-amber-600 dark:text-amber-400"
+                  )}
+                >
+                  {correctCount >= 45 ? <Trophy className="size-5" /> : <Flame className="size-5" />}
+                </div>
+                <div>
+                  <div className="font-semibold text-base flex items-center gap-2">
+                    <span>{correctCount >= 45 ? "🎉 模考及格（成绩合格）" : "⚠️ 未达及格线（继续冲刺）"}</span>
+                    <span className="text-xs px-2 py-0.5 rounded-full border border-current font-normal opacity-80">
+                      及格线 45 / 75 分
+                    </span>
+                  </div>
+                  <p className="text-xs opacity-90 mt-0.5">
+                    {correctCount >= 45
+                      ? `本次得分 ${correctCount} 分，超出及格线 ${correctCount - 45} 分！综合知识科目状态优秀，建议保持答题手感。`
+                      : `本次得分 ${correctCount} 分，距离 45 分及格线还差 ${45 - correctCount} 分。建议对照错题精读考点，多抽几轮强化。`}
+                  </p>
+                </div>
+              </div>
+              <Button
+                type="button"
+                variant="default"
+                onClick={() => void startRandom75()}
+                className="shrink-0 w-full sm:w-auto gap-1.5 shadow-xs"
+              >
+                <Dices className="size-4" />
+                <span>再抽一套 75 题</span>
+              </Button>
+            </div>
+          )}
+
           <div className="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {[
               ["题量", pool.length],
@@ -655,12 +952,19 @@ export function QuizApp() {
               </div>
             ))}
           </div>
+
           <div className="btn-row">
-            <Button type="button" variant="default" onClick={() => void start({ fromWrong: true })}>
+            {(isRandom75Session || pool.length === 75) && (
+              <Button type="button" variant="default" onClick={() => void startRandom75()} className="gap-1.5">
+                <Dices className="size-4" />
+                再抽 75 题
+              </Button>
+            )}
+            <Button type="button" variant={isRandom75Session ? "outline" : "default"} onClick={() => void start({ fromWrong: true })}>
               只做错题
             </Button>
             <Button type="button" variant="outline" onClick={() => void start()}>
-              再来一轮
+              重做本套
             </Button>
             <Button type="button" variant="outline" onClick={() => void start({ resume: true })}>
               断点继续
