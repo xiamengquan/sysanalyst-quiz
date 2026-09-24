@@ -6,6 +6,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -86,6 +87,13 @@ if (!envExample.includes("NEXT_PUBLIC_SUPABASE_URL")) {
 console.log(`check-release · package ${pkgVer || "?"} · latest ${notes?.latest || "?"}`);
 for (const w of warns) console.warn("  warn:", w);
 for (const e of errors) console.error("  error:", e);
+
+const reorg = spawnSync("node", ["scripts/validate-reorg.mjs"], { cwd: root, encoding: "utf8" });
+if (reorg.status !== 0) {
+  errors.push("validate-reorg 未通过");
+  if (reorg.stderr) console.error(reorg.stderr);
+  if (reorg.stdout) console.error(reorg.stdout);
+}
 
 if (errors.length) {
   process.exit(1);
