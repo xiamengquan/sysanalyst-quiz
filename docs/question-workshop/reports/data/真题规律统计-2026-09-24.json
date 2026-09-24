@@ -1,0 +1,97 @@
+{
+  "generatedAt": "2026-09-24",
+  "realPath": "content/banks/real/综合知识/all.jsonl",
+  "practicePath": "content/banks/practice/all.jsonl",
+  "realAll": {
+    "label": "real-all",
+    "n": 1040,
+    "byYear": {
+      "2014上": 75,
+      "2015上": 75,
+      "2016上": 75,
+      "2017上": 75,
+      "2018上": 75,
+      "2019上": 75,
+      "2020上": 75,
+      "2021上": 75,
+      "2022上": 75,
+      "2023上": 75,
+      "2024上": 35,
+      "2024下": 66,
+      "2025上": 60,
+      "2025下": 54,
+      "2026上": 75
+    },
+    "stemLen": {
+      "sum": 145468,
+      "median": 70,
+      "p90": 223,
+      "mean": 139.87307692307692
+    },
+    "rates": {
+      "shortExam": 38.1,
+      "longStem": 24.2,
+      "blank": 58.1,
+      "multiBlank": 20.7,
+      "scenario": 38.8,
+      "template": 6,
+      "calc": 19.2,
+      "negate": 8.7,
+      "compare": 0.9
+    }
+  },
+  "realFormal2018_2023": {
+    "label": "real-formal-2018-2023",
+    "n": 450,
+    "byYear": {
+      "2018上": 75,
+      "2019上": 75,
+      "2020上": 75,
+      "2021上": 75,
+      "2022上": 75,
+      "2023上": 75
+    },
+    "stemLen": {
+      "sum": 83546,
+      "median": 106,
+      "p90": 255,
+      "mean": 185.65777777777777
+    },
+    "rates": {
+      "shortExam": 24.4,
+      "longStem": 34.4,
+      "blank": 66.9,
+      "multiBlank": 31.6,
+      "scenario": 52.7,
+      "template": 6.4,
+      "calc": 21.8,
+      "negate": 8.9,
+      "compare": 1.1
+    }
+  },
+  "practiceGap": {
+    "n": 730,
+    "shortExplainLt35": 119,
+    "shortExplainRate": 16.3,
+    "templateStem": 1,
+    "styleTrack": {
+      "short": 388,
+      "mid": 302,
+      "scenario": 40,
+      "other": 0
+    },
+    "targetStyleFromReal": {
+      "shortExamPct": 38.1,
+      "longStemPct": 24.2,
+      "scenarioPct": 38.8,
+      "calcPct": 19.2,
+      "negatePct": 8.7
+    }
+  },
+  "conclusions": [
+    "真题记录级多空联动仍占绝对主导（blank 标记接近全量）；叙述情景约三成，与「长题干≠情景」口径须分开引用。",
+    "2025 回忆卷及近年卷短题干占比上升，自编库须保留 short/mid/scenario 三轨并按 §4 配额混排。",
+    "自编库当前 short 轨占比偏高、scenario 轨偏低；解析 <35 字仍有一批待清零（重编 Phase B）。",
+    "非真题重编须仅模仿规律，禁止照搬真题原文；考点对齐知识点精炼 v1.0+ 与 §3.0 章映射。"
+  ]
+}

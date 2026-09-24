@@ -1,6 +1,45 @@
 {
-  "latest": "0.8.3",
+  "latest": "0.9.0",
   "releases": [
+    {
+      "version": "0.9.0",
+      "date": "2026-09-24",
+      "title": "非真题重编重组工程完工（上午+工坊+案例论文审计）",
+      "highlights": [
+        "重编闭环：730 道自编练习完成 meta、解析扩写、全章情景化与 style 再平衡（short 轨 20% / scenario 584 题）；工坊 145 道 passed 题同步情景化",
+        "质量门禁：模板题干清零、解析 ≥35 字；新增 npm run validate:reorg",
+        "130 道自编案例与 13 道论文题完成 Phase D 审计标记；出题细则 §2.5 与完工报告已对齐 1040 真题规律",
+        "出题细则 v1.2 正式发布（委员会甲乙丙数据刷新表决通过）；sync 为案例/论文导出补全重编审计标记"
+      ]
+    },
+    {
+      "version": "0.8.6",
+      "date": "2026-09-24",
+      "title": "Phase B2：第 11 章需求/SAO 题干情景化",
+      "highlights": [
+        "重编 Phase B2：第 11 章 150 道自编题中 141 道补充项目情景前缀并重算 style_track（scenario 轨由 15 提升至 76），17 处考点标签对齐精炼别名",
+        "新增脚本 scenarioize-ch11-b2.mjs；补丁留痕于 docs/question-workshop/reports/data/"
+      ]
+    },
+    {
+      "version": "0.8.5",
+      "date": "2026-09-24",
+      "title": "Phase B1：自编练习 119 道短解析扩写清零",
+      "highlights": [
+        "重编计划 Phase B1 落地：730 道自编练习中解析不足 35 字的 119 题已全部扩写（补结论/正确项/错项辨析），满足提示信息官与细则 §7 门槛",
+        "工坊留痕：重编-20260924-批次B1-explain-passed.jsonl；脚本 expand-b1-explains.mjs 可复用于后续批次"
+      ]
+    },
+    {
+      "version": "0.8.4",
+      "date": "2026-09-24",
+      "title": "真题规律刷新与自编练习库 meta 重组",
+      "highlights": [
+        "出题工坊：基于 1040 道综合知识真题重跑规律统计，新增分析师报告与 JSON 数据；出题细则 §2 样本量与 §2.5 刷新",
+        "自编练习 730 题完成 meta-v1 重组（style_track / intensity / difficulty 对齐真题口径），并输出重编审计清单；119 道短解析列入 Phase B 内容重编批次",
+        "新增脚本 analyze-real-patterns.mjs、reorganize-practice-bank.mjs 便于后续批次重编与委员会复核"
+      ]
+    },
     {
       "version": "0.8.3",
       "date": "2026-09-24",

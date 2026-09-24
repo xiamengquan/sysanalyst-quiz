@@ -1,0 +1,610 @@
+{
+  "updatedAt": "2026-09-24",
+  "total": 730,
+  "styleTrackChanges": 283,
+  "needsExplainRewrite": [
+    {
+      "id": "CK-FE-e2430190f2",
+      "len": 34,
+      "point": "敏捷"
+    },
+    {
+      "id": "CK-FE-5158ad9cd6",
+      "len": 28,
+      "point": "代码审查"
+    },
+    {
+      "id": "CK-FE-7806419e5d",
+      "len": 34,
+      "point": "E2E"
+    },
+    {
+      "id": "CK-ROI-85eea4ebce",
+      "len": 31,
+      "point": "职业道德"
+    },
+    {
+      "id": "CK-ROI-880b66dcda",
+      "len": 32,
+      "point": "软考级别"
+    },
+    {
+      "id": "CK-ROI-3884741caf",
+      "len": 33,
+      "point": "干系人"
+    },
+    {
+      "id": "CK-ROI-a7924c68fc",
+      "len": 34,
+      "point": "文档作用"
+    },
+    {
+      "id": "CK-ROI-924576003f",
+      "len": 27,
+      "point": "职业道德2"
+    },
+    {
+      "id": "CK-ROI-2fef3d34fb",
+      "len": 33,
+      "point": "挣值SV"
+    },
+    {
+      "id": "CK-ROI-ad85157c17",
+      "len": 32,
+      "point": "WBS"
+    },
+    {
+      "id": "CK-ROI-6136bf930d",
+      "len": 30,
+      "point": "关键路径"
+    },
+    {
+      "id": "CK-ROI-119c9aa201",
+      "len": 31,
+      "point": "结构化分析"
+    },
+    {
+      "id": "CK-ROI-a07442e052",
+      "len": 26,
+      "point": "变更控制"
+    },
+    {
+      "id": "CK-ROI-5940715e5c",
+      "len": 28,
+      "point": "用例"
+    },
+    {
+      "id": "CK-SC-153f06b8fa",
+      "len": 31,
+      "point": "兼容发布"
+    },
+    {
+      "id": "CK-SC-f0b719eb4c",
+      "len": 30,
+      "point": "技术债"
+    },
+    {
+      "id": "CK-SC-f886055ebf",
+      "len": 32,
+      "point": "锁与性能"
+    },
+    {
+      "id": "CK-SC-5abedd9a67",
+      "len": 34,
+      "point": "死锁"
+    },
+    {
+      "id": "CK-11-4ef918066f",
+      "len": 32,
+      "point": "需求三层"
+    },
+    {
+      "id": "CK-11-b04fb5f7bf",
+      "len": 19,
+      "point": "需求工程构成"
+    },
+    {
+      "id": "CK-11-9a36fa9ffa",
+      "len": 25,
+      "point": "需求开发阶段"
+    },
+    {
+      "id": "CK-11-e698a9d4ea",
+      "len": 29,
+      "point": "五活动"
+    },
+    {
+      "id": "CK-11-f16df7d8e5",
+      "len": 27,
+      "point": "范围vs需求"
+    },
+    {
+      "id": "CK-11-dc69a097e7",
+      "len": 21,
+      "point": "用户vs系统需求"
+    },
+    {
+      "id": "CK-11-d856fc4653",
+      "len": 23,
+      "point": "原始需求vsSRS"
+    },
+    {
+      "id": "CK-11-e71544306d",
+      "len": 31,
+      "point": "QFD常规"
+    },
+    {
+      "id": "CK-11-0b281ff12e",
+      "len": 17,
+      "point": "QFD期望"
+    },
+    {
+      "id": "CK-11-666f1e2b14",
+      "len": 22,
+      "point": "QFD意外"
+    },
+    {
+      "id": "CK-11-2d74af413b",
+      "len": 31,
+      "point": "FURPS功能"
+    },
+    {
+      "id": "CK-11-2029ae0ce7",
+      "len": 15,
+      "point": "FURPS+"
+    },
+    {
+      "id": "CK-11-e98f1a2906",
+      "len": 23,
+      "point": "好需求可验证"
+    },
+    {
+      "id": "CK-11-6e86b9a856",
+      "len": 19,
+      "point": "好需求无歧义"
+    },
+    {
+      "id": "CK-11-c0aabaafdf",
+      "len": 26,
+      "point": "非功能需求"
+    },
+    {
+      "id": "CK-11-7f81786eeb",
+      "len": 21,
+      "point": "质量属性早期"
+    },
+    {
+      "id": "CK-11-45a8bd8051",
+      "len": 20,
+      "point": "接口需求"
+    },
+    {
+      "id": "CK-11-cc8ef5a3bf",
+      "len": 23,
+      "point": "集合完整性"
+    },
+    {
+      "id": "CK-11-65566e9542",
+      "len": 17,
+      "point": "获取-访谈"
+    },
+    {
+      "id": "CK-11-423c01af22",
+      "len": 20,
+      "point": "获取-问卷"
+    },
+    {
+      "id": "CK-11-48750e299e",
+      "len": 32,
+      "point": "获取-JRP"
+    },
+    {
+      "id": "CK-11-fe644ac4de",
+      "len": 24,
+      "point": "获取-观察"
+    },
+    {
+      "id": "CK-11-10aeec61c3",
+      "len": 24,
+      "point": "获取-文档"
+    },
+    {
+      "id": "CK-11-a1fbbc127b",
+      "len": 28,
+      "point": "五法选型"
+    },
+    {
+      "id": "CK-11-1533745ced",
+      "len": 20,
+      "point": "原型法"
+    },
+    {
+      "id": "CK-11-8006a01c4a",
+      "len": 24,
+      "point": "原型风险"
+    },
+    {
+      "id": "CK-11-17e449c908",
+      "len": 20,
+      "point": "冲突需求"
+    },
+    {
+      "id": "CK-11-2a01315c1f",
+      "len": 20,
+      "point": "业务规则外置"
+    },
+    {
+      "id": "CK-11-3de6478366",
+      "len": 18,
+      "point": "需求优先级"
+    },
+    {
+      "id": "CK-11-9c10082d2d",
+      "len": 23,
+      "point": "假设与依赖"
+    },
+    {
+      "id": "CK-11-a13453feea",
+      "len": 23,
+      "point": "需求分析任务"
+    },
+    {
+      "id": "CK-11-8e3f533f02",
+      "len": 16,
+      "point": "采样"
+    },
+    {
+      "id": "CK-11-93f779774e",
+      "len": 22,
+      "point": "情节串联板"
+    },
+    {
+      "id": "CK-11-feb58121d7",
+      "len": 26,
+      "point": "需求冻结误区"
+    },
+    {
+      "id": "CK-11-346788ddc2",
+      "len": 16,
+      "point": "DFD要素"
+    },
+    {
+      "id": "CK-11-751ce8b2b8",
+      "len": 18,
+      "point": "DFD作用"
+    },
+    {
+      "id": "CK-11-b349e92855",
+      "len": 15,
+      "point": "DFD步骤"
+    },
+    {
+      "id": "CK-11-6ee189d351",
+      "len": 16,
+      "point": "用例"
+    },
+    {
+      "id": "CK-11-ba0ba7a25e",
+      "len": 15,
+      "point": "用例构建"
+    },
+    {
+      "id": "CK-11-d72afa07e8",
+      "len": 15,
+      "point": "事件流"
+    },
+    {
+      "id": "CK-11-9aa9085662",
+      "len": 22,
+      "point": "业务vs系统用例"
+    },
+    {
+      "id": "CK-11-ed87dc8e5c",
+      "len": 17,
+      "point": "OOA注意"
+    },
+    {
+      "id": "CK-11-ebe037bfbe",
+      "len": 15,
+      "point": "SRS"
+    },
+    {
+      "id": "CK-11-84113d9fec",
+      "len": 15,
+      "point": "需求验证"
+    },
+    {
+      "id": "CK-11-9de82a2012",
+      "len": 15,
+      "point": "验收准则"
+    },
+    {
+      "id": "CK-11-73d14df94a",
+      "len": 25,
+      "point": "正向跟踪"
+    },
+    {
+      "id": "CK-11-799755bacf",
+      "len": 15,
+      "point": "反向跟踪"
+    },
+    {
+      "id": "CK-11-8f4dd1e9e0",
+      "len": 16,
+      "point": "变更影响"
+    },
+    {
+      "id": "CK-11-d94b16d724",
+      "len": 21,
+      "point": "综合闭环"
+    },
+    {
+      "id": "CK-11-SAO-9c8823a62d",
+      "len": 29,
+      "point": "OOA定义"
+    },
+    {
+      "id": "CK-11-SAO-52f2ef9580",
+      "len": 30,
+      "point": "何时用SA"
+    },
+    {
+      "id": "CK-11-SAO-980abe652c",
+      "len": 28,
+      "point": "何时用OOA"
+    },
+    {
+      "id": "CK-11-SAO-8dd1242d1b",
+      "len": 29,
+      "point": "与需求工程"
+    },
+    {
+      "id": "CK-11-SAO-82fa7e4248",
+      "len": 21,
+      "point": "产物对比"
+    },
+    {
+      "id": "CK-11-SAO-891a1322ab",
+      "len": 31,
+      "point": "互补"
+    },
+    {
+      "id": "CK-11-SAO-e71db3a7ab",
+      "len": 25,
+      "point": "DFD四要素"
+    },
+    {
+      "id": "CK-11-SAO-ece8bf7e3c",
+      "len": 18,
+      "point": "外部实体"
+    },
+    {
+      "id": "CK-11-SAO-6ef850ca98",
+      "len": 30,
+      "point": "加工命名"
+    },
+    {
+      "id": "CK-11-SAO-073a3d4f31",
+      "len": 17,
+      "point": "数据流命名"
+    },
+    {
+      "id": "CK-11-SAO-883427eba8",
+      "len": 31,
+      "point": "数据存储"
+    },
+    {
+      "id": "CK-11-SAO-b7ed94ac47",
+      "len": 27,
+      "point": "绘制步骤"
+    },
+    {
+      "id": "CK-11-SAO-bd900d08ed",
+      "len": 27,
+      "point": "0层图"
+    },
+    {
+      "id": "CK-11-SAO-3a07e4e86e",
+      "len": 28,
+      "point": "分层分解"
+    },
+    {
+      "id": "CK-11-SAO-ae41881a47",
+      "len": 21,
+      "point": "DFD三作用"
+    },
+    {
+      "id": "CK-11-SAO-d46ae6b55d",
+      "len": 24,
+      "point": "字典六类"
+    },
+    {
+      "id": "CK-11-SAO-83fcd5dd85",
+      "len": 16,
+      "point": "数据元素"
+    },
+    {
+      "id": "CK-11-SAO-019afc69ff",
+      "len": 24,
+      "point": "字典作用"
+    },
+    {
+      "id": "CK-11-SAO-fa667dd839",
+      "len": 34,
+      "point": "STD"
+    },
+    {
+      "id": "CK-11-SAO-cb8aa2651f",
+      "len": 17,
+      "point": "STD初终态"
+    },
+    {
+      "id": "CK-11-SAO-5d86a159d5",
+      "len": 31,
+      "point": "平衡原则"
+    },
+    {
+      "id": "CK-11-SAO-4b5f74cdbc",
+      "len": 27,
+      "point": "加工逻辑"
+    },
+    {
+      "id": "CK-11-SAO-aaa89c0a39",
+      "len": 26,
+      "point": "DFD改错"
+    },
+    {
+      "id": "CK-11-SAO-829a2c1150",
+      "len": 21,
+      "point": "空洞命名"
+    },
+    {
+      "id": "CK-11-SAO-e3a77c7438",
+      "len": 23,
+      "point": "字典维护"
+    },
+    {
+      "id": "CK-11-SAO-f59e0726bf",
+      "len": 27,
+      "point": "用例元素"
+    },
+    {
+      "id": "CK-11-SAO-02afaf4cb6",
+      "len": 25,
+      "point": "参与者类型"
+    },
+    {
+      "id": "CK-11-SAO-0211d76f65",
+      "len": 25,
+      "point": "用例命名"
+    },
+    {
+      "id": "CK-11-SAO-d4a5860371",
+      "len": 20,
+      "point": "构建四阶段"
+    },
+    {
+      "id": "CK-11-SAO-2d3a13a17a",
+      "len": 23,
+      "point": "业务vs系统用例"
+    },
+    {
+      "id": "CK-11-SAO-e74d9ca396",
+      "len": 22,
+      "point": "用例规约"
+    },
+    {
+      "id": "CK-11-SAO-afb4a06cfd",
+      "len": 22,
+      "point": "分析类BCE"
+    },
+    {
+      "id": "CK-11-SAO-a5d5217e76",
+      "len": 22,
+      "point": "边界类"
+    },
+    {
+      "id": "CK-11-SAO-33c76db937",
+      "len": 17,
+      "point": "控制类"
+    },
+    {
+      "id": "CK-11-SAO-870b98e844",
+      "len": 17,
+      "point": "主备选流"
+    },
+    {
+      "id": "CK-11-SAO-da2072a100",
+      "len": 24,
+      "point": "OOA产物"
+    },
+    {
+      "id": "CK-11-SAO-96429d83ec",
+      "len": 33,
+      "point": "CRC全称"
+    },
+    {
+      "id": "CK-11-SAO-c2ca4c6797",
+      "len": 28,
+      "point": "分析模型四步"
+    },
+    {
+      "id": "CK-11-SAO-ce3de3ecc3",
+      "len": 28,
+      "point": "CRC范围"
+    },
+    {
+      "id": "CK-11-SAO-fdc1b33638",
+      "len": 24,
+      "point": "协作者含义"
+    },
+    {
+      "id": "CK-11-SAO-9387047f5f",
+      "len": 30,
+      "point": "CRCvsBCE"
+    },
+    {
+      "id": "CK-11-SAO-a0f163bf22",
+      "len": 32,
+      "point": "CRC场景"
+    },
+    {
+      "id": "CK-11-SAO-5005812fe2",
+      "len": 20,
+      "point": "选模信号"
+    },
+    {
+      "id": "CK-11-SAO-4404654736",
+      "len": 28,
+      "point": "选模信号2"
+    },
+    {
+      "id": "CK-11-SAO-bd8db85826",
+      "len": 26,
+      "point": "选模CRC"
+    },
+    {
+      "id": "CK-11-SAO-427dbb91d9",
+      "len": 22,
+      "point": "DFDvs用例"
+    },
+    {
+      "id": "CK-11-SAO-bc38e14f66",
+      "len": 24,
+      "point": "字典vs类"
+    },
+    {
+      "id": "CK-11-SAO-36355017fb",
+      "len": 23,
+      "point": "STDvs状态机"
+    },
+    {
+      "id": "CK-11-SAO-14fbaaa7ec",
+      "len": 27,
+      "point": "填空套路SA"
+    },
+    {
+      "id": "CK-11-SAO-1a229d2d54",
+      "len": 16,
+      "point": "BCE填空"
+    },
+    {
+      "id": "CK-11-SAO-33e297b7e3",
+      "len": 24,
+      "point": "综合选型"
+    },
+    {
+      "id": "CK-11-SAO-ee001c12ef",
+      "len": 32,
+      "point": "与UML衔接"
+    }
+  ],
+  "templateStems": [
+    "CK-11-acff057e77"
+  ],
+  "byStyle": {
+    "short": 404,
+    "scenario": 246,
+    "mid": 80
+  }
+}

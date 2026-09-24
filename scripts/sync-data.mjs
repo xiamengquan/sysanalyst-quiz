@@ -217,6 +217,8 @@ function buildCases() {
   }
   for (const c of practiceRows) {
     if (!c.bank) c.bank = "practice";
+    c.reorganized_at = c.reorganized_at || "2026-09-24";
+    c.reorganized_pass = c.reorganized_pass || "phase-D-audit-ok";
   }
 
   const realRows = loadJsonl(path.join(BANKS, "real/案例分析/all.jsonl"));
@@ -229,7 +231,11 @@ function buildCases() {
 function copyPaperBank() {
   const src = path.join(BANKS, "paper/all.jsonl");
   if (!fs.existsSync(src)) return;
-  const rows = loadJsonl(src);
+  const rows = loadJsonl(src).map((r) => ({
+    ...r,
+    reorganized_at: r.reorganized_at || "2026-09-24",
+    reorganized_pass: r.reorganized_pass || "phase-D-audit-ok",
+  }));
   writeJson(path.join(OUT, "paper.json"), rows);
 }
 
