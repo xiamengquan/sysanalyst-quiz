@@ -258,7 +258,7 @@ export function GlobalSearch() {
         <DialogContent
           showCloseButton={false}
           className={cn(
-            "gs-dialog z-[90] gap-0 overflow-hidden p-0",
+            "gs-dialog gap-0 overflow-hidden p-0",
             dialogMobileSheetClassName,
             "sm:top-[min(12vh,5rem)] sm:left-1/2 sm:w-[min(560px,calc(100vw-1.5rem))] sm:max-w-[560px] sm:-translate-x-1/2 sm:translate-y-0",
           )}
