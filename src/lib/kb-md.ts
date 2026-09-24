@@ -1,5 +1,11 @@
 import { marked, Renderer } from "marked";
-import { looksLikeKbPath, resolveKbRef, type KbFlatItem } from "@/lib/kb-resolve";
+import {
+  isKbMarkdownHref,
+  looksLikeKbPath,
+  resolveKbRef,
+  resolveRelativeKbPath,
+  type KbFlatItem,
+} from "@/lib/kb-resolve";
 
 export function decodeHtmlEntities(s: string) {
   return s
@@ -25,6 +31,29 @@ function linkifyBookTitles(html: string, items: KbFlatItem[], excludeId?: string
     if (!hit) return full;
     return `<a href="/kb/${escapeAttr(hit.id)}/" class="kb-ref" data-kb-id="${escapeAttr(hit.id)}" title="预览：${escapeAttr(hit.title)}">《${escapeHtml(title)}》</a>`;
   });
+}
+
+/** 将正文里指向 *.md 的相对/文件名链接 rewrite 为站内 /kb/{id}/ */
+function linkifyMarkdownFileAnchors(
+  html: string,
+  items: KbFlatItem[],
+  excludeId?: string,
+  currentItemPath?: string,
+) {
+  return html.replace(
+    /<a\s+([^>]*?)href="([^"]+)"([^>]*)>([\s\S]*?)<\/a>/gi,
+    (full, before, href, after, inner) => {
+      if (!isKbMarkdownHref(href)) return full;
+      let query = href;
+      if (currentItemPath && (href.startsWith("./") || href.startsWith("../"))) {
+        query = resolveRelativeKbPath(currentItemPath, href);
+      }
+      const hit = resolveKbRef(items, query, { excludeId });
+      if (!hit) return full;
+      const titleAttr = hit.title ? ` title="预览：${escapeAttr(hit.title)}"` : "";
+      return `<a href="/kb/${escapeAttr(hit.id)}/" class="kb-ref" data-kb-id="${escapeAttr(hit.id)}"${titleAttr}>${inner}</a>`;
+    },
+  );
 }
 
 /**
@@ -60,7 +89,11 @@ export function renderKbMarkdown(md: string, items: KbFlatItem[] = [], excludeId
     /<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/gi,
     (_m, code) => `<div class="mermaid-wrap"><div class="mermaid">${decodeHtmlEntities(code)}</div></div>`,
   );
-  if (items.length) html = linkifyBookTitles(html, items, excludeId);
+  if (items.length) {
+    const currentPath = excludeId ? items.find((it) => it.id === excludeId)?.path : undefined;
+    html = linkifyMarkdownFileAnchors(html, items, excludeId, currentPath);
+    html = linkifyBookTitles(html, items, excludeId);
+  }
   return html;
 }
 

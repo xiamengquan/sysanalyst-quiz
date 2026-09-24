@@ -5,7 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type MouseEvent } fr
 import type { KbIndex, KbItem } from "@/lib/types";
 import { filterCatalogItems } from "@/lib/kb-search";
 import { renderKbMarkdown, runMermaidIn } from "@/lib/kb-md";
-import { parseKbHref, resolveKbRef } from "@/lib/kb-resolve";
+import { isKbMarkdownHref, parseKbHref, resolveKbRef, resolveRelativeKbPath } from "@/lib/kb-resolve";
 import { KbPreviewDrawer, useKbCatalog } from "@/components/KbPreviewDrawer";
 import { KbQuickIndex } from "@/components/KbQuickIndex";
 import { GlobalSearchHintButton } from "@/components/GlobalSearch";
@@ -275,9 +275,23 @@ export function KbReader({ id }: { id: string }) {
       if (parsed && catalog.some((c) => c.id === parsed.id)) {
         e.preventDefault();
         openPreview(parsed.id);
+        return;
+      }
+      if (isKbMarkdownHref(href)) {
+        e.preventDefault();
+        let query = href;
+        if (item?.path && (href.startsWith("./") || href.startsWith("../"))) {
+          query = resolveRelativeKbPath(item.path, href);
+        }
+        const hit = resolveKbRef(catalog, query, { excludeId: id });
+        if (hit) openPreview(hit.id);
+        else {
+          setToast("未找到对应知识点");
+          window.setTimeout(() => setToast(""), 2200);
+        }
       }
     },
-    [catalog, id, openPreview],
+    [catalog, id, item?.path, openPreview],
   );
 
   return (

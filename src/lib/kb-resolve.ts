@@ -11,7 +11,7 @@ export function flattenKbIndex(sections: { title?: string; items?: KbItem[] }[])
   );
 }
 
-function normPath(p: string) {
+export function normPath(p: string) {
   return p
     .trim()
     .replace(/\\/g, "/")
@@ -19,6 +19,28 @@ function normPath(p: string) {
     .replace(/^content\/kb\//, "")
     .replace(/^kb\//, "")
     .replace(/^\/+/, "");
+}
+
+/** 相对当前正文文件路径，解析 Markdown 链接中的 ./ ../ 路径 */
+export function resolveRelativeKbPath(baseItemPath: string, href: string): string {
+  const baseDir = normPath(baseItemPath).split("/");
+  if (baseDir.length) baseDir.pop();
+  const segments = href.trim().replace(/\\/g, "/").split("/");
+  for (const seg of segments) {
+    if (seg === "..") baseDir.pop();
+    else if (seg === "." || seg === "") continue;
+    else baseDir.push(seg);
+  }
+  return baseDir.join("/");
+}
+
+/** 是否为应映射到 /kb/{id}/ 的 Markdown 文件链接（非外链、非已是站内路由） */
+export function isKbMarkdownHref(href: string): boolean {
+  const h = href.trim();
+  if (!h || /^(https?:|mailto:|tel:|#)/i.test(h)) return false;
+  if (h.startsWith("/kb/")) return false;
+  if (/\.md$/i.test(h)) return true;
+  return looksLikeKbPath(h);
 }
 
 function fileName(p: string) {
