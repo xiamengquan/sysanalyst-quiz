@@ -40,6 +40,11 @@ if (audit.status !== 0) {
   else console.log("audit", `${summary.pass}/${summary.total}`);
 }
 
+const wsAudit = spawnSync("node", ["scripts/audit-workshop.mjs"], { cwd: root, encoding: "utf8" });
+if (wsAudit.status !== 0) {
+  errors.push("audit-workshop.mjs 未通过");
+}
+
 if (errors.length) {
   console.error("FAIL", errors);
   process.exit(1);

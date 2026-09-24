@@ -1,6 +1,6 @@
 {
   "name": "sysanalyst-quiz",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -12,6 +12,7 @@
     "sync:all": "npm run sync:kb && npm run sync:data",
     "check:release": "node scripts/check-release.mjs",
     "validate:reorg": "node scripts/validate-reorg.mjs",
+    "audit:workshop": "node scripts/audit-workshop.mjs",
     "build:kb-search": "node scripts/build-kb-search.mjs"
   },
   "dependencies": {
