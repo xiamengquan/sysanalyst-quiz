@@ -20,6 +20,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { dialogMobileSheetClassName } from "@/lib/dialog-mobile";
 import { getExamCountdown, type ExamCountdownInfo } from "@/lib/exam-countdown";
+import {
+  EXAM_CHOICE_MAX_MINUTES,
+  EXAM_CHOICE_MIN_MINUTES_BEFORE_SUBMIT,
+} from "@/lib/exam-schedule";
 import { cn } from "@/lib/utils";
 
 export function ExamCountdown({ className }: { className?: string }) {
@@ -123,7 +127,7 @@ export function ExamCountdown({ className }: { className?: string }) {
               </DialogTitle>
             </div>
             <DialogDescription className="text-xs text-muted-foreground">
-              全国计算机技术与软件专业技术资格（水平）考试 · 下半年统考
+              全国计算机技术与软件专业技术资格（水平）考试 · 下半年统考 · 上午综合+案例连考
             </DialogDescription>
           </DialogHeader>
 
@@ -151,33 +155,50 @@ export function ExamCountdown({ className }: { className?: string }) {
           <div className="space-y-2.5">
             <div className="text-xs font-medium text-foreground flex items-center gap-1.5">
               <Sparkles className="size-3.5 text-amber-500" />
-              <span>三科备考冲刺要点</span>
+              <span>三科备考冲刺要点（2026 机考安排）</span>
+            </div>
+
+            <div className="rounded-lg border border-primary/30 bg-primary/[0.04] p-3 text-xs space-y-1.5">
+              <div className="flex items-center gap-1.5 font-medium text-foreground">
+                <Timer className="size-3.5 text-primary shrink-0" />
+                <span>上午连考（08:30 起 · 综合 + 案例）</span>
+              </div>
+              <p className="text-muted-foreground leading-relaxed pl-5">
+                综合知识与案例分析在<strong className="text-foreground font-medium">同一场次连续机考</strong>
+                。先做 75 道选择题（最长 {EXAM_CHOICE_MAX_MINUTES} 分钟），
+                <strong className="text-foreground font-medium">
+                  满 {EXAM_CHOICE_MIN_MINUTES_BEFORE_SUBMIT} 分钟可提前交卷
+                </strong>
+                （比上限早 30 分钟），交卷后<strong className="text-foreground font-medium">立即进入案例分析</strong>
+                ，无需等到下午。建议模考时练习「选择题控时 + 无缝切换案例」的节奏。
+              </p>
             </div>
 
             <div className="rounded-lg border border-border/70 bg-card p-3 text-xs space-y-1.5">
               <div className="flex items-center gap-1.5 font-medium text-foreground">
                 <BookCheck className="size-3.5 text-blue-500 shrink-0" />
-                <span>综合知识（08:30 - 11:00）</span>
+                <span>综合知识（上午第一场）</span>
               </div>
               <p className="text-muted-foreground leading-relaxed pl-5">
-                高分章节集中在第11章需求工程、第12章软件架构、第07章软件工程与第04章网络系统。每日通过错题与自编练习保持题感。
+                高分章节集中在第11章需求工程、第12章软件架构、第07章软件工程与第04章网络系统。每日通过错题与自编练习保持题感；若选择题已稳，可考虑满{" "}
+                {EXAM_CHOICE_MIN_MINUTES_BEFORE_SUBMIT} 分钟交卷，为案例留足时间。
               </p>
             </div>
 
             <div className="rounded-lg border border-border/70 bg-card p-3 text-xs space-y-1.5">
               <div className="flex items-center gap-1.5 font-medium text-foreground">
                 <CheckCircle2 className="size-3.5 text-emerald-500 shrink-0" />
-                <span>案例分析（13:30 - 15:00）</span>
+                <span>案例分析（上午 · 选择题交卷后）</span>
               </div>
               <p className="text-muted-foreground leading-relaxed pl-5">
-                试题一为必答题；选答题建议优先选择熟悉的架构/Web/微服务领域。作答严格按「七步法」先定性后说明，踩准采分点。
+                试题一为必答题；选答题建议优先选择熟悉的架构/Web/微服务领域。作答严格按「七步法」先定性后说明，踩准采分点。交卷前确认每问都回扣题干关键词。
               </p>
             </div>
 
             <div className="rounded-lg border border-border/70 bg-card p-3 text-xs space-y-1.5">
               <div className="flex items-center gap-1.5 font-medium text-foreground">
                 <PenTool className="size-3.5 text-purple-500 shrink-0" />
-                <span>论文写作（15:30 - 17:30）</span>
+                <span>论文写作（下午场 · 通常 15:30 起）</span>
               </div>
               <p className="text-muted-foreground leading-relaxed pl-5">
                 提前准备好 1~2 个真实大型项目背景，牢记 300~330 字摘要标准句式，正文紧密围绕论题三问展开，注意控制机考打字时长。
@@ -231,7 +252,7 @@ export function ExamSprintBanner({ className }: { className?: string }) {
         </span>
       </div>
       <span className="hidden sm:inline text-xs text-muted-foreground">
-        保持每日刷题与案例练习手感
+        上午综合+案例连考 · 选择满 120 分钟可交卷转案例
       </span>
     </div>
   );

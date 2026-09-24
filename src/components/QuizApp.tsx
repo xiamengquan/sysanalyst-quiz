@@ -21,6 +21,10 @@ import {
 import { dialogMobileSheetClassName } from "@/lib/dialog-mobile";
 import { cn } from "@/lib/utils";
 import { ExamSprintBanner } from "@/components/ExamCountdown";
+import {
+  EXAM_CHOICE_MAX_MINUTES,
+  EXAM_CHOICE_MIN_MINUTES_BEFORE_SUBMIT,
+} from "@/lib/exam-schedule";
 
 type Meta = { practice: number; real: number; workshop: number; total: number };
 
@@ -530,16 +534,18 @@ export function QuizApp() {
                       全真模拟 · 随机抽取 75 题
                     </h2>
                     <p className="text-xs text-muted-foreground mt-0.5">
-                      对标软考系统分析师上午卷综合知识标准规格
+                      上午连考第一场 · 仅模拟综合知识选择部分
                     </p>
                   </div>
                 </div>
                 <span className="shrink-0 rounded-full border border-primary/30 bg-primary/10 px-2.5 py-0.5 text-[0.72rem] font-medium text-primary">
-                  150分钟 · 75分及格制
+                  最长{EXAM_CHOICE_MAX_MINUTES}分 · 45分及格
                 </span>
               </div>
               <p className="text-[0.88rem] leading-relaxed text-muted-foreground mb-4">
                 从全量 <b className="text-foreground">{pureChoiceQuestions.length || 1935}</b> 道选择题（历年真题、自编精选题与工坊新题）中<b>无偏随机抽取 75 道</b>。45 分合格线，每次抽取均为全新题目组合。
+                考场规则：上午综合与案例连续机考，选择题最长 {EXAM_CHOICE_MAX_MINUTES} 分钟，满{" "}
+                {EXAM_CHOICE_MIN_MINUTES_BEFORE_SUBMIT} 分钟可提前交卷并<strong className="text-foreground">直接进入案例分析</strong>。
               </p>
               <div className="flex flex-wrap items-center gap-2.5">
                 <Button
