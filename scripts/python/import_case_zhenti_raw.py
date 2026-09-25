@@ -17,31 +17,7 @@ RAW_DIR = ROOT / "content/banks/real/案例分析/raw"
 OUT_DIR = ROOT / "content/banks/real/案例分析"
 OUT_JSONL = OUT_DIR / "all.jsonl"
 
-# year-half inferred from filename: 2026上.json / 2023下.json
-DOMAIN_HINT = {
-    "需求": (11, "需求"),
-    "用例": (11, "需求"),
-    "DFD": (11, "需求"),
-    "FAST": (10, "需求"),
-    "UML": (12, "架构"),
-    "面向对象": (12, "架构"),
-    "MVC": (16, "Web"),
-    "Web": (16, "Web"),
-    "SSM": (16, "Web"),
-    "Redis": (16, "Web"),
-    "缓存": (16, "Web"),
-    "微服务": (20, "微服务"),
-    "嵌入式": (17, "嵌入式"),
-    "机器人": (17, "嵌入式"),
-    "容器": (17, "嵌入式"),
-    "区块链": (16, "Web"),
-    "大数据": (19, "大数据"),
-    "NoSQL": (5, "数据库"),
-    "数据库": (5, "数据库"),
-    "分片": (5, "数据库"),
-    "PERT": (8, "项目管理"),
-    "MDA": (12, "架构"),
-}
+from case_domain_lib import infer_case_domain, infer_case_type
 
 
 def strip_html(s: str) -> str:
@@ -63,19 +39,10 @@ def strip_html(s: str) -> str:
     return s.strip()
 
 
-def infer_meta(stem: str, title: str):
-    blob = stem + title
-    chapter, domain = 16, "Web"
-    for k, (ch, d) in DOMAIN_HINT.items():
-        if k in blob:
-            chapter, domain = ch, d
-            break
+def infer_meta(stem: str, title: str, prompts: list[str] | None = None, case_id: str = ""):
+    chapter, domain = infer_case_domain(stem, title, prompts or [], case_id=case_id)
     track = "P2" if domain in {"嵌入式", "CPS"} else ("P1" if domain in {"大数据", "项目管理"} else "P0")
-    case_type = "方案对比"
-    if any(x in blob for x in ("填", "完善", "补充", "空（", "(1)")):
-        case_type = "架构设计"
-    if any(x in blob for x in ("改进", "问题", "错误", "优化")):
-        case_type = "分析改进"
+    case_type = infer_case_type(stem)
     return chapter, domain, track, case_type
 
 
@@ -171,7 +138,6 @@ def convert_file(fp: Path, start_no: int) -> tuple[list[dict], list[dict]]:
             # if combined Q1-Q3 in one card, keep as stem and still split questions if multiple
         exam_no += 1
         no += 1
-        chapter, domain, track, case_type = infer_meta(stem, titles[0])
 
         questions = []
 
@@ -263,6 +229,10 @@ def convert_file(fp: Path, start_no: int) -> tuple[list[dict], list[dict]]:
             q["qnum"] = len(uniq_q) + 1
             uniq_q.append(q)
         questions = uniq_q
+
+        prompts = [str(q.get("prompt") or "") for q in questions]
+        case_id = f"ZT-{year}{half}-案例{exam_no:02d}"
+        chapter, domain, track, case_type = infer_meta(stem, titles[0], prompts, case_id=case_id)
 
         from seven_steps_lib import build_seven_steps
 

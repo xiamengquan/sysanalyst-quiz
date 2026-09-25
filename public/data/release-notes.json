@@ -1,6 +1,15 @@
 {
-  "latest": "0.9.4",
+  "latest": "0.9.5",
   "releases": [
+    {
+      "version": "0.9.5",
+      "date": "2026-09-25",
+      "title": "案例分析真题领域标签校正",
+      "highlights": [
+        "校正 36 道案例分析真题 domain/chapter（含 2026 上试题四排队叫号→数据库），筛「需求」不再误含 Redis/分片题",
+        "导入规则升级：case_domain_lib 避免「核心需求」泛词误标；fix_case_domains 脚本可复跑"
+      ]
+    },
     {
       "version": "0.9.4",
       "date": "2026-09-25",
