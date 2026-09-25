@@ -865,6 +865,7 @@ textarea.field {
   .kb-dock-layout.is-docked {
     grid-template-columns: minmax(0, 1fr) minmax(300px, 36%);
     gap: var(--space-5);
+    align-items: start;
   }
 }
 .kb-drawer-root {
@@ -880,6 +881,14 @@ textarea.field {
   pointer-events: auto;
   width: 100%;
   min-width: 0;
+  align-self: start;
+}
+@media (min-width: 960px) {
+  /* 固钉列吸顶：sticky 须挂在 grid 子项（根节点），勿挂在与内容同高的内层面板 */
+  .kb-drawer-root.is-docked {
+    position: sticky;
+    top: calc(var(--safe-t) + 4.75rem);
+  }
 }
 .kb-drawer-backdrop {
   position: absolute;
@@ -914,8 +923,8 @@ textarea.field {
   background: var(--card);
 }
 .kb-drawer-panel.is-docked {
-  position: sticky;
-  top: calc(var(--safe-t) + 4.75rem);
+  position: relative;
+  top: auto;
   right: auto;
   left: auto;
   bottom: auto;
@@ -929,9 +938,11 @@ textarea.field {
   overflow: hidden;
 }
 @media (max-width: 959px) {
-  .kb-drawer-panel.is-docked {
+  .kb-drawer-root.is-docked {
     position: relative;
     top: auto;
+  }
+  .kb-drawer-panel.is-docked {
     max-height: min(70dvh, 640px);
   }
 }
