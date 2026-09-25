@@ -11,7 +11,7 @@ from seven_steps_lib import build_seven_steps
 
 ROOT = Path(__file__).resolve().parents[2]
 JSONL = ROOT / "content/banks/real/案例分析/all.jsonl"
-REPORT = ROOT / "docs/question-workshop/reports/案例分析领域校正-2026-09-25.md"
+REPORT = ROOT / "docs/question-workshop/reports/案例分析领域校正-2026-09-25-规划.md"
 
 
 def pack_role(row: dict) -> str:
@@ -60,10 +60,10 @@ def main() -> None:
     )
 
     lines = [
-        "# 案例分析真题 · 领域标签校正（2026-09-25）",
+        "# 案例分析真题 · 领域标签校正（可行性→系统规划）",
         "",
         f"- 校正条数：**{len(changes)}** / {len(rows)}",
-        "- 规则：`scripts/python/case_domain_lib.py`（标题「关于…」优先；避免「核心需求」误标需求工程）",
+        "- 规则：`case_domain_lib` 新增 **系统规划·ch10**；可行性/NPV/ERP 规划不再归入需求工程",
         "",
         "## 变更清单",
         "",
