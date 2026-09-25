@@ -28,7 +28,7 @@ TOPIC_PATTERNS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"大数据|数据仓库|Hadoop|Spark|用户行为分析"), "大数据"),
     (re.compile(r"用例测试|软件测试|测试"), "测试"),
     (re.compile(r"可行性分析|需求分析|需求获取|需求工程|DFD|数据流图"), "需求"),
-    (re.compile(r"Web应用|Web系统|电子商务|在线销售|前后端|区块链|社交网络|SNS|智慧管理|气象"), "Web"),
+    (re.compile(r"Web应用|Web系统|AI智能体|智能体平台|Web.*AI|电子商务|在线销售|前后端|区块链|社交网络|SNS|智慧管理|气象"), "Web"),
     (re.compile(r"排队叫号|停车场|预约系统|在线调查|客户关系|CRM"), "Web"),
     (re.compile(r"系统集成|中间件|遗留系统|EAI|ESB"), "集成"),
     (re.compile(r"网络设计|物理网络|信息安全|加密|容灾"), "安全"),
@@ -45,7 +45,7 @@ SCORE_RULES: list[tuple[re.Pattern[str], str, int]] = [
     (re.compile(r"嵌入式|多核|RTOS|硬实时|优先级反转|分区化技术|操作系统架构", re.I), "嵌入式", 4),
     (re.compile(r"微服务|Kubernetes|Docker|服务注册|网络约车", re.I), "微服务", 3),
     (re.compile(r"区块链|去中心化|SNS|社交网络", re.I), "Web", 4),
-    (re.compile(r"Web应用|基于Web|Web系统|前后端分离|MVP|MVVM|浏览器|HTTP|电商|商城|云数据库", re.I), "Web", 2),
+    (re.compile(r"Web应用|基于Web|Web系统|AI智能体|智能体|负载均衡|Spring Cloud|FastAPI|前后端分离|MVP|MVVM|浏览器|HTTP|电商|商城|云数据库", re.I), "Web", 3),
     (re.compile(r"测试用例|集成测试|验收测试|V模型|Alpha|Beta", re.I), "测试", 2),
     (re.compile(r"大数据|MapReduce|Spark|PV/UV|海量.*数据", re.I), "大数据", 2),
     (re.compile(r"PERT|挣值|EVM|关键路径", re.I), "项目管理", 2),
@@ -107,6 +107,7 @@ CASE_DOMAIN_OVERRIDES: dict[str, tuple[int, str]] = {
     "ZT-2018上-案例05": (11, "需求"),  # 在线调查：业务流程 / 补图
     "ZT-2021上-案例04": (16, "Web"),  # 远程康复 Web 架构 + 云库选型
     "ZT-2020上-案例01": (11, "需求"),  # 用例详述 + 实体/控制/接口对象
+    "ZT-2026上-案例05": (16, "Web"),  # Web + AI 智能体：架构选型 / 负载均衡
 }
 
 

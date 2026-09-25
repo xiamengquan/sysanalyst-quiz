@@ -1,6 +1,15 @@
 {
-  "latest": "0.9.5",
+  "latest": "0.9.6",
   "releases": [
+    {
+      "version": "0.9.6",
+      "date": "2026-09-25",
+      "title": "2026 上试题五 AI 智能体案例领域修正",
+      "highlights": [
+        "ZT-2026上-案例05 由「需求」改回「Web」：卷面为 Web 与 AI 智能体融合，考点为架构选型与负载均衡",
+        "fix_case_domains 始终写入推断结果；case_domain_lib 增加 AI 智能体/Web 关键词"
+      ]
+    },
     {
       "version": "0.9.5",
       "date": "2026-09-25",

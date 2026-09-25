@@ -42,8 +42,8 @@ def main() -> None:
                     "to": f"{domain}·ch{ch}",
                 }
             )
-            row["domain"] = domain
-            row["chapter"] = ch
+        row["domain"] = domain
+        row["chapter"] = ch
         row["case_type"] = infer_case_type(row.get("stem") or "")
         row["seven_steps"] = build_seven_steps(
             case_id=row.get("id") or "",
