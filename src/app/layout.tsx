@@ -37,7 +37,7 @@ export const viewport: Viewport = {
   ],
 };
 
-const themeBootScript = `(function(){try{var t=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;var r=t==='dark'||(t!=='light'&&(t==='system'||!t)&&d)?'dark':'light';var e=document.documentElement;e.classList.remove('light','dark');e.classList.add(r);e.style.colorScheme=r;}catch(e){}})();`;
+const themeBootScript = `(function(){try{var t=localStorage.getItem('theme');var e=document.documentElement;e.classList.remove('light','dark','eye-care');if(t==='eye-care'){e.classList.add('eye-care');e.style.colorScheme='light';return;}var d=window.matchMedia('(prefers-color-scheme: dark)').matches;var r=t==='dark'||(t!=='light'&&(t==='system'||!t)&&d)?'dark':'light';e.classList.add(r);e.style.colorScheme=r;}catch(e){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -46,7 +46,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
       </head>
       <body>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+          themes={["light", "dark", "eye-care", "system"]}
+        >
           <SiteHeader />
           <main className="site-main">{children}</main>
           <footer

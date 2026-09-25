@@ -73,7 +73,7 @@ export default function AboutPage() {
               <h3 className="text-[0.98rem] font-medium text-foreground">界面与主题</h3>
               <ul className="list-disc space-y-1.5 pl-5">
                 <li>界面参照 Cursor.com 极简现代设计语言，自研纯粹轻量组件体系，移除繁重 shadcn 依赖</li>
-                <li>浅色 / 深色 / 跟随系统，默认深色，本机记忆偏好</li>
+                <li>浅色 / 深色 / 护眼（暖色纸感） / 跟随系统，默认深色，本机记忆偏好</li>
                 <li>
                   <a className="text-primary underline" href="/changelog/">
                     更新日志

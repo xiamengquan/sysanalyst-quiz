@@ -1,6 +1,6 @@
 "use client";
 
-import { Moon, Sun, Monitor, Check } from "lucide-react";
+import { Moon, Sun, Monitor, Check, SunDim } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -14,8 +14,16 @@ import {
 const OPTIONS = [
   { value: "light", label: "浅色", icon: Sun },
   { value: "dark", label: "深色", icon: Moon },
+  { value: "eye-care", label: "护眼", icon: SunDim },
   { value: "system", label: "跟随系统", icon: Monitor },
 ] as const;
+
+function themeIcon(theme: string | undefined) {
+  if (theme === "light") return Sun;
+  if (theme === "dark") return Moon;
+  if (theme === "eye-care") return SunDim;
+  return Monitor;
+}
 
 export function ThemeToggle() {
   const { theme, setTheme, resolvedTheme } = useTheme();
@@ -23,7 +31,7 @@ export function ThemeToggle() {
   useEffect(() => setMounted(true), []);
 
   const current = mounted ? theme || "system" : "system";
-  const Icon = current === "light" ? Sun : current === "dark" ? Moon : Monitor;
+  const Icon = themeIcon(current);
 
   return (
     <DropdownMenu>
@@ -33,7 +41,7 @@ export function ThemeToggle() {
           size="icon"
           className="size-9 shrink-0 rounded-full text-muted-foreground hover:text-foreground touch-manipulation"
           aria-label="切换主题"
-          title="切换主题"
+          title="切换主题（含护眼模式）"
         >
           {mounted ? (
             <Icon className="size-4" />
@@ -42,11 +50,11 @@ export function ThemeToggle() {
           )}
           <span className="sr-only">
             当前：{current}
-            {mounted && resolvedTheme ? `（实际 ${resolvedTheme}）` : ""}
+            {mounted && resolvedTheme ? `（渲染 ${resolvedTheme}）` : ""}
           </span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="min-w-36">
+      <DropdownMenuContent align="end" className="min-w-40">
         {OPTIONS.map((opt) => (
           <DropdownMenuItem
             key={opt.value}

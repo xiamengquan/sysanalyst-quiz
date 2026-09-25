@@ -110,6 +110,57 @@
   --sidebar-ring: oklch(1 0 0 / 30%);
 }
 
+/* 护眼 · 暖色纸感（低蓝光感、略降对比，适合长时间刷题/读知识点） */
+.eye-care {
+  --background: oklch(0.93 0.028 98);
+  --foreground: oklch(0.36 0.04 98);
+  --card: oklch(0.955 0.024 98);
+  --card-foreground: oklch(0.36 0.04 98);
+  --popover: oklch(0.96 0.022 98);
+  --popover-foreground: oklch(0.36 0.04 98);
+  --primary: oklch(0.4 0.07 155);
+  --primary-foreground: oklch(0.98 0.012 98);
+  --secondary: oklch(0.9 0.03 95);
+  --secondary-foreground: oklch(0.32 0.04 98);
+  --muted: oklch(0.89 0.028 95);
+  --muted-foreground: oklch(0.5 0.035 98);
+  --accent: oklch(0.88 0.032 92);
+  --accent-foreground: oklch(0.34 0.04 98);
+  --destructive: oklch(0.52 0.14 35);
+  --border: oklch(0.42 0.04 98 / 14%);
+  --input: oklch(0.42 0.04 98 / 16%);
+  --ring: oklch(0.4 0.07 155 / 35%);
+  --surface: oklch(0.905 0.032 95);
+  --bg-glow-1: oklch(0.62 0.07 145 / 5%);
+  --bg-glow-2: oklch(0.78 0.06 85 / 4%);
+  --ok: oklch(0.5 0.11 145);
+  --bad: oklch(0.52 0.13 35);
+  --warn: oklch(0.62 0.12 78);
+  --chart-1: oklch(0.4 0.07 155);
+  --chart-2: oklch(0.5 0.11 145);
+  --chart-3: oklch(0.62 0.12 78);
+  --chart-4: oklch(0.52 0.13 35);
+  --chart-5: oklch(0.48 0.04 98);
+  --sidebar: oklch(0.92 0.026 98);
+  --sidebar-foreground: oklch(0.36 0.04 98);
+  --sidebar-primary: oklch(0.4 0.07 155);
+  --sidebar-primary-foreground: oklch(0.98 0.012 98);
+  --sidebar-accent: oklch(0.88 0.032 92);
+  --sidebar-accent-foreground: oklch(0.34 0.04 98);
+  --sidebar-border: oklch(0.42 0.04 98 / 14%);
+  --sidebar-ring: oklch(0.4 0.07 155 / 35%);
+  color-scheme: light;
+}
+
+.eye-care .card {
+  box-shadow: 0 1px 2px 0 oklch(0.35 0.03 98 / 4%);
+}
+
+.eye-care .md-body {
+  background: oklch(0.915 0.03 95);
+  border-color: oklch(0.42 0.04 98 / 12%);
+}
+
 *,
 *::before,
 *::after {
