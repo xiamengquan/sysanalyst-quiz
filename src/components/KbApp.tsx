@@ -10,20 +10,57 @@ import { KbPreviewDrawer, useKbCatalog } from "@/components/KbPreviewDrawer";
 import { KbQuickIndex } from "@/components/KbQuickIndex";
 import { GlobalSearchHintButton } from "@/components/GlobalSearch";
 import { Card } from "@/components/ui/card";
+import { quizHomeHref } from "@/lib/quiz-deep-link";
+
+const API_SECTIONS = ["概述", "定义", "要点", "易混辨析", "应试", "相关考点"] as const;
 
 const KIND_OPTS = [
   { value: "all", label: "全部类型" },
+  { value: "point", label: "考点（API）" },
   { value: "chapter", label: "章节" },
+  { value: "legacy", label: "篇章（归档）" },
   { value: "quick", label: "速查" },
   { value: "appendix", label: "附录" },
   { value: "index", label: "篇索引" },
   { value: "entry", label: "入口" },
 ];
 
+function displayTitle(title: string) {
+  return title.replace(/^\d+(?:\.\d+)*\s*/, "").trim() || title;
+}
+
+/** 大纲 tutorial 节序，如 13.2 → 1302；非数字排后 */
+function outlineSortKey(ref?: string) {
+  if (!ref) return 999_999;
+  const m = ref.match(/^(\d+)\.(\d+)/);
+  if (m) return Number(m[1]) * 100 + Number(m[2]);
+  const ch = ref.match(/第(\d+)章/);
+  if (ch) return Number(ch[1]) * 100;
+  return 500_000 + ref.length;
+}
+
+function groupPointItems(items: (KbItem & { sectionId?: string })[]) {
+  const points = items.filter((i) => i.kind === "point");
+  const rest = items.filter((i) => i.kind !== "point");
+  const map = new Map<string, typeof points>();
+  for (const p of points) {
+    const g = p.group || "考点";
+    if (!map.has(g)) map.set(g, []);
+    map.get(g)!.push(p);
+  }
+  const groups = [...map.entries()].map(([name, gitems]) => [
+    name,
+    [...gitems].sort(
+      (a, b) => outlineSortKey(a.outlineRef) - outlineSortKey(b.outlineRef),
+    ),
+  ] as const);
+  return { groups, rest };
+}
+
 export function KbCatalog() {
   const [data, setData] = useState<KbIndex | null>(null);
   const [err, setErr] = useState("");
-  const [kind, setKind] = useState("all");
+  const [kind, setKind] = useState("point");
   const [sectionId, setSectionId] = useState("all");
 
   useEffect(() => {
@@ -69,7 +106,8 @@ export function KbCatalog() {
     <>
       <h1 className="page-title">知识点</h1>
       <p className="page-lead">
-        正式发布 {data.meta?.version || "v1.0"} · 全文搜索请用顶栏或{" "}
+        正式发布 {data.meta?.version || "v1.0"}
+        {data.meta?.apiPoints ? ` · 考点参考 ${data.meta.apiPoints} 篇（API 式单页）` : ""} · 全文搜索请用顶栏或{" "}
         <kbd className="gs-kbd-inline">Ctrl+K</kbd> / <kbd className="gs-kbd-inline">⌘K</kbd>
       </p>
 
@@ -122,31 +160,46 @@ export function KbCatalog() {
             ：审计通过内容；可站内阅读，也可跳转对应章节刷题。正文内关联知识点以抽屉预览。
           </Card>
 
-          {grouped.map((sec) => (
-            <div key={sec.id} className="mb-6">
-              <h3 className="mb-3 text-[0.95rem] font-medium tracking-wide text-muted-foreground">
-                {sec.title}
-              </h3>
-              <ul className="list-gap">
-                {sec.items.map((item) => (
-                  <li key={item.id}>
-                    <Link
-                      href={`/kb/${item.id}/`}
-                      className="flex min-h-14 items-center justify-between gap-3 rounded-xl border border-border bg-muted/40 px-4 py-4 hover:border-border"
-                    >
-                      <div>
-                        <div className="text-[0.95rem]">{item.title}</div>
-                        {item.note ? (
-                          <div className="mt-0.5 text-[0.78rem] text-muted-foreground">{item.note}</div>
-                        ) : null}
-                      </div>
-                      <span className="badge shrink-0">{item.status || "正式"}</span>
-                    </Link>
-                  </li>
+          {grouped.map((sec) => {
+            const { groups, rest } = groupPointItems(sec.items);
+            const renderRow = (item: KbItem) => (
+              <li key={item.id}>
+                <Link
+                  href={`/kb/${item.id}/`}
+                  className="flex min-h-14 items-center justify-between gap-3 rounded-xl border border-border bg-muted/40 px-4 py-4 hover:border-border"
+                >
+                  <div className="min-w-0">
+                    <div className="text-[0.95rem] font-medium">{displayTitle(item.title)}</div>
+                    <div className="mt-0.5 flex flex-wrap gap-1.5 text-[0.78rem] text-muted-foreground">
+                      {item.kind === "point" && item.outlineRef ? (
+                        <span className="badge text-[0.68rem]">大纲 {item.outlineRef}</span>
+                      ) : null}
+                      {item.note ? <span>{item.note}</span> : null}
+                    </div>
+                  </div>
+                  <span className="badge shrink-0">{item.status || "正式"}</span>
+                </Link>
+              </li>
+            );
+            return (
+              <div key={sec.id} className="mb-6">
+                <h3 className="mb-3 text-[0.95rem] font-medium tracking-wide text-muted-foreground">
+                  {sec.title}
+                </h3>
+                {groups.map(([gname, gitems]) => (
+                  <div key={gname} className="mb-4">
+                    {sec.id === "api-ref" ? (
+                      <h4 className="mb-2 border-l-2 border-border pl-3 text-[0.82rem] font-medium text-muted-foreground">
+                        {gname}
+                      </h4>
+                    ) : null}
+                    <ul className="list-gap">{gitems.map(renderRow)}</ul>
+                  </div>
                 ))}
-              </ul>
-            </div>
-          ))}
+                {rest.length ? <ul className="list-gap">{rest.map(renderRow)}</ul> : null}
+              </div>
+            );
+          })}
         </div>
       </div>
     </>
@@ -164,6 +217,26 @@ export function KbReader({ id }: { id: string }) {
   const [kbPinned, setKbPinned] = useState(false);
   const bodyRef = useRef<HTMLDivElement>(null);
   const previewOpen = stack.length > 0;
+
+  const quizChapterHref = useMemo(() => {
+    if (!item?.chapter) return null;
+    const t = displayTitle(item.title);
+    const kw = t.split(/[^\u4e00-\u9fffA-Za-z0-9]+/).find((w) => w.length >= 2);
+    return quizHomeHref({ chapter: item.chapter, q: kw });
+  }, [item]);
+
+  const pointNeighbors = useMemo(() => {
+    const current = catalog.find((c) => c.id === id);
+    if (!current || current.kind !== "point") return { prev: null, next: null };
+    const peers = catalog
+      .filter((c) => c.kind === "point" && c.group === current.group)
+      .sort((a, b) => outlineSortKey(a.outlineRef) - outlineSortKey(b.outlineRef));
+    const idx = peers.findIndex((p) => p.id === id);
+    return {
+      prev: idx > 0 ? peers[idx - 1] : null,
+      next: idx >= 0 && idx < peers.length - 1 ? peers[idx + 1] : null,
+    };
+  }, [catalog, id]);
 
   useEffect(() => {
     if (!catalog.length) return;
@@ -300,27 +373,80 @@ export function KbReader({ id }: { id: string }) {
         <div className="kb-dock-main">
           <article className="kb-reader layout-full">
             <header className="kb-reader-head">
-              <h1>{item?.title || id}</h1>
+              {item?.kind === "point" ? (
+                <p className="mb-1 text-[0.82rem] text-muted-foreground">
+                  考点参考
+                  {item.outlineRef ? ` · 大纲 ${item.outlineRef}` : ""}
+                  {item.group ? ` · ${item.group}` : ""}
+                </p>
+              ) : null}
+              <h1>{item?.title ? displayTitle(item.title) : id}</h1>
               {item?.path ? (
                 <p className="mb-3 break-all text-[0.8rem] leading-relaxed text-muted-foreground sm:text-[0.85rem]">
                   <span className="badge">{item.status || "正式"}</span>
+                  {item.kind === "point" ? (
+                    <span className="badge ml-1">API · 一考点一篇</span>
+                  ) : null}
                   <code className="text-[0.8em]">{item.path}</code>
                 </p>
               ) : null}
               {item?.note ? (
                 <p className="text-[0.88rem] leading-relaxed text-muted-foreground">{item.note}</p>
               ) : null}
+              {item?.kind === "point" ? (
+                <nav
+                  className="mb-4 flex flex-wrap gap-1.5 border-b border-border pb-3"
+                  aria-label="本页目录"
+                >
+                  {API_SECTIONS.map((s) => (
+                    <a
+                      key={s}
+                      href={`#${s}`}
+                      className="rounded-md border border-border bg-muted/50 px-2 py-0.5 text-[0.75rem] text-muted-foreground hover:text-foreground"
+                    >
+                      {s}
+                    </a>
+                  ))}
+                </nav>
+              ) : null}
             </header>
 
             {status === "loading" && <p className="text-muted-foreground">正在加载正文…</p>}
             {status === "err" && <p className="text-[var(--bad)]">{msg}</p>}
             {status === "ok" && (
-              <div
-                ref={bodyRef}
-                className="md-body is-fluid"
-                onClick={onBodyClick}
-                dangerouslySetInnerHTML={{ __html: html }}
-              />
+              <>
+                <div
+                  ref={bodyRef}
+                  className="md-body is-fluid"
+                  onClick={onBodyClick}
+                  dangerouslySetInnerHTML={{ __html: html }}
+                />
+                {item?.kind === "point" && (pointNeighbors.prev || pointNeighbors.next) ? (
+                  <nav
+                    className="mt-8 flex flex-col gap-3 border-t border-border pt-6 sm:flex-row sm:justify-between"
+                    aria-label="同组考点"
+                  >
+                    {pointNeighbors.prev ? (
+                      <Link
+                        href={`/kb/${pointNeighbors.prev.id}/`}
+                        className="text-[0.88rem] text-muted-foreground hover:text-foreground"
+                      >
+                        ← {displayTitle(pointNeighbors.prev.title)}
+                      </Link>
+                    ) : (
+                      <span />
+                    )}
+                    {pointNeighbors.next ? (
+                      <Link
+                        href={`/kb/${pointNeighbors.next.id}/`}
+                        className="text-right text-[0.88rem] text-muted-foreground hover:text-foreground sm:text-right"
+                      >
+                        {displayTitle(pointNeighbors.next.title)} →
+                      </Link>
+                    ) : null}
+                  </nav>
+                ) : null}
+              </>
             )}
           </article>
         </div>
@@ -339,8 +465,8 @@ export function KbReader({ id }: { id: string }) {
       </div>
 
       <nav className="kb-nav-fab" aria-label="阅读页快捷操作">
-        {item?.chapter ? (
-          <Link href={`/?chapter=${item.chapter}&bank=practice`} className="kb-fab-btn is-primary">
+        {quizChapterHref ? (
+          <Link href={quizChapterHref} className="kb-fab-btn is-primary">
             本章刷题
           </Link>
         ) : null}

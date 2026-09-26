@@ -7,6 +7,18 @@
 
 → [`文档模型.md`](./文档模型.md)（Explanation / Reference / Tutorial / How-to 与 `kind`、`docType` 对照）
 
+→ [`知识点API参考模型.md`](./知识点API参考模型.md)（**一考点一篇**、`kind: point`、固定六节，目录 `content/kb/points/`）
+
+批量自篇章迁移正文：
+
+```bash
+python3 scripts/python/migrate_kb_legacy_to_points.py        # 仅覆盖仍含「待编制」的页
+python3 scripts/python/migrate_kb_legacy_to_points.py --force  # 全量重切（保留 kp-2-7 试点）
+python3 scripts/python/refine_kb_api_points.py                 # 工坊精修（关键词重切 + 六节润色）
+```
+
+手工定义句维护：`scripts/python/kb_def_overrides.json`（精修脚本启动时加载，按考点 id 覆盖「定义」节）。
+
 ## 快速命令
 
 ```bash

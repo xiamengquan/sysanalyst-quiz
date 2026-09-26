@@ -104,6 +104,9 @@ export type KbItem = {
   kind?: string;
   chapter?: number;
   note?: string;
+  /** API 式考点：大纲分组（侧栏折叠） */
+  group?: string;
+  outlineRef?: string;
 };
 
 export type KbIndex = {

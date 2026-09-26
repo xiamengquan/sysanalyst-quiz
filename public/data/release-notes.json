@@ -1,6 +1,116 @@
 {
-  "latest": "0.9.12",
+  "latest": "0.9.23",
   "releases": [
+    {
+      "version": "0.9.23",
+      "date": "2026-09-26",
+      "title": "知识点本章刷题深链与定义 override 校验",
+      "highlights": [
+        "首页刷题支持 ?bank&chapter&path=all&q= 深链；知识点 FAB「本章刷题」带章节与关键词",
+        "应试「练题入口」改为可点击深链；check-kb-def-overrides 纳入发版门禁",
+        "kb-index v1.2.8-api"
+      ]
+    },
+    {
+      "version": "0.9.22",
+      "date": "2026-09-26",
+      "title": "API 考点 v1.2.7 切分分配与应试加厚",
+      "highlights": [
+        "assign_slices 按「分差优先」二次分配章内 ###，减少同章抢段",
+        "DEF_OVERRIDES 外置 kb_def_overrides.json；练习库热度驱动应试节与刷题入口",
+        "check-kb-points 增加应试节最短 60 字；kb-index v1.2.7-api"
+      ]
+    },
+    {
+      "version": "0.9.21",
+      "date": "2026-09-26",
+      "title": "API 考点 v1.2.6 切分校准与要点加厚",
+      "highlights": [
+        "修正锚点 ID（kp-13-4/13-6 等）与大纲节号误匹配；FORCE_EXTRACT + supplement_raw 补薄要点",
+        "kp-13-4 维护四类表、运维 MTBF 表等章内正文回归；check-kb-points 增加要点最短 80 字",
+        "kb-index v1.2.6-api"
+      ]
+    },
+    {
+      "version": "0.9.20",
+      "date": "2026-09-26",
+      "title": "API 考点 v1.2.5 定义加厚与速查联动",
+      "highlights": [
+        "精修 v1.2.5：20+ DEF_OVERRIDES 补全弱定义，enrich 自动垫厚至 ≥100 字",
+        "相关考点链入章内速查卡（需求/UML/REST/架构等）；论文定义句加长",
+        "kb-index v1.2.5-api"
+      ]
+    },
+    {
+      "version": "0.9.19",
+      "date": "2026-09-26",
+      "title": "API 考点 v1.2.4 答卷定义补全",
+      "highlights": [
+        "章内答卷句自动收割 + 30+ 高频 DEF_OVERRIDES（DFD/4+1/CMMI/维护/挣值等）",
+        "论文专题组统一论文定义句；check-kb-points 增加定义最短长度门禁",
+        "kb-index v1.2.4-api"
+      ]
+    },
+    {
+      "version": "0.9.18",
+      "date": "2026-09-26",
+      "title": "API 考点 v1.2.3 自动定义与阅读导航",
+      "highlights": [
+        "精修脚本：推断定义、章上下文补全、概述/应试优化；占位定义清零",
+        "阅读页：六节锚点导航、同组上一篇/下一篇；check:kb-points 纳入发版门禁",
+        "kb-index v1.2.3-api"
+      ]
+    },
+    {
+      "version": "0.9.17",
+      "date": "2026-09-26",
+      "title": "API 考点 v1.2.1 续批精修",
+      "highlights": [
+        "refine v1.2.1：定义/应试上提、易混关键词过滤、ANCHOR 校准；CMMI/IDE 定义补全",
+        "论文专题组索引标题可读化；知识点目录默认「考点（API）」并按 outlineRef 排序",
+        "kb-index meta v1.2.1-api"
+      ]
+    },
+    {
+      "version": "0.9.16",
+      "date": "2026-09-26",
+      "title": "API 考点 v1.2 审计全员通过",
+      "highlights": [
+        "审计甲/乙/丙表决通过 API 174 篇考点参考，主席正式发布 v1.2-api",
+        "公告与清单入 docs/kb-workshop/审计委员会/正式发布/；kb-index 对齐 manifest",
+        "考点页标注「审计通过」；kp-5-3 补教程提纲说明"
+      ]
+    },
+    {
+      "version": "0.9.15",
+      "date": "2026-09-26",
+      "title": "工坊精修 API 考点正文",
+      "highlights": [
+        "refine_kb_api_points.py：按标题关键词重切篇章、提取答卷句、过滤易混表",
+        "科目3 论文专题组与跨章题补写作素材；索引 meta v1.2-api（kp-2-7 手工保留）",
+        "送审稿：编制委员会/草稿/编制完成-送审-API考点精修-v1.2.md"
+      ]
+    },
+    {
+      "version": "0.9.14",
+      "date": "2026-09-26",
+      "title": "篇章正文一次性迁入考点 API",
+      "highlights": [
+        "174 篇 kp-* 自分章合订自动切分迁移为六节 API 正文，索引均为正式",
+        "原第1—22章合订标记 legacy 归档；知识点页新增「篇章（归档）」筛选",
+        "脚本 migrate_kb_legacy_to_points.py；知识地图说明以考点 API 为主入口"
+      ]
+    },
+    {
+      "version": "0.9.13",
+      "date": "2026-09-26",
+      "title": "考点参考 API 式单页体系",
+      "highlights": [
+        "174 个大纲考点各一篇 kp-*.md（六节结构），索引分区「考点参考（API）」与 sync 静态路由",
+        "知识点页可筛「考点（API）」并按章分组；试点 kp-2-7 REST 已正式编制",
+        "工坊文档与 bootstrap_kb_api_points.py 支持从大纲对照批量生成骨架"
+      ]
+    },
     {
       "version": "0.9.12",
       "date": "2026-09-26",

@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { BookOpen, Dices, Flame, LayoutGrid, Trophy } from "lucide-react";
 import { CH_NAMES, type Question } from "@/lib/types";
 import { QUIZ_STORAGE_KEY, storageGet, storageSet } from "@/lib/storage";
@@ -25,6 +26,7 @@ import {
   EXAM_CHOICE_MAX_MINUTES,
   EXAM_CHOICE_MIN_MINUTES_BEFORE_SUBMIT,
 } from "@/lib/exam-schedule";
+import { parseQuizDeepLink } from "@/lib/quiz-deep-link";
 
 type Meta = { practice: number; real: number; workshop: number; total: number };
 
@@ -48,11 +50,15 @@ function shuffleArray<T>(items: T[]): T[] {
 }
 
 export function QuizApp() {
+  const searchParams = useSearchParams();
+  const appliedDeepLink = useRef(false);
   const [all, setAll] = useState<Question[]>([]);
   const [meta, setMeta] = useState<Meta | null>(null);
   const [bank, setBank] = useState("practice");
   const [yearHalf, setYearHalf] = useState("all");
   const [chapter, setChapter] = useState("all");
+  const [keyword, setKeyword] = useState("");
+  const [fromKbDeepLink, setFromKbDeepLink] = useState(false);
   const [diff, setDiff] = useState("all");
   const [path, setPath] = useState<
     | "all"
@@ -115,6 +121,19 @@ export function QuizApp() {
     });
   }, []);
 
+  useEffect(() => {
+    if (loading || appliedDeepLink.current) return;
+    appliedDeepLink.current = true;
+    const link = parseQuizDeepLink(searchParams);
+    if (!link.chapter && !link.q && !link.bank && !link.path) return;
+    setFromKbDeepLink(true);
+    if (link.bank) setBank(link.bank);
+    if (link.path) setPath(link.path);
+    else if (link.chapter != null) setPath("all");
+    if (link.chapter != null) setChapter(String(link.chapter));
+    if (link.q) setKeyword(link.q);
+  }, [loading, searchParams]);
+
   const yearHalves = useMemo(() => {
     const s = new Set<string>();
     all
@@ -153,6 +172,11 @@ export function QuizApp() {
         return false;
       }
       if (diff !== "all" && q.diff !== diff) return false;
+      if (keyword.trim()) {
+        const k = keyword.trim();
+        const bag = `${q.point || ""}${q.stem}`;
+        if (!bag.includes(k)) return false;
+      }
       // 综合知识真题库：不受自编学习路径限制
       if (bank === "real") return true;
       if (path === "frontend") {
@@ -218,7 +242,7 @@ export function QuizApp() {
     const effectiveLimit = path === "random75" && limit === 0 ? 75 : limit;
     if (effectiveLimit > 0) list = list.slice(0, effectiveLimit);
     return list;
-  }, [all, bank, yearHalf, chapter, diff, path, shuffle, limit]);
+  }, [all, bank, yearHalf, chapter, diff, path, shuffle, limit, keyword]);
 
   const persist = useCallback(async () => {
     try {
@@ -395,6 +419,19 @@ export function QuizApp() {
       {phase === "setup" && (
         <>
           <ExamSprintBanner />
+          {fromKbDeepLink && (chapter !== "all" || keyword.trim()) ? (
+            <p className="mb-3 rounded-lg border border-primary/25 bg-primary/[0.04] px-3 py-2 text-[0.85rem] text-muted-foreground">
+              已从知识点带入筛选：
+              {chapter !== "all" ? (
+                <>
+                  {" "}
+                  第 {chapter} 章 {CH_NAMES[Number(chapter)] || ""}
+                </>
+              ) : null}
+              {keyword.trim() ? <> · 关键词「{keyword.trim()}」</> : null}
+              {filtered.length > 0 ? <> · 当前匹配 {filtered.length} 题</> : <> · 暂无匹配题，可放宽关键词或改章节</>}
+            </p>
+          ) : null}
           <div className="layout-split">
           <aside className="layout-aside" aria-label="刷题筛选">
             <Card className="px-(--card-spacing) mb-4">
@@ -484,6 +521,16 @@ export function QuizApp() {
                       </option>
                     ))}
                   </select>
+                </label>
+                <label className="block text-[0.82rem] text-muted-foreground">
+                  关键词（题干/考点）
+                  <input
+                    className="field mt-1.5"
+                    type="search"
+                    value={keyword}
+                    placeholder="可选，如：DFD、挣值"
+                    onChange={(e) => setKeyword(e.target.value)}
+                  />
                 </label>
                 <label className="block text-[0.82rem] text-muted-foreground">
                   难度

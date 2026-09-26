@@ -1,6 +1,6 @@
 {
   "name": "sysanalyst-quiz",
-  "version": "0.9.12",
+  "version": "0.9.23",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -10,7 +10,9 @@
     "sync:kb": "node scripts/sync-kb.mjs",
     "sync:data": "node scripts/sync-data.mjs",
     "sync:all": "npm run sync:kb && npm run sync:data",
-    "check:release": "node scripts/check-release.mjs",
+    "check:release": "node scripts/check-release.mjs && node scripts/check-kb-points.mjs && node scripts/check-kb-def-overrides.mjs",
+    "check:kb-points": "node scripts/check-kb-points.mjs",
+    "check:kb-def-overrides": "node scripts/check-kb-def-overrides.mjs",
     "validate:reorg": "node scripts/validate-reorg.mjs",
     "audit:workshop": "node scripts/audit-workshop.mjs",
     "build:kb-search": "node scripts/build-kb-search.mjs"
