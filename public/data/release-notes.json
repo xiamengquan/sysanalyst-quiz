@@ -1,6 +1,15 @@
 {
-  "latest": "0.9.10",
+  "latest": "0.9.11",
   "releases": [
+    {
+      "version": "0.9.11",
+      "date": "2026-09-25",
+      "title": "知识点 Dev Docs 文档模型与运维手册",
+      "highlights": [
+        "知识点工坊新增程序/README、文档模型（Diátaxis↔kind/docType）、速查卡模板",
+        "kb-index 登记 docType 与 docModel；知识地图说明 Dev Docs 四类归类"
+      ]
+    },
     {
       "version": "0.9.10",
       "date": "2026-09-25",

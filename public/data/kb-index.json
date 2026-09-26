@@ -1,10 +1,12 @@
 {
   "meta": {
-    "version": "v1.0",
-    "effective": "2026-09-10",
+    "version": "v1.1",
+    "effective": "2026-09-25",
     "audit": "甲通过 / 乙通过 / 丙通过",
-    "manifest": "docs/kb-workshop/审计委员会/正式发布/知识点精炼-正式清单-v1.0.md",
-    "announcement": "docs/kb-workshop/审计委员会/正式发布/发布公告-v1.0.md"
+    "manifest": "docs/kb-workshop/审计委员会/正式发布/知识点精炼-正式清单-v1.1.md",
+    "announcement": "docs/kb-workshop/审计委员会/正式发布/发布公告-v1.1.md",
+    "docModel": "docs/kb-workshop/程序/文档模型.md",
+    "authoringGuide": "docs/kb-workshop/程序/README.md"
   },
   "sections": [
     {
@@ -16,7 +18,8 @@
           "title": "使用说明与知识地图",
           "path": "00-使用说明与知识地图.md",
           "status": "正式",
-          "kind": "entry"
+          "kind": "entry",
+          "docType": "reference"
         },
         {
           "id": "case-tutorial",
@@ -24,6 +27,7 @@
           "path": "案例分析答题教程.md",
           "status": "正式",
           "kind": "entry",
+          "docType": "howto",
           "note": "科目2 方法"
         }
       ]
@@ -267,6 +271,7 @@
           "path": "速查/案例必答-需求获取五法对比卡.md",
           "status": "正式",
           "kind": "quick",
+          "docType": "howto",
           "note": "加练·约25分"
         },
         {
@@ -275,6 +280,7 @@
           "path": "速查/需求工程-体系化学习路径.md",
           "status": "正式",
           "kind": "quick",
+          "docType": "tutorial",
           "note": "教程化问答 · 对齐大纲§9"
         },
         {
@@ -283,6 +289,7 @@
           "path": "速查/UML-体系化学习指南.md",
           "status": "正式",
           "kind": "quick",
+          "docType": "tutorial",
           "note": "补第7章概要 · 对齐 UML 2.5.1"
         },
         {
@@ -291,6 +298,7 @@
           "path": "速查/结构化与面向对象分析-体系化学习路径.md",
           "status": "正式",
           "kind": "quick",
+          "docType": "tutorial",
           "note": "SA/DFD + OOA/用例 · 对齐第11章"
         },
         {
@@ -298,14 +306,16 @@
           "title": "大纲考点对照",
           "path": "速查/大纲考点对照.md",
           "status": "正式",
-          "kind": "quick"
+          "kind": "quick",
+          "docType": "reference"
         },
         {
           "id": "quick-compare",
           "title": "高频对比速查表",
           "path": "速查/高频对比速查表.md",
           "status": "正式",
-          "kind": "quick"
+          "kind": "quick",
+          "docType": "reference"
         },
         {
           "id": "quick-web-agent-arch",
@@ -313,6 +323,7 @@
           "path": "速查/Web与AI智能体-架构选型四维度卡.md",
           "status": "正式",
           "kind": "quick",
+          "docType": "reference",
           "note": "2026 案例 Web+Agent 四维度对比"
         },
         {
@@ -321,6 +332,7 @@
           "path": "速查/REST架构风格-体系化学习卡.md",
           "status": "正式",
           "kind": "quick",
+          "docType": "reference",
           "note": "REST vs SOAP、约束、幂等；2016/2018 案例"
         },
         {
