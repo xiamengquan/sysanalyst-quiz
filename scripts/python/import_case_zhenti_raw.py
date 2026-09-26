@@ -18,6 +18,8 @@ OUT_DIR = ROOT / "content/banks/real/案例分析"
 OUT_JSONL = OUT_DIR / "all.jsonl"
 
 from case_domain_lib import infer_case_domain, infer_case_type
+from case_point_lib import format_real_case_point
+from seven_steps_lib import build_seven_steps
 
 
 def strip_html(s: str) -> str:
@@ -234,8 +236,6 @@ def convert_file(fp: Path, start_no: int) -> tuple[list[dict], list[dict]]:
         case_id = f"ZT-{year}{half}-案例{exam_no:02d}"
         chapter, domain, track, case_type = infer_meta(stem, titles[0], prompts, case_id=case_id)
 
-        from seven_steps_lib import build_seven_steps
-
         exam_label = exam_no
         year_label = f"{year}{half}"
         role = (
@@ -252,33 +252,30 @@ def convert_file(fp: Path, start_no: int) -> tuple[list[dict], list[dict]]:
             pack_role=role,
         )
 
-        # title from stem first line
-        title_m = re.search(r"试题[一二三四五六七八九十\d]+[^\n]{0,40}", stem)
-        short = title_m.group(0) if title_m else f"试题{exam_no}"
-        cases.append(
-            {
-                "no": no,
-                "id": f"ZT-{year}{half}-案例{exam_no:02d}",
-                "subject": "case",
-                "bank": "real",
-                "year": year,
-                "half": half,
-                "exam_no": exam_no,
-                "chapter": chapter,
-                "domain": domain,
-                "case_type": case_type,
-                "point": f"{year}{half}·{short}",
-                "track": track,
-                "stop_loss": track == "P2",
-                "depth": "real",
-                "stem": stem,
-                "questions": questions,
-                "seven_steps": seven_steps,
-                "source": f"{year}年{'上' if half == '上' else '下'}半年系统分析师·案例分析真题",
-                "time_limit_min": 25,
-                "raw_file": fp.name,
-            }
-        )
+        case_row = {
+            "no": no,
+            "id": f"ZT-{year}{half}-案例{exam_no:02d}",
+            "subject": "case",
+            "bank": "real",
+            "year": year,
+            "half": half,
+            "exam_no": exam_no,
+            "chapter": chapter,
+            "domain": domain,
+            "case_type": case_type,
+            "point": "",
+            "track": track,
+            "stop_loss": track == "P2",
+            "depth": "real",
+            "stem": stem,
+            "questions": questions,
+            "seven_steps": seven_steps,
+            "source": f"{year}年{'上' if half == '上' else '下'}半年系统分析师·案例分析真题",
+            "time_limit_min": 25,
+            "raw_file": fp.name,
+        }
+        case_row["point"] = format_real_case_point(case_row)
+        cases.append(case_row)
     packs = []
     if cases:
         packs.append(

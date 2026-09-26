@@ -378,13 +378,20 @@ export function CaseApp() {
                           setPhase("quiz");
                         }}
                       >
-                        <div className="text-[0.95rem]">
-                          {c.id} · {c.point}
+                        <div className="text-[0.95rem] font-medium leading-snug">
+                          {c.point || `${c.domain} · ${c.case_type}`}
                           {i === 0 && packHint.includes("必答") ? "（建议必答）" : ""}
                         </div>
+                        <div className="mt-1.5 flex flex-wrap gap-1.5">
+                          {c.bank === "real" ? (
+                            <span className="badge text-[0.72rem]">真题</span>
+                          ) : null}
+                          <span className="badge text-[0.72rem]">{c.domain}</span>
+                          <span className="badge text-[0.72rem]">{c.case_type}</span>
+                        </div>
                         <div className="mt-1.5 text-[0.78rem] leading-relaxed text-muted-foreground">
-                          {c.bank === "real" ? "真题 · " : ""}
-                          {c.track ? TRACK_LABEL[c.track] || c.track : ""}
+                          {c.id}
+                          {c.track ? ` · ${TRACK_LABEL[c.track] || c.track}` : ""}
                           {c.stop_loss ? " · 止损" : ""} · 第{c.chapter}章 · 建议{" "}
                           {c.time_limit_min || 25} 分钟
                         </div>

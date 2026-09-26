@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 
 from case_domain_lib import infer_case_domain, infer_case_type
+from case_point_lib import format_real_case_point
 from seven_steps_lib import build_seven_steps
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -45,6 +46,7 @@ def main() -> None:
         row["domain"] = domain
         row["chapter"] = ch
         row["case_type"] = infer_case_type(row.get("stem") or "")
+        row["point"] = format_real_case_point(row)
         row["seven_steps"] = build_seven_steps(
             case_id=row.get("id") or "",
             domain=row.get("domain") or "Web",
