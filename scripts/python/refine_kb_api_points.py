@@ -82,7 +82,7 @@ ESSAY_INDEX_TITLES: dict[str, str] = {
     "kp-内容": "论文写作方法 · 注意事项与评分",
 }
 
-POLISH_STATUS = "工坊精修 v1.2.8 · 审计通过"
+POLISH_STATUS = "工坊精修 v1.2.9 · 审计通过"
 
 DEF_OVERRIDES_PATH = Path(__file__).resolve().parent / "kb_def_overrides.json"
 QUESTIONS_PATH = ROOT / "public/data/questions.json"
@@ -838,17 +838,41 @@ def build_overview(title: str, intro: str, keys: list[str], raw: str) -> str:
     return f"**{clean}** 属本科目大纲考点，侧重概念辨析与案例/论文回扣。"
 
 
-def scrub_points(raw: str, defs: str) -> str:
-    body = raw
-    body = re.sub(
+def scrub_points_answer_blocks(body: str) -> str:
+    return re.sub(
         r"\*\*.+?（答卷·(?:定义|必背|作用)）\*\*[^\n]*\n(?:[^\n#][^\n]*\n?)*",
         "",
         body,
     )
+
+
+def scrub_points_def_dupes(body: str, defs: str) -> str:
     for ln in defs.splitlines():
-        frag = ln.lstrip("- ").split("：", 1)[0].replace("**", "")
-        if len(frag) > 4:
-            body = body.replace(frag, "")
+        s = ln.strip()
+        if not s.startswith("- "):
+            continue
+        label = s[2:].split("：", 1)[0].split(":", 1)[0].strip()
+        if len(label) < 3:
+            continue
+        esc_label = re.escape(label)
+        body = re.sub(rf"^- {esc_label}\s*[：:].*\n?", "", body, flags=re.M)
+        inner = label.replace("**", "")
+        if inner and inner != label:
+            body = re.sub(
+                rf"^- \*\*{re.escape(inner)}\*\*\s*[：:].*\n?",
+                "",
+                body,
+                flags=re.M,
+            )
+    body = re.sub(r"^- \*\*\*\*\s*[：:].*$", "", body, flags=re.M)
+    return body
+
+
+def scrub_points(raw: str, defs: str) -> str:
+    body = scrub_points_answer_blocks(raw)
+    deduped = scrub_points_def_dupes(body, defs)
+    if len(deduped.strip()) >= RAW_MIN_QUALITY:
+        body = deduped
     body = re.sub(r"^###\s*$", "", body, flags=re.M)
     body = re.sub(r"\n{3,}", "\n\n", body)
     return body.strip()
@@ -1133,7 +1157,7 @@ def main() -> None:
         if not args.dry_run:
             (POINTS / f"{pid}.md").write_text(doc, encoding="utf-8")
         it["status"] = "正式"
-        it["note"] = "审计通过 v1.2.8-api"
+        it["note"] = "审计通过 v1.2.9-api"
         tid = ESSAY_INDEX_TITLES.get(pid)
         if tid:
             it["title"] = tid
@@ -1145,7 +1169,7 @@ def main() -> None:
             if sec.get("id") == "api-ref":
                 sec["items"] = items
         meta = data.setdefault("meta", {})
-        meta["version"] = "v1.2.8-api"
+        meta["version"] = "v1.2.9-api"
         meta["apiPolish"] = "2026-09-26"
         meta["authoringGuide"] = "docs/kb-workshop/编制委员会/答卷写法准则-v1.1.md"
         INDEX.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

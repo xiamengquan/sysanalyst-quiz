@@ -1,6 +1,15 @@
 {
-  "latest": "0.9.25",
+  "latest": "0.9.26",
   "releases": [
+    {
+      "version": "0.9.26",
+      "date": "2026-09-26",
+      "title": "考点要点去重修复空 ****",
+      "highlights": [
+        "精修 scrub_points 改为按整行去重，修复 UML 等页「****」空加粗显示",
+        "check-kb-points 禁止 - ****： 占位；kb-index v1.2.9-api"
+      ]
+    },
     {
       "version": "0.9.25",
       "date": "2026-09-26",
