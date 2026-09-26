@@ -1,6 +1,14 @@
 {
-  "latest": "0.9.24",
+  "latest": "0.9.25",
   "releases": [
+    {
+      "version": "0.9.25",
+      "date": "2026-09-26",
+      "title": "REST 速查卡重复标题修复",
+      "highlights": [
+        "同步 public/kb：REST 架构风格学习卡去掉重复 H1；搜索索引对齐"
+      ]
+    },
     {
       "version": "0.9.24",
       "date": "2026-09-26",
