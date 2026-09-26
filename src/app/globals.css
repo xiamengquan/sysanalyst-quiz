@@ -649,6 +649,74 @@ textarea.field {
   -webkit-overflow-scrolling: auto;
 }
 
+.kb-reader-split.is-single {
+  display: block;
+}
+.kb-reader-split.is-single .kb-reader {
+  max-width: none;
+}
+
+.kb-point-index-aside {
+  padding: var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--muted) 35%, transparent);
+}
+.kb-point-index-title {
+  margin: 0 0 var(--space-3);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--muted-foreground);
+}
+.kb-point-index-scroll {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.kb-point-index-group-title {
+  margin: 0 0 var(--space-2);
+  padding-left: var(--space-2);
+  border-left: 2px solid var(--border);
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--muted-foreground);
+}
+.kb-point-index-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.kb-point-index-list a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.4rem 0.55rem;
+  border-radius: var(--radius-md);
+  font-size: 0.78rem;
+  line-height: 1.35;
+  color: var(--muted-foreground);
+  text-decoration: none;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.kb-point-index-list a:hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--muted) 55%, transparent);
+}
+.kb-point-index-list a.is-active {
+  color: var(--foreground);
+  font-weight: 600;
+  background: color-mix(in srgb, var(--primary) 12%, var(--muted));
+}
+.kb-point-index-item-ref {
+  font-size: 0.68rem;
+  opacity: 0.85;
+}
+
 .kb-reader {
   width: 100%;
   max-width: none;

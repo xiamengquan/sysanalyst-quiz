@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import type { KbIndex, KbItem } from "@/lib/types";
 import { filterCatalogItems } from "@/lib/kb-search";
@@ -206,7 +207,57 @@ export function KbCatalog() {
   );
 }
 
+function KbPointIndexNav({
+  groups,
+  currentId,
+}: {
+  groups: readonly (readonly [string, KbItem[]])[];
+  currentId: string;
+}) {
+  const activeRef = useRef<HTMLAnchorElement>(null);
+
+  useEffect(() => {
+    activeRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }, [currentId]);
+
+  if (!groups.length) return null;
+
+  return (
+    <nav className="kb-point-index-nav" aria-label="考点索引">
+      <p className="kb-point-index-title">考点索引</p>
+      <div className="kb-point-index-scroll">
+        {groups.map(([gname, gitems]) => (
+          <section key={gname} className="kb-point-index-group">
+            <h2 className="kb-point-index-group-title">{gname}</h2>
+            <ul className="kb-point-index-list">
+              {gitems.map((p) => {
+                const active = p.id === currentId;
+                return (
+                  <li key={p.id}>
+                    <Link
+                      ref={active ? activeRef : undefined}
+                      href={`/kb/${p.id}/`}
+                      className={active ? "is-active" : undefined}
+                      aria-current={active ? "page" : undefined}
+                    >
+                      <span className="kb-point-index-item-title">{displayTitle(p.title)}</span>
+                      {p.outlineRef ? (
+                        <span className="kb-point-index-item-ref">{p.outlineRef}</span>
+                      ) : null}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        ))}
+      </div>
+    </nav>
+  );
+}
+
 export function KbReader({ id }: { id: string }) {
+  const router = useRouter();
   const catalog = useKbCatalog();
   const [item, setItem] = useState<KbItem | null>(null);
   const [html, setHtml] = useState("");
@@ -224,6 +275,21 @@ export function KbReader({ id }: { id: string }) {
     const kw = t.split(/[^\u4e00-\u9fffA-Za-z0-9]+/).find((w) => w.length >= 2);
     return quizHomeHref({ chapter: item.chapter, q: kw });
   }, [item]);
+
+  const pointIndexGroups = useMemo(() => {
+    const points = catalog.filter((c) => c.kind === "point");
+    if (!points.length) return [] as (readonly [string, KbItem[]])[];
+    const { groups } = groupPointItems(points);
+    return groups;
+  }, [catalog]);
+
+  const pointIndexFlat = useMemo(
+    () => pointIndexGroups.flatMap(([, items]) => items),
+    [pointIndexGroups],
+  );
+
+  const currentMeta = useMemo(() => catalog.find((c) => c.id === id), [catalog, id]);
+  const showPointIndex = currentMeta?.kind === "point" && pointIndexGroups.length > 0;
 
   const pointNeighbors = useMemo(() => {
     const current = catalog.find((c) => c.id === id);
@@ -371,8 +437,31 @@ export function KbReader({ id }: { id: string }) {
     <>
       <div className={`kb-dock-layout${previewOpen && kbPinned ? " is-docked" : ""}`}>
         <div className="kb-dock-main">
-          <article className="kb-reader layout-full">
+          <div className={`layout-split kb-reader-split${showPointIndex ? "" : " is-single"}`}>
+            {showPointIndex ? (
+              <aside className="layout-aside kb-point-index-aside hidden md:block" aria-label="考点索引侧栏">
+                <KbPointIndexNav groups={pointIndexGroups} currentId={id} />
+              </aside>
+            ) : null}
+            <article className="kb-reader layout-main min-w-0">
             <header className="kb-reader-head">
+              {showPointIndex ? (
+                <label className="kb-point-index-mobile mb-3 block md:hidden">
+                  <span className="mb-1 block text-[0.78rem] text-muted-foreground">考点索引</span>
+                  <select
+                    className="field w-full"
+                    value={id}
+                    onChange={(e) => router.push(`/kb/${e.target.value}/`)}
+                  >
+                    {pointIndexFlat.map((p) => (
+                      <option key={p.id} value={p.id}>
+                        {displayTitle(p.title)}
+                        {p.outlineRef ? ` · ${p.outlineRef}` : ""}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              ) : null}
               {item?.kind === "point" ? (
                 <p className="mb-1 text-[0.82rem] text-muted-foreground">
                   考点参考
@@ -449,6 +538,7 @@ export function KbReader({ id }: { id: string }) {
               </>
             )}
           </article>
+          </div>
         </div>
         {previewOpen && kbPinned ? (
           <KbPreviewDrawer
