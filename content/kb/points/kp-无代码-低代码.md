@@ -1,6 +1,6 @@
 # 无代码/低代码
 
-> **大纲**：第18章 18.5 · **教程**：第18章 · **分组**：科目3 · 8. 新技术及其应用 · **状态**：工坊精修 v1.2.9 · 审计通过
+> **大纲**：第18章 18.5 · **教程**：第18章 · **分组**：科目3 · 8. 新技术及其应用 · **状态**：工坊精修 v1.3.1 · 审计通过
 
 ## 概述
 
@@ -8,12 +8,14 @@
 
 ## 定义
 
-- **MVC**：Model-View-Controller 分离
-- **MVP**：Presenter 中转，View 被动
-- **MVVM**：ViewModel + 数据绑定（Vue/小程序/Angular）
-- **微服务**：独立服务、独立部署（Netflix 案例）
-- **原生 Native**：Swift/ObjC(iOS)、Kotlin/Java(Android)
-- **Web App**：HTML5/CSS/JS
+- **低代码开发**：是通过可视化建模与少量脚本快速构建应用的方式，仍保留扩展代码能力。**作用**：用于缩短交付周期、降低对专业开发人员的依赖。
+- **无代码开发**：是由业务人员通过配置与拖拽完成应用组装、基本不需手写代码的方式。**作用**：用于简单流程与表单类需求的快速上线。
+- **MVC**：是Model-View-Controller 分离。
+- **MVP**：是Presenter 中转，View 被动。
+- **MVVM**：是ViewModel + 数据绑定（Vue/小程序/Angular）。
+- **微服务**：是独立服务、独立部署（Netflix 案例）。
+- **原生 Native**：是Swift/ObjC(iOS)、Kotlin/Java(Android)。
+- **Web App**：是HTML5/CSS/JS。
 
 ## 要点
 

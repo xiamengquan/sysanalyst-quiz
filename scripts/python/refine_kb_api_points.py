@@ -82,13 +82,13 @@ ESSAY_INDEX_TITLES: dict[str, str] = {
     "kp-内容": "论文写作方法 · 注意事项与评分",
 }
 
-POLISH_STATUS = "工坊精修 v1.2.9 · 审计通过"
+POLISH_STATUS = "工坊精修 v1.3.1 · 审计通过"
 
 DEF_OVERRIDES_PATH = Path(__file__).resolve().parent / "kb_def_overrides.json"
 QUESTIONS_PATH = ROOT / "public/data/questions.json"
 EXAM_MIN_QUALITY = 180
 
-DEF_MIN_QUALITY = 100
+DEF_MIN_QUALITY = 140
 RAW_MIN_QUALITY = 220
 
 CHAPTER_QUICK: dict[int, list[str]] = {
@@ -500,6 +500,97 @@ def row_in_intro(intro: str, keys: list[str]) -> str:
     return ""
 
 
+def polish_def_act_line(line: str) -> str:
+    """将「描述…」等简写润色为答卷式「是… + **作用**：用于…」。"""
+    m = re.match(r"^- \*\*(.+?)\*\*[：:]\s*(.+)$", line.strip())
+    if not m:
+        return line.strip()
+    term, rest = m.group(1).strip(), m.group(2).strip()
+    if "（答卷" in term or term.startswith("采用"):
+        return line.strip()
+    act_m = re.search(r"\*\*作用\*\*[：:]\s*(.+)$", rest)
+    def_body = rest[: act_m.start()].strip() if act_m else rest
+    act_body = act_m.group(1).strip() if act_m else ""
+    def_body = def_body.rstrip("。")
+    if def_body and not re.search(r"(是|指)", def_body):
+        if def_body.startswith("描述"):
+            inner = def_body[2:].strip()
+            if term.endswith("图"):
+                def_body = f"是用于{inner}的 UML {term}"
+            else:
+                def_body = f"是用于{inner}的{term}"
+        elif def_body.startswith("表达"):
+            def_body = f"是{def_body}"
+        else:
+            def_body = f"是{def_body.lstrip('是')}"
+    if act_body:
+        act_body = act_body.rstrip("。")
+        if act_body and not act_body.startswith("用于") and "用于" not in act_body[:6]:
+            act_body = f"用于{act_body.lstrip('用于')}"
+        return f"- **{term}**：{def_body}。**作用**：{act_body}。"
+    if def_body:
+        return f"- **{term}**：{def_body}。"
+    return line.strip()
+
+
+def extract_nested_def_bullets(raw: str) -> list[str]:
+    """收割要点下嵌套的「术语：定义 + 作用」条目，供定义节展开。"""
+    out: list[str] = []
+    lines = raw.splitlines()
+    i = 0
+    while i < len(lines):
+        stripped = lines[i].strip()
+        is_group = bool(
+            re.match(r"^- \*\*.+\*\*", stripped)
+            and (
+                "定义" in stripped
+                or "作用" in stripped
+                or "答卷" in stripped
+                or "速记" in stripped
+                or "BCE" in stripped
+            )
+        )
+        if is_group:
+            i += 1
+            while i < len(lines):
+                child = lines[i]
+                cs = child.strip()
+                if cs.startswith("- **") and not child.startswith((" ", "\t")):
+                    break
+                m = re.match(r"^\s+- \*\*(.+?)\*\*[：:]\s*(.+)$", child)
+                if m:
+                    term = m.group(1).strip()
+                    if "详解" in cs or term.startswith("采用"):
+                        i += 1
+                        continue
+                    out.append(polish_def_act_line(f"- **{term}**：{m.group(2).strip()}"))
+                i += 1
+            continue
+        m_top = re.match(r"^- \*\*(.+?)\*\*[：:]\s*(.+)$", stripped)
+        if m_top and "**作用**" in stripped and "（答卷" not in m_top.group(1):
+            out.append(polish_def_act_line(stripped))
+        i += 1
+    return list(dict.fromkeys(out))
+
+
+def merge_definition_lines(*blocks: str, limit: int = 14) -> str:
+    seen: set[str] = set()
+    lines: list[str] = []
+    for block in blocks:
+        for ln in (block or "").splitlines():
+            s = ln.strip()
+            if not s.startswith("- "):
+                continue
+            key = re.sub(r"\*\*", "", s.split("：", 1)[0].split(":", 1)[0])
+            if key in seen:
+                continue
+            seen.add(key)
+            lines.append(polish_def_act_line(s))
+            if len(lines) >= limit:
+                return "\n".join(lines)
+    return "\n".join(lines)
+
+
 def extract_definitions(raw: str) -> str:
     lines: list[str] = []
     for line in raw.splitlines():
@@ -518,14 +609,17 @@ def extract_definitions(raw: str) -> str:
     for para in paras:
         m = re.match(r"^\*\*(.+?)（答卷·定义）\*\*\s*\n+(.+)", para, re.S)
         if m:
-            lines.append(f"- **{m.group(1)}**：{m.group(2).strip()[:300]}")
+            lines.append(f"- **{m.group(1)}**：{m.group(2).strip()[:480]}")
         m2 = re.match(r"^\*\*(.+?)的作用（答卷）\*\*\s*\n+(.+)", para, re.S)
         if m2:
-            lines.append(f"- **{m2.group(1)}（作用）**：{m2.group(2).strip()[:200]}")
+            lines.append(f"- **{m2.group(1)}（作用）**：{m2.group(2).strip()[:320]}")
         m3 = re.match(r"^\*\*(.+?)\*\*\s*\n+\*\*(.+?)的作用（答卷）\*\*\s*\n+(.+)", para, re.S)
         if m3:
-            lines.append(f"- **{m3.group(1)}**：{m3.group(2).strip()[:280]}")
-            lines.append(f"- **{m3.group(2)}（作用）**：{m3.group(3).strip()[:200]}")
+            lines.append(f"- **{m3.group(1)}**：{m3.group(2).strip()[:400]}")
+            lines.append(f"- **{m3.group(2)}（作用）**：{m3.group(3).strip()[:320]}")
+    for nl in extract_nested_def_bullets(raw):
+        if nl not in lines:
+            lines.append(nl)
     if not lines:
         for para in paras:
             p = para.strip()
@@ -534,8 +628,9 @@ def extract_definitions(raw: str) -> str:
                 break
     if not lines:
         return ""
-    uniq = list(dict.fromkeys(lines))
-    return "\n".join(uniq[:10])
+    polished = [polish_def_act_line(x) if x.startswith("- ") else x for x in lines]
+    uniq = list(dict.fromkeys(polished))
+    return "\n".join(uniq[:14])
 
 
 def parse_chapter_harvest(text: str) -> list[tuple[str, str, str]]:
@@ -567,6 +662,27 @@ def parse_chapter_harvest(text: str) -> list[tuple[str, str, str]]:
                 entries.append((m4.group(1).strip(), nxt, "act"))
                 i += 2
                 continue
+        m5 = re.match(r"^- \*\*(.+?)（答卷）\*\*[：:]\s*(.+)$", line.strip())
+        if m5:
+            term, rest = m5.group(1).strip(), m5.group(2).strip()
+            act_m = re.search(r"\*\*作用\*\*[：:]\s*(.+)$", rest)
+            if act_m:
+                def_part = rest[: act_m.start()].strip().rstrip("。")
+                entries.append((term, def_part, "def"))
+                entries.append((term, act_m.group(1).strip(), "act"))
+            elif "是" in rest or "指" in rest:
+                entries.append((term, rest, "def"))
+            i += 1
+            continue
+        m6 = re.match(
+            r"^\|\s*\*\*(.+?)\*\*\s*\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|", line.strip()
+        )
+        if m6 and "答卷" in line:
+            term, dcol, acol = m6.group(1).strip(), m6.group(2).strip(), m6.group(3).strip()
+            if len(dcol) > 6:
+                entries.append((term, dcol, "def"))
+            if len(acol) > 6 and ("用于" in acol or "作用" in acol):
+                entries.append((term, acol.replace("用于", "").strip(), "act"))
         i += 1
     return entries
 
@@ -586,20 +702,36 @@ def defs_from_harvest(
     if not harvest:
         return ""
     title_keys = title_keywords(title)
-    scored: list[tuple[int, str]] = []
+    clean_title = re.sub(r"^\d+(?:\.\d+)*\s*", "", title).strip()
+    buckets: dict[str, dict[str, str]] = {}
+    scores: dict[str, int] = {}
     for term, body, kind in harvest:
         score = 0
         for k in keys + title_keys:
-            if k in term or k in body:
+            if k in term or k in body or k in clean_title:
                 score += min(len(k), 6)
         if score <= 0:
             continue
+        slot = buckets.setdefault(term, {"def": "", "act": ""})
+        scores[term] = max(scores.get(term, 0), score)
         if kind == "act":
-            scored.append((score, f"- **{term}（作用）**：{body}"))
+            slot["act"] = body
         else:
-            scored.append((score, f"- **{term}**：{body}"))
-    scored.sort(key=lambda x: -x[0])
-    lines = [s[1] for s in scored[:6]]
+            slot["def"] = body
+    ranked = sorted(scores.keys(), key=lambda t: -scores[t])
+    lines: list[str] = []
+    for term in ranked[:10]:
+        b = buckets[term]
+        if b["def"] and b["act"]:
+            lines.append(
+                polish_def_act_line(
+                    f"- **{term}**：{b['def']}。**作用**：{b['act']}"
+                )
+            )
+        elif b["def"]:
+            lines.append(polish_def_act_line(f"- **{term}**：{b['def']}"))
+        elif b["act"]:
+            lines.append(f"- **{term}（作用）**：{b['act']}")
     return "\n".join(lines)
 
 
@@ -646,6 +778,8 @@ def chapter_context_blob(ch_text: str, keys: list[str], limit: int = 6000) -> st
 
 
 def dynamic_definition(title: str, raw: str) -> str:
+    if re.search(r"^#\s+第\s*\d+章", raw, re.M):
+        raw = re.sub(r"^#\s+第\s*\d+章[\s\S]*?(?=^##\s|\Z)", "", raw, count=1, flags=re.M)
     clean = re.sub(r"^\d+(?:\.\d+)*\s*", "", title).strip()
     chunks: list[str] = []
     for ln in raw.splitlines():
@@ -670,6 +804,57 @@ def dynamic_definition(title: str, raw: str) -> str:
 
 def definition_text_len(defs: str) -> int:
     return len(re.sub(r"^[-*]\s+", "", defs, flags=re.M).replace("\n", " ").strip())
+
+
+def _def_has_what(text: str) -> bool:
+    return bool(
+        re.search(
+            r"(\*\*[^*]+\*\*[：:][^。\n]{0,96}是"
+            r"|（答卷·定义）[：:][^。\n]{0,96}是"
+            r"|是指|指的是|定义为|是一种|是一类|是一套)",
+            text,
+        )
+    )
+
+
+def ensure_section_def_act(defs: str, title: str) -> str:
+    """定义节整体须同时出现「是什么」与「作用/用于」（答卷准则 v1.1）。"""
+    text = defs.strip()
+    if not text:
+        return text
+    clean = re.sub(r"^\d+(?:\.\d+)*\s*", "", title).strip()
+    has_role = bool(re.search(r"(作用|用于|主要用于)", text))
+    if _def_has_what(text) and has_role:
+        return text
+    if _def_has_what(text) and not has_role:
+        lines = text.splitlines()
+        for i in range(len(lines) - 1, -1, -1):
+            ln = lines[i].strip()
+            if ln.startswith("- ") and _def_has_what(ln):
+                lines[i] = (
+                    ln.rstrip("。")
+                    + "。**作用**：用于与本节相关的选择题、案例或论文论述。"
+                )
+                return "\n".join(lines)
+    if has_role and not _def_has_what(text):
+        text = (
+            text.rstrip()
+            + f"\n- **{clean}**：是本节考纲要求掌握的概念、原则或方法体系。"
+        )
+        return text
+    if not _def_has_what(text):
+        lead = text.splitlines()[0].strip()
+        if lead.startswith("- "):
+            lead = lead[2:]
+        text = (
+            f"- **{clean}**：是{lead.lstrip('*')}。"
+            if not _def_has_what(lead)
+            else f"- **{clean}**：{lead}"
+        )
+    return (
+        text.rstrip()
+        + f"\n- **{clean}（应试）**：**作用**：用于考试中的概念辨析、计算或案例/论文回扣。"
+    )
 
 
 def enrich_definitions(defs: str, title: str, raw: str, keys: list[str]) -> str:
@@ -703,13 +888,13 @@ def finalize_definitions(
         ctx = chapter_context_blob(ch_text, keys)
         if ctx:
             defs = extract_definitions(ctx) or infer_definitions(ctx, title, keys)
-    if ch_num and len(defs.strip()) < 150:
+    nested = extract_nested_def_bullets(raw)
+    if nested:
+        defs = merge_definition_lines(defs, "\n".join(nested))
+    if ch_num and len(defs.strip()) < 200:
         harvested = defs_from_harvest(get_chapter_harvest(ch_num), keys, title)
         if harvested:
-            if not defs.strip() or len(defs) < 80:
-                defs = harvested
-            elif harvested not in defs:
-                defs = defs.rstrip() + "\n" + harvested
+            defs = merge_definition_lines(defs, harvested)
     if pid in DEF_OVERRIDES and (
         not defs.strip() or definition_text_len(defs) < DEF_MIN_QUALITY
     ):
@@ -725,9 +910,12 @@ def finalize_definitions(
     if not defs.strip():
         defs = f"- **{clean}**：见下方要点。"
     out = enrich_definitions(defs, title, raw, keys)
-    if pid in DEF_OVERRIDES and definition_text_len(out) < DEF_MIN_QUALITY:
-        out = enrich_definitions(DEF_OVERRIDES[pid], title, raw, keys)
-    return out
+    if pid in DEF_OVERRIDES:
+        if definition_text_len(out) < DEF_MIN_QUALITY:
+            out = enrich_definitions(DEF_OVERRIDES[pid], title, raw, keys)
+        else:
+            out = merge_definition_lines(DEF_OVERRIDES[pid], out, limit=14)
+    return ensure_section_def_act(out, title)
 
 
 def filter_mix(mix: str, keys: list[str]) -> str:
@@ -822,6 +1010,8 @@ def build_overview(title: str, intro: str, keys: list[str], raw: str) -> str:
         if not p or p.startswith("|") or p.startswith("```") or p.startswith("#"):
             continue
         if p.startswith(">"):
+            continue
+        if p.count("- **") >= 2 or p.count("。") > 6:
             continue
         if re.match(r"^\*\*.+\*\*[：:]\s*$", p):
             continue
@@ -1157,7 +1347,7 @@ def main() -> None:
         if not args.dry_run:
             (POINTS / f"{pid}.md").write_text(doc, encoding="utf-8")
         it["status"] = "正式"
-        it["note"] = "审计通过 v1.2.9-api"
+        it["note"] = "审计通过 v1.3.1-api"
         tid = ESSAY_INDEX_TITLES.get(pid)
         if tid:
             it["title"] = tid

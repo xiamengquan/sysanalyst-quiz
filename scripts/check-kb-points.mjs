@@ -30,7 +30,15 @@ for (const sec of index.sections || []) {
     const dm = t.match(/## 定义\n\n([\s\S]*?)\n\n## 要点/);
     if (dm) {
       const def = dm[1].trim();
-      if (def.length < 45) errors.push(`${it.id}: definition too short (${def.length})`);
+      if (def.length < 80) errors.push(`${it.id}: definition too short (${def.length})`);
+      const hasWhat =
+        /(\*\*[^*]+\*\*[：:][^。\n]{0,96}是|（答卷·定义）[：:][^。\n]{0,96}是|是指|指的是|定义为|是一种|是一类|是一套)/.test(
+          def,
+        );
+      const hasRole = /(作用|用于|主要用于)/.test(def);
+      if (def.length > 0 && (!hasWhat || !hasRole)) {
+        errors.push(`${it.id}: 定义须同时交代「是什么/指什么」与「作用/用于」`);
+      }
     }
     const pm = t.match(/## 要点\n\n([\s\S]*?)\n\n## 易混/);
     if (pm) {
