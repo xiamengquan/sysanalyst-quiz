@@ -1,6 +1,14 @@
 {
-  "latest": "0.9.35",
+  "latest": "0.9.36",
   "releases": [
+    {
+      "version": "0.9.36",
+      "date": "2026-09-27",
+      "title": "UML 关系定义去举例、对齐语义",
+      "highlights": [
+        "kp-5-7 / 第 7 章 / UML 指南：六种关系与 §4.1 聚合·组合改为准确答卷定义（Client/Supplier、whole/part 等），关系相关段落去掉业务举例"
+      ]
+    },
     {
       "version": "0.9.35",
       "date": "2026-09-27",
