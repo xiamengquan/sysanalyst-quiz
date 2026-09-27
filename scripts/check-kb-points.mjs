@@ -8,7 +8,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const index = JSON.parse(fs.readFileSync(path.join(root, "content/kb-index.json"), "utf8"));
 const sections = ["概述", "定义", "要点", "易混辨析", "应试", "相关考点"];
 const badPhrases = ["本节要点中含可誊写句", "核心表述见下方要点", "待编制", "- ****："];
-const skip = new Set(["kp-2-7"]);
+const skip = new Set([]);
 let errors = [];
 
 for (const sec of index.sections || []) {

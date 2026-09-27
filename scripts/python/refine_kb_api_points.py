@@ -15,7 +15,7 @@ KB = ROOT / "content/kb"
 POINTS = KB / "points"
 INDEX = ROOT / "content/kb-index.json"
 
-SKIP_IDS = {"kp-2-7"}
+SKIP_IDS: set[str] = set()
 
 EXCLUDE_H2 = re.compile(
     r"本章考什么|易混对比|应试钩子|与综合知识关联|使用说明|Dev Docs|篇索引|分章速查|常考数字"
@@ -82,7 +82,7 @@ ESSAY_INDEX_TITLES: dict[str, str] = {
     "kp-内容": "论文写作方法 · 注意事项与评分",
 }
 
-POLISH_STATUS = "工坊精修 v1.3.1 · 审计通过"
+POLISH_STATUS = "工坊精修 v1.3.4 · 审计通过"
 
 DEF_OVERRIDES_PATH = Path(__file__).resolve().parent / "kb_def_overrides.json"
 QUESTIONS_PATH = ROOT / "public/data/questions.json"
@@ -202,6 +202,7 @@ FORCE_EXTRACT: dict[str, tuple[int, str]] = {
     "kp-2-5": (4, "分布式"),
     "kp-4-1": (6, "企业信息化"),
     "kp-13-3": (15, "故障管理"),
+    "kp-2-7": (4, "SOAP"),
 }
 
 ESSAY_MULTI_CH: dict[str, list[int]] = {
@@ -258,6 +259,13 @@ SYNTHETIC_POINTS: dict[str, str] = {
 
 - **范围**：基础设施、业务系统（ERP/CRM 等）、数据资源与治理、安全与标准。
 - **阶段**：规划 → 建设 → 集成 → 运维与优化；与战略对齐是规划前提。""",
+    "kp-2-7": """**架构约束（选择高频）**：客户端-服务器、**无状态**、可缓存、**统一接口**（URI + 动词）、分层系统、按需代码（可选）。
+
+**HTTP 方法**：GET 查（安全、幂等）；POST 建（通常不幂等）；PUT 全量更、DELETE 删（幂等）。
+
+**URI 惯例**：名词复数集合 `/surveys`；实例 `/surveys/{id}`；编辑/视图可建模为子资源或查询参数。
+
+**REST vs SOAP**：REST 用 URI 标识资源、HTTP 动词与无状态；SOAP 偏 XML 信封、RPC 与企业 WS-Security。案例常考 REST 选型理由（2016 上）与资源抽象（2018 上）。""",
     "kp-5-3": """> 教程无独立 7.3 专节；以下为备考提纲。
 
 **集成开发环境（IDE）** 是集编辑、编译/构建、调试、版本管理于一体的软件开发环境。
@@ -508,6 +516,9 @@ def polish_def_act_line(line: str) -> str:
     term, rest = m.group(1).strip(), m.group(2).strip()
     if "（答卷" in term or term.startswith("采用"):
         return line.strip()
+    used_tail = re.search(r"[；;]\*\*用于\*\*(.+)$", rest)
+    if used_tail and "**作用**" not in rest:
+        rest = rest[: used_tail.start()] + "。**作用**：用于" + used_tail.group(1).strip()
     act_m = re.search(r"\*\*作用\*\*[：:]\s*(.+)$", rest)
     def_body = rest[: act_m.start()].strip() if act_m else rest
     act_body = act_m.group(1).strip() if act_m else ""
@@ -687,11 +698,31 @@ def parse_chapter_harvest(text: str) -> list[tuple[str, str, str]]:
     return entries
 
 
+def harvest_entries_from_text(text: str) -> list[tuple[str, str, str]]:
+    entries = list(parse_chapter_harvest(text))
+    seen = {(t, k) for t, _b, k in entries}
+    for line in parse_chapter_inline_def_act(text):
+        m = re.match(
+            r"^- \*\*(.+?)\*\*[：:]\s*(.+?)\*\*作用\*\*[：:]\s*(.+?)\。?$",
+            line.strip(),
+        )
+        if not m:
+            continue
+        term = m.group(1).strip()
+        if (term, "def") not in seen:
+            entries.append((term, m.group(2).strip().rstrip("。"), "def"))
+            seen.add((term, "def"))
+        if (term, "act") not in seen:
+            entries.append((term, m.group(3).strip().rstrip("。"), "act"))
+            seen.add((term, "act"))
+    return entries
+
+
 def get_chapter_harvest(ch_num: int) -> list[tuple[str, str, str]]:
     if ch_num not in HARVEST_CACHE:
         cf = find_chapter_file(ch_num)
         HARVEST_CACHE[ch_num] = (
-            parse_chapter_harvest(cf.read_text(encoding="utf-8")) if cf else []
+            harvest_entries_from_text(cf.read_text(encoding="utf-8")) if cf else []
         )
     return HARVEST_CACHE[ch_num]
 
@@ -817,6 +848,162 @@ def _def_has_what(text: str) -> bool:
     )
 
 
+def clean_definition_output(defs: str) -> str:
+    """去掉合并后残留的裸「定义/作用」行与易混说明行。"""
+    lines: list[str] = []
+    seen_plain: set[str] = set()
+    for ln in defs.splitlines():
+        s = ln.strip()
+        if not s.startswith("- "):
+            continue
+        if re.match(r"^- \*\*(定义|作用)\*\*[：:]", s):
+            continue
+        if re.match(r"^- [^*].*（答卷·定义）", s):
+            continue
+        if re.match(r"^- \*\*(.+?)（答卷·定义）\*\*\s*$", s):
+            continue
+        if not re.match(r"^- \*\*.+\*\*[：:]", s):
+            continue
+        if "（答卷·定义 / 作用）" in s or "（定义 / 作用速记）" in s:
+            continue
+        if "易混" in s and "不要混答" in s:
+            continue
+        s = polish_def_act_line(s)
+        plain = re.sub(r"\*\*", "", s)
+        if plain in seen_plain:
+            continue
+        seen_plain.add(plain)
+        lines.append(s)
+        if len(lines) >= 14:
+            break
+    return "\n".join(lines)
+
+
+def harvest_term_buckets(ch_num: int | None) -> dict[str, dict[str, str]]:
+    if not ch_num:
+        return {}
+    buckets: dict[str, dict[str, str]] = {}
+    for term, body, kind in get_chapter_harvest(ch_num):
+        slot = buckets.setdefault(term.strip(), {"def": "", "act": ""})
+        if kind == "act":
+            slot["act"] = body.strip()
+        else:
+            slot["def"] = body.strip()
+    return buckets
+
+
+def parse_chapter_inline_def_act(text: str) -> list[str]:
+    """通章行内「- **术语**：…。**作用**：…」。"""
+    out: list[str] = []
+    for m in re.finditer(
+        r"^- \*\*(.+?)\*\*[：:]\s*(.+?)\*\*作用\*\*[：:]\s*(.+?)\.?\s*$",
+        text,
+        re.M,
+    ):
+        term = m.group(1).strip()
+        if "答卷" in term and "（" not in term:
+            term = re.sub(r"（答卷）\s*$", "", term)
+        line = polish_def_act_line(
+            f"- **{term}**：{m.group(2).strip()}。**作用**：{m.group(3).strip()}"
+        )
+        if line not in out:
+            out.append(line)
+    return out
+
+
+def parse_chapter_heading_blocks(text: str) -> list[str]:
+    """通章 **模型名**： + 子 bullet 列表 → 定义 + 作用。"""
+    out: list[str] = []
+    for m in re.finditer(
+        r"^\*\*(.+?)\*\*[：:]\s*\n+((?:[ \t]*- .+\n)+)",
+        text,
+        re.M,
+    ):
+        term = m.group(1).strip()
+        if len(term) > 36 or "答卷" in term or term.endswith("★必考"):
+            continue
+        bullets = [
+            b.strip()[2:].strip()
+            for b in m.group(2).splitlines()
+            if b.strip().startswith("- ")
+        ]
+        if not bullets:
+            continue
+        def_bits: list[str] = []
+        act_hint = ""
+        for b in bullets:
+            if re.match(r"^(适用|优点|缺点|特点|限制)", b):
+                if b.startswith("适用"):
+                    act_hint = b.rstrip("。")
+                continue
+            def_bits.append(b.rstrip("。"))
+        if not def_bits:
+            continue
+        def_body = "；".join(def_bits[:3])
+        if not re.search(r"(是|指|由|含|通过)", def_body):
+            def_body = f"是{def_body}"
+        act_body = act_hint or f"用于与本节相关的模型选型、特点对比与案例论述"
+        if act_body and not act_body.startswith("用于"):
+            act_body = f"用于{act_body.lstrip('用于适用：').lstrip('适用')}"
+        out.append(
+            polish_def_act_line(
+                f"- **{term}**：{def_body}。**作用**：{act_body}"
+            )
+        )
+    return list(dict.fromkeys(out))
+
+
+def supplement_missing_act(
+    defs: str, ch_num: int | None, title: str, raw: str
+) -> str:
+    """为缺「作用/用于」的 bullet 补全（优先通章 harvest，其次本节语境）。"""
+    buckets = harvest_term_buckets(ch_num)
+    clean_title = re.sub(r"^\d+(?:\.\d+)*\s*", "", title).strip()
+    lines_out: list[str] = []
+    for ln in defs.splitlines():
+        s = ln.strip()
+        if not s.startswith("- "):
+            continue
+        polished = polish_def_act_line(s)
+        if re.search(r"\*\*作用\*\*|主要用于|用于", polished):
+            lines_out.append(polished)
+            continue
+        tm = re.match(r"^- \*\*(.+?)\*\*[：:]\s*(.+)$", polished)
+        if not tm:
+            lines_out.append(polished)
+            continue
+        term, rest = tm.group(1).strip(), tm.group(2).strip().rstrip("。")
+        base_term = re.sub(r"（.+?）$", "", term).strip()
+        act = ""
+        for key in (term, base_term):
+            if key in buckets and buckets[key]["act"]:
+                act = buckets[key]["act"]
+                break
+        if not act:
+            for k, slot in buckets.items():
+                if k in term or term in k or k in base_term:
+                    act = slot["act"]
+                    if act:
+                        break
+        if not act:
+            act_m = re.search(
+                rf"\*\*{re.escape(base_term)}[^*]*\*\*[^\n]*作用[：:]\s*([^\n。]+)",
+                raw,
+            )
+            if act_m:
+                act = act_m.group(1).strip()
+        if not act:
+            act = (
+                f"用于在综合知识选择与案例/论文中准确识别「{clean_title}」"
+                "相关概念、方法步骤及其适用边界与易混点辨析"
+            )
+        if not act.startswith("用于"):
+            act = f"用于{act.lstrip('用于')}"
+        def_body = rest.split("。**作用**")[0].rstrip("。")
+        lines_out.append(f"- **{term}**：{def_body}。**作用**：{act}。")
+    return "\n".join(lines_out)
+
+
 def ensure_section_def_act(defs: str, title: str) -> str:
     """定义节整体须同时出现「是什么」与「作用/用于」（答卷准则 v1.1）。"""
     text = defs.strip()
@@ -873,6 +1060,72 @@ def enrich_definitions(defs: str, title: str, raw: str, keys: list[str]) -> str:
     return "\n".join(parts).strip()
 
 
+def parse_chaptersubsubsection_defs(text: str) -> list[str]:
+    """从通章 #### / （答卷·定义）块收割「定义 + 作用」完整句。"""
+    out: list[str] = []
+    for part in re.split(r"\n(?=####\s+)", text):
+        m_h = re.match(r"^####\s+(.+?)\s*$", part, re.M)
+        if not m_h:
+            continue
+        term = re.sub(r"（答卷）\s*$", "", m_h.group(1).strip())
+        def_m = re.search(r"^\*\*定义\*\*[：:]\s*(.+)$", part, re.M)
+        act_m = re.search(r"^\*\*作用\*\*[：:]\s*(.+)$", part, re.M)
+        if def_m and act_m:
+            line = (
+                f"- **{term}**：{def_m.group(1).strip()}。"
+                f"**作用**：{act_m.group(1).strip()}"
+            )
+            out.append(polish_def_act_line(line))
+    for m in re.finditer(
+        r"\*\*(.+?)（答卷·定义）\*\*\s*\n+([^\n]+(?:\n(?!\*\*[^*]+（答卷)[^\n]+)*)\s*\n+\*\*作用\*\*[：:]\s*([^\n]+)",
+        text,
+    ):
+        term = m.group(1).strip()
+        def_body = re.sub(r"\s+", " ", m.group(2).strip())
+        act_body = m.group(3).strip()
+        out.append(
+            polish_def_act_line(
+                f"- **{term}**：{def_body}。**作用**：{act_body}"
+            )
+        )
+    return list(dict.fromkeys(out))
+
+
+def defs_from_chapter_methods(
+    ch_text: str,
+    pid: str,
+    title: str,
+    keys: list[str],
+    outline_ref: str | None,
+    ch_num: int | None,
+) -> str:
+    ranked: list[tuple[float, str]] = []
+    for head, body in atomic_sections(ch_text):
+        sc = score_item(pid, keys, head, body, outline_ref, ch_num)
+        block = parse_chaptersubsubsection_defs(body)
+        if not block:
+            block = parse_chapter_inline_def_act(body)
+        if not block:
+            block = parse_chapter_heading_blocks(body)
+        if sc >= 28 and block:
+            ranked.append((sc + len(block) * 4, "\n".join(block)))
+    ranked.sort(key=lambda x: -x[0])
+    if ranked:
+        return merge_definition_lines(ranked[0][1], limit=14)
+    return ""
+
+
+def authoritative_override(pid: str) -> str | None:
+    """MANUAL / 重建 override 含多条「作用」时，定义节仅以 override 为准（防章内串节）。"""
+    if pid not in DEF_OVERRIDES:
+        return None
+    ov = DEF_OVERRIDES[pid].strip()
+    act_n = ov.count("**作用**")
+    if act_n < 2 or definition_text_len(ov) < 120:
+        return None
+    return ov
+
+
 def finalize_definitions(
     pid: str,
     raw: str,
@@ -880,7 +1133,13 @@ def finalize_definitions(
     keys: list[str],
     ch_text: str,
     ch_num: int | None,
+    outline_ref: str | None = None,
 ) -> str:
+    auth_ov = authoritative_override(pid)
+    if auth_ov:
+        body = clean_definition_output(auth_ov)
+        body = supplement_missing_act(body, ch_num, title, raw)
+        return ensure_section_def_act(body, title)
     defs = extract_definitions(raw)
     if not defs.strip():
         defs = infer_definitions(raw, title, keys)
@@ -891,10 +1150,27 @@ def finalize_definitions(
     nested = extract_nested_def_bullets(raw)
     if nested:
         defs = merge_definition_lines(defs, "\n".join(nested))
+    if ch_text:
+        sec = defs_from_chapter_methods(
+            ch_text, pid, title, keys, outline_ref, ch_num
+        )
+        if sec:
+            defs = merge_definition_lines(defs, sec, limit=14)
     if ch_num and len(defs.strip()) < 200:
         harvested = defs_from_harvest(get_chapter_harvest(ch_num), keys, title)
         if harvested:
             defs = merge_definition_lines(defs, harvested)
+    if ch_text and definition_text_len(defs) < 380 and not authoritative_override(pid):
+        extra: list[str] = []
+        for head, body in atomic_sections(ch_text):
+            sc = score_item(pid, keys, head, body, outline_ref, ch_num)
+            if sc < 22:
+                continue
+            extra.extend(parse_chaptersubsubsection_defs(body))
+            extra.extend(parse_chapter_inline_def_act(body))
+            extra.extend(parse_chapter_heading_blocks(body))
+        if extra:
+            defs = merge_definition_lines(defs, "\n".join(dict.fromkeys(extra)), limit=14)
     if pid in DEF_OVERRIDES and (
         not defs.strip() or definition_text_len(defs) < DEF_MIN_QUALITY
     ):
@@ -911,10 +1187,14 @@ def finalize_definitions(
         defs = f"- **{clean}**：见下方要点。"
     out = enrich_definitions(defs, title, raw, keys)
     if pid in DEF_OVERRIDES:
+        ov = DEF_OVERRIDES[pid]
         if definition_text_len(out) < DEF_MIN_QUALITY:
-            out = enrich_definitions(DEF_OVERRIDES[pid], title, raw, keys)
+            out = enrich_definitions(ov, title, raw, keys)
+        elif authoritative_override(pid):
+            out = enrich_definitions(ov, title, raw, keys)
         else:
-            out = merge_definition_lines(DEF_OVERRIDES[pid], out, limit=14)
+            out = merge_definition_lines(ov, out, limit=14)
+    out = supplement_missing_act(clean_definition_output(out), ch_num, title, raw)
     return ensure_section_def_act(out, title)
 
 
@@ -1250,7 +1530,9 @@ def render(
     pid = item.get("id", "")
     overview = build_overview(title, intro, keys, raw)
     ch_num = int(ch) if ch else None
-    defs = finalize_definitions(pid, raw, title, keys, ch_text, ch_num)
+    defs = finalize_definitions(
+        pid, raw, title, keys, ch_text, ch_num, item.get("outlineRef")
+    )
     points = scrub_points(raw, defs)
     mix_out = filter_mix(mix, keys)
     exam_out = build_exam(exam, tips, raw, keys, item, bank)
@@ -1341,13 +1623,15 @@ def main() -> None:
                 or SYNTHETIC_POINTS.get(pid, "")
                 or (ch_text[:4000] if ch_text else "")
             )
+        if not raw.strip() and authoritative_override(pid):
+            raw = DEF_OVERRIDES[pid]
         if not raw.strip():
             continue
         doc = render(it, raw, ch_text, by_group, bank)
         if not args.dry_run:
             (POINTS / f"{pid}.md").write_text(doc, encoding="utf-8")
         it["status"] = "正式"
-        it["note"] = "审计通过 v1.3.1-api"
+        it["note"] = "审计通过 v1.3.4-api"
         tid = ESSAY_INDEX_TITLES.get(pid)
         if tid:
             it["title"] = tid
@@ -1359,7 +1643,7 @@ def main() -> None:
             if sec.get("id") == "api-ref":
                 sec["items"] = items
         meta = data.setdefault("meta", {})
-        meta["version"] = "v1.2.9-api"
+        meta["version"] = "v1.3.4-api"
         meta["apiPolish"] = "2026-09-26"
         meta["authoringGuide"] = "docs/kb-workshop/编制委员会/答卷写法准则-v1.1.md"
         INDEX.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

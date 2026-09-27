@@ -96,7 +96,9 @@ def main() -> None:
         keys = r.title_keywords(title)
         defs = ""
         if raw.strip():
-            defs = r.finalize_definitions(pid, raw, title, keys, ch_text, ch_num)
+            defs = r.finalize_definitions(
+                pid, raw, title, keys, ch_text, ch_num, it.get("outlineRef")
+            )
         if r.definition_text_len(defs) < MIN_LEN:
             defs = defs_from_point_file(pid)
         if not raw.strip() and r.definition_text_len(defs) < 100:

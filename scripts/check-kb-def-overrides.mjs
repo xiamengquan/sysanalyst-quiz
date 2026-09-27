@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const overridesPath = path.join(root, "scripts/python/kb_def_overrides.json");
 const indexPath = path.join(root, "content/kb-index.json");
-const skip = new Set(["kp-2-7"]);
+const skip = new Set([]);
 const errors = [];
 const warns = [];
 
