@@ -491,7 +491,7 @@ export function KbReader({ id }: { id: string }) {
                     <a
                       key={s}
                       href={`#${s}`}
-                      className="rounded-md border border-border bg-muted/50 px-2 py-0.5 text-[0.75rem] text-muted-foreground hover:text-foreground"
+                      className="kb-section-pill rounded-md border border-border bg-muted/50 px-2 py-0.5 text-[0.75rem] text-muted-foreground hover:text-foreground"
                     >
                       {s}
                     </a>

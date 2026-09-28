@@ -27,6 +27,8 @@ import {
   EXAM_CHOICE_MIN_MINUTES_BEFORE_SUBMIT,
 } from "@/lib/exam-schedule";
 import { parseQuizDeepLink } from "@/lib/quiz-deep-link";
+import { useMediaMinWidth } from "@/lib/use-media-min-width";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 type Meta = { practice: number; real: number; workshop: number; total: number };
 
@@ -87,6 +89,12 @@ export function QuizApp() {
   const [kbOpen, setKbOpen] = useState(false);
   const [kbStack, setKbStack] = useState<{ id: string; title: string }[]>([]);
   const [kbPinned, setKbPinned] = useState(false);
+  const wideSetup = useMediaMinWidth(960);
+  const [filtersOpen, setFiltersOpen] = useState(false);
+
+  useEffect(() => {
+    if (wideSetup) setFiltersOpen(true);
+  }, [wideSetup]);
 
   useEffect(() => {
     Promise.all([
@@ -432,11 +440,32 @@ export function QuizApp() {
               {filtered.length > 0 ? <> · 当前匹配 {filtered.length} 题</> : <> · 暂无匹配题，可放宽关键词或改章节</>}
             </p>
           ) : null}
-          <div className="layout-split">
-          <aside className="layout-aside" aria-label="刷题筛选">
+          <div className="layout-split setup-split">
+          <aside className="layout-aside setup-aside" aria-label="刷题筛选">
             <Card className="px-(--card-spacing) mb-4">
-              <h2 className="mb-4 text-[1rem] font-medium">筛选</h2>
-              <div className="filter-stack">
+              <div className="mb-4 flex items-center justify-between gap-2">
+                <h2 className="text-[1rem] font-medium">筛选</h2>
+                {!wideSetup ? (
+                  <span className="text-xs tabular-nums text-muted-foreground">{filtered.length} 题</span>
+                ) : null}
+              </div>
+              {!wideSetup ? (
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="filter-toggle mb-3"
+                  aria-expanded={filtersOpen}
+                  onClick={() => setFiltersOpen((o) => !o)}
+                >
+                  <span>{filtersOpen ? "收起筛选" : "展开筛选条件"}</span>
+                  {filtersOpen ? (
+                    <ChevronUp className="size-4 shrink-0" aria-hidden />
+                  ) : (
+                    <ChevronDown className="size-4 shrink-0" aria-hidden />
+                  )}
+                </Button>
+              ) : null}
+              <div className={cn("filter-stack", !wideSetup && !filtersOpen && "hidden")}>
                 <label className="block text-[0.82rem] text-muted-foreground">
                   学习路径
                   <select
@@ -568,7 +597,7 @@ export function QuizApp() {
             </Card>
           </aside>
 
-          <div className="layout-main space-y-4">
+          <div className="layout-main setup-main space-y-4">
             {/* 全真模拟 · 随机 75 题推荐卡片 */}
             <Card className="border-primary/30 bg-primary/[0.03] dark:bg-primary/[0.05] p-4 sm:p-5 shadow-xs">
               <div className="flex items-start justify-between gap-3 mb-2.5">
@@ -628,7 +657,7 @@ export function QuizApp() {
             {/* 常规按条件筛选卡片 */}
             <Card className="space-y-4 px-(--card-spacing)">
               <div className="flex items-center justify-between">
-                <h2 className="text-[1rem] font-medium">按左侧条件刷题</h2>
+                <h2 className="text-[1rem] font-medium">按筛选条件刷题</h2>
                 <span className="text-xs text-muted-foreground">
                   当前筛选 <b className="text-foreground">{filtered.length}</b> 题
                 </span>
@@ -784,40 +813,44 @@ export function QuizApp() {
             </div>
           )}
           <div className="sticky-actions">
-            <Button type="button" variant="outline" disabled={idx <= 0} onClick={() => setIdx((i) => i - 1)}>
-              上一题
-            </Button>
-            <Button
-              type="button"
-               variant="default"
-              onClick={() => {
-                if (idx < pool.length - 1) setIdx((i) => i + 1);
-                else setPhase("result");
-              }}
-            >
-              {idx < pool.length - 1 ? "下一题" : "结束"}
-            </Button>
-            <Button
-              type="button"
-               variant="outline"
-              onClick={() => setRevealed((r) => ({ ...r, [q.no]: true }))}
-            >
-              看答案
-            </Button>
-            <Button type="button" variant="outline" onClick={() => setSheetCardOpen(true)}>
-              <LayoutGrid size={15} strokeWidth={2} aria-hidden />
-              答题卡
-            </Button>
-            <Button type="button" variant="outline" onClick={openRelatedKb}>
-              <BookOpen size={16} strokeWidth={2} aria-hidden />
-              知识点{relatedKb.length ? ` · ${relatedKb.length}` : ""}
-            </Button>
-            <Button type="button" variant="ghost" onClick={() => void persist()}>
-              保存
-            </Button>
-            <Button type="button" variant="ghost" onClick={() => setPhase("setup")}>
-              设置
-            </Button>
+            <div className="sticky-actions-primary">
+              <Button type="button" variant="outline" disabled={idx <= 0} onClick={() => setIdx((i) => i - 1)}>
+                上一题
+              </Button>
+              <Button
+                type="button"
+                variant="default"
+                onClick={() => {
+                  if (idx < pool.length - 1) setIdx((i) => i + 1);
+                  else setPhase("result");
+                }}
+              >
+                {idx < pool.length - 1 ? "下一题" : "结束"}
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setRevealed((r) => ({ ...r, [q.no]: true }))}
+              >
+                看答案
+              </Button>
+            </div>
+            <div className="sticky-actions-more">
+              <Button type="button" variant="outline" onClick={() => setSheetCardOpen(true)}>
+                <LayoutGrid size={15} strokeWidth={2} aria-hidden />
+                答题卡
+              </Button>
+              <Button type="button" variant="outline" onClick={openRelatedKb}>
+                <BookOpen size={16} strokeWidth={2} aria-hidden />
+                知识点{relatedKb.length ? ` · ${relatedKb.length}` : ""}
+              </Button>
+              <Button type="button" variant="ghost" onClick={() => void persist()}>
+                保存
+              </Button>
+              <Button type="button" variant="ghost" onClick={() => setPhase("setup")}>
+                设置
+              </Button>
+            </div>
           </div>
         </Card>
           </div>

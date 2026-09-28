@@ -11,6 +11,9 @@ import type { KbSearchDoc, KbSearchIndex } from "@/lib/kb-search";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ExamSprintBanner } from "@/components/ExamCountdown";
+import { useMediaMinWidth } from "@/lib/use-media-min-width";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 type CaseDrafts = Record<string, Record<number, string>>;
 
@@ -42,6 +45,12 @@ export function CaseApp() {
   const [kbOpen, setKbOpen] = useState(false);
   const [kbStack, setKbStack] = useState<{ id: string; title: string }[]>([]);
   const [kbPinned, setKbPinned] = useState(false);
+  const wideSetup = useMediaMinWidth(960);
+  const [filtersOpen, setFiltersOpen] = useState(false);
+
+  useEffect(() => {
+    if (wideSetup) setFiltersOpen(true);
+  }, [wideSetup]);
 
   useEffect(() => {
     let cancelled = false;
@@ -213,11 +222,32 @@ export function CaseApp() {
       {(phase === "setup" || phase === "list") && (
         <>
           <ExamSprintBanner />
-          <div className="layout-split">
-          <aside className="layout-aside" aria-label="案例筛选">
+          <div className="layout-split setup-split">
+          <aside className="layout-aside setup-aside" aria-label="案例筛选">
             <Card className="space-y-4 px-(--card-spacing) mb-4">
-              <h2 className="text-[1rem] font-medium">筛选</h2>
-              <div className="filter-stack">
+              <div className="flex items-center justify-between gap-2">
+                <h2 className="text-[1rem] font-medium">筛选</h2>
+                {!wideSetup ? (
+                  <span className="text-xs tabular-nums text-muted-foreground">{filtered.length} 套</span>
+                ) : null}
+              </div>
+              {!wideSetup ? (
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="filter-toggle"
+                  aria-expanded={filtersOpen}
+                  onClick={() => setFiltersOpen((o) => !o)}
+                >
+                  <span>{filtersOpen ? "收起筛选" : "展开筛选条件"}</span>
+                  {filtersOpen ? (
+                    <ChevronUp className="size-4 shrink-0" aria-hidden />
+                  ) : (
+                    <ChevronDown className="size-4 shrink-0" aria-hidden />
+                  )}
+                </Button>
+              ) : null}
+              <div className={cn("filter-stack", !wideSetup && !filtersOpen && "hidden")}>
                 <label className="block text-[0.82rem] text-muted-foreground">
                   题库
                   <select
@@ -318,7 +348,7 @@ export function CaseApp() {
             </Card>
           </aside>
 
-          <div className="layout-main">
+          <div className="layout-main setup-main">
             {phase === "setup" && (
               <div className="stack">
                 {packs.length > 0 && (
@@ -520,47 +550,51 @@ export function CaseApp() {
           </div>
           )}
           <div className="sticky-actions">
-            <Button
-              type="button"
-              variant="outline"
-              disabled={idx <= 0}
-              onClick={() => {
-                setReveal(false);
-                setQuizTab("answer");
-                setIdx((i) => i - 1);
-              }}
-            >
-              上一套
-            </Button>
-            <Button
-              type="button"
-              variant="default"
-              disabled={idx >= pool.length - 1}
-              onClick={() => {
-                setReveal(false);
-                setQuizTab("answer");
-                setIdx((i) => i + 1);
-              }}
-            >
-              下一套
-            </Button>
-            <Button type="button" variant="outline" onClick={() => setReveal(true)} disabled={quizTab !== "answer"}>
-              看要点
-            </Button>
-            <Button type="button" variant="outline" onClick={openRelatedKb}>
-              <BookOpen size={16} strokeWidth={2} aria-hidden />
-              知识点{relatedKb.length ? ` · ${relatedKb.length}` : ""}
-            </Button>
-            <Button
-              type="button"
-              variant="ghost"
-              onClick={() => void storageSet(CASE_STORAGE_KEY, drafts)}
-            >
-              保存
-            </Button>
-            <Button type="button" variant="ghost" onClick={() => setPhase("list")}>
-              列表
-            </Button>
+            <div className="sticky-actions-primary">
+              <Button
+                type="button"
+                variant="outline"
+                disabled={idx <= 0}
+                onClick={() => {
+                  setReveal(false);
+                  setQuizTab("answer");
+                  setIdx((i) => i - 1);
+                }}
+              >
+                上一套
+              </Button>
+              <Button
+                type="button"
+                variant="default"
+                disabled={idx >= pool.length - 1}
+                onClick={() => {
+                  setReveal(false);
+                  setQuizTab("answer");
+                  setIdx((i) => i + 1);
+                }}
+              >
+                下一套
+              </Button>
+              <Button type="button" variant="outline" onClick={() => setReveal(true)} disabled={quizTab !== "answer"}>
+                看要点
+              </Button>
+            </div>
+            <div className="sticky-actions-more">
+              <Button type="button" variant="outline" onClick={openRelatedKb}>
+                <BookOpen size={16} strokeWidth={2} aria-hidden />
+                知识点{relatedKb.length ? ` · ${relatedKb.length}` : ""}
+              </Button>
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={() => void storageSet(CASE_STORAGE_KEY, drafts)}
+              >
+                保存
+              </Button>
+              <Button type="button" variant="ghost" onClick={() => setPhase("list")}>
+                列表
+              </Button>
+            </div>
           </div>
         </Card>
           </div>

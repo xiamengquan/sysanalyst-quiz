@@ -69,7 +69,7 @@ export function SiteHeader() {
                 <span className="sm:hidden">系分刷题</span>
               </span>
             </Link>
-            <ExamCountdown />
+            <ExamCountdown className="max-[420px]:hidden" />
             {currentTab ? (
               <span className="hidden rounded-full border border-border/80 bg-muted/60 px-2 py-0.5 text-[0.7rem] font-medium text-muted-foreground lg:inline">
                 {currentTab.label}
