@@ -275,12 +275,40 @@ SYNTHETIC_POINTS: dict[str, str] = {
 - **开发环境**：语言/框架 SDK、构建工具（Maven/Gradle）、调试器、静态分析插件。
 - **CASE 分类**：按阶段分为需求（建模/原型）、设计（UML/CASE）、实现（代码生成）、测试（用例管理）、维护（逆向/再工程）工具。
 - **选型要点**：与团队过程（瀑布/敏捷）、制品库、CI 是否集成；避免「工具堆叠、流程不配套」。""",
+    "kp-软件产品线": """**软件产品线** 是在共享核心资产基础上，通过变体绑定为不同客户/市场交付系列产品的组织级复用方式。
+
+- **核心资产**：可复用架构、组件、需求/设计模型与过程框架，是产品线的根基。
+- **领域工程与应用工程**：领域工程负责构建与演进核心资产；应用工程基于资产绑定变体、交付具体产品。
+- **过程**：领域分析 → 领域设计 → 领域实现；新需求优先映射到已有变体机制。
+- **变体机制**：配置、参数化、扩展点/插件等表达产品差异的手段。
+- **与单项目复用区别**：产品线是组织级、长期演进的复用战略，而非一次性代码拷贝；需配套组织与资产管理。""",
+    "kp-计算机辅助软件工程-CASE": """> 教程第7章无独立 CASE 专节；以下为按大纲 7.3 整理的备考提纲。
+
+**计算机辅助软件工程（CASE）** 是用计算机工具辅助软件生命周期各阶段活动（分析、设计、编码、测试、维护）的技术与方法体系。
+
+- **CASE 分类（按阶段）**：上游 CASE（需求/分析/设计建模）与下游 CASE（代码生成、测试、维护）；集成 CASE（I-CASE）贯通全周期。
+- **典型工具**：集成开发环境（IDE）、建模工具（UML）、配置管理、自动化测试、逆向/再工程工具。
+- **核心价值**：提高开发效率与制品一致性、支持文档自动生成与变更追踪。
+- **选型要点**：与团队过程（瀑布/敏捷）、制品库与 CI/CD 流水线集成；避免工具堆叠而流程不配套。""",
+    "kp-开源社区-许可-语言平台-框架库-服务器-工具-评估": """> 大纲专章（结合第7章工具、第16—21章开源组件）；以下为按大纲整理的备考提纲。
+
+**开源软件** 指源码可获取、在开源许可证约束下使用、修改与再发布的软件；**开源社区** 是围绕开源项目的开发者协作生态。
+
+- **开源许可证**：宽松型（MIT、BSD、Apache 2.0，允许闭源再分发，Apache 附加专利授权）与著佐权型（GPL 系列，衍生作品须同许可开源；LGPL 对库类放宽链接限制）。
+- **语言平台与框架库**：选型看生态成熟度、社区活跃度（提交/维护者/发布频率）、文档与学习成本。
+- **服务器与工具**：Web 服务器、数据库、中间件、容器与编排等开源栈；关注许可证兼容与商业支持可得性。
+- **开源评估维度**：许可证合规、社区健康度、安全响应（漏洞修复时效）、版本演进路线、厂商中立性。
+- **风险对策**：SBOM 清单、许可证扫描、漏洞跟踪与补丁策略。""",
 }
 
 SPECIAL_BODY: dict[str, tuple[str, str | None]] = {
-    "kp-开源社区-许可-语言平台-框架库-服务器-工具-评估": (
+    "kp-软件过程改进": (
         "第一篇-基础知识/第07章-软件工程.md",
-        "开发环境",
+        "CMMI",
+    ),
+    "kp-面向对象技术": (
+        "第一篇-基础知识/第07章-软件工程.md",
+        "UML",
     ),
     "kp-标准类型-生命周期-知识产权": (
         "第一篇-基础知识/第06章-企业信息化.md",
@@ -295,6 +323,14 @@ SPECIAL_BODY: dict[str, tuple[str, str | None]] = {
         "第三篇-案例实践/第22章-系统分析师论文写作要点.md",
         "评分",
     ),
+}
+
+
+# 教程无对应专节的考点：要点节强制使用 SYNTHETIC_POINTS 合成内容（防 slices 错配整章/他节）
+SYNTHETIC_ONLY: set[str] = {
+    "kp-开源社区-许可-语言平台-框架库-服务器-工具-评估",
+    "kp-计算机辅助软件工程-CASE",
+    "kp-软件产品线",
 }
 
 
@@ -510,6 +546,8 @@ def row_in_intro(intro: str, keys: list[str]) -> str:
 
 def polish_def_act_line(line: str) -> str:
     """将「描述…」等简写润色为答卷式「是… + **作用**：用于…」。"""
+    line = line.replace("用于主要用于", "主要用于").replace("用于用于", "用于")
+    line = re.sub(r"(\*\*作用\*\*[：:])用于([^。；\n]{0,12}?用于)", r"\1\2", line)
     m = re.match(r"^- \*\*(.+?)\*\*[：:]\s*(.+)$", line.strip())
     if not m:
         return line.strip()
@@ -536,8 +574,12 @@ def polish_def_act_line(line: str) -> str:
             def_body = f"是{def_body.lstrip('是')}"
     if act_body:
         act_body = act_body.rstrip("。")
-        if act_body and not act_body.startswith("用于") and "用于" not in act_body[:6]:
-            act_body = f"用于{act_body.lstrip('用于')}"
+        if (
+            act_body
+            and not act_body.startswith(("用于", "主要用于"))
+            and "用于" not in act_body[:14]
+        ):
+            act_body = f"用于{act_body}"
         return f"- **{term}**：{def_body}。**作用**：{act_body}。"
     if def_body:
         return f"- **{term}**：{def_body}。"
@@ -848,8 +890,18 @@ def _def_has_what(text: str) -> bool:
     )
 
 
+def _term_base(term: str) -> str:
+    t = re.sub(r"（.+?）", "", term).strip()
+    return re.sub(r"\s+[A-Za-z][A-Za-z0-9+/.-]*$", "", t).strip()
+
+
 def clean_definition_output(defs: str) -> str:
-    """去掉合并后残留的裸「定义/作用」行与易混说明行。"""
+    """去掉合并后残留的裸「定义/作用」行、易混说明行与「（作用）」重复条目。"""
+    main_terms: set[str] = set()
+    for ln in defs.splitlines():
+        m = re.match(r"^- \*\*(.+?)\*\*[：:]", ln.strip())
+        if m and "（作用）" not in m.group(1):
+            main_terms.add(_term_base(m.group(1)))
     lines: list[str] = []
     seen_plain: set[str] = set()
     for ln in defs.splitlines():
@@ -867,6 +919,9 @@ def clean_definition_output(defs: str) -> str:
         if "（答卷·定义 / 作用）" in s or "（定义 / 作用速记）" in s:
             continue
         if "易混" in s and "不要混答" in s:
+            continue
+        m_act = re.match(r"^- \*\*(.+?)（作用）\*\*[：:]", s)
+        if m_act and _term_base(m_act.group(1)) in main_terms:
             continue
         s = polish_def_act_line(s)
         plain = re.sub(r"\*\*", "", s)
@@ -943,8 +998,12 @@ def parse_chapter_heading_blocks(text: str) -> list[str]:
         if not re.search(r"(是|指|由|含|通过)", def_body):
             def_body = f"是{def_body}"
         act_body = act_hint or f"用于与本节相关的模型选型、特点对比与案例论述"
-        if act_body and not act_body.startswith("用于"):
-            act_body = f"用于{act_body.lstrip('用于适用：').lstrip('适用')}"
+        if (
+            act_body
+            and not act_body.startswith(("用于", "主要用于"))
+            and "用于" not in act_body[:14]
+        ):
+            act_body = f"用于{act_body.removeprefix('适用：').removeprefix('适用')}"
         out.append(
             polish_def_act_line(
                 f"- **{term}**：{def_body}。**作用**：{act_body}"
@@ -997,8 +1056,8 @@ def supplement_missing_act(
                 f"用于在综合知识选择与案例/论文中准确识别「{clean_title}」"
                 "相关概念、方法步骤及其适用边界与易混点辨析"
             )
-        if not act.startswith("用于"):
-            act = f"用于{act.lstrip('用于')}"
+        if not act.startswith(("用于", "主要用于")) and "用于" not in act[:14]:
+            act = f"用于{act}"
         def_body = rest.split("。**作用**")[0].rstrip("。")
         lines_out.append(f"- **{term}**：{def_body}。**作用**：{act}。")
     return "\n".join(lines_out)
@@ -1294,6 +1353,8 @@ def build_overview(title: str, intro: str, keys: list[str], raw: str) -> str:
         if p.count("- **") >= 2 or p.count("。") > 6:
             continue
         if re.match(r"^\*\*.+\*\*[：:]\s*$", p):
+            continue
+        if re.match(r"^(?:\*\*)?统计(?:\*\*)?[：:]", p):
             continue
         if len(p) < 18:
             continue
@@ -1603,8 +1664,10 @@ def main() -> None:
                 or ESSAY_SYNTHETIC.get(pid, "")
                 or ch22_text()[:6500]
             )
+        elif pid in SYNTHETIC_ONLY:
+            raw = SYNTHETIC_POINTS.get(pid, "")
         else:
-            raw = force_extract(pid) or slices.get(pid, "")
+            raw = force_extract(pid) or special_raw(pid) or slices.get(pid, "")
 
         if raw and ch_text and not essay_first:
             raw = supplement_raw(raw, it, ch_text)
