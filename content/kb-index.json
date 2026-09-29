@@ -2255,6 +2255,15 @@
           "docType": "reference"
         },
         {
+          "id": "quick-exam-7d",
+          "title": "考前 7 天背诵清单",
+          "path": "速查/考前7天背诵清单.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "howto",
+          "note": "按日口诀+对比 · 链高频速查"
+        },
+        {
           "id": "quick-web-agent-arch",
           "title": "Web与AI智能体 · 架构选型四维度卡",
           "path": "速查/Web与AI智能体-架构选型四维度卡.md",
