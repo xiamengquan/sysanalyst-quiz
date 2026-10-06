@@ -12,6 +12,11 @@ import { KbQuickIndex } from "@/components/KbQuickIndex";
 import { GlobalSearchHintButton } from "@/components/GlobalSearch";
 import { Card } from "@/components/ui/card";
 import { quizHomeHref } from "@/lib/quiz-deep-link";
+import {
+  compareKbItemsByExamPriority,
+  examPriorityRank,
+  examPriorityTier,
+} from "@/lib/kb-exam-priority";
 
 const API_SECTIONS = ["概述", "定义", "要点", "易混辨析", "应试", "相关考点"] as const;
 
@@ -40,7 +45,20 @@ function outlineSortKey(ref?: string) {
   return 500_000 + ref.length;
 }
 
-function groupPointItems(items: (KbItem & { sectionId?: string })[]) {
+type PointSortMode = "exam" | "outline";
+
+function sortPointItems(items: KbItem[], mode: PointSortMode) {
+  return [...items].sort((a, b) =>
+    mode === "exam"
+      ? compareKbItemsByExamPriority(a, b)
+      : outlineSortKey(a.outlineRef) - outlineSortKey(b.outlineRef),
+  );
+}
+
+function groupPointItems(
+  items: (KbItem & { sectionId?: string })[],
+  pointSort: PointSortMode = "exam",
+) {
   const points = items.filter((i) => i.kind === "point");
   const rest = items.filter((i) => i.kind !== "point");
   const map = new Map<string, typeof points>();
@@ -51,10 +69,15 @@ function groupPointItems(items: (KbItem & { sectionId?: string })[]) {
   }
   const groups = [...map.entries()].map(([name, gitems]) => [
     name,
-    [...gitems].sort(
-      (a, b) => outlineSortKey(a.outlineRef) - outlineSortKey(b.outlineRef),
-    ),
+    sortPointItems(gitems, pointSort),
   ] as const);
+  groups.sort((ga, gb) => {
+    if (pointSort === "outline") {
+      return outlineSortKey(ga[1][0]?.outlineRef) - outlineSortKey(gb[1][0]?.outlineRef);
+    }
+    const minR = (g: KbItem[]) => Math.min(...g.map((i) => examPriorityRank(i.chapter)));
+    return minR(ga[1]) - minR(gb[1]);
+  });
   return { groups, rest };
 }
 
@@ -63,6 +86,7 @@ export function KbCatalog() {
   const [err, setErr] = useState("");
   const [kind, setKind] = useState("point");
   const [sectionId, setSectionId] = useState("all");
+  const [pointSort, setPointSort] = useState<"exam" | "outline">("exam");
 
   useEffect(() => {
     fetch("/data/kb-index.json")
@@ -117,7 +141,7 @@ export function KbCatalog() {
           <Card className="space-y-4 px-(--card-spacing) mb-4">
             <h2 className="text-[1rem] font-medium">筛选</h2>
             <p className="text-[0.85rem] leading-relaxed text-muted-foreground">
-              按类型 / 分区浏览；搜标题与正文请用全局搜索。
+              考点默认按<strong className="font-medium text-foreground">考试重难点</strong>排序（非教程章序）；搜正文请用全局搜索。
             </p>
             <div className="filter-stack">
               <label className="block text-[0.82rem] text-muted-foreground">
@@ -145,6 +169,19 @@ export function KbCatalog() {
                   ))}
                 </select>
               </label>
+              {kind === "point" || kind === "all" ? (
+                <label className="block text-[0.82rem] text-muted-foreground">
+                  考点排序
+                  <select
+                    className="field mt-1.5"
+                    value={pointSort}
+                    onChange={(e) => setPointSort(e.target.value as "exam" | "outline")}
+                  >
+                    <option value="exam">考试重难点优先（推荐）</option>
+                    <option value="outline">大纲章节顺序</option>
+                  </select>
+                </label>
+              ) : null}
             </div>
             <div className="flex flex-wrap items-center justify-between gap-2">
               <p className="text-[0.85rem] text-muted-foreground">
@@ -162,7 +199,7 @@ export function KbCatalog() {
           </Card>
 
           {grouped.map((sec) => {
-            const { groups, rest } = groupPointItems(sec.items);
+            const { groups, rest } = groupPointItems(sec.items, pointSort);
             const renderRow = (item: KbItem) => (
               <li key={item.id}>
                 <Link
@@ -190,8 +227,11 @@ export function KbCatalog() {
                 {groups.map(([gname, gitems]) => (
                   <div key={gname} className="mb-4">
                     {sec.id === "api-ref" ? (
-                      <h4 className="mb-2 border-l-2 border-border pl-3 text-[0.82rem] font-medium text-muted-foreground">
-                        {gname}
+                      <h4 className="mb-2 flex flex-wrap items-center gap-2 border-l-2 border-border pl-3 text-[0.82rem] font-medium text-muted-foreground">
+                        <span>{gname}</span>
+                        {pointSort === "exam" && gitems[0]?.chapter != null ? (
+                          <span className="badge text-[0.65rem]">{examPriorityTier(gitems[0].chapter)}</span>
+                        ) : null}
                       </h4>
                     ) : null}
                     <ul className="list-gap">{gitems.map(renderRow)}</ul>
@@ -279,7 +319,7 @@ export function KbReader({ id }: { id: string }) {
   const pointIndexGroups = useMemo(() => {
     const points = catalog.filter((c) => c.kind === "point");
     if (!points.length) return [] as (readonly [string, KbItem[]])[];
-    const { groups } = groupPointItems(points);
+    const { groups } = groupPointItems(points, "exam");
     return groups;
   }, [catalog]);
 
@@ -294,15 +334,12 @@ export function KbReader({ id }: { id: string }) {
   const pointNeighbors = useMemo(() => {
     const current = catalog.find((c) => c.id === id);
     if (!current || current.kind !== "point") return { prev: null, next: null };
-    const peers = catalog
-      .filter((c) => c.kind === "point" && c.group === current.group)
-      .sort((a, b) => outlineSortKey(a.outlineRef) - outlineSortKey(b.outlineRef));
-    const idx = peers.findIndex((p) => p.id === id);
+    const idx = pointIndexFlat.findIndex((p) => p.id === id);
     return {
-      prev: idx > 0 ? peers[idx - 1] : null,
-      next: idx >= 0 && idx < peers.length - 1 ? peers[idx + 1] : null,
+      prev: idx > 0 ? pointIndexFlat[idx - 1] : null,
+      next: idx >= 0 && idx < pointIndexFlat.length - 1 ? pointIndexFlat[idx + 1] : null,
     };
-  }, [catalog, id]);
+  }, [catalog, id, pointIndexFlat]);
 
   useEffect(() => {
     if (!catalog.length) return;
