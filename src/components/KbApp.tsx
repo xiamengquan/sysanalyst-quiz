@@ -6,7 +6,14 @@ import { useCallback, useEffect, useMemo, useRef, useState, type MouseEvent } fr
 import type { KbIndex, KbItem } from "@/lib/types";
 import { filterCatalogItems } from "@/lib/kb-search";
 import { renderKbMarkdown, runMermaidIn } from "@/lib/kb-md";
-import { isKbMarkdownHref, parseKbHref, resolveKbRef, resolveRelativeKbPath } from "@/lib/kb-resolve";
+import {
+  findKbItemByRouteId,
+  isKbMarkdownHref,
+  normalizeKbRouteId,
+  parseKbHref,
+  resolveKbRef,
+  resolveRelativeKbPath,
+} from "@/lib/kb-resolve";
 import { KbPreviewDrawer, useKbCatalog } from "@/components/KbPreviewDrawer";
 import { KbQuickIndex } from "@/components/KbQuickIndex";
 import { GlobalSearchHintButton } from "@/components/GlobalSearch";
@@ -296,8 +303,9 @@ function KbPointIndexNav({
   );
 }
 
-export function KbReader({ id }: { id: string }) {
+export function KbReader({ id: routeIdProp }: { id: string }) {
   const router = useRouter();
+  const id = useMemo(() => normalizeKbRouteId(routeIdProp), [routeIdProp]);
   const catalog = useKbCatalog();
   const [item, setItem] = useState<KbItem | null>(null);
   const [html, setHtml] = useState("");
@@ -328,11 +336,11 @@ export function KbReader({ id }: { id: string }) {
     [pointIndexGroups],
   );
 
-  const currentMeta = useMemo(() => catalog.find((c) => c.id === id), [catalog, id]);
+  const currentMeta = useMemo(() => findKbItemByRouteId(catalog, id), [catalog, id]);
   const showPointIndex = currentMeta?.kind === "point" && pointIndexGroups.length > 0;
 
   const pointNeighbors = useMemo(() => {
-    const current = catalog.find((c) => c.id === id);
+    const current = findKbItemByRouteId(catalog, id);
     if (!current || current.kind !== "point") return { prev: null, next: null };
     const idx = pointIndexFlat.findIndex((p) => p.id === id);
     return {
@@ -343,7 +351,7 @@ export function KbReader({ id }: { id: string }) {
 
   useEffect(() => {
     if (!catalog.length) return;
-    const found = catalog.find((it) => it.id === id) || null;
+    const found = findKbItemByRouteId(catalog, id);
     setItem(found);
     if (!found) {
       setStatus("err");

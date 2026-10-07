@@ -1,6 +1,7 @@
 import { readFileSync } from "fs";
 import { join } from "path";
 import { KbReader } from "@/components/KbApp";
+import { normalizeKbRouteId } from "@/lib/kb-resolve";
 
 export function generateStaticParams() {
   const raw = readFileSync(join(process.cwd(), "public/data/kb-index.json"), "utf8");
@@ -13,6 +14,6 @@ export default async function KbDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id } = await params;
-  return <KbReader id={id} />;
+  const { id: rawId } = await params;
+  return <KbReader id={normalizeKbRouteId(rawId)} />;
 }

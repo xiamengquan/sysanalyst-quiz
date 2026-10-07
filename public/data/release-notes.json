@@ -1,6 +1,15 @@
 {
-  "latest": "0.9.41",
+  "latest": "0.9.42",
   "releases": [
+    {
+      "version": "0.9.42",
+      "date": "2026-10-07",
+      "title": "修复中文考点 ID 静态页找不到条目",
+      "highlights": [
+        "知识点阅读页：对路由 id 做 URL 解码后再匹配 kb-index，修复侧栏点击 kp-软件生命周期 等中文 slug 显示「未找到该知识点条目」",
+        "静态导出场景下 Next 传入 percent-encoding id 与索引 Unicode id 不一致的问题"
+      ]
+    },
     {
       "version": "0.9.41",
       "date": "2026-09-29",

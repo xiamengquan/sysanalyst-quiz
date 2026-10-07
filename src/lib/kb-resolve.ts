@@ -21,6 +21,31 @@ export function normPath(p: string) {
     .replace(/^\/+/, "");
 }
 
+/**
+ * 静态导出 / CDN 路由里，Next 可能把 [id] 写成 percent-encoding（如 kp-%E8%BD%AF…），
+ * 而 kb-index 里是 Unicode 原文（kp-软件…）。查找前须对齐。
+ */
+export function normalizeKbRouteId(raw: string): string {
+  let s = raw.trim();
+  if (!s) return s;
+  for (let i = 0; i < 3; i++) {
+    if (!/%[0-9A-Fa-f]{2}/.test(s)) break;
+    try {
+      const next = decodeURIComponent(s);
+      if (next === s) break;
+      s = next;
+    } catch {
+      break;
+    }
+  }
+  return s;
+}
+
+export function findKbItemByRouteId(catalog: KbFlatItem[], routeId: string): KbFlatItem | null {
+  const norm = normalizeKbRouteId(routeId);
+  return catalog.find((it) => it.id === norm || it.id === routeId) ?? null;
+}
+
 /** 相对当前正文文件路径，解析 Markdown 链接中的 ./ ../ 路径 */
 export function resolveRelativeKbPath(baseItemPath: string, href: string): string {
   const baseDir = normPath(baseItemPath).split("/");
