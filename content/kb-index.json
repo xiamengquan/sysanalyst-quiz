@@ -2264,6 +2264,15 @@
           "note": "按考试 P0→P3 优先级 · 非章序"
         },
         {
+          "id": "quick-case-predict-set2",
+          "title": "案例预测 · 第二套 · 练笔 Checklist",
+          "path": "速查/案例预测第二套-练笔Checklist.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "howto",
+          "note": "2026 案例预测第二套 · 五题勾选自测 · 非真题"
+        },
+        {
           "id": "quick-web-agent-arch",
           "title": "Web与AI智能体 · 架构选型四维度卡",
           "path": "速查/Web与AI智能体-架构选型四维度卡.md",
