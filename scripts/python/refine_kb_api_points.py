@@ -137,6 +137,26 @@ def load_def_overrides() -> dict[str, str]:
 
 DEF_OVERRIDES: dict[str, str] = load_def_overrides()
 
+PROCEDURE_OVERRIDES_PATH = Path(__file__).resolve().parent / "kb_procedure_overrides.json"
+
+
+def load_procedure_overrides() -> dict[str, str]:
+    if PROCEDURE_OVERRIDES_PATH.is_file():
+        data = json.loads(PROCEDURE_OVERRIDES_PATH.read_text(encoding="utf-8"))
+        return {str(k): str(v).strip() for k, v in data.items()}
+    return {}
+
+
+PROCEDURE_OVERRIDES: dict[str, str] = load_procedure_overrides()
+
+GENERIC_ROLE_RE = re.compile(
+    r"\*\*作用\*\*：(?:"
+    r"用于[「\"][^」\"]+[」\"]相关选择题、案例或论文中的识别与辨析"
+    r"|用于考试中的概念辨析、计算或案例/论文回扣"
+    r"|用于与本节相关的选择题、案例或论文论述"
+    r")[。.]?$"
+)
+
 
 class QuestionBankIndex:
     """练习库按教程章聚合，用于高频章「应试」加厚。"""
@@ -1226,7 +1246,11 @@ def finalize_definitions(
         body = supplement_missing_act(body, ch_num, title, raw)
         body = ensure_section_def_act(body, title)
         clean_t = re.sub(r"^\d+(?:\.\d+)*\s*", "", title).strip()
-        return filter_definitions_by_title(body, keys, clean_t)
+        body = filter_definitions_by_title(body, keys, clean_t)
+        role_map = build_role_map_from_chapter(ch_text) if ch_text else {}
+        body = normalize_definition_bullets(body)
+        body = improve_definition_roles(body, role_map, clean_t)
+        return apply_role_map_to_definitions(body, role_map)
     defs = extract_definitions(raw)
     if not defs.strip():
         defs = infer_definitions(raw, title, keys)
@@ -1284,7 +1308,11 @@ def finalize_definitions(
     out = supplement_missing_act(clean_definition_output(out), ch_num, title, raw)
     out = ensure_section_def_act(out, title)
     clean = re.sub(r"^\d+(?:\.\d+)*\s*", "", title).strip()
-    return filter_definitions_by_title(out, keys, clean)
+    out = filter_definitions_by_title(out, keys, clean)
+    role_map = build_role_map_from_chapter(ch_text) if ch_text else {}
+    out = normalize_definition_bullets(out)
+    out = improve_definition_roles(out, role_map, clean)
+    return apply_role_map_to_definitions(out, role_map)
 
 
 def filter_mix(mix: str, keys: list[str]) -> str:
@@ -1445,6 +1473,266 @@ def extract_concrete_bullets(raw: str, keys: list[str], limit: int = 4) -> list[
         if len(out) >= limit:
             break
     return out
+
+
+def build_role_map_from_chapter(ch_text: str) -> dict[str, str]:
+    mp: dict[str, str] = {}
+    if not ch_text.strip():
+        return mp
+    pat = re.compile(
+        r"####\s+(.+?)\s*\n+\*\*定义\*\*[：:]\s*.+?\n+\*\*作用\*\*[：:]\s*(.+?)(?=\n\n|\n#|\Z)",
+        re.S,
+    )
+    for m in pat.finditer(ch_text):
+        term = re.sub(r"（答卷）.*", "", m.group(1)).strip()
+        act = m.group(2).strip().rstrip("。")
+        if term and act and len(act) > 8:
+            mp[term] = act
+    pat2 = re.compile(
+        r"\*\*(.+?)（答卷·定义）\*\*\s*\n+(.+?)\n+\*\*作用\*\*[：:]\s*(.+?)(?=\n\n|\n#|\Z)",
+        re.S,
+    )
+    for m in pat2.finditer(ch_text):
+        term = m.group(1).strip()
+        act = m.group(3).strip().rstrip("。")
+        if term and act:
+            mp[term] = act
+    for line in parse_chaptersubsubsection_defs(ch_text):
+        m3 = re.match(r"- \*\*(.+?)\*\*：(.+)。\*\*作用\*\*：(.+)$", line.strip())
+        if m3:
+            term = m3.group(1).strip()
+            act = m3.group(3).strip().rstrip("。")
+            mp[term] = act
+    return mp
+
+
+def _match_role_act(label: str, role_map: dict[str, str]) -> str | None:
+    if not label:
+        return None
+    exact = role_map.get(label)
+    if exact:
+        return exact
+    candidates = [
+        (term, act)
+        for term, act in role_map.items()
+        if label == term or (len(term) >= 4 and label.startswith(term))
+    ]
+    if not candidates:
+        return None
+    term, act = max(candidates, key=lambda x: len(x[0]))
+    return act if label == term or label.startswith(term) else None
+
+
+def clamp_definition_line(ln: str) -> str:
+    ln = ln.strip()
+    if not ln.startswith("- "):
+        return ln
+    m = re.search(r"(\*\*作用\*\*：[^。\n]+。)", ln)
+    if m:
+        head = ln[: m.end()]
+        return re.sub(r"\s+", " ", head)
+    if "。" in ln:
+        return re.sub(r"\s+", " ", ln.split("。")[0] + "。")
+    return ln
+
+
+def normalize_definition_bullets(defs: str) -> str:
+    out: list[str] = []
+    for ln in defs.splitlines():
+        if ln.strip().startswith("- **"):
+            out.append(clamp_definition_line(ln))
+        elif ln.strip() and out:
+            continue
+        elif ln.strip():
+            out.append(ln.strip())
+    return "\n".join(out).strip()
+
+
+def apply_role_map_to_definitions(defs: str, role_map: dict[str, str]) -> str:
+    if not role_map or not defs.strip():
+        return defs
+    out: list[str] = []
+    for ln in defs.splitlines():
+        if not ln.strip().startswith("- **"):
+            continue
+        label = _def_bullet_label(ln)
+        act = _match_role_act(label, role_map)
+        if act and "**作用**" in ln:
+            ln = re.sub(r"\*\*作用\*\*：[^。]+。", f"**作用**：{act}。", ln.strip())
+        out.append(ln)
+    return "\n".join(out)
+
+
+def improve_definition_roles(
+    defs: str,
+    role_map: dict[str, str],
+    title_clean: str,
+) -> str:
+    if not defs.strip():
+        return defs
+    defs = normalize_definition_bullets(defs)
+    out: list[str] = []
+    for ln in defs.splitlines():
+        if not GENERIC_ROLE_RE.search(ln.strip()):
+            out.append(ln)
+            continue
+        label = _def_bullet_label(ln)
+        act = _match_role_act(label, role_map)
+        if act:
+            ln = GENERIC_ROLE_RE.sub(f"**作用**：{act}。", ln.strip())
+        elif label:
+            ln = GENERIC_ROLE_RE.sub(
+                f"**作用**：用于在分析、设计或测试中落实「{label}」相关约束与验收。",
+                ln.strip(),
+            )
+        out.append(ln)
+    return "\n".join(out)
+
+
+def _section_relevant(head: str, body: str, keys: list[str]) -> bool:
+    blob = f"{head}\n{body[:400]}"
+    if any(w in head for w in ("步骤", "阶段", "活动", "流程", "过程")):
+        return True
+    if keys and any(k in blob for k in keys if len(k) >= 2):
+        return True
+    return False
+
+
+def _step_text_usable(text: str) -> bool:
+    t = text.strip()
+    if len(t) < 6:
+        return False
+    if t.startswith("|"):
+        return False
+    if re.match(r"^[：:\s]", t):
+        return False
+    core = re.sub(r"[\W_：:、，。；;（）()\[\]【】\-—\s]", "", t)
+    return len(core) >= 4
+
+
+def extract_flow_chains(body: str, max_items: int = 8) -> list[str]:
+    chains: list[str] = []
+    seen: set[str] = set()
+    for m in re.finditer(
+        r"(?:流程|步骤|阶段|过程|链路)[：:]\s*([^\n。]+(?:→[^\n。]+)+)",
+        body,
+    ):
+        chain = re.sub(r"\*\*", "", m.group(1).strip())
+        if len(chain) > 14 and chain not in seen:
+            seen.add(chain)
+            chains.append(chain)
+    for line in body.splitlines():
+        if "→" not in line:
+            continue
+        cleaned = re.sub(r"^[-*•\d.)]+\s*", "", line.strip())
+        cleaned = re.sub(r"\*\*", "", cleaned)
+        cleaned = re.sub(r"^[^：:]{0,24}[：:]\s*", "", cleaned)
+        if cleaned.count("→") >= 2 and len(cleaned) > 16 and cleaned not in seen:
+            seen.add(cleaned)
+            chains.append(cleaned)
+    return chains[:max_items]
+
+
+def extract_numbered_steps(body: str, max_items: int = 14) -> list[str]:
+    steps: list[str] = []
+    for m in re.finditer(r"(?m)^(\d+)[.)]\s*(.+)$", body):
+        text = m.group(2).strip()
+        if not _step_text_usable(text):
+            continue
+        steps.append(text)
+    if not steps:
+        for chain in extract_flow_chains(body, max_items):
+            parts = [p.strip() for p in re.split(r"\s*→\s*", chain) if p.strip()]
+            if len(parts) >= 2:
+                steps.extend(parts)
+    if not steps:
+        for m in re.finditer(r"(\*\*[^*]+\*\*[^。\n]{0,40}→[^。\n]+)", body):
+            chain = m.group(1).strip()
+            if len(chain) > 12:
+                steps.append(re.sub(r"\*\*", "", chain))
+    return steps[:max_items]
+
+
+def _procedure_harvest_usable(text: str) -> bool:
+    body = text.strip()
+    if len(re.sub(r"\s", "", body)) < 80:
+        return False
+    bad = re.findall(r"(?m)^\d+\.\s*[：:]\s*$", body)
+    if bad:
+        return False
+    steps = re.findall(r"(?m)^\d+\.\s*(.+)$", body)
+    good = [s for s in steps if _step_text_usable(s)]
+    chains = extract_flow_chains(body, 4)
+    return len(good) >= 2 or bool(chains) or len(body) >= 160
+
+
+def harvest_procedure_blocks(
+    ch_text: str,
+    keys: list[str],
+    raw: str,
+    ch_num: int | None,
+    outline_ref: str | None,
+    pid: str,
+) -> str:
+    packs: list[tuple[float, str]] = []
+    for head, body in atomic_sections(ch_text):
+        if not _section_relevant(head, body, keys):
+            continue
+        sc = score_item(pid, keys, head, body, outline_ref, ch_num)
+        steps = extract_numbered_steps(body)
+        if not steps:
+            continue
+        tail = head.split("/")[-1].strip()
+        if tail.startswith("#"):
+            tail = tail.lstrip("#").strip()
+        block = f"### {tail}\n\n" + "\n".join(
+            f"{i}. {s.rstrip('。')}" for i, s in enumerate(steps, 1)
+        )
+        packs.append((sc + len(steps) * 2, block))
+    packs.sort(key=lambda x: -x[0])
+    if packs:
+        merged = "\n\n".join(b for _, b in packs[:3])
+        if _procedure_harvest_usable(merged):
+            return merged
+    # raw 要点中的流程链与编号列表
+    raw_chains = extract_flow_chains(raw, 4)
+    if raw_chains:
+        blocks = ["### 流程要点\n\n" + c for c in raw_chains[:2]]
+        merged = "\n\n".join(blocks)
+        if _procedure_harvest_usable(merged):
+            return merged
+    raw_steps = extract_numbered_steps(raw)
+    if raw_steps:
+        block = "### 流程要点\n\n" + "\n".join(
+            f"{i}. {s.rstrip('。')}" for i, s in enumerate(raw_steps[:12], 1)
+        )
+        if _procedure_harvest_usable(block):
+            return block
+    return ""
+
+
+def build_steps_section(
+    pid: str,
+    keys: list[str],
+    raw: str,
+    ch_text: str,
+    ch_num: int | None,
+    outline_ref: str | None,
+) -> str:
+    if pid in PROCEDURE_OVERRIDES:
+        return PROCEDURE_OVERRIDES[pid]
+    harvested = harvest_procedure_blocks(
+        ch_text, keys, raw, ch_num, outline_ref, pid
+    )
+    if harvested.strip() and _procedure_harvest_usable(harvested):
+        return harvested
+    return (
+        "本节在教程中**未单独列出固定步骤名**；答题时可按下列指引组织答案：\n"
+        "1. 先在「要点」中找 **阶段 / 活动 / → 流程链** 表述；\n"
+        "2. 案例题常用 **调查 → 分析 → 方案 → 验证**（或题干给出的过程框架）；\n"
+        "3. 综合知识流程题优先写 **编号步骤** 或 **阶段名称**；\n"
+        "4. 需要完整步骤时打开文末 **归档通章** 对应小节对照誊写。"
+    )
 
 
 def build_quick_grasp(
@@ -1750,6 +2038,9 @@ def render(
         keys,
         ch_num,
     )
+    steps = build_steps_section(
+        pid, keys, raw, ch_text, ch_num, item.get("outlineRef")
+    )
     exam_out = build_exam(exam, tips, raw, keys, item, bank)
     rel = related_links(item, by_group)
     return f"""# {h1}
@@ -1767,6 +2058,10 @@ def render(
 ## 定义
 
 {defs}
+
+## 步骤与流程
+
+{steps}
 
 ## 要点
 

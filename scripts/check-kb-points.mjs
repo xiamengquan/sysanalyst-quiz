@@ -6,7 +6,16 @@ import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const index = JSON.parse(fs.readFileSync(path.join(root, "content/kb-index.json"), "utf8"));
-const sections = ["概述", "速懂", "定义", "要点", "易混辨析", "应试", "相关考点"];
+const sections = [
+  "概述",
+  "速懂",
+  "定义",
+  "步骤与流程",
+  "要点",
+  "易混辨析",
+  "应试",
+  "相关考点",
+];
 const badPhrases = ["本节要点中含可誊写句", "核心表述见下方要点", "待编制", "- ****："];
 const skip = new Set([]);
 let errors = [];
@@ -35,7 +44,12 @@ for (const sec of index.sections || []) {
         errors.push(`${it.id}: 速懂须含「一句话」「考什么」`);
       }
     }
-    const dm = t.match(/## 定义\n\n([\s\S]*?)\n\n## 要点/);
+    const sm = t.match(/## 步骤与流程\n\n([\s\S]*?)\n\n## 要点/);
+    if (sm) {
+      const st = sm[1].trim();
+      if (st.length < 55) errors.push(`${it.id}: 步骤与流程 too short (${st.length})`);
+    }
+    const dm = t.match(/## 定义\n\n([\s\S]*?)\n\n## 步骤与流程/);
     if (dm) {
       const def = dm[1].trim();
       if (def.length < 80) errors.push(`${it.id}: definition too short (${def.length})`);
