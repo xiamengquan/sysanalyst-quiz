@@ -101,6 +101,32 @@ CHAPTER_QUICK: dict[int, list[str]] = {
 
 HARVEST_CACHE: dict[int, list[tuple[str, str, str]]] = {}
 
+# 教程章 → 题型提示（速懂节「考什么」）
+CHAPTER_EXAM_HINT: dict[int, str] = {
+    1: "标准层次、知识产权、法规概念辨析",
+    2: "计算题（图论、决策树、概率统计、建模）",
+    3: "Cache/RAID/存储层次、OS 与指令对比",
+    4: "子网划分、协议对比、分布式与云",
+    5: "范式/事务/备份、ER 与 SQL 场景",
+    6: "ERP/BPR/EAI、CRM/SCM 概念",
+    7: "开发模型选型、UML、过程改进",
+    8: "挣值计算、WBS、风险与进度压缩",
+    9: "访问控制模型、加密、容灾 RPO/RTO",
+    10: "可行性四维、DFD、规划方法 BSP/CSF",
+    11: "需求三层、获取方法、SRS/变更",
+    12: "架构风格、SOA/微服务、质量属性",
+    13: "耦合内聚、设计模式、人机交互",
+    14: "测试阶段、黑/白盒、覆盖标准",
+    15: "维护四类、系统转换策略",
+    16: "Web 峰值、缓存限流、B/S 与 MVC",
+    17: "嵌入式实时、调度与资源约束",
+    18: "移动开发方式、离线与安全",
+    19: "大数据 Lambda/Kappa、批流",
+    20: "微服务治理、熔断限流、最终一致",
+    21: "CPS/IoT、边缘与信息物理融合",
+    22: "论文结构、摘要与评分要点",
+}
+
 
 def load_def_overrides() -> dict[str, str]:
     if DEF_OVERRIDES_PATH.is_file():
@@ -1198,7 +1224,9 @@ def finalize_definitions(
     if auth_ov:
         body = clean_definition_output(auth_ov)
         body = supplement_missing_act(body, ch_num, title, raw)
-        return ensure_section_def_act(body, title)
+        body = ensure_section_def_act(body, title)
+        clean_t = re.sub(r"^\d+(?:\.\d+)*\s*", "", title).strip()
+        return filter_definitions_by_title(body, keys, clean_t)
     defs = extract_definitions(raw)
     if not defs.strip():
         defs = infer_definitions(raw, title, keys)
@@ -1254,7 +1282,9 @@ def finalize_definitions(
         else:
             out = merge_definition_lines(ov, out, limit=14)
     out = supplement_missing_act(clean_definition_output(out), ch_num, title, raw)
-    return ensure_section_def_act(out, title)
+    out = ensure_section_def_act(out, title)
+    clean = re.sub(r"^\d+(?:\.\d+)*\s*", "", title).strip()
+    return filter_definitions_by_title(out, keys, clean)
 
 
 def filter_mix(mix: str, keys: list[str]) -> str:
@@ -1338,6 +1368,121 @@ def build_exam(
             "- 案例：先列约束，再对比 2 方案，结论回扣本节约束。"
         )
     return "\n\n".join(parts)
+
+
+def _def_bullet_label(line: str) -> str:
+    m = re.match(r"^- \*\*(.+?)\*\*", line.strip())
+    if not m:
+        return ""
+    return re.sub(r"（.+?）$", "", m.group(1)).strip()
+
+
+def def_line_relevant(line: str, keys: list[str], title_clean: str) -> bool:
+    if not line.strip().startswith("- "):
+        return True
+    label = _def_bullet_label(line)
+    blob = line if not label else f"{label}\n{line}"
+    for k in keys:
+        if len(k) >= 2 and k in blob:
+            return True
+    if not label:
+        return True
+    if title_clean and (title_clean in label or label in title_clean):
+        return True
+    for m in re.finditer(r"[A-Z]{2,}", title_clean):
+        if m.group(0) in label.upper():
+            return True
+    # 剔除典型串节（如生命周期页误收 UML）
+    if "UML" in label.upper() and "UML" not in title_clean.upper():
+        if not any("UML" in k.upper() for k in keys):
+            return False
+    return True
+
+
+def filter_definitions_by_title(defs: str, keys: list[str], title_clean: str) -> str:
+    lines = [ln for ln in defs.splitlines() if ln.strip()]
+    kept = [ln for ln in lines if def_line_relevant(ln, keys, title_clean)]
+    out = "\n".join(kept).strip()
+    if len(out) >= 80 and _def_has_what(out):
+        return out
+    return defs.strip()
+
+
+def first_definition_plain(defs: str, max_len: int = 200) -> str:
+    for ln in defs.splitlines():
+        if not ln.strip().startswith("- **"):
+            continue
+        plain = re.sub(r"\*\*", "", ln.lstrip("- ").strip())
+        if len(plain) < 16:
+            continue
+        if max_len and len(plain) > max_len:
+            plain = plain[: max_len - 1].rstrip("，,；;") + "…"
+        return plain
+    return ""
+
+
+def extract_concrete_bullets(raw: str, keys: list[str], limit: int = 4) -> list[str]:
+    out: list[str] = []
+    for ln in raw.splitlines():
+        t = ln.strip()
+        if t.startswith("#") or t.startswith("```") or t.startswith(">"):
+            continue
+        if t.startswith("|") or "---" in t:
+            continue
+        if not (t.startswith("- ") or t.startswith("* ") or re.match(r"^\d+[.)]", t)):
+            continue
+        plain = re.sub(r"\*\*", "", t)
+        plain = re.sub(r"^[-*]\s*", "", plain)
+        plain = re.sub(r"^\d+[.)]\s*", "", plain).strip()
+        if len(plain) < 14:
+            continue
+        if keys and not any(k in plain for k in keys[:8]):
+            if not re.search(r"[0-9→—]|阶段|步骤|原则|对比|口诀", plain):
+                continue
+        if plain in out:
+            continue
+        out.append(plain[:220])
+        if len(out) >= limit:
+            break
+    return out
+
+
+def build_quick_grasp(
+    title_clean: str,
+    overview: str,
+    defs: str,
+    raw: str,
+    mix_out: str,
+    keys: list[str],
+    ch_num: int | None,
+) -> str:
+    one = first_definition_plain(defs)
+    if not one:
+        one = re.sub(r"\*\*", "", overview).strip()
+    exam_hint = CHAPTER_EXAM_HINT.get(ch_num or 0, "概念辨析、场景决策与案例回扣")
+    ch_note = f"（教程第 {ch_num} 章）" if ch_num else ""
+    bullets = extract_concrete_bullets(raw, keys, 4)
+    if len(bullets) < 2:
+        bullets.extend(extract_concrete_bullets(defs, keys, 4 - len(bullets)))
+    confuse = ""
+    if mix_out.strip() and not mix_out.strip().startswith("（"):
+        confuse = re.sub(r"\*\*", "", mix_out.splitlines()[0])[:140]
+    elif keys:
+        confuse = f"与同章相邻考点区分；题干锚词：**{' / '.join(keys[:3])}**。"
+    else:
+        confuse = "先读定义完整句，再对照下方要点与易混辨析。"
+    lines = [
+        f"- **一句话**：{one}",
+        f"- **考什么**：{exam_hint}{ch_note}。",
+        "- **具体理解**：",
+    ]
+    if bullets:
+        for b in bullets[:4]:
+            lines.append(f"  - {b}")
+    else:
+        lines.append("  - 先背定义节「是什么 + 作用」，再展开要点中的表格或口诀。")
+    lines.append(f"- **别搞混**：{confuse}")
+    return "\n".join(lines)
 
 
 def build_overview(title: str, intro: str, keys: list[str], raw: str) -> str:
@@ -1596,6 +1741,15 @@ def render(
     )
     points = scrub_points(raw, defs)
     mix_out = filter_mix(mix, keys)
+    quick = build_quick_grasp(
+        re.sub(r"^\d+(?:\.\d+)*\s*", "", title).strip(),
+        overview,
+        defs,
+        raw,
+        mix_out,
+        keys,
+        ch_num,
+    )
     exam_out = build_exam(exam, tips, raw, keys, item, bank)
     rel = related_links(item, by_group)
     return f"""# {h1}
@@ -1605,6 +1759,10 @@ def render(
 ## 概述
 
 {overview}
+
+## 速懂
+
+{quick}
 
 ## 定义
 

@@ -25,7 +25,7 @@ import {
   examPriorityTier,
 } from "@/lib/kb-exam-priority";
 
-const API_SECTIONS = ["概述", "定义", "要点", "易混辨析", "应试", "相关考点"] as const;
+const API_SECTIONS = ["概述", "速懂", "定义", "要点", "易混辨析", "应试", "相关考点"] as const;
 
 const KIND_OPTS = [
   { value: "all", label: "全部类型" },

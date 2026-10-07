@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const index = JSON.parse(fs.readFileSync(path.join(root, "content/kb-index.json"), "utf8"));
-const sections = ["概述", "定义", "要点", "易混辨析", "应试", "相关考点"];
+const sections = ["概述", "速懂", "定义", "要点", "易混辨析", "应试", "相关考点"];
 const badPhrases = ["本节要点中含可誊写句", "核心表述见下方要点", "待编制", "- ****："];
 const skip = new Set([]);
 let errors = [];
@@ -26,6 +26,14 @@ for (const sec of index.sections || []) {
     }
     for (const p of badPhrases) {
       if (t.includes(p)) errors.push(`${it.id}: contains «${p}»`);
+    }
+    const qm = t.match(/## 速懂\n\n([\s\S]*?)\n\n## 定义/);
+    if (qm) {
+      const q = qm[1].trim();
+      if (q.length < 120) errors.push(`${it.id}: 速懂 too short (${q.length})`);
+      if (!q.includes("一句话") || !q.includes("考什么")) {
+        errors.push(`${it.id}: 速懂须含「一句话」「考什么」`);
+      }
     }
     const dm = t.match(/## 定义\n\n([\s\S]*?)\n\n## 要点/);
     if (dm) {
