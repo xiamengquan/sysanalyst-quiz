@@ -1,0 +1,490 @@
+<h1 id="第11章-软件需求工程">第11章 软件需求工程</h1>
+<blockquote>
+<p>出自《系统分析师教程》知识点精炼 · 第二篇 · 关键技术（第10—15章）分章。</p>
+</blockquote>
+<hr>
+<h2 id="一本章考什么">一、本章考什么</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>考点</th>
+<th>题型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>需求三层、QFD、FURPS+</td>
+<td>选择题</td>
+</tr>
+<tr>
+<td>需求工程五阶段</td>
+<td>流程题</td>
+</tr>
+<tr>
+<td>需求获取方法（访谈/JAD 等）与<strong>广度/深度/集成/参与四维</strong></td>
+<td>案例</td>
+</tr>
+<tr>
+<td><strong>DFD / STD / 数据字典</strong></td>
+<td>分析题</td>
+</tr>
+<tr>
+<td>用例模型、事件流</td>
+<td>案例、UML</td>
+</tr>
+<tr>
+<td>需求验证与管理</td>
+<td>变更、跟踪矩阵</td>
+</tr>
+<tr>
+<td>好需求特性（IEEE）</td>
+<td>选择题</td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p><strong>体系化学习</strong>：按 L0→L4 关卡学 → 见速查<a href="/kb/kp-requirements-engineering/" class="kb-ref" data-kb-id="kp-requirements-engineering" title="预览：需求工程">《需求工程-体系化学习路径》</a>；刷题选路径「需求工程（L0→L4）」。<br><strong>SA / OOA 专精</strong>：见速查<a href="/kb/quick-sao-learn/" class="kb-ref" data-kb-id="quick-sao-learn" title="预览：结构化与面向对象分析 · 体系化学习路径（L0→L4）">《结构化与面向对象分析-体系化学习路径》</a>；刷题选路径「结构化与OO分析（L0→L4）」。</p>
+</blockquote>
+<hr>
+<h2 id="二核心知识点">二、核心知识点</h2>
+<h3 id="21-需求定义与层次答卷必背">2.1 需求定义与层次（答卷·必背）</h3>
+<p><strong>软件需求（答卷·定义）</strong><br>软件需求是用户（及干系人）对新系统在功能、行为、性能、设计约束等方面的期望与约定。<br><strong>作用</strong>：用于指导后续分析、设计、实现、测试与验收，并作为变更与跟踪的基准。</p>
+<p><strong>三层需求总览</strong>：业务需求 → 用户需求 → 系统需求（由战略到可实现规格，逐层细化）。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>层次</th>
+<th>关注点</th>
+<th>主要读者</th>
+<th>典型产物</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>业务需求</strong></td>
+<td>组织为什么做、做成什么样（目标/范围）</td>
+<td>投资人、客户、管理层</td>
+<td>项目视图与范围、愿景、业务目标</td>
+</tr>
+<tr>
+<td><strong>用户需求</strong></td>
+<td>角色要完成什么任务、达成什么目标</td>
+<td>最终用户、业务代表</td>
+<td>用例/用户故事、场景、任务描述</td>
+</tr>
+<tr>
+<td><strong>系统需求</strong></td>
+<td>系统必须具备哪些可验证能力与约束</td>
+<td>分析/设计/开发/测试</td>
+<td>SRS：功能 + 非功能 + 设计约束</td>
+</tr>
+</tbody></table></div>
+<h4 id="业务需求答卷">业务需求（答卷）</h4>
+<p><strong>定义</strong>：业务需求是组织或投资方希望通过系统建设达成的高层业务目标、收益与项目范围描述。<br><strong>作用</strong>：用于界定「为什么做、做到什么程度、不做什么」，为项目立项、范围控制与优先级提供依据。<br><strong>常见内容</strong>：业务目标（如缩短办理时限、提升跨厅协同）、成功标准、范围边界、主要干系人与约束（工期/预算/政策）。<br><strong>举例</strong>：某市要「支持 15 个分厅跨厅取号办理，高峰响应 ≤1 秒，记录保存 ≥5 年」——这是业务层目标与约束，尚未落到具体界面操作或表结构。</p>
+<h4 id="用户需求答卷">用户需求（答卷）</h4>
+<p><strong>定义</strong>：用户需求是最终用户（或角色）为完成其工作任务而对系统提出的目标、任务与交互期望。<br><strong>作用</strong>：用于说明「谁要用系统做什么」，是连接业务目标与系统规格的桥梁，常以用例、场景、用户故事表达。<br><strong>常见内容</strong>：角色、任务目标、主成功场景、备选/异常流、业务规则（用户可感知部分）。<br><strong>举例</strong>：「办事群众可在 A 厅取号后到 B 厅办理同类型业务，并在小程序查看排队进度」——强调用户任务与体验，仍不等于详细接口/性能指标写法。</p>
+<h4 id="系统需求答卷">系统需求（答卷）</h4>
+<p><strong>定义</strong>：系统需求是为实现业务与用户需求，对系统必须具备的功能、非功能属性及设计约束所作的、可验证的规格说明。<br><strong>作用</strong>：用于作为开发、测试与验收的直接依据，把「用户要做什么」落实为「系统必须怎样表现」。<br><strong>常见内容</strong>：  </p>
+<ul>
+<li><strong>功能需求</strong>：系统应提供的具体能力（输入/处理/输出、接口行为）  </li>
+<li><strong>非功能需求</strong>：性能、可靠性、安全性、可用性、可维护性等（常对应 FURPS+）  </li>
+<li><strong>设计约束</strong>：必须采用的技术/标准/平台、法规与互操作限制等<br><strong>举例</strong>：「排队记录须持久化保存至少 5 年；跨厅办理时目标分厅须能按业务类型+分厅定位原取号记录；热点排队人数查询经 Redis 缓存」——可设计、可测试。</li>
+</ul>
+<h4 id="三者关系与易混答卷">三者关系与易混（答卷）</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比</th>
+<th>业务需求</th>
+<th>用户需求</th>
+<th>系统需求</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>问的是</td>
+<td>组织要什么结果</td>
+<td>角色要完成什么事</td>
+<td>系统必须具备什么能力/约束</td>
+</tr>
+<tr>
+<td>抽象度</td>
+<td>最高</td>
+<td>中</td>
+<td>最低（可实现、可验证）</td>
+</tr>
+<tr>
+<td>典型错答</td>
+<td>写成按钮/字段细节</td>
+<td>写成组织战略口号</td>
+<td>写成不可测形容词（「好用」「美观」）</td>
+</tr>
+</tbody></table></div>
+<p><strong>推导关系（答卷一句）</strong>：业务需求规定方向与范围；用户需求把方向落实为角色任务；系统需求再把任务落实为可开发、可测试的功能/非功能/约束。三者应可跟踪（业务 ↔ 用户 ↔ 系统），变更时同步评估影响。</p>
+<p><strong>与 QFD「常规/期望/意外」易混</strong>：那是按<strong>用户满意度类型</strong>分类；本处三层是按<strong>抽象层次与读者</strong>分类，不要混答。</p>
+<h3 id="22-质量功能部署-qfd">2.2 质量功能部署 QFD</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>含义</th>
+<th>未满足后果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>常规需求</strong></td>
+<td>用户明确期望的功能/性能</td>
+<td>实现越多越满意</td>
+</tr>
+<tr>
+<td><strong>期望需求</strong></td>
+<td>用户认为理所当然但未说清</td>
+<td>未实现 → 不满意</td>
+</tr>
+<tr>
+<td><strong>意外需求（兴奋需求）</strong></td>
+<td>范围外但开发者可赋予的特性</td>
+<td>未实现不影响购买；实现则更高兴</td>
+</tr>
+</tbody></table></div>
+<h3 id="23-furps-分类">2.3 FURPS+ 分类</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>FURPS</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>F 功能性</td>
+<td>特性、功能、安全性</td>
+</tr>
+<tr>
+<td>U 可用性</td>
+<td>人性化、帮助、文档</td>
+</tr>
+<tr>
+<td>R 可靠性</td>
+<td>故障频率、可恢复性、可预测性</td>
+</tr>
+<tr>
+<td>P 性能</td>
+<td>响应时间、吞吐量、准确性、资源利用率</td>
+</tr>
+<tr>
+<td>S 可支持性</td>
+<td>适应性、可维护性、国际化、可配置性</td>
+</tr>
+</tbody></table></div>
+<p><strong>“+”辅助因素</strong>：实现、接口、操作、包装、授权。</p>
+<h3 id="24-好需求特性ieee">2.4 好需求特性（IEEE）</h3>
+<ul>
+<li><strong>单条需求</strong>：正确、无歧义、可检验、可跟踪</li>
+<li><strong>需求集合</strong>：完整、一致、可修改</li>
+<li><strong>高品质</strong>：正确性、完整性、一致性、明确性、可验证性、优先级排序、可修改性、可追溯性、可理解性</li>
+</ul>
+<h3 id="25-需求工程">2.5 需求工程</h3>
+<p><strong>两大工作</strong>：需求开发 + 需求管理。</p>
+<p><strong>需求开发四阶段</strong>：</p>
+<ol>
+<li>需求获取</li>
+<li>需求分析</li>
+<li>需求定义（文档化）→ 用户原始需求说明书 + 软件需求规格说明</li>
+<li>需求验证</li>
+</ol>
+<p><strong>需求管理</strong>：需求基线、变更控制、<strong>需求跟踪</strong>。</p>
+<p><strong>需求工程五活动</strong>（含管理）：获取 → 分析 → 规格 → 确认验证 → 管理。</p>
+<p><strong>需求基线</strong>：评审批准后的需求约定，是开发与管理的桥梁。</p>
+<hr>
+<h2 id="三需求获取技术答卷案例高频">三、需求获取技术（答卷·案例高频）</h2>
+<blockquote>
+<p>案例常要求从<strong>需求广度、需求深度、信息集成度、用户参与度</strong>等维度比较获取方法，并结合题干选型。速查卡：<a href="/kb/quick-req-five/" class="kb-ref" data-kb-id="quick-req-five" data-kb-path="速查/案例必答-需求获取五法对比卡.md" title="预览：案例必答 · 需求获取五法对比卡"><code>速查/案例必答-需求获取五法对比卡.md</code></a>。</p>
+</blockquote>
+<h3 id="31-需求获取答卷">3.1 需求获取（答卷）</h3>
+<p><strong>需求获取（答卷·定义）</strong><br>需求获取是通过调查、交流与观测等手段，从干系人处收集并初步整理业务目标、用户任务与约束条件，形成原始需求素材的过程。<br><strong>作用</strong>：用于把隐含的业务与用户期望显性化，为后续需求分析、建模与规格说明提供输入。</p>
+<h3 id="32-比较维度答卷四维必背">3.2 比较维度（答卷·四维必背）</h3>
+<p><strong>需求广度（答卷·定义）</strong><br>需求广度是一次获取活动所能覆盖的干系人范围、业务领域或需求条目面的宽窄程度。<br><strong>作用</strong>：用于衡量「能覆盖多少人/多少面」——面越宽，越利于发现共性问题与统计分布，但单点深入往往不足。</p>
+<p><strong>需求深度（答卷·定义）</strong><br>需求深度是对某一角色、任务或业务规则所能挖掘到的细节、动机与异常场景的充分程度。<br><strong>作用</strong>：用于衡量「挖得够不够细」——深度高利于澄清复杂流程与例外，但覆盖面通常较窄、成本较高。</p>
+<p><strong>信息集成度（答卷·定义）</strong><br>信息集成度是多方信息能否在同一场合被对照、冲突被当场暴露并初步收敛为一致认识的程度。<br><strong>作用</strong>：用于衡量「信息是否拼得拢」——集成度高利于消解矛盾、形成共识；集成度低则信息分散，需事后综合。</p>
+<p><strong>用户参与度（答卷·定义）</strong><br>用户参与度是最终用户（或业务代表）在获取过程中直接投入时间、表达意见并影响结论的程度。<br><strong>作用</strong>：用于衡量「用户是否真的进来了」——参与度高利于验收对齐与减少误解；参与度低则易出现「文档有、现场不对」。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>一句话抓手</th>
+<th>高意味着</th>
+<th>低意味着</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>需求广度</strong></td>
+<td>覆盖面</td>
+<td>多人/多部门/多样本</td>
+<td>仅少数角色</td>
+</tr>
+<tr>
+<td><strong>需求深度</strong></td>
+<td>挖得细</td>
+<td>动机、例外、规则清楚</td>
+<td>只得表面诉求</td>
+</tr>
+<tr>
+<td><strong>信息集成度</strong></td>
+<td>当场对齐</td>
+<td>冲突可见、共识快</td>
+<td>信息孤岛、事后拼</td>
+</tr>
+<tr>
+<td><strong>用户参与度</strong></td>
+<td>用户在场</td>
+<td>共创、可确认</td>
+<td>间接、易偏差</td>
+</tr>
+</tbody></table></div>
+<p><strong>助记（不当答卷正文）</strong>：广看面、深看细、集成看冲突、参与看人在不在。</p>
+<h3 id="33-常用需求获取技术答卷">3.3 常用需求获取技术（答卷）</h3>
+<h4 id="用户访谈">用户访谈</h4>
+<p><strong>定义</strong>：用户访谈是分析人员与干系人进行一对一（或小范围）交流，通过结构化/非结构化提问收集需求的技术。<br><strong>作用</strong>：用于深入了解特定角色的目标、任务与痛点，澄清模糊表述。<br><strong>四维倾向</strong>：广度中；<strong>深度高</strong>；信息集成中；用户参与中高。<br><strong>要点</strong>：准备→主持→后续整理；结构与非结构结合。</p>
+<h4 id="联合需求计划-jrp--联合应用设计-jad">联合需求计划 JRP / 联合应用设计 JAD</h4>
+<p><strong>定义</strong>：JRP/JAD 是在引导人主持下，于短时间内召集关键干系人共同研讨需求（或设计）并当场达成一致的工作坊式获取技术。<br><strong>作用</strong>：用于快速收敛多方观点、暴露并处理冲突，缩短需求确认周期。<br><strong>四维倾向</strong>：广度中高；深度高；<strong>信息集成度高（当场冲突）</strong>；<strong>用户参与度高</strong>。<br><strong>要点</strong>：严格议程、控制发言、避免堆砌术语；适合干系人多、分歧大、工期紧。</p>
+<h4 id="问卷调查">问卷调查</h4>
+<p><strong>定义</strong>：问卷调查是向较大范围对象发放统一题项并回收统计结果，以批量收集需求或态度的技术。<br><strong>作用</strong>：用于在短时间内扩大样本面、获取可量化的共性倾向。<br><strong>四维倾向</strong>：<strong>广度高</strong>；深度低；信息集成低；用户参与中（间接）。<br><strong>要点</strong>：宜与访谈结合；题项须可理解、可统计；难挖深层动机。</p>
+<h4 id="文档分析">文档分析</h4>
+<p><strong>定义</strong>：文档分析是通过研读现有制度、报表、接口说明、遗留系统文档等，提取业务规则与数据需求的技术。<br><strong>作用</strong>：用于低成本复用已有知识、发现书面规则与现状差距。<br><strong>四维倾向</strong>：广度中；深度中；信息集成中；<strong>用户参与低</strong>。<br><strong>要点</strong>：文档可能过时；须与访谈/观察交叉验证。</p>
+<h4 id="观察--实地调研">观察 / 实地调研</h4>
+<p><strong>定义</strong>：观察（实地调研）是分析人员到业务现场跟随真实操作，记录实际流程、例外与环境约束的技术。<br><strong>作用</strong>：用于发现用户「说不清」或「不好意思说」的真实做法与隐性规则。<br><strong>四维倾向</strong>：广度低中；<strong>深度高（真实操作）</strong>；信息集成中；用户参与中。<br><strong>要点</strong>：注意被观察效应；适合操作复杂、口头描述与现场不一致的场景。</p>
+<h4 id="采样答卷">采样（答卷）</h4>
+<p><strong>定义</strong>：采样是从总体中按规则抽取代表性样本进行调查的技术（简单随机、分层、聚类、系统采样等）。<br><strong>作用</strong>：用于在问卷/访谈等活动中控制成本，并以样本结果推断总体特征。<br><strong>四维倾向</strong>：广度取决于样本设计（可高可中）；深度低中；信息集成低；用户参与中（间接）。<br><strong>要点</strong>：常与<strong>问卷调查</strong>组合；答题须写清抽样方法是否与总体匹配。</p>
+<h4 id="情节串联板答卷">情节串联板（答卷）</h4>
+<p><strong>定义</strong>：情节串联板是用故事板、分镜或场景串联呈现用户交互与业务流程的获取与确认手段（被动、主动、交互式）。<br><strong>作用</strong>：用于消除用户对界面与流程的想象盲区，便于讨论与确认需求。<br><strong>四维倾向</strong>：广度低中；深度中高（场景与交互）；信息集成中；用户参与中高（尤其交互式）。<br><strong>要点</strong>：适合界面/流程复杂、口头描述难以对齐的场景；可与原型、JAD 配合。</p>
+<h3 id="34-获取技术--四维对照表答卷默写">3.4 获取技术 × 四维对照表（答卷默写）</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>需求广度</th>
+<th>需求深度</th>
+<th>信息集成度</th>
+<th>用户参与度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>访谈</strong></td>
+<td>中</td>
+<td><strong>高</strong></td>
+<td>中</td>
+<td>中高</td>
+</tr>
+<tr>
+<td><strong>JRP/JAD</strong></td>
+<td>中高</td>
+<td>高</td>
+<td><strong>高（当场冲突）</strong></td>
+<td><strong>高</strong></td>
+</tr>
+<tr>
+<td><strong>问卷</strong></td>
+<td><strong>高</strong></td>
+<td>低</td>
+<td>低</td>
+<td>中（间接）</td>
+</tr>
+<tr>
+<td><strong>文档分析</strong></td>
+<td>中</td>
+<td>中</td>
+<td>中</td>
+<td>低</td>
+</tr>
+<tr>
+<td><strong>观察/实地</strong></td>
+<td>低中</td>
+<td><strong>高（真实操作）</strong></td>
+<td>中</td>
+<td>中</td>
+</tr>
+<tr>
+<td><strong>采样</strong></td>
+<td>中～高（视设计）</td>
+<td>低中</td>
+<td>低</td>
+<td>中（间接）</td>
+</tr>
+<tr>
+<td><strong>情节串联板</strong></td>
+<td>低中</td>
+<td>中高（场景交互）</td>
+<td>中</td>
+<td>中高</td>
+</tr>
+</tbody></table></div>
+<h3 id="35-选型口诀答卷">3.5 选型口诀（答卷）</h3>
+<ul>
+<li>要<strong>大面统计/多人意见</strong> → 偏问卷（广度高；可写<strong>采样</strong>控成本）  </li>
+<li>要<strong>挖清某人任务与例外</strong> → 偏访谈或观察（深度高）  </li>
+<li>要<strong>多方当场对齐、消冲突</strong> → 偏 JRP/JAD（集成度+参与度高）  </li>
+<li><strong>文档多、用户难约</strong> → 先文档分析，再访谈/观察验证  </li>
+<li><strong>界面/流程难描述、想象不一致</strong> → 偏<strong>情节串联板</strong>（或原型），再 JAD 确认  </li>
+<li>答题结构：先按四维对比表 → 结合题干约束选型 → 每点回扣干系人/工期/预算</li>
+</ul>
+<hr>
+<h2 id="四结构化分析dfd--std--数据字典">四、结构化分析（DFD / STD / 数据字典）</h2>
+<blockquote>
+<p><strong>由简入深</strong>：<a href="/kb/quick-sao-learn/" class="kb-ref" data-kb-id="quick-sao-learn" data-kb-path="速查/结构化与面向对象分析-体系化学习路径.md" title="预览：结构化与面向对象分析 · 体系化学习路径（L0→L4）"><code>速查/结构化与面向对象分析-体系化学习路径.md</code></a>（L0–L2）；刷题路径选「结构化与OO分析（L0→L4）」。</p>
+</blockquote>
+<h3 id="51-dfd-在需求阶段的三作用">5.1 DFD 在需求阶段的三作用</h3>
+<ol>
+<li>理解表达用户需求</li>
+<li>概括内部逻辑，是设计基础</li>
+<li>存档材料，修改开发计划依据</li>
+</ol>
+<h3 id="52-dfd-绘制步骤">5.2 DFD 绘制步骤</h3>
+<ol>
+<li>画系统输入输出（边缘标出）</li>
+<li>画内部，从输入连接处理</li>
+<li>为每个数据流命名（避免空洞词）</li>
+<li>为加工命名（<strong>动宾短语</strong>）</li>
+<li>逐层分解</li>
+</ol>
+<h3 id="53-状态转换图-std">5.3 状态转换图 STD</h3>
+<ul>
+<li>描述系统状态及状态间转换</li>
+<li><strong>初态</strong>：实心圆；<strong>终态</strong>：双同心圆（内实心）</li>
+<li>可表示循环过程或单程生命期</li>
+</ul>
+<h3 id="54-数据字典六类条目">5.4 数据字典六类条目</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>条目</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数据元素</td>
+<td>最小单位，类型/长度/取值</td>
+</tr>
+<tr>
+<td>数据结构</td>
+<td>组合关系；[] 任选、{} 必选、* 重复</td>
+</tr>
+<tr>
+<td>数据流</td>
+<td>来源、去处、组成、流通量</td>
+</tr>
+<tr>
+<td>数据存储</td>
+<td>结构、数据流、查询要求</td>
+</tr>
+<tr>
+<td>加工逻辑</td>
+<td>编号、名称、I/O；可用判定树/表/结构化语言</td>
+</tr>
+<tr>
+<td>外部实体</td>
+<td>名称、I/O 数据流、数量</td>
+</tr>
+</tbody></table></div>
+<p><strong>四作用</strong>：列表、相互参照、内容检索、一致性检验。专人（数据管理员）维护。</p>
+<hr>
+<h2 id="五面向对象需求与需求管理">五、面向对象需求与需求管理</h2>
+<blockquote>
+<p><strong>由简入深</strong>：<a href="/kb/quick-sao-learn/" class="kb-ref" data-kb-id="quick-sao-learn" data-kb-path="速查/结构化与面向对象分析-体系化学习路径.md" title="预览：结构化与面向对象分析 · 体系化学习路径（L0→L4）"><code>速查/结构化与面向对象分析-体系化学习路径.md</code></a>（L3–L4）；用例符号见 <a href="/kb/quick-uml-learn/" class="kb-ref" data-kb-id="quick-uml-learn" data-kb-path="速查/UML-体系化学习指南.md" title="预览：UML · 体系化学习指南（由简入深）"><code>速查/UML-体系化学习指南.md</code></a>。</p>
+</blockquote>
+<p><strong>系统分析建模</strong>（答卷·定义 / 作用）：</p>
+<ul>
+<li><strong>定义</strong>：系统分析建模是在系统分析（需求分析）阶段，用图形与文字模型描述待建系统的功能、数据或对象及其关系与行为，以准确理解问题域并形成可交付分析模型的过程。</li>
+<li><strong>作用</strong>：用于澄清并结构化需求，发现遗漏与冲突，形成对「系统做什么」的共同理解，并为后续设计、实现与测试提供可跟踪依据。</li>
+<li><strong>OO 建立系统分析模型四步</strong>：①定义概念类 ②确定类关系 ③为类添加职责 ④建立交互图（前三步=CRC）。详解见路径 §4.0。</li>
+</ul>
+<h3 id="61-用例模型">6.1 用例模型</h3>
+<blockquote>
+<p>用例图符号、include/extend、案例填空见：<a href="/kb/quick-uml-learn/" class="kb-ref" data-kb-id="quick-uml-learn" data-kb-path="速查/UML-体系化学习指南.md" title="预览：UML · 体系化学习指南（由简入深）"><code>速查/UML-体系化学习指南.md</code></a> · L2.1。</p>
+</blockquote>
+<p><strong>元素</strong>：参与者、用例、通信关联（箭头表示主动方）。</p>
+<p><strong>构建四阶段</strong>：识别参与者 → 合并需求获用例 → 细化描述 → 调整模型。</p>
+<p><strong>参与者类型</strong>：人、其他系统、硬件设备、时钟。</p>
+<p><strong>用例命名</strong>：动词(短语)+名词(短语)；宜编号便于<strong>需求跟踪</strong>。</p>
+<p><strong>注意</strong>：</p>
+<ul>
+<li>不混淆用例与用例内步骤</li>
+<li>区分<strong>业务用例</strong> vs <strong>系统用例</strong></li>
+</ul>
+<p><strong>用例规约</strong>：名称、说明、主/备选事件流、非功能需求、前置/后置条件。</p>
+<p><strong>分析类 BCE</strong>（答卷·定义 / 作用；写法见 SA/OOA 路径 §0.1 准则）：</p>
+<ul>
+<li><strong>边界类</strong>：是系统与参与者（或其他外部系统、设备）之间的交互接口类。<strong>作用</strong>：用于接收外部输入、返回结果并适配交互，隔离系统内外。</li>
+<li><strong>控制类</strong>：是协调完成某一用例（或其中控制流程）的编排类。<strong>作用</strong>：用于按规定顺序调用相关对象、处理分支，实现用例流程；不长期保存业务数据。</li>
+<li><strong>实体类</strong>：是问题域中具有持久业务意义的信息及其规则的载体类。<strong>作用</strong>：用于表达并保存业务状态与约束，供控制类读写。</li>
+<li><strong>采用 BCE 的作用</strong>：按职责分离界面交互、流程编排与业务数据，避免职责混杂，便于建立分析模型并衔接序列图与设计。</li>
+<li>详解：<a href="/kb/quick-sao-learn/" class="kb-ref" data-kb-id="quick-sao-learn" data-kb-path="速查/结构化与面向对象分析-体系化学习路径.md" title="预览：结构化与面向对象分析 · 体系化学习路径（L0→L4）"><code>速查/结构化与面向对象分析-体系化学习路径.md</code></a> · §4.4</li>
+</ul>
+<p><strong>CRC 建模</strong>（答卷）：CRC 是类–责任–协作者建模方法；<strong>作用</strong>是识别概念类并厘清职责与协作。建立分析模型四步——①定义概念类 ②确定类关系 ③为类添加职责 ④建立交互图；<strong>前三步合称 CRC</strong>。勿与网络 CRC（循环冗余校验）混淆。</p>
+<p><strong>需求管理</strong>：变更控制（CCB 审批）+ <strong>需求跟踪矩阵</strong>（需求↔设计↔代码↔测试；正向/反向跟踪）。</p>
+<hr>
+<h2 id="六第11章易混对比">六、第11章易混对比</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比</th>
+<th>区别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>业务/用户/系统需求</td>
+<td>组织目标与范围 / 角色任务与场景 / 可验证的功能·非功能·约束（详见 §2.1）</td>
+</tr>
+<tr>
+<td>需求广度 vs 需求深度</td>
+<td>覆盖面宽窄 / 单点细节与例外是否挖透</td>
+</tr>
+<tr>
+<td>信息集成度 vs 用户参与度</td>
+<td>多方信息能否当场对齐 / 用户是否直接共创</td>
+</tr>
+<tr>
+<td>访谈 vs JRP/JAD</td>
+<td>一对一深挖 / 多方当场共识（集成与参与通常更高）</td>
+</tr>
+<tr>
+<td>问卷 vs 观察</td>
+<td>广度高、深度低 / 真实操作深度高、广度窄</td>
+</tr>
+<tr>
+<td>常规/期望/意外需求</td>
+<td>明示 / 隐含 / 锦上添花</td>
+</tr>
+<tr>
+<td>需求开发 vs 管理</td>
+<td>产出规格 vs 基线/变更/跟踪</td>
+</tr>
+<tr>
+<td>用户原始需求 vs SRS</td>
+<td>用户协约 vs 开发指南</td>
+</tr>
+<tr>
+<td>主事件流 vs 备选事件流</td>
+<td>成功路径 / 分支失败扩展</td>
+</tr>
+<tr>
+<td>00A vs 00D</td>
+<td>做什么 / 怎么做</td>
+</tr>
+<tr>
+<td>系统分析建模 vs 系统设计建模</td>
+<td>澄清「做什么」、产出分析模型 / 决定「怎么做」、产出设计</td>
+</tr>
+<tr>
+<td>CRC 建模 vs 循环冗余校验</td>
+<td>类–责任–协作者 / 网络检错码</td>
+</tr>
+<tr>
+<td>CRC 前三步 vs 交互图</td>
+<td>静态职责协作 / 动态消息</td>
+</tr>
+<tr>
+<td>DFD vs 数据字典</td>
+<td>图形分解 / 文字精确定义</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="应试钩子">应试钩子</h2>
+<p><strong>案例可能怎么问</strong>：给出干系人多、工期紧、说法冲突等约束，要求用四维比较访谈 / JRP(JAD) / 问卷 / 文档分析 / 观察（及<strong>采样</strong>、<strong>情节串联板</strong>若题干涉及大样本成本或界面流程确认），并说明应优先采用哪一种及理由。</p>
+<p><strong>论文怎么用</strong>：需求获取段落可写「先问卷（+采样）扩面 → 访谈/观察加深 → 情节串联板或原型对齐界面 → JAD 收敛冲突」，并回扣四维与题干约束。</p>
+<hr>

@@ -38,6 +38,15 @@ function main() {
   copyDir(SRC, OUT_KB);
   fs.mkdirSync(OUT_DATA, { recursive: true });
   fs.copyFileSync(INDEX_SRC, path.join(OUT_DATA, "kb-index.json"));
+  exportKbMdFlat(INDEX_SRC, OUT_KB, path.join(OUT_DATA, "kb-md"));
+
+  const tsxBin = path.join(ROOT, "node_modules/.bin/tsx");
+  const htmlBuild = spawnSync(
+    fs.existsSync(tsxBin) ? tsxBin : "npx",
+    fs.existsSync(tsxBin) ? [path.join(__dirname, "build-kb-html.ts")] : ["tsx", path.join(__dirname, "build-kb-html.ts")],
+    { cwd: ROOT, stdio: "inherit" },
+  );
+  if (htmlBuild.status !== 0) process.exit(htmlBuild.status || 1);
 
   const r = spawnSync(process.execPath, [path.join(__dirname, "build-kb-search.mjs")], {
     cwd: ROOT,
@@ -47,6 +56,28 @@ function main() {
 
   const n = countMd(OUT_KB);
   console.log({ syncedKb: n, index: "public/data/kb-index.json" });
+}
+
+/** 按 kb-index id 扁平导出 md，供客户端 /data/kb-md/{id}.md 加载（避免 CDN 对 /kb/*.md 的拦截） */
+function exportKbMdFlat(indexPath, kbDir, outDir) {
+  const catalog = JSON.parse(fs.readFileSync(indexPath, "utf8"));
+  rmrf(outDir);
+  fs.mkdirSync(outDir, { recursive: true });
+  let n = 0;
+  let missing = 0;
+  for (const sec of catalog.sections || []) {
+    for (const item of sec.items || []) {
+      if (!item.id || !item.path || String(item.path).endsWith("/")) continue;
+      const src = path.join(kbDir, item.path);
+      if (!fs.existsSync(src)) {
+        missing += 1;
+        continue;
+      }
+      fs.copyFileSync(src, path.join(outDir, `${item.id}.md`));
+      n += 1;
+    }
+  }
+  console.log({ kbMdFlat: n, missing, out: "public/data/kb-md/" });
 }
 
 function countMd(dir) {

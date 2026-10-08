@@ -1,0 +1,328 @@
+<h1 id="系统维护">系统维护</h1>
+<blockquote>
+<p><strong>大纲</strong>：第15章 · <strong>教程</strong>：第15章 · <strong>分组</strong>：科目3 · 1. 信息系统开发及应用 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+</blockquote>
+<h2 id="概述">概述</h2>
+<p><strong>系统维护</strong>：关系： - MTBF ↑ → 可靠性 ↑ - MTTR ↓ → 修复能力 ↑ - MTBF 不含计划内维护停机。</p>
+<h2 id="速懂">速懂</h2>
+<ul>
+<li><strong>一句话</strong>：系统维护：是交付后为修正缺陷、适应环境、改进与扩展而修改软件的活动。作用：用于区分维护类型与生命周期成本。</li>
+<li><strong>考什么</strong>：维护四类、系统转换策略（教程第 15 章）。</li>
+<li><strong>具体理解</strong>：<ul>
+<li>MTBF ↑ → 可靠性 ↑</li>
+<li>MTTR ↓ → 修复能力 ↑</li>
+</ul>
+</li>
+<li><strong>别搞混</strong>：与同章相邻考点区分；题干锚词：<strong>系统维护</strong>。</li>
+</ul>
+<h2 id="定义">定义</h2>
+<ul>
+<li><strong>系统维护</strong>：是交付后为修正缺陷、适应环境、改进与扩展而修改软件的活动。<strong>作用</strong>：用于区分维护类型与生命周期成本。</li>
+<li><strong>维护组织</strong>：是含维护请求、版本发布与配置基线。<strong>作用</strong>：用于运维流程与 SLA 管理。</li>
+<li><strong>维护度量</strong>：可用缺陷率、平均修复时间等指标。<strong>作用</strong>：用于过程改进与资源规划。</li>
+</ul>
+<h2 id="步骤与流程">步骤与流程</h2>
+<h3 id="流程要点">流程要点</h3>
+<ol>
+<li>按<strong>功能</strong>分阶段</li>
+<li>按<strong>部门</strong>分阶段</li>
+<li>按<strong>机器设备</strong>分阶段</li>
+<li><strong>切换前工具迁移</strong>（ETL，最主要）：一次迁移 vs 分次迁移</li>
+<li><strong>切换前手工录入</strong>：新旧结构差异大、期初数据无法从历史获得</li>
+<li><strong>切换后新系统生成</strong>：根据已迁移数据生成结果数据</li>
+</ol>
+<h2 id="要点">要点</h2>
+<h1 id="第15章-系统运行与维护">第15章 系统运行与维护</h1>
+<blockquote>
+<p>出自《系统分析师教程》知识点精炼 · 第二篇 · 关键技术（第10—15章）分章。</p>
+</blockquote>
+<hr>
+<h2 id="一本章考什么">一、本章考什么</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>考点</th>
+<th>题型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>运维指标 MTTR/MTBF/MTTF/MTTA</td>
+<td>计算/概念</td>
+</tr>
+<tr>
+<td><strong>维护四类</strong></td>
+<td>超高频</td>
+</tr>
+<tr>
+<td>维护管理与影响因素</td>
+<td>案例</td>
+</tr>
+<tr>
+<td>信息系统评价</td>
+<td>选择</td>
+</tr>
+<tr>
+<td><strong>遗留系统四象限策略</strong></td>
+<td>案例大题</td>
+</tr>
+<tr>
+<td><strong>新旧系统三种转换策略</strong></td>
+<td>案例</td>
+</tr>
+<tr>
+<td>数据迁移方法与原则</td>
+<td>案例</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="二运维技术指标">二、运维技术指标</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>指标</th>
+<th>全称</th>
+<th>含义</th>
+<th>公式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>MTTR</strong></td>
+<td>平均故障修复/恢复时间</td>
+<td>故障到恢复正常平均时间</td>
+<td>修复总时间/故障次数</td>
+</tr>
+<tr>
+<td><strong>MTBF</strong></td>
+<td>平均故障间隔时间</td>
+<td>两次故障间平均运行时间；<strong>越大越可靠</strong></td>
+<td>总运行时间/故障总数</td>
+</tr>
+<tr>
+<td><strong>MTTF</strong></td>
+<td>平均无故障时间</td>
+<td>不可修复部件从开始到失效；衡量寿命</td>
+<td>正常运行总时间/故障总数</td>
+</tr>
+<tr>
+<td><strong>MTTA</strong></td>
+<td>平均应答时间</td>
+<td>告警到确认的平均时间</td>
+<td>应答累计时间/事件总数</td>
+</tr>
+</tbody></table></div>
+<p><strong>关系</strong>：</p>
+<ul>
+<li>MTBF ↑ → 可靠性 ↑</li>
+<li>MTTR ↓ → 修复能力 ↑</li>
+<li>MTBF 不含计划内维护停机</li>
+</ul>
+<p><strong>系统运行管理</strong>：用户管理、网络资源管理、软件资源管理。</p>
+<p><strong>网络管理五功能</strong>：性能、故障、配置、计费、安全。</p>
+<p><strong>身份认证四种</strong>：用户名密码、IC 卡、动态密码、USB Key。</p>
+<hr>
+<h2 id="三系统故障管理">三、系统故障管理</h2>
+<p><strong>故障类型</strong>：计划维护、应用性、人为操作、系统软件、硬件、相关设备、灾难灾害。</p>
+<p><strong>故障处理流程</strong>：监视 → 调查 → 排查恢复 → 收尾。</p>
+<hr>
+<h2 id="四软件维护重点">四、软件维护（重点）</h2>
+<h3 id="41-维护占比">4.1 维护占比</h3>
+<p>运行维护占生命周期 <strong>60%–80%</strong>。</p>
+<h3 id="42-维护四类必背">4.2 维护四类（必背）</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>触发原因</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>改正性维护</strong></td>
+<td>识别纠正错误、缺陷、误用</td>
+<td>Bug 修复</td>
+</tr>
+<tr>
+<td><strong>适应性维护</strong></td>
+<td>外部环境变化（软硬件、数据环境）</td>
+<td>换操作系统、数据库升级</td>
+</tr>
+<tr>
+<td><strong>完善性维护</strong></td>
+<td>用户新功能与性能要求</td>
+<td>新增报表、优化功能</td>
+</tr>
+<tr>
+<td><strong>预防性维护</strong></td>
+<td>提高可维护性、可靠性</td>
+<td>“用今天方法改昨天系统满足明天需要”</td>
+</tr>
+</tbody></table></div>
+<p><strong>统计</strong>：完善性维护通常占比最大。</p>
+<h3 id="43-维护管理">4.3 维护管理</h3>
+<p>维护申请→审批→计划→实施→验收→更新配置库。完善性维护通常占比最大。</p>
+<hr>
+<h2 id="五系统评价了解">五、系统评价（了解）</h2>
+<p>评价流程：确定对象→收集资料→实施评价→复核报送。指标驱动：效率/能力/效果/效益。</p>
+<hr>
+<h2 id="六遗留系统处置重点">六、遗留系统处置（重点）</h2>
+<h3 id="61-遗留系统特征">6.1 遗留系统特征</h3>
+<ul>
+<li>不能满足全部要求</li>
+<li>性能落后、技术过时</li>
+<li>大型、难维护</li>
+<li>缺乏文档</li>
+</ul>
+<h3 id="62-评价活动">6.2 评价活动</h3>
+<p>启动评价 → 业务价值评价 → 外部环境评价（硬件/支撑软件/IT 基础设施）→ 应用软件评价 → 分析结果。</p>
+<p><strong>综合技术水平</strong>：</p>
+<pre><code>OR = (P₁×ORH + P₂×ORS + P₃×OAF + P₄×ORA) / 4
+</code></pre>
+<h3 id="63-四象限演化策略必考">6.3 四象限演化策略（必考）</h3>
+<pre><code>        高业务价值
+            │
+  改造      │      集成
+ (高技高值) │ (高技低值)
+────────────┼──────────── 高技术水平
+  淘汰      │      继承
+ (低技低值) │ (低技高值)
+            │
+        低业务价值
+</code></pre>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>象限</th>
+<th>策略</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第一象限 高技高值</td>
+<td><strong>改造</strong></td>
+<td>功能增强 + 数据模型改造</td>
+</tr>
+<tr>
+<td>第二象限 高技低值</td>
+<td><strong>集成</strong></td>
+<td>企业应用集成，消除孤岛</td>
+</tr>
+<tr>
+<td>第三象限 低技低值</td>
+<td><strong>淘汰</strong></td>
+<td>全面重新开发；可借鉴旧系统降风险</td>
+</tr>
+<tr>
+<td>第四象限 低技高值</td>
+<td><strong>继承</strong></td>
+<td>新系统兼容旧功能/数据模型；需并行运行</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="七新旧系统转换重点">七、新旧系统转换（重点）</h2>
+<h3 id="71-转换前准备">7.1 转换前准备</h3>
+<p>数据准备、文档准备、人员培训、设备安装、<strong>系统试运行</strong>。</p>
+<h3 id="72-三种转换策略">7.2 三种转换策略</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>策略</th>
+<th>做法</th>
+<th>优点</th>
+<th>缺点</th>
+<th>适用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>直接转换</strong></td>
+<td>旧停新立，无过渡</td>
+<td>人力费用最省</td>
+<td>风险高，无回退</td>
+<td>新系统简单或旧系统完全不可用</td>
+</tr>
+<tr>
+<td><strong>并行转换</strong></td>
+<td>新旧同时运行，结果核对</td>
+<td>风险小，可培训比较</td>
+<td>双套班子，周期长，数据难控</td>
+<td>大型、复杂、数据重要系统（最常用）</td>
+</tr>
+<tr>
+<td><strong>分段转换</strong></td>
+<td>分期分批逐步切换</td>
+<td>震动小，费用适中</td>
+<td>周期长，需新旧接口</td>
+<td>大系统、风险大（订票、银行）</td>
+</tr>
+</tbody></table></div>
+<p><strong>分段转换三种方式</strong>：</p>
+<ol>
+<li>按<strong>功能</strong>分阶段</li>
+<li>按<strong>部门</strong>分阶段</li>
+<li>按<strong>机器设备</strong>分阶段</li>
+</ol>
+<p><strong>并行转换实施</strong>：以旧系统为正式作业，新系统结果作核对；验证后旧系统退出。</p>
+<h3 id="73-数据转换与迁移">7.3 数据转换与迁移</h3>
+<p><strong>原则</strong>：<strong>数据不丢失</strong>。</p>
+<p><strong>三种方法</strong>：</p>
+<ol>
+<li><strong>切换前工具迁移</strong>（ETL，最主要）：一次迁移 vs 分次迁移</li>
+<li><strong>切换前手工录入</strong>：新旧结构差异大、期初数据无法从历史获得</li>
+<li><strong>切换后新系统生成</strong>：根据已迁移数据生成结果数据</li>
+</ol>
+<p><strong>迁移三阶段</strong>：准备→抽取/转换/装载→校验（完整性、一致性、总分平衡）。</p>
+<hr>
+<h2 id="八第15章易混对比">八、第15章易混对比</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比</th>
+<th>区别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>改正 vs 完善性维护</td>
+<td>修错 vs 增功能</td>
+</tr>
+<tr>
+<td>适应 vs 预防性维护</td>
+<td>适应环境 vs 主动改进可维护性</td>
+</tr>
+<tr>
+<td>改造 vs 继承</td>
+<td>高技术可改 vs 低技术但高价值需兼容</td>
+</tr>
+<tr>
+<td>淘汰 vs 集成</td>
+<td>低价值重建 vs 高技低值互联</td>
+</tr>
+<tr>
+<td>直接 vs 并行转换</td>
+<td>一刀切 vs 双轨核对</td>
+</tr>
+<tr>
+<td>并行 vs 分段</td>
+<td>全系统双轨 vs 子集渐进</td>
+</tr>
+<tr>
+<td>MTBF vs MTTR</td>
+<td>间隔越长越好 vs 修复越短越好</td>
+</tr>
+<tr>
+<td>一次 vs 分次数据迁移</td>
+<td>短、风险低 vs 解决数据量大与宕机矛盾</td>
+</tr>
+</tbody></table></div>
+<h2 id="易混辨析">易混辨析</h2>
+<p>（本节与相邻考点易混点见归档篇章「易混对比」；检索关键词：<strong>系统维护</strong>。）</p>
+<h2 id="应试">应试</h2>
+<ul>
+<li><strong>本章练习热力</strong>：教程第 15 章约 40 题（站点练习库，不含真题卷 ch=99）。</li>
+<li><strong>题库考点标签</strong>：MTBF、MTTR、完善性维护、系统转换、维护类型。</li>
+<li><strong>练题入口</strong>：<a href="/?bank=practice&chapter=15&path=all&q=%E7%B3%BB%E7%BB%9F%E7%BB%B4%E6%8A%A4">第 15 章练习（关键词 系统维护）</a></li>
+</ul>
+<h2 id="相关考点">相关考点</h2>
+<ul>
+<li><a href="/kb/kp-system-testing">系统测试</a></li>
+<li><a href="/kb/kp-realtime-systems">实时系统开发</a></li>
+<li>归档通章：<a href="../%E7%AC%AC%E4%BA%8C%E7%AF%87-%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF/%E7%AC%AC15%E7%AB%A0-%E7%B3%BB%E7%BB%9F%E8%BF%90%E8%A1%8C%E4%B8%8E%E7%BB%B4%E6%8A%A4.md"><a href="/kb/ch15/" class="kb-ref" data-kb-id="ch15" data-kb-path="第15章-系统运行与维护.md" title="预览：第15章 · 系统运行与维护"><code>第15章-系统运行与维护.md</code></a></a></li>
+</ul>

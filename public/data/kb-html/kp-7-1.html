@@ -1,0 +1,130 @@
+<h1 id="信息系统安全体系">信息系统安全体系</h1>
+<blockquote>
+<p><strong>大纲</strong>：9.1 · <strong>教程</strong>：第9章 · <strong>分组</strong>：科目1 · 7. 信息安全 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+</blockquote>
+<h2 id="概述">概述</h2>
+<p><strong>信息系统安全体系</strong>：安全威胁三类：稳定性/可靠性破坏、设备管理问题、信息保密完整性风险。</p>
+<h2 id="速懂">速懂</h2>
+<ul>
+<li><strong>一句话</strong>：数字签名：数字签名是基于非对称加密技术，用发送方私钥对消息摘要进行加密而形成的认证标识。作用：用于验证发送方身份（鉴别）、保证消息未被篡改（完整性），以及防止发送方事后否认（不可否认）。</li>
+<li><strong>考什么</strong>：访问控制模型、加密、容灾 RPO/RTO（教程第 9 章）。</li>
+<li><strong>具体理解</strong>：<ul>
+<li>数字证书：数字证书是由可信的证书颁发机构（CA）签发、符合 X.509 标准的电子凭证，内含用户身份信息、公钥、有效期及 CA 数字签名。作用：用于在 PKI 体系中绑定公钥与持有者身份，使通信各方能够验证公钥归属并建立可信通信。</li>
+<li>N版本程序设计：N 版本程序设计是由 N 个功能相同但独立开发的程序版本同时运行，通过表决器选取正确结果的软件容错方法。作用：用于实现静态/设计冗余与前向恢复——故障发生时无需回退，直接以多数表决输出屏蔽单个版本的错误。</li>
+<li>恢复块方法：恢复块方法是以主程序块为核心、主块失败后切换到备用块并回退状态的软件容错方法。作用：用于实现动态/设计冗余与后向恢复——通过验证测试发现错误后 Roll-back 到一致状态，再启用备份块继续执行。</li>
+</ul>
+</li>
+<li><strong>别搞混</strong>：与同章相邻考点区分；题干锚词：<strong>信息系统安全体系</strong>。</li>
+</ul>
+<h2 id="定义">定义</h2>
+<ul>
+<li><strong>数字签名</strong>：数字签名是基于非对称加密技术，用发送方私钥对消息摘要进行加密而形成的认证标识。<strong>作用</strong>：用于验证发送方身份（鉴别）、保证消息未被篡改（完整性），以及防止发送方事后否认（不可否认）。</li>
+<li><strong>数字证书</strong>：数字证书是由可信的证书颁发机构（CA）签发、符合 X.509 标准的电子凭证，内含用户身份信息、公钥、有效期及 CA 数字签名。<strong>作用</strong>：用于在 PKI 体系中绑定公钥与持有者身份，使通信各方能够验证公钥归属并建立可信通信。</li>
+<li><strong>防火墙</strong>：防火墙是部署在网络边界、依据安全策略对进出流量进行过滤与控制的网络安全设备或系统。<strong>作用</strong>：用于实现访问控制、内容过滤与日志审计，隔离受信网络与不可信网络，降低外部攻击面。</li>
+<li><strong>系统可靠性</strong>：系统可靠性是系统在<strong>规定时间、规定条件下完成规定功能</strong>的能力。<strong>作用</strong>：用于衡量系统持续稳定运行、少出故障的程度，是可用性、容灾与冗余设计的基础指标。</li>
+<li><strong>N版本程序设计</strong>：N 版本程序设计是由 N 个功能相同但独立开发的程序版本同时运行，通过表决器选取正确结果的软件容错方法。<strong>作用</strong>：用于实现<strong>静态/设计冗余</strong>与<strong>前向恢复</strong>——故障发生时无需回退，直接以多数表决输出屏蔽单个版本的错误。</li>
+<li><strong>恢复块方法</strong>：恢复块方法是以主程序块为核心、主块失败后切换到备用块并回退状态的软件容错方法。<strong>作用</strong>：用于实现<strong>动态/设计冗余</strong>与<strong>后向恢复</strong>——通过验证测试发现错误后 Roll-back 到一致状态，再启用备份块继续执行。</li>
+<li><strong>防卫式程序设计</strong>：防卫式程序设计是在程序中主动插入合法性检查与异常处理逻辑、不依赖传统冗余结构的容错方法。<strong>作用</strong>：用于在小程序或局部模块中灵活捕获并纠正输入错误、边界异常，实现低开销的局部容错。</li>
+</ul>
+<h2 id="步骤与流程">步骤与流程</h2>
+<p>本节在教程中<strong>未单独列出固定步骤名</strong>；答题时可按下列指引组织答案：</p>
+<ol>
+<li>先在「要点」中找 <strong>阶段 / 活动 / → 流程链</strong> 表述；</li>
+<li>案例题常用 <strong>调查 → 分析 → 方案 → 验证</strong>（或题干给出的过程框架）；</li>
+<li>综合知识流程题优先写 <strong>编号步骤</strong> 或 <strong>阶段名称</strong>；</li>
+<li>需要完整步骤时打开文末 <strong>归档通章</strong> 对应小节对照誊写。</li>
+</ol>
+<h2 id="要点">要点</h2>
+<h3 id="信息系统安全体系">信息系统安全体系</h3>
+<p><strong>安全威胁三类</strong>：稳定性/可靠性破坏、设备管理问题、信息保密完整性风险。</p>
+<p><strong>安全层次</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>层次</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>实体安全</td>
+<td>物理环境</td>
+</tr>
+<tr>
+<td>运行安全</td>
+<td>系统运行管理</td>
+</tr>
+<tr>
+<td>信息安全</td>
+<td>数据与通信</td>
+</tr>
+<tr>
+<td>人员安全</td>
+<td>管理培训</td>
+</tr>
+</tbody></table></div>
+<p><strong>技术层次</strong>：物理层→OS→网络→应用→安全管理。</p>
+<p><strong>TCSEC/等保五级</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>级别</th>
+<th>名称</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>用户自主保护级</td>
+</tr>
+<tr>
+<td>2</td>
+<td>系统审计保护级</td>
+</tr>
+<tr>
+<td>3</td>
+<td>安全标记保护级</td>
+</tr>
+<tr>
+<td>4</td>
+<td>结构化保护级</td>
+</tr>
+<tr>
+<td>5</td>
+<td>访问验证保护级</td>
+</tr>
+</tbody></table></div>
+<p><strong>安全策略</strong>：统一身份认证、统一安全管理、安全保密体系、网络边界防护。</p>
+<h2 id="易混辨析">易混辨析</h2>
+<p>（本节与相邻考点易混点见归档篇章「易混对比」；检索关键词：<strong>信息系统安全体系</strong>。）</p>
+<h2 id="应试">应试</h2>
+<p><strong>案例可能怎么问</strong>：按场景选访问控制模型（DAC/MAC/RBAC/BLP/Biba）；防火墙类型与部署位置；给定 RPO/RTO 要求设计备份与容灾等级；N 版本/恢复块/防卫式程序容错对比。</p>
+<p><strong>论文怎么用</strong>：DevSecOps/安全运维类可写「左移测试+流水线门禁+密钥/权限最小化」；可靠性段落用 MTBF/可用性公式、冗余策略与 RPO/RTO 目标对齐业务连续性。</p>
+<p><strong>常考结论</strong></p>
+<ul>
+<li><p>BLP：<strong>上读下写</strong>；Biba：<strong>下读上写</strong>（相反！）。</p>
+</li>
+<li><p>可用性 = <strong>MTTF/MTBF × 100%</strong>。</p>
+</li>
+<li><p>指数分布：<strong>R(t)=e^(-λt)</strong>，<strong>MTTF=1/λ</strong>。</p>
+</li>
+<li><p>串联：<strong>R=∏Ri</strong>；并联：<strong>R=1-∏(1-Ri)</strong>。</p>
+</li>
+<li><p>模冗余 <strong>2n+1</strong> 个模块，容忍 <strong>n</strong> 个故障。</p>
+</li>
+<li><p>等保 <strong>5</strong> 级：<strong>自审标结验</strong>。</p>
+</li>
+<li><p>口令认证<strong>极不安全</strong>；动态口令<strong>一次一密</strong>。</p>
+</li>
+<li><p>N版本=<strong>前向恢复/静态</strong>；恢复块=<strong>后向恢复/动态</strong>。</p>
+</li>
+<li><p><strong>本章练习热力</strong>：教程第 9 章约 78 题（站点练习库，不含真题卷 ch=99）。</p>
+</li>
+<li><p><strong>题库考点标签</strong>：BLP模型、Biba模型、DAC、MAC、N版本程序设计。</p>
+</li>
+<li><p><strong>练题入口</strong>：<a href="/?bank=practice&chapter=9&path=all&q=%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E4%BD%93%E7%B3%BB">第 9 章练习（关键词 信息系统安全体系）</a></p>
+</li>
+</ul>
+<h2 id="相关考点">相关考点</h2>
+<ul>
+<li><a href="/kb/kp-7-2">数据安全与保密（加密、认证、KMI/PKI/SPK）</a></li>
+<li>归档通章：<a href="../%E7%AC%AC%E4%B8%80%E7%AF%87-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AC%AC09%E7%AB%A0-%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8.md"><a href="/kb/ch09/" class="kb-ref" data-kb-id="ch09" data-kb-path="第09章-信息安全.md" title="预览：第09章 · 信息安全"><code>第09章-信息安全.md</code></a></a></li>
+</ul>

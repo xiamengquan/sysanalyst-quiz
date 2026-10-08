@@ -1,0 +1,265 @@
+<h1 id="web-与-ai-智能体--架构选型四维度卡">Web 与 AI 智能体 · 架构选型四维度卡</h1>
+<blockquote>
+<p><strong>对齐真题</strong>：2026 上案例分析 · 试题五（Web + AI 智能体服务平台）<br><strong>关联章节</strong>：第16章 Web · 第20章 微服务 · 第9章 安全 · 第4章 分布式<br><strong>用途</strong>：案例「填表对比两种后端架构」、简答负载均衡与中间件</p>
+</blockquote>
+<hr>
+<h2 id="一场景特征读题信号">一、场景特征（读题信号）</h2>
+<p>题干常见表述：</p>
+<ul>
+<li>Web 端提供：<strong>智能对话、任务自动执行、多智能体协同、知识库检索、API 调用</strong></li>
+<li>三类终端：用户端、AI 智能体、管理后台</li>
+<li>质量要求：<strong>高并发、低延迟、数据安全、高可用</strong>；智能体 <strong>动态扩缩容</strong> 与 <strong>行为安全管控</strong></li>
+</ul>
+<p><strong>答题第一步</strong>：确认是在比 <strong>两种后端架构</strong>（如 Spring Cloud 微服务 vs FastAPI+Node 轻量栈），按题干给的 <strong>四个维度</strong> 分别填各自优势/短板，勿混写成一个方案。</p>
+<hr>
+<h2 id="二四维度对比案例填表--2026-上口径">二、四维度对比（案例填表 · 2026 上口径）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>考查什么</th>
+<th><strong>轻量快速栈</strong>（FastAPI + Node.js 等）</th>
+<th><strong>微服务栈</strong>（Spring Cloud 等）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>① 并发适配 / 实时性</strong></td>
+<td>峰值吞吐、响应时延、稳定性</td>
+<td><strong>开发快、轻量高效</strong>；异步 I/O 适合 I/O 密集；但 <strong>高并发下稳定性较弱</strong>（进程模型、治理组件少）</td>
+<td>线程池/连接池与 <strong>服务治理</strong> 成熟；网关限流熔断；更适合 ** sustained 高并发** 与 SLA</td>
+</tr>
+<tr>
+<td><strong>② 智能体调度能力</strong></td>
+<td>多 Agent 接入、任务分发、扩缩容</td>
+<td>需 <strong>自建</strong> 任务队列、Worker 池、路由；多 Agent 协同逻辑多在应用层实现</td>
+<td><strong>服务注册发现</strong>（Nacos/Eureka）+ <strong>客户端/网关负载均衡</strong>；配合 <strong>K8s</strong> 做 Agent 实例 <strong>动态扩缩容</strong>；适合 <strong>分布式调度、多智能体协同</strong></td>
+</tr>
+<tr>
+<td><strong>③ 安全与权限管控</strong></td>
+<td>鉴权、审计、风控、行为管控</td>
+<td><strong>基础安全</strong>（HTTPS、JWT 等）具备；<strong>企业级风控</strong>（细粒度 RBAC、行为审计、合规策略）常需 <strong>额外开发</strong></td>
+<td><strong>Spring Security / Gateway</strong> 生态；统一 <strong>OAuth2、RBAC、API 权限</strong>；网关层 <strong>限流、黑白名单</strong>；更适合 <strong>企业级安全管控</strong></td>
+</tr>
+<tr>
+<td><strong>④ 扩展性与分布式</strong></td>
+<td>服务拆分、横向扩展、大型平台</td>
+<td>适合 <strong>原型验证、中小规模</strong>；横向扩展需手动拆服务或上容器</td>
+<td><strong>服务拆分、弹性扩缩容</strong>；配置中心、链路追踪齐全；适合 <strong>大型分布式 AI 平台</strong></td>
+</tr>
+</tbody></table></div>
+<h3 id="2026-上--问题-1-参考填空四格">2026 上 · 问题 1 参考填空（四格）</h3>
+<p>题干要求从 <strong>并发适配、智能体调度、安全管控、扩展性</strong> 四维度对比两种架构，官方参考答案要点可概括为：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>填入内容（对应维度）</th>
+<th>通常归属栈</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>（1）</td>
+<td>开发快、轻量高效，但 <strong>高并发稳定性较弱</strong></td>
+<td>轻量快速栈</td>
+</tr>
+<tr>
+<td>（2）</td>
+<td>支持 <strong>分布式调度、多智能体协同与动态扩缩容</strong></td>
+<td>微服务栈</td>
+</tr>
+<tr>
+<td>（3）</td>
+<td><strong>基础安全能力具备</strong>，企业级风控需额外开发</td>
+<td>轻量快速栈</td>
+</tr>
+<tr>
+<td>（4）</td>
+<td>支持 <strong>服务拆分、弹性扩缩容</strong>，适合大型分布式平台</td>
+<td>微服务栈</td>
+</tr>
+</tbody></table></div>
+<p><strong>选型结论（案例写法）</strong>：若题干强调 <strong>高并发 + 多 Agent + 企业安全 + 大规模扩展</strong> → 倾向 <strong>Spring Cloud + K8s</strong>；若强调 <strong>快速上线、团队小、流量可控</strong> → 可先用轻量栈，并说明后续演进路径。</p>
+<hr>
+<h2 id="三ai-智能体agent要点综合知识--案例背景">三、AI 智能体（Agent）要点（综合知识 + 案例背景）</h2>
+<p><strong>答卷·定义</strong>：智能体是可以 <strong>感知环境、自主决策并执行动作</strong> 的计算实体，具有 <strong>自主性、反应性</strong> 等特征。</p>
+<p><strong>大模型时代 Agent（2026 上选择题口径）</strong>：不仅能对话，还可 <strong>规划任务、调用工具/API</strong>（如检索知识库、触发工作流），<strong>并非</strong>「只能对话生成」。</p>
+<p><strong>平台架构中与 Agent 相关的构件</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>构件</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>接入层（Nginx / API Gateway）</td>
+<td>用户与 Agent 的 HTTP/WebSocket 接入、SSL、限流</td>
+</tr>
+<tr>
+<td>调度/编排层</td>
+<td>任务队列、Agent 路由、多 Agent 协同（Orchestrator）</td>
+</tr>
+<tr>
+<td>推理/工具层</td>
+<td>LLM 调用、RAG 检索、外部 API 执行</td>
+</tr>
+<tr>
+<td>注册发现</td>
+<td>Agent 实例上下线、健康检查、负载分配</td>
+</tr>
+<tr>
+<td>安全审计</td>
+<td>行为日志、权限策略、敏感操作拦截</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="四负载均衡2026-上--问题-2-要点">四、负载均衡（2026 上 · 问题 2 要点）</h2>
+<p>面向 <strong>大量 Agent 并发接入与高吞吐推理</strong>，常见技术对比如下（300 字内简答可直接选用）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>代表</th>
+<th>优势</th>
+<th>劣势</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>七层反向代理</strong></td>
+<td>Nginx、OpenResty</td>
+<td>七层路由、限流、熔断、SSL 卸载；适合 Agent <strong>HTTP/WebSocket</strong> 接入</td>
+<td>长连接密集时转发压力较大</td>
+</tr>
+<tr>
+<td><strong>四层负载均衡</strong></td>
+<td>LVS、HAProxy（四层模式）</td>
+<td><strong>性能极高、抗并发</strong>；适合大量连接与推理流量转发</td>
+<td><strong>缺乏应用层感知</strong>，无法按 Agent ID/任务类型调度</td>
+</tr>
+<tr>
+<td><strong>API 网关</strong></td>
+<td>Spring Cloud Gateway、Kong</td>
+<td>可感知 <strong>用户/Agent 身份与接口权限</strong>；支持灰度、限流</td>
+<td>部署复杂，网关集群本身需高可用</td>
+</tr>
+<tr>
+<td><strong>服务发现 + 客户端 LB</strong></td>
+<td>Nacos + Ribbon/自研</td>
+<td>去中心化、调度灵活；适合微服务下 <strong>Agent 实例调度</strong></td>
+<td>客户端逻辑复杂，统一管控难度高</td>
+</tr>
+</tbody></table></div>
+<p><strong>答题提示</strong>：写 <strong>2～3 种</strong> 即可，每种 <strong>优势 + 劣势</strong> 成对出现；点明 Agent 场景多为 <strong>长连接 + 推理耗时</strong>，四层偏吞吐、七层偏治理。</p>
+<hr>
+<h2 id="五常用中间件2026-上--问题-3-要点">五、常用中间件（2026 上 · 问题 3 要点）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>典型产品</th>
+<th>在 AI Agent 平台中的作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Web / 接入</td>
+<td>Nginx、Apache</td>
+<td>静态资源、反向代理</td>
+</tr>
+<tr>
+<td>API 网关</td>
+<td>Spring Cloud Gateway、Kong</td>
+<td>路由、鉴权、限流</td>
+</tr>
+<tr>
+<td>分布式缓存</td>
+<td>Redis</td>
+<td>会话、向量/热点缓存、限流计数</td>
+</tr>
+<tr>
+<td>消息队列</td>
+<td>Kafka、RabbitMQ</td>
+<td><strong>异步任务</strong>、Agent 事件通知、解耦</td>
+</tr>
+<tr>
+<td>服务注册发现</td>
+<td>Nacos、Eureka</td>
+<td>Agent/微服务实例注册与发现</td>
+</tr>
+<tr>
+<td>搜索引擎</td>
+<td>Elasticsearch</td>
+<td>知识库、对话记录检索</td>
+</tr>
+<tr>
+<td>配置 / 限流</td>
+<td>Sentinel、Apollo</td>
+<td>动态配置、熔断限流</td>
+</tr>
+<tr>
+<td>容器编排</td>
+<td><strong>Kubernetes</strong></td>
+<td><strong>Agent 容器化调度与扩缩容</strong></td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="六与并发-vs-实时性的辨析易混">六、与「并发 vs 实时性」的辨析（易混）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>含义</th>
+<th>案例怎么写</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>高并发</strong></td>
+<td>单位时间大量请求/连接</td>
+<td>网关限流、连接池、水平扩展、缓存</td>
+</tr>
+<tr>
+<td><strong>低延迟 / 实时性</strong></td>
+<td>单次交互响应快（如对话首 token、排队 ≤1s）</td>
+<td>边缘缓存、异步化非关键路径、推理队列优先级、WebSocket 推送</td>
+</tr>
+<tr>
+<td><strong>二者冲突时</strong></td>
+<td>峰值并发可能拉高延迟</td>
+<td>写 <strong>削峰</strong>（队列）、<strong>读写分离</strong>、<strong>热点缓存</strong>、<strong>降级</strong></td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="七30-秒默写清单">七、30 秒默写清单</h2>
+<ul>
+<li><input disabled="" type="checkbox"> 四维度：<strong>并发、Agent 调度、安全、扩展</strong>  </li>
+<li><input disabled="" type="checkbox"> 轻量栈：<strong>快、轻、高并发稳性弱、基础安全</strong>  </li>
+<li><input disabled="" type="checkbox"> 微服务栈：<strong>调度扩缩、企业安全、分布式扩展</strong>  </li>
+<li><input disabled="" type="checkbox"> Agent：<strong>感知+决策+执行</strong>；可 <strong>规划任务、调工具</strong>  </li>
+<li><input disabled="" type="checkbox"> LB：七层（路由权限）vs 四层（性能）vs 网关 vs 客户端  </li>
+<li><input disabled="" type="checkbox"> 中间件：Redis / MQ / Nacos / ES / <strong>K8s</strong></li>
+</ul>
+<hr>
+<h2 id="八本站延伸">八、本站延伸</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>材料</th>
+<th>关系</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="../%E7%AC%AC%E4%B8%89%E7%AF%87-%E6%A1%88%E4%BE%8B%E5%AE%9E%E8%B7%B5/%E7%AC%AC16%E7%AB%A0-Web%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1.md">第16章 Web应用系统分析与设计</a></td>
+<td>§2.5 本节扩展</td>
+</tr>
+<tr>
+<td><a href="../%E7%AC%AC%E4%B8%89%E7%AF%87-%E6%A1%88%E4%BE%8B%E5%AE%9E%E8%B7%B5/%E7%AC%AC20%E7%AB%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1.md">第20章 微服务</a></td>
+<td>注册发现、熔断、测试金字塔</td>
+</tr>
+<tr>
+<td><a href="./%E9%AB%98%E9%A2%91%E5%AF%B9%E6%AF%94%E9%80%9F%E6%9F%A5%E8%A1%A8.md#13-web-%E6%9E%B6%E6%9E%84%E5%AF%B9%E6%AF%94">高频对比速查表 · Web架构</a></td>
+<td>整体式/微服务/SPA</td>
+</tr>
+<tr>
+<td>站点「案例」· 2026 上真题包</td>
+<td>试题五完整题干与参考答案</td>
+</tr>
+</tbody></table></div>

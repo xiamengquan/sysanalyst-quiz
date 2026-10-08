@@ -1,0 +1,398 @@
+<h1 id="第8章-项目管理-高频">第8章 项目管理 ★高频</h1>
+<blockquote>
+<p>出自《系统分析师教程》知识点精炼 · 第一篇 · 基础知识（第1—9章）分章。</p>
+</blockquote>
+<hr>
+<h2 id="本章考什么">本章考什么</h2>
+<p>范围(WBS)、进度(网络图/关键路径/挣值)、成本估算(COCOMO/功能点)、配置管理、质量(GJB5000/ISO25010)、人力资源(RAM/RACI)、风险、文档标准。计算题(关键路径/挣值)与概念题为高频。</p>
+<h2 id="核心知识点概念">核心知识点/概念</h2>
+<h3 id="项目管理概述">项目管理概述</h3>
+<ul>
+<li><strong>PMBOK知识域</strong>：范围、进度、成本、质量、资源、沟通、风险、采购、干系人、整合。</li>
+<li><strong>项目特点</strong>：临时性、独特性、渐进明细。</li>
+</ul>
+<h3 id="范围管理">范围管理</h3>
+<ul>
+<li><strong>范围说明书</strong>：产品描述、验收标准、项目边界、约束假设。</li>
+<li><strong>WBS</strong>：面向可交付成果的层次分解；最底层=工作包。</li>
+<li><strong>WBS原则</strong>：100%规则、互斥、可管理粒度。</li>
+<li><strong>范围确认</strong>：干系人验收可交付成果。</li>
+<li><strong>范围控制</strong>：变更以WBS和范围基准为依据。</li>
+</ul>
+<h3 id="进度管理">进度管理</h3>
+<p><strong>6过程</strong>：活动定义→排序→资源估算→历时估算→进度计划→进度控制。</p>
+<p><strong>依赖关系</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FS(完成-开始)</td>
+<td>最常见</td>
+</tr>
+<tr>
+<td>FF</td>
+<td>完成-完成</td>
+</tr>
+<tr>
+<td>SS</td>
+<td>开始-开始</td>
+</tr>
+<tr>
+<td>SF</td>
+<td>开始-完成</td>
+</tr>
+</tbody></table></div>
+<p><strong>依赖性质</strong>：强制(硬逻辑)、自由(软逻辑)、外部。</p>
+<p><strong>网络图</strong>：PDM(节点法/AON)、ADM(箭线法/AOA)。</p>
+<p><strong>关键路径</strong>：最长路径，决定项目最短工期；总时差=0。</p>
+<p><strong>进度压缩</strong>：赶工(加资源)、快速跟进(并行)。</p>
+<p><strong>估算方法</strong>：专家判断、类比、参数(COCOMO)、三点(PERT)、自下而上。</p>
+<p><strong>PERT</strong>：期望时间 = (乐观+4×最可能+悲观)/6。</p>
+<h3 id="成本管理">成本管理</h3>
+<p><strong>估算方法</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类比估算</td>
+<td>类似项目参考</td>
+</tr>
+<tr>
+<td>参数估算</td>
+<td>COCOMO/功能点</td>
+</tr>
+<tr>
+<td>自下而上</td>
+<td>WBS逐级汇总</td>
+</tr>
+<tr>
+<td>德尔菲</td>
+<td>专家匿名多轮</td>
+</tr>
+</tbody></table></div>
+<p><strong>COCOMO模型</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>模型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>基本</td>
+<td>仅规模(KLOC)</td>
+</tr>
+<tr>
+<td>中间</td>
+<td>+15个成本驱动因子</td>
+</tr>
+<tr>
+<td>详细</td>
+<td>+阶段/模块因子</td>
+</tr>
+</tbody></table></div>
+<p><strong>功能点法</strong>：输入/输出/查询/文件/接口 × 权重 × 复杂度因子。</p>
+<p><strong>成本预算</strong>：WBS工作包→活动→时间分布→成本基准(S曲线)。</p>
+<h3 id="挣值分析evm-计算必考">挣值分析(EVM) ★计算必考</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>指标</th>
+<th>公式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PV</td>
+<td>—</td>
+<td>计划值(计划完成工作的预算成本)</td>
+</tr>
+<tr>
+<td>EV</td>
+<td>—</td>
+<td>挣值(实际完成工作的预算成本)</td>
+</tr>
+<tr>
+<td>AC</td>
+<td>—</td>
+<td>实际成本</td>
+</tr>
+<tr>
+<td>CV</td>
+<td>EV-AC</td>
+<td>成本偏差(&gt;0节约)</td>
+</tr>
+<tr>
+<td>SV</td>
+<td>EV-PV</td>
+<td>进度偏差(&gt;0超前)</td>
+</tr>
+<tr>
+<td>CPI</td>
+<td>EV/AC</td>
+<td>成本绩效(&gt;1节约)</td>
+</tr>
+<tr>
+<td>SPI</td>
+<td>EV/PV</td>
+<td>进度绩效(&gt;1超前)</td>
+</tr>
+<tr>
+<td>EAC</td>
+<td>BAC/CPI</td>
+<td>完工估算(典型)</td>
+</tr>
+<tr>
+<td>ETC</td>
+<td>EAC-AC</td>
+<td>完工尚需估算</td>
+</tr>
+</tbody></table></div>
+<h3 id="配置管理">配置管理</h3>
+<ul>
+<li><strong>配置项(CI)</strong>：软件/硬件/文档等可管理单元。</li>
+<li><strong>基线</strong>：通过评审的配置项集合，变更需正式程序。</li>
+<li><strong>5过程</strong>：配置标识→版本控制→变更控制→配置状态报告→配置审计。</li>
+<li><strong>变更控制</strong>：申请→评估→批准→实施→验证→关闭。</li>
+</ul>
+<h3 id="质量管理">质量管理</h3>
+<p><strong>McCall质量模型</strong>：运行(正确性/可靠性/效率/完整性/可用性/风险性) + 修正(可维护/灵活/可测试/互操作/可移植/可重用/可理解) + 转移(可移植/可重用/可互操作)。</p>
+<p><strong>ISO/IEC 25010</strong>：功能适合性、性能效率、兼容性、可用性、可靠性、安全性、可维护性、可移植性。</p>
+<p><strong>QA vs QC</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>QA(质量保证)</th>
+<th>QC(质量控制)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>性质</td>
+<td>预防性</td>
+<td>检查性</td>
+</tr>
+<tr>
+<td>阶段</td>
+<td>全过程</td>
+<td>结果检查</td>
+</tr>
+<tr>
+<td>手段</td>
+<td>过程规范</td>
+<td>测试/评审</td>
+</tr>
+</tbody></table></div>
+<h3 id="人力资源管理">人力资源管理</h3>
+<ul>
+<li><strong>OBS</strong>：组织分解结构。</li>
+<li><strong>RAM/RBS</strong>：责任分配矩阵(WBS×OBS)。</li>
+<li><strong>RACI</strong>：R(负责执行)、A(批准)、C(咨询)、I(知情)。</li>
+<li><strong>团队建设</strong>：培训、团建、认可奖励。</li>
+<li><strong>冲突解决</strong>：回避、缓和、强制、妥协、合作(面对)。</li>
+</ul>
+<h3 id="沟通管理">沟通管理</h3>
+<ul>
+<li><strong>渠道数</strong> = n(n-1)/2（n为沟通参与者）。</li>
+<li><strong>沟通方式</strong>：正式/非正式、书面/口头、内部/外部。</li>
+</ul>
+<h3 id="风险管理">风险管理</h3>
+<p><strong>过程</strong>：规划→识别→定性分析→定量分析→应对→监控。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>策略</th>
+<th>威胁(负)</th>
+<th>机会(正)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>消极</td>
+<td>规避/转移/减轻/接受</td>
+<td>—</td>
+</tr>
+<tr>
+<td>积极</td>
+<td>—</td>
+<td>开拓/分享/提高/接受</td>
+</tr>
+</tbody></table></div>
+<h3 id="文档管理">文档管理</h3>
+<p><strong>GB/T 8567软件文档标准</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>文档</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>可行性</td>
+<td>可行性研究报告</td>
+</tr>
+<tr>
+<td>计划</td>
+<td>项目开发计划</td>
+</tr>
+<tr>
+<td>需求</td>
+<td>软件需求规格说明(SRS)</td>
+</tr>
+<tr>
+<td>设计</td>
+<td>概要/详细设计说明</td>
+</tr>
+<tr>
+<td>实现</td>
+<td>用户手册、操作手册</td>
+</tr>
+<tr>
+<td>测试</td>
+<td>测试计划/分析报告</td>
+</tr>
+<tr>
+<td>维护</td>
+<td>维护手册</td>
+</tr>
+</tbody></table></div>
+<h2 id="易混对比">易混对比</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>关键路径</th>
+<th>非关键路径</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>总时差</td>
+<td>0</td>
+<td>&gt;0</td>
+</tr>
+<tr>
+<td>影响工期</td>
+<td>直接影响</td>
+<td>超总时差才影响</td>
+</tr>
+<tr>
+<td>压缩</td>
+<td>优先赶工</td>
+<td>资源调配</td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>总时差(TF)</th>
+<th>自由时差(FF)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>定义</td>
+<td>不影响总工期</td>
+<td>不影响紧后活动最早开始</td>
+</tr>
+<tr>
+<td>关系</td>
+<td>TF≥FF</td>
+<td>—</td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>赶工</th>
+<th>快速跟进</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>方法</td>
+<td>加资源</td>
+<td>并行活动</td>
+</tr>
+<tr>
+<td>风险</td>
+<td>成本增加</td>
+<td>返工风险</td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>PV</th>
+<th>EV</th>
+<th>AC</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>含义</td>
+<td>计划完成预算</td>
+<td>实际完成预算</td>
+<td>实际花费</td>
+</tr>
+<tr>
+<td>时间</td>
+<td>计划</td>
+<td>实际</td>
+<td>实际</td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>配置管理</th>
+<th>变更管理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>范围</td>
+<td>所有配置项</td>
+<td>变更请求</td>
+</tr>
+<tr>
+<td>目的</td>
+<td>版本一致</td>
+<td>控制变更</td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>范围确认</th>
+<th>范围控制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>目的</td>
+<td>验收可交付</td>
+<td>管理变更</td>
+</tr>
+<tr>
+<td>时机</td>
+<td>阶段/项目末</td>
+<td>全过程</td>
+</tr>
+</tbody></table></div>
+<h2 id="常考数字结论口诀">常考数字/结论/口诀</h2>
+<ul>
+<li>沟通渠道：<strong>n(n-1)/2</strong>。</li>
+<li>PERT期望：<strong>(O+4M+P)/6</strong>。</li>
+<li>挣值：<strong>CV=EV-AC，SV=EV-PV，CPI=EV/AC，SPI=EV/PV</strong>。</li>
+<li>CPI/SPI <strong>&gt;1</strong> 好，<strong>&lt;1</strong> 差。</li>
+<li>WBS <strong>100%</strong> 规则。</li>
+<li>网络图规则：单起始、单终止、无回路、无双向箭头。</li>
+</ul>
+<hr>

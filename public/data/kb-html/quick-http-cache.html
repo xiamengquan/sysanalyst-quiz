@@ -1,0 +1,38 @@
+<h1 id="速查--http-缓存-vs-硬件-cache">速查 · HTTP 缓存 vs 硬件 Cache</h1>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>在哪</th>
+<th>典型词</th>
+<th>别混淆</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>硬件 Cache</td>
+<td>CPU/内存层次</td>
+<td>L1/L2 Cache</td>
+<td>不是浏览器缓存头</td>
+</tr>
+<tr>
+<td>HTTP 缓存</td>
+<td>浏览器/代理</td>
+<td>Cache-Control、ETag、304</td>
+<td>不是 Redis 业务缓存</td>
+</tr>
+<tr>
+<td>CDN 缓存</td>
+<td>边缘节点</td>
+<td>就近命中静态资源</td>
+<td>不替代业务规则</td>
+</tr>
+<tr>
+<td>应用缓存</td>
+<td>服务端 Redis 等</td>
+<td>热点数据</td>
+<td>要防击穿/穿透</td>
+</tr>
+</tbody></table></div>
+<h2 id="前端常考链">前端常考链</h2>
+<p>请求 →（可 304）→ 用本地；或 CDN 命中 → 源站。
+鉴权接口一般 <code>Cache-Control: no-store</code>，别缓存带隐私的响应。</p>

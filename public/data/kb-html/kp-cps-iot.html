@@ -1,0 +1,62 @@
+<h1 id="cps物联网">CPS/物联网</h1>
+<blockquote>
+<p><strong>大纲</strong>：第21章 · <strong>教程</strong>：第21章 · <strong>分组</strong>：科目3 · 8. 新技术及其应用 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+</blockquote>
+<h2 id="概述">概述</h2>
+<p><strong>CPS/物联网</strong>：定义：包含物理部件、计算部件、网络的交互系统，实现信息空间与物理空间的深度融合与闭环控制。</p>
+<h2 id="速懂">速懂</h2>
+<ul>
+<li><strong>一句话</strong>：信息物理系统 CPS：是计算、通信与控制深度融合的嵌入式网络系统。作用：用于智能制造、工控与软考 21 章主题。</li>
+<li><strong>考什么</strong>：CPS/IoT、边缘与信息物理融合（教程第 21 章）。</li>
+<li><strong>具体理解</strong>：<ul>
+<li>信息物理系统 CPS：是计算、通信与控制深度融合的嵌入式网络系统。作用：用于智能制造、工控与软考 21 章主题。</li>
+<li>物联网 IoT：是物物相连、感知与智能处理的信息基础设施。作用：用于与 CPS 关系辨析（IoT 偏连接与数据，CPS 强调闭环控制）。</li>
+<li>CPS 闭环控制：是感知→分析→决策→执行→反馈。作用：用于案例写控制流与安全攸关设计。</li>
+</ul>
+</li>
+<li><strong>别搞混</strong>：与同章相邻考点区分；题干锚词：<strong>CPS / 物联网</strong>。</li>
+</ul>
+<h2 id="定义">定义</h2>
+<ul>
+<li><strong>信息物理系统 CPS</strong>：是计算、通信与控制深度融合的嵌入式网络系统。<strong>作用</strong>：用于智能制造、工控与软考 21 章主题。</li>
+<li><strong>物联网 IoT</strong>：是物物相连、感知与智能处理的信息基础设施。<strong>作用</strong>：用于与 CPS 关系辨析（IoT 偏连接与数据，CPS 强调闭环控制）。</li>
+<li><strong>边缘计算</strong>：是在靠近数据源侧完成处理以降低时延。<strong>作用</strong>：用于实时控制与带宽优化。</li>
+<li><strong>CPS 闭环控制</strong>：是感知→分析→决策→执行→反馈。<strong>作用</strong>：用于案例写控制流与安全攸关设计。</li>
+</ul>
+<h2 id="步骤与流程">步骤与流程</h2>
+<h3 id="cps-闭环与分层教程第-21-章">CPS 闭环与分层（教程第 21 章）</h3>
+<p><strong>感知-分析-决策-执行闭环</strong>：感知（传感器/ADC）→ 传输（工业以太网、TSN、5G 切片等）→ 分析（边缘/云侧状态估计与优化）→ 执行（执行器作用于物理对象）→ 反馈再感知。</p>
+<p><strong>三层逻辑架构</strong>：</p>
+<ol>
+<li><strong>设备层</strong>——传感器/执行器与物理实体接口。</li>
+<li><strong>控制层</strong>——嵌入式/实时计算与局部闭环控制。</li>
+<li><strong>应用层</strong>——监控、优化、数字孪生与业务系统集成。</li>
+</ol>
+<p><strong>与 IoT</strong>：IoT 侧重连接与数据采集；CPS 强调闭环控制、实时性与安全攸关设计。</p>
+<h2 id="要点">要点</h2>
+<h3 id="一场景特征">一、场景特征</h3>
+<p><strong>定义</strong>：包含<strong>物理部件、计算部件、网络</strong>的交互系统，实现信息空间与物理空间的深度融合与闭环控制。</p>
+<p><strong>与物联网关系</strong>：IoT 侧重连接与感知；CPS 侧重<strong>感知-分析-决策-执行</strong>闭环与实时控制。CPS 范围更广、实时性与安全性要求更高。</p>
+<p><strong>典型应用</strong>：智能制造、智能交通、智能电网、工业互联网、自动驾驶、医疗监护</p>
+<p><strong>CPS 与 SCADA/嵌入式区别</strong>：CPS 强调全局虚拟-局部物理、深度嵌入、事件驱动、以数据为中心、异构 SoS</p>
+<h2 id="易混辨析">易混辨析</h2>
+<p>（同章归档篇章「易混对比」；刷题前对照相邻考点。）</p>
+<h2 id="应试">应试</h2>
+<ul>
+<li><p><strong>综合知识侧重</strong>：CPS/IoT、边缘与信息物理融合。</p>
+</li>
+<li><p><strong>案例题</strong>：先写业务/非功能约束，再列 2 方案对比，结论回扣本页定义术语。</p>
+</li>
+<li><p><strong>论文题</strong>：可复用近 3 年项目经历；结构见 <a href="/kb/kp-thesis-writing-guide">论文写作要点</a>。</p>
+</li>
+<li><p>选择题：抓题干中的技术名词与「最/首先/不属于」等信号词。</p>
+</li>
+<li><p>案例：先列约束，再对比 2 方案，结论回扣本节约束。</p>
+</li>
+</ul>
+<h2 id="相关考点">相关考点</h2>
+<ul>
+<li><a href="/kb/kp-microservices">微服务</a></li>
+<li><a href="/kb/kp-cloud-computing">云计算</a></li>
+<li>归档通章：<a href="../%E7%AC%AC%E4%B8%89%E7%AF%87-%E6%A1%88%E4%BE%8B%E5%AE%9E%E8%B7%B5/%E7%AC%AC21%E7%AB%A0-%E4%BF%A1%E6%81%AF%E7%89%A9%E7%90%86%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1.md"><a href="/kb/ch21/" class="kb-ref" data-kb-id="ch21" data-kb-path="第21章-信息物理系统分析与设计.md" title="预览：第21章 · 信息物理系统分析与设计"><code>第21章-信息物理系统分析与设计.md</code></a></a></li>
+</ul>

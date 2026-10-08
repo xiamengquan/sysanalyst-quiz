@@ -1,0 +1,53 @@
+<h1 id="速查--鉴权与前端安全">速查 · 鉴权与前端安全</h1>
+<h2 id="登录与授权">登录与授权</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>白话</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Cookie + Session</td>
+<td>浏览器持 ID，服务器认人</td>
+</tr>
+<tr>
+<td>JWT</td>
+<td>自带信息的令牌（仍要校签名、控过期）</td>
+</tr>
+<tr>
+<td>OAuth</td>
+<td>第三方授权，不交密码</td>
+</tr>
+<tr>
+<td>HTTPS</td>
+<td>传输加密，防偷密码</td>
+</tr>
+</tbody></table></div>
+<h2 id="前端三连坑">前端三连坑</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>风险</th>
+<th>成因</th>
+<th>防护</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>XSS</td>
+<td>输入当 HTML/JS 执行</td>
+<td>转义、CSP</td>
+</tr>
+<tr>
+<td>CSRF</td>
+<td>异站借 Cookie 发请求</td>
+<td>Token、SameSite</td>
+</tr>
+<tr>
+<td>乱跨域</td>
+<td>浏览器同源策略</td>
+<td>服务器 CORS 头</td>
+</tr>
+</tbody></table></div>
+<h2 id="同源">同源</h2>
+<p>协议 + 域名 + 端口 都相同才同源。</p>

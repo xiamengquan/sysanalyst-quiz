@@ -1,0 +1,106 @@
+<h1 id="面向对象技术">面向对象技术</h1>
+<blockquote>
+<p><strong>大纲</strong>：第7章 UML、第11/13章 · <strong>教程</strong>：第7章 · <strong>分组</strong>：科目3 · 1. 信息系统开发及应用 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+</blockquote>
+<h2 id="概述">概述</h2>
+<p><strong>面向对象技术</strong> 属本科目大纲考点，侧重概念辨析与案例/论文回扣。</p>
+<h2 id="速懂">速懂</h2>
+<ul>
+<li><strong>一句话</strong>：面向对象技术：是以对象为基本单元组织软件，通过类、封装、继承与多态表达问题域的分析、设计与实现方法。作用：用于提高软件的复用性、可维护性与对变化的适应能力。</li>
+<li><strong>考什么</strong>：开发模型选型、UML、过程改进（教程第 7 章）。</li>
+<li><strong>具体理解</strong>：<ul>
+<li>依赖 Dependency：客户端元素依赖供应者元素，供应者变更可能影响客户端；非结构性、较弱，常用于使用、创建、调用、导入等。作用：表示较弱使用语义；虚线开放箭头：客户端 → 供应者。</li>
+<li>聚合 Aggregation：共享整—部分语义的关联；弱拥有，整体不负责部分生命周期，部分可独立存在、可被多整体共享。作用：可分离包含；实线空心菱在整体端。</li>
+<li>组合 Composition：组合整—部分语义的关联；整体负责部分存在与存储，部分生命周期与整体绑定。作用：强拥有与构成；实线实心菱在整体端。</li>
+<li>详解 → <a href="/kb/quick-uml-learn/" class="kb-ref" data-kb-id="quick-uml-learn" data-kb-path="速查/UML-体系化学习指南.md" title="预览：UML · 体系化学习指南（由简入深）"><code>速查/UML-体系化学习指南.md</code></a> · §2.2.1</li>
+</ul>
+</li>
+<li><strong>别搞混</strong>：与同章相邻考点区分；题干锚词：<strong>面向对象技术</strong>。</li>
+</ul>
+<h2 id="定义">定义</h2>
+<ul>
+<li><strong>面向对象技术</strong>：是以对象为基本单元组织软件，通过类、封装、继承与多态表达问题域的分析、设计与实现方法。<strong>作用</strong>：用于提高软件的复用性、可维护性与对变化的适应能力。</li>
+<li><strong>对象与类</strong>：对象是状态（属性）与行为（操作）的封装体；类是具有相同属性与操作的对象集合的抽象。<strong>作用</strong>：用于建立问题域概念与程序结构的直接映射。</li>
+<li><strong>封装、继承、多态</strong>：是封装隐藏内部实现；继承表达一般—特殊关系并复用特征；多态使同一消息在不同对象上呈现不同行为。<strong>作用</strong>：用于降低耦合、支持扩展与替换。</li>
+</ul>
+<h2 id="步骤与流程">步骤与流程</h2>
+<h3 id="建立面向对象分析模型案例高频步骤">建立面向对象分析模型（案例高频步骤）</h3>
+<ol>
+<li>识别<strong>参与者</strong>与<strong>用例</strong>，建立用例模型。</li>
+<li>细化用例事件流，识别<strong>分析类</strong>（边界/控制/实体 BCE）。</li>
+<li>建立<strong>类图</strong>（概念类及关系）。</li>
+<li>对关键场景绘制<strong>序列图/通信图</strong>。</li>
+<li>对状态复杂对象补充<strong>状态机图</strong>；业务流程用<strong>活动图</strong>。</li>
+<li>迭代精化并追踪到系统需求。</li>
+</ol>
+<h2 id="要点">要点</h2>
+<blockquote>
+<p><strong>由简入深完整指南</strong>：<a href="/kb/quick-uml-learn/" class="kb-ref" data-kb-id="quick-uml-learn" data-kb-path="速查/UML-体系化学习指南.md" title="预览：UML · 体系化学习指南（由简入深）"><code>速查/UML-体系化学习指南.md</code></a>（对齐 OMG UML 2.5.1；含五图读法、易混对比、案例填空套路）。下文仅作考前速记。</p>
+</blockquote>
+<ul>
+<li><strong>UML（答卷）</strong>：是用标准图形符号描述软件静态结构与动态行为的可视化建模语言（非编程语言、非过程）。<strong>作用</strong>：用于统一表达与沟通系统模型，支撑分析设计。</li>
+<li><strong>结构图 / 行为图</strong>：结构图描述静态构成与连接，<strong>作用</strong>是说明系统由何组成、如何组织部署；行为图描述动态运作与交互，<strong>作用</strong>是说明系统如何响应与协作。</li>
+<li><strong>关系（答卷·定义 / 作用）</strong>：<ul>
+<li><strong>关联 Association</strong>：表示分类器之间的结构关系，实例通过链接相连；可标角色名、多重性、导航性、可见性、限定符、约束与关联类；<strong>实线</strong>，单向导航用开放箭头指向目标端；聚合与组合是关联的两种特殊形式。<strong>作用</strong>：表达实例间结构连接及端点语义。</li>
+<li><strong>依赖 Dependency</strong>：客户端元素依赖供应者元素，供应者变更可能影响客户端；非结构性、较弱，常用于使用、创建、调用、导入等。<strong>作用</strong>：表示较弱使用语义；<strong>虚线开放箭头：客户端 → 供应者</strong>。</li>
+<li><strong>泛化 Generalization</strong>：一般与特殊分类器之间的 is-a；特殊端继承并可增加、覆盖或特化行为，支持子类型可替换父类型。<strong>作用</strong>：建立类型层次与多态；<strong>实线空心三角在一般分类器端</strong>。</li>
+<li><strong>实现 Realization</strong>：实现元素兑现规约元素契约（典型：类实现接口）。<strong>作用</strong>：实现与规约对应；<strong>虚线空心三角在规约端</strong>。</li>
+<li><strong>聚合 Aggregation</strong>：共享整—部分语义的关联；弱拥有，整体不负责部分生命周期，部分可独立存在、可被多整体共享。<strong>作用</strong>：可分离包含；<strong>实线空心菱在整体端</strong>。</li>
+<li><strong>组合 Composition</strong>：组合整—部分语义的关联；整体负责部分存在与存储，部分生命周期与整体绑定。<strong>作用</strong>：强拥有与构成；<strong>实线实心菱在整体端</strong>。</li>
+<li><strong>强度与选型</strong>：依赖弱于关联，关联弱于聚合，聚合弱于组合；泛化/实现不参与菱形强弱序；选型看生命周期是否从属整体与语义强弱。</li>
+<li>详解 → <a href="/kb/quick-uml-learn/" class="kb-ref" data-kb-id="quick-uml-learn" data-kb-path="速查/UML-体系化学习指南.md" title="预览：UML · 体系化学习指南（由简入深）"><code>速查/UML-体系化学习指南.md</code></a> · §2.2.1</li>
+</ul>
+</li>
+<li><strong>必考五图（定义 / 作用速记）</strong>：<ul>
+<li><strong>用例图</strong>：描述参与者与用例。<strong>作用</strong>：界定功能范围与交互目标。</li>
+<li><strong>类图</strong>：描述类及静态关系。<strong>作用</strong>：展示概念/设计结构。</li>
+<li><strong>序列图</strong>：按时间描述消息交互。<strong>作用</strong>：说明场景中对象如何依次协作。<strong>核心元素</strong>：选择三大（对象、生命线、消息，2014 上）；案例四大（参与者、对象、生命线、消息，2026 上）。泳道属活动图。</li>
+<li><strong>通信图</strong>（UML 1.x 称<strong>协作图</strong>）：按对象链接结构描述消息交互，消息旁标序号。<strong>作用</strong>：说明谁与谁相连、链路上交换了哪些消息；与序列图语义等价、视角不同（时间 vs 链接）。</li>
+<li><strong>状态机图</strong>：描述单对象状态迁移。<strong>作用</strong>：说明事件如何改变对象状态。</li>
+<li><strong>活动图</strong>：描述流程分支与并行。<strong>作用</strong>：说明业务如何推进与分工。</li>
+<li>详解 → <a href="/kb/quick-uml-learn/" class="kb-ref" data-kb-id="quick-uml-learn" data-kb-path="速查/UML-体系化学习指南.md" title="预览：UML · 体系化学习指南（由简入深）"><code>速查/UML-体系化学习指南.md</code></a> · §2.3 / §3（通信图见 §3.3b）</li>
+</ul>
+</li>
+<li><strong>必考优先级</strong>：用例 → 类 → 序列 / 通信（协作）→ 状态 → 活动 → 组件/部署。</li>
+<li><strong>分析类三角色 BCE</strong>（答卷完整句）：<ul>
+<li><strong>边界类</strong>：是系统与参与者（或其他外部系统、设备）之间的交互接口类。<strong>作用</strong>：用于接收外部输入、返回结果并适配交互，隔离系统内外。</li>
+<li><strong>控制类</strong>：是协调完成某一用例（或其中控制流程）的编排类。<strong>作用</strong>：用于按规定顺序调用相关对象、处理分支，实现用例流程；不长期保存业务数据。</li>
+<li><strong>实体类</strong>：是问题域中具有持久业务意义的信息及其规则的载体类。<strong>作用</strong>：用于表达并保存业务状态与约束，供控制类读写。</li>
+<li><strong>采用 BCE 的作用</strong>：按职责分离界面交互、流程编排与业务数据，避免职责混杂。</li>
+<li>详解 → <a href="/kb/quick-sao-learn/" class="kb-ref" data-kb-id="quick-sao-learn" data-kb-path="速查/结构化与面向对象分析-体系化学习路径.md" title="预览：结构化与面向对象分析 · 体系化学习路径（L0→L4）"><code>速查/结构化与面向对象分析-体系化学习路径.md</code></a> · §4.4（定义/作用须可直接答卷，见该文 §0.1）</li>
+</ul>
+</li>
+<li><strong>易混</strong>：include（必含，基→被含）vs extend（可选，扩展→基）；状态图（单对象生命周期）vs 活动图（流程/并行）；序列图（时间轴）vs 通信图/协作图（对象链接+序号）；聚合 vs 组合（生命周期）；泛化 vs 实现（实线/虚线）；边界类 vs 参与者（内 vs 外）。</li>
+</ul>
+<h2 id="易混辨析">易混辨析</h2>
+<p>（本节与相邻考点易混点见归档篇章「易混对比」；检索关键词：<strong>面向对象技术</strong>。）</p>
+<h2 id="应试">应试</h2>
+<p><strong>案例可能怎么问</strong>：根据项目特征（需求稳定度、团队规模、风险、工期）四选一或排序开发模型；RUP 四阶段/敏捷宣言/RAD 五阶段填空；逆向工程 vs 再工程 vs 正向工程概念辨析。</p>
+<p><strong>论文怎么用</strong>：近五年 RAD、敏捷、原型法、设计模式、ABSD 高频——按「背景→选型理由→过程（迭代/用例/原型）→度量改进→总结」写；CMMI/RUP 可作组织级过程改进段落，勿空泛堆名词。</p>
+<p><strong>常考结论</strong></p>
+<ul>
+<li>CMMI <strong>5</strong> 级：<strong>初可已定优</strong>（初始→可重复→已定义→可管理→优化）。</li>
+<li>RUP <strong>4</strong> 阶段：<strong>初细构移</strong>。</li>
+<li>RUP三特点：<strong>用例驱动、架构中心、迭代增量</strong>。</li>
+<li>螺旋每轮 <strong>4</strong> 步：<strong>计风实评</strong>。</li>
+<li>敏捷宣言 <strong>4</strong> 条对比（右优于左）。</li>
+<li>RAD五阶段：<strong>业数过应测</strong>。</li>
+</ul>
+<hr>
+<ul>
+<li><strong>本章练习热力</strong>：教程第 7 章约 46 题（站点练习库，不含真题卷 ch=99）。</li>
+<li><strong>题库考点标签</strong>：CMMI等级、Scrum角色、UML用例图、V模型、敏捷宣言。</li>
+<li><strong>练题入口</strong>：<a href="/?bank=practice&chapter=7&path=all&q=%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF">第 7 章练习（关键词 面向对象技术）</a></li>
+</ul>
+<h2 id="相关考点">相关考点</h2>
+<ul>
+<li><a href="/kb/kp-7-4">访问控制（BLP/Biba/Lattice、DAC/MAC/RBAC 等）</a></li>
+<li><a href="/kb/kp-7-5">容灾与业务持续</a></li>
+<li><a href="/kb/kp-requirements-engineering/">需求工程</a></li>
+<li><a href="/kb/kp-9-1/">需求获取</a></li>
+<li>速查：<a href="../%E9%80%9F%E6%9F%A5/UML-%E4%BD%93%E7%B3%BB%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97.md">UML-体系化学习指南</a></li>
+<li><a href="/kb/kp-software-product-line">软件产品线</a></li>
+<li><a href="/kb/kp-project-management-essay">项目管理</a></li>
+<li>速查：<a href="../%E9%80%9F%E6%9F%A5/UML-%E4%BD%93%E7%B3%BB%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97.md">UML-体系化学习指南</a></li>
+<li>归档通章：<a href="../%E7%AC%AC%E4%B8%80%E7%AF%87-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AC%AC07%E7%AB%A0-%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B.md"><a href="/kb/ch07/" class="kb-ref" data-kb-id="ch07" data-kb-path="第07章-软件工程.md" title="预览：第07章 · 软件工程"><code>第07章-软件工程.md</code></a></a></li>
+</ul>

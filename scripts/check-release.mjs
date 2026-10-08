@@ -54,6 +54,17 @@ if (pkgVer && notes) {
   }
 }
 
+for (const id of ["kp-requirements-engineering", "kp-software-lifecycle", "kp-3-1", "kp-10-1"]) {
+  const md = path.join(root, "public/data/kb-md", `${id}.md`);
+  if (!fs.existsSync(md) || fs.statSync(md).size < 200) {
+    errors.push(`缺少或过小：public/data/kb-md/${id}.md（请 npm run sync:kb）`);
+  }
+  const html = path.join(root, "public/data/kb-html", `${id}.html`);
+  if (!fs.existsSync(html) || fs.statSync(html).size < 200) {
+    errors.push(`缺少或过小：public/data/kb-html/${id}.html（请 npm run sync:kb）`);
+  }
+}
+
 for (const rel of [
   "public/data/questions.json",
   "public/data/cases.json",

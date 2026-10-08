@@ -1,0 +1,87 @@
+<h1 id="遗留系统">遗留系统</h1>
+<blockquote>
+<p><strong>大纲</strong>：15.6 · <strong>教程</strong>：第15章 · <strong>分组</strong>：科目1 · 13. 系统运行与维护 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+</blockquote>
+<h2 id="概述">概述</h2>
+<p><strong>遗留系统</strong> 属本科目大纲考点。常考：<strong>遗留系统四象限策略</strong>  ·  案例大题。</p>
+<h2 id="速懂">速懂</h2>
+<ul>
+<li><strong>一句话</strong>：遗留系统：是仍在运行但技术陈旧、文档不足、难以维护的系统。作用：用于识别现代化与风险。</li>
+<li><strong>考什么</strong>：维护四类、系统转换策略（教程第 15 章）。</li>
+<li><strong>具体理解</strong>：<ul>
+<li>遗留系统：是仍在运行但技术陈旧、文档不足、难以维护的系统。作用：用于识别现代化与风险。</li>
+</ul>
+</li>
+<li><strong>别搞混</strong>：与同章相邻考点区分；题干锚词：<strong>遗留系统</strong>。</li>
+</ul>
+<h2 id="定义">定义</h2>
+<ul>
+<li><strong>遗留系统</strong>：是仍在运行但技术陈旧、文档不足、难以维护的系统。<strong>作用</strong>：用于识别现代化与风险。</li>
+<li><strong>遗留评估</strong>：是从业务价值、技术风险、替换成本维度分析。<strong>作用</strong>：用于封装/重构/替换/迁移策略选择。</li>
+<li><strong>封装（Wrapping）</strong>：是用接口层包装遗留功能供新系统调用。<strong>作用</strong>：用于渐进式集成与风险可控迁移。</li>
+<li><strong>绞杀者模式</strong>：是逐步用新功能替换旧系统边界。<strong>作用</strong>：用于大型遗留分步演进。</li>
+</ul>
+<h2 id="步骤与流程">步骤与流程</h2>
+<p>本节在教程中<strong>未单独列出固定步骤名</strong>；答题时可按下列指引组织答案：</p>
+<ol>
+<li>先在「要点」中找 <strong>阶段 / 活动 / → 流程链</strong> 表述；</li>
+<li>案例题常用 <strong>调查 → 分析 → 方案 → 验证</strong>（或题干给出的过程框架）；</li>
+<li>综合知识流程题优先写 <strong>编号步骤</strong> 或 <strong>阶段名称</strong>；</li>
+<li>需要完整步骤时打开文末 <strong>归档通章</strong> 对应小节对照誊写。</li>
+</ol>
+<h2 id="要点">要点</h2>
+<h3 id="63-四象限演化策略必考">6.3 四象限演化策略（必考）</h3>
+<pre><code>        高业务价值
+            │
+  改造      │      集成
+ (高技高值) │ (高技低值)
+────────────┼──────────── 高技术水平
+  淘汰      │      继承
+ (低技低值) │ (低技高值)
+            │
+        低业务价值
+</code></pre>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>象限</th>
+<th>策略</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第一象限 高技高值</td>
+<td><strong>改造</strong></td>
+<td>功能增强 + 数据模型改造</td>
+</tr>
+<tr>
+<td>第二象限 高技低值</td>
+<td><strong>集成</strong></td>
+<td>企业应用集成，消除孤岛</td>
+</tr>
+<tr>
+<td>第三象限 低技低值</td>
+<td><strong>淘汰</strong></td>
+<td>全面重新开发；可借鉴旧系统降风险</td>
+</tr>
+<tr>
+<td>第四象限 低技高值</td>
+<td><strong>继承</strong></td>
+<td>新系统兼容旧功能/数据模型；需并行运行</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="易混辨析">易混辨析</h2>
+<p>（本节与相邻考点易混点见归档篇章「易混对比」；检索关键词：<strong>遗留系统</strong>。）</p>
+<h2 id="应试">应试</h2>
+<ul>
+<li><strong>本章练习热力</strong>：教程第 15 章约 40 题（站点练习库，不含真题卷 ch=99）。</li>
+<li><strong>题库考点标签</strong>：遗留系统策略、遗留系统改造。</li>
+<li><strong>练题入口</strong>：<a href="/?bank=practice&chapter=15&path=all&q=%E9%81%97%E7%95%99%E7%B3%BB%E7%BB%9F">第 15 章练习（关键词 遗留系统）</a></li>
+</ul>
+<h2 id="相关考点">相关考点</h2>
+<ul>
+<li><a href="/kb/kp-13-5">系统评价</a></li>
+<li><a href="/kb/kp-13-7">新旧系统转换</a></li>
+<li>归档通章：<a href="../%E7%AC%AC%E4%BA%8C%E7%AF%87-%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF/%E7%AC%AC15%E7%AB%A0-%E7%B3%BB%E7%BB%9F%E8%BF%90%E8%A1%8C%E4%B8%8E%E7%BB%B4%E6%8A%A4.md"><a href="/kb/ch15/" class="kb-ref" data-kb-id="ch15" data-kb-path="第15章-系统运行与维护.md" title="预览：第15章 · 系统运行与维护"><code>第15章-系统运行与维护.md</code></a></a></li>
+</ul>

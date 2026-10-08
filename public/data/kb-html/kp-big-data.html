@@ -1,0 +1,75 @@
+<h1 id="大数据">大数据</h1>
+<blockquote>
+<p><strong>大纲</strong>：第19章 · <strong>教程</strong>：第19章 · <strong>分组</strong>：科目3 · 8. 新技术及其应用 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+</blockquote>
+<h2 id="概述">概述</h2>
+<p><strong>大数据</strong>：定义：高效、综合的数据处理平台，处理和分析海量、多样、高速数据。</p>
+<h2 id="速懂">速懂</h2>
+<ul>
+<li><strong>一句话</strong>：大数据：是对海量、多样、高速数据进行处理与分析的技术体系（常考 5V）。作用：用于 Lambda/Kappa 架构选型与批流一体案例。</li>
+<li><strong>考什么</strong>：5V、Lambda/Kappa、批流组件选型（教程第 19 章）。</li>
+<li><strong>具体理解</strong>：<ul>
+<li>大数据：是对海量、多样、高速数据进行处理与分析的技术体系（常考 5V）。作用：用于 Lambda/Kappa 架构选型与批流一体案例。</li>
+<li>离线批处理：是有界数据，HDFS + MapReduce + Hive。作用：用于 T+1 报表与历史分析。</li>
+</ul>
+</li>
+<li><strong>别搞混</strong>：与同章相邻考点区分；题干锚词：<strong>大数据</strong>。</li>
+</ul>
+<h2 id="定义">定义</h2>
+<ul>
+<li><strong>大数据</strong>：是对海量、多样、高速数据进行处理与分析的技术体系（常考 5V）。<strong>作用</strong>：用于 Lambda/Kappa 架构选型与批流一体案例。</li>
+<li><strong>离线批处理</strong>：是有界数据，HDFS + MapReduce + Hive。<strong>作用</strong>：用于 T+1 报表与历史分析。</li>
+<li><strong>实时流处理</strong>：是无界数据，Flume/Kafka + Storm/Spark Streaming + HBase/Redis。<strong>作用</strong>：用于监控、风控等低时延场景。</li>
+<li><strong>混合架构</strong>：是 Lambda（批+流）/ Kappa / 数据湖。<strong>作用</strong>：用于批流并存与架构权衡题。</li>
+</ul>
+<h2 id="步骤与流程">步骤与流程</h2>
+<h3 id="大数据处理一般链路">大数据处理一般链路</h3>
+<ol>
+<li><strong>采集</strong>——多源异构数据接入（日志、传感、业务系统）。</li>
+<li><strong>存储与计算</strong>——分布式文件/NoSQL、批处理与流处理框架。</li>
+<li><strong>分析挖掘</strong>——OLAP、机器学习、可视化洞察。</li>
+<li><strong>应用</strong>——精准营销、风控、运维监测等场景落地。</li>
+</ol>
+<p><strong>5V 特征</strong>（辨析题）：Volume、Velocity、Variety、Value、Veracity。</p>
+<h2 id="要点">要点</h2>
+<h3 id="一场景特征">一、场景特征</h3>
+<p><strong>定义</strong>：高效、综合的数据处理平台，处理和分析<strong>海量、多样、高速</strong>数据。</p>
+<p><strong>大数据特征（常考）</strong>：Volume、Velocity、Variety、Veracity（不同教材表述略有差异，考试以教程为准）</p>
+<p><strong>数据类型</strong>：</p>
+<ul>
+<li>结构化：关系数据库</li>
+<li>半结构化：JSON、XML、日志</li>
+<li>非结构化：图片、视频、文本、语音</li>
+</ul>
+<p><strong>处理方式</strong>：</p>
+<ul>
+<li><strong>离线批处理</strong>：有界数据，HDFS + MapReduce + Hive</li>
+<li><strong>实时流处理</strong>：无界数据，Flume/Kafka + Storm/Spark Streaming + HBase/Redis</li>
+<li><strong>混合架构</strong>：Lambda（批+流）/ Kappa / 数据湖</li>
+</ul>
+<h2 id="易混辨析">易混辨析</h2>
+<p>（同章归档篇章「易混对比」；刷题前对照相邻考点。）</p>
+<h2 id="应试">应试</h2>
+<ul>
+<li><p><strong>综合知识侧重</strong>：大数据 Lambda/Kappa、批流。</p>
+</li>
+<li><p><strong>本考点侧重</strong>：5V、Lambda/Kappa、批流组件选型。</p>
+</li>
+<li><p><strong>案例题</strong>：先写业务/非功能约束，再列 2 方案对比，结论回扣本页定义术语。</p>
+</li>
+<li><p><strong>论文题</strong>：可复用近 3 年项目经历；结构见 <a href="/kb/kp-thesis-writing-guide">论文写作要点</a>。</p>
+</li>
+<li><p>选择题：抓题干中的技术名词与「最/首先/不属于」等信号词。</p>
+</li>
+<li><p>案例：先列约束，再对比 2 方案，结论回扣本节约束。</p>
+</li>
+</ul>
+<h2 id="相关考点">相关考点</h2>
+<ul>
+<li><a href="/kb/kp-cloud-computing">云计算</a></li>
+<li><a href="/kb/kp-4-4-2">测试</a></li>
+<li><a href="/kb/kp-data-mining">数据挖掘</a></li>
+<li><a href="/kb/kp-low-code-nocode">无代码/低代码</a></li>
+<li><a href="/kb/kp-microservices">微服务</a></li>
+<li>归档通章：<a href="../%E7%AC%AC%E4%B8%89%E7%AF%87-%E6%A1%88%E4%BE%8B%E5%AE%9E%E8%B7%B5/%E7%AC%AC19%E7%AB%A0-%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1.md"><a href="/kb/ch19/" class="kb-ref" data-kb-id="ch19" data-kb-path="第19章-大数据处理系统分析与设计.md" title="预览：第19章 · 大数据处理系统分析与设计"><code>第19章-大数据处理系统分析与设计.md</code></a></a></li>
+</ul>

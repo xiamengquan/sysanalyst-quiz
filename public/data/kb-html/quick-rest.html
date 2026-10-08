@@ -1,0 +1,194 @@
+<h1 id="rest-架构风格--体系化学习卡">REST 架构风格 · 体系化学习卡</h1>
+<blockquote>
+<p><strong>docType</strong>：reference<br><strong>对齐大纲</strong>：Web 服务 / SOA 集成（第12章）、Web 应用（第16章）、微服务通信（第20章）<br><strong>对齐真题</strong>：2016 上案例 · 试题五（REST vs SOAP RPC）；2018 上案例 · 在线调查（REST 资源抽象）<br><strong>用途</strong>：综合知识「URI+HTTP 动词、无状态、幂等」；案例填表、资源 URI 设计<br><strong>关联章节</strong>：第12章 SOA、第16章 Web、速查 §13.0</p>
+</blockquote>
+<hr>
+<h2 id="一rest-是什么答卷定义">一、REST 是什么（答卷·定义）</h2>
+<p><strong>REST（Representational State Transfer，表述性状态转移）</strong> 是一种 <strong>Web 架构风格</strong>（不是某一家公司的产品协议），核心思想是：</p>
+<ul>
+<li>把系统里的 <strong>名词（资源）</strong> 用 <strong>URI</strong> 标识；</li>
+<li>用 <strong>HTTP 标准方法</strong>（GET/POST/PUT/DELETE 等）表达对资源的 <strong>操作语义</strong>；</li>
+<li>服务器 <strong>不在请求之间保存客户端会话状态</strong>（无状态），每个请求应 <strong>自包含</strong> 完成操作所需信息。</li>
+</ul>
+<p><strong>助记</strong>：资源 + URI + 统一接口 + 无状态 —— 与「远程过程名 + 信封消息体」的 SOAP/RPC 思路不同。</p>
+<hr>
+<h2 id="二架构约束选择题高频">二、架构约束（选择题高频）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>约束</th>
+<th>要点</th>
+<th>题干信号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>客户端-服务器</strong></td>
+<td>界面与存储分离，各自演化</td>
+<td>前后端、多端复用 API</td>
+</tr>
+<tr>
+<td><strong>无状态（Stateless）</strong></td>
+<td>服务端不保存会话上下文；请求须自带令牌、资源标识等</td>
+<td>「不在请求之间保存客户端会话」</td>
+</tr>
+<tr>
+<td><strong>可缓存</strong></td>
+<td>响应可标为可缓存或不可缓存</td>
+<td>CDN、GET 缓存</td>
+</tr>
+<tr>
+<td><strong>统一接口</strong></td>
+<td>资源标识（URI）+ 标准动词 + 自描述消息</td>
+<td>URI + GET/POST/PUT/DELETE</td>
+</tr>
+<tr>
+<td><strong>分层系统</strong></td>
+<td>客户端不知连的是末端还是中间代理</td>
+<td>网关、负载均衡</td>
+</tr>
+<tr>
+<td><strong>按需代码（可选）</strong></td>
+<td>可选下发脚本</td>
+<td>较少单独考</td>
+</tr>
+</tbody></table></div>
+<p><strong>无状态 vs 统一接口（易混）</strong>：无状态强调 <strong>服务端不记会话</strong>；统一接口强调 <strong>用 URI 标识资源、用 HTTP 动词表达操作</strong>。</p>
+<hr>
+<h2 id="三http-方法与语义综合知识--设计题">三、HTTP 方法与语义（综合知识 + 设计题）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>典型语义</th>
+<th>安全</th>
+<th>幂等</th>
+<th>案例/设计提示</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>GET</strong></td>
+<td>查询资源</td>
+<td>是</td>
+<td>是</td>
+<td>只读，可缓存</td>
+</tr>
+<tr>
+<td><strong>POST</strong></td>
+<td>创建资源 / 非幂等动作</td>
+<td>否</td>
+<td>否</td>
+<td>下单、提交问卷</td>
+</tr>
+<tr>
+<td><strong>PUT</strong></td>
+<td>全量更新（或指定 URI 的替换）</td>
+<td>否</td>
+<td>是</td>
+<td>弱网重试仍安全</td>
+</tr>
+<tr>
+<td><strong>DELETE</strong></td>
+<td>删除资源</td>
+<td>否</td>
+<td>是</td>
+<td>删除调查、订单</td>
+</tr>
+<tr>
+<td><strong>PATCH</strong></td>
+<td>部分更新</td>
+<td>否</td>
+<td>视设计</td>
+<td>大纲较少深挖</td>
+</tr>
+</tbody></table></div>
+<p><strong>幂等（答卷·白话）</strong>：同一请求 <strong>重复执行多次，资源状态与执行一次一致</strong>（如 PUT 覆盖、DELETE 删已删）。POST 创建通常 <strong>不幂等</strong>（多次可能产生多条记录）。</p>
+<p><strong>URI 设计惯例（2018 上 · 资源抽象）</strong>：</p>
+<ul>
+<li>用 <strong>名词复数</strong> 表资源集合：<code>/surveys</code>、<code>/questions</code></li>
+<li>用 <strong>路径参数</strong> 表实例：<code>/surveys/{id}</code></li>
+<li><strong>编辑模式 / 视图模式</strong> 可建模为资源或子资源（如 <code>/surveys/{id}?mode=edit</code> 或 <code>/surveys/{id}/edit</code>），与业务状态机一致即可自洽。</li>
+</ul>
+<hr>
+<h2 id="四rest-vs-soap-vs-rpc对比速记">四、REST vs SOAP vs RPC（对比速记）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>维度</th>
+<th><strong>REST 风格</strong></th>
+<th><strong>SOAP / 传统 RPC</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>抽象</td>
+<td><strong>资源</strong> + HTTP 动词</td>
+<td><strong>过程/对象</strong> + 操作名</td>
+</tr>
+<tr>
+<td>协议载体</td>
+<td>常用 HTTP/HTTPS</td>
+<td>HTTP/SMTP 等 + XML 信封</td>
+</tr>
+<tr>
+<td>状态</td>
+<td>强调 <strong>无状态</strong></td>
+<td>可支持 <strong>会话/上下文</strong> 的有状态多步流程</td>
+</tr>
+<tr>
+<td>负载与耦合</td>
+<td>相对 <strong>轻量</strong>，易与浏览器/CDN 协作</td>
+<td>消息体规范重，工具链完整</td>
+</tr>
+<tr>
+<td>扩展</td>
+<td>无状态 + HTTP → <strong>横向扩展、负载均衡</strong> 较自然</td>
+<td>企业级 <strong>WS-Security</strong> 等安全规范成熟</td>
+</tr>
+<tr>
+<td>安全</td>
+<td>常靠 HTTPS + 应用层鉴权（OAuth2/JWT）补</td>
+<td>规范层安全能力 <strong>更直接</strong></td>
+</tr>
+</tbody></table></div>
+<p><strong>2016 上 · 选 REST 集成云平台（表 5-2 判题口径，摘要）</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>常见表述</th>
+<th>是否合理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET/POST/PUT/DELETE 映射配置与监测数据的 <strong>CRUD 无状态操作</strong></td>
+<td>合理</td>
+</tr>
+<tr>
+<td>REST <strong>缺少</strong> 像 WS-Security 那样 <strong>开箱即用的服务安全规范</strong>（需额外设计）</td>
+<td>合理</td>
+</tr>
+<tr>
+<td>SOAP 一定比 REST <strong>更适合所有无状态场景</strong></td>
+<td>需看题干，不能绝对化</td>
+</tr>
+<tr>
+<td>无状态请求可在任意服务器处理，利于 <strong>HTTP 负载均衡与横向扩展</strong></td>
+<td>合理</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="五与-soa--微服务的关系">五、与 SOA / 微服务的关系</h2>
+<ul>
+<li><strong>第12章 SOA</strong>：REST 与 SOAP、WSDL、UDDI 并列，表示 <strong>面向资源的轻量服务暴露方式</strong>。</li>
+<li><strong>第16章 Web</strong>：前后端分离、SPA 通过 <strong>RESTful API</strong> 访问后端。</li>
+<li><strong>第20章 微服务</strong>：服务间同步调用常用 <strong>HTTP/REST + OpenAPI</strong>；异步用消息队列。</li>
+</ul>
+<p><strong>答卷句</strong>：微服务对外暴露 <strong>标准 REST API</strong> 并做 <strong>版本控制</strong>，用于降低协作成本、支持独立部署与演进。</p>
+<hr>
+<h2 id="六自测清单闭卷-5-分钟">六、自测清单（闭卷 5 分钟）</h2>
+<ol>
+<li>说出 REST 的 <strong>资源、URI、无状态</strong> 三关键词。  </li>
+<li><strong>GET / PUT / DELETE</strong> 是否幂等？<strong>POST</strong> 呢？  </li>
+<li>题干「服务端不保存会话、请求自包含」→ 哪条约束？  </li>
+<li>REST 相对 SOAP 在 <strong>横向扩展</strong> 上的常见理由是什么？  </li>
+<li>2018 类题：调查问卷、问题、评论、统计结果如何拆 <strong>资源</strong>？</li>
+</ol>
+<p><strong>站内练习</strong>：综合知识搜索考点「REST」「REST无状态」「REST幂等」。</p>

@@ -1,0 +1,35 @@
+# 速查 · 论文方向写作索引
+
+> **docType**：howto · **科目3** · 4 选 1，摘要约 300～320 字 + 正文三问  
+> **关联**：[第22章 论文写作要点](../第三篇-案例实践/第22章-系统分析师论文写作要点.md) · `kp-essay-topic-*` · [注意事项考点](../points/kp-thesis-writing-guide.md)
+
+## 方向 → 考点 / 素材入口
+
+| 论文方向（常见） | 项目经历可写 | 知识点 / 速查 |
+|------------------|--------------|----------------|
+| 系统分析与设计 | 需求→架构→实现→测试 | `kp-requirements-engineering` · [结构化与 OO 路径](./结构化与面向对象分析-体系化学习路径.md) · `kp-app-system-analysis-design` |
+| UML 建模实践 | 用例/类图/序列/活动 | [UML 指南](./UML-体系化学习指南.md) · `kp-oo-technology` · `kp-7-4`～`kp-7-6` |
+| 软件架构 / 微服务 | 风格选型、治理、演进 | `kp-10-*` · `kp-microservices` · [REST 卡](./REST架构风格-体系化学习卡.md) · [案例系统设计 Checklist](./案例系统设计类-答题Checklist.md) |
+| 企业架构 / 信息化 | ERP/BPR/规划、TOGAF/Zachman | [TOGAF 与 Zachman 素材卡](./企业架构-TOGAF与Zachman-论文素材卡.md) · `kp-4-2` · `kp-system-planning-analysis` · `kp-enterprise-informatization` · `kp-essay-topic-enterprise-is` |
+| 数据模型 / 数据治理 | ER、仓库、分片 | `kp-3-*` · `kp-data-warehouse` · `kp-big-data` |
+| 性能优化 | 缓存、分库、异步、压测 | `kp-12-*` · [案例系统设计类](./案例系统设计类-答题Checklist.md) |
+| Web / 云 / 新技术 | 云原生、容器、智能体 | `kp-cloud-computing` · [Web+Agent 四维度](./Web与AI智能体-架构选型四维度卡.md) |
+| 项目管理 | 范围/风险/挣值 | 第 8 章考点 · `kp-8-1` · `kp-project-management-essay` |
+| 安全与等保 | 等级保护、零信任 | [等保2.0与零信任](./等保2.0与零信任-速查卡.md) · `kp-security-data-system` |
+
+## UML 建模实践 · 三问素材（提纲）
+
+1. **问需求/模型**：用例图 + 活动图描述业务流程；类图表达核心领域对象。
+2. **问设计/动态**：序列图/协作图说明关键用例；状态图用于订单/工单类对象。
+3. **问实施/质量**：模型到代码映射、重构与评审；与 `kp-oo-technology` 定义对齐。
+
+## 写作骨架（每问通用）
+
+1. **摘要**：背景（行业+规模）→ 本人角色 → 技术路线 → 效果数据 → 不足  
+2. **正文每问**：先 **回应子问题** → 分点技术措施 → **项目数据/指标** → 小结回扣  
+3. **禁忌**：纯概念堆砌、无项目、三问互相重复、摘要与正文矛盾  
+
+## 专题页
+
+- 总入口：`kp-essay-topic-info-systems`  
+- 分主题：`kp-essay-topic-db-modeling` … `kp-essay-topic-new-tech`（按 kb 目录「论文专题」分组浏览）

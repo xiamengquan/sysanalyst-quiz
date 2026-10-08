@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import type { KbIndex, KbItem } from "@/lib/types";
 import { filterCatalogItems } from "@/lib/kb-search";
+import { fetchKbBody } from "@/lib/kb-fetch";
 import { renderKbMarkdown, runMermaidIn } from "@/lib/kb-md";
 import {
   findKbItemByRouteId,
@@ -411,7 +412,11 @@ export function KbReader({ id: routeIdProp }: { id: string }) {
   }, [catalog, id, pointIndexFlat]);
 
   useEffect(() => {
-    if (!catalog.length) return;
+    if (!catalog.length) {
+      setStatus("loading");
+      setMsg("");
+      return;
+    }
     const found = findKbItemByRouteId(catalog, id);
     setItem(found);
     if (!found) {
@@ -425,23 +430,32 @@ export function KbReader({ id: routeIdProp }: { id: string }) {
       return;
     }
     let cancelled = false;
+    const ac = new AbortController();
     setStatus("loading");
-    const url = "/kb/" + found.path.split("/").map(encodeURIComponent).join("/");
-    fetch(url)
-      .then(async (res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const md = await res.text();
+    setMsg("");
+    fetchKbBody({ id: found.id, path: found.path }, ac.signal)
+      .then((body) => {
         if (cancelled) return;
-        setHtml(renderKbMarkdown(md, catalog, found.id));
-        setStatus("ok");
+        try {
+          setHtml(
+            body.format === "html"
+              ? body.html
+              : renderKbMarkdown(body.markdown, catalog, found.id),
+          );
+          setStatus("ok");
+        } catch (e) {
+          setStatus("err");
+          setMsg(e instanceof Error ? e.message : "正文渲染失败");
+        }
       })
       .catch((e) => {
         if (cancelled) return;
         setStatus("err");
-        setMsg(e.message);
+        setMsg(e instanceof Error ? e.message : "加载失败");
       });
     return () => {
       cancelled = true;
+      ac.abort();
     };
   }, [id, catalog]);
 

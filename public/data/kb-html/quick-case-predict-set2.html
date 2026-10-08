@@ -1,0 +1,268 @@
+<h1 id="案例预测--第二套--练笔-checklist">案例预测 · 第二套 · 练笔 Checklist</h1>
+<blockquote>
+<p><strong>docType</strong>：howto<br><strong>来源</strong>：外部预测模拟卷《案例分析预测（第二套）》（2026-10-01 编写，<strong>非真题</strong>）<br><strong>用途</strong>：限时练笔 + 自测勾选项；与第一套预测<strong>互补</strong>（本套补大纲常考/近年空窗方向）<br><strong>关联</strong>：<a href="../%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E7%AD%94%E9%A2%98%E6%95%99%E7%A8%8B.md">案例分析答题教程</a> · <a href="./UML-%E4%BD%93%E7%B3%BB%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97.md">UML 体系化学习指南</a> · <a href="./%E6%A1%88%E4%BE%8B%E5%BF%85%E7%AD%94-%E9%9C%80%E6%B1%82%E8%8E%B7%E5%8F%96%E4%BA%94%E6%B3%95%E5%AF%B9%E6%AF%94%E5%8D%A1.md">案例必答 · 需求获取五法对比卡</a> · <a href="./Web%E4%B8%8EAI%E6%99%BA%E8%83%BD%E4%BD%93-%E6%9E%B6%E6%9E%84%E9%80%89%E5%9E%8B%E5%9B%9B%E7%BB%B4%E5%BA%A6%E5%8D%A1.md">Web与AI智能体 · 架构选型四维度卡</a> · <a href="./%E8%80%83%E5%89%8D7%E5%A4%A9%E8%83%8C%E8%AF%B5%E6%B8%85%E5%8D%95.md">考前 7 天背诵清单</a></p>
+</blockquote>
+<p><strong>可检索摘要</strong>：案例分析 90 分钟 75 分；试题一必答 25 分，试题二至五任选 2 题各 25 分。第二套覆盖类图多重性、活动图分叉汇合、OO 设计原则、可行性 NPV/回收期、BPR、3NF/SQL/反规范化索引、高并发挂号防超卖幂等、RTOS 与云边端 OTA。</p>
+<hr>
+<h2 id="卷面规则先记">卷面规则（先记）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>时长 / 满分</td>
+<td>90 分钟 · 75 分</td>
+</tr>
+<tr>
+<td>题量</td>
+<td><strong>5 大题</strong> → 实际作答 <strong>3 道</strong>（一必答 + 四选二）</td>
+</tr>
+<tr>
+<td>分值</td>
+<td>每道 <strong>25 分</strong>；建议 <strong>每题约 30 分钟</strong></td>
+</tr>
+<tr>
+<td>机考</td>
+<td>2026 年下半年场次为<strong>连续机考</strong>（综合知识交卷后进入案例）</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="与第一套的分工选题用">与第一套的分工（选题用）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>方向</th>
+<th>第一套（站内可对照）</th>
+<th>第二套（本 Checklist）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>试题一</td>
+<td>需求分类、状态图、需求验证 → <a href="./%E6%A1%88%E4%BE%8B%E5%BF%85%E7%AD%94-%E9%9C%80%E6%B1%82%E8%8E%B7%E5%8F%96%E4%BA%94%E6%B3%95%E5%AF%B9%E6%AF%94%E5%8D%A1.md">需求获取五法</a></td>
+<td><strong>类图关系/多重性、活动图、OO 设计原则</strong></td>
+</tr>
+<tr>
+<td>结构化/规划</td>
+<td>DFD、判定表 → <a href="./%E7%BB%93%E6%9E%84%E5%8C%96%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%88%86%E6%9E%90-%E4%BD%93%E7%B3%BB%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84.md">结构化与 OO 路径</a></td>
+<td><strong>可行性四维、回收期/NPV、BPR</strong></td>
+</tr>
+<tr>
+<td>数据库</td>
+<td>E-R、分布式事务</td>
+<td><strong>函数依赖 → 范式 → SQL → 反规范化/索引</strong></td>
+</tr>
+<tr>
+<td>Web</td>
+<td>智能体/RAG → <a href="./Web%E4%B8%8EAI%E6%99%BA%E8%83%BD%E4%BD%93-%E6%9E%B6%E6%9E%84%E9%80%89%E5%9E%8B%E5%9B%9B%E7%BB%B4%E5%BA%A6%E5%8D%A1.md">Web+Agent 四维度</a></td>
+<td><strong>预约挂号：LB、MQ 削峰、防超卖、幂等、超时释放</strong></td>
+</tr>
+<tr>
+<td>嵌入式</td>
+<td>覆盖准则、MC/DC</td>
+<td><strong>RTOS vs Linux、MQTT QoS、低功耗、OTA</strong></td>
+</tr>
+</tbody></table></div>
+<p><strong>复习顺序（文档建议 + 站点落地）</strong></p>
+<ol>
+<li><strong>必做</strong>：第一套试题一 + <strong>本套试题一</strong>（唯一必答题方向全覆盖 UML 高频图）。  </li>
+<li><strong>选答稳分</strong>：两套的「数据库 + 结构化/规划」——规则明确、填空多。  </li>
+<li><strong>按背景二选一</strong>：Web 高并发 <strong>或</strong> 嵌入式云边端。  </li>
+<li><strong>保底 1 小时</strong>：回收期 / 动态回收期 / NPV 公式 + 可行性分类。</li>
+</ol>
+<hr>
+<h2 id="试题一必答--25-分-居家养老--oo-建模">试题一（必答 · 25 分）· 居家养老 · OO 建模</h2>
+<p><strong>场景关键词</strong>：老人 / 家属 / 服务人员；健康档案；服务订单与明细；智能手环；派单。</p>
+<h3 id="问题-18-分-类图">问题 1（8 分）· 类图</h3>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>(1)(2)</strong> 判 <strong>组合</strong>：部分随整体生命周期销毁（档案随老人注销；明细不能脱离订单）。  </li>
+<li><input disabled="" type="checkbox"> <strong>(3)</strong> 判 <strong>关联</strong>：订单明细 ↔ 服务项目，各自独立存在。  </li>
+<li><input disabled="" type="checkbox"> <strong>(4)</strong> 判 <strong>聚合</strong>：手环可收回再分配给另一位老人。  </li>
+<li><input disabled="" type="checkbox"> <strong>(5)(6)</strong> 多重性 <strong>1..</strong>*（家属↔老人：至少 1 名家属；一名家属可关注多位老人）——<strong>写在对方端，勿写反</strong>。  </li>
+<li><input disabled="" type="checkbox"> <strong>(7)</strong> 老人—订单 <strong>0..</strong>*；（8）明细—服务项目 <strong>1</strong>。</li>
+</ul>
+<p><strong>回链考点</strong>：<a href="./UML-%E4%BD%93%E7%B3%BB%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97.md">UML 指南 · 类图关系</a> · 考点 API <code>kp-面向对象技术</code> · <code>kp-7-4</code>（类图）</p>
+<h3 id="问题-28-分-活动图">问题 2（8 分）· 活动图</h3>
+<ul>
+<li><input disabled="" type="checkbox"> 填空：<strong>分支</strong> = 审核是否完整；<strong>分叉 / 汇合</strong> = 并发粗横线；后续 <strong>评价服务</strong>。  </li>
+<li><input disabled="" type="checkbox"> 口述区别：<strong>分叉/汇合 = 同时做</strong>；<strong>分支/合并 = 选一个做</strong>（菱形）。  </li>
+<li><input disabled="" type="checkbox"> <strong>泳道</strong>：按角色/对象划分活动，看清职责与跨角色交接。</li>
+</ul>
+<p><strong>回链考点</strong>：<code>kp-7-5</code>（活动图）· <code>kp-7-6</code>（状态图/活动对比时一并复习）</p>
+<h3 id="问题-39-分-设计原则">问题 3（9 分）· 设计原则</h3>
+<ul>
+<li><input disabled="" type="checkbox"> ① 开闭 · ② 单一职责 · ③ 依赖倒置 · ④ 接口隔离 · ⑤ <strong>违反里氏替换</strong> · ⑥ 迪米特 · ⑦ 合成复用。  </li>
+<li><input disabled="" type="checkbox"> <strong>⑤ 改法</strong>：子类不能削弱父类行为；计费改为 <strong>策略对象</strong> 或调整继承体系，避免 VIP 重写后抛异常导致替换失败。</li>
+</ul>
+<p><strong>回链考点</strong>：<code>kp-7-7</code> · <a href="./UML-%E4%BD%93%E7%B3%BB%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97.md">UML 指南 · 设计原则小节</a></p>
+<h3 id="试题一--30-分钟练笔步骤">试题一 · 30 分钟练笔步骤</h3>
+<ol>
+<li>读说明 <strong>6 条业务规则</strong> → 在草稿上画关系与多重性（2 min）。  </li>
+<li>看活动图（PDF 原图）填空 + 写分叉/泳道区别（8 min）。  </li>
+<li>原则题 <strong>先写原则名再写一句依据</strong>；⑤ 必须写 <strong>修改方案</strong>（15 min）。  </li>
+<li>对照下方「易错」扫一遍（5 min）。</li>
+</ol>
+<p><strong>易错</strong>：组合 vs 聚合只看 <strong>生命周期</strong>；开闭（怎么扩展）≠ 依赖倒置（依赖抽象）。</p>
+<hr>
+<h2 id="试题二选答--25-分-一网通办--规划与-bpr">试题二（选答 · 25 分）· 一网通办 · 规划与 BPR</h2>
+<h3 id="问题-16-分-可行性分类">问题 1（6 分）· 可行性分类</h3>
+<ul>
+<li><input disabled="" type="checkbox"> ① 经济 · ② 技术 · ③ 法律/社会 · ④ 操作/用户使用 · ⑤ <strong>组织与政策</strong>（仍归社会/法律层面，非技术）· ⑥ 技术（团队能力与工期）。</li>
+</ul>
+<h3 id="问题-210-分-成本效益">问题 2（10 分）· 成本效益</h3>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>静态回收期</strong>：累计净现金流由负转正年 = <code>3 + 30/150 = 3.2 年</code>（写清公式）。  </li>
+<li><input disabled="" type="checkbox"> <strong>动态回收期</strong>：用现值累计，约 <strong>3.93 年</strong>（应 <strong>≥ 静态</strong>）。  </li>
+<li><input disabled="" type="checkbox"> <strong>NPV</strong>（10%）：≈ <strong>100.62 万</strong> &gt; 0 → 经济可行。</li>
+</ul>
+<h3 id="问题-39-分-bpr">问题 3（9 分）· BPR</h3>
+<ul>
+<li><input disabled="" type="checkbox"> 流程填空：<strong>一窗受理 → 数据共享交换平台 → 统一出件 → 电子监察</strong>（以 PDF 图 3 为准）。  </li>
+<li><input disabled="" type="checkbox"> BPR 关键词：<strong>根本性、彻底性、以顾客/申请人为中心</strong>；本案例：并联、一次采集、串改并、信息推送。</li>
+</ul>
+<p><strong>回链考点</strong>：<code>kp-系统计划和分析</code> · <code>kp-4-2</code>（BSP/CSF/SST）· <a href="../%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E7%AD%94%E9%A2%98%E6%95%99%E7%A8%8B.md">案例分析答题教程</a> § 规划类</p>
+<p><strong>站内加练</strong>：案例库 <strong>规划/需求</strong> 领域限时 1 套；综合知识 <strong>NPV/回收期</strong> 计算题速刷。</p>
+<hr>
+<h2 id="试题三选答--25-分-健身预约--数据库">试题三（选答 · 25 分）· 健身预约 · 数据库</h2>
+<h3 id="问题-19-分-规范化">问题 1（9 分）· 规范化</h3>
+<ul>
+<li><input disabled="" type="checkbox"> 候选键 <strong>(会员号, 课程号)</strong>；最高 <strong>1NF</strong>（有部分依赖 → 非 2NF）。  </li>
+<li><input disabled="" type="checkbox"> 各举 <strong>插入 / 删除 / 修改</strong> 异常一例（教练姓名不一致 = 修改异常）。  </li>
+<li><input disabled="" type="checkbox"> 分解 <strong>3NF</strong>：会员、教练、课程、预约 四表 + 主键/外键标清。</li>
+</ul>
+<h3 id="问题-27-分-sql">问题 2（7 分）· SQL</h3>
+<ul>
+<li><input disabled="" type="checkbox"> DDL：<code>(a) CHECK</code> · <code>(b) PRIMARY KEY</code> · <code>(c) REFERENCES</code>。  </li>
+<li><input disabled="" type="checkbox"> 统计：<code>(d) JOIN</code> · <code>(e) GROUP BY</code> · <code>(f) HAVING</code>（筛签到率）· <code>(g) ORDER BY</code>。</li>
+</ul>
+<h3 id="问题-39-分-性能">问题 3（9 分）· 性能</h3>
+<ul>
+<li><input disabled="" type="checkbox"> 反规范化：<strong>冗余列 / 派生列 / 汇总表</strong> 等；列表建议 <strong>教练姓名冗余 + 已预约人数派生</strong>。  </li>
+<li><input disabled="" type="checkbox"> <strong>一致性</strong>：同一事务更新、触发器、定期对账（缺一不可，否则扣分）。  </li>
+<li><input disabled="" type="checkbox"> 索引：<strong>(会员号, 预约时间)</strong>；(<strong>课程号, 签到状态</strong>) + <strong>最左前缀</strong>（仅查签到状态无法用后者）。</li>
+</ul>
+<p><strong>回链考点</strong>：第 5 章考点群 <code>kp-3-*</code> · <code>kp-数据管理-分析-建模-管理-应用</code></p>
+<hr>
+<h2 id="试题四选答--25-分-预约挂号--高并发-web">试题四（选答 · 25 分）· 预约挂号 · 高并发 Web</h2>
+<h3 id="问题-17-分-架构填空">问题 1（7 分）· 架构填空</h3>
+<ul>
+<li><input disabled="" type="checkbox"> CDN（静态）· LB · API 网关 · Redis · MQ · 分库分表 · 注册中心（动态服务）。  </li>
+<li><input disabled="" type="checkbox"> <strong>勿把动态号源放 CDN</strong>。</li>
+</ul>
+<h3 id="问题-28-分-负载均衡">问题 2（8 分）· 负载均衡</h3>
+<ul>
+<li><input disabled="" type="checkbox"> ① 加权轮询 · ② 最少连接 · ③ 源地址哈希（会话粘滞）· ④ 一致性哈希（扩缩容少迁移）。  </li>
+<li><input disabled="" type="checkbox"> <strong>四层</strong>（IP/端口）vs <strong>七层</strong>（HTTP 内容）；常见 <strong>LVS + Nginx</strong> 组合。</li>
+</ul>
+<h3 id="问题-310-分-业务一致性">问题 3（10 分）· 业务一致性</h3>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>防超卖</strong>：Redis <strong>原子扣减</strong>（Lua/DECR）+ DB <strong><code>剩余&gt;0</code> 条件更新</strong>；MQ <strong>异步落库削峰</strong>。  </li>
+<li><input disabled="" type="checkbox"> <strong>防重复</strong>：前端防连点 + <strong>幂等令牌 / SETNX / 唯一索引</strong>（至少写两种）。  </li>
+<li><input disabled="" type="checkbox"> <strong>15 分钟释放</strong>：延迟队列或 Redis ZSet + 到期检查；支付与取消 <strong>条件更新</strong>；对账兜底。</li>
+</ul>
+<p><strong>回链考点</strong>：<code>kp-cloud-computing</code> · <code>kp-microservices</code> · <code>kp-app-service-integration</code> · <a href="./Web%E4%B8%8EAI%E6%99%BA%E8%83%BD%E4%BD%93-%E6%9E%B6%E6%9E%84%E9%80%89%E5%9E%8B%E5%9B%9B%E7%BB%B4%E5%BA%A6%E5%8D%A1.md">Web+Agent 卡</a>（LB/中间件表述可对齐）</p>
+<hr>
+<h2 id="试题五选答--25-分-燃气管网--云边端">试题五（选答 · 25 分）· 燃气管网 · 云边端</h2>
+<h3 id="问题-18-分-os-选型">问题 1（8 分）· OS 选型</h3>
+<ul>
+<li><input disabled="" type="checkbox"> 四维对比：<strong>硬实时 / 资源 / 生态 / 认证</strong>。  </li>
+<li><input disabled="" type="checkbox"> <strong>终端 RTOS</strong>（电池、1 秒告警、功能单一）· <strong>网关嵌入式 Linux</strong>（多容器、协议转换、市电）。</li>
+</ul>
+<h3 id="问题-29-分-架构与-mqtt">问题 2（9 分）· 架构与 MQTT</h3>
+<ul>
+<li><input disabled="" type="checkbox"> 终端 RTOS · 网关 Linux · 边缘规则 · MQTT Broker · <strong>时序库</strong>（非数仓）· NB-IoT/LoRa · OTA。  </li>
+<li><input disabled="" type="checkbox"> 告警 <strong>QoS 1</strong>（至少一次，可去重）；QoS 0 可能丢；QoS 2 开销大。</li>
+</ul>
+<h3 id="问题-38-分-低功耗与-ota">问题 3（8 分）· 低功耗与 OTA</h3>
+<ul>
+<li><input disabled="" type="checkbox"> 低功耗 ≥4：<strong>深度休眠、事件驱动上报、PSM/eDRX、本地预处理、DVFS、低功耗器件</strong> 等。  </li>
+<li><input disabled="" type="checkbox"> OTA ≥4：<strong>签名验签、TLS、差分、断点续传、A/B 回滚、安全启动、灰度、电量检查</strong>。</li>
+</ul>
+<p><strong>回链考点</strong>：<code>kp-CPS-物联网</code> · <code>kp-6-1-2</code> · <code>kp-实时系统开发</code></p>
+<hr>
+<h2 id="自测打分-rubric每题-25-分">自测打分 rubric（每题 25 分）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>档位</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>≥20</strong></td>
+<td>填空全对 + 简答有结构（分点、关键词、公式步骤）→ 可上考场</td>
+</tr>
+<tr>
+<td><strong>15–19</strong></td>
+<td>主干对、漏兜底（如反规范化一致性、DB 条件更新、OTA 回滚）→ 按「回链考点」补 1 篇 API</td>
+</tr>
+<tr>
+<td><strong>&lt;15</strong></td>
+<td>先过 <a href="../%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E7%AD%94%E9%A2%98%E6%95%99%E7%A8%8B.md">案例分析答题教程</a> 对应题型模板，再重做该题 <strong>闭卷 30 min</strong></td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="作者优先级-vs-建议投入参考">作者优先级 vs 建议投入（参考）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>题目</th>
+<th>作者估「方向命中」</th>
+<th>建议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>试题一</td>
+<td>★★★★★</td>
+<td><strong>必练</strong></td>
+</tr>
+<tr>
+<td>试题三</td>
+<td>★★★★</td>
+<td>选答首选</td>
+</tr>
+<tr>
+<td>试题四</td>
+<td>★★★★</td>
+<td>有 Web/架构背景首选</td>
+</tr>
+<tr>
+<td>试题五</td>
+<td>★★★★</td>
+<td>有工控/物联网背景首选</td>
+</tr>
+<tr>
+<td>试题二</td>
+<td>★★★</td>
+<td><strong>公式+分类</strong> 1 小时保底</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="练笔记录可手填">练笔记录（可手填）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>日期</th>
+<th>选题（一 + 二～五选）</th>
+<th>得分估</th>
+<th>薄弱点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>一 + ___ + ___</td>
+<td>/75</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>一 + ___ + ___</td>
+<td>/75</td>
+<td></td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p><strong>说明</strong>：原卷含 <strong>图 1～5</strong>（类图、活动图、政务流程、挂号架构、燃气云边端），练笔须配合 PDF 原图；本站条目只固化<strong>考点与答卷结构</strong>，不替代原题图形。</p>
+</blockquote>

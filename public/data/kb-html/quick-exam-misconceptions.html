@@ -1,0 +1,49 @@
+<h1 id="速查--常见备考误区第十轮审计专题">速查 · 常见备考误区（第十轮审计专题）</h1>
+<blockquote>
+<p>每个误区配<strong>辨析要点</strong>与<strong>案例/选择回链</strong>；详情见各考点「易错点」段。</p>
+</blockquote>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>误区</th>
+<th>辨析要点</th>
+<th>回链</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>可行性研究 vs 需求分析</strong></td>
+<td>可行性回答「建不建、选哪方案、投不投」→ 可行性研究报告；需求分析回答「系统逻辑上做什么」→ SRS/模型。<strong>不要把 SRS 功能列表写进可行性章。</strong></td>
+<td><code>kp-8-7</code></td>
+</tr>
+<tr>
+<td><strong>概要设计 vs 详细设计</strong></td>
+<td>概要：模块<strong>之间</strong>结构与接口（SC 图）；详细：模块<strong>内部</strong>算法、数据结构、伪代码。<strong>伪代码属于详细设计，不是系统分析。</strong></td>
+<td><code>kp-11-1</code> · <code>kp-software-lifecycle</code></td>
+</tr>
+<tr>
+<td><strong>系统分析 vs 系统设计</strong></td>
+<td>系统分析产出逻辑模型（DFD、数据字典）；设计产出物理/实现方案。分析阶段不写实现级伪代码。</td>
+<td><code>kp-8-6</code> · <code>kp-system-planning-analysis</code></td>
+</tr>
+<tr>
+<td><strong>用例 vs 功能</strong></td>
+<td>用例 = 参与者为达成目标与系统的交互；功能 = 系统提供的能力清单。勿把按钮级操作直接当用例。</td>
+<td><code>kp-9-3</code> · <code>kp-requirements-engineering</code></td>
+</tr>
+<tr>
+<td><strong>模块四要素</strong></td>
+<td>输入、输出、处理逻辑、内部数据——勿与「结构图/SC」混为一谈。</td>
+<td><code>kp-11-1</code></td>
+</tr>
+</tbody></table></div>
+<h3 id="辨析示例一句话">辨析示例（一句话）</h3>
+<ul>
+<li><strong>可行性 vs 需求</strong>：可行性写「三年 ROI 18%、技术团队可支撑微服务拆分」；需求写「订单状态机含 7 个状态及转换条件」。  </li>
+<li><strong>分析 vs 设计</strong>：分析阶段给 <strong>DFD/数据字典</strong>；<strong>伪代码、表结构字段类型</strong> 属详细设计。  </li>
+<li><strong>概要 vs 详细</strong>：概要回答「模块 A 调用模块 B 的接口」；详细回答「模块 A 内排序算法步骤」。  </li>
+<li><strong>用例 vs 功能</strong>：用例「收银员完成一笔退货」；功能「打印小票」是实现细节，不宜单独充当用例。  </li>
+<li><strong>模块四要素</strong>：针对<strong>单个模块</strong>说明 I/O 与内部数据；SC 图描述<strong>模块间</strong>调用关系。</li>
+</ul>
+<h2 id="案例论文自检一句">案例/论文自检一句</h2>
+<p>交卷前问：<strong>本题考的是立项、逻辑需求、结构设计还是实现细节？</strong> 层次错档是高频失分。</p>
+<p><strong>关联</strong>：<a href="./%E6%A1%88%E4%BE%8B%E5%9B%9B%E7%B1%BB%E9%A2%98%E5%9E%8B%E5%AF%BC%E8%88%AA.md">可行性 vs 需求 · 案例对比示例</a> · <a href="./%E9%9C%80%E6%B1%82%E4%BE%A7%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C%E6%A1%86%E6%9E%B6.md">需求侧论文框架</a></p>

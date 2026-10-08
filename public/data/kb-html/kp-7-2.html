@@ -1,0 +1,168 @@
+<h1 id="数据安全与保密加密认证kmipkispk">数据安全与保密（加密、认证、KMI/PKI/SPK）</h1>
+<blockquote>
+<p><strong>大纲</strong>：9.2 · <strong>教程</strong>：第9章 · <strong>分组</strong>：科目1 · 7. 信息安全 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+</blockquote>
+<h2 id="概述">概述</h2>
+<p><strong>数据安全与保密（加密、认证、KMI/PKI/SPK）</strong>：数字签名（答卷·定义） 数字签名是基于非对称加密技术，用发送方私钥对消息摘要进行加密而形成的认证标识。 作用：用于验证发送方身份（鉴别）、保证消息未被篡改（完整性），以及防止发送方事后否认（不可否认）。</p>
+<h2 id="速懂">速懂</h2>
+<ul>
+<li><strong>一句话</strong>：对称加密：是加密与解密使用相同密钥的算法（如 AES、DES）。作用：用于大批量数据机密性保护、性能较高。</li>
+<li><strong>考什么</strong>：访问控制模型、加密、容灾 RPO/RTO（教程第 9 章）。</li>
+<li><strong>具体理解</strong>：<ul>
+<li>数字证书（PKI）：是 CA 签发的含身份与公钥的 X.509 凭证。作用：用于在 PKI 体系中绑定公钥与持有者身份，使通信各方能够验证公钥归属并建立可信通信。</li>
+<li>KMI/PKI/SPK：是密钥管理基础设施、公钥基础设施与对称密钥分发体系的统称。作用：用于企业级密钥生命周期与信任管理。</li>
+</ul>
+</li>
+<li><strong>别搞混</strong>：与同章相邻考点区分；题干锚词：<strong>数据安全与保密 / KMI / PKI</strong>。</li>
+</ul>
+<h2 id="定义">定义</h2>
+<ul>
+<li><strong>对称加密</strong>：是加密与解密使用相同密钥的算法（如 AES、DES）。<strong>作用</strong>：用于大批量数据机密性保护、性能较高。</li>
+<li><strong>非对称加密</strong>：是使用公钥加密/私钥解密（或反向签名）的算法（如 RSA）。<strong>作用</strong>：用于密钥交换、数字签名与身份认证。</li>
+<li><strong>数字签名</strong>：是用发送方私钥对消息摘要加密形成的认证标识。<strong>作用</strong>：用于验证发送方身份（鉴别）、保证消息未被篡改（完整性），以及防止发送方事后否认（不可否认）。</li>
+<li><strong>数字证书（PKI）</strong>：是 CA 签发的含身份与公钥的 X.509 凭证。<strong>作用</strong>：用于在 PKI 体系中绑定公钥与持有者身份，使通信各方能够验证公钥归属并建立可信通信。</li>
+<li><strong>KMI/PKI/SPK</strong>：是密钥管理基础设施、公钥基础设施与对称密钥分发体系的统称。<strong>作用</strong>：用于企业级密钥生命周期与信任管理。</li>
+</ul>
+<h2 id="步骤与流程">步骤与流程</h2>
+<p>本节在教程中<strong>未单独列出固定步骤名</strong>；答题时可按下列指引组织答案：</p>
+<ol>
+<li>先在「要点」中找 <strong>阶段 / 活动 / → 流程链</strong> 表述；</li>
+<li>案例题常用 <strong>调查 → 分析 → 方案 → 验证</strong>（或题干给出的过程框架）；</li>
+<li>综合知识流程题优先写 <strong>编号步骤</strong> 或 <strong>阶段名称</strong>；</li>
+<li>需要完整步骤时打开文末 <strong>归档通章</strong> 对应小节对照誊写。</li>
+</ol>
+<h2 id="要点">要点</h2>
+<h3 id="数据安全与保密">数据安全与保密</h3>
+<p><strong>加密 vs 认证</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>加密</th>
+<th>认证</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>目的</td>
+<td>保密性</td>
+<td>真实性、完整性</td>
+</tr>
+<tr>
+<td>防攻击</td>
+<td>被动(截获)</td>
+<td>主动(冒充/篡改/重放)</td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>定义（答卷）</th>
+<th>作用（答卷）</th>
+<th>代表</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>对称(私钥)</td>
+<td>对称加密是加解密双方使用<strong>同一密钥</strong>的加密方式</td>
+<td>用于大量数据的快速加密传输（如会话数据）</td>
+<td>DES、IDEA、AES</td>
+</tr>
+<tr>
+<td>非对称(公钥)</td>
+<td>非对称加密是使用<strong>公钥加密、私钥解密</strong>（或反向签名）的加密方式</td>
+<td>用于密钥交换、数字签名与身份认证等需区分公私钥的场景</td>
+<td>RSA(512+位)</td>
+</tr>
+<tr>
+<td>传统</td>
+<td>传统加密是以代换、置换等手工规则变换明文的加密方式</td>
+<td>用于理解加密基本原理（现代考试已不作为主流方案）</td>
+<td>简单，已淘汰</td>
+</tr>
+<tr>
+<td>Hash(摘要)</td>
+<td>摘要算法（Hash）是将任意长度输入映射为<strong>固定长度、不可逆</strong>摘要值的单向函数</td>
+<td>用于完整性校验、口令存储与数字签名等（不能用于解密还原明文）</td>
+<td>MD5、SHA</td>
+</tr>
+</tbody></table></div>
+<p><strong>身份认证方式</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>口令</td>
+<td>最常用，<strong>极不安全</strong></td>
+</tr>
+<tr>
+<td>动态口令</td>
+<td>一次一密，令牌</td>
+</tr>
+<tr>
+<td>生物特征</td>
+<td>指纹/虹膜/人脸</td>
+</tr>
+</tbody></table></div>
+<p><strong>密钥管理</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>点对点</td>
+<td>对称/非对称</td>
+</tr>
+<tr>
+<td>KDC</td>
+<td>密钥分发中心</td>
+</tr>
+<tr>
+<td>PKI</td>
+<td>公钥基础设施，CA+证书</td>
+</tr>
+</tbody></table></div>
+<p><strong>数字信封</strong>：对称密钥加密数据，公钥加密对称密钥。</p>
+<h2 id="易混辨析">易混辨析</h2>
+<p>（本节与相邻考点易混点见归档篇章「易混对比」；检索关键词：<strong>数据安全与保密、KMI、PKI、SPK</strong>。）</p>
+<h2 id="应试">应试</h2>
+<p><strong>案例可能怎么问</strong>：按场景选访问控制模型（DAC/MAC/RBAC/BLP/Biba）；防火墙类型与部署位置；给定 RPO/RTO 要求设计备份与容灾等级；N 版本/恢复块/防卫式程序容错对比。</p>
+<p><strong>论文怎么用</strong>：DevSecOps/安全运维类可写「左移测试+流水线门禁+密钥/权限最小化」；可靠性段落用 MTBF/可用性公式、冗余策略与 RPO/RTO 目标对齐业务连续性。</p>
+<p><strong>常考结论</strong></p>
+<ul>
+<li><p>BLP：<strong>上读下写</strong>；Biba：<strong>下读上写</strong>（相反！）。</p>
+</li>
+<li><p>可用性 = <strong>MTTF/MTBF × 100%</strong>。</p>
+</li>
+<li><p>指数分布：<strong>R(t)=e^(-λt)</strong>，<strong>MTTF=1/λ</strong>。</p>
+</li>
+<li><p>串联：<strong>R=∏Ri</strong>；并联：<strong>R=1-∏(1-Ri)</strong>。</p>
+</li>
+<li><p>模冗余 <strong>2n+1</strong> 个模块，容忍 <strong>n</strong> 个故障。</p>
+</li>
+<li><p>等保 <strong>5</strong> 级：<strong>自审标结验</strong>。</p>
+</li>
+<li><p>口令认证<strong>极不安全</strong>；动态口令<strong>一次一密</strong>。</p>
+</li>
+<li><p>N版本=<strong>前向恢复/静态</strong>；恢复块=<strong>后向恢复/动态</strong>。</p>
+</li>
+<li><p><strong>本章练习热力</strong>：教程第 9 章约 78 题（站点练习库，不含真题卷 ch=99）。</p>
+</li>
+<li><p><strong>题库考点标签</strong>：BLP模型、Biba模型、DAC、MAC、N版本程序设计。</p>
+</li>
+<li><p><strong>练题入口</strong>：<a href="/?bank=practice&chapter=9&path=all&q=%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E4%B8%8E%E4%BF%9D%E5%AF%86">第 9 章练习（关键词 数据安全与保密）</a></p>
+</li>
+</ul>
+<h2 id="相关考点">相关考点</h2>
+<ul>
+<li><a href="/kb/kp-7-1">信息系统安全体系</a></li>
+<li><a href="/kb/kp-7-3">通信与网络安全（防火墙、VPN、SSL/HTTPS/IPSec、SSO/Kerberos）</a></li>
+<li>归档通章：<a href="../%E7%AC%AC%E4%B8%80%E7%AF%87-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AC%AC09%E7%AB%A0-%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8.md"><a href="/kb/ch09/" class="kb-ref" data-kb-id="ch09" data-kb-path="第09章-信息安全.md" title="预览：第09章 · 信息安全"><code>第09章-信息安全.md</code></a></a></li>
+</ul>

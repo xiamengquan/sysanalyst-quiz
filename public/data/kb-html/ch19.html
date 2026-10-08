@@ -1,0 +1,197 @@
+<h1 id="第19章-大数据处理系统分析与设计">第19章 大数据处理系统分析与设计</h1>
+<blockquote>
+<p>出自《系统分析师教程》知识点精炼 · 第三篇分章。科目2/3相关。</p>
+</blockquote>
+<hr>
+<h2 id="一场景特征">一、场景特征</h2>
+<p><strong>定义</strong>：高效、综合的数据处理平台，处理和分析<strong>海量、多样、高速</strong>数据。</p>
+<p><strong>大数据特征（常考）</strong>：Volume、Velocity、Variety、Veracity（不同教材表述略有差异，考试以教程为准）</p>
+<p><strong>数据类型</strong>：</p>
+<ul>
+<li>结构化：关系数据库</li>
+<li>半结构化：JSON、XML、日志</li>
+<li>非结构化：图片、视频、文本、语音</li>
+</ul>
+<p><strong>处理方式</strong>：</p>
+<ul>
+<li><strong>离线批处理</strong>：有界数据，HDFS + MapReduce + Hive</li>
+<li><strong>实时流处理</strong>：无界数据，Flume/Kafka + Storm/Spark Streaming + HBase/Redis</li>
+<li><strong>混合架构</strong>：Lambda（批+流）/ Kappa / 数据湖</li>
+</ul>
+<h2 id="二架构原则与模式">二、架构原则与模式</h2>
+<h3 id="21-架构原则">2.1 架构原则</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>原则</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>分布式环境</td>
+<td>水平扩展</td>
+</tr>
+<tr>
+<td>模块化设计</td>
+<td>组件可替换</td>
+</tr>
+<tr>
+<td>安全性</td>
+<td>加密、访问控制、备份、审计、持续监控</td>
+</tr>
+<tr>
+<td>性能</td>
+<td>分区、分布式计算、并行、内存计算</td>
+</tr>
+<tr>
+<td>可靠性</td>
+<td>冗余、自动故障转移、负载均衡</td>
+</tr>
+<tr>
+<td>可运维</td>
+<td>监控预警、性能调优、故障排除、升级维护</td>
+</tr>
+</tbody></table></div>
+<h3 id="22-架构类型与模式">2.2 架构类型与模式</h3>
+<p><strong>Lambda 架构三层</strong>：</p>
+<ul>
+<li>批处理层（Batch Layer）：全量历史视图</li>
+<li>速度层（Speed/Stream Layer）：实时增量</li>
+<li>服务层（Serving Layer）：查询合并结果</li>
+</ul>
+<p><strong>数据湖模式组件</strong>：通用数据模型、边缘 SDK、实时缓存、历史沉浸区、Dumper、Query Engine、模型反馈</p>
+<p><strong>特点</strong>：去 ETL 化、即时查询、边缘计算</p>
+<h3 id="23-存储选型">2.3 存储选型</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>优点</th>
+<th>缺点</th>
+<th>适用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>行存储</strong></td>
+<td>写入完整、事务友好</td>
+<td>读冗余、分析慢</td>
+<td>OLTP、MySQL</td>
+</tr>
+<tr>
+<td><strong>列存储</strong></td>
+<td>批量列访问快、压缩比高</td>
+<td>写入复杂、完整性弱</td>
+<td>OLAP、HBase</td>
+</tr>
+<tr>
+<td><strong>文档</strong></td>
+<td>灵活 schema</td>
+<td>—</td>
+<td>MongoDB</td>
+</tr>
+<tr>
+<td><strong>搜索</strong></td>
+<td>全文/复杂检索</td>
+<td>—</td>
+<td>Elasticsearch</td>
+</tr>
+</tbody></table></div>
+<p><strong>HBase</strong>：列族，平衡 OLTP/OLAP，水平扩展</p>
+<h2 id="三开发与测试要点">三、开发与测试要点</h2>
+<h3 id="31-数据生命周期">3.1 数据生命周期</h3>
+<p><strong>存储</strong> → <strong>管理</strong> → <strong>处理</strong> → <strong>分析</strong> → <strong>部署</strong></p>
+<p><strong>数据管理四块</strong>：</p>
+<ol>
+<li><strong>元数据管理</strong>：技术元数据 + 业务元数据（数据源、ETL 规则、仓库、报表、接口、商业、日志）</li>
+<li><strong>数据关系图谱</strong>：血缘（归属性、多源性、可追溯性、层次性）+ 关联分析</li>
+<li><strong>数据安全</strong>：认证 + 授权（Kerberos、RBAC、Sentry/Ranger）；产生→存储→使用→传输→展示→销毁全链路；S1—S4 表安全等级</li>
+<li><strong>资源监控</strong>：机房网络、组件存活、Metrics、Runtime 探活、集群指标、任务状态、趋势预测</li>
+</ol>
+<p><strong>数据处理</strong>：</p>
+<ul>
+<li>实时：数据不断到来、不能积压、TB/PB 级、结果快速展现</li>
+<li>离线：数据量巨大、批量复杂运算、数据预先到位不变、方便查询结果</li>
+<li>图计算：顶点/边、路径搜索、中心性、社群发现（GraphX/Spark）</li>
+</ul>
+<p><strong>数据分析</strong>：</p>
+<ul>
+<li>机器学习：监督/非监督/强化学习</li>
+<li>搜索推荐：ElasticSearch、Solr</li>
+<li>可视化：Tableau、Datawrapper</li>
+</ul>
+<p><strong>ETL/数据转换六步</strong>：发现 → 映射 → 提取 → 代码生成 → 执行 → 审查</p>
+<p><strong>数据清洗</strong>：缺失值、异常值、重复记录、标准化、干净数据回流</p>
+<h3 id="32-系统部署">3.2 系统部署</h3>
+<p><strong>隔离原则</strong>：生产/测试、集群、在线/离线、应用、数据</p>
+<p><strong>部署检查</strong>：集群规划、网络、安全、时间同步、SSH</p>
+<p><strong>变更管理</strong>：版本控制、内容一致、变更跟踪、版本对应、快速回滚、历史记录</p>
+<h3 id="33-测试特点与过程">3.3 测试特点与过程</h3>
+<p><strong>特点</strong>：数据量大、类型多样、实时+批处理、高性能可扩展、逻辑复杂</p>
+<p><strong>过程</strong>：测试需求分析 → 计划方案 → 用例设计 → 执行 → 报告</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>功能</td>
+<td>查询过滤、分区分片、聚合统计、排序分组、多表关联、清洗转换</td>
+</tr>
+<tr>
+<td>性能</td>
+<td>存储容量、扩展性、吞吐、延迟</td>
+</tr>
+<tr>
+<td>可靠性/容错</td>
+<td>节点故障、数据副本、故障转移</td>
+</tr>
+<tr>
+<td>安全</td>
+<td>认证授权、加密、审计</td>
+</tr>
+<tr>
+<td>兼容性</td>
+<td>多组件、多版本、多数据源</td>
+</tr>
+</tbody></table></div>
+<h2 id="四与综合知识关联">四、与综合知识关联</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>本篇要点</th>
+<th>对应章节</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数据仓库、OLAP、ETL</td>
+<td>第5章 数据仓库</td>
+</tr>
+<tr>
+<td>数据挖掘、机器学习</td>
+<td>第5章 数据挖掘；第2章 统计</td>
+</tr>
+<tr>
+<td>CAP、NoSQL</td>
+<td>第5章 非关系数据库</td>
+</tr>
+<tr>
+<td>分布式、Hadoop 生态</td>
+<td>第4章 分布式系统</td>
+</tr>
+<tr>
+<td>安全、Kerberos</td>
+<td>第9章 信息安全</td>
+</tr>
+<tr>
+<td>性能测试</td>
+<td>第14章 测试</td>
+</tr>
+<tr>
+<td>运维监控</td>
+<td>第15章 运行维护</td>
+</tr>
+</tbody></table></div>
+<p><strong>案例答题模板</strong>：业务与数据特征 → Lambda/Kappa 选型 → 存储（行/列/ES）→ 实时/离线 pipeline → 元数据与安全 → 测试策略。</p>
+<hr>

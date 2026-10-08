@@ -1,0 +1,73 @@
+<h1 id="架构概述">架构概述</h1>
+<blockquote>
+<p><strong>大纲</strong>：12.1 · <strong>教程</strong>：第12章 · <strong>分组</strong>：科目1 · 10. 软件架构设计 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+</blockquote>
+<h2 id="概述">概述</h2>
+<p><strong>架构概述</strong>：软件架构（答卷·定义）：软件架构是软件系统的构件、连接件、集成模式及其约束的集合，规定了系统的组织结构与拓扑关系。</p>
+<h2 id="速懂">速懂</h2>
+<ul>
+<li><strong>一句话</strong>：软件架构：是系统的高层结构，含组件、连接件及设计决策。作用：用于在需求与实现之间建立可演进的技术蓝图。</li>
+<li><strong>考什么</strong>：架构风格、SOA/微服务、质量属性（教程第 12 章）。</li>
+<li><strong>具体理解</strong>：<ul>
+<li>4+1 视图：是逻辑、开发、进程、物理 + 场景视图描述架构。作用：用于多干系人视角沟通与文档化。</li>
+<li>架构设计原则：是如高内聚低耦合、关注点分离、抽象与复用。作用：用于案例写架构决策与权衡理由。</li>
+</ul>
+</li>
+<li><strong>别搞混</strong>：与同章相邻考点区分；题干锚词：<strong>架构概述</strong>。</li>
+</ul>
+<h2 id="定义">定义</h2>
+<ul>
+<li><strong>软件架构</strong>：是系统的高层结构，含组件、连接件及设计决策。<strong>作用</strong>：用于在需求与实现之间建立可演进的技术蓝图。</li>
+<li><strong>4+1 视图</strong>：是逻辑、开发、进程、物理 + 场景视图描述架构。<strong>作用</strong>：用于多干系人视角沟通与文档化。</li>
+<li><strong>架构描述语言 ADL</strong>：是形式化表达组件、连接器与约束的语言。<strong>作用</strong>：用于可分析、可生成的架构规格。</li>
+<li><strong>架构设计原则</strong>：是如高内聚低耦合、关注点分离、抽象与复用。<strong>作用</strong>：用于案例写架构决策与权衡理由。</li>
+</ul>
+<h2 id="步骤与流程">步骤与流程</h2>
+<h3 id="二架构概述">二、架构概述</h3>
+<ol>
+<li>干系人交流手段</li>
+<li>早期设计决策体现</li>
+<li>明确实现约束</li>
+<li>决定开发维护组织结构</li>
+<li><strong>制约质量属性</strong></li>
+<li>使推理和控制更改更简单（局部/非局部/架构级变更）</li>
+<li>支持渐进原型</li>
+<li>可传递可复用模型</li>
+</ol>
+<h2 id="要点">要点</h2>
+<h3 id="二架构概述">二、架构概述</h3>
+<p><strong>定义</strong>：构件 + 连接件 + 集成模式及约束；指定组织结构与拓扑，显示需求与构件对应关系。</p>
+<p><strong>架构九大意义</strong>（常考）：</p>
+<ol>
+<li>干系人交流手段</li>
+<li>早期设计决策体现</li>
+<li>明确实现约束</li>
+<li>决定开发维护组织结构</li>
+<li><strong>制约质量属性</strong></li>
+<li>使推理和控制更改更简单（局部/非局部/架构级变更）</li>
+<li>支持渐进原型</li>
+<li>培训基础</li>
+<li>可传递可复用模型</li>
+</ol>
+<p><strong>架构发展史四阶段</strong>：无架构 → 萌芽（DFD/控制流图）→ 初级（UML）→ 高级（4+1）。</p>
+<hr>
+<h2 id="易混辨析">易混辨析</h2>
+<p>（本节与相邻考点易混点见归档篇章「易混对比」；检索关键词：<strong>架构概述</strong>。）</p>
+<h2 id="应试">应试</h2>
+<p><strong>案例可能怎么问</strong>：给定场景选架构风格（管道-过滤器/仓库/黑板/C-S/B-S/SOA 等）并说明权衡；ESB 集成遗留系统时答「非侵入、消息转换、服务注册」；质量属性场景六要素填空或补响应度量。</p>
+<p><strong>论文怎么用</strong>：ABSD、面向服务/SOA（20下、24上）——写「需求→架构风格选型→4+1 视图/关键决策→质量属性场景验证→演化」；与微服务对比时强调粒度、治理与集成方式差异。</p>
+<ul>
+<li><strong>本章练习热力</strong>：教程第 12 章约 81 题（站点练习库，不含真题卷 ch=99）。</li>
+<li><strong>题库考点标签</strong>：4+1视图、SOA、仓库风格、分层架构、架构风格定义。</li>
+<li><strong>练题入口</strong>：<a href="/?bank=practice&chapter=12&path=all&q=%E6%9E%B6%E6%9E%84%E6%A6%82%E8%BF%B0">第 12 章练习（关键词 架构概述）</a></li>
+</ul>
+<h2 id="相关考点">相关考点</h2>
+<ul>
+<li><a href="/kb/kp-10-2/">架构风格与模式</a></li>
+<li><a href="/kb/kp-10-5/">架构实现</a></li>
+<li><a href="/kb/kp-10-6/">质量属性</a></li>
+<li><a href="/kb/kp-microservices">微服务</a></li>
+<li><a href="/kb/kp-10-2">架构建模（4+1）</a></li>
+<li>速查：<a href="../%E9%80%9F%E6%9F%A5/Web%E4%B8%8EAI%E6%99%BA%E8%83%BD%E4%BD%93-%E6%9E%B6%E6%9E%84%E9%80%89%E5%9E%8B%E5%9B%9B%E7%BB%B4%E5%BA%A6%E5%8D%A1.md">Web与AI智能体-架构选型四维度卡</a></li>
+<li>归档通章：<a href="../%E7%AC%AC%E4%BA%8C%E7%AF%87-%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF/%E7%AC%AC12%E7%AB%A0-%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.md"><a href="/kb/ch12/" class="kb-ref" data-kb-id="ch12" data-kb-path="第12章-软件架构设计.md" title="预览：第12章 · 软件架构设计"><code>第12章-软件架构设计.md</code></a></a></li>
+</ul>

@@ -1,0 +1,269 @@
+<h1 id="速查--需求工程体系化学习路径教程化问答">速查 · 需求工程体系化学习路径（教程化问答）</h1>
+<blockquote>
+<p>对齐大纲 <strong>§9 软件需求工程</strong>（教程第11章）· 由浅入深 · 点→面→闭环<br>刷题入口：综合知识 → 学习路径选 <strong>「需求工程（L0→L4）」</strong>（按关卡顺序，建议关闭随机）</p>
+</blockquote>
+<hr>
+<h2 id="0-怎么用15-分钟看懂地图">0. 怎么用（15 分钟看懂地图）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>关卡</th>
+<th>学什么</th>
+<th>对应大纲</th>
+<th>刷题标签</th>
+<th>建议题量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>L0 点：地图</strong></td>
+<td>需求是什么、三层、开发 vs 管理</td>
+<td>9.1 概览</td>
+<td><code>L0</code></td>
+<td>先过一遍</td>
+</tr>
+<tr>
+<td><strong>L1 面：分类</strong></td>
+<td>QFD、FURPS+、好需求特性</td>
+<td>9.1</td>
+<td><code>L1</code></td>
+<td>概念扎根</td>
+</tr>
+<tr>
+<td><strong>L2 面：获取分析</strong></td>
+<td>五法、原型、冲突与优先级</td>
+<td>9.2–9.3</td>
+<td><code>L2</code></td>
+<td>案例必答底座</td>
+</tr>
+<tr>
+<td><strong>L3 面：建模</strong></td>
+<td>DFD/字典/STD + 用例模型</td>
+<td>9.4–9.5</td>
+<td><code>L3</code></td>
+<td>图模题</td>
+</tr>
+<tr>
+<td><strong>L4 面：闭环</strong></td>
+<td>SRS、验证、基线、变更、跟踪</td>
+<td>9.6–9.8</td>
+<td><code>L4</code></td>
+<td>管理与文档</td>
+</tr>
+</tbody></table></div>
+<p><strong>学习节奏（推荐）</strong></p>
+<ol>
+<li>读本章精炼：<a href="/kb/ch11/" class="kb-ref" data-kb-id="ch11" data-kb-path="第11章-软件需求工程.md" title="预览：第11章 · 软件需求工程"><code>第11章-软件需求工程.md</code></a> 对应小节（每关 5–10 分钟）  </li>
+<li>刷本关 <code>L*</code> 问答（先不看解析，再对答案）  </li>
+<li>对照速查卡：<a href="/kb/quick-req-five/" class="kb-ref" data-kb-id="quick-req-five" data-kb-path="案例必答-需求获取五法对比卡.md" title="预览：案例必答 · 需求获取五法对比卡"><code>案例必答-需求获取五法对比卡.md</code></a>（L2 必看）  </li>
+<li>L4 过完后：案例分析 → 领域 <strong>需求</strong>（CA-016 等）做一套限时</li>
+</ol>
+<p><strong>终局标准</strong>：能默写「三层 / 五活动 / 五法四维 / DFD 四要素 / 跟踪矩阵方向」，并在案例题里用题干约束选题。</p>
+<hr>
+<h2 id="1-l0--点建立需求地图先立坐标系">1. L0 · 点：建立需求地图（先立坐标系）</h2>
+<h3 id="要记住的三句话">要记住的三句话</h3>
+<ol>
+<li><strong>软件需求</strong> = 用户对新系统在功能、行为、性能、设计约束等方面的期望。  </li>
+<li><strong>三层</strong>：业务（组织目标）→ 用户（角色任务）→ 系统（可实现的功能/非功能/约束）。  </li>
+<li><strong>需求工程</strong> = <strong>需求开发</strong>（获取→分析→定义→验证）+ <strong>需求管理</strong>（基线、变更、跟踪）。</li>
+</ol>
+<h3 id="业务--用户--系统需求答卷展开">业务 / 用户 / 系统需求（答卷·展开）</h3>
+<blockquote>
+<p>完整定义与举例见 <a href="/kb/ch11/" class="kb-ref" data-kb-id="ch11" data-kb-path="第11章-软件需求工程.md" title="预览：第11章 · 软件需求工程"><code>第11章-软件需求工程.md</code></a> §2.1。默写时用「X 是……；用于……」。</p>
+</blockquote>
+<p><strong>业务需求（答卷）</strong><br>业务需求是组织或投资方希望通过系统建设达成的高层业务目标、收益与项目范围描述。<br><strong>用于</strong>界定为什么做、做到什么程度、不做什么（项目视图与范围）。</p>
+<p><strong>用户需求（答卷）</strong><br>用户需求是最终用户（或角色）为完成其工作任务而对系统提出的目标、任务与交互期望。<br><strong>用于</strong>说明谁要用系统做什么，常以用例/场景表达。</p>
+<p><strong>系统需求（答卷）</strong><br>系统需求是为实现业务与用户需求，对系统必须具备的功能、非功能属性及设计约束所作的、可验证的规格说明。<br><strong>用于</strong>作为开发、测试与验收依据（含功能 + 非功能 + 设计约束）。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>层次</th>
+<th>一句话</th>
+<th>勿写成</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>业务</td>
+<td>组织要什么结果/范围</td>
+<td>按钮字段细节</td>
+</tr>
+<tr>
+<td>用户</td>
+<td>角色要完成什么任务</td>
+<td>空泛战略口号</td>
+</tr>
+<tr>
+<td>系统</td>
+<td>系统必须怎样（可测）</td>
+<td>「好用」「美观」等不可验证词</td>
+</tr>
+</tbody></table></div>
+<p><strong>关系</strong>：业务定方向与范围 → 用户落实为角色任务 → 系统落实为可开发可测规格；三者应可跟踪。</p>
+<h3 id="五活动含管理">五活动（含管理）</h3>
+<p>获取 → 分析 → 规格（定义）→ 确认验证 → <strong>管理</strong>（贯穿）。</p>
+<h3 id="自检口诀">自检口诀</h3>
+<p>「谁要什么」= 业务/用户；「系统必须怎样」= 系统需求；「改需求走哪」= 变更控制 + 跟踪矩阵。</p>
+<hr>
+<h2 id="2-l1--面把需求分清类说清质">2. L1 · 面：把需求分清类、说清质</h2>
+<h3 id="qfd-三类别和三层搞混">QFD 三类（别和三层搞混）</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>用户怎么想</th>
+<th>未满足</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>常规</td>
+<td>明确要的</td>
+<td>越少越不满</td>
+</tr>
+<tr>
+<td>期望</td>
+<td>理所当然没说清</td>
+<td><strong>特别不满</strong></td>
+</tr>
+<tr>
+<td>意外/兴奋</td>
+<td>没指望</td>
+<td>不做也不影响买；做了更惊喜</td>
+</tr>
+</tbody></table></div>
+<h3 id="furps">FURPS+</h3>
+<p>F 功能（含安全特性）· U 可用 · R 可靠 · P 性能 · S 可支持；<strong>+</strong> = 实现/接口/操作/包装/授权等。</p>
+<h3 id="ieee-好需求单条-vs-集合">IEEE 好需求（单条 vs 集合）</h3>
+<ul>
+<li><strong>单条</strong>：正确、无歧义、可检验、可跟踪  </li>
+<li><strong>集合</strong>：完整、一致、可修改  </li>
+<li>常考挖坑：<strong>不可验证</strong>的形容词（「美观」「好用」）不是合格系统需求</li>
+</ul>
+<hr>
+<h2 id="3-l2--面怎么把需求掏出来并理顺">3. L2 · 面：怎么把需求「掏」出来并理顺</h2>
+<h3 id="获取五法案例默写四维">获取五法（案例默写四维）</h3>
+<p>访谈 / JRP(JAD) / 问卷 / 文档分析 / 观察 —— 用 <strong>广度、深度、信息集成、用户参与</strong> 对比，再贴题干选。</p>
+<p><strong>四维答卷句（须能默写）</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>是……</th>
+<th>用于……</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>需求广度</td>
+<td>覆盖面的宽窄</td>
+<td>衡量能覆盖多少干系人/业务面</td>
+</tr>
+<tr>
+<td>需求深度</td>
+<td>细节与例外挖得是否充分</td>
+<td>衡量能否澄清复杂任务与规则</td>
+</tr>
+<tr>
+<td>信息集成度</td>
+<td>多方信息当场对照收敛的程度</td>
+<td>衡量冲突能否当场暴露并共识</td>
+</tr>
+<tr>
+<td>用户参与度</td>
+<td>用户直接投入并影响结论的程度</td>
+<td>衡量是否共创、减少误解</td>
+</tr>
+</tbody></table></div>
+<p>完整定义与五法展开 → <a href="/kb/ch11/" class="kb-ref" data-kb-id="ch11" data-kb-path="第11章-软件需求工程.md" title="预览：第11章 · 软件需求工程"><code>第11章-软件需求工程.md</code></a> §三；默写表 → <a href="/kb/quick-req-five/" class="kb-ref" data-kb-id="quick-req-five" data-kb-path="案例必答-需求获取五法对比卡.md" title="预览：案例必答 · 需求获取五法对比卡"><code>案例必答-需求获取五法对比卡.md</code></a>。</p>
+<h3 id="分析时常考">分析时常考</h3>
+<ul>
+<li>冲突需求：优先级、干系人、业务规则外置  </li>
+<li>原型：澄清界面/交互；风险是「原型当交付」或过早冻结  </li>
+<li>范围 vs 需求：范围定边界；需求定边界内「要什么」</li>
+</ul>
+<hr>
+<h2 id="4-l3--面用模型把需求画写清楚">4. L3 · 面：用模型把需求「画/写」清楚</h2>
+<h3 id="结构化sa">结构化（SA）</h3>
+<ul>
+<li><strong>DFD</strong>：外部实体、加工、数据流、数据存储；加工名单用<strong>动宾</strong>；作用含理解需求、支撑设计、存档  </li>
+<li><strong>数据字典</strong>：元素/结构/流/存储/加工逻辑/外部实体 —— 给精确定义  </li>
+<li><strong>STD</strong>：状态与转换；初态实心圆、终态双同心</li>
+</ul>
+<h3 id="面向对象ooa">面向对象（OOA）</h3>
+<ul>
+<li>用例：参与者 + 用例 + 通信；构建：识别参与者 → 合并出用例 → 细化 → 调整  </li>
+<li>主事件流 vs 备选；业务用例 vs 系统用例  </li>
+<li>用例宜编号，方便<strong>需求跟踪</strong></li>
+</ul>
+<hr>
+<h2 id="5-l4--面写成规格验过管住变更">5. L4 · 面：写成规格、验过、管住变更</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>产物/活动</th>
+<th>记住一句</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>用户原始需求说明书</td>
+<td>与用户的协约（偏用户语言）</td>
+</tr>
+<tr>
+<td><strong>SRS</strong></td>
+<td>开发/测试依据（外部行为与约束）</td>
+</tr>
+<tr>
+<td>需求验证</td>
+<td>确认「写对了、可测、一致完整」</td>
+</tr>
+<tr>
+<td>需求基线</td>
+<td>评审批准后的约定，改须走变更</td>
+</tr>
+<tr>
+<td>变更控制</td>
+<td>CCB 审批，评估影响再改</td>
+</tr>
+<tr>
+<td>跟踪矩阵</td>
+<td>需求↔设计↔代码↔测试；正向/反向</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="6-从点到面综合串题清单自测">6. 从点到面：综合串题清单（自测）</h2>
+<p>合上书能答才算过关：</p>
+<ol>
+<li>举一例：同一项目的业务/用户/系统需求各一句  </li>
+<li>「登录要快」为何不合格？如何改成可验证需求？  </li>
+<li>干系人多、目标模糊、工期紧：五法里优先谁？为何？  </li>
+<li>DFD 上「加工」命名错在哪（名词堆砌）？  </li>
+<li>需求变更后，跟踪矩阵至少要改哪两端？</li>
+</ol>
+<p>做完 L0–L4 问答后，用案例分析「需求」领域练限时卷。</p>
+<hr>
+<h2 id="7-资源索引">7. 资源索引</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>资源</th>
+<th>路径/入口</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>章节精炼</td>
+<td>知识点 · 第11章</td>
+</tr>
+<tr>
+<td>五法对比卡</td>
+<td>速查 · 案例必答-需求获取五法</td>
+</tr>
+<tr>
+<td>大纲对照</td>
+<td>速查 · 大纲考点对照 §9</td>
+</tr>
+<tr>
+<td>选择题路径</td>
+<td>刷题 · <strong>需求工程（L0→L4）</strong></td>
+</tr>
+<tr>
+<td>案例加练</td>
+<td>案例分析 · 领域=需求</td>
+</tr>
+</tbody></table></div>

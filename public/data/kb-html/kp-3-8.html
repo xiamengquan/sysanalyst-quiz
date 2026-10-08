@@ -1,0 +1,138 @@
+<h1 id="非关系数据库cap列文档键值图库">非关系数据库（CAP、列/文档/键值/图库）</h1>
+<blockquote>
+<p><strong>大纲</strong>：5.8 · <strong>教程</strong>：第5章 · <strong>分组</strong>：科目1 · 3. 数据库系统基础知识 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+</blockquote>
+<h2 id="概述">概述</h2>
+<p><strong>非关系数据库（CAP、列/文档/键值/图库）</strong>：- CAP定理：一致性(C)、可用性(A)、分区容错(P)，最多同时满足两个。</p>
+<h2 id="速懂">速懂</h2>
+<ul>
+<li><strong>一句话</strong>：CAP定理：是一致性(C)、可用性(A)、分区容错(P)，最多同时满足两个。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>考什么</strong>：范式/事务/备份、ER 与 SQL 场景（教程第 5 章）。</li>
+<li><strong>具体理解</strong>：<ul>
+<li>CAP定理：一致性(C)、可用性(A)、分区容错(P)，最多同时满足两个。</li>
+<li>CAP定理：是一致性(C)、可用性(A)、分区容错(P)，最多同时满足两个。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li>数据均衡性原则：数据均衡性原则是指分片后各节点的数据量与访问压力应尽可能均匀。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li>业务相关性原则：业务相关性原则是指分片键与分片边界应紧贴核心业务场景与高频访问路径来设计。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+</ul>
+</li>
+<li><strong>别搞混</strong>：与同章相邻考点区分；题干锚词：<strong>非关系数据库 / CAP</strong>。</li>
+</ul>
+<h2 id="定义">定义</h2>
+<ul>
+<li><strong>CAP定理</strong>：是一致性(C)、可用性(A)、分区容错(P)，最多同时满足两个。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>数据均衡性原则</strong>：数据均衡性原则是指分片后各节点的数据量与访问压力应尽可能均匀。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>业务相关性原则</strong>：业务相关性原则是指分片键与分片边界应紧贴核心业务场景与高频访问路径来设计。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>可扩展性原则</strong>：可扩展性原则是指分片方案应支持业务增长时通过新增节点实现横向扩展。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>数据分片</strong>：数据分片是把逻辑上统一的数据集合按既定规则划分到多个物理节点存储与访问的技术。<strong>作用</strong>：用于提升容量与并发扩展能力，并支撑故障隔离与按片备份恢复。</li>
+<li><strong>分片键</strong>：分片键是用于决定一条（或一组）数据路由到哪一个分片的属性或属性组合。</li>
+<li><strong>跨厅（跨站点）数据共享</strong>：跨厅数据共享是指不同业务网点之间能够按统一规则访问与使用同一业务域下的共享数据（如 A 厅取号、B 厅办理时读取原取号记录）。<strong>作用</strong>：用于支撑跨网点连续办理与实时协同，避免各厅数据孤岛。</li>
+<li><strong>数据持久化</strong>：数据持久化是将业务数据可靠写入可长期保存的存储介质，并在进程重启、节点故障后仍可恢复访问的能力。<strong>作用</strong>：用于满足长期保存、审计统计与故障后数据不丢等需求（如排队记录保存 ≥5 年）。</li>
+</ul>
+<h2 id="步骤与流程">步骤与流程</h2>
+<p>本节在教程中<strong>未单独列出固定步骤名</strong>；答题时可按下列指引组织答案：</p>
+<ol>
+<li>先在「要点」中找 <strong>阶段 / 活动 / → 流程链</strong> 表述；</li>
+<li>案例题常用 <strong>调查 → 分析 → 方案 → 验证</strong>（或题干给出的过程框架）；</li>
+<li>综合知识流程题优先写 <strong>编号步骤</strong> 或 <strong>阶段名称</strong>；</li>
+<li>需要完整步骤时打开文末 <strong>归档通章</strong> 对应小节对照誊写。</li>
+</ol>
+<h2 id="要点">要点</h2>
+<h3 id="非关系数据库nosql">非关系数据库(NoSQL)</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>特点</th>
+<th>代表</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>列数据库</td>
+<td>列存储，分析型</td>
+<td>HBase</td>
+</tr>
+<tr>
+<td>文档数据库</td>
+<td>JSON/BSON</td>
+<td>MongoDB</td>
+</tr>
+<tr>
+<td>键值数据库</td>
+<td>简单KV，高性能</td>
+<td>Redis</td>
+</tr>
+<tr>
+<td>图数据库</td>
+<td>关系网络</td>
+<td>Neo4j</td>
+</tr>
+</tbody></table></div>
+<p><strong>适用场景（选择/案例）</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>适用</th>
+<th>慎用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>键值</td>
+<td>会话、计数、热点缓存（<strong>Redis</strong>）</td>
+<td>复杂关联查询</td>
+</tr>
+<tr>
+<td>文档</td>
+<td>模式多变、JSON 业务对象（<strong>MongoDB</strong>）</td>
+<td>强一致跨文档事务</td>
+</tr>
+<tr>
+<td>列族</td>
+<td>海量列、时序/日志分析（<strong>HBase</strong>）</td>
+<td>频繁随机小更新</td>
+</tr>
+<tr>
+<td>图</td>
+<td>社交/风控/知识图谱（<strong>Neo4j</strong>）</td>
+<td>简单 CRUD 为主</td>
+</tr>
+</tbody></table></div>
+<p><strong>性能优化（与 <code>kp-3-3</code> 衔接）</strong>：索引与执行计划、读写分离、缓存（注意击穿/穿透）、分片键（均衡+业务相关）、反规范化换读性能。</p>
+<ul>
+<li><strong>CAP定理</strong>：一致性(C)、可用性(A)、分区容错(P)，最多同时满足两个。</li>
+</ul>
+<h2 id="易混辨析">易混辨析</h2>
+<p>（本节与相邻考点易混点见归档篇章「易混对比」；检索关键词：<strong>非关系数据库、CAP</strong>。）</p>
+<h2 id="应试">应试</h2>
+<p><strong>案例可能怎么问</strong>：给定业务表与函数依赖，要求判断范式级别并分解至 3NF/BCNF；或给出并发/死锁场景，选隔离级别与加锁策略；备份恢复题常考「完全+增量/差异」组合与 RPO 对应关系；<strong>分布式库案例</strong>常考「分片设计核心原则（至少 2 个）」——答<strong>数据均衡性、业务相关性、可扩展性</strong>并稍作展开；再问分片键选型，回扣「跨厅/跨站点共享」与「长期持久化/审计保存」。</p>
+<p><strong>论文怎么用</strong>：数据迁移/多源集成类（23上、24上）可写「源库→中间层→目标库」割接步骤、一致性校验与回滚；OLTP/OLAP 分离、读写分离、缓存与索引优化可作为性能段落素材；多网点政务/连锁类可写分片键与故障隔离。</p>
+<p><strong>常考结论</strong></p>
+<ul>
+<li><p>授权粒度：<strong>库→表→行→列</strong>（4级，由大到小）。</p>
+</li>
+<li><p>审计=<strong>事后</strong>；标识鉴别=<strong>事前</strong>。</p>
+</li>
+<li><p>ACID：<strong>原一隔持</strong>。</p>
+</li>
+<li><p>范式递进：<strong>1→2→3→BCNF→4NF</strong>。</p>
+</li>
+<li><p>备份口诀：<strong>物逻分，冷热全增异</strong>。</p>
+</li>
+<li><p>增量备份基于&quot;上次任意备份&quot;，差异备份基于&quot;上次完全备份&quot;（易混！）。</p>
+</li>
+<li><p>分片<strong>设计</strong>原则口诀：<strong>均衡、相关、可扩展</strong>（写全名：数据均衡性 / 业务相关性 / 可扩展性）。</p>
+</li>
+<li><p>分片<strong>正确性</strong>准则：<strong>完备、重构、不相交</strong>（勿与上条混答）。</p>
+</li>
+<li><p><strong>本章练习热力</strong>：教程第 5 章约 84 题（站点练习库，不含真题卷 ch=99）。</p>
+</li>
+<li><p><strong>题库考点标签</strong>：CAP理论、CAP中的C。</p>
+</li>
+<li><p><strong>练题入口</strong>：<a href="/?bank=practice&chapter=5&path=all&q=%E9%9D%9E%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93">第 5 章练习（关键词 非关系数据库）</a></p>
+</li>
+</ul>
+<h2 id="相关考点">相关考点</h2>
+<ul>
+<li><a href="/kb/kp-3-7">数据挖掘</a></li>
+<li>归档通章：<a href="../%E7%AC%AC%E4%B8%80%E7%AF%87-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AC%AC05%E7%AB%A0-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F.md"><a href="/kb/ch05/" class="kb-ref" data-kb-id="ch05" data-kb-path="第05章-数据库系统.md" title="预览：第05章 · 数据库系统"><code>第05章-数据库系统.md</code></a></a></li>
+</ul>

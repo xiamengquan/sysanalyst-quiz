@@ -1,0 +1,304 @@
+<h1 id="微服务概述与特征">微服务概述与特征</h1>
+<blockquote>
+<p><strong>大纲</strong>：20.1 · <strong>教程</strong>：第20章 · <strong>分组</strong>：科目2 · 5. 微服务系统分析与设计 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+</blockquote>
+<h2 id="概述">概述</h2>
+<p><strong>微服务概述与特征</strong>：微服务（答卷·定义）：微服务是将大型应用拆分为多个小型、自治、可独立部署的服务，每个服务围绕特定业务能力，通过 HTTP/REST、gRPC 或消息等轻量通信协作的架构风格。</p>
+<h2 id="速懂">速懂</h2>
+<ul>
+<li><strong>一句话</strong>：微服务：微服务是将大型应用拆分为多个小型、自治、可独立部署的服务，每个服务围绕特定业务能力，通过 HTTP/REST、gRPC 或消息等轻量通信协作的架构风格。作用：主要用于应对单体应用在扩展性、部署频率与技术异构方面的瓶颈，使各服务可独立演化、弹性伸缩并按域隔离故障。</li>
+<li><strong>考什么</strong>：微服务治理、熔断限流、最终一致（教程第 20 章）。</li>
+<li><strong>具体理解</strong>：<ul>
+<li>与 SOA 关系：微服务是 SOA 的细粒度实现；强调去 ESB 中心化、去共享 DB、智能端点+简单消息。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li>单一职责原则（答卷）：单一职责原则是指每个微服务只围绕一项明确的业务能力构建；用于控制服务边界，避免「大而全」服务带来的耦合与发布风险。</li>
+<li>隔离性原则（答卷）：隔离性原则是指各服务以独立进程运行并拥有自己的数据存储，常用容器封装；用于故障隔离，防止单服务异常拖垮整个系统。</li>
+<li>自治性原则（答卷）：自治性原则是指每个服务拥有独立的生命周期，可独立开发、测试、部署与演化；用于提升团队并行效率与发布频率。</li>
+</ul>
+</li>
+<li><strong>别搞混</strong>：与同章相邻考点区分；题干锚词：<strong>微服务概述与特征</strong>。</li>
+</ul>
+<h2 id="定义">定义</h2>
+<ul>
+<li><strong>微服务</strong>：微服务是将大型应用拆分为多个小型、自治、可独立部署的服务，每个服务围绕特定业务能力，通过 HTTP/REST、gRPC 或消息等轻量通信协作的架构风格。<strong>作用</strong>：主要用于应对单体应用在扩展性、部署频率与技术异构方面的瓶颈，使各服务可独立演化、弹性伸缩并按域隔离故障。</li>
+<li><strong>与 SOA 关系</strong>：微服务是 SOA 的细粒度实现；强调去 ESB 中心化、去共享 DB、智能端点+简单消息。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>单一职责原则（答卷）</strong>：单一职责原则是指每个微服务只围绕一项明确的业务能力构建；<strong>用于</strong>控制服务边界，避免「大而全」服务带来的耦合与发布风险。</li>
+<li><strong>隔离性原则（答卷）</strong>：隔离性原则是指各服务以独立进程运行并拥有自己的数据存储，常用容器封装；<strong>用于</strong>故障隔离，防止单服务异常拖垮整个系统。</li>
+<li><strong>自治性原则（答卷）</strong>：自治性原则是指每个服务拥有独立的生命周期，可独立开发、测试、部署与演化；<strong>用于</strong>提升团队并行效率与发布频率。</li>
+<li><strong>弹性原则（答卷）</strong>：弹性原则是指系统具备自动扩缩容与故障转移能力；<strong>用于</strong>应对流量波动，保障高可用。</li>
+<li><strong>可观察性原则（答卷）</strong>：可观察性原则是指通过日志、指标与分布式链路追踪等手段掌握系统运行状态；<strong>用于</strong>快速定位分布式环境下的故障与性能瓶颈。</li>
+<li><strong>可测试性原则（答卷）</strong>：可测试性原则是指各服务须支持单元测试、集成测试与契约测试，并纳入 CI/CD 流水线；<strong>用于</strong>在频繁独立发布下仍保障质量。</li>
+<li><strong>可维护性原则（答卷）</strong>：可维护性原则是指服务对外暴露标准 API（如 REST/OpenAPI）并实施版本控制；<strong>用于</strong>降低服务间协作成本，支持平滑升级。</li>
+<li><strong>安全性原则（答卷）</strong>：安全性原则是指服务间通信加密（TLS）、身份认证（OAuth2/JWT）与访问控制（RBAC）；<strong>用于</strong>保障分布式环境下的数据与接口安全。</li>
+<li><strong>智能端点 + 简单消息原则（答卷）</strong>：智能端点 + 简单消息原则是指业务逻辑放在服务端点、消息通道保持轻量简单，以去中心化方式集成；<strong>用于</strong>替代 ESB 重度编排，降低集成中间件单点风险。</li>
+</ul>
+<h2 id="步骤与流程">步骤与流程</h2>
+<h3 id="流程要点">流程要点</h3>
+<p>| 监控 | ELK（Logstash→ES→Kibana）、Prometheus+Grafana、APM | 日志/指标/告警 |</p>
+<h3 id="流程要点">流程要点</h3>
+<p>单元（单服务）→ 集成（服务间）→ 端到端 → 性能 → 容错 → 安全</p>
+<h2 id="要点">要点</h2>
+<h1 id="第20章-微服务系统分析与设计">第20章 微服务系统分析与设计</h1>
+<blockquote>
+<p>出自《系统分析师教程》知识点精炼 · 第三篇分章。科目2/3相关。</p>
+</blockquote>
+<hr>
+<h2 id="一场景特征">一、场景特征</h2>
+<p><strong>定义</strong>：将大型应用拆分为<strong>小型、自治、独立部署</strong>的服务，每个服务围绕特定业务能力，通过轻量通信（HTTP/REST、gRPC、消息）协作。</p>
+<p><strong>典型场景</strong>：电商、金融、流媒体（Netflix）、大型互联网后台</p>
+<p><strong>核心特征</strong>：</p>
+<ol>
+<li>服务粒度小、职责单一</li>
+<li>独立部署与演化</li>
+<li>松耦合</li>
+<li>分布式部署（跨数据中心）</li>
+<li>技术异构（Java/Python/Go 混用）</li>
+<li>弹性伸缩</li>
+<li>独立演化和部署</li>
+</ol>
+<p><strong>与 SOA 关系</strong>：微服务是 SOA 的细粒度实现；强调去 ESB 中心化、去共享 DB、智能端点+简单消息</p>
+<p><strong>微服务 vs SOA vs 单体（答卷·易混）</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比维度</th>
+<th>单体（Monolithic）</th>
+<th>SOA</th>
+<th>微服务</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>定义</strong></td>
+<td>全部功能集中于单一部署单元</td>
+<td>以独立服务为单位、通过标准接口实现跨系统集成的架构思想</td>
+<td>SOA 的细粒度实现，强调小服务、独立 DB、去中心化集成</td>
+</tr>
+<tr>
+<td><strong>服务粒度</strong></td>
+<td>无服务边界，模块级</td>
+<td>较粗，常按企业级业务域</td>
+<td>较细，常按单一业务能力</td>
+</tr>
+<tr>
+<td><strong>集成方式</strong></td>
+<td>进程内调用</td>
+<td>常经 ESB 集中路由与编排</td>
+<td>智能端点 + 简单消息，API 网关/消息队列，去 ESB 中心化</td>
+</tr>
+<tr>
+<td><strong>数据存储</strong></td>
+<td>通常共享同一数据库</td>
+<td>可能共享 DB 或通过 ESB 转换</td>
+<td>每服务独立数据库，跨服务用 API 或异步消息</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>简单、低流量、小团队</td>
+<td>异构遗留系统集成、企业级复用</td>
+<td>高并发、复杂业务、需独立扩展与频繁发布</td>
+</tr>
+<tr>
+<td><strong>主要代价</strong></td>
+<td>扩展难、小改全量部署</td>
+<td>ESB 成为瓶颈与单点</td>
+<td>运维复杂、分布式一致性难保障</td>
+</tr>
+</tbody></table></div>
+<h2 id="二架构原则与模式">二、架构原则与模式</h2>
+<h3 id="21-九大架构原则">2.1 九大架构原则</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>原则</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>单一职责</td>
+<td>一服务一业务域</td>
+</tr>
+<tr>
+<td>隔离性</td>
+<td>独立进程+独立 DB，容器封装</td>
+</tr>
+<tr>
+<td>自治性</td>
+<td>独立生命周期，组件化</td>
+</tr>
+<tr>
+<td>弹性</td>
+<td>自动扩缩容、容错转移</td>
+</tr>
+<tr>
+<td>可观察性</td>
+<td>日志、指标、链路追踪</td>
+</tr>
+<tr>
+<td>可测试性</td>
+<td>单元/集成/契约测试、CI/CD</td>
+</tr>
+<tr>
+<td>可维护性</td>
+<td>标准 API（REST/OpenAPI）、版本控制</td>
+</tr>
+<tr>
+<td>安全性</td>
+<td>TLS、OAuth2、JWT、RBAC</td>
+</tr>
+<tr>
+<td>智能端点+简单消息</td>
+<td>去中心化集成，异步消息</td>
+</tr>
+</tbody></table></div>
+<p><strong>单一职责原则（答卷）</strong>：单一职责原则是指每个微服务只围绕一项明确的业务能力构建；<strong>用于</strong>控制服务边界，避免「大而全」服务带来的耦合与发布风险。</p>
+<p><strong>隔离性原则（答卷）</strong>：隔离性原则是指各服务以独立进程运行并拥有自己的数据存储，常用容器封装；<strong>用于</strong>故障隔离，防止单服务异常拖垮整个系统。</p>
+<p><strong>自治性原则（答卷）</strong>：自治性原则是指每个服务拥有独立的生命周期，可独立开发、测试、部署与演化；<strong>用于</strong>提升团队并行效率与发布频率。</p>
+<p><strong>弹性原则（答卷）</strong>：弹性原则是指系统具备自动扩缩容与故障转移能力；<strong>用于</strong>应对流量波动，保障高可用。</p>
+<p><strong>可观察性原则（答卷）</strong>：可观察性原则是指通过日志、指标与分布式链路追踪等手段掌握系统运行状态；<strong>用于</strong>快速定位分布式环境下的故障与性能瓶颈。</p>
+<p><strong>可测试性原则（答卷）</strong>：可测试性原则是指各服务须支持单元测试、集成测试与契约测试，并纳入 CI/CD 流水线；<strong>用于</strong>在频繁独立发布下仍保障质量。</p>
+<p><strong>可维护性原则（答卷）</strong>：可维护性原则是指服务对外暴露标准 API（如 REST/OpenAPI）并实施版本控制；<strong>用于</strong>降低服务间协作成本，支持平滑升级。</p>
+<p><strong>安全性原则（答卷）</strong>：安全性原则是指服务间通信加密（TLS）、身份认证（OAuth2/JWT）与访问控制（RBAC）；<strong>用于</strong>保障分布式环境下的数据与接口安全。</p>
+<p><strong>智能端点 + 简单消息原则（答卷）</strong>：智能端点 + 简单消息原则是指业务逻辑放在服务端点、消息通道保持轻量简单，以去中心化方式集成；<strong>用于</strong>替代 ESB 重度编排，降低集成中间件单点风险。</p>
+<h3 id="22-六种架构模式案例对比高频">2.2 六种架构模式（案例对比高频）</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>模式</th>
+<th>机制</th>
+<th>优点</th>
+<th>注意</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>聚合器</strong></td>
+<td>收集多服务数据聚合返回</td>
+<td>减延迟、减依赖、提高可靠</td>
+<td>聚合器成为瓶颈</td>
+</tr>
+<tr>
+<td><strong>代理</strong></td>
+<td>网关转发+治理（LB/熔断/限流）</td>
+<td>解耦客户端与后端</td>
+<td>不做数据聚合</td>
+</tr>
+<tr>
+<td><strong>链式</strong></td>
+<td>请求顺序经过多服务</td>
+<td>流程清晰</td>
+<td>客户端阻塞等待</td>
+</tr>
+<tr>
+<td><strong>分支</strong></td>
+<td>链式扩展，条件分支</td>
+<td>灵活业务路径</td>
+<td>复杂度上升</td>
+</tr>
+<tr>
+<td><strong>数据共享</strong></td>
+<td>共享 DB 或数据代理(Kafka)</td>
+<td>数据一致</td>
+<td>并发与一致性风险</td>
+</tr>
+<tr>
+<td><strong>异步消息</strong></td>
+<td>消息队列+EDA</td>
+<td>高吞吐、松耦合</td>
+<td>最终一致性</td>
+</tr>
+</tbody></table></div>
+<h3 id="23-开发与运维组件">2.3 开发与运维组件</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>组件</th>
+<th>代表技术</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>容器化</td>
+<td>Docker、Kubernetes</td>
+<td>隔离、编排、自动部署</td>
+</tr>
+<tr>
+<td>服务注册发现</td>
+<td>Consul、Eureka、Nacos</td>
+<td>动态地址</td>
+</tr>
+<tr>
+<td>服务通信</td>
+<td>REST、gRPC、Kafka</td>
+<td>同步/异步</td>
+</tr>
+<tr>
+<td>API 网关</td>
+<td>Zuul、Kong</td>
+<td>路由、鉴权、限流</td>
+</tr>
+<tr>
+<td>安全</td>
+<td>OAuth2（4 模式）、JWT、TLS</td>
+<td>认证授权</td>
+</tr>
+<tr>
+<td>监控</td>
+<td>ELK（Logstash→ES→Kibana）、Prometheus+Grafana、APM</td>
+<td>日志/指标/告警</td>
+</tr>
+</tbody></table></div>
+<p><strong>OAuth2 四种模式</strong>：授权码、密码、客户端、隐式</p>
+<p><strong>gRPC 四种 RPC</strong>：Unary、Server Streaming、Client Streaming、Bidirectional Streaming</p>
+<p><strong>Kafka 核心概念</strong>：Broker、Topic、Partition、Producer、Consumer、Consumer Group</p>
+<h2 id="三开发与测试要点">三、开发与测试要点</h2>
+<h3 id="31-测试特点">3.1 测试特点</h3>
+<ul>
+<li>服务多、依赖链长</li>
+<li>需契约测试（Consumer-Driven Contract）</li>
+<li>需测试替身（Mock/Stub）与测试容器</li>
+<li>分布式环境搭建复杂</li>
+</ul>
+<h3 id="32-测试过程与类型">3.2 测试过程与类型</h3>
+<p><strong>过程</strong>：单元（单服务）→ 集成（服务间）→ 端到端 → 性能 → 容错 → 安全</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>功能</td>
+<td>API 正确性、业务规则</td>
+</tr>
+<tr>
+<td>性能</td>
+<td>单服务与链路延迟、吞吐</td>
+</tr>
+<tr>
+<td>容错</td>
+<td>熔断、降级、故障注入</td>
+</tr>
+<tr>
+<td>安全</td>
+<td>认证授权、传输加密、漏洞扫描</td>
+</tr>
+</tbody></table></div>
+<h2 id="四与综合知识关联">四、与综合知识关联</h2>
+<p>| 本篇要点 | 对应章节 |
+|-</p>
+<h2 id="易混辨析">易混辨析</h2>
+<p>（本节与相邻考点易混点见归档篇章「易混对比」；检索关键词：<strong>微服务概述与特征</strong>。）</p>
+<h2 id="应试">应试</h2>
+<ul>
+<li>「说明从单体迁移微服务的理由与拆分原则」→ 写单体痛点 + 单一职责/隔离性/有界上下文等原则答卷句。</li>
+<li>「对比微服务方案与传统 SOA/ESB 方案」→ 用 §一 对比表 + §五 易混对比展开。</li>
+<li>「跨服务下单如何保证一致性？」→ Saga + 最终一致性，说明补偿机制；避免简单写 2PC。</li>
+<li>「如何保障微服务可观测与容错？」→ 日志/指标/链路追踪 + 熔断/限流/降级。</li>
+<li>背景：电商/金融后台单体瓶颈（发布慢、扩展难、技术栈锁定）。</li>
+<li>方案：按业务能力拆分 + 容器编排 + API 网关 + 注册发现 + 消息队列；一致性写 Saga。</li>
+<li>成效：独立发布频率、故障隔离、弹性伸缩、团队并行度等可量化指标。</li>
+</ul>
+<h2 id="相关考点">相关考点</h2>
+<ul>
+<li><a href="/kb/kp-5-2-2">架构（原则、模式）</a></li>
+<li>归档通章：<a href="../%E7%AC%AC%E4%B8%89%E7%AF%87-%E6%A1%88%E4%BE%8B%E5%AE%9E%E8%B7%B5/%E7%AC%AC20%E7%AB%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1.md"><a href="/kb/ch20/" class="kb-ref" data-kb-id="ch20" data-kb-path="第20章-微服务系统分析与设计.md" title="预览：第20章 · 微服务系统分析与设计"><code>第20章-微服务系统分析与设计.md</code></a></a></li>
+</ul>

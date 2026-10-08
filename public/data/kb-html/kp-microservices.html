@@ -1,0 +1,146 @@
+<h1 id="微服务">微服务</h1>
+<blockquote>
+<p><strong>大纲</strong>：第20章 · <strong>教程</strong>：第20章 · <strong>分组</strong>：科目3 · 8. 新技术及其应用 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+</blockquote>
+<h2 id="概述">概述</h2>
+<p><strong>微服务</strong> 属本科目大纲考点。常考：对比维度  ·  单体（Monolithic）  ·  SOA  ·  微服务。</p>
+<h2 id="速懂">速懂</h2>
+<ul>
+<li><strong>一句话</strong>：微服务：微服务是将大型应用拆分为多个小型、自治、可独立部署的服务，每个服务围绕特定业务能力，通过 HTTP/REST、gRPC 或消息等轻量通信协作的架构风格。作用：主要用于应对单体应用在扩展性、部署频率与技术异构方面的瓶颈，使各服务可独立演化、弹性伸缩并按域隔离故障。</li>
+<li><strong>考什么</strong>：Service Mesh、网关、熔断限流、最终一致（教程第 20 章）。</li>
+<li><strong>具体理解</strong>：<ul>
+<li>微服务：微服务是将大型应用拆分为多个小型、自治、可独立部署的服务，每个服务围绕特定业务能力，通过 HTTP/REST、gRPC 或消息等轻量通信协作的架构风格。作用：主要用于应对单体应用在扩展性、部署频率与技术异构方面的瓶颈，使各服务可独立演化、弹性伸缩并按域隔离故障。</li>
+<li>与 SOA 关系：微服务是 SOA 的细粒度实现；强调去 ESB 中心化、去共享 DB、智能端点+简单消息。作用：用于辨析集成方式与数据边界。</li>
+<li>API 网关：是对外统一入口，负责路由、鉴权、限流与协议转换的组件。作用：用于客户端与微服务集群之间的边界控制。</li>
+<li>最终一致性：是跨服务协作允许短暂不一致、通过消息/补偿异步收敛的一致级别。作用：用于替代分布式 2PC 提升可用性（Saga/TCC 等）。</li>
+</ul>
+</li>
+<li><strong>别搞混</strong>：| 对比 | 区别 |</li>
+</ul>
+<h2 id="定义">定义</h2>
+<ul>
+<li><strong>微服务</strong>：微服务是将大型应用拆分为多个小型、自治、可独立部署的服务，每个服务围绕特定业务能力，通过 HTTP/REST、gRPC 或消息等轻量通信协作的架构风格。<strong>作用</strong>：主要用于应对单体应用在扩展性、部署频率与技术异构方面的瓶颈，使各服务可独立演化、弹性伸缩并按域隔离故障。</li>
+<li><strong>与 SOA 关系</strong>：微服务是 SOA 的细粒度实现；强调去 ESB 中心化、去共享 DB、智能端点+简单消息。<strong>作用</strong>：用于辨析集成方式与数据边界。</li>
+<li><strong>Service Mesh（服务网格）</strong>：是在 Sidecar 代理层统一处理服务间流量、安全、观测与弹性的基础设施层。<strong>作用</strong>：用于解耦业务代码与通信治理（熔断、重试、mTLS）。</li>
+<li><strong>API 网关</strong>：是对外统一入口，负责路由、鉴权、限流与协议转换的组件。<strong>作用</strong>：用于客户端与微服务集群之间的边界控制。</li>
+<li><strong>最终一致性</strong>：是跨服务协作允许短暂不一致、通过消息/补偿异步收敛的一致级别。<strong>作用</strong>：用于替代分布式 2PC 提升可用性（Saga/TCC 等）。</li>
+</ul>
+<h2 id="步骤与流程">步骤与流程</h2>
+<h3 id="微服务治理步骤案例论文">微服务治理步骤（案例/论文）</h3>
+<ol>
+<li><strong>拆分</strong>——按业务能力边界划分服务与独立数据库。</li>
+<li><strong>通信</strong>——REST/gRPC/消息；API 网关对外。</li>
+<li><strong>治理</strong>——注册发现、配置中心、<strong>Service Mesh</strong>（Sidecar 治理流量）。</li>
+<li><strong>弹性</strong>——限流、熔断、降级、扩缩容。</li>
+<li><strong>一致性</strong>——Saga/TCC/幂等/对账，接受最终一致。</li>
+<li><strong>可观测</strong>——日志、指标、分布式追踪。</li>
+</ol>
+<h2 id="要点">要点</h2>
+<h3 id="一场景特征">一、场景特征</h3>
+<p><strong>定义</strong>：将大型应用拆分为<strong>小型、自治、独立部署</strong>的服务，每个服务围绕特定业务能力，通过轻量通信（HTTP/REST、gRPC、消息）协作。</p>
+<p><strong>典型场景</strong>：电商、金融、流媒体（Netflix）、大型互联网后台</p>
+<p><strong>核心特征</strong>：</p>
+<ol>
+<li>服务粒度小、职责单一</li>
+<li>独立部署与演化</li>
+<li>松耦合</li>
+<li>分布式部署（跨数据中心）</li>
+<li>技术异构（Java/Python/Go 混用）</li>
+<li>弹性伸缩</li>
+<li>独立演化和部署</li>
+</ol>
+<p><strong>与 SOA 关系</strong>：微服务是 SOA 的细粒度实现；强调去 ESB 中心化、去共享 DB、智能端点+简单消息</p>
+<p><strong>微服务 vs SOA vs 单体（答卷·易混）</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比维度</th>
+<th>单体（Monolithic）</th>
+<th>SOA</th>
+<th>微服务</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>定义</strong></td>
+<td>全部功能集中于单一部署单元</td>
+<td>以独立服务为单位、通过标准接口实现跨系统集成的架构思想</td>
+<td>SOA 的细粒度实现，强调小服务、独立 DB、去中心化集成</td>
+</tr>
+<tr>
+<td><strong>服务粒度</strong></td>
+<td>无服务边界，模块级</td>
+<td>较粗，常按企业级业务域</td>
+<td>较细，常按单一业务能力</td>
+</tr>
+<tr>
+<td><strong>集成方式</strong></td>
+<td>进程内调用</td>
+<td>常经 ESB 集中路由与编排</td>
+<td>智能端点 + 简单消息，API 网关/消息队列，去 ESB 中心化</td>
+</tr>
+<tr>
+<td><strong>数据存储</strong></td>
+<td>通常共享同一数据库</td>
+<td>可能共享 DB 或通过 ESB 转换</td>
+<td>每服务独立数据库，跨服务用 API 或异步消息</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>简单、低流量、小团队</td>
+<td>异构遗留系统集成、企业级复用</td>
+<td>高并发、复杂业务、需独立扩展与频繁发布</td>
+</tr>
+<tr>
+<td><strong>主要代价</strong></td>
+<td>扩展难、小改全量部署</td>
+<td>ESB 成为瓶颈与单点</td>
+<td>运维复杂、分布式一致性难保障</td>
+</tr>
+</tbody></table></div>
+<h2 id="易混辨析">易混辨析</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比</th>
+<th>区别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>微服务 vs 单体</strong></td>
+<td>单体全部功能单部署、共享 DB，适合简单场景；微服务多服务独立部署、各管各库，适合高并发与频繁发布，但运维与一致性成本更高。</td>
+</tr>
+<tr>
+<td><strong>微服务 vs SOA</strong></td>
+<td>SOA 强调企业级服务集成，常经 ESB 集中编排；微服务粒度更细、去 ESB 中心化，强调智能端点 + 简单消息与每服务独立 DB。</td>
+</tr>
+<tr>
+<td><strong>强一致 vs 最终一致</strong></td>
+<td>强一致要求任意时刻读到最新数据（如 2PC），代价是可用性与性能；最终一致允许短暂不一致、异步同步，是微服务跨服务协作的常见取舍。</td>
+</tr>
+</tbody></table></div>
+<h2 id="应试">应试</h2>
+<ul>
+<li><p><strong>综合知识侧重</strong>：微服务治理、熔断限流、最终一致。</p>
+</li>
+<li><p><strong>本考点侧重</strong>：Service Mesh、网关、熔断限流、最终一致。</p>
+</li>
+<li><p><strong>案例题</strong>：先写业务/非功能约束，再列 2 方案对比，结论回扣本页定义术语。</p>
+</li>
+<li><p><strong>论文题</strong>：可复用近 3 年项目经历；结构见 <a href="/kb/kp-thesis-writing-guide">论文写作要点</a>。</p>
+</li>
+<li><p>「说明从单体迁移微服务的理由与拆分原则」→ 写单体痛点 + 单一职责/隔离性/有界上下文等原则答卷句。</p>
+</li>
+<li><p>「对比微服务方案与传统 SOA/ESB 方案」→ 用 §一 对比表 + §五 易混对比展开。</p>
+</li>
+<li><p>「如何保障微服务可观测与容错？」→ 日志/指标/链路追踪 + 熔断/限流/降级。</p>
+</li>
+</ul>
+<h2 id="相关考点">相关考点</h2>
+<ul>
+<li><a href="/kb/kp-10-1">架构概述</a></li>
+<li><a href="/kb/kp-app-service-integration">应用集成/服务集成</a></li>
+<li><a href="/kb/kp-cloud-computing">云计算</a></li>
+<li><a href="/kb/kp-big-data">大数据</a></li>
+<li><a href="/kb/kp-cps-iot">CPS/物联网</a></li>
+<li>归档通章：<a href="../%E7%AC%AC%E4%B8%89%E7%AF%87-%E6%A1%88%E4%BE%8B%E5%AE%9E%E8%B7%B5/%E7%AC%AC20%E7%AB%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1.md"><a href="/kb/ch20/" class="kb-ref" data-kb-id="ch20" data-kb-path="第20章-微服务系统分析与设计.md" title="预览：第20章 · 微服务系统分析与设计"><code>第20章-微服务系统分析与设计.md</code></a></a></li>
+</ul>

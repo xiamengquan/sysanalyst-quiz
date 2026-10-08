@@ -1,0 +1,174 @@
+<h1 id="访问控制blpbibalatticedacmacrbac-等">访问控制（BLP/Biba/Lattice、DAC/MAC/RBAC 等）</h1>
+<blockquote>
+<p><strong>大纲</strong>：9.4 · <strong>教程</strong>：第9章 · <strong>分组</strong>：科目1 · 7. 信息安全 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+</blockquote>
+<h2 id="概述">概述</h2>
+<p><strong>访问控制（BLP/Biba/Lattice、DAC/MAC/RBAC 等）</strong>：三要素：主体、客体、控制策略。</p>
+<h2 id="速懂">速懂</h2>
+<ul>
+<li><strong>一句话</strong>：上读(no read up)：是不能读高于自身级别的数据。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>考什么</strong>：访问控制模型、加密、容灾 RPO/RTO（教程第 9 章）。</li>
+<li><strong>具体理解</strong>：<ul>
+<li>上读(no read up)：是不能读高于自身级别的数据。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li>下写(no write down)：是不能写低于自身级别的数据。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li>下读(no read down)：是不能读低于自身级别的数据。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li>上写(no write up)：是不能写高于自身级别的数据。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+</ul>
+</li>
+<li><strong>别搞混</strong>：| 对比 | 区别 |</li>
+</ul>
+<h2 id="定义">定义</h2>
+<ul>
+<li><strong>上读(no read up)</strong>：是不能读高于自身级别的数据。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>下写(no write down)</strong>：是不能写低于自身级别的数据。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>下读(no read down)</strong>：是不能读低于自身级别的数据。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>上写(no write up)</strong>：是不能写高于自身级别的数据。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>数字签名</strong>：数字签名是基于非对称加密技术，用发送方私钥对消息摘要进行加密而形成的认证标识。<strong>作用</strong>：用于验证发送方身份（鉴别）、保证消息未被篡改（完整性），以及防止发送方事后否认（不可否认）。</li>
+<li><strong>数字证书</strong>：数字证书是由可信的证书颁发机构（CA）签发、符合 X.509 标准的电子凭证，内含用户身份信息、公钥、有效期及 CA 数字签名。<strong>作用</strong>：用于在 PKI 体系中绑定公钥与持有者身份，使通信各方能够验证公钥归属并建立可信通信。</li>
+<li><strong>防火墙</strong>：防火墙是部署在网络边界、依据安全策略对进出流量进行过滤与控制的网络安全设备或系统。<strong>作用</strong>：用于实现访问控制、内容过滤与日志审计，隔离受信网络与不可信网络，降低外部攻击面。</li>
+<li><strong>系统可靠性</strong>：系统可靠性是系统在<strong>规定时间、规定条件下完成规定功能</strong>的能力。<strong>作用</strong>：用于衡量系统持续稳定运行、少出故障的程度，是可用性、容灾与冗余设计的基础指标。</li>
+<li><strong>N版本程序设计</strong>：N 版本程序设计是由 N 个功能相同但独立开发的程序版本同时运行，通过表决器选取正确结果的软件容错方法。<strong>作用</strong>：用于实现<strong>静态/设计冗余</strong>与<strong>前向恢复</strong>——故障发生时无需回退，直接以多数表决输出屏蔽单个版本的错误。</li>
+<li><strong>恢复块方法</strong>：恢复块方法是以主程序块为核心、主块失败后切换到备用块并回退状态的软件容错方法。<strong>作用</strong>：用于实现<strong>动态/设计冗余</strong>与<strong>后向恢复</strong>——通过验证测试发现错误后 Roll-back 到一致状态，再启用备份块继续执行。</li>
+<li><strong>防卫式程序设计</strong>：防卫式程序设计是在程序中主动插入合法性检查与异常处理逻辑、不依赖传统冗余结构的容错方法。<strong>作用</strong>：用于在小程序或局部模块中灵活捕获并纠正输入错误、边界异常，实现低开销的局部容错。</li>
+</ul>
+<h2 id="步骤与流程">步骤与流程</h2>
+<h3 id="系统访问控制-必考">系统访问控制 ★必考</h3>
+<ol>
+<li>| RBAC | 角色 | 用户</li>
+<li>角色</li>
+<li>权限 |</li>
+<li>RBAC0(基本)</li>
+<li>RBAC1(层次)</li>
+<li>RBAC2(约束)</li>
+<li>RBAC3(层次+约束)</li>
+</ol>
+<h3 id="通信与网络安全">通信与网络安全</h3>
+<ol>
+<li>接通</li>
+<li>密码交换</li>
+<li>会谈密码</li>
+<li>检验</li>
+<li>客户认证</li>
+<li>结束</li>
+</ol>
+<h2 id="要点">要点</h2>
+<h3 id="系统访问控制-必考">系统访问控制 ★必考</h3>
+<p><strong>三要素</strong>：主体、客体、控制策略。</p>
+<p><strong>五种策略</strong>：登录访问控制、操作权限、目录安全、属性安全、服务器安全。</p>
+<p><strong>访问控制模型</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>模型</th>
+<th>关注点</th>
+<th>规则</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>BLP</strong></td>
+<td>保密性(MAC)</td>
+<td><strong>上读下写</strong>（不可读高、不可写低）</td>
+</tr>
+<tr>
+<td><strong>Biba</strong></td>
+<td>完整性(MAC)</td>
+<td><strong>下读上写</strong>（与BLP相反）</td>
+</tr>
+<tr>
+<td><strong>Lattice</strong></td>
+<td>保密(扩展BLP)</td>
+<td>安全集束内同上</td>
+</tr>
+<tr>
+<td><strong>DAC</strong></td>
+<td>自主</td>
+<td>用户自主授权(ACL)</td>
+</tr>
+<tr>
+<td><strong>MAC</strong></td>
+<td>强制</td>
+<td>安全属性决定访问</td>
+</tr>
+<tr>
+<td><strong>RBAC</strong></td>
+<td>角色</td>
+<td>用户→角色→权限</td>
+</tr>
+<tr>
+<td><strong>TBAC</strong></td>
+<td>任务</td>
+<td>面向任务/工作流</td>
+</tr>
+<tr>
+<td><strong>OBAC</strong></td>
+<td>对象</td>
+<td>控制规则基于对象属性</td>
+</tr>
+</tbody></table></div>
+<p><strong>RBAC模型演进</strong>：RBAC0(基本)→RBAC1(层次)→RBAC2(约束)→RBAC3(层次+约束)。</p>
+<p><strong>BLP详细</strong>：</p>
+<ul>
+<li>安全级别：公开、受限、秘密、机密、高密。</li>
+</ul>
+<p><strong>Biba详细</strong>：</p>
+<h2 id="易混辨析">易混辨析</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比</th>
+<th>区别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>对比项</td>
+<td>BLP(保密)</td>
+</tr>
+<tr>
+<td>对比项</td>
+<td>DAC</td>
+</tr>
+<tr>
+<td>功能</td>
+<td>访问控制/隔离</td>
+</tr>
+</tbody></table></div>
+<h2 id="应试">应试</h2>
+<p><strong>案例可能怎么问</strong>：按场景选访问控制模型（DAC/MAC/RBAC/BLP/Biba）；防火墙类型与部署位置；给定 RPO/RTO 要求设计备份与容灾等级；N 版本/恢复块/防卫式程序容错对比。</p>
+<p><strong>论文怎么用</strong>：DevSecOps/安全运维类可写「左移测试+流水线门禁+密钥/权限最小化」；可靠性段落用 MTBF/可用性公式、冗余策略与 RPO/RTO 目标对齐业务连续性。</p>
+<p><strong>常考结论</strong></p>
+<ul>
+<li><p>BLP：<strong>上读下写</strong>；Biba：<strong>下读上写</strong>（相反！）。</p>
+</li>
+<li><p>可用性 = <strong>MTTF/MTBF × 100%</strong>。</p>
+</li>
+<li><p>指数分布：<strong>R(t)=e^(-λt)</strong>，<strong>MTTF=1/λ</strong>。</p>
+</li>
+<li><p>串联：<strong>R=∏Ri</strong>；并联：<strong>R=1-∏(1-Ri)</strong>。</p>
+</li>
+<li><p>模冗余 <strong>2n+1</strong> 个模块，容忍 <strong>n</strong> 个故障。</p>
+</li>
+<li><p>等保 <strong>5</strong> 级：<strong>自审标结验</strong>。</p>
+</li>
+<li><p>口令认证<strong>极不安全</strong>；动态口令<strong>一次一密</strong>。</p>
+</li>
+<li><p>N版本=<strong>前向恢复/静态</strong>；恢复块=<strong>后向恢复/动态</strong>。</p>
+</li>
+<li><h3 id="系统访问控制-必考">系统访问控制 ★必考</h3>
+</li>
+<li><p><strong>本章练习热力</strong>：教程第 9 章约 78 题（站点练习库，不含真题卷 ch=99）。</p>
+</li>
+<li><p><strong>题库考点标签</strong>：BLP模型、DAC、MAC、RBAC、DAC局限。</p>
+</li>
+<li><p><strong>练题入口</strong>：<a href="/?bank=practice&chapter=9&path=all&q=%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6">第 9 章练习（关键词 访问控制）</a></p>
+</li>
+</ul>
+<h2 id="相关考点">相关考点</h2>
+<ul>
+<li><a href="/kb/kp-oo-technology/">面向对象技术</a></li>
+<li><a href="/kb/kp-requirements-engineering/">需求工程</a></li>
+<li><a href="/kb/kp-9-3/">需求分析</a></li>
+<li><a href="/kb/kp-10-1">架构概述</a></li>
+<li><a href="/kb/kp-7-3">通信与网络安全（防火墙、VPN、SSL/HTTPS/IPSec、SSO/Kerberos）</a></li>
+<li><a href="/kb/kp-7-5">容灾与业务持续</a></li>
+<li>归档通章：<a href="../%E7%AC%AC%E4%B8%80%E7%AF%87-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AC%AC09%E7%AB%A0-%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8.md"><a href="/kb/ch09/" class="kb-ref" data-kb-id="ch09" data-kb-path="第09章-信息安全.md" title="预览：第09章 · 信息安全"><code>第09章-信息安全.md</code></a></a></li>
+</ul>

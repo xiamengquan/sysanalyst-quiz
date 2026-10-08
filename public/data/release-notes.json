@@ -1,6 +1,25 @@
 {
-  "latest": "0.9.57",
+  "latest": "0.9.59",
   "releases": [
+    {
+      "version": "0.9.59",
+      "date": "2026-10-08",
+      "title": "知识点正文预渲染 HTML 直出",
+      "highlights": [
+        "sync:kb 构建 public/data/kb-html/{id}.html，与 renderKbMarkdown 同源",
+        "阅读页/预览抽屉优先加载 HTML，跳过客户端 marked 解析以加快首屏"
+      ]
+    },
+    {
+      "version": "0.9.58",
+      "date": "2026-10-08",
+      "title": "第十一轮审计：KB 正文加载与路由修复",
+      "highlights": [
+        "修复：知识点正文改走 /data/kb-md/{id}.md，解决 CDN 下长期「正在加载正文」",
+        "别名：kp-database-system→kp-3-1、kp-system-architecture→kp-10-1",
+        "加深：EMV/蒙特卡洛、ABSD 三基础、NoSQL 代表产品；案例题型推断与误区/论文框架补强"
+      ]
+    },
     {
       "version": "0.9.57",
       "date": "2026-10-08",

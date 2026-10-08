@@ -1,0 +1,90 @@
+<h1 id="结构化设计耦合内聚sc-图">结构化设计（耦合内聚、SC 图）</h1>
+<blockquote>
+<p><strong>大纲</strong>：13.3 · <strong>教程</strong>：第13章 · <strong>分组</strong>：科目1 · 11. 系统设计 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+</blockquote>
+<h2 id="概述">概述</h2>
+<p><strong>结构化设计（耦合内聚、SC 图）</strong> 属本科目大纲考点。常考：模块结构、扇入扇出、SC  ·  结构图。</p>
+<h2 id="速懂">速懂</h2>
+<ul>
+<li><strong>一句话</strong>：模块内聚：模块内聚是一个模块内部各个元素彼此结合紧密程度的度量。作用：模块内聚用于衡量模块内部功能是否集中、单一；内聚越高，模块职责越清晰、可维护性通常越好。</li>
+<li><strong>考什么</strong>：耦合内聚、设计模式、人机交互（教程第 13 章）。</li>
+<li><strong>具体理解</strong>：<ul>
+<li>先背定义节「是什么 + 作用」，再展开要点中的表格或口诀。</li>
+</ul>
+</li>
+<li><strong>别搞混</strong>：| 对比 | 区别 |</li>
+</ul>
+<h2 id="定义">定义</h2>
+<ul>
+<li><strong>模块内聚</strong>：模块内聚是一个模块内部各个元素彼此结合紧密程度的度量。<strong>作用</strong>：模块内聚用于衡量模块内部功能是否集中、单一；内聚越高，模块职责越清晰、可维护性通常越好。</li>
+<li><strong>模块耦合</strong>：模块耦合是各模块之间相互结合紧密程度的一种度量。<strong>作用</strong>：模块耦合用于衡量模块之间依赖强弱；耦合越低，模块越独立，修改一处对其他模块的波及通常越小。</li>
+</ul>
+<h2 id="步骤与流程">步骤与流程</h2>
+<h3 id="结构化分析dfd常用步骤">结构化分析（DFD）常用步骤</h3>
+<ol>
+<li>确定系统边界与<strong>外部实体</strong>。</li>
+<li>识别<strong>加工</strong>与<strong>数据流</strong>（自顶向下分层，0 层→1 层…）。</li>
+<li>定义<strong>数据存储</strong>与数据字典条目。</li>
+<li>检查<strong>守恒</strong>与命名一致性。</li>
+<li>与需求双向追踪。</li>
+</ol>
+<h2 id="要点">要点</h2>
+<h3 id="31-rtsad-与模块独立性答卷高频">3.1 RTSAD 与模块独立性（答卷·高频）</h3>
+<blockquote>
+<p>实时结构化分析与设计（RTSAD）：分析阶段建基本模型（含<strong>环境模型、行为模型</strong>，见 SA/OOA 路径 §3.8）；设计阶段结合<strong>模块耦合与内聚</strong>导出模块结构。</p>
+</blockquote>
+<p><strong>模块内聚的作用（答卷）</strong><br>模块内聚用于衡量模块内部功能是否集中、单一；内聚越高，模块职责越清晰、可维护性通常越好。</p>
+<p><strong>模块耦合的作用（答卷）</strong><br>模块耦合用于衡量模块之间依赖强弱；耦合越低，模块越独立，修改一处对其他模块的波及通常越小。</p>
+<p><strong>模块设计的基本原则（答卷·从模块独立性角度）</strong><br>从模块独立性角度，模块设计的基本原则是：<strong>提高内聚、降低耦合</strong>（高内聚、低耦合），使每个模块尽量只完成相对独立的功能，并尽量减少模块间不必要的联系。</p>
+<blockquote>
+<p>案例若写「模型内聚 / 模型耦合 / 模型设计基本要素」，按阅卷常见答法对应为<strong>模块内聚、模块耦合、高内聚低耦合</strong>。</p>
+</blockquote>
+<p><strong>内聚七级（高好）</strong>：功能 &gt; 顺序 &gt; 通信 &gt; 过程 &gt; 时间 &gt; 逻辑 &gt; 偶然。<br><strong>耦合七级（低好）</strong>：数据 &lt; 标记 &lt; 控制 &lt; 外部 &lt; 公共 &lt; 内容（内容耦合最强、最差）。详表见 <a href="/kb/quick-compare/" class="kb-ref" data-kb-id="quick-compare" data-kb-path="速查/高频对比速查表.md" title="预览：高频对比速查表"><code>速查/高频对比速查表.md</code></a> §25。</p>
+<p><strong>SC 四部分</strong>：模块、调用关系、通信、辅助控制（菱形=条件，弧形=循环）。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>SC 类型</th>
+<th>特征</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>变换型</strong></td>
+<td>输入→变换中心→输出</td>
+</tr>
+<tr>
+<td><strong>事务型</strong></td>
+<td>事务中心选择活动流（事务/操作/细节三层）</td>
+</tr>
+<tr>
+<td><strong>混合型</strong></td>
+<td>变换+事务，以变换为主</td>
+</tr>
+</tbody></table></div>
+<p>从 DFD 导出 SC；区分逻辑 I/O 与物理 I/O。RTSAD 中常称转换分析、事务分析策略。</p>
+<hr>
+<h2 id="易混辨析">易混辨析</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比</th>
+<th>区别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>变换型 vs 事务型 SC</td>
+<td>变换中心 vs 事务中心辐射</td>
+</tr>
+</tbody></table></div>
+<h2 id="应试">应试</h2>
+<ul>
+<li><strong>本章练习热力</strong>：教程第 13 章约 27 题（站点练习库，不含真题卷 ch=99）。</li>
+<li><strong>题库考点标签</strong>：结构图、输入输出。</li>
+<li><strong>练题入口</strong>：<a href="/?bank=practice&chapter=13&path=all&q=%E7%BB%93%E6%9E%84%E5%8C%96%E8%AE%BE%E8%AE%A1">第 13 章练习（关键词 结构化设计）</a></li>
+</ul>
+<h2 id="相关考点">相关考点</h2>
+<ul>
+<li><a href="/kb/kp-11-2">处理流程设计（工作流 WFMS）</a></li>
+<li><a href="/kb/kp-11-4">面向对象设计（ECB、持久化、SOLID）</a></li>
+<li>归档通章：<a href="../%E7%AC%AC%E4%BA%8C%E7%AF%87-%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF/%E7%AC%AC13%E7%AB%A0-%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1.md"><a href="/kb/ch13/" class="kb-ref" data-kb-id="ch13" data-kb-path="第13章-系统设计.md" title="预览：第13章 · 系统设计"><code>第13章-系统设计.md</code></a></a></li>
+</ul>

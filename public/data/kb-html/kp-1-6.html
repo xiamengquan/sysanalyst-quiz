@@ -1,0 +1,122 @@
+<h1 id="操作系统概述进程存储设备文件作业ui国产-os">操作系统（概述、进程、存储、设备、文件、作业/UI、国产 OS）</h1>
+<blockquote>
+<p><strong>大纲</strong>：3.6 · <strong>教程</strong>：第3章 · <strong>分组</strong>：科目1 · 1. 计算机系统基础知识 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+</blockquote>
+<h2 id="概述">概述</h2>
+<p><strong>操作系统（概述、进程、存储、设备、文件、作业/UI、国产 OS）</strong>：功能：进程管理、存储管理、设备管理、文件管理、作业管理。</p>
+<h2 id="速懂">速懂</h2>
+<ul>
+<li><strong>一句话</strong>：操作系统：是管理硬件资源、提供进程/内存/文件/设备抽象的系统软件。作用：用于理解资源调度与系统安全边界。</li>
+<li><strong>考什么</strong>：Cache/RAID/存储层次、OS 与指令对比（教程第 3 章）。</li>
+<li><strong>具体理解</strong>：<ul>
+<li>操作系统：是管理硬件资源、提供进程/内存/文件/设备抽象的系统软件。作用：用于理解资源调度与系统安全边界。</li>
+</ul>
+</li>
+<li><strong>别搞混</strong>：与同章相邻考点区分；题干锚词：<strong>操作系统 / UI / OS</strong>。</li>
+</ul>
+<h2 id="定义">定义</h2>
+<ul>
+<li><strong>操作系统</strong>：是管理硬件资源、提供进程/内存/文件/设备抽象的系统软件。<strong>作用</strong>：用于理解资源调度与系统安全边界。</li>
+<li><strong>进程与线程</strong>：进程是资源分配单位；线程是 CPU 调度单位。<strong>作用</strong>：用于并发、同步与死锁题。</li>
+<li><strong>存储管理</strong>：是含分页、分段、虚拟内存与页面置换。<strong>作用</strong>：用于地址转换与性能分析。</li>
+<li><strong>文件系统</strong>：是组织、命名与访问持久数据的机制。<strong>作用</strong>：用于权限、索引与备份恢复。</li>
+</ul>
+<h2 id="步骤与流程">步骤与流程</h2>
+<p>本节在教程中<strong>未单独列出固定步骤名</strong>；答题时可按下列指引组织答案：</p>
+<ol>
+<li>先在「要点」中找 <strong>阶段 / 活动 / → 流程链</strong> 表述；</li>
+<li>案例题常用 <strong>调查 → 分析 → 方案 → 验证</strong>（或题干给出的过程框架）；</li>
+<li>综合知识流程题优先写 <strong>编号步骤</strong> 或 <strong>阶段名称</strong>；</li>
+<li>需要完整步骤时打开文末 <strong>归档通章</strong> 对应小节对照誊写。</li>
+</ol>
+<h2 id="要点">要点</h2>
+<h3 id="操作系统">操作系统</h3>
+<p><strong>功能</strong>：进程管理、存储管理、设备管理、文件管理、作业管理。</p>
+<p><strong>进程状态</strong>：就绪、运行、阻塞；切换保存上下文。</p>
+<p><strong>进程同步</strong>：信号量、管程；PV操作。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>条件</th>
+<th>定义（答卷）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>互斥条件</strong></td>
+<td>互斥条件是指资源一次只能被一个进程占用，其他进程必须等待</td>
+</tr>
+<tr>
+<td><strong>占有且等待</strong></td>
+<td>占有且等待是指进程已占有至少一个资源，同时又在等待获取其他进程占有的资源</td>
+</tr>
+<tr>
+<td><strong>不可抢占</strong></td>
+<td>不可抢占是指已分配给进程的资源在使用完毕前不能被强行剥夺，只能由占有者主动释放</td>
+</tr>
+<tr>
+<td><strong>循环等待</strong></td>
+<td>循环等待是指存在若干进程形成首尾相接的资源等待环路，每个进程都在等待下一进程占有的资源</td>
+</tr>
+</tbody></table></div>
+<p><strong>存储管理</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>分区</td>
+<td>简单，碎片</td>
+</tr>
+<tr>
+<td>分页</td>
+<td>物理块，无外部碎片</td>
+</tr>
+<tr>
+<td>分段</td>
+<td>逻辑段，有外部碎片</td>
+</tr>
+<tr>
+<td>段页式</td>
+<td>结合两者</td>
+</tr>
+</tbody></table></div>
+<p><strong>虚拟存储（OS 侧）</strong>：请求分页/分段，页面置换(FIFO/LRU/OPT)。</p>
+<p><strong>文件结构</strong>：逻辑结构(流式/记录式)、物理结构(连续/链接/索引)。</p>
+<p><strong>目录结构</strong>：单级、两级、树形、无环图。</p>
+<h2 id="易混辨析">易混辨析</h2>
+<p>（本节与相邻考点易混点见归档篇章「易混对比」；检索关键词：<strong>操作系统、UI、OS</strong>。）</p>
+<h2 id="应试">应试</h2>
+<p><strong>案例可能怎么问</strong>：Cache 命中率与平均周期计算；按 I/O 场景选查询/中断/DMA；死锁四条件识别与破坏策略；虚拟存储分页/分段与置换算法选型；局部性原理解释 Cache 或应用层缓存设计。</p>
+<p><strong>论文怎么用</strong>：性能优化可写「Cache/局部性→存储层次→I/O 方式选型→虚拟存储与并发」；可靠性场景可写 RAID 冗余；分布式系统可类比 DMA 减轻主节点负担、虚拟存储类比弹性资源池。</p>
+<hr>
+<p><strong>常考结论</strong></p>
+<ul>
+<li><p>Cache公式：<strong>t3 = tc×h + tm×(1-h)</strong>。</p>
+</li>
+<li><p>CISC <strong>80/20</strong>：20%指令占80%时间。</p>
+</li>
+<li><p>RISC性能：<strong>P=I×CPI×T</strong>，快 <strong>3~5</strong> 倍。</p>
+</li>
+<li><p>RAID1利用率 <strong>50%</strong>。</p>
+</li>
+<li><p>USB最多 <strong>127</strong> 设备；1394最多 <strong>63</strong> 节点。</p>
+</li>
+<li><p>I/O方式递进：<strong>查询→中断→DMA→通道→I/O处理机</strong>。</p>
+</li>
+<li><p>总线带宽 = 宽度 × 频率（注意单位换算）。</p>
+</li>
+<li><p><strong>本章练习热力</strong>：教程第 3 章约 69 题（站点练习库，不含真题卷 ch=99）。</p>
+</li>
+<li><p><strong>题库考点标签</strong>：SMP、中断、页面置换、死锁预防、缺页处理。</p>
+</li>
+<li><p><strong>练题入口</strong>：<a href="/?bank=practice&chapter=3&path=all&q=%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F">第 3 章练习（关键词 操作系统）</a></p>
+</li>
+</ul>
+<h2 id="相关考点">相关考点</h2>
+<ul>
+<li><a href="/kb/kp-1-5">多处理机系统（MPP/SMP、互连网络）</a></li>
+<li>归档通章：<a href="../%E7%AC%AC%E4%B8%80%E7%AF%87-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AC%AC03%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F.md"><a href="/kb/ch03/" class="kb-ref" data-kb-id="ch03" data-kb-path="第03章-计算机系统.md" title="预览：第03章 · 计算机系统"><code>第03章-计算机系统.md</code></a></a></li>
+</ul>

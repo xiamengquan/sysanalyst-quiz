@@ -1,0 +1,106 @@
+<h1 id="结构化分析dfdstd数据字典">结构化分析（DFD、STD、数据字典）</h1>
+<blockquote>
+<p><strong>大纲</strong>：11.4 · <strong>教程</strong>：第11章 · <strong>分组</strong>：科目1 · 9. 软件需求工程 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+</blockquote>
+<h2 id="概述">概述</h2>
+<p><strong>结构化分析（DFD、STD、数据字典）</strong> 属本科目大纲考点。常考：<strong>DFD / STD / 数据字典</strong>  ·  分析题。</p>
+<h2 id="速懂">速懂</h2>
+<ul>
+<li><strong>一句话</strong>：数据流图（DFD）：是用外部实体、加工、数据流、数据存储描述系统逻辑的数据流模型。作用：用于结构化分析、分层分解与需求确认。</li>
+<li><strong>考什么</strong>：需求三层、获取方法、SRS/变更（教程第 11 章）。</li>
+<li><strong>具体理解</strong>：<ul>
+<li>数据流图（DFD）：是用外部实体、加工、数据流、数据存储描述系统逻辑的数据流模型。作用：用于结构化分析、分层分解与需求确认。</li>
+<li>数据字典：是对 DFD 中数据流、存储、加工与数据项的精确定义集合。作用：用于消除二义性并支撑设计与测试。</li>
+<li>STD（状态转换图）：是描述单个对象或控制逻辑状态迁移的模型。作用：用于行为复杂、事件驱动的控制逻辑分析。</li>
+<li>结构化分析：是以 DFD+字典+STD 为核心，自顶向下分解。作用：用于与面向对象分析路线对比选型。</li>
+</ul>
+</li>
+<li><strong>别搞混</strong>：| 对比 | 区别 |</li>
+</ul>
+<h2 id="定义">定义</h2>
+<ul>
+<li><strong>数据流图（DFD）</strong>：是用外部实体、加工、数据流、数据存储描述系统逻辑的数据流模型。<strong>作用</strong>：用于结构化分析、分层分解与需求确认。</li>
+<li><strong>数据字典</strong>：是对 DFD 中数据流、存储、加工与数据项的精确定义集合。<strong>作用</strong>：用于消除二义性并支撑设计与测试。</li>
+<li><strong>STD（状态转换图）</strong>：是描述单个对象或控制逻辑状态迁移的模型。<strong>作用</strong>：用于行为复杂、事件驱动的控制逻辑分析。</li>
+<li><strong>结构化分析</strong>：是以 DFD+字典+STD 为核心，自顶向下分解。<strong>作用</strong>：用于与面向对象分析路线对比选型。</li>
+</ul>
+<h2 id="步骤与流程">步骤与流程</h2>
+<h3 id="52-dfd-绘制步骤">5.2 DFD 绘制步骤</h3>
+<ol>
+<li>画系统输入输出（边缘标出）</li>
+<li>画内部，从输入连接处理</li>
+<li>为每个数据流命名（避免空洞词）</li>
+<li>为加工命名（<strong>动宾短语</strong>）</li>
+</ol>
+<h3 id="51-dfd-在需求阶段的三作用">5.1 DFD 在需求阶段的三作用</h3>
+<ol>
+<li>理解表达用户需求</li>
+<li>概括内部逻辑，是设计基础</li>
+<li>存档材料，修改开发计划依据</li>
+</ol>
+<h2 id="要点">要点</h2>
+<h3 id="54-数据字典六类条目">5.4 数据字典六类条目</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>条目</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数据元素</td>
+<td>最小单位，类型/长度/取值</td>
+</tr>
+<tr>
+<td>数据结构</td>
+<td>组合关系；[] 任选、{} 必选、* 重复</td>
+</tr>
+<tr>
+<td>数据流</td>
+<td>来源、去处、组成、流通量</td>
+</tr>
+<tr>
+<td>数据存储</td>
+<td>结构、数据流、查询要求</td>
+</tr>
+<tr>
+<td>加工逻辑</td>
+<td>编号、名称、I/O；可用判定树/表/结构化语言</td>
+</tr>
+<tr>
+<td>外部实体</td>
+<td>名称、I/O 数据流、数量</td>
+</tr>
+</tbody></table></div>
+<p><strong>四作用</strong>：列表、相互参照、内容检索、一致性检验。专人（数据管理员）维护。</p>
+<hr>
+<h2 id="易混辨析">易混辨析</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比</th>
+<th>区别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DFD vs 数据字典</td>
+<td>图形分解 / 文字精确定义</td>
+</tr>
+</tbody></table></div>
+<h2 id="应试">应试</h2>
+<p><strong>案例可能怎么问</strong>：给出干系人多、工期紧、说法冲突等约束，要求用四维比较访谈 / JRP(JAD) / 问卷 / 文档分析 / 观察（及<strong>采样</strong>、<strong>情节串联板</strong>若题干涉及大样本成本或界面流程确认），并说明应优先采用哪一种及理由。</p>
+<p><strong>论文怎么用</strong>：需求获取段落可写「先问卷（+采样）扩面 → 访谈/观察加深 → 情节串联板或原型对齐界面 → JAD 收敛冲突」，并回扣四维与题干约束。</p>
+<hr>
+<ul>
+<li><strong>本章练习热力</strong>：教程第 11 章约 177 题（站点练习库，不含真题卷 ch=99）。</li>
+<li><strong>题库考点标签</strong>：DFD要素、DFD作用、DFD命名、DFD步骤、数据字典。</li>
+<li><strong>练题入口</strong>：<a href="/?bank=practice&chapter=11&path=all&q=%E7%BB%93%E6%9E%84%E5%8C%96%E5%88%86%E6%9E%90">第 11 章练习（关键词 结构化分析）</a></li>
+</ul>
+<h2 id="相关考点">相关考点</h2>
+<ul>
+<li><a href="/kb/kp-9-3">需求分析</a></li>
+<li><a href="/kb/kp-9-5">面向对象分析（用例、分析模型）</a></li>
+<li>速查：<a href="../%E9%80%9F%E6%9F%A5/%E9%9C%80%E6%B1%82%E5%B7%A5%E7%A8%8B-%E4%BD%93%E7%B3%BB%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84.md">需求工程-体系化学习路径</a></li>
+<li>速查：<a href="../%E9%80%9F%E6%9F%A5/%E6%A1%88%E4%BE%8B%E5%BF%85%E7%AD%94-%E9%9C%80%E6%B1%82%E8%8E%B7%E5%8F%96%E4%BA%94%E6%B3%95%E5%AF%B9%E6%AF%94%E5%8D%A1.md">案例必答-需求获取五法对比卡</a></li>
+<li>归档通章：<a href="../%E7%AC%AC%E4%BA%8C%E7%AF%87-%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF/%E7%AC%AC11%E7%AB%A0-%E8%BD%AF%E4%BB%B6%E9%9C%80%E6%B1%82%E5%B7%A5%E7%A8%8B.md"><a href="/kb/ch11/" class="kb-ref" data-kb-id="ch11" data-kb-path="第11章-软件需求工程.md" title="预览：第11章 · 软件需求工程"><code>第11章-软件需求工程.md</code></a></a></li>
+</ul>

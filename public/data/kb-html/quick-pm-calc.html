@@ -1,0 +1,121 @@
+<h1 id="速查--项目管理计算挣值--cpm--风险量化">速查 · 项目管理计算（挣值 · CPM · 风险量化）</h1>
+<blockquote>
+<p><strong>教程</strong>：第 8 章 · <strong>考点</strong>：<code>kp-6-4</code> · 综合知识计算题高频</p>
+</blockquote>
+<h2 id="挣值-evm12-指标">挣值 EVM（12 指标）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>名称</th>
+<th>公式</th>
+<th>好坏</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BAC</td>
+<td>完工预算</td>
+<td>基准</td>
+<td>—</td>
+</tr>
+<tr>
+<td>PV</td>
+<td>计划值</td>
+<td>计划工作量×预算单价</td>
+<td>—</td>
+</tr>
+<tr>
+<td>EV</td>
+<td>挣值</td>
+<td>实际完成比例×BAC（或该工作包预算）</td>
+<td>—</td>
+</tr>
+<tr>
+<td>AC</td>
+<td>实际成本</td>
+<td>已花费</td>
+<td>—</td>
+</tr>
+<tr>
+<td>CV</td>
+<td>成本偏差</td>
+<td>EV − AC</td>
+<td>&gt;0 节约</td>
+</tr>
+<tr>
+<td>SV</td>
+<td>进度偏差</td>
+<td>EV − PV</td>
+<td>&gt;0 超前</td>
+</tr>
+<tr>
+<td>CPI</td>
+<td>成本绩效</td>
+<td>EV / AC</td>
+<td>&gt;1 好</td>
+</tr>
+<tr>
+<td>SPI</td>
+<td>进度绩效</td>
+<td>EV / PV</td>
+<td>&gt;1 好</td>
+</tr>
+<tr>
+<td>EAC</td>
+<td>完工估算</td>
+<td>BAC/CPI（典型）或 AC+ETC</td>
+<td>—</td>
+</tr>
+<tr>
+<td>ETC</td>
+<td>尚需估算</td>
+<td>EAC − AC</td>
+<td>—</td>
+</tr>
+<tr>
+<td>VAC</td>
+<td>完工偏差</td>
+<td>BAC − EAC</td>
+<td>&gt;0 节约</td>
+</tr>
+<tr>
+<td>TCPI</td>
+<td>剩余 CPI</td>
+<td>(BAC−EV)/(BAC−AC)</td>
+<td>&gt;1 需更高效</td>
+</tr>
+</tbody></table></div>
+<p><strong>做题顺序</strong>：先算 EV → CV/SV → CPI/SPI → 按题干选 EAC 公式。</p>
+<h2 id="关键路径-cpm">关键路径 CPM</h2>
+<ul>
+<li><strong>关键路径</strong> = 最长路径（总时差 = 0 的活动链）  </li>
+<li><strong>总时差</strong> = LS − ES = LF − EF  </li>
+<li><strong>压缩</strong>：赶工（加资源）、快速跟进（并行，增风险）——先动<strong>关键活动</strong></li>
+</ul>
+<h2 id="风险量化">风险量化</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>要点</th>
+<th>简例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>EMV</strong></td>
+<td>Σ(概率 × 结果值)；决策树各层乘加</td>
+<td>70%×100 + 30%×(−20) = 64</td>
+</tr>
+<tr>
+<td><strong>蒙特卡洛</strong></td>
+<td>对工期/成本等输入多次随机抽样，得到完成概率分布</td>
+<td>回答「评估整体不确定性，辅助储备与进度目标」</td>
+</tr>
+</tbody></table></div>
+<p><strong>PERT 期望</strong>（常同章）：(O + 4M + P) / 6</p>
+<h2 id="其他公式">其他公式</h2>
+<ul>
+<li>沟通渠道：n(n−1)/2  </li>
+<li>WBS：100% 规则</li>
+</ul>
+<p><strong>练题</strong>：<a href="/?bank=practice&chapter=8&path=all&q=%E9%A2%84%E7%AE%97%E4%B8%8E%E6%88%90%E6%9C%AC">第 8 章 · 预算与成本</a></p>

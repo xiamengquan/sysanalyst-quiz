@@ -1,0 +1,92 @@
+<h1 id="业务流程分析tfdbambpm">业务流程分析（TFD、BAM、BPM）</h1>
+<blockquote>
+<p><strong>大纲</strong>：10.5 · <strong>教程</strong>：第10章 · <strong>分组</strong>：科目1 · 8. 系统规划与分析 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+</blockquote>
+<h2 id="概述">概述</h2>
+<p><strong>业务流程分析（TFD、BAM、BPM）</strong> 属本科目大纲考点。常考：<strong>业务流程图 TFD / BAM / BPM</strong>  ·  符号识别、画图改错。</p>
+<h2 id="速懂">速懂</h2>
+<ul>
+<li><strong>一句话</strong>：行为符号：是圆圈表示工作步骤；达到职能分解层时圆圈外加方框。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>考什么</strong>：可行性四维、DFD、规划方法 BSP/CSF（教程第 10 章）。</li>
+<li><strong>具体理解</strong>：<ul>
+<li>行为符号：圆圈表示工作步骤；达到职能分解层时圆圈外加方框</li>
+<li>编号：分层编号（如 1.0、1.1、1.2）</li>
+</ul>
+</li>
+<li><strong>别搞混</strong>：| 对比 | 区别 |</li>
+</ul>
+<h2 id="定义">定义</h2>
+<ul>
+<li><strong>行为符号</strong>：是圆圈表示工作步骤；达到职能分解层时圆圈外加方框。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>编号</strong>：是分层编号（如 1.0、1.1、1.2）。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>系统规划</strong>：系统规划是信息系统生命周期第一阶段，在既定约束下分析系统建设的必要性与可能性的工作。<strong>作用</strong>：用于主要作用是输出可行性研究报告与系统设计任务书，为后续系统分析、设计与实施确立目标与边界。</li>
+<li><strong>系统分析</strong>：系统分析是在系统规划基础上，与用户配合对现行系统进行全面调查与分析，确定新系统逻辑需求的工作。<strong>作用</strong>：用于主要作用是找出业务瓶颈、明确新系统应实现的逻辑功能，并输出系统需求规格说明书。</li>
+<li><strong>数据流图 DFD</strong>：数据流图是用外部实体、加工、数据流、数据存储四种基本元素描述系统中数据流动与处理过程的图形化模型。<strong>作用</strong>：主要用于在系统分析阶段表达系统的逻辑功能与数据加工路径，为分层分解、需求确认与后续设计提供依据。</li>
+<li><strong>上下文图 / 0 层图</strong>：上下文图（即 0 层图）是数据流图的最顶层，仅含一个代表整个系统的加工及其与外部实体之间的数据流。<strong>作用</strong>：用于界定系统边界、明确系统与外部环境的信息交换关系，是 DFD 自顶向下分解的起点。</li>
+<li><strong>可行性分析</strong>：可行性分析是对拟建信息系统从必要性与可能性两方面进行论证与评价的工作。<strong>作用</strong>：用于主要作用是为项目立项、方案选择与投资决策提供依据，避免盲目建设或技术不可行。</li>
+</ul>
+<h2 id="步骤与流程">步骤与流程</h2>
+<h3 id="53-可行性研究八步骤">5.3 可行性研究八步骤</h3>
+<ol>
+<li>复查系统目标和规模</li>
+<li>分析现有系统（高层流程图、接口）</li>
+<li>导出新系统高层逻辑模型（上下文图、E-R、用例、领域模型、IPO）</li>
+<li><strong>用户复核</strong>（前 4 步循环直至确认）</li>
+<li>提出并评价解决方案（候选方案矩阵、可行性分析矩阵）</li>
+<li>确定最终推荐方案（完善成本效益分析）</li>
+<li>草拟开发计划</li>
+<li>编制并提交可行性研究报告 → 可行性论证会</li>
+</ol>
+<h3 id="25-业务流程分析">2.5 业务流程分析</h3>
+<ol>
+<li>调查</li>
+<li>描述现有流程</li>
+<li>确认</li>
+<li>分析</li>
+<li>提出方案</li>
+<li>优化流程</li>
+</ol>
+<h2 id="要点">要点</h2>
+<h3 id="33-bam-业务活动图">3.3 BAM 业务活动图</h3>
+<ul>
+<li><strong>行为符号</strong>：圆圈表示工作步骤；达到职能分解层时圆圈外加方框</li>
+<li><strong>决策符号</strong>：圆圈边上加菱形</li>
+<li><strong>编号</strong>：分层编号（如 1.0、1.1、1.2）</li>
+<li>应用：流程识别、描述新流程、实施优化</li>
+</ul>
+<h3 id="34-bpm-与建模语言了解">3.4 BPM 与建模语言（了解）</h3>
+<p>BPM 三要素：实体、对象、活动。建模语言分<strong>文本类</strong>（BPEL/XPDL，可执行）和<strong>图元类</strong>（BPMN/UML 活动图，直观；BPMN 可生成 BPEL）。</p>
+<hr>
+<h3 id="51-必要性与可能性">5.1 必要性与可能性</h3>
+<p><strong>可行性 = 必要性 + 可能性</strong>。</p>
+<h2 id="易混辨析">易混辨析</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比</th>
+<th>区别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TFD vs DFD</td>
+<td>业务“流水账”，6种符号</td>
+</tr>
+<tr>
+<td>内部实体 vs 外部实体（TFD）</td>
+<td>参与处理</td>
+</tr>
+</tbody></table></div>
+<h2 id="应试">应试</h2>
+<p><strong>案例可能怎么问</strong>：TFD/DFD 符号识别与分层改错（守恒、外部实体、数据存储）；四维可行性缺项补全；NPV/回收期/盈亏平衡计算与方案比选结论。</p>
+<p><strong>论文怎么用</strong>：可行性分析、业务流程、成本效益（23上/24下/25下）——用「现状痛点→候选方案→经济/技术/管理可行性→NPV 或 ROI 结论」结构；BPR/流程再造可写 AS-IS/TO-BE 与 KPI 改进。</p>
+<ul>
+<li><strong>本章练习热力</strong>：教程第 10 章约 42 题（站点练习库，不含真题卷 ch=99）。</li>
+<li><strong>题库考点标签</strong>：DFD。</li>
+<li><strong>练题入口</strong>：<a href="/?bank=practice&chapter=10&path=all&q=%E4%B8%9A%E5%8A%A1%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90">第 10 章练习（关键词 业务流程分析）</a></li>
+</ul>
+<h2 id="相关考点">相关考点</h2>
+<ul>
+<li><a href="/kb/kp-8-4">问题分析</a></li>
+<li><a href="/kb/kp-8-6">数据与数据流程分析（DFD）</a></li>
+<li>归档通章：<a href="../%E7%AC%AC%E4%BA%8C%E7%AF%87-%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF/%E7%AC%AC10%E7%AB%A0-%E7%B3%BB%E7%BB%9F%E8%A7%84%E5%88%92%E4%B8%8E%E5%88%86%E6%9E%90.md"><a href="/kb/ch10/" class="kb-ref" data-kb-id="ch10" data-kb-path="第10章-系统规划与分析.md" title="预览：第10章 · 系统规划与分析"><code>第10章-系统规划与分析.md</code></a></a></li>
+</ul>

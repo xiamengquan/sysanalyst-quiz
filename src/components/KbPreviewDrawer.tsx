@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useId, useRef, useState, type MouseEvent } from "react";
 import { ChevronLeft, ExternalLink, Pin, PinOff, X } from "lucide-react";
+import { fetchKbBody } from "@/lib/kb-fetch";
 import { renderKbMarkdown, runMermaidIn } from "@/lib/kb-md";
 import {
   flattenKbIndex,
@@ -25,8 +26,8 @@ import { useEscapeKey } from "@/lib/use-escape-key";
 
 type StackEntry = { id: string; title: string };
 
-// 模块级内存缓存：在用户刷题/阅读过程中，已拉取过的 markdown 不重复发起 fetch，切换 0ms 瞬间响应
-const kbMarkdownCache = new Map<string, string>();
+// 模块级内存缓存：已拉取过的 HTML/MD 不重复 fetch
+const kbBodyCache = new Map<string, string>();
 
 export type KbRelatedChip = {
   id: string;
@@ -285,14 +286,15 @@ export function KbPreviewDrawer({
   useEffect(() => {
     if (!open || !related.length) return;
     for (const r of related) {
-      if (kbMarkdownCache.has(r.id)) continue;
+      if (kbBodyCache.has(r.id)) continue;
       const target = catalog.find((c) => c.id === r.id);
       if (!target?.path) continue;
-      const url = "/kb/" + target.path.split("/").map(encodeURIComponent).join("/");
-      fetch(url)
-        .then((res) => (res.ok ? res.text() : Promise.reject()))
-        .then((md) => {
-          kbMarkdownCache.set(r.id, md);
+      fetchKbBody({ id: target.id, path: target.path })
+        .then((body) => {
+          kbBodyCache.set(
+            r.id,
+            body.format === "html" ? body.html : renderKbMarkdown(body.markdown, catalog, target.id),
+          );
         })
         .catch(() => {});
     }
@@ -306,35 +308,35 @@ export function KbPreviewDrawer({
     }
 
     // 优先命中内存缓存：0ms 秒切无收缩
-    if (kbMarkdownCache.has(item.id)) {
-      const cachedMd = kbMarkdownCache.get(item.id)!;
-      setHtml(renderKbMarkdown(cachedMd, catalog, item.id));
+    if (kbBodyCache.has(item.id)) {
+      setHtml(kbBodyCache.get(item.id)!);
       setStatus("ok");
       bodyRef.current?.scrollTo({ top: 0, behavior: "instant" });
       return;
     }
 
     let cancelled = false;
+    const ac = new AbortController();
     setStatus("loading");
     setMsg("");
-    const url = "/kb/" + item.path.split("/").map(encodeURIComponent).join("/");
-    fetch(url)
-      .then(async (res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const md = await res.text();
+    fetchKbBody({ id: item.id, path: item.path }, ac.signal)
+      .then((body) => {
         if (cancelled) return;
-        kbMarkdownCache.set(item.id, md);
-        setHtml(renderKbMarkdown(md, catalog, item.id));
+        const html =
+          body.format === "html" ? body.html : renderKbMarkdown(body.markdown, catalog, item.id);
+        kbBodyCache.set(item.id, html);
+        setHtml(html);
         setStatus("ok");
         bodyRef.current?.scrollTo({ top: 0, behavior: "instant" });
       })
       .catch((e) => {
         if (cancelled) return;
         setStatus("err");
-        setMsg(e.message || "加载失败");
+        setMsg(e instanceof Error ? e.message : "加载失败");
       });
     return () => {
       cancelled = true;
+      ac.abort();
     };
   }, [open, item?.id, item?.path, catalog]);
 

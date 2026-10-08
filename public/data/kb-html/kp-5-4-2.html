@@ -1,0 +1,77 @@
+<h1 id="测试">测试</h1>
+<blockquote>
+<p><strong>大纲</strong>：20.4 · <strong>教程</strong>：第20章 · <strong>分组</strong>：科目2 · 5. 微服务系统分析与设计 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+</blockquote>
+<h2 id="概述">概述</h2>
+<p><strong>测试</strong>：过程：单元（单服务）→ 集成（服务间）→ 端到端 → 性能 → 容错 → 安全。</p>
+<h2 id="速懂">速懂</h2>
+<ul>
+<li><strong>一句话</strong>：CMMI 成熟度：是5 级从初始→优化，过程可预测与持续改进。作用：用于过程评估与投标资质题。</li>
+<li><strong>考什么</strong>：微服务治理、熔断限流、最终一致（教程第 20 章）。</li>
+<li><strong>具体理解</strong>：<ul>
+<li>CMMI 成熟度：是5 级从初始→优化，过程可预测与持续改进。作用：用于过程评估与投标资质题。</li>
+<li>过程域：是按阶段式/连续式评估能力。作用：用于识别组织弱项与改进计划。</li>
+<li>量化管理：是用统计方法控制过程性能。作用：用于 4/5 级特征辨析。</li>
+</ul>
+</li>
+<li><strong>别搞混</strong>：与同章相邻考点区分；题干锚词：<strong>测试</strong>。</li>
+</ul>
+<h2 id="定义">定义</h2>
+<ul>
+<li><strong>CMMI 成熟度</strong>：是5 级从初始→优化，过程可预测与持续改进。<strong>作用</strong>：用于过程评估与投标资质题。</li>
+<li><strong>过程域</strong>：是按阶段式/连续式评估能力。<strong>作用</strong>：用于识别组织弱项与改进计划。</li>
+<li><strong>量化管理</strong>：是用统计方法控制过程性能。<strong>作用</strong>：用于 4/5 级特征辨析。</li>
+<li><strong>PPQA 过程与产品质量保证</strong>：是审计过程与产物合规。<strong>作用</strong>：用于 QA 活动与证据链。</li>
+</ul>
+<h2 id="步骤与流程">步骤与流程</h2>
+<p>本节在教程中<strong>未单独列出固定步骤名</strong>；答题时可按下列指引组织答案：</p>
+<ol>
+<li>先在「要点」中找 <strong>阶段 / 活动 / → 流程链</strong> 表述；</li>
+<li>案例题常用 <strong>调查 → 分析 → 方案 → 验证</strong>（或题干给出的过程框架）；</li>
+<li>综合知识流程题优先写 <strong>编号步骤</strong> 或 <strong>阶段名称</strong>；</li>
+<li>需要完整步骤时打开文末 <strong>归档通章</strong> 对应小节对照誊写。</li>
+</ol>
+<h2 id="要点">要点</h2>
+<h3 id="32-测试过程与类型">3.2 测试过程与类型</h3>
+<p><strong>过程</strong>：单元（单服务）→ 集成（服务间）→ 端到端 → 性能 → 容错 → 安全</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>功能</td>
+<td>API 正确性、业务规则</td>
+</tr>
+<tr>
+<td>性能</td>
+<td>单服务与链路延迟、吞吐</td>
+</tr>
+<tr>
+<td>容错</td>
+<td>熔断、降级、故障注入</td>
+</tr>
+<tr>
+<td>安全</td>
+<td>认证授权、传输加密、漏洞扫描</td>
+</tr>
+</tbody></table></div>
+<h2 id="易混辨析">易混辨析</h2>
+<p>（本节与相邻考点易混点见归档篇章「易混对比」；检索关键词：<strong>测试</strong>。）</p>
+<h2 id="应试">应试</h2>
+<ul>
+<li>「说明从单体迁移微服务的理由与拆分原则」→ 写单体痛点 + 单一职责/隔离性/有界上下文等原则答卷句。</li>
+<li>「对比微服务方案与传统 SOA/ESB 方案」→ 用 §一 对比表 + §五 易混对比展开。</li>
+<li>「跨服务下单如何保证一致性？」→ Saga + 最终一致性，说明补偿机制；避免简单写 2PC。</li>
+<li>「如何保障微服务可观测与容错？」→ 日志/指标/链路追踪 + 熔断/限流/降级。</li>
+<li>背景：电商/金融后台单体瓶颈（发布慢、扩展难、技术栈锁定）。</li>
+<li>方案：按业务能力拆分 + 容器编排 + API 网关 + 注册发现 + 消息队列；一致性写 Saga。</li>
+<li>成效：独立发布频率、故障隔离、弹性伸缩、团队并行度等可量化指标。</li>
+</ul>
+<h2 id="相关考点">相关考点</h2>
+<ul>
+<li><a href="/kb/kp-5-3-2">开发（容器、注册发现、通信、安全、监控）</a></li>
+<li>归档通章：<a href="../%E7%AC%AC%E4%B8%89%E7%AF%87-%E6%A1%88%E4%BE%8B%E5%AE%9E%E8%B7%B5/%E7%AC%AC20%E7%AB%A0-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1.md"><a href="/kb/ch20/" class="kb-ref" data-kb-id="ch20" data-kb-path="第20章-微服务系统分析与设计.md" title="预览：第20章 · 微服务系统分析与设计"><code>第20章-微服务系统分析与设计.md</code></a></a></li>
+</ul>

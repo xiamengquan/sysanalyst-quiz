@@ -1,0 +1,435 @@
+<h1 id="第3章-计算机系统-高频">第3章 计算机系统 ★高频</h1>
+<blockquote>
+<p>出自《系统分析师教程》知识点精炼 · 第一篇 · 基础知识（第1—9章）分章。</p>
+</blockquote>
+<hr>
+<h2 id="本章考什么">本章考什么</h2>
+<p>计算机组成、存储层次、Cache、RAID、I/O方式、总线、CISC/RISC、多处理机、操作系统（进程/内存/文件）为必考。计算题常考Cache平均周期、总线带宽、RISC性能公式。</p>
+<h2 id="核心知识点概念">核心知识点/概念</h2>
+<h3 id="计算机系统层次">计算机系统层次</h3>
+<pre><code>应用层：应用软件
+系统层：OS、语言处理程序（编译/汇编/解释）
+硬件层：传统机器级 → 微程序级 → 硬联逻辑级
+</code></pre>
+<ul>
+<li><strong>冯·诺依曼</strong>：运算器、控制器、存储器、输入、输出；存储程序。</li>
+<li><strong>软件分类</strong>：系统软件（OS、语言处理、服务程序、DBMS、网络软件）、应用软件。</li>
+<li><strong>固件(firmware)</strong>：EPROM/EEPROM中程序，性能介于软硬件之间。</li>
+</ul>
+<h3 id="存储器系统">存储器系统</h3>
+<p><strong>三级结构</strong>：Cache → 主存 → 辅存。</p>
+<p><strong>存取方式</strong>：顺序、直接、随机、相联。</p>
+<p><strong>主存</strong>：RAM(DRAM需刷新/SRAM不需)、ROM(BIOS)。</p>
+<p><strong>辅存</strong>：磁带(顺序)、硬盘(HDD/SSD/SSHD)、RAID、光盘(CD-ROM/CD-R/CD-RW/DVD)。</p>
+<p><strong>硬盘</strong>：寻道时间 + 等待时间 + 读写时间；Ta≈Ts+Tw。</p>
+<p><strong>RAID级别</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>级别</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RAID0</td>
+<td>无冗余，性能最高，故障率高</td>
+</tr>
+<tr>
+<td>RAID1</td>
+<td>镜像，50%利用率，安全性最高</td>
+</tr>
+<tr>
+<td>RAID2</td>
+<td>海明码，少用</td>
+</tr>
+<tr>
+<td>RAID3/4</td>
+<td>独立校验盘，位/块交叉</td>
+</tr>
+<tr>
+<td>RAID5</td>
+<td>分布式校验，无独立校验盘</td>
+</tr>
+<tr>
+<td>RAID6</td>
+<td>双分布式校验</td>
+</tr>
+<tr>
+<td>RAID10</td>
+<td>RAID0+1组合</td>
+</tr>
+</tbody></table></div>
+<p><strong>程序局部性（答卷·必背）</strong></p>
+<p><strong>程序局部性（答卷·定义）</strong>：程序局部性是程序在执行过程中访问存储单元时呈现的非均匀分布规律，包括时间局部性与空间局部性。</p>
+<p><strong>时间局部性（答卷·定义）</strong>：时间局部性是最近被访问过的存储单元在不久的将来很可能被再次访问的特性。</p>
+<p><strong>时间局部性（答卷·作用）</strong>：主要用于 Cache 设计——近期用过的数据块可保留在 Cache 中以提高命中率。</p>
+<p><strong>空间局部性（答卷·定义）</strong>：空间局部性是当前被访问单元邻近的存储单元在不久的将来很可能被访问的特性。</p>
+<p><strong>空间局部性（答卷·作用）</strong>：主要用于 Cache 块传输与预取设计——一次调入相邻数据块可提升后续访问命中概率。</p>
+<p><strong>Cache（答卷·必背）</strong></p>
+<p><strong>Cache（答卷·定义）</strong>：Cache 是位于 CPU 与主存之间、由高速 SRAM 构成的小容量缓冲存储器。</p>
+<p><strong>Cache（答卷·作用）</strong>：主要用于利用程序局部性，在 CPU 与主存速度差距之间建立缓冲，降低平均访存时间。</p>
+<ul>
+<li>依据：<strong>程序局部性</strong>（时间局部性、空间局部性）。</li>
+<li>平均周期：<strong>t3 = tc×h + tm×(1-h)</strong>（h为命中率）。</li>
+<li>映射：直接映射(K=I mod C)、全相联、组相联。</li>
+<li>替换：随机、FIFO、LRU。</li>
+<li>写策略：写直达(Write Through)、写回(Write Back)、标记法。</li>
+</ul>
+<p><strong>网络存储</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DAS</td>
+<td>直连，扩展差，已基本被NAS替代</td>
+</tr>
+<tr>
+<td>NAS</td>
+<td>文件级，NFS/CIFS，小文件共享</td>
+</tr>
+<tr>
+<td>SAN</td>
+<td>块级，FC SAN/IP SAN(iSCSI)/IB SAN</td>
+</tr>
+</tbody></table></div>
+<p><strong>虚拟存储（答卷·必背）</strong></p>
+<p><strong>虚拟存储（答卷·定义）</strong>：虚拟存储是在主存与辅存之间通过操作系统与硬件配合、为进程提供比物理内存更大逻辑地址空间的存储管理机制。</p>
+<p><strong>虚拟存储（答卷·作用）</strong>：主要用于运行大于物理内存的程序、实现内存保护与进程隔离，并通过请求分页/分段与页面置换算法管理内存分配。</p>
+<ul>
+<li>实现层次：对称式/非对称式；数据块虚拟/虚拟文件系统；主机级/设备级/网络级实现。</li>
+</ul>
+<h3 id="io系统">I/O系统</h3>
+<p><strong>5种工作方式（由低到高）</strong>：</p>
+<ol>
+<li><strong>程序控制</strong>：无条件传送、程序查询（CPU效率低）</li>
+<li><strong>程序中断</strong>：CPU与外设并行，5阶段（请求→判优→响应→处理→返回）</li>
+<li><strong>DMA</strong>：DMAC控制，CPU暂停/分时/周期窃取</li>
+<li><strong>通道</strong>：字节多路/选择/数组多路</li>
+<li><strong>I/O处理机</strong>：功能最强，可独立运算</li>
+</ol>
+<p><strong>程序中断（答卷·必背）</strong></p>
+<p><strong>程序中断（答卷·定义）</strong>：程序中断是 CPU 在执行程序过程中响应外设请求、暂停当前程序转去执行中断服务程序、处理完毕后再返回原程序的 I/O 控制方式。</p>
+<p><strong>程序中断（答卷·作用）</strong>：主要用于使 CPU 与外设并行工作，提高 I/O 效率；适用于中速设备，CPU 仅在请求到达与处理首尾阶段参与。</p>
+<p><strong>DMA（答卷·必背）</strong></p>
+<p><strong>DMA（答卷·定义）</strong>：DMA（直接存储器访问）是由 DMA 控制器直接在内存与外设之间批量传送数据、无需 CPU 逐字节参与控制的 I/O 方式。</p>
+<p><strong>DMA（答卷·作用）</strong>：主要用于高速、大批量数据传输，减轻 CPU 负担并提高并行度；CPU 仅负责预处理与后处理（如启动传输、处理完成中断）。</p>
+<p><strong>总线</strong>：地址总线、数据总线、控制总线；并行/串行。</p>
+<p><strong>总线带宽</strong> = 总线宽度 × 总线频率（注意周期与猝发传输）。</p>
+<p><strong>端口编址</strong>：独立编址(I/O指令) vs 统一编址(存储器映射)。</p>
+<h3 id="指令系统">指令系统</h3>
+<p><strong>CISC特点</strong>：指令多(100<del>250)、使用频率20/80、寻址方式多(5</del>20)、变长指令、微程序控制。</p>
+<p><strong>RISC特点</strong>：指令少、固定长度、Load/Store结构、硬布线控制、流水线、寄存器多(32+)、指令/数据Cache分离。</p>
+<p><strong>RISC性能公式</strong>：<strong>P = I × CPI × T</strong></p>
+<ul>
+<li>RISC的I比CISC长20%<del>40%，但CPI≈1(vs CISC的4</del>10)，T约为CISC的1/3。</li>
+<li><strong>综合：RISC比同规模CISC快3~5倍</strong>。</li>
+</ul>
+<p><strong>RISC关键技术</strong>：延迟转移、指令取消、重叠寄存器窗口、指令流调整。</p>
+<h3 id="多处理机">多处理机</h3>
+<ul>
+<li><strong>MIMD</strong>：多处理机，各自独立程序。</li>
+<li><strong>SIMD</strong>：并行/阵列处理机，单控制器多处理单元，适合矩阵运算。</li>
+<li><strong>MPP</strong>：海量并行；<strong>SMP</strong>：对称多处理，共享内存。</li>
+</ul>
+<h3 id="操作系统">操作系统</h3>
+<p><strong>功能</strong>：进程管理、存储管理、设备管理、文件管理、作业管理。</p>
+<p><strong>进程状态</strong>：就绪、运行、阻塞；切换保存上下文。</p>
+<p><strong>进程同步</strong>：信号量、管程；PV操作。</p>
+<p><strong>死锁（答卷·必背）</strong></p>
+<p><strong>死锁（答卷·定义）</strong>：死锁是两个或多个进程因互相等待对方占有的资源而无法继续推进的运行状态。</p>
+<p><strong>死锁（答卷·作用）</strong>：理解死锁定义与四条件是分析死锁产生原因、制定预防/避免/检测与恢复策略的基础。</p>
+<p><strong>死锁四条件（答卷·必背）</strong>——四条件同时成立才可能发生死锁：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>条件</th>
+<th>定义（答卷）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>互斥条件</strong></td>
+<td>互斥条件是指资源一次只能被一个进程占用，其他进程必须等待</td>
+</tr>
+<tr>
+<td><strong>占有且等待</strong></td>
+<td>占有且等待是指进程已占有至少一个资源，同时又在等待获取其他进程占有的资源</td>
+</tr>
+<tr>
+<td><strong>不可抢占</strong></td>
+<td>不可抢占是指已分配给进程的资源在使用完毕前不能被强行剥夺，只能由占有者主动释放</td>
+</tr>
+<tr>
+<td><strong>循环等待</strong></td>
+<td>循环等待是指存在若干进程形成首尾相接的资源等待环路，每个进程都在等待下一进程占有的资源</td>
+</tr>
+</tbody></table></div>
+<p><strong>存储管理</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>分区</td>
+<td>简单，碎片</td>
+</tr>
+<tr>
+<td>分页</td>
+<td>物理块，无外部碎片</td>
+</tr>
+<tr>
+<td>分段</td>
+<td>逻辑段，有外部碎片</td>
+</tr>
+<tr>
+<td>段页式</td>
+<td>结合两者</td>
+</tr>
+</tbody></table></div>
+<p><strong>虚拟存储（OS 侧）</strong>：请求分页/分段，页面置换(FIFO/LRU/OPT)。</p>
+<p><strong>文件结构</strong>：逻辑结构(流式/记录式)、物理结构(连续/链接/索引)。</p>
+<p><strong>目录结构</strong>：单级、两级、树形、无环图。</p>
+<h2 id="易混对比">易混对比</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>DRAM</th>
+<th>SRAM</th>
+<th>ROM</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>刷新</td>
+<td>需要</td>
+<td>不需要</td>
+<td>—</td>
+</tr>
+<tr>
+<td>速度</td>
+<td>较慢</td>
+<td>快</td>
+<td>—</td>
+</tr>
+<tr>
+<td>断电</td>
+<td>数据丢失</td>
+<td>数据丢失</td>
+<td>数据保留</td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>写直达</th>
+<th>写回</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>主存一致性</td>
+<td>始终一致</td>
+<td>淘汰时才写回</td>
+</tr>
+<tr>
+<td>速度</td>
+<td>较慢</td>
+<td>较快</td>
+</tr>
+<tr>
+<td>标志位</td>
+<td>不需要</td>
+<td>需要修改标志</td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>CISC</th>
+<th>RISC</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>指令数</td>
+<td>多(100~250)</td>
+<td>少</td>
+</tr>
+<tr>
+<td>指令长度</td>
+<td>变长</td>
+<td>固定</td>
+</tr>
+<tr>
+<td>寻址方式</td>
+<td>5~20种</td>
+<td>少</td>
+</tr>
+<tr>
+<td>控制器</td>
+<td>微程序</td>
+<td>硬布线</td>
+</tr>
+<tr>
+<td>CPI</td>
+<td>4~10</td>
+<td>≈1</td>
+</tr>
+<tr>
+<td>访存</td>
+<td>直接访存</td>
+<td>Load/Store</td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>DAS</th>
+<th>NAS</th>
+<th>SAN</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>连接</td>
+<td>直连服务器</td>
+<td>网络文件</td>
+<td>专用网络块</td>
+</tr>
+<tr>
+<td>级别</td>
+<td>—</td>
+<td>文件</td>
+<td>块</td>
+</tr>
+<tr>
+<td>协议</td>
+<td>SCSI</td>
+<td>NFS/CIFS</td>
+<td>FC/iSCSI</td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>分页</th>
+<th>分段</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>单位</td>
+<td>物理块(页)</td>
+<td>逻辑段</td>
+</tr>
+<tr>
+<td>碎片</td>
+<td>内部碎片</td>
+<td>外部碎片</td>
+</tr>
+<tr>
+<td>共享</td>
+<td>较难</td>
+<td>易共享</td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>程序查询</th>
+<th>中断</th>
+<th>DMA</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CPU参与</td>
+<td>全程</td>
+<td>首尾</td>
+<td>预处理+后处理</td>
+</tr>
+<tr>
+<td>并行度</td>
+<td>低</td>
+<td>中</td>
+<td>高</td>
+</tr>
+<tr>
+<td>适用</td>
+<td>简单慢速</td>
+<td>中速</td>
+<td>高速批量</td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>直接映射</th>
+<th>全相联</th>
+<th>组相联</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>冲突</td>
+<td>多</td>
+<td>少</td>
+<td>折中</td>
+</tr>
+<tr>
+<td>速度</td>
+<td>快</td>
+<td>慢(需逐个比较)</td>
+<td>中等</td>
+</tr>
+<tr>
+<td>成本</td>
+<td>低</td>
+<td>高</td>
+<td>中</td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>时间局部性</th>
+<th>空间局部性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>定义</td>
+<td>时间局部性是最近访问过的单元很可能再次被访问</td>
+<td>空间局部性是邻近单元的访问很可能紧随其后</td>
+</tr>
+<tr>
+<td>典型场景</td>
+<td>循环变量、频繁调用的子程序</td>
+<td>数组顺序访问、顺序指令取指</td>
+</tr>
+<tr>
+<td>与 Cache</td>
+<td>用于保留近期数据块以提高命中</td>
+<td>用于块调入与预取相邻数据</td>
+</tr>
+</tbody></table></div>
+<h2 id="常考数字结论口诀">常考数字/结论/口诀</h2>
+<ul>
+<li>Cache公式：<strong>t3 = tc×h + tm×(1-h)</strong>。</li>
+<li>CISC <strong>80/20</strong>：20%指令占80%时间。</li>
+<li>RISC性能：<strong>P=I×CPI×T</strong>，快 <strong>3~5</strong> 倍。</li>
+<li>RAID1利用率 <strong>50%</strong>。</li>
+<li>USB最多 <strong>127</strong> 设备；1394最多 <strong>63</strong> 节点。</li>
+<li>I/O方式递进：<strong>查询→中断→DMA→通道→I/O处理机</strong>。</li>
+<li>总线带宽 = 宽度 × 频率（注意单位换算）。</li>
+</ul>
+<h2 id="应试钩子">应试钩子</h2>
+<p><strong>案例可能怎么问</strong>：Cache 命中率与平均周期计算；按 I/O 场景选查询/中断/DMA；死锁四条件识别与破坏策略；虚拟存储分页/分段与置换算法选型；局部性原理解释 Cache 或应用层缓存设计。</p>
+<p><strong>论文怎么用</strong>：性能优化可写「Cache/局部性→存储层次→I/O 方式选型→虚拟存储与并发」；可靠性场景可写 RAID 冗余；分布式系统可类比 DMA 减轻主节点负担、虚拟存储类比弹性资源池。</p>
+<hr>

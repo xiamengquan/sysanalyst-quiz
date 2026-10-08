@@ -1,0 +1,74 @@
+<h1 id="分布式系统">分布式系统</h1>
+<blockquote>
+<p><strong>大纲</strong>：4.5 · <strong>教程</strong>：第4章 · <strong>分组</strong>：科目1 · 2. 计算机网络与分布式系统 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+</blockquote>
+<h2 id="概述">概述</h2>
+<p><strong>分布式系统</strong>：由多台独立计算机协同对外呈现单一系统能力。</p>
+<h2 id="速懂">速懂</h2>
+<ul>
+<li><strong>一句话</strong>：分布式系统：是由多台独立计算机通过网络协同、对外呈现单一逻辑能力的系统。作用：用于扩展性、一致性、容错与 CAP 权衡。</li>
+<li><strong>考什么</strong>：CAP、一致性模型、分布式容错（非子网计算）（教程第 4 章）。</li>
+<li><strong>具体理解</strong>：<ul>
+<li>与集中式对比：扩展性更好，设计与运维复杂度更高。</li>
+<li>分布式系统：是由多台独立计算机通过网络协同、对外呈现单一逻辑能力的系统。作用：用于扩展性、一致性、容错与 CAP 权衡。</li>
+<li>与集中式对比：是扩展性更好，设计与运维复杂度更高。作用：用于架构对比题。</li>
+</ul>
+</li>
+<li><strong>别搞混</strong>：与同章相邻考点区分；题干锚词：<strong>分布式系统</strong>。</li>
+</ul>
+<h2 id="定义">定义</h2>
+<ul>
+<li><strong>分布式系统</strong>：是由多台独立计算机通过网络协同、对外呈现单一逻辑能力的系统。<strong>作用</strong>：用于扩展性、一致性、容错与 CAP 权衡。</li>
+<li><strong>关键议题</strong>：是透明性（访问/迁移/复制等）、一致性、容错与并发控制。<strong>作用</strong>：用于分布式案例的非功能约束分析。</li>
+<li><strong>CAP</strong>：是在一致性、可用性、分区容忍性之间权衡（P 通常必须接受）。<strong>作用</strong>：用于选型 AP/CP 与分区故障场景。</li>
+<li><strong>与集中式对比</strong>：是扩展性更好，设计与运维复杂度更高。<strong>作用</strong>：用于架构对比题。</li>
+</ul>
+<h2 id="步骤与流程">步骤与流程</h2>
+<p>本节在教程中<strong>未单独列出固定步骤名</strong>；答题时可按下列指引组织答案：</p>
+<ol>
+<li>先在「要点」中找 <strong>阶段 / 活动 / → 流程链</strong> 表述；</li>
+<li>案例题常用 <strong>调查 → 分析 → 方案 → 验证</strong>（或题干给出的过程框架）；</li>
+<li>综合知识流程题优先写 <strong>编号步骤</strong> 或 <strong>阶段名称</strong>；</li>
+<li>需要完整步骤时打开文末 <strong>归档通章</strong> 对应小节对照誊写。</li>
+</ol>
+<h2 id="要点">要点</h2>
+<p><strong>分布式系统</strong>由多台独立计算机协同对外呈现单一系统能力。</p>
+<ul>
+<li><strong>关键议题</strong>：透明性（访问/迁移/复制等）、一致性、容错与并发控制。</li>
+<li><strong>CAP</strong>：在 <strong>C（一致性）/ A（可用性）/ P（分区容忍）</strong> 中最多同时满足两项；分区发生时常在 <strong>CP</strong> 与 <strong>AP</strong> 间取舍。</li>
+<li><strong>BASE</strong>：Basically Available、Soft state、Eventually consistent；与 ACID 强一致相对，常见于大规模 Web/NoSQL。</li>
+<li><strong>一致性级别（选择）</strong>：强一致、会话一致、最终一致；与业务（库存/社交 feed）匹配。</li>
+<li><strong>分布式事务</strong>：<strong>2PC</strong>（协调者阻塞风险）、<strong>3PC</strong>（超时减少阻塞）、<strong>TCC</strong>（Try-Confirm-Cancel，业务补偿）；案例写「最终一致 + 幂等 + 消息」。</li>
+<li><strong>复制拓扑</strong>：<strong>主从复制</strong>（读扩展、故障转移）、<strong>对等/多主</strong>（写扩展、冲突解决成本高）；微服务常 <strong>一服务一库</strong> + 事件驱动同步。</li>
+<li><strong>共识协议（了解）</strong>：<strong>Paxos/Raft</strong> 用于日志复制与主从选举；Raft 易讲清 <strong>Leader 选举 + 日志复制</strong>。</li>
+<li><strong>分布式设计模式（第2版教程）</strong>：<strong>主从复制</strong>（读扩展/故障转移）、<strong>分片/分区</strong>（水平扩展）、<strong>CQRS</strong>（读写分离模型）、<strong>事件溯源</strong>（审计与重放）、<strong>Saga/TCC</strong>（长事务）；案例写模式名 + 解决的<strong>质量属性</strong>（可用/一致/扩展）。</li>
+<li><strong>容错</strong>：副本冗余、心跳检测、故障转移、降级；与 <a href="/kb/kp-7-5/">容灾考点</a> 衔接。</li>
+<li><strong>与集中式对比</strong>：扩展性更好，设计与运维复杂度更高。</li>
+</ul>
+<h2 id="易混辨析">易混辨析</h2>
+<p>（本节与相邻考点易混点见归档篇章「易混对比」；检索关键词：<strong>分布式系统</strong>。）</p>
+<h2 id="应试">应试</h2>
+<p><strong>常考结论</strong></p>
+<ul>
+<li>OSI <strong>7</strong> 层，TCP/IP <strong>4</strong> 层。</li>
+<li>IPv4 <strong>32</strong> 位，IPv6 <strong>128</strong> 位。</li>
+<li>以太网帧最小 <strong>64</strong> 字节。</li>
+<li>子网主机数 = 2^m <strong>-2</strong>（减网络地址和广播地址）。</li>
+<li>TCP端口：HTTP <strong>80</strong>，HTTPS <strong>443</strong>，FTP <strong>21</strong>，DNS <strong>53</strong>。</li>
+</ul>
+<hr>
+<ul>
+<li><strong>本章练习热力</strong>：教程第 4 章约 64 题（站点练习库，不含真题卷 ch=99）。</li>
+<li><strong>题库考点标签</strong>：分布式系统特点、缓存协商、幂等重试、网关限流、会话固定。</li>
+<li><strong>练题入口</strong>：<a href="/?bank=practice&chapter=4&path=all&q=%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F">第 4 章练习（关键词 分布式系统）</a></li>
+</ul>
+<h2 id="相关考点">相关考点</h2>
+<ul>
+<li><a href="/kb/kp-cloud-computing">云计算</a></li>
+<li><a href="/kb/kp-2-7">Web 服务</a></li>
+<li><a href="/kb/kp-microservices">微服务</a></li>
+<li><a href="/kb/kp-2-4">网络工程（规划、设计、实施）</a></li>
+<li><a href="/kb/kp-2-6">构件与中间件</a></li>
+<li>速查：<a href="../%E9%80%9F%E6%9F%A5/REST%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC-%E4%BD%93%E7%B3%BB%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%8D%A1.md">REST架构风格-体系化学习卡</a></li>
+<li>归档通章：<a href="../%E7%AC%AC%E4%B8%80%E7%AF%87-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AC%AC04%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F.md"><a href="/kb/ch04/" class="kb-ref" data-kb-id="ch04" data-kb-path="第04章-计算机网络与分布式系统.md" title="预览：第04章 · 计算机网络与分布式系统"><code>第04章-计算机网络与分布式系统.md</code></a></a></li>
+</ul>

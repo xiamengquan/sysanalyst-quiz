@@ -1,0 +1,587 @@
+<h1 id="系统分析师知识点精炼--使用说明与知识地图">系统分析师知识点精炼 · 使用说明与知识地图</h1>
+<blockquote>
+<p>本套笔记依据《系统分析师教程（第2版）》22 章结构提炼，并对照<strong>最新考试大纲</strong>三科目范围组织。目标：支撑综合知识选择题、案例分析题、论文三科备考。</p>
+</blockquote>
+<p><strong>站点专业范围</strong>：本站 <strong>仅服务软考高级「系统分析师」</strong>，不包含系统架构设计师独立考纲；题干中的「架构师」多为项目角色而非另一科目。</p>
+<h2 id="知识点三层结构信息架构">知识点三层结构（信息架构）</h2>
+<ol>
+<li><strong>科目维度</strong>：综合知识 · 案例分析 · 论文（见下表与第三篇）  </li>
+<li><strong>模块维度</strong>：考点 API 的 <code>group</code>（对齐大纲模块）+ 通章 <strong>legacy</strong>（按教程 22 章）  </li>
+<li><strong>单页维度</strong>：174 考点 <strong>八节 API</strong>（速懂 / 定义 / 步骤与流程 / 要点 / 易混 / 应试 / 相关考点）；速查为 howto/reference 补充</li>
+</ol>
+<p>阅读页顶栏提供 <strong>学习路径（综合 / 案例 / 论文）</strong> 切换，串联 L0→L4 速查与考前 P0 清单。</p>
+<h2 id="机考时间安排2026-起--以准考证为准">机考时间安排（2026 起 · 以准考证为准）</h2>
+<p><strong>2026 年下半年系统分析师笔试日</strong>：<strong>10 月 25 日</strong>（上午 08:30 起；以软考办公告与准考证为准）。站点倒计时与此对齐。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>场次</th>
+<th>科目</th>
+<th>备考提示</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>上午连考</strong>（08:30 起）</td>
+<td><strong>综合知识</strong> → <strong>案例分析</strong></td>
+<td>两科<strong>同一场次连续机考</strong>。先做 75 道单选（最长 <strong>150 分钟</strong>），<strong>满 120 分钟可提前交卷</strong>（比上限早 30 分钟），交卷后<strong>立即进入案例分析</strong>，不再单独下午场。</td>
+</tr>
+<tr>
+<td><strong>下午场</strong>（通常 15:30 起）</td>
+<td><strong>论文</strong></td>
+<td>4 选 1，摘要 + 正文，机考打字。</td>
+</tr>
+</tbody></table></div>
+<p><strong>复习节奏</strong>：模考时练习「选择题控时 → 无缝切换案例七步法」整段上午链路；论文单独下午限时练笔。</p>
+<h2 id="组织与发布门禁2026-09-10-起">组织与发布门禁（2026-09-10 起）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>组织</th>
+<th>路径</th>
+<th>门禁</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>知识点编制委员会 → 审计委员会</td>
+<td><code>docs/kb-workshop/</code></td>
+<td><strong>三名审计委员全员通过</strong>方可正式发布精炼正文</td>
+</tr>
+<tr>
+<td>出题细则审计委员会</td>
+<td><code>docs/question-workshop/</code></td>
+<td>细则全员通过后出题/评审才认正式稿</td>
+</tr>
+<tr>
+<td>出题工坊 · 提示信息官</td>
+<td><code>.cursor/skills/sysanalyst-hint-officer</code></td>
+<td>检查习题<strong>正确/错误提示</strong>是否简洁、合理、通俗易懂</td>
+</tr>
+<tr>
+<td>案例分析练习</td>
+<td><code>content/banks/</code> + 站点「案例」</td>
+<td>自编练习卡 + 真题入库</td>
+</tr>
+<tr>
+<td>题库网站小组</td>
+<td><code>docs/web-team/</code></td>
+<td>站点设计与程序；正式内容未发布不得挂「正式」标签</td>
+</tr>
+</tbody></table></div>
+<p>口令示例：「召开知识点审计委员会」「编制委员会重编第X章」「提示信息官质检解析」「网站小组改版答题页」「案例分析入库」。</p>
+<blockquote>
+<p><strong>知识点精炼状态</strong>：篇章 <strong>v1.1</strong>；<strong>API 考点 v1.2.4-api</strong>（174 篇，已审计；章内答卷句收割 + 高频定义补全）。<br>规范见 <code>答卷写法准则-v1.1.md</code>；API 公告见 <code>审计委员会/正式发布/发布公告-v1.2-api.md</code>。<br>日常复习主入口：<strong>考点（API）</strong>；分章 <strong>legacy</strong> 仅通章阅读。</p>
+</blockquote>
+<hr>
+<h2 id="一目录结构说明">一、目录结构说明</h2>
+<blockquote>
+<p><strong>2026-09-26 起</strong>：大纲考点以 <strong>「考点参考（API）」</strong> 为主入口——174 篇 <code>points/kp-*.md</code>，一考点一页、六节结构；原分章合订正文已迁入单页，章文件标记为 <strong>归档（legacy）</strong> 仅供通章阅读。</p>
+</blockquote>
+<pre><code>系统分析师知识点精炼/
+├── 00-使用说明与知识地图.md                    ← 本文件
+├── 第一篇-基础知识/
+│   ├── 第一篇-第1至9章.md                 ← 分章目录索引
+│   ├── 第01章-绪论.md … 第09章-信息安全.md
+│   └── 附录-第一篇跨章高频对比速查.md
+├── 第二篇-关键技术/
+│   ├── 第二篇-第10至15章.md               ← 分章目录索引
+│   ├── 第10章-系统规划与分析.md … 第15章-系统运行与维护.md
+│   └── 附录-跨章综合速查.md
+├── 第三篇-案例实践/
+│   ├── 第三篇-第16至22章.md              ← 分章目录索引
+│   ├── 第16章-Web应用系统分析与设计.md
+│   ├── 第17章-嵌入式系统分析与设计.md
+│   ├── 第18章-移动应用系统分析与设计.md
+│   ├── 第19章-大数据处理系统分析与设计.md
+│   ├── 第20章-微服务系统分析与设计.md
+│   ├── 第21章-信息物理系统分析与设计.md
+│   └── 第22章-系统分析师论文写作要点.md
+├── 案例分析答题教程.md
+├── 论文范文/                                      ← 论文练习范文（科目3）；入口 `论文范文/README.md`
+└── 速查/
+    ├── 大纲考点对照.md                          ← 大纲 ↔ 教程章节映射
+    ├── 高频对比速查表.md                        ← 常考对比题速查
+    ├── 近五年论文范围分析.md                    ← 论文命题趋势速查
+    ├── 需求工程-体系化学习路径.md                ← 需求 L0→L4
+    ├── UML-体系化学习指南.md                    ← UML 由简入深（补第7章概要）
+    ├── Web与AI智能体-架构选型四维度卡.md        ← 2026 案例 Web+Agent 四维度对比
+    ├── REST架构风格-体系化学习卡.md             ← Reference · REST vs SOAP
+    ├── 结构化与面向对象分析-体系化学习路径.md    ← SA+OOA L0→L4
+    ├── 考纲模块导航-数据库系统.md               ← 别名 kp-数据库 → kp-3-*
+    ├── 考纲模块导航-软件工程.md                 ← 别名 kp-软件工程 → 生命周期/需求/测试
+    └── 考纲模块导航-系统架构.md                 ← 别名 kp-系统架构 → kp-10-*
+</code></pre>
+<h3 id="dev-docs-文档模型内容怎么归类">Dev Docs 文档模型（内容怎么归类）</h3>
+<p>与 <code>docs/web-team/程序</code> 同理，知识点按 <strong>Dev Docs</strong> 四类管理（详见 <code>docs/kb-workshop/程序/文档模型.md</code>）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>在本库中</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Explanation</strong> 解释</td>
+<td><code>kind: chapter</code> 分章精炼</td>
+<td>第11章 需求工程</td>
+</tr>
+<tr>
+<td><strong>Reference</strong> 参考</td>
+<td><code>kind: quick</code> + <code>docType: reference</code></td>
+<td>高频对比速查表、REST 学习卡</td>
+</tr>
+<tr>
+<td><strong>Tutorial</strong> 教程</td>
+<td><code>kind: quick</code> + <code>docType: tutorial</code></td>
+<td>需求工程 L0→L4、UML 指南</td>
+</tr>
+<tr>
+<td><strong>How-to</strong> 操作</td>
+<td><code>docType: howto</code></td>
+<td>案例分析答题教程、案例必答卡</td>
+</tr>
+</tbody></table></div>
+<p>权威源仅 <code>content/kb/</code>；目录注册 <code>content/kb-index.json</code>；挂站 <code>npm run sync:kb</code>。新增速查文首见 <code>docs/kb-workshop/编制委员会/模板-速查学习卡.md</code>。</p>
+<p><strong>文件定位</strong>（与教程三篇划分一致）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>篇</th>
+<th>章节</th>
+<th>主要服务科目</th>
+<th>内容侧重</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第一篇 基础知识</td>
+<td>1—9</td>
+<td>科目1 综合知识</td>
+<td>数学、计算机、网络、DB、企业信息化、软工、项目管理、信息安全</td>
+</tr>
+<tr>
+<td>第二篇 关键技术</td>
+<td>10—15</td>
+<td>科目1 + 科目3</td>
+<td>规划分析、需求、架构、设计、实现测试、运维</td>
+</tr>
+<tr>
+<td>第三篇 案例实践</td>
+<td>16—22</td>
+<td>科目2 + 科目3</td>
+<td>Web/嵌入式/移动/大数据/微服务/CPS + 论文</td>
+</tr>
+<tr>
+<td>速查</td>
+<td>—</td>
+<td>三科通用</td>
+<td>大纲清单、对比表、复习路径</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="二三篇-22-章知识地图">二、三篇 22 章知识地图</h2>
+<h3 id="21-总览图">2.1 总览图</h3>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TB
+    subgraph P1["第一篇 · 基础知识（1—9章）"]
+        C1[1 绪论]
+        C2[2 数学与工程基础]
+        C3[3 计算机系统]
+        C4[4 计算机网络与分布式]
+        C5[5 数据库系统]
+        C6[6 企业信息化]
+        C7[7 软件工程]
+        C8[8 项目管理]
+        C9[9 信息安全]
+    end
+
+    subgraph P2["第二篇 · 关键技术（10—15章）"]
+        C10[10 系统规划与分析]
+        C11[11 软件需求工程]
+        C12[12 软件架构设计]
+        C13[13 系统设计]
+        C14[14 软件实现与测试]
+        C15[15 系统运行与维护]
+    end
+
+    subgraph P3["第三篇 · 案例实践（16—22章）"]
+        C16[16 Web应用]
+        C17[17 嵌入式]
+        C18[18 移动应用]
+        C19[19 大数据]
+        C20[20 微服务]
+        C21[21 CPS]
+        C22[22 论文写作]
+    end
+
+    P1 --> P2
+    P2 --> P3
+    C10 --> C11 --> C12 --> C13 --> C14 --> C15
+    C16 & C17 & C18 & C19 & C20 & C21 --> C22
+</div></div>
+<h3 id="22-分章速查表">2.2 分章速查表</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>章</th>
+<th>标题</th>
+<th>核心关键词</th>
+<th>科目</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>绪论</td>
+<td>信息、系统、IS 工程、系统分析师角色</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>数学与工程基础</td>
+<td>概率、图论、预测决策、建模、工程伦理</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>计算机系统</td>
+<td>存储、Cache、I/O、RISC/CISC、OS、多处理机</td>
+<td>1</td>
+</tr>
+<tr>
+<td>4</td>
+<td>计算机网络</td>
+<td>OSI/TCP-IP、子网、分布式、中间件、Web 服务、云</td>
+<td>1</td>
+</tr>
+<tr>
+<td>5</td>
+<td>数据库</td>
+<td>三级模式、范式、并发、备份、<strong>分片/分片键·跨站点共享</strong>、DW、挖掘、NoSQL</td>
+<td>1</td>
+</tr>
+<tr>
+<td>6</td>
+<td>企业信息化</td>
+<td>ERP/CRM/SCM、BPR、EAI、电子商务、政务</td>
+<td>1</td>
+</tr>
+<tr>
+<td>7</td>
+<td>软件工程</td>
+<td>生命周期、开发模型、RUP、敏捷、UML、CMM</td>
+<td>1</td>
+</tr>
+<tr>
+<td>8</td>
+<td>项目管理</td>
+<td>WBS、进度、成本、挣值、质量、风险、文档</td>
+<td>1</td>
+</tr>
+<tr>
+<td>9</td>
+<td>信息安全</td>
+<td>加密、防火墙、VPN、访问控制、容灾、可靠性</td>
+<td>1</td>
+</tr>
+<tr>
+<td>10</td>
+<td>系统规划与分析</td>
+<td>立项、可行性、DFD、成本效益、方案建议</td>
+<td>1、3</td>
+</tr>
+<tr>
+<td>11</td>
+<td>需求工程</td>
+<td>业务/用户/系统需求、获取、SRS、变更、跟踪</td>
+<td>1、3</td>
+</tr>
+<tr>
+<td>12</td>
+<td>软件架构</td>
+<td>架构风格、4+1、SOA、质量属性</td>
+<td>1、3</td>
+</tr>
+<tr>
+<td>13</td>
+<td>系统设计</td>
+<td>模块耦合内聚（含 RTSAD）、OO 设计、设计模式、UI</td>
+<td>1、3</td>
+</tr>
+<tr>
+<td>14</td>
+<td>实现与测试</td>
+<td>黑盒白盒、测试阶段、部署</td>
+<td>1、3</td>
+</tr>
+<tr>
+<td>15</td>
+<td>运行维护</td>
+<td>维护类型、转换策略、遗留系统</td>
+<td>1、3</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Web 应用</td>
+<td>B/S、MVC、微服务、缓存、Web 测试</td>
+<td>2、3</td>
+</tr>
+<tr>
+<td>17</td>
+<td>嵌入式</td>
+<td>RTOS、调度、优先级反转、低功耗</td>
+<td>2</td>
+</tr>
+<tr>
+<td>18</td>
+<td>移动应用</td>
+<td>Native/Hybrid/小程序、MVVM、无代码</td>
+<td>2</td>
+</tr>
+<tr>
+<td>19</td>
+<td>大数据</td>
+<td>Lambda、Hadoop、实时/离线、数据安全</td>
+<td>2、3</td>
+</tr>
+<tr>
+<td>20</td>
+<td>微服务</td>
+<td>容器、注册发现、OAuth2、架构模式</td>
+<td>2、3</td>
+</tr>
+<tr>
+<td>21</td>
+<td>CPS</td>
+<td>感知-决策-执行、工业协议、SoS</td>
+<td>2、3</td>
+</tr>
+<tr>
+<td>22</td>
+<td>论文</td>
+<td>结构、摘要、评分、常见问题</td>
+<td>3</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="三建议复习路径">三、建议复习路径</h2>
+<h3 id="31-按科目">3.1 按科目</h3>
+<h4 id="科目1综合知识75-分--75-题单选">科目1：综合知识（75 分 / 75 题，单选）</h4>
+<p><strong>目标</strong>：广度覆盖 + 对比辨析</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>时间建议</th>
+<th>内容</th>
+<th>资料</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第一轮</td>
+<td>4—6 周</td>
+<td>按 1→15 章顺序通读第一篇+第二篇</td>
+<td>各章精炼 + 速查对比表</td>
+</tr>
+<tr>
+<td>第二轮</td>
+<td>2—3 周</td>
+<td>薄弱章重读 + 大纲考点对照逐项勾选</td>
+<td>大纲考点对照.md</td>
+</tr>
+<tr>
+<td>第三轮</td>
+<td>1—2 周</td>
+<td>真题/模拟题 + 错题回查</td>
+<td>高频对比速查表</td>
+</tr>
+</tbody></table></div>
+<p><strong>高频块</strong>（占分权重大，优先保证）：</p>
+<ul>
+<li>第3章 存储/Cache/OS</li>
+<li>第4章 网络/子网/云计算</li>
+<li>第5章 范式/并发/备份/DW</li>
+<li>第6章 ERP/BPR/EAI</li>
+<li>第7章 开发模型/CMM</li>
+<li>第8章 挣值/WBS</li>
+<li>第9章 加密/访问控制/容灾</li>
+<li><strong>第11章 需求工程</strong>（可用刷题路径「需求工程 L0→L4」+ 速查<a href="/kb/kp-requirements-engineering/" class="kb-ref" data-kb-id="kp-requirements-engineering" title="预览：需求工程">《需求工程-体系化学习路径》</a>；SA/OOA 专精路径「结构化与OO分析 L0→L4」+ 速查<a href="/kb/quick-sao-learn/" class="kb-ref" data-kb-id="quick-sao-learn" title="预览：结构化与面向对象分析 · 体系化学习路径（L0→L4）">《结构化与面向对象分析-体系化学习路径》</a>）</li>
+<li>第12章 架构风格/SOA</li>
+</ul>
+<h4 id="科目2案例分析75-分3-道大题">科目2：案例分析（75 分，3 道大题）</h4>
+<p><strong>目标</strong>：第三篇领域知识 + 第二篇方法落地</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>基础</td>
+<td>第10—15章（可行性、需求、架构、测试）</td>
+</tr>
+<tr>
+<td>核心</td>
+<td>第16—21章（六领域各准备 1 套「场景-架构-开发-测试-关联」模板）</td>
+</tr>
+<tr>
+<td>冲刺</td>
+<td>历年真题：EAI/SOA 对比、架构选型、测试方案、协议选型</td>
+</tr>
+</tbody></table></div>
+<p><strong>案例答题四步法</strong>：</p>
+<ol>
+<li><strong>审题</strong>：圈关键词（实时？高并发？遗留系统？）</li>
+<li><strong>定位</strong>：对应章节（Web/嵌入式/…）</li>
+<li><strong>对比</strong>：至少 2 方案列表格（优缺点）</li>
+<li><strong>落地</strong>：测试、安全、运维、与综合知识勾连</li>
+</ol>
+<h4 id="科目3论文75-分4-选-12000-字">科目3：论文（75 分，4 选 1，≥2000 字）</h4>
+<p><strong>目标</strong>：1 个项目素材 + 多主题复用</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>准备</td>
+<td>选定近 3 年项目，写 800 字项目概要（可复用）</td>
+</tr>
+<tr>
+<td>精读</td>
+<td>第22章全文 + 第二篇方法章（10—15）</td>
+</tr>
+<tr>
+<td>练笔</td>
+<td>按三问结构限时 120 分钟写 2—3 篇</td>
+</tr>
+<tr>
+<td>素材库</td>
+<td>每个常考主题准备 2—3 个深入技术点</td>
+</tr>
+</tbody></table></div>
+<p><strong>论文主题与大章对应</strong>：见第三篇第22章末表 + 速查/大纲考点对照.md 科目3部分。</p>
+<h3 id="32-按时间距考试-8-周示例">3.2 按时间（距考试 8 周示例）</h3>
+<pre><code>周1—2：第一篇 1—4章 + 速查对比（开发模型、RAID、架构风格）
+周3—4：第一篇 5—8章 + 第二篇 10—11章
+周5—6：第二篇 12—15章 + 第三篇 16—20章
+周7：  第三篇 21—22章 + 案例真题 2 套
+周8：  综合模拟 + 论文限时 1 篇 + 查漏补缺（大纲对照勾选）
+</code></pre>
+<h3 id="33-按基础">3.3 按基础</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>背景</th>
+<th>建议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>有项目管理/开发经验</td>
+<td>先第三篇案例 + 第22章论文，再补第一篇薄弱章</td>
+</tr>
+<tr>
+<td>在校学生/经验少</td>
+<td>先第一篇+第二篇打基础，论文多读范文+虚构合理项目细节</td>
+</tr>
+<tr>
+<td>二战/部分通过</td>
+<td>未过科目精读 + 大纲对照补漏；已过科目用速查维持</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="四如何用本套笔记做题">四、如何用本套笔记做题</h2>
+<h3 id="41-综合知识选择题">4.1 综合知识选择题</h3>
+<ol>
+<li><strong>看到概念题</strong> → 回对应章精炼「定义/特点」段</li>
+<li><strong>看到对比题</strong> → 先查 <a href="/kb/quick-compare/" class="kb-ref" data-kb-id="quick-compare" data-kb-path="速查/高频对比速查表.md" title="预览：高频对比速查表"><code>速查/高频对比速查表.md</code></a>（Web 服务 REST vs SOAP → <a href="/kb/quick-rest/" class="kb-ref" data-kb-id="quick-rest" data-kb-path="速查/REST架构风格-体系化学习卡.md" title="预览：REST 架构风格 · 体系化学习卡"><code>速查/REST架构风格-体系化学习卡.md</code></a>）</li>
+<li><strong>看到计算题</strong> → 第2章（图论/决策）、第8章（挣值/COCOMO）、第3章（Cache/子网）</li>
+<li><strong>看到英文题</strong> → 记各章英文缩写（RAID、RUP、SOA、CPS…）</li>
+</ol>
+<h3 id="42-案例分析题">4.2 案例分析题</h3>
+<ol>
+<li><strong>读题干领域</strong> → 打开第三篇对应章「场景特征」</li>
+<li><strong>问架构/方案</strong> → 「架构原则/模式」+ 对比表</li>
+<li><strong>问开发/测试</strong> → 「开发与测试要点」</li>
+<li><strong>问与 XX 关系</strong> → 「与综合知识关联」回查第一篇/第二篇</li>
+</ol>
+<p><strong>常考题型映射</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>题型</th>
+<th>查阅位置</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EAI vs SOA/ESB</td>
+<td>第6章 EAI + 第20章微服务 + 对比速查表</td>
+</tr>
+<tr>
+<td>架构选型</td>
+<td>第12章风格 + 第16/20章 + 对比速查表</td>
+</tr>
+<tr>
+<td>测试方案</td>
+<td>第14章 + 第16/19/20章测试节</td>
+</tr>
+<tr>
+<td>调度/实时</td>
+<td>第17章 + 对比速查表</td>
+</tr>
+<tr>
+<td>大数据 pipeline</td>
+<td>第19章 + 第5章 DW</td>
+</tr>
+</tbody></table></div>
+<h3 id="43-论文题">4.3 论文题</h3>
+<ol>
+<li><strong>选题</strong> → 选与准备项目最接近的；优先有深度素材的</li>
+<li><strong>拆题</strong> → 试题 3 问 = 正文 3 大块（概要 / 理论 / 实践）</li>
+<li><strong>写摘要</strong> → 第22章模板，300—400 字，含项目+角色+主题+措施</li>
+<li><strong>写正文</strong> → 项目概要 400—600 字 → 理论 800—1200 → 实践 400—500 → 总结</li>
+<li><strong>自检</strong> → 第22章「常见问题」+ 评分五维度</li>
+</ol>
+<h3 id="44-复习检查清单">4.4 复习检查清单</h3>
+<ul>
+<li><input disabled="" type="checkbox"> 大纲考点对照.md 科目1 各节已勾选</li>
+<li><input disabled="" type="checkbox"> 高频对比速查表能闭卷说出 80% 条目</li>
+<li><input disabled="" type="checkbox"> 第三篇六领域各能画 1 张架构简图</li>
+<li><input disabled="" type="checkbox"> 论文项目概要已写好并可默写</li>
+<li><input disabled="" type="checkbox"> 限时完成 1 套综合 + 1 道案例 + 1 篇论文</li>
+</ul>
+<hr>
+<h2 id="五与其他资料配合">五、与其他资料配合</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>资料</th>
+<th>配合方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>官方教程</td>
+<td>本笔记为提炼；疑难回查原文</td>
+</tr>
+<tr>
+<td>考试大纲</td>
+<td>以 <a href="/kb/quick-outline/" class="kb-ref" data-kb-id="quick-outline" data-kb-path="速查/大纲考点对照.md" title="预览：大纲考点对照"><code>速查/大纲考点对照.md</code></a> 为检核清单</td>
+</tr>
+<tr>
+<td>历年真题</td>
+<td>做题后回笔记补漏，错题标章节</td>
+</tr>
+<tr>
+<td>英语词汇</td>
+<td>各章英文缩写汇总（综合知识第18部分）</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="六说明">六、说明</h2>
+<ul>
+<li>本套笔记为<strong>提炼归纳</strong>，非教程原文；具体公式、数值以教程和大纲为准。</li>
+<li>第三篇第16—21章为科目2直接范围；第22章为科目3写作指南。</li>
+<li>大纲中「开源软件」「标准化」「经济管理」「专业英语」等在教程中分散或未单独成章，复习时结合大纲考点对照补读教程相关段落。</li>
+</ul>
+<hr>
+<p><em>祝备考顺利。</em></p>

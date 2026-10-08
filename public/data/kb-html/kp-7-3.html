@@ -1,0 +1,174 @@
+<h1 id="通信与网络安全防火墙vpnsslhttpsipsecssokerberos">通信与网络安全（防火墙、VPN、SSL/HTTPS/IPSec、SSO/Kerberos）</h1>
+<blockquote>
+<p><strong>大纲</strong>：9.3 · <strong>教程</strong>：第9章 · <strong>分组</strong>：科目1 · 7. 信息安全 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+</blockquote>
+<h2 id="概述">概述</h2>
+<p><strong>通信与网络安全（防火墙、VPN、SSL/HTTPS/IPSec、SSO/Kerberos）</strong>：防火墙（答卷·定义） 防火墙是部署在网络边界、依据安全策略对进出流量进行过滤与控制的网络安全设备或系统。 作用：用于实现访问控制、内容过滤与日志审计，隔离受信网络与不可信网络，降低外部攻击面。</p>
+<h2 id="速懂">速懂</h2>
+<ul>
+<li><strong>一句话</strong>：防火墙：防火墙是部署在网络边界、依据安全策略对进出流量进行过滤与控制的网络安全设备或系统。作用：用于实现访问控制、内容过滤与日志审计，隔离受信网络与不可信网络，降低外部攻击面。</li>
+<li><strong>考什么</strong>：访问控制模型、加密、容灾 RPO/RTO（教程第 9 章）。</li>
+<li><strong>具体理解</strong>：<ul>
+<li>数字证书：数字证书是由可信的证书颁发机构（CA）签发、符合 X.509 标准的电子凭证，内含用户身份信息、公钥、有效期及 CA 数字签名。作用：用于在 PKI 体系中绑定公钥与持有者身份，使通信各方能够验证公钥归属并建立可信通信。</li>
+<li>N版本程序设计：N 版本程序设计是由 N 个功能相同但独立开发的程序版本同时运行，通过表决器选取正确结果的软件容错方法。作用：用于实现静态/设计冗余与前向恢复——故障发生时无需回退，直接以多数表决输出屏蔽单个版本的错误。</li>
+<li>恢复块方法：恢复块方法是以主程序块为核心、主块失败后切换到备用块并回退状态的软件容错方法。作用：用于实现动态/设计冗余与后向恢复——通过验证测试发现错误后 Roll-back 到一致状态，再启用备份块继续执行。</li>
+</ul>
+</li>
+<li><strong>别搞混</strong>：| 对比 | 区别 |</li>
+</ul>
+<h2 id="定义">定义</h2>
+<ul>
+<li><strong>防火墙</strong>：防火墙是部署在网络边界、依据安全策略对进出流量进行过滤与控制的网络安全设备或系统。<strong>作用</strong>：用于实现访问控制、内容过滤与日志审计，隔离受信网络与不可信网络，降低外部攻击面。</li>
+<li><strong>数字签名</strong>：数字签名是基于非对称加密技术，用发送方私钥对消息摘要进行加密而形成的认证标识。<strong>作用</strong>：用于验证发送方身份（鉴别）、保证消息未被篡改（完整性），以及防止发送方事后否认（不可否认）。</li>
+<li><strong>数字证书</strong>：数字证书是由可信的证书颁发机构（CA）签发、符合 X.509 标准的电子凭证，内含用户身份信息、公钥、有效期及 CA 数字签名。<strong>作用</strong>：用于在 PKI 体系中绑定公钥与持有者身份，使通信各方能够验证公钥归属并建立可信通信。</li>
+<li><strong>系统可靠性</strong>：系统可靠性是系统在<strong>规定时间、规定条件下完成规定功能</strong>的能力。<strong>作用</strong>：用于衡量系统持续稳定运行、少出故障的程度，是可用性、容灾与冗余设计的基础指标。</li>
+<li><strong>N版本程序设计</strong>：N 版本程序设计是由 N 个功能相同但独立开发的程序版本同时运行，通过表决器选取正确结果的软件容错方法。<strong>作用</strong>：用于实现<strong>静态/设计冗余</strong>与<strong>前向恢复</strong>——故障发生时无需回退，直接以多数表决输出屏蔽单个版本的错误。</li>
+<li><strong>恢复块方法</strong>：恢复块方法是以主程序块为核心、主块失败后切换到备用块并回退状态的软件容错方法。<strong>作用</strong>：用于实现<strong>动态/设计冗余</strong>与<strong>后向恢复</strong>——通过验证测试发现错误后 Roll-back 到一致状态，再启用备份块继续执行。</li>
+<li><strong>防卫式程序设计</strong>：防卫式程序设计是在程序中主动插入合法性检查与异常处理逻辑、不依赖传统冗余结构的容错方法。<strong>作用</strong>：用于在小程序或局部模块中灵活捕获并纠正输入错误、边界异常，实现低开销的局部容错。</li>
+</ul>
+<h2 id="步骤与流程">步骤与流程</h2>
+<p>本节在教程中<strong>未单独列出固定步骤名</strong>；答题时可按下列指引组织答案：</p>
+<ol>
+<li>先在「要点」中找 <strong>阶段 / 活动 / → 流程链</strong> 表述；</li>
+<li>案例题常用 <strong>调查 → 分析 → 方案 → 验证</strong>（或题干给出的过程框架）；</li>
+<li>综合知识流程题优先写 <strong>编号步骤</strong> 或 <strong>阶段名称</strong>；</li>
+<li>需要完整步骤时打开文末 <strong>归档通章</strong> 对应小节对照誊写。</li>
+</ol>
+<h2 id="要点">要点</h2>
+<h3 id="通信与网络安全">通信与网络安全</h3>
+<p><strong>防火墙技术类型（答卷）</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>定义（答卷）</th>
+<th>适用（答卷）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>包过滤</strong></td>
+<td>包过滤防火墙是根据 IP 地址、端口、协议等<strong>包头信息</strong>进行访问控制的防火墙</td>
+<td>适用于规则简单、对性能要求高、不需深度内容检查的场景</td>
+</tr>
+<tr>
+<td><strong>状态检测</strong></td>
+<td>状态检测防火墙是在包过滤基础上<strong>跟踪连接状态</strong>，基于会话上下文判断数据包是否合法的防火墙</td>
+<td>适用于需识别 TCP/UDP 会话、防范简单伪造攻击的中等安全需求场景</td>
+</tr>
+<tr>
+<td><strong>应用代理</strong></td>
+<td>应用代理防火墙是以代理方式代客户端与服务器通信，并在<strong>应用层</strong>进行深度检查与过滤的防火墙</td>
+<td>适用于对 HTTP/FTP 等特定应用需细粒度控制、安全要求较高的场景（性能开销较大）</td>
+</tr>
+</tbody></table></div>
+<p><strong>防火墙部署模式</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>模式</th>
+<th>结构</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>双宿/多宿</td>
+<td>双网卡，路由禁用</td>
+</tr>
+<tr>
+<td>屏蔽主机</td>
+<td>堡垒机+内部主机</td>
+</tr>
+<tr>
+<td>屏蔽子网</td>
+<td>DMZ+内外网隔离(最安全)</td>
+</tr>
+</tbody></table></div>
+<ul>
+<li>局限：防不了内部攻击、不经过防火墙的攻击、病毒。</li>
+</ul>
+<p><strong>VPN关键技术</strong>：隧道、加解密、密钥管理、身份认证、访问控制。</p>
+<p><strong>安全协议</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>协议</th>
+<th>层次/用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SSL/TLS</td>
+<td>传输层，HTTPS基础</td>
+</tr>
+<tr>
+<td>IPSec</td>
+<td>网络层，端对端，AH/ESP</td>
+</tr>
+<tr>
+<td>PPTP/L2TP</td>
+<td>隧道协议</td>
+</tr>
+<tr>
+<td>HTTPS</td>
+<td>HTTP+SSL</td>
+</tr>
+<tr>
+<td>PGP</td>
+<td>邮件加密</td>
+</tr>
+</tbody></table></div>
+<p><strong>SSL握手6阶段</strong>：接通→密码交换→会谈密码→检验→客户认证→结束。</p>
+<p><strong>SSO(单点登录)</strong>：一次认证，访问多系统；Kerberos基于KDC对称加密。</p>
+<h2 id="易混辨析">易混辨析</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比</th>
+<th>区别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>对比项</td>
+<td>防火墙</td>
+</tr>
+<tr>
+<td>对比项</td>
+<td>SSL</td>
+</tr>
+<tr>
+<td>特点</td>
+<td>HTTPS</td>
+</tr>
+</tbody></table></div>
+<h2 id="应试">应试</h2>
+<p><strong>案例可能怎么问</strong>：按场景选访问控制模型（DAC/MAC/RBAC/BLP/Biba）；防火墙类型与部署位置；给定 RPO/RTO 要求设计备份与容灾等级；N 版本/恢复块/防卫式程序容错对比。</p>
+<p><strong>论文怎么用</strong>：DevSecOps/安全运维类可写「左移测试+流水线门禁+密钥/权限最小化」；可靠性段落用 MTBF/可用性公式、冗余策略与 RPO/RTO 目标对齐业务连续性。</p>
+<p><strong>常考结论</strong></p>
+<ul>
+<li><p>BLP：<strong>上读下写</strong>；Biba：<strong>下读上写</strong>（相反！）。</p>
+</li>
+<li><p>可用性 = <strong>MTTF/MTBF × 100%</strong>。</p>
+</li>
+<li><p>指数分布：<strong>R(t)=e^(-λt)</strong>，<strong>MTTF=1/λ</strong>。</p>
+</li>
+<li><p>串联：<strong>R=∏Ri</strong>；并联：<strong>R=1-∏(1-Ri)</strong>。</p>
+</li>
+<li><p>模冗余 <strong>2n+1</strong> 个模块，容忍 <strong>n</strong> 个故障。</p>
+</li>
+<li><p>等保 <strong>5</strong> 级：<strong>自审标结验</strong>。</p>
+</li>
+<li><p>口令认证<strong>极不安全</strong>；动态口令<strong>一次一密</strong>。</p>
+</li>
+<li><p>N版本=<strong>前向恢复/静态</strong>；恢复块=<strong>后向恢复/动态</strong>。</p>
+</li>
+<li><p><strong>本章练习热力</strong>：教程第 9 章约 78 题（站点练习库，不含真题卷 ch=99）。</p>
+</li>
+<li><p><strong>题库考点标签</strong>：VPN、VPN用途、防火墙局限。</p>
+</li>
+<li><p><strong>练题入口</strong>：<a href="/?bank=practice&chapter=9&path=all&q=%E9%80%9A%E4%BF%A1%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8">第 9 章练习（关键词 通信与网络安全）</a></p>
+</li>
+</ul>
+<h2 id="相关考点">相关考点</h2>
+<ul>
+<li><a href="/kb/kp-7-2">数据安全与保密（加密、认证、KMI/PKI/SPK）</a></li>
+<li><a href="/kb/kp-7-4">访问控制（BLP/Biba/Lattice、DAC/MAC/RBAC 等）</a></li>
+<li>归档通章：<a href="../%E7%AC%AC%E4%B8%80%E7%AF%87-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AC%AC09%E7%AB%A0-%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8.md"><a href="/kb/ch09/" class="kb-ref" data-kb-id="ch09" data-kb-path="第09章-信息安全.md" title="预览：第09章 · 信息安全"><code>第09章-信息安全.md</code></a></a></li>
+</ul>

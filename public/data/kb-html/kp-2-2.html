@@ -1,0 +1,125 @@
+<h1 id="网络体系结构与协议ositcpipip-与子网超网ipv6">网络体系结构与协议（OSI、TCP/IP、IP 与子网/超网/IPv6）</h1>
+<blockquote>
+<p><strong>大纲</strong>：4.2 · <strong>教程</strong>：第4章 · <strong>分组</strong>：科目1 · 2. 计算机网络与分布式系统 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+</blockquote>
+<h2 id="概述">概述</h2>
+<p><strong>网络体系结构与协议（OSI、TCP/IP、IP 与子网/超网/IPv6）</strong>：OSI七层：物理→数据链路→网络→传输→会话→表示→应用。</p>
+<h2 id="速懂">速懂</h2>
+<ul>
+<li><strong>一句话</strong>：OSI 七层模型：是国际标准的网络协议分层参考模型。作用：用于理解各层职责与协议归属（物数网传会表应）。</li>
+<li><strong>考什么</strong>：子网划分、协议对比、分布式与云（教程第 4 章）。</li>
+<li><strong>具体理解</strong>：<ul>
+<li>OSI 七层模型：是国际标准的网络协议分层参考模型。作用：用于理解各层职责与协议归属（物数网传会表应）。</li>
+<li>TCP/IP 四层模型：是 Internet 事实标准（网络接口/网际/传输/应用）。作用：用于与 OSI 对照及协议选型。</li>
+<li>IP 与子网划分：是IP 提供主机寻址；子网掩码划分网络/主机位。作用：用于 CIDR、超网与路由聚合计算题。</li>
+<li>IPv6：是 128 位地址、简化首部、内置 IPsec 的下一代 IP。作用：用于地址耗尽、自动配置与过渡技术题。</li>
+</ul>
+</li>
+<li><strong>别搞混</strong>：| 对比 | 区别 |</li>
+</ul>
+<h2 id="定义">定义</h2>
+<ul>
+<li><strong>OSI 七层模型</strong>：是国际标准的网络协议分层参考模型。<strong>作用</strong>：用于理解各层职责与协议归属（物数网传会表应）。</li>
+<li><strong>TCP/IP 四层模型</strong>：是 Internet 事实标准（网络接口/网际/传输/应用）。<strong>作用</strong>：用于与 OSI 对照及协议选型。</li>
+<li><strong>IP 与子网划分</strong>：是IP 提供主机寻址；子网掩码划分网络/主机位。<strong>作用</strong>：用于 CIDR、超网与路由聚合计算题。</li>
+<li><strong>IPv6</strong>：是 128 位地址、简化首部、内置 IPsec 的下一代 IP。<strong>作用</strong>：用于地址耗尽、自动配置与过渡技术题。</li>
+</ul>
+<h2 id="步骤与流程">步骤与流程</h2>
+<p>本节在教程中<strong>未单独列出固定步骤名</strong>；答题时可按下列指引组织答案：</p>
+<ol>
+<li>先在「要点」中找 <strong>阶段 / 活动 / → 流程链</strong> 表述；</li>
+<li>案例题常用 <strong>调查 → 分析 → 方案 → 验证</strong>（或题干给出的过程框架）；</li>
+<li>综合知识流程题优先写 <strong>编号步骤</strong> 或 <strong>阶段名称</strong>；</li>
+<li>需要完整步骤时打开文末 <strong>归档通章</strong> 对应小节对照誊写。</li>
+</ol>
+<h2 id="要点">要点</h2>
+<h3 id="网络体系结构">网络体系结构</h3>
+<p><strong>OSI七层</strong>：物理→数据链路→网络→传输→会话→表示→应用。</p>
+<p><strong>TCP/IP四层</strong>：网络接口→网际(IP)→传输(TCP/UDP)→应用。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>OSI</th>
+<th>TCP/IP</th>
+<th>协议/设备</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>应用层</td>
+<td>应用层</td>
+<td>HTTP/FTP/SMTP/DNS</td>
+</tr>
+<tr>
+<td>表示层</td>
+<td>↑</td>
+<td>加密/压缩</td>
+</tr>
+<tr>
+<td>会话层</td>
+<td>↑</td>
+<td>会话管理</td>
+</tr>
+<tr>
+<td>传输层</td>
+<td>传输层</td>
+<td>TCP/UDP</td>
+</tr>
+<tr>
+<td>网络层</td>
+<td>网际层</td>
+<td>IP/ICMP/ARP</td>
+</tr>
+<tr>
+<td>数据链路层</td>
+<td>网络接口</td>
+<td>Ethernet/PPP</td>
+</tr>
+<tr>
+<td>物理层</td>
+<td>↑</td>
+<td>比特传输</td>
+</tr>
+</tbody></table></div>
+<h2 id="易混辨析">易混辨析</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比</th>
+<th>区别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>对比项</td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>应用</td>
+<td>HTTP/FTP/邮件</td>
+</tr>
+<tr>
+<td>依据</td>
+<td>MAC地址</td>
+</tr>
+</tbody></table></div>
+<h2 id="应试">应试</h2>
+<p><strong>常考结论</strong></p>
+<ul>
+<li>OSI <strong>7</strong> 层，TCP/IP <strong>4</strong> 层。</li>
+<li>IPv4 <strong>32</strong> 位，IPv6 <strong>128</strong> 位。</li>
+<li>以太网帧最小 <strong>64</strong> 字节。</li>
+<li>子网主机数 = 2^m <strong>-2</strong>（减网络地址和广播地址）。</li>
+<li>TCP端口：HTTP <strong>80</strong>，HTTPS <strong>443</strong>，FTP <strong>21</strong>，DNS <strong>53</strong>。</li>
+</ul>
+<hr>
+<ul>
+<li><strong>本章练习热力</strong>：教程第 4 章约 64 题（站点练习库，不含真题卷 ch=99）。</li>
+<li><strong>题库考点标签</strong>：ARP、DNS、IP地址与子网、OSI七层、TCP与UDP。</li>
+<li><strong>练题入口</strong>：<a href="/?bank=practice&chapter=4&path=all&q=%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E4%B8%8E%E5%8D%8F%E8%AE%AE">第 4 章练习（关键词 网络体系结构与协议）</a></li>
+</ul>
+<h2 id="相关考点">相关考点</h2>
+<ul>
+<li><a href="/kb/kp-2-1">计算机网络基础（带宽/奈奎斯特、编码、差错控制）</a></li>
+<li><a href="/kb/kp-2-3">局域网与广域网（拓扑、以太网、WLAN、WAN）</a></li>
+<li>速查：<a href="../%E9%80%9F%E6%9F%A5/REST%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC-%E4%BD%93%E7%B3%BB%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%8D%A1.md">REST架构风格-体系化学习卡</a></li>
+<li>归档通章：<a href="../%E7%AC%AC%E4%B8%80%E7%AF%87-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AC%AC04%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F.md"><a href="/kb/ch04/" class="kb-ref" data-kb-id="ch04" data-kb-path="第04章-计算机网络与分布式系统.md" title="预览：第04章 · 计算机网络与分布式系统"><code>第04章-计算机网络与分布式系统.md</code></a></a></li>
+</ul>

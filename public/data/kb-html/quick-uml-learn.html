@@ -1,0 +1,1070 @@
+<h1 id="速查--uml-体系化学习指南由简入深">速查 · UML 体系化学习指南（由简入深）</h1>
+<blockquote>
+<p><strong>对齐</strong>：大纲 §5.7 统一建模语言 UML（教程第7章）+ 面向对象分析用例（第11章）<br><strong>规范依据</strong>：OMG UML 2.5.1（结构 / 行为图分类、关系语义）<br><strong>本站旧稿</strong>：第7章仅列图种与关系名；第11章仅有用例模型要点——本指南补全「读法、画法、易混、案例填空」并配<strong>图形解释</strong><br><strong>读者画像</strong>：前端向、弱数学；先看图再记口诀<br><strong>写作准则（定义 / 作用）</strong>：凡「定义」「作用」写成可直接答卷的完整句——定义用「X 是……」；作用用「用于…… / 主要作用是……」；口诀仅助记。</p>
+</blockquote>
+<hr>
+<h2 id="0-怎么用15-分钟地图">0. 怎么用（15 分钟地图）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>关卡</th>
+<th>目标</th>
+<th>建议用时</th>
+<th>过关标准</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>L0 入门</strong></td>
+<td>UML 是什么、两类图、考试考什么</td>
+<td>20 分钟</td>
+<td>能说「结构看静态、行为看动态」</td>
+</tr>
+<tr>
+<td><strong>L1 积木</strong></td>
+<td>事物 / 关系 / 图种总表</td>
+<td>30 分钟</td>
+<td>闭卷写出 5 种关系 + 5 种必考图</td>
+</tr>
+<tr>
+<td><strong>L2 必考五图</strong></td>
+<td>用例 / 类 / 序列 / 状态 / 活动</td>
+<td>2–3 小时</td>
+<td>见题干能选对图、会填空</td>
+</tr>
+<tr>
+<td><strong>L3 加深</strong></td>
+<td>聚合组合、include/extend、包/组件/部署</td>
+<td>1 小时</td>
+<td>易混对比不翻车</td>
+</tr>
+<tr>
+<td><strong>L4 应试</strong></td>
+<td>案例填空套路、4+1、OOA→OOD</td>
+<td>45 分钟</td>
+<td>真题卷能限时开做</td>
+</tr>
+</tbody></table></div>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TB
+  L0[L0 坐标系] --> L1[L1 积木与关系]
+  L1 --> L2[L2 必考五图]
+  L2 --> L3[L3 易混与次高频]
+  L3 --> L4[L4 案例填空]
+  L2 --> Case[案例分析真题练手]
+</div></div>
+<p><strong>终局口诀</strong></p>
+<blockquote>
+<p>看清<strong>谁</strong> → <strong>什么结构</strong> → <strong>怎么交互/变状态</strong> → 空白处回扣题干名词。</p>
+</blockquote>
+<hr>
+<h2 id="1-l0--入门先立坐标系">1. L0 · 入门：先立坐标系</h2>
+<h3 id="11-uml-是什么答卷定义--作用">1.1 UML 是什么（答卷·定义 / 作用）</h3>
+<p><strong>UML（答卷·定义）</strong><br>UML（统一建模语言）是一套用标准图形符号描述软件系统静态结构与动态行为的可视化建模语言；它不是编程语言，也不是软件开发过程本身。</p>
+<p><strong>UML 的作用（答卷）</strong><br>UML 用于在分析、设计与沟通中统一表达系统模型，帮助干系人就「系统长什么样、如何运作」达成一致，并为需求分析、架构设计、实现与测试提供可共享的图示依据。</p>
+<h3 id="12-两大语义区先看这张总图">1.2 两大语义区（先看这张总图）</h3>
+<div class="mermaid-wrap"><div class="mermaid">flowchart LR
+  subgraph S["结构图 · 系统长什么样"]
+    C[类图]
+    P[包图]
+    Cmp[组件图]
+    D[部署图]
+  end
+  subgraph B["行为图 · 系统怎么动"]
+    U[用例图]
+    Seq[序列图]
+    St[状态机图]
+    Act[活动图]
+  end
+  S -.静态.-> Sys((系统模型))
+  B -.动态.-> Sys
+</div></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>类别</th>
+<th><strong>答卷·定义</strong></th>
+<th><strong>答卷·作用</strong></th>
+<th>考试关键词</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>结构图</strong></td>
+<td>结构图是描述系统静态构成与元素间连接关系的 UML 图。</td>
+<td>用于说明系统由哪些构件组成、如何组织与部署。</td>
+<td>类、包、组件、部署</td>
+</tr>
+<tr>
+<td><strong>行为图</strong></td>
+<td>行为图是描述系统动态运作、交互与状态变化的 UML 图。</td>
+<td>用于说明系统如何响应用户与事件、对象如何协作与迁移。</td>
+<td>用例、序列、活动、状态</td>
+</tr>
+</tbody></table></div>
+<p><strong>必考优先级</strong>：用例 → 类 → 序列 → 状态 → 活动 → 组件/部署。</p>
+<hr>
+<h2 id="2-l1--积木事物关系图种">2. L1 · 积木：事物、关系、图种</h2>
+<h3 id="21-三类积木答卷">2.1 三类积木（答卷）</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>积木</th>
+<th><strong>答卷·定义</strong></th>
+<th><strong>答卷·作用</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>事物 Things</strong></td>
+<td>事物是 UML 模型中的基本建模元素（如类、用例、状态、组件等）。</td>
+<td>用于命名并表示问题域或系统中的概念实体。</td>
+</tr>
+<tr>
+<td><strong>关系 Relationships</strong></td>
+<td>关系是模型元素之间具有语义的连接。</td>
+<td>用于表达元素之间如何关联、依赖、继承、实现或组成。</td>
+</tr>
+<tr>
+<td><strong>图 Diagrams</strong></td>
+<td>图是把事物与关系按某一视角投影而成的视图。</td>
+<td>用于从结构或行为侧面展示系统模型，支撑沟通与分析设计。</td>
+</tr>
+</tbody></table></div>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TB
+  Things[事物 Things<br/>类 / 用例 / 状态 / 组件…]
+  Rels[关系 Relationships<br/>关联·依赖·泛化…]
+  Diags[图 Diagrams<br/>把积木投影成视图]
+  Things --> Diags
+  Rels --> Diags
+</div></div>
+<h3 id="22-六种关系--图形速查菱形在整体侧">2.2 六种关系 · 图形速查（菱形在整体侧）</h3>
+<figure class="uml-figure">
+<svg viewBox="0 0 720 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="UML六种关系符号">
+  <style>
+    .t{font:14px sans-serif;fill:#d7e0ea}
+    .s{font:12px sans-serif;fill:#8b9bb0}
+    .box{fill:#1a2330;stroke:#4a5d73;stroke-width:1.5;rx:6}
+    .line{stroke:#c5d0dc;stroke-width:2;fill:none}
+    .dash{stroke-dasharray:6 4}
+  </style>
+  <!-- 关联 -->
+  <text class="t" x="24" y="28">1 关联 Association ·「认识」</text>
+  <rect class="box" x="40" y="44" width="70" height="36"/><text class="t" x="58" y="67">A</text>
+  <line class="line" x1="110" y1="62" x2="200" y2="62"/>
+  <rect class="box" x="200" y="44" width="70" height="36"/><text class="t" x="218" y="67">B</text>
+  <text class="s" x="300" y="66">实线连接</text>
+
+  <!-- 依赖 -->
+<p>  <text class="t" x="24" y="110">2 依赖 Dependency ·「用一下」</text>
+  <rect class="box" x="40" y="126" width="70" height="36"/><text class="t" x="58" y="149">A</text>
+  <line class="line dash" x1="110" y1="144" x2="190" y2="144"/>
+  <polygon points="200,144 188,138 188,150" fill="#c5d0dc"/>
+  <rect class="box" x="200" y="126" width="70" height="36"/><text class="t" x="218" y="149">B</text>
+  <text class="s" x="300" y="148">虚线 + 开放箭头（指向被依赖方）</text></p>
+  <!-- 泛化 -->
+<p>  <text class="t" x="24" y="192">3 泛化 Generalization ·「是一种」</text>
+  <rect class="box" x="40" y="208" width="70" height="36"/><text class="t" x="52" y="231">子类</text>
+  <line class="line" x1="110" y1="226" x2="185" y2="226"/>
+  <polygon points="200,226 185,216 185,236" fill="#0f141c" stroke="#c5d0dc" stroke-width="2"/>
+  <rect class="box" x="200" y="208" width="70" height="36"/><text class="t" x="52" y="0"></text><text class="t" x="212" y="231">父类</text>
+  <text class="s" x="300" y="230">空心三角 · 指向一般（父）</text></p>
+  <!-- 实现 -->
+<p>  <text class="t" x="24" y="274">4 实现 Realization ·「兑现契约」</text>
+  <rect class="box" x="40" y="290" width="70" height="36"/><text class="t" x="55" y="313">类</text>
+  <line class="line dash" x1="110" y1="308" x2="185" y2="308"/>
+  <polygon points="200,308 185,298 185,318" fill="#0f141c" stroke="#c5d0dc" stroke-width="2"/>
+  <rect class="box" x="200" y="290" width="90" height="36" stroke-dasharray="5 3"/><text class="t" x="215" y="313">«接口»</text>
+  <text class="s" x="310" y="312">空心三角 + 虚线</text></p>
+  <!-- 聚合 / 组合 -->
+<p>  <text class="t" x="400" y="28">5 聚合 Aggregation ·「有一些」</text>
+  <rect class="box" x="420" y="44" width="70" height="36"/><text class="t" x="432" y="67">整体</text>
+  <polygon points="500,62 512,54 524,62 512,70" fill="#0f141c" stroke="#c5d0dc" stroke-width="2"/>
+  <line class="line" x1="524" y1="62" x2="580" y2="62"/>
+  <rect class="box" x="580" y="44" width="70" height="36"/><text class="t" x="592" y="67">部分</text>
+  <text class="s" x="420" y="100">空心菱形在整体侧</text></p>
+<p>  <text class="t" x="400" y="140">6 组合 Composition ·「长在身上」</text>
+  <rect class="box" x="420" y="156" width="70" height="36"/><text class="t" x="432" y="179">整体</text>
+  <polygon points="500,174 512,166 524,174 512,182" fill="#c5d0dc"/>
+  <line class="line" x1="524" y1="174" x2="580" y2="174"/>
+  <rect class="box" x="580" y="156" width="70" height="36"/><text class="t" x="592" y="179">部分</text>
+  <text class="s" x="420" y="212">实心菱形 · 同生共死</text></p>
+<p>  <text class="s" x="400" y="260">记忆：菱形永远贴着「整体」；</text>
+  <text class="s" x="400" y="280">空心=可拆散；实心=拆不了。</text>
+</svg></p>
+<figcaption>图 L1 · UML 六种关系符号一览（考试默画用）</figcaption>
+</figure>
+
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>关系</th>
+<th>符号</th>
+<th>口诀</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>关联</td>
+<td>实线</td>
+<td>「认识」</td>
+</tr>
+<tr>
+<td>依赖</td>
+<td>虚线箭头</td>
+<td>「用一下」</td>
+</tr>
+<tr>
+<td>泛化</td>
+<td>空心三角实线</td>
+<td>「是一种」</td>
+</tr>
+<tr>
+<td>实现</td>
+<td>空心三角虚线</td>
+<td>「兑现契约」</td>
+</tr>
+<tr>
+<td>聚合</td>
+<td>空心菱</td>
+<td>「有一些」</td>
+</tr>
+<tr>
+<td>组合</td>
+<td>实心菱</td>
+<td>「长在身上」</td>
+</tr>
+</tbody></table></div>
+<h3 id="221-六种关系--答卷定义与作用">2.2.1 六种关系 · 答卷定义与作用</h3>
+<blockquote>
+<p><strong>关系（答卷·定义）</strong>：关系是 UML 模型元素之间具有语义的连接。类图中最常考查；用例图中另有通信关联以及 <code>«include»</code> / <code>«extend»</code>（见 §3.1）。<br><strong>关系的作用（答卷）</strong>：关系用于标明模型元素之间如何联系与协作，使静态结构与动态交互可被准确表达和阅读。</p>
+</blockquote>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>关系</th>
+<th><strong>答卷·定义</strong></th>
+<th><strong>答卷·作用</strong></th>
+<th>符号要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>关联</strong> Association</td>
+<td>表示分类器之间的结构关系，其实例之间通过链接相连；可标注角色名、多重性、导航性、可见性、限定符和约束，也可附带关联类；聚合与组合是关联的两种特殊形式。</td>
+<td>用于在类图中表达实例间的结构连接及端点语义。</td>
+<td>实线；单向导航：开放箭头指向可导航目标端</td>
+</tr>
+<tr>
+<td><strong>依赖</strong> Dependency</td>
+<td>表示客户端元素对供应者元素的依赖，供应者的变更可能影响客户端；通常是非结构性的、较弱的语义关系，常用于使用、创建、调用、导入等。</td>
+<td>用于表示较弱的使用/创建/调用等语义，而不强调长期结构持有。</td>
+<td>虚线开放箭头：客户端 → 供应者</td>
+</tr>
+<tr>
+<td><strong>泛化</strong> Generalization</td>
+<td>表示一般分类器与特殊分类器之间的 is-a 关系；特殊分类器继承一般分类器的特征，并可增加、覆盖或特化其行为，支持子类型可替换父类型。</td>
+<td>用于建立类型层次与多态。</td>
+<td>实线空心三角，三角在一般分类器端</td>
+</tr>
+<tr>
+<td><strong>实现</strong> Realization</td>
+<td>表示实现元素与规约元素之间的契约兑现关系，实现端承诺满足规约端声明的契约（典型如类实现接口）。</td>
+<td>用于表示实现与规约在操作与责任上的对应。</td>
+<td>虚线空心三角，三角在被实现的规约端</td>
+</tr>
+<tr>
+<td><strong>聚合</strong> Aggregation</td>
+<td>是具有共享整—部分语义的关联；整体与部分是弱拥有关系，整体不负责部分的生命周期，部分可独立存在，并可能被多个整体共享。</td>
+<td>用于表示可分离的整—部分包含及共享归属。</td>
+<td>实线空心菱形在整体（whole）端</td>
+</tr>
+<tr>
+<td><strong>组合</strong> Composition</td>
+<td>是具有组合整—部分语义的关联；整体负责部分的存在与存储，部分生命周期通常与整体绑定；整体销毁时部分通常失去独立存在意义。</td>
+<td>用于表示强拥有与构成，部分不能独立于整体存在。</td>
+<td>实线实心菱形在整体（whole）端</td>
+</tr>
+</tbody></table></div>
+<p><strong>强度（答卷可写）</strong>：在整—部分与使用联系上，依赖弱于关联，关联弱于聚合，聚合弱于组合。泛化与实现属于类型/契约关系，不参与菱形强弱排序。</p>
+<p><strong>选型依据（答卷）</strong>：部分生命周期是否从属整体 → 组合/聚合；是否为结构连接 → 关联/依赖；继承还是兑现契约 → 泛化/实现（看实线/虚线三角）。</p>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TB
+  Dep[依赖 · 临时使用] --> Assoc[关联 · 稳定往来]
+  Assoc --> Agg[聚合 · 可拆的整体部分]
+  Agg --> Comp[组合 · 同生共死]
+  Gen[泛化 · 是一种] -.->|类型层次| Class[类]
+  Real[实现 · 兑现接口] -.->|契约| IF[«接口»]
+</div></div>
+<p><strong>易混（答卷对比句）</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比</th>
+<th>可直接写的区别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>关联 vs 依赖</td>
+<td>关联是结构性联系，实例经链接相连；依赖较弱，常用于使用/创建/调用/导入，供应者变更可能影响客户端。</td>
+</tr>
+<tr>
+<td>聚合 vs 组合</td>
+<td>聚合：弱拥有，整体不负责部分生命周期，部分可独立、可被共享；组合：整体负责部分存在与存储，生命周期通常绑定。</td>
+</tr>
+<tr>
+<td>泛化 vs 实现</td>
+<td>二者均为空心三角；实线表示继承父类，虚线表示实现接口。</td>
+</tr>
+<tr>
+<td>菱形方向</td>
+<td>菱形始终画在整体一端。</td>
+</tr>
+</tbody></table></div>
+<p><strong>多重性（答卷）</strong>：多重性（Multiplicity）标注在关联端点，表示该端一个实例可与另一端实例集合的基数约束（如 1、0..1、<em>、1..</em> 等）。</p>
+<p><strong>口诀（助记，勿当答卷）</strong>：关联「认识」· 依赖「用一下」· 泛化「是一种」· 实现「兑现契约」· 聚合「有一些」· 组合「长在身上」。</p>
+<p><strong>前端类比（勿写进答案）</strong>：关联≈模块间稳定引用；依赖≈临时 import；泛化≈继承；实现≈兑现接口约定；聚合≈可挪走的子项；组合≈随父卸载的子项。</p>
+<h3 id="23-图种--答卷定义与作用结构--行为">2.3 图种 · 答卷定义与作用（结构 / 行为）</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>图</th>
+<th><strong>答卷·定义</strong></th>
+<th><strong>答卷·作用</strong></th>
+<th>热度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>用例图</strong></td>
+<td>用例图是描述系统边界外参与者与系统内用例及其关系的行为图。</td>
+<td>用于界定系统功能范围，说明「谁与系统交互、系统完成哪些有价值目标」。</td>
+<td>★★★★★</td>
+</tr>
+<tr>
+<td><strong>类图</strong></td>
+<td>类图是描述类、接口及其属性、操作与静态关系的结构图。</td>
+<td>用于展示问题域或设计中的概念结构与类间联系。</td>
+<td>★★★★★</td>
+</tr>
+<tr>
+<td><strong>序列图</strong></td>
+<td>序列图是按时间顺序描述对象之间消息交互的行为图。</td>
+<td>用于说明某一场景下对象如何依次协作完成一次交互。</td>
+<td>★★★★★</td>
+</tr>
+<tr>
+<td><strong>通信图</strong></td>
+<td>通信图是按对象链接结构描述对象之间消息交互的行为图（UML 1.x 称协作图）。</td>
+<td>用于说明「谁与谁相连、在链路上传了哪些带序号的消息」，强调协作结构而非时间轴。</td>
+<td>★★★★</td>
+</tr>
+<tr>
+<td><strong>状态机图</strong></td>
+<td>状态机图是描述某一个对象在生命周期中状态及迁移的行为图。</td>
+<td>用于说明对象在何种事件下从一状态转到另一状态。</td>
+<td>★★★★</td>
+</tr>
+<tr>
+<td><strong>活动图</strong></td>
+<td>活动图是描述业务流程中动作、分支、合并与并行的行为图。</td>
+<td>用于说明工作如何推进、何处分支或并行，以及角色分工（泳道）。</td>
+<td>★★★★</td>
+</tr>
+<tr>
+<td><strong>组件图</strong></td>
+<td>组件图是描述软件组件及其提供/需求接口的结构图。</td>
+<td>用于说明模块如何封装与通过接口装配。</td>
+<td>★★★</td>
+</tr>
+<tr>
+<td><strong>部署图</strong></td>
+<td>部署图是描述运行时节点及制品如何部署到节点上的结构图。</td>
+<td>用于说明软件部署在哪些机器/环境上运行。</td>
+<td>★★★</td>
+</tr>
+<tr>
+<td><strong>包图</strong></td>
+<td>包图是描述模型元素分组与包间依赖的结构图。</td>
+<td>用于组织大型模型、展示命名空间与依赖边界。</td>
+<td>★★</td>
+</tr>
+</tbody></table></div>
+<p><strong>必考五图优先记</strong>：用例、类、序列、状态机、活动。</p>
+<hr>
+<h2 id="3-l2--必考五图精读--带图">3. L2 · 必考五图（精读 · 带图）</h2>
+<h3 id="31-用例图-use-case">3.1 用例图 Use Case</h3>
+<p><strong>答卷·定义</strong>：用例图是描述系统边界外参与者与系统内用例及其关系的行为图。<br><strong>答卷·作用</strong>：用于界定系统功能范围，说明谁与系统交互、系统为参与者完成哪些有价值目标。</p>
+<figure class="uml-figure">
+<svg viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="用例图示例">
+  <style>
+    .t{font:13px sans-serif;fill:#d7e0ea}
+    .s{font:11px sans-serif;fill:#8b9bb0}
+    .bound{fill:#15202b;stroke:#5b7c99;stroke-width:2;rx:4}
+    .uc{fill:#1e2a38;stroke:#7eb8da;stroke-width:2}
+    .line{stroke:#c5d0dc;stroke-width:1.6;fill:none}
+    .dash{stroke-dasharray:5 4}
+  </style>
+  <!-- actor -->
+  <circle cx="70" cy="90" r="14" fill="none" stroke="#c5d0dc" stroke-width="2"/>
+  <line x1="70" y1="104" x2="70" y2="150" stroke="#c5d0dc" stroke-width="2"/>
+  <line x1="50" y1="120" x2="90" y2="120" stroke="#c5d0dc" stroke-width="2"/>
+  <line x1="70" y1="150" x2="52" y2="185" stroke="#c5d0dc" stroke-width="2"/>
+  <line x1="70" y1="150" x2="88" y2="185" stroke="#c5d0dc" stroke-width="2"/>
+  <text class="t" x="48" y="210">用户</text>
+  <text class="s" x="40" y="228">参与者</text>
+
+  <!-- system boundary -->
+  <rect class="bound" x="160" y="40" width="360" height="240"/>
+  <text class="t" x="280" y="62">通讯录系统</text>
+
+  <ellipse class="uc" cx="300" cy="120" rx="78" ry="28"/>
+  <text class="t" x="258" y="125">查询联系人</text>
+
+  <ellipse class="uc" cx="300" cy="200" rx="70" ry="26"/>
+  <text class="t" x="262" y="205">身份认证</text>
+
+  <ellipse class="uc" cx="460" cy="120" rx="70" ry="26"/>
+  <text class="t" x="422" y="125">发送短信</text>
+
+  <line class="line" x1="90" y1="120" x2="222" y2="120"/>
+  <line class="line dash" x1="300" y1="148" x2="300" y2="174"/>
+  <polygon points="300,174 295,164 305,164" fill="#7eb8da"/>
+  <text class="s" x="308" y="168">«include»</text>
+
+  <line class="line dash" x1="390" y1="120" x2="378" y2="120"/>
+  <line class="line dash" x1="390" y1="120" x2="422" y2="120"/>
+  <polygon points="378,120 388,115 388,125" fill="#7eb8da"/>
+  <text class="s" x="385" y="108">«extend»</text>
+
+<p>  <text class="s" x="170" y="290">边界内=用例；边界外=参与者</text>
+</svg></p>
+<figcaption>图 3-1 · 用例图：参与者、边界、用例、include / extend</figcaption>
+</figure>
+
+<h4 id="include-vs-extend答卷">include vs extend（答卷）</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th><strong>答卷·定义</strong></th>
+<th><strong>答卷·作用</strong></th>
+<th>箭头</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>«include»</strong></td>
+<td>include 是基用例必然包含另一用例行为的关系。</td>
+<td>用于抽取每次都必须执行的公共子流程。</td>
+<td>基用例 → 被包含用例</td>
+</tr>
+<tr>
+<td><strong>«extend»</strong></td>
+<td>extend 是在特定条件下由扩展用例为基用例增加行为的关系。</td>
+<td>用于表示可选增值功能或条件触发的扩展行为。</td>
+<td>扩展用例 → 基用例</td>
+</tr>
+</tbody></table></div>
+<div class="mermaid-wrap"><div class="mermaid">flowchart LR
+  Base[基用例：查询联系人]
+  Inc[被包含：身份认证]
+  Ext[扩展：发送短信]
+  Base -->|«include» 必做| Inc
+  Ext -->|«extend» 可选| Base
+</div></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>include</th>
+<th>extend</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>时机</td>
+<td><strong>每次</strong>都执行</td>
+<td>条件满足才执行</td>
+</tr>
+<tr>
+<td>话术</td>
+<td>抽公共子流程</td>
+<td>可选增值/异常</td>
+</tr>
+</tbody></table></div>
+<h4 id="案例填空看哪里">案例填空看哪里</h4>
+<ol>
+<li>边界外空白 → <strong>参与者</strong>  </li>
+<li>椭圆空白 → <strong>用例名</strong>（动宾）  </li>
+<li>虚线旁 → 先判必经/可选，再写 include 或 extend</li>
+</ol>
+<hr>
+<h3 id="32-类图-class">3.2 类图 Class</h3>
+<p><strong>答卷·定义</strong>：类图是描述类、接口及其属性、操作与静态关系的结构图。<br><strong>答卷·作用</strong>：用于展示问题域或设计中的概念结构，说明有哪些类以及类之间如何关联。</p>
+<figure class="uml-figure">
+<svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="类图示例">
+  <style>
+    .t{font:12px sans-serif;fill:#d7e0ea}
+    .s{font:11px sans-serif;fill:#8b9bb0}
+    .box{fill:#1a2330;stroke:#7eb8da;stroke-width:1.6}
+    .div{stroke:#4a5d73;stroke-width:1}
+    .line{stroke:#c5d0dc;stroke-width:1.8;fill:none}
+  </style>
+  <!-- Order -->
+  <rect class="box" x="40" y="40" width="150" height="120"/>
+  <line class="div" x1="40" y1="68" x2="190" y2="68"/>
+  <line class="div" x1="40" y1="110" x2="190" y2="110"/>
+  <text class="t" x="88" y="60">Whole</text>
+  <text class="s" x="52" y="88">-id</text>
+  <text class="s" x="52" y="104">-name</text>
+  <text class="s" x="52" y="130">+op()</text>
+
+  <!-- Part -->
+  <rect class="box" x="360" y="50" width="150" height="100"/>
+  <line class="div" x1="360" y1="78" x2="510" y2="78"/>
+  <line class="div" x1="360" y1="112" x2="510" y2="112"/>
+  <text class="t" x="398" y="70">Part</text>
+  <text class="s" x="372" y="98">-qty</text>
+  <text class="s" x="372" y="132">+calc()</text>
+
+  <!-- composition -->
+  <polygon points="200,95 212,87 224,95 212,103" fill="#c5d0dc"/>
+  <line class="line" x1="224" y1="95" x2="360" y2="95"/>
+  <text class="s" x="250" y="86">1</text>
+  <text class="s" x="330" y="86">1..*</text>
+  <text class="s" x="218" y="118">组合：实心菱在 whole 端；部分生命周期从属整体</text>
+
+  <!-- Boundary Control Entity -->
+  <rect class="box" x="40" y="210" width="120" height="50" rx="4"/>
+  <text class="t" x="62" y="240">边界 Boundary</text>
+  <rect class="box" x="200" y="210" width="120" height="50" rx="4"/>
+  <text class="t" x="225" y="240">控制 Control</text>
+  <rect class="box" x="360" y="210" width="120" height="50" rx="4"/>
+  <text class="t" x="388" y="240">实体 Entity</text>
+  <text class="s" x="500" y="240">分析类三角色</text>
+</svg>
+<figcaption>图 3-2 · 类盒子三格 + 组合关系 + 分析类三角色</figcaption>
+</figure>
+
+<p><strong>三格</strong>：类名 / 属性 / 操作()。可见性：<code>+</code> public · <code>-</code> private · <code>#</code> protected。</p>
+<p><strong>分析类三角色 BCE（答卷·定义 / 作用）</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>角色</th>
+<th>答卷·定义</th>
+<th>答卷·作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>边界 Boundary</strong></td>
+<td>边界类是系统与参与者（或其他外部系统、设备）之间的交互接口类。</td>
+<td>用于接收外部输入、返回处理结果并完成交互适配，隔离系统内外；不承担核心业务数据的持久保存。</td>
+</tr>
+<tr>
+<td><strong>控制 Control</strong></td>
+<td>控制类是协调完成某一用例（或其中控制流程）的编排类。</td>
+<td>用于按规定顺序调用相关对象、处理分支与异常，实现用例处理流程；不长期保存业务数据。</td>
+</tr>
+<tr>
+<td><strong>实体 Entity</strong></td>
+<td>实体类是问题域中具有持久业务意义的信息及其业务规则的载体类。</td>
+<td>用于表达并保存业务对象的状态与约束，供控制类在用例执行中读写。</td>
+</tr>
+</tbody></table></div>
+<p><strong>采用 BCE 的作用（答卷）</strong>：按职责分离界面交互、流程编排与业务数据，避免职责混杂，便于建立分析模型并衔接到序列图与设计。<br><strong>口诀（助记）</strong>：界面收发、控制编排、实体存业务。<br><strong>协作（答卷）</strong>：参与者通过边界类交互，边界类将请求交控制类，控制类再调用实体类。一条用例常对应 1 边界 + 1 控制 + 若干实体。详解见 <a href="/kb/quick-sao-learn/" class="kb-ref" data-kb-id="quick-sao-learn" data-kb-path="速查/结构化与面向对象分析-体系化学习路径.md" title="预览：结构化与面向对象分析 · 体系化学习路径（L0→L4）"><code>速查/结构化与面向对象分析-体系化学习路径.md</code></a> · §4.4。</p>
+<p><strong>多重性读法</strong>：靠近对端的数字 = 「一个本端对应几个对端」。</p>
+<hr>
+<h3 id="33-序列图-sequence">3.3 序列图 Sequence</h3>
+<p><strong>答卷·定义</strong>：序列图是按时间顺序描述对象之间消息交互的行为图。<br><strong>答卷·作用</strong>：用于说明某一场景下对象如何依次发送消息、协作完成一次交互。</p>
+<p><strong>口径对照（必记）</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>题型</th>
+<th>数量</th>
+<th>元素</th>
+<th>依据</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>选择题 / 综合知识</strong></td>
+<td><strong>三大</strong></td>
+<td>对象、生命线、消息</td>
+<td>2014 上午第 2 题</td>
+</tr>
+<tr>
+<td><strong>案例简答</strong></td>
+<td><strong>四大</strong></td>
+<td><strong>参与者</strong>、对象、生命线、消息</td>
+<td>2026 上案例分析</td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p>选择题里参与者通常<strong>并入「对象」</strong>（顶框 + 生命线）；案例简答要求<strong>单独列出参与者</strong>，写作用「界定系统边界、作为消息发起/接收源头」。</p>
+</blockquote>
+<p><strong>四大核心元素（案例简答 · 2026 上）</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>元素</th>
+<th>作用（答卷句）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>参与者 Actor</strong></td>
+<td>与系统交互的外部实体（用户、外部设备/系统）；作为消息发起或接收源头，界定系统边界</td>
+</tr>
+<tr>
+<td><strong>对象 Object</strong></td>
+<td>系统内部执行业务的实例（常写 <code>对象名:类名</code>）；消息传递的核心载体</td>
+</tr>
+<tr>
+<td><strong>生命线 Lifeline</strong></td>
+<td>参与者/对象在时间上的存在；纵向体现<strong>交互先后顺序</strong>（上早下晚）</td>
+</tr>
+<tr>
+<td><strong>消息 Message</strong></td>
+<td>参与者↔对象、对象↔对象间传递的交互指令；带箭头与消息名，串联流程节点</td>
+</tr>
+</tbody></table></div>
+<p><strong>三大核心元素（选择题 · 2014 上）</strong>：<strong>对象</strong>、<strong>生命线</strong>、<strong>消息</strong>——缺任一无法完整表达一次交互。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>核心元素</th>
+<th>含义</th>
+<th>图中长什么样</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>对象 Object</strong></td>
+<td>参与交互的实例（含系统外参与者，顶框可为 actor 小人）</td>
+<td>顶部矩形框</td>
+</tr>
+<tr>
+<td><strong>生命线 Lifeline</strong></td>
+<td>对象在时间轴上的存在</td>
+<td>对象框下方的竖虚线；<strong>时间自上而下</strong></td>
+</tr>
+<tr>
+<td><strong>消息 Message</strong></td>
+<td>对象间按顺序传递的调用/信号</td>
+<td>生命线之间的水平箭头（同步实线、返回虚线）</td>
+</tr>
+</tbody></table></div>
+<p><strong>易混（答卷）</strong>：</p>
+<ul>
+<li><strong>泳道</strong>是<strong>活动图</strong>元素，<strong>不属于</strong>序列图基本构成（2014 干扰项）。</li>
+<li><strong>激活条</strong>是 UML 教材常讲的第 4 元素，但 <strong>2026 案例四大不含激活</strong>；案例题按「参与者、对象、生命线、消息」答。</li>
+</ul>
+<div class="mermaid-wrap"><div class="mermaid">sequenceDiagram
+  autonumber
+  actor 用户
+  participant UI as 订单界面
+  participant Ctrl as 订单控制
+  participant Ent as 订单
+  用户->>UI: 提交订单
+  UI->>Ctrl: 创建订单()
+  Ctrl->>Ent: 保存()
+  Ent-->>Ctrl: ok
+  Ctrl-->>UI: 成功
+  UI-->>用户: 显示结果
+</div></div>
+<figure class="uml-figure">
+<pre class="uml-ascii">
+  用户          订单界面         订单控制          订单
+   │               │               │               │
+   │  提交订单      │               │               │
+   │──────────────►│               │               │
+   │               │ 创建订单()    │               │
+   │               │──────────────►│               │
+   │               │               │   保存()      │
+   │               │               │──────────────►│
+   │               │               │◄─ ─ ─ ok ─ ─ ─│
+   │               │◄── 成功 ──────│               │
+   │◄── 显示结果 ──│               │               │
+   ▼               ▼               ▼               ▼
+              ↑ 生命线（时间向下）      激活条=正在干活
+</pre>
+<figcaption>图 3-3 · 序列图读法：对象（顶框）→ 生命线（竖虚线）→ 消息（箭头）；激活条=正在执行</figcaption>
+</figure>
+
+<p><strong>扩展元素（读图常考，非案例四大 / 非选择三大）</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>元素</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>激活条 Activation</td>
+<td>生命线上的细矩形，表示对象正在执行操作（教材「第四基本元素」，案例简答不单独列）</td>
+</tr>
+<tr>
+<td>同步消息</td>
+<td>实心箭头，调用方等待返回</td>
+</tr>
+<tr>
+<td>返回</td>
+<td>虚线箭头（可省略）</td>
+</tr>
+<tr>
+<td>异步消息</td>
+<td>开放箭头，发送方不必等待</td>
+</tr>
+<tr>
+<td><code>alt</code>/<code>opt</code>/<code>loop</code></td>
+<td>分支 / 可选 / 循环片段框</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3 id="33b-通信图-communication旧称协作图">3.3b 通信图 Communication（旧称：协作图）</h3>
+<p><strong>答卷·定义</strong>：通信图（Communication Diagram）是按对象之间的链接（Link）结构描述消息交互的行为图；在 UML 1.x 中称为<strong>协作图</strong>（Collaboration Diagram）。<br><strong>答卷·作用</strong>：用于说明某一协作场景中「哪些对象彼此相连、在链路上交换了哪些消息」；消息旁用序号表达先后，<strong>强调对象拓扑与协作关系</strong>，而非垂直时间轴。</p>
+<p><strong>与序列图的关系（答卷）</strong>：通信图与序列图同属<strong>交互图</strong>（Interaction），语义等价、视角不同——同一场景可互相转换；序列图突出时间顺序，通信图突出对象间链接结构。</p>
+<figure class="uml-figure">
+<pre class="uml-ascii">
+        ┌──────────┐  1:提交订单()   ┌──────────┐
+        │  用户     │───────────────►│ 订单界面  │
+        └──────────┘                 └────┬─────┘
+                                          │ 2:创建订单()
+                                          ▼
+                                    ┌──────────┐  3:保存()  ┌────────┐
+                                    │ 订单控制  │──────────►│  订单   │
+                                    └──────────┘           └────────┘
+
+<p>  · 对象用矩形（可写 对象名:类名）
+  · 对象间实线 = 链接（Link，表示可通信）
+  · 箭头旁写「序号:消息名」——序号代替生命线表达顺序
+</pre></p>
+<figcaption>图 3-3b · 通信图读法：链接上的带序号消息（与图 3-3 同一场景）</figcaption>
+</figure>
+
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>元素</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>对象 / 角色</td>
+<td>矩形框，常写作 <code>名称:类名</code> 或仅类名</td>
+</tr>
+<tr>
+<td>链接 Link</td>
+<td>对象间实线，表示二者存在可发消息的连接</td>
+</tr>
+<tr>
+<td>消息</td>
+<td>链路上的箭头；标注 <code>序号:消息()</code>（如 <code>1.2:校验()</code>）</td>
+</tr>
+<tr>
+<td>序号</td>
+<td>表达消息先后；可用嵌套序号（<code>1</code>、<code>1.1</code>、<code>1.2</code>）表示调用层次</td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th><strong>序列图</strong></th>
+<th><strong>通信图（协作图）</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>答卷·侧重点</strong></td>
+<td>按时间轴看「先发谁、后发谁」</td>
+<td>按链接看「谁连着谁、链路上有哪些消息」</td>
+</tr>
+<tr>
+<td>时间表达</td>
+<td>生命线自上而下</td>
+<td>消息序号（可嵌套）</td>
+</tr>
+<tr>
+<td>结构表达</td>
+<td>较弱（对象横排）</td>
+<td>较强（对象自由排布 + 链接）</td>
+</tr>
+<tr>
+<td>旧称 / 现称</td>
+<td>顺序图 ≈ 序列图</td>
+<td>协作图 ≈ 通信图（UML 2）</td>
+</tr>
+<tr>
+<td>题干信号</td>
+<td>「调用顺序」「时序」「生命线」</td>
+<td>「协作关系」「对象链接」「带序号消息」；题干写「协作图」亦指本图</td>
+</tr>
+</tbody></table></div>
+<p><strong>易混（答卷）</strong>：</p>
+<ul>
+<li>通信图 ≠ 类图：类图是静态结构（类与关系）；通信图是某次协作中的<strong>对象实例</strong>与<strong>消息</strong>。</li>
+<li>通信图 ≠ 活动图：活动图描述流程步骤/并行；通信图描述对象间消息协作。</li>
+<li>软考材料若写「协作图」，按 UML 2 答「通信图」即可，二者概念等价。</li>
+</ul>
+<p><strong>何时优先画通信图</strong>：题干强调参与对象有哪些、彼此如何连接、消息挂在哪条链上；或要求与序列图对照转换时。</p>
+<hr>
+<h3 id="34-状态机图-state-machine">3.4 状态机图 State Machine</h3>
+<p><strong>答卷·定义</strong>：状态机图是描述某一个对象在其生命周期中所处状态及状态迁移的行为图。<br><strong>答卷·作用</strong>：用于说明该对象在何种事件（及条件）下从一种状态转到另一种状态。</p>
+<figure class="uml-figure">
+<svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="订单状态机">
+  <style>
+    .t{font:12px sans-serif;fill:#d7e0ea}
+    .s{font:11px sans-serif;fill:#8b9bb0}
+    .st{fill:#1a2330;stroke:#7eb8da;stroke-width:1.8;rx:14}
+    .line{stroke:#c5d0dc;stroke-width:1.6;fill:none}
+  </style>
+  <circle cx="30" cy="100" r="8" fill="#c5d0dc"/>
+  <line class="line" x1="38" y1="100" x2="70" y2="100"/>
+  <polygon points="70,100 60,95 60,105" fill="#c5d0dc"/>
+
+  <rect class="st" x="70" y="78" width="90" height="44"/>
+  <text class="t" x="88" y="105">待支付</text>
+
+  <line class="line" x1="160" y1="100" x2="210" y2="100"/>
+  <polygon points="210,100 200,95 200,105" fill="#c5d0dc"/>
+  <text class="s" x="162" y="90">支付成功</text>
+
+  <rect class="st" x="210" y="78" width="90" height="44"/>
+  <text class="t" x="228" y="105">已支付</text>
+
+  <line class="line" x1="300" y1="100" x2="350" y2="100"/>
+  <polygon points="350,100 340,95 340,105" fill="#c5d0dc"/>
+  <text class="s" x="312" y="90">发货</text>
+
+  <rect class="st" x="350" y="78" width="90" height="44"/>
+  <text class="t" x="368" y="105">已发货</text>
+
+  <line class="line" x1="440" y1="100" x2="490" y2="100"/>
+  <polygon points="490,100 480,95 480,105" fill="#c5d0dc"/>
+  <text class="s" x="448" y="90">签收</text>
+
+  <rect class="st" x="490" y="78" width="80" height="44"/>
+  <text class="t" x="510" y="105">完成</text>
+
+  <line class="line" x1="570" y1="100" x2="610" y2="100"/>
+  <circle cx="620" cy="100" r="10" fill="none" stroke="#c5d0dc" stroke-width="2"/>
+  <circle cx="620" cy="100" r="5" fill="#c5d0dc"/>
+
+  <path class="line" d="M115 122 Q115 175 250 175 Q380 175 380 122"/>
+  <polygon points="380,122 372,130 388,130" fill="#c5d0dc"/>
+  <text class="s" x="200" y="192">超时 / 取消 → 也可画到「已取消」状态</text>
+</svg>
+<figcaption>图 3-4 · 订单状态机：初态● → 状态 → 终态◉；箭头旁写事件</figcaption>
+</figure>
+
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>何时用状态图</th>
+<th>何时用活动图</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>焦点是<strong>一个对象</strong>的状态</td>
+<td>焦点是<strong>业务流程</strong>步骤/并行</td>
+</tr>
+<tr>
+<td>「处于什么状态」</td>
+<td>「下一步做什么」</td>
+</tr>
+</tbody></table></div>
+<p>迁移标注格式：<code>事件[条件]/动作</code></p>
+<hr>
+<h3 id="35-活动图-activity">3.5 活动图 Activity</h3>
+<p><strong>答卷·定义</strong>：活动图是描述业务流程中动作、分支、合并与并行的行为图。<br><strong>答卷·作用</strong>：用于说明工作流程如何推进、何处分支或并行，以及不同角色如何分工（泳道）。</p>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TB
+  Start((●)) --> A[填写订单]
+  A --> B{库存足够?}
+  B -->|是| C[扣减库存]
+  B -->|否| D[提示缺货]
+  C --> E[支付]
+  E --> F[发货]
+  F --> End((◉))
+  D --> End
+</div></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>元素</th>
+<th>画法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>动作</td>
+<td>圆角矩形</td>
+</tr>
+<tr>
+<td>决策</td>
+<td>菱形</td>
+</tr>
+<tr>
+<td>分叉/汇合</td>
+<td>粗横线（并行）</td>
+</tr>
+<tr>
+<td>泳道</td>
+<td>按角色分列</td>
+</tr>
+</tbody></table></div>
+<p>与流程图三区别：可表达<strong>并行</strong>、<strong>对象流/泳道</strong>、基于 <strong>token</strong> 语义（UML 2）。</p>
+<hr>
+<h2 id="4-l3--加深易混与次高频">4. L3 · 加深：易混与次高频</h2>
+<h3 id="41-聚合-vs-组合答卷再钉死">4.1 聚合 vs 组合（答卷再钉死）</h3>
+<p><strong>聚合（答卷·定义）</strong>：聚合是具有共享整—部分语义的关联；整体与部分是弱拥有关系，整体不负责部分的生命周期，部分可独立存在，并可能被多个整体共享。符号为实线空心菱形，菱形位于整体端。<br><strong>聚合的作用（答卷）</strong>：用于表示可分离的整—部分包含及共享归属。</p>
+<p><strong>组合（答卷·定义）</strong>：组合是具有组合整—部分语义的关联；整体负责部分的存在与存储，部分生命周期通常与整体绑定；整体销毁时，部分通常失去独立存在意义。符号为实线实心菱形，菱形位于整体端。<br><strong>组合的作用（答卷）</strong>：用于表示强拥有与构成，部分不能独立于整体存在。</p>
+<div class="mermaid-wrap"><div class="mermaid">flowchart LR
+  W1[Whole] --o P1[Part]
+  W2[Whole] --* P2[Part]
+</div></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>聚合 ○</th>
+<th>组合 ●</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>生命周期</td>
+<td>部分可独立于整体</td>
+<td>部分随整体消亡</td>
+</tr>
+<tr>
+<td>符号</td>
+<td>空心菱形在 whole 端</td>
+<td>实心菱形在 whole 端</td>
+</tr>
+<tr>
+<td>语义判据</td>
+<td>部分可脱离整体仍具独立存在意义</td>
+<td>整体销毁时部分通常失去独立存在意义</td>
+</tr>
+</tbody></table></div>
+<p><strong>答卷补充</strong>：聚合与组合都是带整体—部分语义的特殊关联；题干出现删除级联、同生共死信号时，优先判为组合。</p>
+<h3 id="42-组件图--部署图答卷">4.2 组件图 / 部署图（答卷）</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>图</th>
+<th><strong>答卷·定义</strong></th>
+<th><strong>答卷·作用</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>组件图</strong></td>
+<td>组件图是描述软件组件及其提供接口、需求接口的结构图。</td>
+<td>用于说明系统由哪些可替换构件组成、彼此如何通过接口装配。</td>
+</tr>
+<tr>
+<td><strong>部署图</strong></td>
+<td>部署图是描述运行时处理节点及软件制品如何部署到节点上的结构图。</td>
+<td>用于说明软件在哪些机器、设备或环境下运行。</td>
+</tr>
+</tbody></table></div>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TB
+  subgraph Comp["组件图 · 谁提供/需要接口"]
+    Web[Web组件] -->|提供| API((订单API))
+    App[App] -->|需求| API
+  end
+  subgraph Dep["部署图 · 跑在哪"]
+    N1[应用服务器]
+    N2[数据库节点]
+    Art[order.war] -.->|部署到| N1
+    DB[(DB)] -.-> N2
+  end
+</div></div>
+<hr>
+<h2 id="5-l4--应试看图填空">5. L4 · 应试：看图填空</h2>
+<h3 id="51-题干信号--选图">5.1 题干信号 → 选图</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>题干信号</th>
+<th>优先图</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>角色、功能目标、边界</td>
+<td>用例</td>
+</tr>
+<tr>
+<td>概念类、属性、多重性</td>
+<td>类图</td>
+</tr>
+<tr>
+<td>调用顺序、消息、生命线、时序</td>
+<td>序列</td>
+</tr>
+<tr>
+<td>对象链接、协作、带序号消息、协作图</td>
+<td>通信图（协作图）</td>
+</tr>
+<tr>
+<td>状态、超时取消</td>
+<td>状态机</td>
+</tr>
+<tr>
+<td>流程、并行、审批</td>
+<td>活动</td>
+</tr>
+<tr>
+<td>部署到哪台机器</td>
+<td>部署</td>
+</tr>
+</tbody></table></div>
+<h3 id="52-填空四步">5.2 填空四步</h3>
+<ol>
+<li>圈题干名词  </li>
+<li>定空白语义（名 / 关系 / 消息 / 事件）  </li>
+<li>核对关系方向（include/extend、菱形在整体）  </li>
+<li><strong>用题干原词</strong>填</li>
+</ol>
+<h3 id="53-ooaood-链条图">5.3 OOA→OOD 链条（图）</h3>
+<div class="mermaid-wrap"><div class="mermaid">flowchart LR
+  UC[用例模型] --> AC[分析类<br/>边界/控制/实体]
+  AC --> SEQ[序列细化]
+  SEQ --> DES[设计类/组件]
+  DES --> DEP[部署]
+</div></div>
+<h3 id="54-30-秒默写">5.4 30 秒默写</h3>
+<ul>
+<li><input disabled="" type="checkbox"> UML 定义 + 作用各一句  </li>
+<li><input disabled="" type="checkbox"> 结构图 / 行为图：定义 + 作用  </li>
+<li><input disabled="" type="checkbox"> 六关系：各能默写「是……」「用于……」  </li>
+<li><input disabled="" type="checkbox"> 必考五图：各能默写定义 + 作用  </li>
+<li><input disabled="" type="checkbox"> 序列图：选择<strong>三大</strong>（对象、生命线、消息）；案例<strong>四大</strong>（参与者、对象、生命线、消息）  </li>
+<li><input disabled="" type="checkbox"> 通信图（协作图）：定义 + 作用；与序列图「时间 vs 链接」对比  </li>
+<li><input disabled="" type="checkbox"> include / extend：定义、作用、箭头方向  </li>
+<li><input disabled="" type="checkbox"> 聚合 vs 组合：定义 + 作用  </li>
+<li><input disabled="" type="checkbox"> 分析类三角色  </li>
+<li><input disabled="" type="checkbox"> 状态图 vs 活动图</li>
+</ul>
+<hr>
+<h2 id="6-迷你练习">6. 迷你练习</h2>
+<p><strong>A</strong> 共享单车：列出 ≥3 用例、≥2 参与者（先在纸上画小人+椭圆）。<br><strong>B</strong> 题干写明「整体销毁则部分失去独立存在意义」→ 组合还是聚合？菱形在哪侧？各用一句话给出<strong>定义</strong>依据。<br><strong>C</strong> 订单待支付→已支付→已发货→完成，超时取消 → 用哪张图？<br><strong>D</strong> 用一句话区分：关联 vs 依赖；泛化 vs 实现。<br><strong>E</strong> 同一「提交订单」场景：序列图与通信图各强调什么？旧称「协作图」对应哪张？</p>
+<p><strong>要点</strong>：B 组合（部分生命周期从属整体）、实心菱在 whole 端；C 状态机图；D 见 §2.2.1；E 序列强调时间顺序、通信强调对象链接与带序号消息，协作图=通信图（见 §3.3b）。</p>
+<hr>
+<h2 id="7-与本站材料">7. 与本站材料</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>材料</th>
+<th>关系</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第7章 UML 概要</td>
+<td>考前 30 秒回忆</td>
+</tr>
+<tr>
+<td>第11章 用例模型</td>
+<td>规约与构建步骤</td>
+</tr>
+<tr>
+<td>案例分析真题</td>
+<td>五图实战场</td>
+</tr>
+</tbody></table></div>
+<p>站点知识点页已支持 <strong>Mermaid 图形渲染</strong>；本页 SVG / ASCII 图无需外网亦可看。</p>
+<hr>
+<h2 id="8-规范说明">8. 规范说明</h2>
+<ul>
+<li>对齐 <strong>OMG UML 2.5.1</strong>。软考或用「顺序图/协作图」旧称，与序列图/通信图概念等价即可（通信图详解见 §3.3b）。  </li>
+<li><strong>定义 / 作用写作准则</strong>：凡「定义」「作用」须可直接用于案例/简答——定义用「X 是……」，作用用「用于…… / 主要作用是……」；口诀与前端类比仅助记。  </li>
+<li>关系详解见 §2.2.1；图种详解见 §2.3 与 §3；聚合/组合与组件/部署见 §4。</li>
+</ul>

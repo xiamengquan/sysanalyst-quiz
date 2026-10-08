@@ -1,0 +1,71 @@
+<h1 id="速查--分布式一致性与-bpmn">速查 · 分布式一致性与 BPMN</h1>
+<blockquote>
+<p><strong>docType</strong>：reference<br><strong>关联</strong>：<code>kp-2-5</code>（分布式）· <code>kp-应用集成-服务集成</code> · <code>kp-4-2</code>（企业信息化/BPR）</p>
+</blockquote>
+<h2 id="分布式一致性案例选择">分布式一致性（案例/选择）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>一句话</th>
+<th>场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>CAP</strong></td>
+<td>分区容忍 P 下，C 与 A 不可兼得</td>
+<td>分区时选 CP 还是 AP</td>
+</tr>
+<tr>
+<td><strong>强一致</strong></td>
+<td>读始终最新（如 2PC）</td>
+<td>金融扣款、库存</td>
+</tr>
+<tr>
+<td><strong>最终一致</strong></td>
+<td>允许短暂不一致，异步收敛</td>
+<td>微服务、缓存、MQ</td>
+</tr>
+<tr>
+<td><strong>Saga</strong></td>
+<td>本地事务链 + <strong>补偿</strong></td>
+<td>跨服务长事务</td>
+</tr>
+<tr>
+<td><strong>TCC</strong></td>
+<td>Try-Confirm-Cancel</td>
+<td>需预留资源的高一致业务</td>
+</tr>
+</tbody></table></div>
+<p><strong>答题链</strong>：业务能否接受延迟 → 选一致级别 → 写 <strong>幂等 / 重试 / 对账</strong></p>
+<h2 id="bpmn-vs-dfd业务建模">BPMN vs DFD（业务建模）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>DFD</th>
+<th>BPMN</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>侧重</strong></td>
+<td>数据流、加工、存储</td>
+<td>业务流程、事件、网关、泳道</td>
+</tr>
+<tr>
+<td><strong>软考</strong></td>
+<td>系统分析 <strong>结构化</strong> 高频</td>
+<td>企业信息化、BPR、工作流</td>
+</tr>
+<tr>
+<td><strong>网关</strong></td>
+<td>无</td>
+<td>排他/并行/包容网关</td>
+</tr>
+<tr>
+<td><strong>案例</strong></td>
+<td>0 层/1 层 DFD、平衡</td>
+<td>流程重组前后对比</td>
+</tr>
+</tbody></table></div>
+<p><strong>回链</strong>：<a href="./%E7%BB%93%E6%9E%84%E5%8C%96%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%88%86%E6%9E%90-%E4%BD%93%E7%B3%BB%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84.md">结构化与 OO 路径</a> · <code>kp-11-2</code>（工作流）</p>
