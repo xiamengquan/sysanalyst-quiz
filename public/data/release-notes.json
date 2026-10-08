@@ -1,6 +1,16 @@
 {
-  "latest": "0.9.63",
+  "latest": "0.9.64",
   "releases": [
+    {
+      "version": "0.9.64",
+      "date": "2026-10-08",
+      "title": "第十六轮审计：/knowledge 修复与 SWOT/差错/BPM/EA",
+      "highlights": [
+        "修复：/knowledge 根路径重定向至 /kb/；v0.9.63 Web/大数据/五热点/PM/误区已落地（本轮 release 对齐审计项）",
+        "新增：SWOT 解决方案对比框架；差错控制计算速查；IDEF/Petri BPM 速查；EA 与数字化转型速查",
+        "加深：大数据六原则（可扩展/可管理等）；论证模板链 SWOT；kp-2-1 链差错计算"
+      ]
+    },
     {
       "version": "0.9.63",
       "date": "2026-10-08",

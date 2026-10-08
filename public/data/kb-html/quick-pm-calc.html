@@ -103,8 +103,13 @@
 </thead>
 <tbody><tr>
 <td><strong>EMV</strong></td>
-<td>各方案期望 = Σ(概率 × 结果值)；决策树自叶向根乘加</td>
+<td><strong>EMV = 概率 × 影响值</strong>（货币）；多分支 <strong>Σ(概率×结果)</strong>；决策树自叶向根乘加</td>
 <td><strong>例</strong>：70% 收益 100 万、30% 损失 20 万 → EMV = 0.7×100 + 0.3×(−20) = <strong>64 万</strong>；选 EMV 最大（成本决策则选最小）</td>
+</tr>
+<tr>
+<td><strong>决策树</strong></td>
+<td>机会/决策节点 → 枝上写概率与损益 → 回算 EMV</td>
+<td>与 <code>kp-math-stats-graph-theory-decision</code> 一致</td>
 </tr>
 <tr>
 <td><strong>蒙特卡洛</strong></td>

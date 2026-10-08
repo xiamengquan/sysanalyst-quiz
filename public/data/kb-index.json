@@ -2426,6 +2426,42 @@
           "note": "AI/大数据/云原生枢纽 · 第十四轮"
         },
         {
+          "id": "quick-swot-case",
+          "title": "解决方案对比 · SWOT 答题框架",
+          "path": "速查/解决方案对比-SWOT答题框架.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "howto",
+          "note": "2026 新增对比题型 · 第十六轮"
+        },
+        {
+          "id": "quick-error-control",
+          "title": "差错控制 · 计算速查",
+          "path": "速查/差错控制-计算速查.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "reference",
+          "note": "海明码/CRC/ARQ · 第十六轮"
+        },
+        {
+          "id": "quick-bpm-idef-petri",
+          "title": "业务流程建模 · IDEF 与 Petri 网",
+          "path": "速查/业务流程建模-IDEF与Petri网-速查.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "reference",
+          "note": "BPM 权重 · 第十六轮"
+        },
+        {
+          "id": "quick-ea-digital",
+          "title": "企业架构与数字化转型 · 速查",
+          "path": "速查/企业架构与数字化转型-速查.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "reference",
+          "note": "EA/数字化 · 第十六轮"
+        },
+        {
           "id": "quick-essay-index",
           "title": "论文方向写作索引",
           "path": "速查/论文方向写作索引.md",

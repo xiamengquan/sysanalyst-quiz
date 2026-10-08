@@ -1,0 +1,89 @@
+<h1 id="速查--差错控制计算与辨析">速查 · 差错控制（计算与辨析）</h1>
+<blockquote>
+<p><strong>考点</strong>：<code>kp-2-1</code> · 网络模块约 <strong>6%–9%</strong> · 综合知识选择/计算</p>
+</blockquote>
+<h2 id="差错类型">差错类型</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>随机错误</strong></td>
+<td>热噪声，<strong>单比特</strong>独立出错</td>
+</tr>
+<tr>
+<td><strong>突发错误</strong></td>
+<td>冲击干扰，<strong>连续多比特</strong>成块出错</td>
+</tr>
+<tr>
+<td><strong>单比特错误</strong></td>
+<td>随机错误的特例表述</td>
+</tr>
+</tbody></table></div>
+<h2 id="海明码">海明码</h2>
+<p><strong>校验位数 r</strong>：满足 <strong>2^r ≥ m + r + 1</strong>（m = 数据位位数）。</p>
+<p><strong>能力</strong>：检 2 位错、纠 <strong>1</strong> 位错（标准表述）。</p>
+<p><strong>编码步骤（答题）</strong>  </p>
+<ol>
+<li>定 m，求最小 r  </li>
+<li>校验位放在 <strong>1、2、4、8…</strong>（2 的幂次位）  </li>
+<li>各校验位负责特定数据位的异或（按教材规则）  </li>
+<li>接收端算 ** syndrome** 定位错 bit</li>
+</ol>
+<p><strong>微型例</strong>：m=4 数据位 → 2^3=8 ≥ 4+3+1 → <strong>r=3</strong>，共 7 位码字（含校验）。</p>
+<h2 id="crc-循环冗余校验">CRC 循环冗余校验</h2>
+<ul>
+<li><strong>思想</strong>：生成多项式 G(x)，数据多项式 M(x)，求 <strong>余数 R(x)</strong> 作为 FCS（模 2 运算）  </li>
+<li><strong>特点</strong>：<strong>检错强、不纠错</strong>；以太网 <strong>FCS</strong> 用 CRC  </li>
+<li><strong>答题</strong>：写「模 2 除法/异或减法求余数」，不必展开长除除非题干给数</li>
+</ul>
+<h2 id="arq">ARQ</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>协议</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>停等</strong></td>
+<td>一帧一确认；利用率低</td>
+</tr>
+<tr>
+<td><strong>GBN</strong></td>
+<td>回退 N；窗口 ≤ <strong>2^n − 1</strong></td>
+</tr>
+<tr>
+<td><strong>SR</strong></td>
+<td>选择性重传；窗口 ≤ <strong>2^(n−1)</strong></td>
+</tr>
+</tbody></table></div>
+<h2 id="fec-vs-检错重传">FEC vs 检错+重传</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>FEC 前向纠错</th>
+<th>ARQ 检错重传</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>时延</td>
+<td>低（无需往返）</td>
+<td>依赖 RTT</td>
+</tr>
+<tr>
+<td>带宽</td>
+<td>冗余大</td>
+<td>无错时开销小</td>
+</tr>
+<tr>
+<td>场景</td>
+<td>单工、卫星等</td>
+<td>双向链路、TCP 上层</td>
+</tr>
+</tbody></table></div>
+<p><strong>回链</strong>：<a href="/kb/kp-2-1/">kp-2-1 正文</a> · TCP 可靠 vs UDP</p>

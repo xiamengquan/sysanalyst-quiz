@@ -1,0 +1,56 @@
+<h1 id="速查--业务流程建模bpm--idef--petri-网">速查 · 业务流程建模（BPM · IDEF · Petri 网）</h1>
+<blockquote>
+<p><strong>背景</strong>：2026 教材强调 <strong>BPM 权重提升</strong>（约 15%→22% 量级，以大纲为准）<br><strong>考点</strong>：<code>kp-8-5</code> · <a href="./%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7%E4%B8%8EBPMN-%E9%80%9F%E6%9F%A5.md">分布式一致性与 BPMN 速查</a></p>
+</blockquote>
+<h2 id="工具对比选择案例">工具对比（选择/案例）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>侧重</th>
+<th>典型用途</th>
+<th>与别种区别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>TFD</strong></td>
+<td>业务活动顺序</td>
+<td>As-Is/To-Be 业务流程</td>
+<td>6 种业务符号，非系统 DFD</td>
+</tr>
+<tr>
+<td><strong>DFD</strong></td>
+<td>数据加工与存储</td>
+<td>系统分析逻辑模型</td>
+<td>4 元素，分层 0/1/2…</td>
+</tr>
+<tr>
+<td><strong>BPMN</strong></td>
+<td>可执行流程图元</td>
+<td>跨系统编排、BPEL 生成</td>
+<td>活动/网关/事件/泳道</td>
+</tr>
+<tr>
+<td><strong>IDEF0</strong></td>
+<td><strong>功能建模</strong>（I=输入 O=输出 C=控制 M=机制）</td>
+<td>企业/系统功能分解</td>
+<td>强调控制与机制，非 Petri 令牌</td>
+</tr>
+<tr>
+<td><strong>Petri 网</strong></td>
+<td><strong>并发、冲突、资源</strong></td>
+<td>并行活动、死锁/可达性分析</td>
+<td>库所+变迁+令牌，形式化强</td>
+</tr>
+</tbody></table></div>
+<h2 id="应用场景案例怎么选">应用场景（案例怎么选）</h2>
+<ul>
+<li><strong>梳理部门间业务流程、找瓶颈</strong> → TFD / 泳道图 / BPMN  </li>
+<li><strong>论证功能分解与接口</strong> → IDEF0 或 DFD  </li>
+<li><strong>多资源竞争、并行分支、同步汇合</strong> → <strong>Petri 网</strong>（写「变迁 firing、库所容量、死锁检测」）</li>
+</ul>
+<h2 id="答题一句">答题一句</h2>
+<blockquote>
+<p>题干强调 <strong>并发与资源互斥</strong> 用 Petri；强调 <strong>业务活动与职能</strong> 用 TFD/BPMN；强调 <strong>数据流动</strong> 用 DFD。</p>
+</blockquote>
+<p><strong>回链</strong>：<a href="./%E9%9C%80%E6%B1%82%E4%BE%A7%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C%E6%A1%86%E6%9E%B6.md">需求侧论文 · 业务流程重构</a> · <code>kp-8-6</code></p>

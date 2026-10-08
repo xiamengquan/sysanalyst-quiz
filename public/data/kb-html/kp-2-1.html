@@ -212,7 +212,8 @@
 </tr>
 </tbody></table></div>
 <p><strong>FEC vs ARQ</strong>：前向纠错（FEC）在接收端直接纠错、时延小但冗余开销大；ARQ 检错后请求重传，适合双向信道。链路层 CRC 检错丢帧，<strong>TCP</strong> 端到端序号/确认/超时保证可靠。</p>
-<p><strong>答题顺序</strong>：先判 <strong>随机/突发</strong> → <strong>检错还是纠错</strong> → <strong>CRC/海明码/ARQ 层次</strong> → 与 <strong>UDP/TCP</strong> 区分。</p>
+<p><strong>答题顺序</strong>：先判 <strong>随机/突发/单比特</strong> → <strong>检错还是纠错</strong> → <strong>CRC/海明码/ARQ 层次</strong> → 与 <strong>UDP/TCP</strong> 区分。</p>
+<p><strong>计算与步骤</strong>：见速查 <a href="../%E9%80%9F%E6%9F%A5/%E5%B7%AE%E9%94%99%E6%8E%A7%E5%88%B6-%E8%AE%A1%E7%AE%97%E9%80%9F%E6%9F%A5.md">差错控制-计算速查</a>（海明码 r 判定、CRC 模 2、ARQ 窗口）。</p>
 <h2 id="易混对比">易混对比</h2>
 <div class="table-wrap"><table>
 <thead>
