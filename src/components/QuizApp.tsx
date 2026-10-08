@@ -32,6 +32,16 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 
 type Meta = { practice: number; real: number; workshop: number; total: number };
 
+type MockSetItem = { qnum: number; id: string; ch: number; module: string; diff: string; style: string };
+type MockSet = {
+  id: string;
+  title: string;
+  total: number;
+  diffSummary: Record<string, number>;
+  items: MockSetItem[];
+};
+type MockSetsData = { meta: Record<string, unknown>; template: { qnum: number; ch: number; module: string }[]; sets: MockSet[] };
+
 type QuizPersist = {
   poolNos?: number[];
   idx?: number;
@@ -56,6 +66,7 @@ export function QuizApp() {
   const appliedDeepLink = useRef(false);
   const [all, setAll] = useState<Question[]>([]);
   const [meta, setMeta] = useState<Meta | null>(null);
+  const [mockSets, setMockSets] = useState<MockSetsData | null>(null);
   const [bank, setBank] = useState("practice");
   const [yearHalf, setYearHalf] = useState("all");
   const [chapter, setChapter] = useState("all");
@@ -106,7 +117,10 @@ export function QuizApp() {
       fetch("/data/kb-search-index.json")
         .then((r) => (r.ok ? r.json() : null))
         .catch(() => null),
-    ]).then(([qs, m, paper, kbIdx]) => {
+      fetch("/data/mock-sets.json")
+        .then((r) => (r.ok ? r.json() : null))
+        .catch(() => null),
+    ]).then(([qs, m, paper, kbIdx, mSets]) => {
       const paperQs = (Array.isArray(paper) ? paper : []).map((o: Record<string, unknown>, i: number) => ({
         no: Number(o.no) || 900000 + i,
         ch: Number(o.chapter) || 22,
@@ -123,6 +137,7 @@ export function QuizApp() {
       }));
       setAll([...qs, ...paperQs]);
       setMeta(m);
+      setMockSets(mSets && mSets.sets ? (mSets as MockSetsData) : null);
       const docs = (kbIdx as KbSearchIndex | null)?.docs;
       setKbDocs(Array.isArray(docs) ? docs : []);
       setLoading(false);
@@ -288,6 +303,41 @@ export function QuizApp() {
       setPhase("quiz");
     },
     [pureChoiceQuestions]
+  );
+
+  /** 对齐真题 75 题结构的模拟卷：按 qnum 顺序组卷 */
+  const startMockSet = useCallback(
+    (setId: string, preferredMode?: "continuous" | "practice" | "exam") => {
+      if (!mockSets) {
+        alert("模拟卷数据尚未加载，请稍候…");
+        return;
+      }
+      const target = mockSets.sets.find((s) => s.id === setId);
+      if (!target) {
+        alert("未找到该模拟卷");
+        return;
+      }
+      const byId = new Map(all.map((qq) => [String(qq.id), qq]));
+      const selected: Question[] = [];
+      const missing: string[] = [];
+      for (const item of [...target.items].sort((a, b) => a.qnum - b.qnum)) {
+        const qq = byId.get(String(item.id));
+        if (qq) selected.push(qq);
+        else missing.push(item.id);
+      }
+      if (missing.length) {
+        alert(`模拟卷中有 ${missing.length} 道题未找到（数据可能未同步），请稍候重试`);
+        return;
+      }
+      setPool(selected);
+      setIdx(0);
+      setAnswers({});
+      setRevealed({});
+      setIsRandom75Session(false);
+      if (preferredMode) setMode(preferredMode);
+      setPhase("quiz");
+    },
+    [mockSets, all]
   );
 
   const start = useCallback(
@@ -653,6 +703,58 @@ export function QuizApp() {
                 </Button>
               </div>
             </Card>
+
+            {/* 模拟卷 · 对齐真题 75 题结构 */}
+            {mockSets ? (
+              <Card className="border-primary/30 bg-primary/[0.03] dark:bg-primary/[0.05] p-4 sm:p-5 shadow-xs">
+                <div className="flex items-start justify-between gap-3 mb-2.5">
+                  <div className="flex items-center gap-2.5">
+                    <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
+                      <LayoutGrid className="size-4" />
+                    </span>
+                    <div>
+                      <h2 className="text-[1.02rem] font-semibold text-foreground">
+                        模拟卷 · 对齐真题 75 题结构
+                      </h2>
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        参照 15 套真题（2014上—2026上）题序模板组卷 · 覆盖 10+ 知识模块
+                      </p>
+                    </div>
+                  </div>
+                  <span className="shrink-0 rounded-full border border-primary/30 bg-primary/10 px-2.5 py-0.5 text-[0.72rem] font-medium text-primary">
+                    每套75题 · 45分及格
+                  </span>
+                </div>
+                <p className="text-[0.88rem] leading-relaxed text-muted-foreground mb-4">
+                  按真题 <b className="text-foreground">1—75 题的出题顺序与模块分布</b>（法规、英语、数学、系统、网络、数据库、信息化、软工、项目、安全、需求、架构、设计、测试、维护）逐槽选题，分<b>基础 / 进阶 / 困难</b>三套成卷，作答顺序即真题顺序。
+                </p>
+                <div className="flex flex-wrap items-center gap-2.5">
+                  {mockSets.sets.map((s) => {
+                    const shortName =
+                      s.id === "mock-basic" ? "基础卷" : s.id === "mock-medium" ? "进阶卷" : "困难卷";
+                    const diffText = Object.entries(s.diffSummary)
+                      .map(([k, v]) => `${k === "basic" ? "基础" : k === "medium" ? "中等" : "深度"}${v}`)
+                      .join(" · ");
+                    return (
+                      <Button
+                        key={s.id}
+                        type="button"
+                        variant="default"
+                        onClick={() => startMockSet(s.id)}
+                        className="gap-2 shadow-xs"
+                        title={`${s.title}（${diffText}）`}
+                      >
+                        <span>开始{shortName}</span>
+                        <span className="text-[0.72rem] font-normal opacity-80">{diffText}</span>
+                      </Button>
+                    );
+                  })}
+                </div>
+                <p className="mt-2.5 text-[0.75rem] text-muted-foreground">
+                  作答模式跟随上方「模式」选择（默认连续通关，可切换为模考交卷或即时解析）
+                </p>
+              </Card>
+            ) : null}
 
             {/* 常规按条件筛选卡片 */}
             <Card className="space-y-4 px-(--card-spacing)">
