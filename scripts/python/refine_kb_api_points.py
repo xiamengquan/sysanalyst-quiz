@@ -127,11 +127,45 @@ CHAPTER_EXAM_HINT: dict[int, str] = {
     22: "论文结构、摘要与评分要点",
 }
 
+POINT_EXAM_HINT: dict[str, str] = {
+    "kp-云计算": "IaaS/PaaS/SaaS、云原生、虚拟化与上云案例（非子网计算）",
+    "kp-微服务": "Service Mesh、网关、熔断限流、最终一致",
+    "kp-网络安全-数据安全-系统安全": "等保2.0、零信任、访问控制、容灾指标",
+    "kp-2-5": "CAP、一致性模型、分布式容错（非子网计算）",
+    "kp-大数据": "5V、Lambda/Kappa、批流组件选型",
+    "kp-概率统计-图论-预测决策-数学建模-工程伦理": "MST/最短路径、决策树 EMV、概率与建模步骤",
+    "kp-英文阅读-领域术语": "软考英文题干、缩写全称与词义辨析",
+    "kp-10-6": "质量属性场景六要素、ATAM 评估步骤",
+    "kp-6-4": "挣值 PV/EV/AC、CPI/SPI 与 EAC 预测",
+}
+
+EXAM_OVERRIDES_PATH = Path(__file__).resolve().parent / "kb_exam_overrides.json"
+
+PLACEHOLDER_DEF_RE = re.compile(r"是本节考纲要求掌握的概念、原则或方法体系")
+
+ESSAY_PROCEDURE = (
+    "### 科三论文作答流程\n\n"
+    "1. **读题**：圈三问关键词，确认与本页「本组可选专题」一致。\n"
+    "2. **列提纲**：同一项目背景 + 每问小标题（各约 600～800 字）。\n"
+    "3. **写摘要**：约 300～320 字，背景→本人角色→方案要点→效果与不足。\n"
+    "4. **正文分段**：按三问各写一段，以「我」为中心写决策与量化效果。\n"
+    "5. **自检**：摘要与正文一致、术语准确、字数与分段符合评分要点。"
+)
+
+
+def polish_override_block(text: str) -> str:
+    lines: list[str] = []
+    for ln in text.splitlines():
+        if PLACEHOLDER_DEF_RE.search(ln):
+            continue
+        lines.append(ln)
+    return "\n".join(lines).strip()
+
 
 def load_def_overrides() -> dict[str, str]:
     if DEF_OVERRIDES_PATH.is_file():
         data = json.loads(DEF_OVERRIDES_PATH.read_text(encoding="utf-8"))
-        return {str(k): str(v) for k, v in data.items()}
+        return {str(k): polish_override_block(str(v)) for k, v in data.items()}
     return {}
 
 
@@ -149,11 +183,22 @@ def load_procedure_overrides() -> dict[str, str]:
 
 PROCEDURE_OVERRIDES: dict[str, str] = load_procedure_overrides()
 
+
+def load_exam_overrides() -> dict[str, str]:
+    if EXAM_OVERRIDES_PATH.is_file():
+        data = json.loads(EXAM_OVERRIDES_PATH.read_text(encoding="utf-8"))
+        return {str(k): str(v).strip() for k, v in data.items()}
+    return {}
+
+
+EXAM_OVERRIDES: dict[str, str] = load_exam_overrides()
+
 GENERIC_ROLE_RE = re.compile(
     r"\*\*作用\*\*：(?:"
     r"用于[「\"][^」\"]+[」\"]相关选择题、案例或论文中的识别与辨析"
     r"|用于考试中的概念辨析、计算或案例/论文回扣"
     r"|用于与本节相关的选择题、案例或论文论述"
+    r"|用于在分析、设计或测试中落实「[^」]+」相关约束与验收"
     r")[。.]?$"
 )
 
@@ -336,6 +381,16 @@ SYNTHETIC_POINTS: dict[str, str] = {
 - **典型工具**：集成开发环境（IDE）、建模工具（UML）、配置管理、自动化测试、逆向/再工程工具。
 - **核心价值**：提高开发效率与制品一致性、支持文档自动生成与变更追踪。
 - **选型要点**：与团队过程（瀑布/敏捷）、制品库与 CI/CD 流水线集成；避免工具堆叠而流程不配套。""",
+    "kp-云计算": """> 大纲 4.8 · 云计算与虚拟化（非整章网络协议）；以下为备考提纲。
+
+**云计算** 是按需、可计量、通过网络访问的可扩展 IT 资源与服务模式（IaaS/PaaS/SaaS）。
+
+- **服务模型**：IaaS（基础设施）、PaaS（平台）、SaaS（软件）；选型看控制粒度与运维责任。
+- **部署模式**：公有云、私有云、混合云、社区云；权衡成本、合规与可控性。
+- **云原生**：容器（Docker）、编排（Kubernetes）、微服务、DevOps、持续交付；强调弹性与可观测性。
+- **虚拟化与资源池**：计算/存储/网络虚拟化，提高利用率与快速 provisioning。
+- **与分布式**：云计算依托分布式与数据中心技术；案例常考 **弹性伸缩、多租户、灾备**。
+- **MLOps（了解）**：模型训练/部署/监控的运维体系，常与云 PaaS、数据平台结合。""",
     "kp-开源社区-许可-语言平台-框架库-服务器-工具-评估": """> 大纲专章（结合第7章工具、第16—21章开源组件）；以下为按大纲整理的备考提纲。
 
 **开源软件** 指源码可获取、在开源许可证约束下使用、修改与再发布的软件；**开源社区** 是围绕开源项目的开发者协作生态。
@@ -374,9 +429,38 @@ SPECIAL_BODY: dict[str, tuple[str, str | None]] = {
 
 # 教程无对应专节的考点：要点节强制使用 SYNTHETIC_POINTS 合成内容（防 slices 错配整章/他节）
 SYNTHETIC_ONLY: set[str] = {
+    "kp-云计算",
     "kp-开源社区-许可-语言平台-框架库-服务器-工具-评估",
     "kp-计算机辅助软件工程-CASE",
     "kp-软件产品线",
+}
+
+# 语义相关考点（补充同组相邻链接）
+RELATED_OVERRIDES: dict[str, list[str]] = {
+    "kp-需求工程": ["kp-9-3", "kp-面向对象技术", "kp-软件生命周期"],
+    "kp-面向对象技术": ["kp-7-4", "kp-7-5", "kp-需求工程"],
+    "kp-7-4": ["kp-面向对象技术", "kp-9-3", "kp-10-1"],
+    "kp-10-1": ["kp-10-5", "kp-10-6", "kp-微服务"],
+    "kp-10-5": ["kp-10-6", "kp-12-1", "kp-10-1"],
+    "kp-10-6": ["kp-10-5", "kp-10-1", "kp-微服务"],
+    "kp-3-1": ["kp-3-2", "kp-3-7", "kp-数据仓库"],
+    "kp-3-2": ["kp-3-1", "kp-3-4", "kp-数据挖掘"],
+    "kp-微服务": ["kp-10-1", "kp-应用集成-服务集成", "kp-云计算"],
+    "kp-云计算": ["kp-微服务", "kp-大数据", "kp-2-5"],
+    "kp-2-5": ["kp-云计算", "kp-2-7", "kp-微服务"],
+    "kp-大数据": ["kp-云计算", "kp-4-4-2", "kp-数据挖掘"],
+    "kp-系统计划和分析": ["kp-4-2", "kp-8-1", "kp-2-4"],
+    "kp-网络安全-数据安全-系统安全": ["kp-7-6", "kp-9-1", "kp-运维指标-MTTR-MTBF-MTTF-MTTA"],
+    "kp-概率统计-图论-预测决策-数学建模-工程伦理": [
+        "kp-企业法律制度-会计-财务成本-组织-HR-文化-IT-审计",
+        "kp-英文阅读-领域术语",
+    ],
+    "kp-英文阅读-领域术语": [
+        "kp-概率统计-图论-预测决策-数学建模-工程伦理",
+        "kp-标准类型-生命周期-知识产权",
+    ],
+    "kp-6-4": ["kp-6-3", "kp-6-8", "kp-6-1"],
+    "kp-注意事项-解答步骤-摘要正文-评分": ["kp-论文专题", "kp-应用系统分析与设计"],
 }
 
 
@@ -1109,10 +1193,21 @@ def supplement_missing_act(
     return "\n".join(lines_out)
 
 
+def purge_placeholder_defs(defs: str) -> str:
+    lines = [
+        ln
+        for ln in defs.splitlines()
+        if ln.strip() and not PLACEHOLDER_DEF_RE.search(ln)
+    ]
+    return "\n".join(lines).strip()
+
+
 def ensure_section_def_act(defs: str, title: str) -> str:
     """定义节整体须同时出现「是什么」与「作用/用于」（答卷准则 v1.1）。"""
-    text = defs.strip()
+    text = purge_placeholder_defs(defs.strip())
     if not text:
+        return text
+    if "论文可从本组大纲专题中择一" in text:
         return text
     clean = re.sub(r"^\d+(?:\.\d+)*\s*", "", title).strip()
     has_role = bool(re.search(r"(作用|用于|主要用于)", text))
@@ -1288,7 +1383,10 @@ def finalize_definitions(
         defs = DEF_OVERRIDES[pid]
     if pid.startswith("kp-论文专题") or pid == "kp-内容":
         clean = re.sub(r"^\d+(?:\.\d+)*\s*", "", title).strip()
-        defs = f"- **{clean}**：{ESSAY_DEF_PREFIX}"
+        defs = (
+            f"- **{clean}**：是科三论文可选专题方向；{ESSAY_DEF_PREFIX.rstrip('。')}。"
+            "**作用**：用于科三论文选题与摘要/正文三问结构对齐。"
+        )
     if not defs.strip():
         defs = dynamic_definition(title, raw)
     if not defs.strip() and ch_text:
@@ -1312,7 +1410,15 @@ def finalize_definitions(
     role_map = build_role_map_from_chapter(ch_text) if ch_text else {}
     out = normalize_definition_bullets(out)
     out = improve_definition_roles(out, role_map, clean)
-    return apply_role_map_to_definitions(out, role_map)
+    out = apply_role_map_to_definitions(out, role_map)
+    out = purge_placeholder_defs(out)
+    if pid.startswith("kp-论文专题") or pid == "kp-内容":
+        clean = re.sub(r"^\d+(?:\.\d+)*\s*", "", title).strip()
+        return (
+            f"- **{clean}**：是科三论文可选专题方向；{ESSAY_DEF_PREFIX.rstrip('。')}。"
+            "**作用**：用于科三论文选题与摘要/正文三问结构对齐。"
+        )
+    return out
 
 
 def filter_mix(mix: str, keys: list[str]) -> str:
@@ -1331,6 +1437,18 @@ def filter_mix(mix: str, keys: list[str]) -> str:
     return "\n".join([header, sep] + picked[:6])
 
 
+def build_essay_exam(title: str) -> str:
+    clean = re.sub(r"^\d+(?:\.\d+)*\s*", "", title).strip()
+    return "\n\n".join(
+        [
+            f"- **科三论文**：从本页「本组可选专题」择一（{clean}），**同一项目**贯穿摘要与正文三问。",
+            "- **结构**：摘要约 300～320 字；正文按试题三问分段，各约 600～800 字，以「我」写角色与量化效果。",
+            "- **自检**：三问分别作答、摘要与正文一致、术语准确；勿中途更换项目。",
+            "- **速查**：[论文方向写作索引](../速查/论文方向写作索引.md)；方法见 [论文写作要点](/kb/kp-注意事项-解答步骤-摘要正文-评分)。",
+        ]
+    )
+
+
 def build_exam(
     exam: str,
     tips: str,
@@ -1338,7 +1456,22 @@ def build_exam(
     keys: list[str],
     item: dict | None = None,
     bank: QuestionBankIndex | None = None,
+    pid: str = "",
 ) -> str:
+    if pid in EXAM_OVERRIDES:
+        base = EXAM_OVERRIDES[pid]
+        if bank and item:
+            sup = bank.exam_supplement(item, keys)
+            if sup:
+                return f"{base}\n\n{sup}"
+        return base
+    if pid.startswith("kp-论文专题") and item:
+        body = build_essay_exam(item.get("title") or "")
+        if bank and item:
+            sup = bank.exam_supplement(item, keys)
+            if sup:
+                body = f"{body}\n\n{sup}"
+        return body
     parts: list[str] = []
     exam_lines: list[str] = []
     exam_all: list[str] = []
@@ -1395,6 +1528,23 @@ def build_exam(
             "- 选择题：抓题干中的技术名词与「最/首先/不属于」等信号词。\n"
             "- 案例：先列约束，再对比 2 方案，结论回扣本节约束。"
         )
+    body = "\n\n".join(parts)
+    if len(body) < EXAM_MIN_QUALITY:
+        extras: list[str] = []
+        if ch and ch in CHAPTER_EXAM_HINT:
+            extras.append(f"- **综合知识侧重**：{CHAPTER_EXAM_HINT[ch]}。")
+        hint = POINT_EXAM_HINT.get(pid)
+        if hint:
+            extras.append(f"- **本考点侧重**：{hint}。")
+        extras.append(
+            "- **案例题**：先写业务/非功能约束，再列 2 方案对比，结论回扣本页定义术语。"
+        )
+        if ch != 22:
+            extras.append(
+                "- **论文题**：可复用近 3 年项目经历；结构见 "
+                "[论文写作要点](/kb/kp-注意事项-解答步骤-摘要正文-评分)。"
+            )
+        parts.insert(0, "\n".join(extras))
     return "\n\n".join(parts)
 
 
@@ -1582,7 +1732,7 @@ def improve_definition_roles(
             ln = GENERIC_ROLE_RE.sub(f"**作用**：{act}。", ln.strip())
         elif label:
             ln = GENERIC_ROLE_RE.sub(
-                f"**作用**：用于在分析、设计或测试中落实「{label}」相关约束与验收。",
+                f"**作用**：用于题干场景下的概念识别、对比选型与案例/论文回扣。",
                 ln.strip(),
             )
         out.append(ln)
@@ -1719,6 +1869,8 @@ def build_steps_section(
     ch_num: int | None,
     outline_ref: str | None,
 ) -> str:
+    if pid.startswith("kp-论文专题"):
+        return ESSAY_PROCEDURE
     if pid in PROCEDURE_OVERRIDES:
         return PROCEDURE_OVERRIDES[pid]
     harvested = harvest_procedure_blocks(
@@ -1743,11 +1895,14 @@ def build_quick_grasp(
     mix_out: str,
     keys: list[str],
     ch_num: int | None,
+    pid: str = "",
 ) -> str:
     one = first_definition_plain(defs)
     if not one:
         one = re.sub(r"\*\*", "", overview).strip()
-    exam_hint = CHAPTER_EXAM_HINT.get(ch_num or 0, "概念辨析、场景决策与案例回扣")
+    exam_hint = POINT_EXAM_HINT.get(pid) or CHAPTER_EXAM_HINT.get(
+        ch_num or 0, "概念辨析、场景决策与案例回扣"
+    )
     ch_note = f"（教程第 {ch_num} 章）" if ch_num else ""
     bullets = extract_concrete_bullets(raw, keys, 4)
     if len(bullets) < 2:
@@ -1983,13 +2138,31 @@ def special_raw(kp_id: str) -> str:
 
 
 def related_links(item: dict, by_group: dict[str, list[dict]]) -> str:
+    pid = item.get("id", "")
     g = item.get("group") or ""
     sibs = sorted(by_group.get(g, []), key=lambda x: x.get("outlineRef") or "")
     idx = next((i for i, s in enumerate(sibs) if s["id"] == item["id"]), -1)
     lines: list[str] = []
+    seen: set[str] = {pid}
+    for rid in RELATED_OVERRIDES.get(pid, []):
+        if rid in seen:
+            continue
+        seen.add(rid)
+        hit = next((s for s in sibs if s["id"] == rid), None)
+        if not hit:
+            for lst in by_group.values():
+                hit = next((s for s in lst if s["id"] == rid), None)
+                if hit:
+                    break
+        if hit:
+            st = re.sub(r"^\d+(?:\.\d+)*\s*", "", hit.get("title", ""))[:48]
+            lines.append(f"- [{st}](/kb/{rid})")
     for j in (idx - 1, idx + 1):
         if 0 <= j < len(sibs):
             s = sibs[j]
+            if s["id"] in seen:
+                continue
+            seen.add(s["id"])
             st = re.sub(r"^\d+(?:\.\d+)*\s*", "", s.get("title", ""))[:48]
             lines.append(f"- [{st}](/kb/{s['id']})")
     ch = item.get("chapter")
@@ -2037,11 +2210,12 @@ def render(
         mix_out,
         keys,
         ch_num,
+        pid,
     )
     steps = build_steps_section(
         pid, keys, raw, ch_text, ch_num, item.get("outlineRef")
     )
-    exam_out = build_exam(exam, tips, raw, keys, item, bank)
+    exam_out = build_exam(exam, tips, raw, keys, item, bank, pid)
     rel = related_links(item, by_group)
     return f"""# {h1}
 

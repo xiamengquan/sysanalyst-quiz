@@ -70,7 +70,7 @@ for (const sec of index.sections || []) {
     const em = t.match(/## 应试\n\n([\s\S]*?)\n\n## 相关考点/);
     if (em) {
       const ex = em[1].trim();
-      if (ex.length < 60) errors.push(`${it.id}: 应试 too short (${ex.length})`);
+      if (ex.length < 120) errors.push(`${it.id}: 应试 too short (${ex.length})`);
     }
   }
 }

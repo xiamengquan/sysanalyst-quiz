@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { ThemeProvider } from "@/components/theme-provider";
 import { UpdateNotice } from "@/components/UpdateNotice";
 import { cn } from "@/lib/utils";
+import { siteUrl } from "@/lib/site-url";
 
 /** 拉丁数字优先走此字体，配合 tabular-nums */
 const plexSans = IBM_Plex_Sans({
@@ -15,6 +16,7 @@ const plexSans = IBM_Plex_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl()),
   title: "系统分析师 · 刷题站",
   description: "软考系统分析师本地/边缘刷题：选择题、案例分析、知识点精炼",
   appleWebApp: {

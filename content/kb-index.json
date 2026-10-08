@@ -2273,6 +2273,42 @@
           "note": "2026 案例预测第二套 · 五题勾选自测 · 非真题"
         },
         {
+          "id": "quick-case-design",
+          "title": "案例系统设计类 · 答题 Checklist",
+          "path": "速查/案例系统设计类-答题Checklist.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "howto",
+          "note": "架构/性能类案例 · 审计补强 A-03"
+        },
+        {
+          "id": "quick-essay-index",
+          "title": "论文方向写作索引",
+          "path": "速查/论文方向写作索引.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "howto",
+          "note": "论文方向 → 考点回链 · 审计 A-04"
+        },
+        {
+          "id": "quick-security-dj0",
+          "title": "等保 2.0 与零信任 · 速查卡",
+          "path": "速查/等保2.0与零信任-速查卡.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "reference",
+          "note": "第9章安全补强"
+        },
+        {
+          "id": "quick-dist-bpmn",
+          "title": "分布式一致性与 BPMN · 速查",
+          "path": "速查/分布式一致性与BPMN-速查.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "reference",
+          "note": "分布式 + 业务建模"
+        },
+        {
           "id": "quick-web-agent-arch",
           "title": "Web与AI智能体 · 架构选型四维度卡",
           "path": "速查/Web与AI智能体-架构选型四维度卡.md",

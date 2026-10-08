@@ -14,6 +14,7 @@ import {
   resolveKbRef,
   resolveRelativeKbPath,
 } from "@/lib/kb-resolve";
+import { cn } from "@/lib/utils";
 import { KbPreviewDrawer, useKbCatalog } from "@/components/KbPreviewDrawer";
 import { KbQuickIndex } from "@/components/KbQuickIndex";
 import { GlobalSearchHintButton } from "@/components/GlobalSearch";
@@ -24,6 +25,11 @@ import {
   examPriorityRank,
   examPriorityTier,
 } from "@/lib/kb-exam-priority";
+import {
+  pickTrack,
+  segmentsForTrack,
+  type LearningTrackId,
+} from "@/lib/kb-learning-paths";
 
 const API_SECTIONS = [
   "概述",
@@ -62,6 +68,52 @@ function outlineSortKey(ref?: string) {
 }
 
 type PointSortMode = "exam" | "outline";
+
+function LearningPathBar({ item }: { item: KbItem }) {
+  const [track, setTrack] = useState<LearningTrackId>(() => pickTrack(item));
+  const chapterForHighlight =
+    track === "essay" ? 22 : track === "case" ? (item.chapter ?? 11) : item.chapter;
+  const activeSegments = segmentsForTrack(track, chapterForHighlight);
+
+  return (
+    <div className="mb-3 rounded-lg border border-border/80 bg-muted/30 px-3 py-2 text-[0.78rem]">
+      <div className="mb-1.5 flex flex-wrap items-center gap-2">
+        <span className="text-muted-foreground">学习路径</span>
+        {(["choice", "case", "essay"] as LearningTrackId[]).map((t) => (
+          <button
+            key={t}
+            type="button"
+            className={cn(
+              "rounded-md px-2 py-0.5 touch-manipulation",
+              track === t
+                ? "bg-foreground text-background"
+                : "text-muted-foreground hover:text-foreground",
+            )}
+            onClick={() => setTrack(t)}
+          >
+            {t === "choice" ? "综合" : t === "case" ? "案例" : "论文"}
+          </button>
+        ))}
+      </div>
+      <p className="flex flex-wrap items-center gap-1 text-muted-foreground">
+        {activeSegments.map((seg, i) => (
+          <span key={seg.quickId} className="inline-flex items-center gap-1">
+            {i > 0 ? <span aria-hidden>→</span> : null}
+            <Link
+              href={`/kb/${seg.quickId}/`}
+              className={cn(
+                "hover:text-foreground underline-offset-2 hover:underline",
+                seg.active && "font-medium text-foreground",
+              )}
+            >
+              {seg.label}
+            </Link>
+          </span>
+        ))}
+      </p>
+    </div>
+  );
+}
 
 function sortPointItems(items: KbItem[], mode: PointSortMode) {
   return [...items].sort((a, b) =>
@@ -535,6 +587,9 @@ export function KbReader({ id: routeIdProp }: { id: string }) {
               ) : null}
               {item?.note ? (
                 <p className="text-[0.88rem] leading-relaxed text-muted-foreground">{item.note}</p>
+              ) : null}
+              {item && (item.kind === "point" || item.kind === "quick") ? (
+                <LearningPathBar item={item} />
               ) : null}
               {item?.kind === "point" ? (
                 <nav

@@ -83,6 +83,9 @@ const envExample = fs.readFileSync(path.join(root, ".env.example"), "utf8");
 if (!envExample.includes("NEXT_PUBLIC_SUPABASE_URL")) {
   errors.push(".env.example 缺少 NEXT_PUBLIC_SUPABASE_URL 说明");
 }
+if (!envExample.includes("NEXT_PUBLIC_SITE_URL")) {
+  errors.push(".env.example 缺少 NEXT_PUBLIC_SITE_URL 说明");
+}
 
 console.log(`check-release · package ${pkgVer || "?"} · latest ${notes?.latest || "?"}`);
 for (const w of warns) console.warn("  warn:", w);

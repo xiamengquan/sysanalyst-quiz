@@ -19,7 +19,11 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { dialogMobileSheetClassName } from "@/lib/dialog-mobile";
-import { getExamCountdown, type ExamCountdownInfo } from "@/lib/exam-countdown";
+import {
+  getExamCountdown,
+  SYST_ANALYST_EXAM_SHORT_LABEL,
+  type ExamCountdownInfo,
+} from "@/lib/exam-countdown";
 import {
   EXAM_CHOICE_MAX_MINUTES,
   EXAM_CHOICE_MIN_MINUTES_BEFORE_SUBMIT,
@@ -31,10 +35,10 @@ export function ExamCountdown({ className }: { className?: string }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    setInfo(getExamCountdown(10, 24));
+    setInfo(getExamCountdown());
     // 每小时刷新一次倒计时
     const timer = setInterval(() => {
-      setInfo(getExamCountdown(10, 24));
+      setInfo(getExamCountdown());
     }, 60 * 60 * 1000);
     return () => clearInterval(timer);
   }, []);
@@ -49,7 +53,7 @@ export function ExamCountdown({ className }: { className?: string }) {
         )}
       >
         <span className="size-1.5 rounded-full bg-amber-500/50 animate-pulse" />
-        <span>10.24 考期</span>
+        <span>{SYST_ANALYST_EXAM_SHORT_LABEL} 考期</span>
       </div>
     );
   }
@@ -102,7 +106,7 @@ export function ExamCountdown({ className }: { className?: string }) {
           <span className="font-semibold text-amber-600 dark:text-amber-400">明天开考！</span>
         ) : (
           <>
-            <span className="hidden sm:inline">距 10.24 考期</span>
+            <span className="hidden sm:inline">距 {SYST_ANALYST_EXAM_SHORT_LABEL} 考期</span>
             <span className="sm:hidden">距考</span>
             <span className="font-semibold tabular-nums text-foreground">{days}</span>
             <span>天</span>
@@ -227,7 +231,7 @@ export function ExamSprintBanner({ className }: { className?: string }) {
   const [info, setInfo] = useState<ExamCountdownInfo | null>(null);
 
   useEffect(() => {
-    setInfo(getExamCountdown(10, 24));
+    setInfo(getExamCountdown());
   }, []);
 
   if (!info) return null;
@@ -244,7 +248,7 @@ export function ExamSprintBanner({ className }: { className?: string }) {
           <Flame className="size-3.5" />
         </span>
         <span>
-          2026 下半年软考（<b>10月24日</b>）倒计时：
+          2026 下半年系统分析师（<b>{info.targetDateStr.replace(/^\d+年/, "")}</b>）倒计时：
           <span className="font-semibold text-foreground tabular-nums text-sm ml-1 mr-0.5">
             {info.days}
           </span>{" "}

@@ -1,7 +1,15 @@
 /**
  * 系统分析师考试倒计时计算逻辑
- * 考试日期：10月24日（软考下半年统一开考时间）
+ * 笔试日：以当次软考办公告为准（2026 年下半年系统分析师为 **10 月 25 日**）。
+ * 注：系统架构设计师等其它科目日期可能不同，本站仅服务系统分析师。
  */
+
+/** 系统分析师当次统考日（月/日） */
+export const SYST_ANALYST_EXAM_MONTH = 10;
+export const SYST_ANALYST_EXAM_DAY = 25;
+
+/** 顶栏短标签，如 10.25 */
+export const SYST_ANALYST_EXAM_SHORT_LABEL = `${SYST_ANALYST_EXAM_MONTH}.${SYST_ANALYST_EXAM_DAY}`;
 
 export interface ExamCountdownInfo {
   /** 剩余天数（>=0） */
@@ -10,7 +18,7 @@ export interface ExamCountdownInfo {
   totalHours: number;
   /** 目标考试年份 */
   targetYear: number;
-  /** 目标考试完整日期格式化字符串，如 "2026年10月24日" */
+  /** 目标考试完整日期格式化字符串，如 "2026年10月25日" */
   targetDateStr: string;
   /** 考试状态 */
   status: "upcoming" | "tomorrow" | "today" | "passed";
@@ -22,7 +30,12 @@ export interface ExamCountdownInfo {
  * @param day 考试日期（默认 24 日）
  * @param examHour 开考小时（默认 8 点 30 分）
  */
-export function getExamCountdown(month = 10, day = 24, examHour = 8, examMinute = 30): ExamCountdownInfo {
+export function getExamCountdown(
+  month = SYST_ANALYST_EXAM_MONTH,
+  day = SYST_ANALYST_EXAM_DAY,
+  examHour = 8,
+  examMinute = 30
+): ExamCountdownInfo {
   const now = new Date();
   const currentYear = now.getFullYear();
 
