@@ -45,7 +45,7 @@ ANCHOR_HINTS: dict[str, list[str]] = {
     "kp-5-2": ["软件开发模型", "瀑布", "螺旋", "敏捷"],
     "kp-5-5": ["重用", "再工程", "逆向"],
     "kp-5-7": ["UML"],
-    "kp-软件生命周期": ["软件生命周期"],
+    "kp-software-lifecycle": ["软件生命周期"],
     "kp-10-5": ["业务流程", "TFD", "BAM", "BPM"],
     "kp-10-6": ["DFD", "数据流", "SA 方法"],
     "kp-10-7": ["可行性", "NPV", "回收期"],
@@ -67,19 +67,19 @@ ANCHOR_HINTS: dict[str, list[str]] = {
     "kp-8-6": ["DFD", "数据流图", "加工"],
     "kp-8-7": ["可行性", "技术可行性", "经济可行性"],
     "kp-10-2": ["4+1", "Kruchten", "逻辑视图"],
-    "kp-概率统计-图论-预测决策-数学建模-工程伦理": ["概率", "图论", "工程伦理"],
+    "kp-math-stats-graph-theory-decision": ["概率", "图论", "工程伦理"],
 }
 
 ESSAY_INDEX_TITLES: dict[str, str] = {
-    "kp-论文专题": "论文专题组 · 信息系统开发及应用",
-    "kp-论文专题-2": "论文专题组 · 数据库建模及应用",
-    "kp-论文专题-3": "论文专题组 · 网络规划及应用",
-    "kp-论文专题-4": "论文专题组 · 系统安全性分析",
-    "kp-论文专题-5": "论文专题组 · 应用系统集成",
-    "kp-论文专题-6": "论文专题组 · 企业信息系统",
-    "kp-论文专题-7": "论文专题组 · 开源软件及应用",
-    "kp-论文专题-8": "论文专题组 · 新技术及其应用",
-    "kp-内容": "论文写作方法 · 注意事项与评分",
+    "kp-essay-topic-info-systems": "论文专题组 · 信息系统开发及应用",
+    "kp-essay-topic-db-modeling": "论文专题组 · 数据库建模及应用",
+    "kp-essay-topic-network-planning": "论文专题组 · 网络规划及应用",
+    "kp-essay-topic-security-analysis": "论文专题组 · 系统安全性分析",
+    "kp-essay-topic-system-integration": "论文专题组 · 应用系统集成",
+    "kp-essay-topic-enterprise-is": "论文专题组 · 企业信息系统",
+    "kp-essay-topic-open-source": "论文专题组 · 开源软件及应用",
+    "kp-essay-topic-new-tech": "论文专题组 · 新技术及其应用",
+    "kp-essay-content": "论文写作方法 · 注意事项与评分",
 }
 
 POLISH_STATUS = "工坊精修 v1.3.4 · 审计通过"
@@ -128,13 +128,13 @@ CHAPTER_EXAM_HINT: dict[int, str] = {
 }
 
 POINT_EXAM_HINT: dict[str, str] = {
-    "kp-云计算": "IaaS/PaaS/SaaS、云原生、虚拟化与上云案例（非子网计算）",
-    "kp-微服务": "Service Mesh、网关、熔断限流、最终一致",
-    "kp-网络安全-数据安全-系统安全": "等保2.0、零信任、访问控制、容灾指标",
+    "kp-cloud-computing": "IaaS/PaaS/SaaS、云原生、虚拟化与上云案例（非子网计算）",
+    "kp-microservices": "Service Mesh、网关、熔断限流、最终一致",
+    "kp-security-data-system": "等保2.0、零信任、访问控制、容灾指标",
     "kp-2-5": "CAP、一致性模型、分布式容错（非子网计算）",
-    "kp-大数据": "5V、Lambda/Kappa、批流组件选型",
-    "kp-概率统计-图论-预测决策-数学建模-工程伦理": "MST/最短路径、决策树 EMV、概率与建模步骤",
-    "kp-英文阅读-领域术语": "软考英文题干、缩写全称与词义辨析",
+    "kp-big-data": "5V、Lambda/Kappa、批流组件选型",
+    "kp-math-stats-graph-theory-decision": "MST/最短路径、决策树 EMV、概率与建模步骤",
+    "kp-english-reading-terms": "软考英文题干、缩写全称与词义辨析",
     "kp-10-6": "质量属性场景六要素、ATAM 评估步骤",
     "kp-6-4": "挣值 PV/EV/AC、CPI/SPI 与 EAC 预测",
 }
@@ -286,8 +286,8 @@ FORCE_EXTRACT: dict[str, tuple[int, str]] = {
     "kp-8-7": (10, "可行性"),
     "kp-2-4": (4, "网络工程"),
     "kp-3-7": (5, "数据挖掘"),
-    "kp-概率统计-图论-预测决策-数学建模-工程伦理": (2, "概率统计"),
-    "kp-运维指标-MTTR-MTBF-MTTF-MTTA": (15, "MTBF"),
+    "kp-math-stats-graph-theory-decision": (2, "概率统计"),
+    "kp-ops-metrics-mttr-mtbf-mttf-mtta": (15, "MTBF"),
     "kp-9-3": (11, "需求开发四阶段"),
     "kp-8-4": (10, "问题分析"),
     "kp-2-5": (4, "分布式"),
@@ -297,13 +297,13 @@ FORCE_EXTRACT: dict[str, tuple[int, str]] = {
 }
 
 ESSAY_MULTI_CH: dict[str, list[int]] = {
-    "kp-应用系统分析与设计": [10, 13, 16],
-    "kp-移动-Web": [16, 18],
-    "kp-质量保证": [8, 14],
+    "kp-app-system-analysis-design": [10, 13, 16],
+    "kp-mobile-web": [16, 18],
+    "kp-quality-assurance-essay": [8, 14],
 }
 
 ESSAY_SYNTHETIC: dict[str, str] = {
-    "kp-开源软件": """**开源软件** 指源码可获取、可在开源许可证约束下使用与再发布的软件。
+    "kp-open-source-software": """**开源软件** 指源码可获取、可在开源许可证约束下使用与再发布的软件。
 
 - **论文角度**：选型（许可合规、社区活跃度、安全响应）、与商业产品集成、治理（SBOM、漏洞扫描）。
 - **素材章节**：大纲§14；综合知识见第7章工具链、第16—21章典型栈（Linux、中间件、容器生态）。
@@ -366,14 +366,14 @@ SYNTHETIC_POINTS: dict[str, str] = {
 - **开发环境**：语言/框架 SDK、构建工具（Maven/Gradle）、调试器、静态分析插件。
 - **CASE 分类**：按阶段分为需求（建模/原型）、设计（UML/CASE）、实现（代码生成）、测试（用例管理）、维护（逆向/再工程）工具。
 - **选型要点**：与团队过程（瀑布/敏捷）、制品库、CI 是否集成；避免「工具堆叠、流程不配套」。""",
-    "kp-软件产品线": """**软件产品线** 是在共享核心资产基础上，通过变体绑定为不同客户/市场交付系列产品的组织级复用方式。
+    "kp-software-product-line": """**软件产品线** 是在共享核心资产基础上，通过变体绑定为不同客户/市场交付系列产品的组织级复用方式。
 
 - **核心资产**：可复用架构、组件、需求/设计模型与过程框架，是产品线的根基。
 - **领域工程与应用工程**：领域工程负责构建与演进核心资产；应用工程基于资产绑定变体、交付具体产品。
 - **过程**：领域分析 → 领域设计 → 领域实现；新需求优先映射到已有变体机制。
 - **变体机制**：配置、参数化、扩展点/插件等表达产品差异的手段。
 - **与单项目复用区别**：产品线是组织级、长期演进的复用战略，而非一次性代码拷贝；需配套组织与资产管理。""",
-    "kp-计算机辅助软件工程-CASE": """> 教程第7章无独立 CASE 专节；以下为按大纲 7.3 整理的备考提纲。
+    "kp-case-tools": """> 教程第7章无独立 CASE 专节；以下为按大纲 7.3 整理的备考提纲。
 
 **计算机辅助软件工程（CASE）** 是用计算机工具辅助软件生命周期各阶段活动（分析、设计、编码、测试、维护）的技术与方法体系。
 
@@ -381,7 +381,7 @@ SYNTHETIC_POINTS: dict[str, str] = {
 - **典型工具**：集成开发环境（IDE）、建模工具（UML）、配置管理、自动化测试、逆向/再工程工具。
 - **核心价值**：提高开发效率与制品一致性、支持文档自动生成与变更追踪。
 - **选型要点**：与团队过程（瀑布/敏捷）、制品库与 CI/CD 流水线集成；避免工具堆叠而流程不配套。""",
-    "kp-云计算": """> 大纲 4.8 · 云计算与虚拟化（非整章网络协议）；以下为备考提纲。
+    "kp-cloud-computing": """> 大纲 4.8 · 云计算与虚拟化（非整章网络协议）；以下为备考提纲。
 
 **云计算** 是按需、可计量、通过网络访问的可扩展 IT 资源与服务模式（IaaS/PaaS/SaaS）。
 
@@ -391,7 +391,7 @@ SYNTHETIC_POINTS: dict[str, str] = {
 - **虚拟化与资源池**：计算/存储/网络虚拟化，提高利用率与快速 provisioning。
 - **与分布式**：云计算依托分布式与数据中心技术；案例常考 **弹性伸缩、多租户、灾备**。
 - **MLOps（了解）**：模型训练/部署/监控的运维体系，常与云 PaaS、数据平台结合。""",
-    "kp-开源社区-许可-语言平台-框架库-服务器-工具-评估": """> 大纲专章（结合第7章工具、第16—21章开源组件）；以下为按大纲整理的备考提纲。
+    "kp-open-source-community-stack": """> 大纲专章（结合第7章工具、第16—21章开源组件）；以下为按大纲整理的备考提纲。
 
 **开源软件** 指源码可获取、在开源许可证约束下使用、修改与再发布的软件；**开源社区** 是围绕开源项目的开发者协作生态。
 
@@ -403,24 +403,24 @@ SYNTHETIC_POINTS: dict[str, str] = {
 }
 
 SPECIAL_BODY: dict[str, tuple[str, str | None]] = {
-    "kp-软件过程改进": (
+    "kp-spi-cmmi": (
         "第一篇-基础知识/第07章-软件工程.md",
         "CMMI",
     ),
-    "kp-面向对象技术": (
+    "kp-oo-technology": (
         "第一篇-基础知识/第07章-软件工程.md",
         "UML",
     ),
-    "kp-标准类型-生命周期-知识产权": (
+    "kp-standards-ip-lifecycle": (
         "第一篇-基础知识/第06章-企业信息化.md",
         "信息资源管理",
     ),
-    "kp-概率统计-图论-预测决策-数学建模-工程伦理": (
+    "kp-math-stats-graph-theory-decision": (
         "第一篇-基础知识/第02章-数学与工程基础.md",
         None,
     ),
-    "kp-英文阅读-领域术语": ("第一篇-基础知识/第01章-绪论.md", None),
-    "kp-注意事项-解答步骤-摘要正文-评分": (
+    "kp-english-reading-terms": ("第一篇-基础知识/第01章-绪论.md", None),
+    "kp-thesis-writing-guide": (
         "第三篇-案例实践/第22章-系统分析师论文写作要点.md",
         "评分",
     ),
@@ -429,38 +429,38 @@ SPECIAL_BODY: dict[str, tuple[str, str | None]] = {
 
 # 教程无对应专节的考点：要点节强制使用 SYNTHETIC_POINTS 合成内容（防 slices 错配整章/他节）
 SYNTHETIC_ONLY: set[str] = {
-    "kp-云计算",
-    "kp-开源社区-许可-语言平台-框架库-服务器-工具-评估",
-    "kp-计算机辅助软件工程-CASE",
-    "kp-软件产品线",
+    "kp-cloud-computing",
+    "kp-open-source-community-stack",
+    "kp-case-tools",
+    "kp-software-product-line",
 }
 
 # 语义相关考点（补充同组相邻链接）
 RELATED_OVERRIDES: dict[str, list[str]] = {
-    "kp-需求工程": ["kp-9-3", "kp-面向对象技术", "kp-软件生命周期"],
-    "kp-面向对象技术": ["kp-7-4", "kp-7-5", "kp-需求工程"],
-    "kp-7-4": ["kp-面向对象技术", "kp-9-3", "kp-10-1"],
-    "kp-10-1": ["kp-10-5", "kp-10-6", "kp-微服务"],
+    "kp-requirements-engineering": ["kp-9-3", "kp-oo-technology", "kp-software-lifecycle"],
+    "kp-oo-technology": ["kp-7-4", "kp-7-5", "kp-requirements-engineering"],
+    "kp-7-4": ["kp-oo-technology", "kp-9-3", "kp-10-1"],
+    "kp-10-1": ["kp-10-5", "kp-10-6", "kp-microservices"],
     "kp-10-5": ["kp-10-6", "kp-12-1", "kp-10-1"],
-    "kp-10-6": ["kp-10-5", "kp-10-1", "kp-微服务"],
-    "kp-3-1": ["kp-3-2", "kp-3-7", "kp-数据仓库"],
-    "kp-3-2": ["kp-3-1", "kp-3-4", "kp-数据挖掘"],
-    "kp-微服务": ["kp-10-1", "kp-应用集成-服务集成", "kp-云计算"],
-    "kp-云计算": ["kp-微服务", "kp-大数据", "kp-2-5"],
-    "kp-2-5": ["kp-云计算", "kp-2-7", "kp-微服务"],
-    "kp-大数据": ["kp-云计算", "kp-4-4-2", "kp-数据挖掘"],
-    "kp-系统计划和分析": ["kp-4-2", "kp-8-1", "kp-2-4"],
-    "kp-网络安全-数据安全-系统安全": ["kp-7-6", "kp-9-1", "kp-运维指标-MTTR-MTBF-MTTF-MTTA"],
-    "kp-概率统计-图论-预测决策-数学建模-工程伦理": [
-        "kp-企业法律制度-会计-财务成本-组织-HR-文化-IT-审计",
-        "kp-英文阅读-领域术语",
+    "kp-10-6": ["kp-10-5", "kp-10-1", "kp-microservices"],
+    "kp-3-1": ["kp-3-2", "kp-3-7", "kp-data-warehouse"],
+    "kp-3-2": ["kp-3-1", "kp-3-4", "kp-data-mining"],
+    "kp-microservices": ["kp-10-1", "kp-app-service-integration", "kp-cloud-computing"],
+    "kp-cloud-computing": ["kp-microservices", "kp-big-data", "kp-2-5"],
+    "kp-2-5": ["kp-cloud-computing", "kp-2-7", "kp-microservices"],
+    "kp-big-data": ["kp-cloud-computing", "kp-4-4-2", "kp-data-mining"],
+    "kp-system-planning-analysis": ["kp-4-2", "kp-8-1", "kp-2-4"],
+    "kp-security-data-system": ["kp-7-6", "kp-9-1", "kp-ops-metrics-mttr-mtbf-mttf-mtta"],
+    "kp-math-stats-graph-theory-decision": [
+        "kp-law-finance-org-hr-it-audit",
+        "kp-english-reading-terms",
     ],
-    "kp-英文阅读-领域术语": [
-        "kp-概率统计-图论-预测决策-数学建模-工程伦理",
-        "kp-标准类型-生命周期-知识产权",
+    "kp-english-reading-terms": [
+        "kp-math-stats-graph-theory-decision",
+        "kp-standards-ip-lifecycle",
     ],
     "kp-6-4": ["kp-6-3", "kp-6-8", "kp-6-1"],
-    "kp-注意事项-解答步骤-摘要正文-评分": ["kp-论文专题", "kp-应用系统分析与设计"],
+    "kp-thesis-writing-guide": ["kp-essay-topic-info-systems", "kp-app-system-analysis-design"],
 }
 
 
@@ -1381,7 +1381,7 @@ def finalize_definitions(
         not defs.strip() or definition_text_len(defs) < DEF_MIN_QUALITY
     ):
         defs = DEF_OVERRIDES[pid]
-    if pid.startswith("kp-论文专题") or pid == "kp-内容":
+    if pid.startswith("kp-essay-topic-info-systems") or pid == "kp-essay-content":
         clean = re.sub(r"^\d+(?:\.\d+)*\s*", "", title).strip()
         defs = (
             f"- **{clean}**：是科三论文可选专题方向；{ESSAY_DEF_PREFIX.rstrip('。')}。"
@@ -1412,7 +1412,7 @@ def finalize_definitions(
     out = improve_definition_roles(out, role_map, clean)
     out = apply_role_map_to_definitions(out, role_map)
     out = purge_placeholder_defs(out)
-    if pid.startswith("kp-论文专题") or pid == "kp-内容":
+    if pid.startswith("kp-essay-topic-info-systems") or pid == "kp-essay-content":
         clean = re.sub(r"^\d+(?:\.\d+)*\s*", "", title).strip()
         return (
             f"- **{clean}**：是科三论文可选专题方向；{ESSAY_DEF_PREFIX.rstrip('。')}。"
@@ -1444,7 +1444,7 @@ def build_essay_exam(title: str) -> str:
             f"- **科三论文**：从本页「本组可选专题」择一（{clean}），**同一项目**贯穿摘要与正文三问。",
             "- **结构**：摘要约 300～320 字；正文按试题三问分段，各约 600～800 字，以「我」写角色与量化效果。",
             "- **自检**：三问分别作答、摘要与正文一致、术语准确；勿中途更换项目。",
-            "- **速查**：[论文方向写作索引](../速查/论文方向写作索引.md)；方法见 [论文写作要点](/kb/kp-注意事项-解答步骤-摘要正文-评分)。",
+            "- **速查**：[论文方向写作索引](../速查/论文方向写作索引.md)；方法见 [论文写作要点](/kb/kp-thesis-writing-guide)。",
         ]
     )
 
@@ -1465,7 +1465,7 @@ def build_exam(
             if sup:
                 return f"{base}\n\n{sup}"
         return base
-    if pid.startswith("kp-论文专题") and item:
+    if pid.startswith("kp-essay-topic-info-systems") and item:
         body = build_essay_exam(item.get("title") or "")
         if bank and item:
             sup = bank.exam_supplement(item, keys)
@@ -1542,7 +1542,7 @@ def build_exam(
         if ch != 22:
             extras.append(
                 "- **论文题**：可复用近 3 年项目经历；结构见 "
-                "[论文写作要点](/kb/kp-注意事项-解答步骤-摘要正文-评分)。"
+                "[论文写作要点](/kb/kp-thesis-writing-guide)。"
             )
         parts.insert(0, "\n".join(extras))
     return "\n\n".join(parts)
@@ -1869,7 +1869,7 @@ def build_steps_section(
     ch_num: int | None,
     outline_ref: str | None,
 ) -> str:
-    if pid.startswith("kp-论文专题"):
+    if pid.startswith("kp-essay-topic-info-systems"):
         return ESSAY_PROCEDURE
     if pid in PROCEDURE_OVERRIDES:
         return PROCEDURE_OVERRIDES[pid]
@@ -2004,7 +2004,7 @@ def ch22_text() -> str:
 
 def essay_group_raw(item: dict, all_items: list[dict]) -> str:
     pid = item["id"]
-    if pid != "kp-论文专题" and not pid.startswith("kp-论文专题-"):
+    if pid != "kp-essay-topic-info-systems" and not pid.startswith("kp-论文专题-"):
         return ""
     g = item.get("group") or ""
     topics = [
@@ -2012,7 +2012,7 @@ def essay_group_raw(item: dict, all_items: list[dict]) -> str:
         for x in all_items
         if x.get("group") == g
         and x["id"] != pid
-        and not x["id"].startswith("kp-论文专题")
+        and not x["id"].startswith("kp-essay-topic-info-systems")
     ]
     lines = [
         "### 本组论文可选专题（大纲）",
@@ -2279,10 +2279,10 @@ def main() -> None:
                 ch_text = cf.read_text(encoding="utf-8")
 
         essay_first = (
-            pid.startswith("kp-论文专题")
+            pid.startswith("kp-essay-topic-info-systems")
             or pid in ESSAY_MULTI_CH
             or pid in ESSAY_SYNTHETIC
-            or pid in ("kp-内容", "kp-注意事项-解答步骤-摘要正文-评分")
+            or pid in ("kp-essay-content", "kp-thesis-writing-guide")
         )
         if essay_first:
             raw = (

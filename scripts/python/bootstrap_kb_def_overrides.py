@@ -34,10 +34,10 @@ def build_raw(item: dict, items: list[dict], slices: dict) -> str:
         if cf:
             ch_text = cf.read_text(encoding="utf-8")
     essay_first = (
-        pid.startswith("kp-论文专题")
+        pid.startswith("kp-essay-topic-info-systems")
         or pid in r.ESSAY_MULTI_CH
         or pid in r.ESSAY_SYNTHETIC
-        or pid in ("kp-内容", "kp-注意事项-解答步骤-摘要正文-评分")
+        or pid in ("kp-essay-content", "kp-thesis-writing-guide")
     )
     if essay_first:
         raw = (
@@ -82,7 +82,7 @@ def main() -> None:
         pid = it["id"]
         if pid in SKIP or pid in overrides:
             continue
-        if pid.startswith("kp-论文专题") or pid == "kp-内容":
+        if pid.startswith("kp-essay-topic-info-systems") or pid == "kp-essay-content":
             continue
         ch_text = ""
         ch_num = None

@@ -143,7 +143,7 @@
 - [ ] **防重复**：前端防连点 + **幂等令牌 / SETNX / 唯一索引**（至少写两种）。  
 - [ ] **15 分钟释放**：延迟队列或 Redis ZSet + 到期检查；支付与取消 **条件更新**；对账兜底。
 
-**回链考点**：`kp-云计算` · `kp-微服务` · `kp-应用集成-服务集成` · [Web+Agent 卡](./Web与AI智能体-架构选型四维度卡.md)（LB/中间件表述可对齐）
+**回链考点**：`kp-cloud-computing` · `kp-microservices` · `kp-app-service-integration` · [Web+Agent 卡](./Web与AI智能体-架构选型四维度卡.md)（LB/中间件表述可对齐）
 
 ---
 

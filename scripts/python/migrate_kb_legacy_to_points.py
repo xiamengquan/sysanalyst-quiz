@@ -30,32 +30,32 @@ ACT_RE = re.compile(
 
 # 无教程章节的考点：整篇或速查来源
 SPECIAL_BODY: dict[str, tuple[str, str | None]] = {
-    "kp-开源社区-许可-语言平台-框架库-服务器-工具-评估": (
+    "kp-open-source-community-stack": (
         "第一篇-基础知识/第07章-软件工程.md",
         "### 开发环境与工具",
     ),
-    "kp-开源软件": ("案例分析答题教程.md", None),
-    "kp-标准类型-生命周期-知识产权": (
+    "kp-open-source-software": ("案例分析答题教程.md", None),
+    "kp-standards-ip-lifecycle": (
         "第一篇-基础知识/第06章-企业信息化.md",
         "### 信息资源管理(IRM)",
     ),
-    "kp-企业法律制度-会计-财务成本-组织-HR-文化-IT-审计": (
+    "kp-law-finance-org-hr-it-audit": (
         "第一篇-基础知识/第08章-项目管理.md",
         "## 二、",
     ),
-    "kp-概率统计-图论-预测决策-数学建模-工程伦理": (
+    "kp-math-stats-graph-theory-decision": (
         "第一篇-基础知识/第02章-数学与工程基础.md",
         None,
     ),
-    "kp-英文阅读-领域术语": (
+    "kp-english-reading-terms": (
         "第一篇-基础知识/第01章-绪论.md",
         None,
     ),
-    "kp-注意事项-解答步骤-摘要正文-评分": (
+    "kp-thesis-writing-guide": (
         "第三篇-案例实践/第22章-系统分析师论文写作要点.md",
         "### 4.",
     ),
-    "kp-内容": ("案例分析答题教程.md", "## 一、"),
+    "kp-essay-content": ("案例分析答题教程.md", "## 一、"),
 }
 
 CHAPTER_QUICK: dict[int, list[str]] = {

@@ -1,6 +1,16 @@
 {
-  "latest": "0.9.50",
+  "latest": "0.9.51",
   "releases": [
+    {
+      "version": "0.9.51",
+      "date": "2026-10-08",
+      "title": "知识点英文 canonical slug（工单 14）",
+      "highlights": [
+        "47 条中文/混合 kp id 迁移为英文 slug；索引与 Markdown 文件名同步",
+        "旧 /kb/{中文id}/ 保留静态路由并 replace 到 canonical；sitemap 仅收录英文 id",
+        "kb-slug-canonical-map + migrate-kb-slugs.mjs；seo-utils 与路由别名共用映射"
+      ]
+    },
     {
       "version": "0.9.50",
       "date": "2026-10-08",

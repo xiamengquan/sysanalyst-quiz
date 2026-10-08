@@ -1,8 +1,14 @@
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const slugMap = JSON.parse(
+  fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "src/lib/kb-slug-canonical-map.json"), "utf8"),
+);
 
 export const KB_ROUTE_ALIASES = {
-  "kp-13-1": "kp-运维指标-MTTR-MTBF-MTTF-MTTA",
+  "kp-13-1": "kp-ops-metrics-mttr-mtbf-mttf-mtta",
+  ...slugMap,
 };
 
 const SECTION_ORDER = {

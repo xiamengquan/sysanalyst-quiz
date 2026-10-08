@@ -349,9 +349,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-软件生命周期",
+          "id": "kp-software-lifecycle",
           "title": "软件生命周期",
-          "path": "points/kp-软件生命周期.md",
+          "path": "points/kp-software-lifecycle.md",
           "status": "正式",
           "kind": "point",
           "group": "科目1 · 5. 软件工程",
@@ -1031,9 +1031,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-运维指标-MTTR-MTBF-MTTF-MTTA",
+          "id": "kp-ops-metrics-mttr-mtbf-mttf-mtta",
           "title": "运维指标 MTTR/MTBF/MTTF/MTTA",
-          "path": "points/kp-运维指标-MTTR-MTBF-MTTF-MTTA.md",
+          "path": "points/kp-ops-metrics-mttr-mtbf-mttf-mtta.md",
           "status": "正式",
           "kind": "point",
           "group": "科目1 · 13. 系统运行与维护",
@@ -1119,9 +1119,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-开源社区-许可-语言平台-框架库-服务器-工具-评估",
+          "id": "kp-open-source-community-stack",
           "title": "开源社区、许可、语言平台、框架库、服务器、工具、评估",
-          "path": "points/kp-开源社区-许可-语言平台-框架库-服务器-工具-评估.md",
+          "path": "points/kp-open-source-community-stack.md",
           "status": "正式",
           "kind": "point",
           "group": "科目1 · 14. 开源软件开发与应用",
@@ -1130,9 +1130,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-标准类型-生命周期-知识产权",
+          "id": "kp-standards-ip-lifecycle",
           "title": "标准类型、生命周期、知识产权",
-          "path": "points/kp-标准类型-生命周期-知识产权.md",
+          "path": "points/kp-standards-ip-lifecycle.md",
           "status": "正式",
           "kind": "point",
           "group": "科目1 · 15. 标准化与知识产权",
@@ -1140,9 +1140,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-企业法律制度-会计-财务成本-组织-HR-文化-IT-审计",
+          "id": "kp-law-finance-org-hr-it-audit",
           "title": "企业法律制度、会计、财务成本、组织、HR、文化、IT 审计",
-          "path": "points/kp-企业法律制度-会计-财务成本-组织-HR-文化-IT-审计.md",
+          "path": "points/kp-law-finance-org-hr-it-audit.md",
           "status": "正式",
           "kind": "point",
           "group": "科目1 · 16. 经济、管理等相关知识",
@@ -1151,9 +1151,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-概率统计-图论-预测决策-数学建模-工程伦理",
+          "id": "kp-math-stats-graph-theory-decision",
           "title": "概率统计、图论、预测决策、数学建模、工程伦理",
-          "path": "points/kp-概率统计-图论-预测决策-数学建模-工程伦理.md",
+          "path": "points/kp-math-stats-graph-theory-decision.md",
           "status": "正式",
           "kind": "point",
           "group": "科目1 · 17. 数学与工程基础",
@@ -1162,9 +1162,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-英文阅读-领域术语",
+          "id": "kp-english-reading-terms",
           "title": "英文阅读、领域术语",
-          "path": "points/kp-英文阅读-领域术语.md",
+          "path": "points/kp-english-reading-terms.md",
           "status": "正式",
           "kind": "point",
           "group": "科目1 · 18. 专业英语",
@@ -1492,9 +1492,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-论文专题",
+          "id": "kp-essay-topic-info-systems",
           "title": "论文专题组 · 信息系统开发及应用",
-          "path": "points/kp-论文专题.md",
+          "path": "points/kp-essay-topic-info-systems.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 1. 信息系统开发及应用",
@@ -1502,9 +1502,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-系统计划和分析",
+          "id": "kp-system-planning-analysis",
           "title": "系统计划和分析",
-          "path": "points/kp-系统计划和分析.md",
+          "path": "points/kp-system-planning-analysis.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 1. 信息系统开发及应用",
@@ -1513,9 +1513,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-需求工程",
+          "id": "kp-requirements-engineering",
           "title": "需求工程",
-          "path": "points/kp-需求工程.md",
+          "path": "points/kp-requirements-engineering.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 1. 信息系统开发及应用",
@@ -1524,9 +1524,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-系统测试",
+          "id": "kp-system-testing",
           "title": "系统测试",
-          "path": "points/kp-系统测试.md",
+          "path": "points/kp-system-testing.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 1. 信息系统开发及应用",
@@ -1535,9 +1535,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-系统维护",
+          "id": "kp-system-maintenance",
           "title": "系统维护",
-          "path": "points/kp-系统维护.md",
+          "path": "points/kp-system-maintenance.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 1. 信息系统开发及应用",
@@ -1546,9 +1546,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-项目管理",
+          "id": "kp-project-management-essay",
           "title": "项目管理",
-          "path": "points/kp-项目管理.md",
+          "path": "points/kp-project-management-essay.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 1. 信息系统开发及应用",
@@ -1557,9 +1557,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-质量保证",
+          "id": "kp-quality-assurance-essay",
           "title": "质量保证",
-          "path": "points/kp-质量保证.md",
+          "path": "points/kp-quality-assurance-essay.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 1. 信息系统开发及应用",
@@ -1568,9 +1568,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-面向对象技术",
+          "id": "kp-oo-technology",
           "title": "面向对象技术",
-          "path": "points/kp-面向对象技术.md",
+          "path": "points/kp-oo-technology.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 1. 信息系统开发及应用",
@@ -1579,9 +1579,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-计算机辅助软件工程-CASE",
+          "id": "kp-case-tools",
           "title": "计算机辅助软件工程 CASE",
-          "path": "points/kp-计算机辅助软件工程-CASE.md",
+          "path": "points/kp-case-tools.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 1. 信息系统开发及应用",
@@ -1590,9 +1590,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-软件过程改进",
+          "id": "kp-spi-cmmi",
           "title": "软件过程改进",
-          "path": "points/kp-软件过程改进.md",
+          "path": "points/kp-spi-cmmi.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 1. 信息系统开发及应用",
@@ -1601,9 +1601,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-实时系统开发",
+          "id": "kp-realtime-systems",
           "title": "实时系统开发",
-          "path": "points/kp-实时系统开发.md",
+          "path": "points/kp-realtime-systems.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 1. 信息系统开发及应用",
@@ -1612,9 +1612,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-应用系统分析与设计",
+          "id": "kp-app-system-analysis-design",
           "title": "应用系统分析与设计",
-          "path": "points/kp-应用系统分析与设计.md",
+          "path": "points/kp-app-system-analysis-design.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 1. 信息系统开发及应用",
@@ -1622,9 +1622,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-软件产品线",
+          "id": "kp-software-product-line",
           "title": "软件产品线",
-          "path": "points/kp-软件产品线.md",
+          "path": "points/kp-software-product-line.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 1. 信息系统开发及应用",
@@ -1633,9 +1633,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-论文专题-2",
+          "id": "kp-essay-topic-db-modeling",
           "title": "论文专题组 · 数据库建模及应用",
-          "path": "points/kp-论文专题-2.md",
+          "path": "points/kp-essay-topic-db-modeling.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 2. 数据库建模及应用",
@@ -1643,9 +1643,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-数据管理-分析-建模-管理-应用",
+          "id": "kp-data-mgmt-analysis-modeling",
           "title": "数据管理/分析/建模/管理/应用",
-          "path": "points/kp-数据管理-分析-建模-管理-应用.md",
+          "path": "points/kp-data-mgmt-analysis-modeling.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 2. 数据库建模及应用",
@@ -1654,9 +1654,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-数据仓库",
+          "id": "kp-data-warehouse",
           "title": "数据仓库",
-          "path": "points/kp-数据仓库.md",
+          "path": "points/kp-data-warehouse.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 2. 数据库建模及应用",
@@ -1665,9 +1665,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-数据挖掘",
+          "id": "kp-data-mining",
           "title": "数据挖掘",
-          "path": "points/kp-数据挖掘.md",
+          "path": "points/kp-data-mining.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 2. 数据库建模及应用",
@@ -1676,9 +1676,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-论文专题-3",
+          "id": "kp-essay-topic-network-planning",
           "title": "论文专题组 · 网络规划及应用",
-          "path": "points/kp-论文专题-3.md",
+          "path": "points/kp-essay-topic-network-planning.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 3. 网络规划及应用",
@@ -1686,9 +1686,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-网络规划-优化-配置-部署-实施",
+          "id": "kp-network-planning-ops",
           "title": "网络规划/优化/配置/部署/实施",
-          "path": "points/kp-网络规划-优化-配置-部署-实施.md",
+          "path": "points/kp-network-planning-ops.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 3. 网络规划及应用",
@@ -1697,9 +1697,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-论文专题-4",
+          "id": "kp-essay-topic-security-analysis",
           "title": "论文专题组 · 系统安全性分析",
-          "path": "points/kp-论文专题-4.md",
+          "path": "points/kp-essay-topic-security-analysis.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 4. 系统安全性分析",
@@ -1707,9 +1707,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-网络安全-数据安全-系统安全",
+          "id": "kp-security-data-system",
           "title": "网络安全/数据安全/系统安全",
-          "path": "points/kp-网络安全-数据安全-系统安全.md",
+          "path": "points/kp-security-data-system.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 4. 系统安全性分析",
@@ -1718,9 +1718,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-论文专题-5",
+          "id": "kp-essay-topic-system-integration",
           "title": "论文专题组 · 应用系统集成",
-          "path": "points/kp-论文专题-5.md",
+          "path": "points/kp-essay-topic-system-integration.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 5. 应用系统集成",
@@ -1728,9 +1728,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-数据集成与共享",
+          "id": "kp-data-integration-sharing",
           "title": "数据集成与共享",
-          "path": "points/kp-数据集成与共享.md",
+          "path": "points/kp-data-integration-sharing.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 5. 应用系统集成",
@@ -1739,9 +1739,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-应用集成-服务集成",
+          "id": "kp-app-service-integration",
           "title": "应用集成/服务集成",
-          "path": "points/kp-应用集成-服务集成.md",
+          "path": "points/kp-app-service-integration.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 5. 应用系统集成",
@@ -1750,9 +1750,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-论文专题-6",
+          "id": "kp-essay-topic-enterprise-is",
           "title": "论文专题组 · 企业信息系统",
-          "path": "points/kp-论文专题-6.md",
+          "path": "points/kp-essay-topic-enterprise-is.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 6. 企业信息系统",
@@ -1760,9 +1760,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-电子商务和电子政务",
+          "id": "kp-ecommerce-egovernment",
           "title": "电子商务和电子政务",
-          "path": "points/kp-电子商务和电子政务.md",
+          "path": "points/kp-ecommerce-egovernment.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 6. 企业信息系统",
@@ -1771,9 +1771,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-事务处理系统",
+          "id": "kp-tps",
           "title": "事务处理系统",
-          "path": "points/kp-事务处理系统.md",
+          "path": "points/kp-tps.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 6. 企业信息系统",
@@ -1782,9 +1782,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-决策支持系统",
+          "id": "kp-dss",
           "title": "决策支持系统",
-          "path": "points/kp-决策支持系统.md",
+          "path": "points/kp-dss.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 6. 企业信息系统",
@@ -1793,9 +1793,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-企业信息化组织及实施",
+          "id": "kp-enterprise-informatization",
           "title": "企业信息化组织及实施",
-          "path": "points/kp-企业信息化组织及实施.md",
+          "path": "points/kp-enterprise-informatization.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 6. 企业信息系统",
@@ -1804,9 +1804,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-论文专题-7",
+          "id": "kp-essay-topic-open-source",
           "title": "论文专题组 · 开源软件及应用",
-          "path": "points/kp-论文专题-7.md",
+          "path": "points/kp-essay-topic-open-source.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 7. 开源软件及应用",
@@ -1814,9 +1814,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-开源软件",
+          "id": "kp-open-source-software",
           "title": "开源软件",
-          "path": "points/kp-开源软件.md",
+          "path": "points/kp-open-source-software.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 7. 开源软件及应用",
@@ -1824,9 +1824,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-论文专题-8",
+          "id": "kp-essay-topic-new-tech",
           "title": "论文专题组 · 新技术及其应用",
-          "path": "points/kp-论文专题-8.md",
+          "path": "points/kp-essay-topic-new-tech.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 8. 新技术及其应用",
@@ -1834,9 +1834,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-云计算",
+          "id": "kp-cloud-computing",
           "title": "云计算",
-          "path": "points/kp-云计算.md",
+          "path": "points/kp-cloud-computing.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 8. 新技术及其应用",
@@ -1845,9 +1845,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-大数据",
+          "id": "kp-big-data",
           "title": "大数据",
-          "path": "points/kp-大数据.md",
+          "path": "points/kp-big-data.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 8. 新技术及其应用",
@@ -1856,9 +1856,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-微服务",
+          "id": "kp-microservices",
           "title": "微服务",
-          "path": "points/kp-微服务.md",
+          "path": "points/kp-microservices.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 8. 新技术及其应用",
@@ -1867,9 +1867,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-移动-Web",
+          "id": "kp-mobile-web",
           "title": "移动/ Web",
-          "path": "points/kp-移动-Web.md",
+          "path": "points/kp-mobile-web.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 8. 新技术及其应用",
@@ -1877,9 +1877,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-CPS-物联网",
+          "id": "kp-cps-iot",
           "title": "CPS/物联网",
-          "path": "points/kp-CPS-物联网.md",
+          "path": "points/kp-cps-iot.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 8. 新技术及其应用",
@@ -1888,9 +1888,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-无代码-低代码",
+          "id": "kp-low-code-nocode",
           "title": "无代码/低代码",
-          "path": "points/kp-无代码-低代码.md",
+          "path": "points/kp-low-code-nocode.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 8. 新技术及其应用",
@@ -1899,9 +1899,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-内容",
+          "id": "kp-essay-content",
           "title": "论文写作方法 · 注意事项与评分",
-          "path": "points/kp-内容.md",
+          "path": "points/kp-essay-content.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 论文写作方法",
@@ -1909,9 +1909,9 @@
           "note": "审计通过 v1.3.4-api"
         },
         {
-          "id": "kp-注意事项-解答步骤-摘要正文-评分",
+          "id": "kp-thesis-writing-guide",
           "title": "注意事项、解答步骤、摘要正文、评分",
-          "path": "points/kp-注意事项-解答步骤-摘要正文-评分.md",
+          "path": "points/kp-thesis-writing-guide.md",
           "status": "正式",
           "kind": "point",
           "group": "科目3 · 论文写作方法",
