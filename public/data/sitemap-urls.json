@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-08T08:43:40.222Z",
+  "generatedAt": "2026-10-08T08:56:43.559Z",
   "urls": [
     {
       "url": "https://maintruly.top/",
@@ -99,7 +99,7 @@
     },
     {
       "url": "https://maintruly.top/kb/kp-2-1/",
-      "lastModified": "2026-10-08T01:47:20.553Z",
+      "lastModified": "2026-10-08T08:52:13.633Z",
       "changeFrequency": "weekly",
       "priority": 0.8
     },
@@ -807,7 +807,7 @@
     },
     {
       "url": "https://maintruly.top/kb/kp-big-data/",
-      "lastModified": "2026-10-08T02:50:18.511Z",
+      "lastModified": "2026-10-08T08:52:13.634Z",
       "changeFrequency": "monthly",
       "priority": 0.7
     },
@@ -819,7 +819,7 @@
     },
     {
       "url": "https://maintruly.top/kb/kp-cloud-computing/",
-      "lastModified": "2026-10-08T02:50:18.512Z",
+      "lastModified": "2026-10-08T08:52:13.634Z",
       "changeFrequency": "weekly",
       "priority": 0.8
     },
@@ -1305,7 +1305,7 @@
     },
     {
       "url": "https://maintruly.top/kb/quick-case-diagnosis/",
-      "lastModified": "2026-10-08T08:00:04.687Z",
+      "lastModified": "2026-10-08T08:52:15.514Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
@@ -1335,13 +1335,43 @@
     },
     {
       "url": "https://maintruly.top/kb/quick-exam-misconceptions/",
-      "lastModified": "2026-10-08T08:39:06.346Z",
+      "lastModified": "2026-10-08T08:52:13.871Z",
+      "changeFrequency": "weekly",
+      "priority": 0.75
+    },
+    {
+      "url": "https://maintruly.top/kb/quick-essay-hot-2026/",
+      "lastModified": "2026-10-08T08:51:54.481Z",
+      "changeFrequency": "weekly",
+      "priority": 0.75
+    },
+    {
+      "url": "https://maintruly.top/kb/quick-case-practice-nav/",
+      "lastModified": "2026-10-08T08:52:01.321Z",
+      "changeFrequency": "weekly",
+      "priority": 0.75
+    },
+    {
+      "url": "https://maintruly.top/kb/quick-web-case/",
+      "lastModified": "2026-10-08T08:51:59.760Z",
+      "changeFrequency": "weekly",
+      "priority": 0.75
+    },
+    {
+      "url": "https://maintruly.top/kb/quick-bigdata-case/",
+      "lastModified": "2026-10-08T08:52:03.690Z",
+      "changeFrequency": "weekly",
+      "priority": 0.75
+    },
+    {
+      "url": "https://maintruly.top/kb/quick-cloud-native/",
+      "lastModified": "2026-10-08T08:51:57.904Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-essay-index/",
-      "lastModified": "2026-10-08T03:38:01.058Z",
+      "lastModified": "2026-10-08T08:52:16.145Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },

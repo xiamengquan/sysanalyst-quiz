@@ -144,6 +144,37 @@
 <li><strong>部署模型</strong>：公有云、私有云、混合云、社区云。</li>
 <li><strong>特点</strong>：按需自助、广泛网络访问、资源池化、快速弹性、可计量。</li>
 </ul>
+<h3 id="差错控制2026-考纲--选择高频">差错控制（2026 考纲 · 选择高频）</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>机制</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>检错</strong></td>
+<td>奇偶校验、<strong>CRC</strong></td>
+<td>发现错误，通常配合 <strong>ARQ 重传</strong>（停等、GBN、SR）</td>
+</tr>
+<tr>
+<td><strong>纠错</strong></td>
+<td><strong>海明码</strong></td>
+<td>可定位并纠正有限位错误；冗余位满足 2^r ≥ m+r+1</td>
+</tr>
+<tr>
+<td><strong>链路层</strong></td>
+<td>以太网 FCS（CRC）</td>
+<td>检错丢弃坏帧，靠上层 TCP 重传</td>
+</tr>
+<tr>
+<td><strong>与可靠传输</strong></td>
+<td>TCP 序号/确认/超时</td>
+<td>端到端可靠；UDP 无连接不保证</td>
+</tr>
+</tbody></table></div>
+<p><strong>答题顺序</strong>：先判 <strong>检错还是纠错</strong> → 再写 <strong>CRC/海明码/ARQ</strong> 适用层次 → 与 <strong>TCP 可靠</strong> 区分。</p>
 <h2 id="易混对比">易混对比</h2>
 <div class="table-wrap"><table>
 <thead>

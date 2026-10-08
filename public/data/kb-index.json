@@ -2336,6 +2336,51 @@
           "note": "第十轮审计 · 工单6"
         },
         {
+          "id": "quick-essay-hot-2026",
+          "title": "论文热点方向写作框架（2026）",
+          "path": "速查/论文热点方向写作框架-2026.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "howto",
+          "note": "第十三轮 · 微服务测试/数据治理/云原生/DDD/DevSecOps"
+        },
+        {
+          "id": "quick-case-practice-nav",
+          "title": "案例实践章节导航（第2版教程）",
+          "path": "速查/案例实践章节导航-第2版教程.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "howto",
+          "note": "ch16–21 对照 · 第十三轮"
+        },
+        {
+          "id": "quick-web-case",
+          "title": "Web应用案例分析 · 考点速查",
+          "path": "速查/Web应用案例分析-考点速查.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "howto",
+          "note": "第16章 · 高并发"
+        },
+        {
+          "id": "quick-bigdata-case",
+          "title": "大数据处理 · 考点速查",
+          "path": "速查/大数据处理-考点速查.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "reference",
+          "note": "第19章 · 4V/5V · Lambda/Kappa"
+        },
+        {
+          "id": "quick-cloud-native",
+          "title": "云原生架构 · 考点速查",
+          "path": "速查/云原生架构-考点速查.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "reference",
+          "note": "Mesh · K8s · 拆分策略"
+        },
+        {
           "id": "quick-essay-index",
           "title": "论文方向写作索引",
           "path": "速查/论文方向写作索引.md",

@@ -1,0 +1,79 @@
+<h1 id="速查--云原生架构设计2026-考纲">速查 · 云原生架构设计（2026 考纲）</h1>
+<blockquote>
+<p><strong>回链</strong>：<code>kp-cloud-computing</code> · <code>kp-microservices</code> · <code>ch20</code> · <a href="./Web%E4%B8%8EAI%E6%99%BA%E8%83%BD%E4%BD%93-%E6%9E%B6%E6%9E%84%E9%80%89%E5%9E%8B%E5%9B%9B%E7%BB%B4%E5%BA%A6%E5%8D%A1.md">Web+Agent 四维度</a></p>
+</blockquote>
+<h2 id="云原生四要素">云原生四要素</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>要素</th>
+<th>考点</th>
+<th>案例/论文句</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>容器</strong></td>
+<td>Docker 镜像、轻量隔离、不可变基础设施</td>
+<td>环境一致、快速回滚</td>
+</tr>
+<tr>
+<td><strong>微服务</strong></td>
+<td>按业务能力拆分、独立库、轻量通信</td>
+<td>见拆分策略</td>
+</tr>
+<tr>
+<td><strong>DevOps</strong></td>
+<td>CI/CD、自动化测试、基础设施即代码</td>
+<td>缩短交付周期</td>
+</tr>
+<tr>
+<td><strong>持续交付</strong></td>
+<td>小批量发布、金丝雀/蓝绿</td>
+<td>降低发布风险</td>
+</tr>
+</tbody></table></div>
+<h2 id="微服务拆分策略选型题案例">微服务拆分策略（选型题/案例）</h2>
+<ul>
+<li><strong>按业务能力</strong>（DDD 限界上下文）——首选表述  </li>
+<li><strong>按变更频率 / 团队拓扑</strong>（康威定律）  </li>
+<li><strong>按非功能需求</strong>（性能热点独立扩容）  </li>
+<li><strong>忌</strong>：按技术层拆分（UI 服务/API 服务）导致跨层调用链过长</li>
+</ul>
+<h2 id="服务治理">服务治理</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>能力</th>
+<th>典型组件/机制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>注册发现</td>
+<td>Nacos/Eureka/Consul</td>
+</tr>
+<tr>
+<td>配置</td>
+<td>配置中心、动态刷新</td>
+</tr>
+<tr>
+<td>流量</td>
+<td>网关、限流、熔断、重试</td>
+</tr>
+<tr>
+<td><strong>Service Mesh</strong></td>
+<td>Sidecar（Envoy/Istio）：mTLS、可观测、策略与流量治理与业务解耦</td>
+</tr>
+<tr>
+<td>追踪</td>
+<td>分布式 traceId</td>
+</tr>
+</tbody></table></div>
+<h2 id="容器编排kubernetes-原理级">容器编排（Kubernetes 原理级）</h2>
+<ul>
+<li><strong>Pod</strong> 最小调度单元；<strong>Deployment</strong> 声明式副本与滚动更新  </li>
+<li><strong>Service</strong> 集群内稳定访问；<strong>Ingress</strong> 七层入口  </li>
+<li><strong>HPA</strong> 按 CPU/自定义指标弹性伸缩  </li>
+<li>案例写「编排层负责调度与自愈，业务无感知节点故障」即可，勿堆 kubectl 命令</li>
+</ul>
+<h2 id="与-soa单体对比">与 SOA/单体对比</h2>
+<p>写 <strong>权衡</strong>：云原生换弹性与发布速度，代价是分布式复杂度、最终一致与运维体系投入。</p>

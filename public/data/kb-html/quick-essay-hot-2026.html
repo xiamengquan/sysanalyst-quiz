@@ -1,0 +1,156 @@
+<h1 id="速查--论文热点方向写作框架2026">速查 · 论文热点方向写作框架（2026）</h1>
+<blockquote>
+<p><strong>docType</strong>：howto · 与 <a href="./%E8%AE%BA%E6%96%87%E6%96%B9%E5%90%91%E5%86%99%E4%BD%9C%E7%B4%A2%E5%BC%95.md">论文方向写作索引</a>、<a href="./%E9%9C%80%E6%B1%82%E4%BE%A7%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C%E6%A1%86%E6%9E%B6.md">需求侧论文写作框架</a> 互补<br><strong>用法</strong>：4 选 1 时若题目命中下列方向，按「摘要 + 三问骨架」展开，每问回扣子题干。</p>
+</blockquote>
+<h2 id="1-微服务系统测试工程">1. 微服务系统测试工程</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>段</th>
+<th>写什么</th>
+<th>回链</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>背景</td>
+<td>服务数量、发布频率、故障域</td>
+<td><code>kp-microservices</code> · <code>ch20</code></td>
+</tr>
+<tr>
+<td>测试策略</td>
+<td><strong>测试金字塔</strong>（单测/契约/集成/E2E）；<strong>混沌工程</strong>（故障注入、韧性验证）</td>
+<td><code>kp-system-testing</code> · <code>kp-7-3</code></td>
+</tr>
+<tr>
+<td>性能</td>
+<td>压测场景、SLA、瓶颈与限流熔断</td>
+<td><a href="./%E6%A1%88%E4%BE%8B%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E7%B1%BB-%E7%AD%94%E9%A2%98Checklist.md">案例系统设计 Checklist</a></td>
+</tr>
+<tr>
+<td>效果</td>
+<td>缺陷率、MTTR、发布成功率</td>
+<td>—</td>
+</tr>
+</tbody></table></div>
+<p><strong>三问示例</strong>：① 微服务测试难点（环境、数据、依赖）→ ② 契约测试 + 混沌实验设计 → ③ 流水线与质量门禁。</p>
+<h2 id="2-企业数据治理体系构建与应用">2. 企业数据治理体系构建与应用</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>段</th>
+<th>写什么</th>
+<th>回链</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>标准</td>
+<td>数据元、主数据、编码与命名规范</td>
+<td><code>kp-data-mgmt-analysis-modeling</code></td>
+</tr>
+<tr>
+<td>质量</td>
+<td>完整性/一致性/及时性维度；清洗与监控</td>
+<td><code>kp-3-3</code></td>
+</tr>
+<tr>
+<td>生命周期</td>
+<td>采集→存储→使用→归档→销毁；分级分类</td>
+<td><code>kp-data-warehouse</code> · <code>kp-big-data</code></td>
+</tr>
+<tr>
+<td>组织</td>
+<td>数据 Owner、委员会、制度与考核</td>
+<td><code>kp-enterprise-informatization</code></td>
+</tr>
+</tbody></table></div>
+<h2 id="3-云原生应用运维体系">3. 云原生应用运维体系</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>段</th>
+<th>写什么</th>
+<th>回链</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>四要素</td>
+<td>容器、微服务、DevOps、持续交付</td>
+<td><code>kp-cloud-computing</code> · <a href="./%E4%BA%91%E5%8E%9F%E7%94%9F%E6%9E%B6%E6%9E%84-%E8%80%83%E7%82%B9%E9%80%9F%E6%9F%A5.md">云原生架构速查</a></td>
+</tr>
+<tr>
+<td>可观测</td>
+<td>日志 / 指标 / 链路追踪；告警与 SLO</td>
+<td><code>kp-ops-metrics-mttr-mtbf-mttf-mtta</code></td>
+</tr>
+<tr>
+<td>发布</td>
+<td>蓝绿、金丝雀、回滚；配置与密钥管理</td>
+<td><code>kp-microservices</code></td>
+</tr>
+<tr>
+<td>弹性</td>
+<td>HPA、多 AZ、灾备 RPO/RTO</td>
+<td><code>kp-7-5</code></td>
+</tr>
+</tbody></table></div>
+<h2 id="4-领域驱动设计ddd应用">4. 领域驱动设计（DDD）应用</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>段</th>
+<th>写什么</th>
+<th>回链</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>战略</td>
+<td><strong>限界上下文</strong>、上下文映射（防腐层）</td>
+<td><code>kp-microservices</code> · <code>ch16</code> 有界上下文</td>
+</tr>
+<tr>
+<td>战术</td>
+<td>实体、值对象、聚合根、领域事件</td>
+<td><code>kp-oo-technology</code> · <code>kp-7-4</code></td>
+</tr>
+<tr>
+<td>落地</td>
+<td>聚合边界 ↔ 微服务边界；统一语言</td>
+<td><a href="./UML-%E4%BD%93%E7%B3%BB%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97.md">UML 指南</a></td>
+</tr>
+<tr>
+<td>效果</td>
+<td>需求变更影响面缩小、模型与代码一致</td>
+<td><code>kp-requirements-engineering</code></td>
+</tr>
+</tbody></table></div>
+<h2 id="5-devsecops-在企业级项目的应用">5. DevSecOps 在企业级项目的应用</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>段</th>
+<th>写什么</th>
+<th>回链</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>左移</td>
+<td>需求/设计阶段威胁建模；SAST/DAST 门禁</td>
+<td><code>kp-security-data-system</code></td>
+</tr>
+<tr>
+<td>流水线</td>
+<td>CI/CD 中安全扫描、依赖 SBOM、镜像扫描</td>
+<td><code>kp-spi-cmmi</code></td>
+</tr>
+<tr>
+<td>运行时</td>
+<td>WAF、最小权限、审计与合规（等保）</td>
+<td><a href="./%E7%AD%89%E4%BF%9D2.0%E4%B8%8E%E9%9B%B6%E4%BF%A1%E4%BB%BB-%E9%80%9F%E6%9F%A5%E5%8D%A1.md">等保2.0与零信任</a></td>
+</tr>
+<tr>
+<td>文化</td>
+<td>安全 champion、漏洞响应 SLA</td>
+<td><code>kp-quality-assurance-essay</code></td>
+</tr>
+</tbody></table></div>
+<p><strong>评卷提醒</strong>：三问各写「措施 + 项目场景 + 可测结果」，忌只写工具名词列表。</p>
