@@ -196,14 +196,8 @@ export function buildSitemapUrls(root) {
     },
   ];
 
-  let entries = collectKbIndexEntries(index);
-  for (const [aliasId, targetId] of Object.entries(KB_ROUTE_ALIASES)) {
-    const target = entries.find((e) => e.id === targetId);
-    if (target) {
-      entries.push({ ...target, id: aliasId, sectionId: "api-ref", sectionOrder: 0 });
-    }
-  }
-  const sorted = sortKbEntriesForSitemap(entries);
+  // sitemap 仅收录 kb-index canonical id；别名仍由 generateStaticParams 生成静态页 + 客户端跳转
+  const sorted = sortKbEntriesForSitemap(collectKbIndexEntries(index));
   const seen = new Set();
   const kbRoutes = [];
   for (const entry of sorted) {

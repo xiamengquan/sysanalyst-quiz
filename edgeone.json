@@ -4,5 +4,17 @@
   "framework": "nextjs",
   "installCommand": "npm install",
   "buildCommand": "npm run build",
-  "outputDirectory": "out"
+  "outputDirectory": "out",
+  "redirects": [
+    {
+      "source": "/sitemap.xml/",
+      "destination": "/sitemap.xml",
+      "statusCode": 301
+    },
+    {
+      "source": "/robots.txt/",
+      "destination": "/robots.txt",
+      "statusCode": 301
+    }
+  ]
 }

@@ -67,6 +67,8 @@
 
 ## 相关考点
 
+- [需求工程](/kb/kp-requirements-engineering/)
+- [项目管理（论文/挣值）](/kb/kp-project-management-essay/)
 - [开发方法与模型（瀑布/演化/螺旋/喷泉/V/RAD/RUP/敏捷 XP/Scrum）](/kb/kp-5-2)
 - 速查：[UML-体系化学习指南](../速查/UML-体系化学习指南.md)
 - 归档通章：[`第07章-软件工程.md`](../第一篇-基础知识/第07章-软件工程.md)

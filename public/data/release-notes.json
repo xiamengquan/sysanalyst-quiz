@@ -1,6 +1,25 @@
 {
-  "latest": "0.9.51",
+  "latest": "0.9.53",
   "releases": [
+    {
+      "version": "0.9.53",
+      "date": "2026-10-08",
+      "title": "第四轮审计工单全量落地",
+      "highlights": [
+        "内容：专业英语/经济法律考点纠偏加厚；数学·知产期限；案例系统设计 Checklist；TOGAF/Zachman 论文卡",
+        "结构：论文方向索引英文化 slug；考点交叉链接补全",
+        "SEO：sitemap 仅 canonical id；edgeone 尾斜杠 301；check:live-seo 冒烟"
+      ]
+    },
+    {
+      "version": "0.9.52",
+      "date": "2026-10-08",
+      "title": "第四轮审计纠偏：SEO 文件尾斜杠",
+      "highlights": [
+        "edgeone：/sitemap.xml/、/robots.txt/ 301 到无尾斜杠，避免 trailingSlash 误测 404",
+        "新增 check:live-seo 线上冒烟；台账补充第四轮 sitemap P0 纠偏说明"
+      ]
+    },
     {
       "version": "0.9.51",
       "date": "2026-10-08",

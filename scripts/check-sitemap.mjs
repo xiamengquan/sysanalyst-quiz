@@ -58,7 +58,6 @@ if (fs.existsSync(smPath)) {
   const apiRefIds = new Set(
     (index.sections?.find((s) => s.id === "api-ref")?.items ?? []).map((i) => i.id),
   );
-  for (const a of Object.keys(KB_ROUTE_ALIASES)) apiRefIds.add(a);
   const apiLocs = locs.filter((u) => {
     const id = kbIdFromLoc(u);
     return id && apiRefIds.has(id);
@@ -71,8 +70,10 @@ if (fs.existsSync(smPath)) {
       break;
     }
   }
-  if (!locs.some((u) => kbIdFromLoc(u) === "kp-13-1")) {
-    errors.push("sitemap 缺少 kp-13-1 别名 URL");
+  for (const [alias, target] of Object.entries(KB_ROUTE_ALIASES)) {
+    if (locs.some((u) => kbIdFromLoc(u) === alias)) {
+      errors.push(`sitemap 不应收录别名 URL：${alias}（canonical：${target}）`);
+    }
   }
 }
 
