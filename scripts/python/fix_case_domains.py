@@ -6,7 +6,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from case_domain_lib import infer_case_domain, infer_case_type
+from case_domain_lib import infer_case_domain, infer_case_type, normalize_case_type
 from case_point_lib import format_real_case_point
 from seven_steps_lib import build_seven_steps
 
@@ -50,7 +50,7 @@ def main() -> None:
         row["seven_steps"] = build_seven_steps(
             case_id=row.get("id") or "",
             domain=row.get("domain") or "Web",
-            case_type=row.get("case_type") or "分析改进",
+            case_type=row.get("case_type") or "建模与设计",
             stem=row.get("stem") or "",
             questions=row.get("questions") or [],
             pack_role=pack_role(row),

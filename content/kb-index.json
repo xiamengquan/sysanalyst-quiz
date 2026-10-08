@@ -2273,13 +2273,67 @@
           "note": "2026 案例预测第二套 · 五题勾选自测 · 非真题"
         },
         {
+          "id": "quick-case-four-types",
+          "title": "案例分析四类题型导航（2026 考纲）",
+          "path": "速查/案例四类题型导航.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "howto",
+          "note": "第十轮审计 · 工单1"
+        },
+        {
+          "id": "quick-case-diagnosis",
+          "title": "案例 · 问题诊断与改进 · 答题模板",
+          "path": "速查/案例-问题诊断与改进-答题模板.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "howto",
+          "note": "第十轮审计 · 工单1"
+        },
+        {
+          "id": "quick-case-tech-arg",
+          "title": "案例 · 技术方案论证 · 答题模板",
+          "path": "速查/案例-技术方案论证-答题模板.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "howto",
+          "note": "第十轮审计 · 工单1"
+        },
+        {
           "id": "quick-case-design",
           "title": "案例系统设计类 · 答题 Checklist",
           "path": "速查/案例系统设计类-答题Checklist.md",
           "status": "正式",
           "kind": "quick",
           "docType": "howto",
-          "note": "架构/性能类案例 · 审计补强 A-03"
+          "note": "建模与设计类 · 审计补强 A-03"
+        },
+        {
+          "id": "quick-essay-requirements",
+          "title": "需求侧论文写作框架",
+          "path": "速查/需求侧论文写作框架.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "howto",
+          "note": "第十轮审计 · 工单3"
+        },
+        {
+          "id": "quick-pm-calc",
+          "title": "项目管理计算速查表",
+          "path": "速查/项目管理计算速查表.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "reference",
+          "note": "挣值/CPM/EMV · 工单5"
+        },
+        {
+          "id": "quick-exam-misconceptions",
+          "title": "常见备考误区",
+          "path": "速查/常见备考误区.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "howto",
+          "note": "第十轮审计 · 工单6"
         },
         {
           "id": "quick-essay-index",

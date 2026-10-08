@@ -6,6 +6,8 @@ import json, re
 from pathlib import Path
 from collections import Counter
 
+from case_domain_lib import normalize_case_type
+
 ROOT = Path(__file__).resolve().parents[2]
 CASE_DIR = ROOT / "content/banks/cases"
 OUT_DATA = ROOT / "public/data"
@@ -16,6 +18,10 @@ DOMAIN_CHAPTER = {
     "需求": 11, "测试": 14, "安全": 9, "运维": 15, "数据库": 5,
 }
 TYPE_ANSWER = {
+    "技术方案论证": "compare",
+    "建模与设计": "design",
+    "问题诊断与改进": "design",
+    "需求识别与确认": "short",
     "方案对比": "compare",
     "架构设计": "design",
     "分析改进": "design",
@@ -103,6 +109,8 @@ def parse_md(path: Path) -> dict:
                 "how": how_m.group(1).strip(),
                 "why": (why_m.group(1).strip() if why_m else ""),
             })
+
+    case_type = normalize_case_type(case_type, stem)
 
     return {
         "no": no,

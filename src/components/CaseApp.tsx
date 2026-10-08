@@ -303,12 +303,13 @@ export function CaseApp() {
                   </select>
                 </label>
                 <label className="block text-[0.82rem] text-muted-foreground">
-                  题型
+                  题型（2026 考纲四类）
                   <select className="field mt-1.5" value={typ} onChange={(e) => setTyp(e.target.value)}>
                     <option value="all">全部题型</option>
-                    <option value="方案对比">方案对比</option>
-                    <option value="架构设计">架构设计</option>
-                    <option value="分析改进">分析改进</option>
+                    <option value="需求识别与确认">需求识别与确认</option>
+                    <option value="建模与设计">建模与设计</option>
+                    <option value="问题诊断与改进">问题诊断与改进</option>
+                    <option value="技术方案论证">技术方案论证</option>
                   </select>
                 </label>
                 <label className="block text-[0.82rem] text-muted-foreground">

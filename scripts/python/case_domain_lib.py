@@ -127,12 +127,73 @@ CASE_DOMAIN_OVERRIDES: dict[str, tuple[int, str]] = {
 }
 
 
+CASE_TYPES_V2 = (
+    "需求识别与确认",
+    "建模与设计",
+    "问题诊断与改进",
+    "技术方案论证",
+)
+
+_LEGACY_CASE_TYPE_MAP = {
+    "方案对比": "技术方案论证",
+    "架构设计": "建模与设计",
+}
+
+
 def infer_case_type(stem: str) -> str:
+    """2026 考纲四类案例分析题型（与《案例分析答题教程》§3 对齐）。"""
     blob = stem or ""
-    if any(x in blob for x in ("比较", "对比", "两种方案", "王工", "李工")):
-        return "方案对比"
-    if any(x in blob for x in ("填", "完善", "补充", "空（", "(1)")):
-        return "架构设计"
-    if any(x in blob for x in ("改进", "问题", "错误", "优化")):
-        return "分析改进"
-    return "分析改进"
+    if any(
+        x in blob
+        for x in (
+            "需求确认",
+            "需求识别",
+            "干系人",
+            "用例",
+            "需求获取",
+            "需求工程",
+            "访谈",
+            "JRP",
+            "JAD",
+        )
+    ):
+        return "需求识别与确认"
+    if any(x in blob for x in ("比较", "对比", "两种方案", "王工", "李工", "选型", "论证", "为何选")):
+        return "技术方案论证"
+    if any(
+        x in blob
+        for x in (
+            "填",
+            "完善",
+            "补充",
+            "空（",
+            "(1)",
+            "DFD",
+            "UML",
+            "类图",
+            "活动图",
+            "架构",
+            "分层",
+            "设计",
+            "建模",
+        )
+    ):
+        return "建模与设计"
+    if any(x in blob for x in ("改进", "问题", "错误", "优化", "诊断", "缺陷", "不足")):
+        return "问题诊断与改进"
+    return "建模与设计"
+
+
+def normalize_case_type(case_type: str | None, stem: str = "") -> str:
+    """将旧三类题型迁移为 2026 四类；已是新类型则原样返回。"""
+    ct = (case_type or "").strip()
+    if ct in CASE_TYPES_V2:
+        return ct
+    if ct in _LEGACY_CASE_TYPE_MAP:
+        mapped = _LEGACY_CASE_TYPE_MAP[ct]
+        if ct == "分析改进":
+            return infer_case_type(stem)
+        return mapped
+    if ct == "分析改进":
+        return infer_case_type(stem)
+    return infer_case_type(stem)
