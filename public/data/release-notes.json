@@ -1,6 +1,15 @@
 {
-  "latest": "0.9.54",
+  "latest": "0.9.55",
   "releases": [
+    {
+      "version": "0.9.55",
+      "date": "2026-10-08",
+      "title": "P0 sitemap 发版门禁加固",
+      "highlights": [
+        "check:release --strict-out 校验 out/sitemap.xml、out/robots.txt 与 check-sitemap",
+        "强制 src/app/sitemap.ts 含 force-static；静态托管清单补充 SEO 产物与 check:live-seo"
+      ]
+    },
     {
       "version": "0.9.54",
       "date": "2026-10-08",

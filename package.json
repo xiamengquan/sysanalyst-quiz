@@ -1,6 +1,6 @@
 {
   "name": "sysanalyst-quiz",
-  "version": "0.9.54",
+  "version": "0.9.55",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -12,6 +12,7 @@
     "sync:all": "npm run sync:kb && npm run sync:data && npm run generate:seo",
     "generate:seo": "node scripts/generate-seo.mjs",
     "check:release": "node scripts/check-release.mjs && node scripts/check-kb-points.mjs && node scripts/check-kb-def-overrides.mjs && node scripts/check-question-stats.mjs && node scripts/check-kb-exam-links.mjs && node scripts/check-case-external-images.mjs && node scripts/check-sitemap.mjs",
+    "check:release:strict": "node scripts/check-release.mjs --strict-out && node scripts/check-kb-points.mjs && node scripts/check-kb-def-overrides.mjs && node scripts/check-question-stats.mjs && node scripts/check-kb-exam-links.mjs && node scripts/check-case-external-images.mjs && node scripts/check-sitemap.mjs --strict-out",
     "check:sitemap": "node scripts/check-sitemap.mjs",
     "check:live-seo": "node scripts/check-live-seo.mjs",
     "check:kb-points": "node scripts/check-kb-points.mjs",

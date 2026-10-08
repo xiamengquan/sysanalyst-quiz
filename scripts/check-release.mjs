@@ -59,11 +59,25 @@ for (const rel of [
   "public/data/cases.json",
   "public/data/kb-index.json",
   "public/data/kb-search-index.json",
+  "public/data/sitemap-urls.json",
+  "src/app/sitemap.ts",
+  "src/app/robots.ts",
   "next.config.ts",
   ".env.example",
   "docs/web-team/发布/静态托管发布清单.md",
 ]) {
   exists(rel, true);
+}
+
+const sitemapTs = path.join(root, "src/app/sitemap.ts");
+if (fs.existsSync(sitemapTs)) {
+  const src = fs.readFileSync(sitemapTs, "utf8");
+  if (!src.includes('export const dynamic = "force-static"')) {
+    errors.push("src/app/sitemap.ts 须 export const dynamic = \"force-static\"（静态 export sitemap）");
+  }
+  if (!/export default function sitemap\(\)/.test(src)) {
+    errors.push("src/app/sitemap.ts 须 default export sitemap() → MetadataRoute.Sitemap");
+  }
 }
 
 exists("docs/web-team/发布/版本说明-v" + (pkgVer || "?.?.?") + ".md", false);
@@ -74,6 +88,25 @@ if (strictOut) {
   } else {
     const about = path.join(root, "out/about/index.html");
     if (!fs.existsSync(about)) warns.push("out/about/index.html 不存在（trailingSlash 导出异常？）");
+    const outSm = path.join(root, "out/sitemap.xml");
+    const outRobots = path.join(root, "out/robots.txt");
+    if (!fs.existsSync(outSm)) {
+      errors.push("out/sitemap.xml 不存在（Next app/sitemap.ts 未产出，检查 build）");
+    } else if (fs.statSync(outSm).size < 1000) {
+      errors.push("out/sitemap.xml 过小，内容可能不完整");
+    }
+    if (!fs.existsSync(outRobots)) {
+      errors.push("out/robots.txt 不存在（Next app/robots.ts 未产出）");
+    }
+    const smCheck = spawnSync("node", ["scripts/check-sitemap.mjs", "--strict-out"], {
+      cwd: root,
+      encoding: "utf8",
+    });
+    if (smCheck.status !== 0) {
+      errors.push("check-sitemap --strict-out 未通过");
+      if (smCheck.stderr) console.error(smCheck.stderr);
+      if (smCheck.stdout) console.error(smCheck.stdout);
+    }
   }
 } else if (!fs.existsSync(path.join(root, "out"))) {
   warns.push("尚无 out/：正式上传前请 npm run build，再用 --strict-out 复查");

@@ -9,7 +9,7 @@
 | 工单 | 优先级 | 状态 | 说明 |
 |------|--------|------|------|
 | 13 排序与缺失条目 | P0 | ✅ v0.9.50 | api-ref 按 `kp-{n}` 字典序；`kp-13-1` 别名 → `kp-ops-metrics-mttr-mtbf-mttf-mtta` |
-| 18 URL 可访问性 | P0 | ✅ v0.9.50 | `check-sitemap.mjs`（索引文件存在；`--strict-out` 校验 out/sitemap.xml） |
+| 18 URL 可访问性 | P0 | ✅ v0.9.54 | `app/sitemap.ts` + `force-static` → `out/sitemap.xml`；`check:release --strict-out` 含 sitemap 门禁；线上 `/sitemap.xml` 200 |
 | 14 英文 slug 全站替换 | P1 | ✅ v0.9.51 | **47** 条中文/混合 `kp-*` → 英文 canonical；旧 URL 静态页 + `KbCanonicalRedirect`；数字大纲 id（如 `kp-3-1`）未改 |
 | 15 lastmod / priority | P1 | ✅ v0.9.50 | 文件 mtime + 发版日；教程章练习热力分档 priority/changefreq |
 | 16 刷题页 sitemap | P1 | ✅ 说明 | 刷题为 **`/` 单页应用**（`/?bank=` 参数），无独立 `/exam/` 路由；sitemap 已收录 `/` priority 1.0 |
