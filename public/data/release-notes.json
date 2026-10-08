@@ -1,6 +1,16 @@
 {
-  "latest": "0.9.55",
+  "latest": "0.9.56",
   "releases": [
+    {
+      "version": "0.9.56",
+      "date": "2026-10-08",
+      "title": "第九轮审计：考纲别名路由与内容加厚",
+      "highlights": [
+        "别名：kp-数据库/信息安全/专业英语/数学与工程基础等 → canonical 考点",
+        "加厚：分布式 CAP/BASE/2PC/TCC、挣值 BAC/VAC/CPM、ATAM/SAAM 步骤",
+        "案例 Checklist 架构选型；考纲导航速查（库/软工/架构）；BPMN/政务；工单 1–7 全关闭"
+      ]
+    },
     {
       "version": "0.9.55",
       "date": "2026-10-08",

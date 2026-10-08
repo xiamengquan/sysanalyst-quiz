@@ -88,8 +88,9 @@
 
 ## 相关考点
 
-- [需求分析](/kb/kp-9-3)
-- [面向对象技术](/kb/kp-oo-technology)
+- [需求获取与规约](/kb/kp-9-1/)
+- [需求分析](/kb/kp-9-3/)
+- [面向对象技术](/kb/kp-oo-technology/)
 - [软件生命周期](/kb/kp-software-lifecycle)
 - [系统计划和分析](/kb/kp-system-planning-analysis)
 - [系统测试](/kb/kp-system-testing)

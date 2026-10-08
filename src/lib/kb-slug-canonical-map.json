@@ -45,5 +45,21 @@
   "kp-CPS-物联网": "kp-cps-iot",
   "kp-无代码-低代码": "kp-low-code-nocode",
   "kp-内容": "kp-essay-content",
-  "kp-注意事项-解答步骤-摘要正文-评分": "kp-thesis-writing-guide"
+  "kp-注意事项-解答步骤-摘要正文-评分": "kp-thesis-writing-guide",
+  "kp-数据库": "kp-3-1",
+  "kp-database": "kp-3-1",
+  "kp-信息安全": "kp-security-data-system",
+  "kp-专业英语": "kp-english-reading-terms",
+  "kp-数学与工程基础": "kp-math-stats-graph-theory-decision",
+  "kp-知识产权与标准化": "kp-standards-ip-lifecycle",
+  "kp-经济与管理等相关知识": "kp-law-finance-org-hr-it-audit",
+  "kp-软件工程": "kp-software-lifecycle",
+  "kp-系统架构": "kp-10-1",
+  "kp-软件架构": "kp-10-1",
+  "kp-网络与分布式": "kp-2-5",
+  "kp-分布式系统": "kp-2-5",
+  "kp-第八章项目管理": "kp-6-1",
+  "kp-挣值分析": "kp-6-4",
+  "kp-企业信息化": "kp-enterprise-informatization",
+  "kp-BPMN": "kp-system-planning-analysis"
 }

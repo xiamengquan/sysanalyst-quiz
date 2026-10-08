@@ -94,7 +94,9 @@
 
 - [访问控制（BLP/Biba/Lattice、DAC/MAC/RBAC 等）](/kb/kp-7-4)
 - [容灾与业务持续](/kb/kp-7-5)
-- [需求工程](/kb/kp-requirements-engineering)
+- [需求工程](/kb/kp-requirements-engineering/)
+- [需求获取](/kb/kp-9-1/)
+- 速查：[UML-体系化学习指南](../速查/UML-体系化学习指南.md)
 - [软件产品线](/kb/kp-software-product-line)
 - [项目管理](/kb/kp-project-management-essay)
 - 速查：[UML-体系化学习指南](../速查/UML-体系化学习指南.md)
