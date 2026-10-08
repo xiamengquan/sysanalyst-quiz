@@ -35,6 +35,16 @@
       "source": "/kb/kp-论文热点方向/",
       "destination": "/kb/quick-essay-hot-2026/",
       "statusCode": 301
+    },
+    {
+      "source": "/kb/kp-%E8%AE%BA%E6%96%87%E7%83%AD%E7%82%B9%E6%96%B9%E5%90%91",
+      "destination": "/kb/quick-essay-hot-2026/",
+      "statusCode": 301
+    },
+    {
+      "source": "/kb/kp-%E8%AE%BA%E6%96%87%E7%83%AD%E7%82%B9%E6%96%B9%E5%90%91/",
+      "destination": "/kb/quick-essay-hot-2026/",
+      "statusCode": 301
     }
   ]
 }
