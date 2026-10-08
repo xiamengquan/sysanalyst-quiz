@@ -15,6 +15,26 @@
       "source": "/robots.txt/",
       "destination": "/robots.txt",
       "statusCode": 301
+    },
+    {
+      "source": "/kb/kp-web-application-analysis",
+      "destination": "/kb/quick-web-case/",
+      "statusCode": 301
+    },
+    {
+      "source": "/kb/kp-web-application-analysis/",
+      "destination": "/kb/quick-web-case/",
+      "statusCode": 301
+    },
+    {
+      "source": "/kb/kp-论文热点方向",
+      "destination": "/kb/quick-essay-hot-2026/",
+      "statusCode": 301
+    },
+    {
+      "source": "/kb/kp-论文热点方向/",
+      "destination": "/kb/quick-essay-hot-2026/",
+      "statusCode": 301
     }
   ]
 }

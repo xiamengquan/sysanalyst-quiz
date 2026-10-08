@@ -63,5 +63,10 @@
   "kp-企业信息化": "kp-enterprise-informatization",
   "kp-BPMN": "kp-system-planning-analysis",
   "kp-database-system": "kp-3-1",
-  "kp-system-architecture": "kp-10-1"
+  "kp-system-architecture": "kp-10-1",
+  "kp-web-application-analysis": "quick-web-case",
+  "kp-web-application-system-analysis-design": "quick-web-case",
+  "kp-论文热点方向": "quick-essay-hot-2026",
+  "kp-论文热点": "quick-essay-hot-2026",
+  "kp-essay-hot-topics": "quick-essay-hot-2026"
 }

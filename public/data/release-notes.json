@@ -1,6 +1,15 @@
 {
-  "latest": "0.9.64",
+  "latest": "0.9.65",
   "releases": [
+    {
+      "version": "0.9.65",
+      "date": "2026-10-08",
+      "title": "KB 外链 slug 与 404",
+      "highlights": [
+        "修复：审计/外链常用 slug（kp-web-application-analysis、kp-论文热点方向）别名至 quick-web-case / quick-essay-hot-2026",
+        "EdgeOne 301 与静态 404 页，减少未知 /kb 路径 fallback 到刷题首页"
+      ]
+    },
     {
       "version": "0.9.64",
       "date": "2026-10-08",
