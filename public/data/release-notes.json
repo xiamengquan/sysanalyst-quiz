@@ -1,6 +1,16 @@
 {
-  "latest": "0.9.53",
+  "latest": "0.9.54",
   "releases": [
+    {
+      "version": "0.9.54",
+      "date": "2026-10-08",
+      "title": "Next.js 原生 sitemap/robots",
+      "highlights": [
+        "恢复 app/sitemap.ts + app/robots.ts；构建生成 out/sitemap.xml、out/robots.txt",
+        "generate:seo 写入 sitemap-urls.json；移除 public 下静态 sitemap/robots 避免与 Metadata Route 冲突",
+        "check-sitemap 校验 out 与 seo-utils 预期一致"
+      ]
+    },
     {
       "version": "0.9.53",
       "date": "2026-10-08",

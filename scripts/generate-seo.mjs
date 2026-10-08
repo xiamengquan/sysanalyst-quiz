@@ -1,15 +1,24 @@
 #!/usr/bin/env node
-/** 写入 public/sitemap.xml 与 public/robots.txt（保留 URL 顺序，避免 Next 按字串重排） */
+/**
+ * 写入 public/data/sitemap-urls.json；Next app/sitemap.ts 在 build 时读取并生成 /sitemap.xml。
+ */
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { buildSitemapUrls, renderRobotsTxt, renderSitemapXml } from "./seo-utils.mjs";
+import { buildSitemapUrls } from "./seo-utils.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const urls = buildSitemapUrls(root);
-const xml = renderSitemapXml(urls);
-const robots = renderRobotsTxt(root);
-
-fs.writeFileSync(path.join(root, "public/sitemap.xml"), xml, "utf8");
-fs.writeFileSync(path.join(root, "public/robots.txt"), robots, "utf8");
-console.log({ generateSeo: true, urls: urls.length });
+const payload = {
+  generatedAt: new Date().toISOString(),
+  urls: urls.map((u) => ({
+    url: u.loc,
+    lastModified: u.lastmod ? u.lastmod.toISOString() : undefined,
+    changeFrequency: u.changefreq,
+    priority: u.priority,
+  })),
+};
+const out = path.join(root, "public/data/sitemap-urls.json");
+fs.mkdirSync(path.dirname(out), { recursive: true });
+fs.writeFileSync(out, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
+console.log({ generateSeo: true, urls: payload.urls.length, out: "public/data/sitemap-urls.json" });
