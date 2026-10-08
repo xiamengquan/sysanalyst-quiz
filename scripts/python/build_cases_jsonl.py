@@ -110,7 +110,7 @@ def parse_md(path: Path) -> dict:
                 "why": (why_m.group(1).strip() if why_m else ""),
             })
 
-    case_type = normalize_case_type(case_type, stem)
+    case_type = normalize_case_type(case_type, stem, qblock)
 
     return {
         "no": no,

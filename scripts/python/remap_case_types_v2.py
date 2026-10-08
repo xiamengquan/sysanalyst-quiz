@@ -27,7 +27,11 @@ def remap_file(jsonl: Path) -> dict[str, int]:
         row = json.loads(line)
         stem = row.get("stem") or ""
         old = row.get("case_type") or ""
-        new = normalize_case_type(old, stem)
+        prompts = row.get("questions") or []
+        extra = "\n".join(
+            q.get("prompt", "") for q in prompts if isinstance(q, dict)
+        )
+        new = normalize_case_type(old, stem, extra)
         row["case_type"] = new
         if row.get("point") and " · " in str(row["point"]):
             parts = str(row["point"]).split(" · ")

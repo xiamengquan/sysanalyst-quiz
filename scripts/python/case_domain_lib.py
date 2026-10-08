@@ -140,9 +140,12 @@ _LEGACY_CASE_TYPE_MAP = {
 }
 
 
-def infer_case_type(stem: str) -> str:
-    """2026 考纲四类案例分析题型（与《案例分析答题教程》§3 对齐）。"""
-    blob = stem or ""
+def infer_case_type(stem: str, extra: str = "") -> str:
+    """2026 考纲四类案例分析题型（与《案例分析答题教程》§3 对齐）。
+
+    extra：通常为「问题」段落，避免题干里「参与方案论证」等背景误触方案对比题型。
+    """
+    blob = f"{stem or ''}\n{extra or ''}"
     if any(
         x in blob
         for x in (
@@ -158,7 +161,18 @@ def infer_case_type(stem: str) -> str:
         )
     ):
         return "需求识别与确认"
-    if any(x in blob for x in ("比较", "对比", "两种方案", "王工", "李工", "选型", "论证", "为何选")):
+    if re.search(
+        r"指出.*问题|存在的主要问题|改进措施|如何改进|问题诊断|现状.*问题",
+        blob,
+    ):
+        if not re.search(r"王工|李工", blob):
+            return "问题诊断与改进"
+    if any(
+        x in blob
+        for x in ("比较", "对比", "两种方案", "王工", "李工", "为何选")
+    ) or (
+        "选型" in blob and re.search(r"比较|对比|两种|王工|李工", blob)
+    ):
         return "技术方案论证"
     if any(x in blob for x in ("改进", "问题", "错误", "优化", "诊断", "缺陷", "不足", "瓶颈", "故障")):
         if not any(x in blob for x in ("填", "补全", "完善", "DFD", "UML", "类图", "分层")):
@@ -187,13 +201,15 @@ def infer_case_type(stem: str) -> str:
     return "建模与设计"
 
 
-def normalize_case_type(case_type: str | None, stem: str = "") -> str:
+def normalize_case_type(
+    case_type: str | None, stem: str = "", extra: str = ""
+) -> str:
     """将旧三类题型迁移为 2026 四类；已是新类型则原样返回。"""
     ct = (case_type or "").strip()
     if ct in CASE_TYPES_V2:
         return ct
     if ct in _LEGACY_CASE_TYPE_MAP:
         return _LEGACY_CASE_TYPE_MAP[ct]
-    if ct == "分析改进":
-        return infer_case_type(stem)
-    return infer_case_type(stem)
+    if ct in ("分析改进", "问题诊断与改进"):
+        return infer_case_type(stem, extra)
+    return infer_case_type(stem, extra)
