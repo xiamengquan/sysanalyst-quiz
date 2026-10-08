@@ -2381,6 +2381,51 @@
           "note": "Mesh · K8s · 拆分策略"
         },
         {
+          "id": "quick-embedded-case",
+          "title": "嵌入式系统 · 案例考点速查",
+          "path": "速查/嵌入式系统案例分析-考点速查.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "howto",
+          "note": "第17章 · 第十四轮"
+        },
+        {
+          "id": "quick-mobile-case",
+          "title": "移动应用 · 案例考点速查",
+          "path": "速查/移动应用系统案例分析-考点速查.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "howto",
+          "note": "第18章 · MVP/MVVM"
+        },
+        {
+          "id": "quick-microservice-case",
+          "title": "微服务系统 · 案例考点速查",
+          "path": "速查/微服务系统案例分析-考点速查.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "howto",
+          "note": "第20章 · 拆分与治理"
+        },
+        {
+          "id": "quick-cps-case",
+          "title": "信息物理系统 · 案例考点速查",
+          "path": "速查/信息物理系统案例分析-考点速查.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "howto",
+          "note": "第21章 · CPS/SoS"
+        },
+        {
+          "id": "quick-ai-digital",
+          "title": "AI与数字化应用 · 考点速查",
+          "path": "速查/AI与数字化应用-考点速查.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "reference",
+          "note": "AI/大数据/云原生枢纽 · 第十四轮"
+        },
+        {
           "id": "quick-essay-index",
           "title": "论文方向写作索引",
           "path": "速查/论文方向写作索引.md",

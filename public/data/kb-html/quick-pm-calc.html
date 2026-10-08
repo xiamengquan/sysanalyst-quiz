@@ -112,7 +112,29 @@
 <td>回答「评估整体不确定性，辅助储备与进度目标」</td>
 </tr>
 </tbody></table></div>
-<p><strong>PERT 期望</strong>（常同章）：(O + 4M + P) / 6</p>
+<h2 id="pert-三点估算">PERT 三点估算</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>量</th>
+<th>公式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>期望工期 Te</strong></td>
+<td>(O + 4M + P) / 6</td>
+</tr>
+<tr>
+<td><strong>标准差 σ</strong></td>
+<td>(P − O) / 6</td>
+</tr>
+<tr>
+<td><strong>方差 σ²</strong></td>
+<td>[(P − O) / 6]²</td>
+</tr>
+</tbody></table></div>
+<p><strong>完工概率（原理级）</strong>：假定各活动独立，总工期近似正态；求「在 T 日前完工概率」→ 用总期望与总标准差算 Z 分位数（综合知识常给表或只考 Te/σ 公式）。</p>
+<p>与 <strong>CPM 关键路径</strong> 结合：关键链路上的活动方差叠加影响总工期不确定性；<strong>蒙特卡洛</strong> 用于多活动相关时的模拟（见上表）。</p>
 <h2 id="其他公式">其他公式</h2>
 <ul>
 <li>沟通渠道：n(n−1)/2  </li>

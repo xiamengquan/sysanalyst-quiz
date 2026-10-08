@@ -1,0 +1,51 @@
+<h1 id="速查--嵌入式系统分析与设计案例综合">速查 · 嵌入式系统分析与设计（案例/综合）</h1>
+<blockquote>
+<p><strong>教程</strong>：第 17 章 · <strong>归档</strong>：<a href="../%E7%AC%AC%E4%B8%89%E7%AF%87-%E6%A1%88%E4%BE%8B%E5%AE%9E%E8%B7%B5/%E7%AC%AC17%E7%AB%A0-%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1.md">第17章-嵌入式系统分析与设计.md</a><br><strong>考点</strong>：<code>kp-realtime-systems</code> · <strong>案例域</strong>：嵌入式（止损/P2 亦常考）</p>
+</blockquote>
+<h2 id="分值与信号">分值与信号</h2>
+<ul>
+<li>案例分析已出现真题（多核、实时、安全攸关）；综合知识侧重 <strong>RTOS、调度、优先级反转</strong>  </li>
+<li>题干信号：硬/软实时、中断、看门狗、多核、低功耗、车载/工控</li>
+</ul>
+<h2 id="核心部件五类--答题可列">核心部件（五类 · 答题可列）</h2>
+<ol>
+<li><strong>处理器</strong>（MCU/MPU/多核 SoC）  </li>
+<li><strong>存储</strong>（Flash/RAM/外存）  </li>
+<li><strong>I/O 接口</strong>（GPIO、ADC/DAC、总线）  </li>
+<li><strong>通信</strong>（CAN、SPI、I2C、以太网）  </li>
+<li><strong>电源与时钟</strong>（低功耗模式、复位）</li>
+</ol>
+<h2 id="多核体系结构辨析">多核体系结构（辨析）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SMP</td>
+<td>对称多处理，共享 OS，调度复杂</td>
+</tr>
+<tr>
+<td>AMP</td>
+<td>非对称，各核跑不同 OS/裸机</td>
+</tr>
+<tr>
+<td>同构/异构</td>
+<td>核相同 vs 大核+小核（功耗）</td>
+</tr>
+<tr>
+<td>分区/虚拟化</td>
+<td>安全域隔离（案例写「故障域隔离」）</td>
+</tr>
+</tbody></table></div>
+<h2 id="分析与设计流程案例七步法可用">分析与设计流程（案例七步法可用）</h2>
+<p>需求（实时性/安全等级）→ 体系结构（单核/多核/分区）→ 硬件选型 → 软件分层（驱动/HAL/应用）→ <strong>RTOS 选型</strong>（抢占/时间片/优先级）→ 测试（边界、压力、失效模式）</p>
+<h2 id="高频易错">高频易错</h2>
+<ul>
+<li><strong>优先级反转</strong>：高优先级等低优先级占用的资源 → 优先级继承/天花板协议  </li>
+<li><strong>硬实时 vs 软实时</strong>：错过 deadline 是否灾难性  </li>
+<li>勿把嵌入式案例写成纯 Web 三层架构</li>
+</ul>
+<p><strong>回链</strong>：<a href="./%E6%A1%88%E4%BE%8B%E5%AE%9E%E8%B7%B5%E7%AB%A0%E8%8A%82%E5%AF%BC%E8%88%AA-%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B.md">案例实践章节导航</a> · <a href="./%E6%A1%88%E4%BE%8B-%E9%97%AE%E9%A2%98%E8%AF%8A%E6%96%AD%E4%B8%8E%E6%94%B9%E8%BF%9B-%E7%AD%94%E9%A2%98%E6%A8%A1%E6%9D%BF.md">问题诊断模板</a></p>

@@ -1,0 +1,72 @@
+<h1 id="速查--移动应用系统分析与设计案例综合">速查 · 移动应用系统分析与设计（案例/综合）</h1>
+<blockquote>
+<p><strong>教程</strong>：第 18 章 · <strong>归档</strong>：<a href="../%E7%AC%AC%E4%B8%89%E7%AF%87-%E6%A1%88%E4%BE%8B%E5%AE%9E%E8%B7%B5/%E7%AC%AC18%E7%AB%A0-%E7%A7%BB%E5%8A%A8%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1.md">第18章-移动应用系统分析与设计.md</a><br><strong>考点</strong>：<code>kp-mobile-web</code> · <strong>案例域</strong>：移动</p>
+</blockquote>
+<h2 id="分值与题型">分值与题型</h2>
+<ul>
+<li>综合约 <strong>8–12 分</strong>；案例约 <strong>8–12 分</strong>  </li>
+<li>高频：<strong>Native / Hybrid / Web App / 小程序</strong> 对比、<strong>MVP/MVVM</strong>、弱网与离线、性能与安全</li>
+</ul>
+<h2 id="架构模式">架构模式</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>模式</th>
+<th>适用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>MVP</strong></td>
+<td>视图与逻辑分离，Presenter 驱动</td>
+</tr>
+<tr>
+<td><strong>MVVM</strong></td>
+<td>数据绑定，适合复杂 UI 状态</td>
+</tr>
+<tr>
+<td><strong>分层</strong></td>
+<td>UI → 领域 → 数据（本地缓存 + 同步）</td>
+</tr>
+</tbody></table></div>
+<h2 id="三端对比方案论证常用">三端对比（方案论证常用）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Native</th>
+<th>Hybrid/跨端</th>
+<th>Web App</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>体验/性能</td>
+<td>优</td>
+<td>中</td>
+<td>依赖浏览器</td>
+</tr>
+<tr>
+<td>发布</td>
+<td>应用商店审核</td>
+<td>热更新有限</td>
+<td>即时</td>
+</tr>
+<tr>
+<td>设备能力</td>
+<td>全</td>
+<td>插件/桥接</td>
+<td>受限</td>
+</tr>
+<tr>
+<td>成本</td>
+<td>双端维护高</td>
+<td>一套代码多端</td>
+<td>低但体验折中</td>
+</tr>
+</tbody></table></div>
+<h2 id="非功能清单">非功能清单</h2>
+<ul>
+<li><strong>弱网/离线</strong>：本地队列、冲突合并、幂等同步  </li>
+<li><strong>安全</strong>：本地存储加密、证书绑定、代码混淆  </li>
+<li><strong>性能</strong>：启动时间、内存、电量、包体积</li>
+</ul>
+<p><strong>回链</strong>：<a href="./%E6%A1%88%E4%BE%8B-%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88%E8%AE%BA%E8%AF%81-%E7%AD%94%E9%A2%98%E6%A8%A1%E6%9D%BF.md">技术方案论证模板</a> · <a href="./%E6%A1%88%E4%BE%8B%E5%AE%9E%E8%B7%B5%E7%AB%A0%E8%8A%82%E5%AF%BC%E8%88%AA-%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B.md">案例实践章节导航</a></p>
