@@ -1,6 +1,6 @@
-<h1 id="速查--项目管理计算挣值--cpm--风险量化">速查 · 项目管理计算（挣值 · CPM · 风险量化）</h1>
+<h1 id="速查--项目管理计算挣值--cpm--风险量化--pert">速查 · 项目管理计算（挣值 · CPM · 风险量化 · PERT）</h1>
 <blockquote>
-<p><strong>教程</strong>：第 8 章 · <strong>考点</strong>：<code>kp-6-4</code> · 综合知识计算题高频</p>
+<p><strong>教程</strong>：第 8 章 · <strong>考点</strong>：<code>kp-6-4</code> · <code>kp-6-8</code> · 综合知识计算题高频（2026 计算占比上升）</p>
 </blockquote>
 <h2 id="挣值-evm12-指标">挣值 EVM（12 指标）</h2>
 <div class="table-wrap"><table>
@@ -85,34 +85,35 @@
 <td>&gt;1 需更高效</td>
 </tr>
 </tbody></table></div>
-<p><strong>做题顺序</strong>：先算 EV → CV/SV → CPI/SPI → 按题干选 EAC 公式。</p>
+<p><strong>做题顺序</strong>：先算 EV → CV/SV → CPI/SPI → 按题干选 EAC 公式。<br><strong>关联</strong>：<a href="/?bank=practice&chapter=8">第 8 章练习</a></p>
 <h2 id="关键路径-cpm">关键路径 CPM</h2>
 <ul>
 <li><strong>关键路径</strong> = 最长路径（总时差 = 0 的活动链）  </li>
 <li><strong>总时差</strong> = LS − ES = LF − EF  </li>
-<li><strong>压缩</strong>：赶工（加资源）、快速跟进（并行，增风险）——先动<strong>关键活动</strong></li>
+<li><strong>压缩</strong>：赶工、快速跟进——先动<strong>关键活动</strong></li>
 </ul>
-<h2 id="风险量化">风险量化</h2>
+<h2 id="风险量化--emv--蒙特卡洛">风险量化 · EMV · 蒙特卡洛</h2>
 <div class="table-wrap"><table>
 <thead>
 <tr>
 <th>方法</th>
 <th>要点</th>
-<th>简例</th>
+<th>例题/场景</th>
 </tr>
 </thead>
 <tbody><tr>
 <td><strong>EMV</strong></td>
-<td>Σ(概率 × 结果值)；决策树各层乘加</td>
-<td>70%×100 + 30%×(−20) = 64</td>
+<td>各方案期望 = Σ(概率 × 结果值)；决策树自叶向根乘加</td>
+<td><strong>例</strong>：70% 收益 100 万、30% 损失 20 万 → EMV = 0.7×100 + 0.3×(−20) = <strong>64 万</strong>；选 EMV 最大（成本决策则选最小）</td>
 </tr>
 <tr>
 <td><strong>蒙特卡洛</strong></td>
-<td>对工期/成本等输入多次随机抽样，得到完成概率分布</td>
-<td>回答「评估整体不确定性，辅助储备与进度目标」</td>
+<td>对工期/成本等输入<strong>多次随机抽样</strong>，得完成概率分布与置信区间</td>
+<td><strong>答法</strong>：「活动工期不确定、存在相关关系时，用模拟得到整体完工概率，支撑<strong>应急/管理储备</strong>」——与单点 PERT/CPM 互补</td>
 </tr>
 </tbody></table></div>
-<h2 id="pert-三点估算">PERT 三点估算</h2>
+<p>与 <a href="/kb/kp-math-stats-graph-theory-decision/">数学决策树</a> · <code>kp-6-8</code> 定量风险分析一致。</p>
+<h2 id="pert-三点估算与概率">PERT 三点估算与概率</h2>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -121,7 +122,7 @@
 </tr>
 </thead>
 <tbody><tr>
-<td><strong>期望工期 Te</strong></td>
+<td><strong>期望 Te</strong></td>
 <td>(O + 4M + P) / 6</td>
 </tr>
 <tr>
@@ -133,11 +134,12 @@
 <td>[(P − O) / 6]²</td>
 </tr>
 </tbody></table></div>
-<p><strong>完工概率（原理级）</strong>：假定各活动独立，总工期近似正态；求「在 T 日前完工概率」→ 用总期望与总标准差算 Z 分位数（综合知识常给表或只考 Te/σ 公式）。</p>
-<p>与 <strong>CPM 关键路径</strong> 结合：关键链路上的活动方差叠加影响总工期不确定性；<strong>蒙特卡洛</strong> 用于多活动相关时的模拟（见上表）。</p>
+<p><strong>数值例</strong>：某活动 O=4、M=5、P=10 → Te=(4+20+10)/6=<strong>5.67</strong>，σ=(10−4)/6=<strong>1</strong>。</p>
+<p><strong>完工概率（原理级）</strong>：关键路径上各活动 Te 相加得 <strong>μ</strong>，方差相加后开方得总 <strong>σ</strong>；求「在 T 日前完工」→ 算 Z=(T−μ)/σ，查正态表（试卷常给表或只考 Te/σ）。</p>
+<p>与 <strong>CPM</strong>：关键链路上方差大则整体不确定性高；复杂相关时用 <strong>蒙特卡洛</strong> 替代手工正态叠加。</p>
 <h2 id="其他公式">其他公式</h2>
 <ul>
 <li>沟通渠道：n(n−1)/2  </li>
 <li>WBS：100% 规则</li>
 </ul>
-<p><strong>练题</strong>：<a href="/?bank=practice&chapter=8&path=all&q=%E9%A2%84%E7%AE%97%E4%B8%8E%E6%88%90%E6%9C%AC">第 8 章 · 预算与成本</a></p>
+<p><strong>一页串联</strong>：EVM 看绩效 → CPM 看关键路径 → PERT 估不确定工期 → EMV/蒙特卡洛 估风险与储备。</p>

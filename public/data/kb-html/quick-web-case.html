@@ -1,23 +1,178 @@
 <h1 id="速查--web-应用系统分析与设计案例论文">速查 · Web 应用系统分析与设计（案例/论文）</h1>
 <blockquote>
-<p><strong>教程</strong>：第 16 章 · <strong>归档</strong>：<a href="../%E7%AC%AC%E4%B8%89%E7%AF%87-%E6%A1%88%E4%BE%8B%E5%AE%9E%E8%B7%B5/%E7%AC%AC16%E7%AB%A0-Web%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1.md">第16章-Web应用系统分析与设计.md</a><br><strong>案例导航</strong>：<a href="./%E6%A1%88%E4%BE%8B%E5%9B%9B%E7%B1%BB%E9%A2%98%E5%9E%8B%E5%AF%BC%E8%88%AA.md">案例四类题型导航</a> · <a href="./%E6%A1%88%E4%BE%8B%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E7%B1%BB-%E7%AD%94%E9%A2%98Checklist.md">系统设计 Checklist</a></p>
+<p><strong>教程</strong>：第 16 章 · <strong>归档</strong>：<a href="../%E7%AC%AC%E4%B8%89%E7%AF%87-%E6%A1%88%E4%BE%8B%E5%AE%9E%E8%B7%B5/%E7%AC%AC16%E7%AB%A0-Web%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1.md">第16章-Web应用系统分析与设计.md</a>（完整子节）<br><strong>案例导航</strong>：<a href="./%E6%A1%88%E4%BE%8B%E5%9B%9B%E7%B1%BB%E9%A2%98%E5%9E%8B%E5%AF%BC%E8%88%AA.md">案例四类题型导航</a> · <a href="./%E6%A1%88%E4%BE%8B%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E7%B1%BB-%E7%AD%94%E9%A2%98Checklist.md">系统设计 Checklist</a></p>
 </blockquote>
 <h2 id="分值与题型">分值与题型</h2>
 <ul>
-<li>综合知识约 <strong>5–8 分</strong>；案例分析约 <strong>10–15 分</strong>；论文常涉及 Web/高并发/架构选型  </li>
-<li>高频：<strong>分层/MVC/前后端分离</strong>、<strong>缓存与限流</strong>、<strong>会话与安全</strong></li>
+<li>综合 <strong>5–8 分</strong>；案例 <strong>10–15 分</strong>；论文常涉及 Web/高并发/架构选型（章节权重约 <strong>15%–20%</strong>）  </li>
+<li>题干信号：浏览器入口、HTTP/HTTPS、B/S、MVC/SPA、高并发、会话、REST</li>
 </ul>
-<h2 id="分析设计要点答题清单">分析设计要点（答题清单）</h2>
-<ol>
-<li><strong>需求</strong>：功能 + 非功能（并发、可用、安全）；Web 特征（无安装、跨平台）  </li>
-<li><strong>架构</strong>：单体 vs 微服务 vs Serverless；SPA vs 传统 MVC  </li>
-<li><strong>高并发（≈65% 场景信号）</strong>：CDN、读写分离、缓存（穿透/击穿/雪崩）、异步队列、限流降级  </li>
-<li><strong>安全</strong>：HTTPS、认证鉴权、CSRF/XSS、会话管理  </li>
-<li><strong>测试与 CI/CD</strong>：自动化回归、灰度发布</li>
-</ol>
-<h2 id="案例回链">案例回链</h2>
+<h2 id="web-应用概念与特征">Web 应用概念与特征</h2>
 <ul>
-<li>架构原则（分离关注点、有界上下文）：<code>ch16</code> §2.1  </li>
-<li>智能体/Web 四维度对比：<a href="./Web%E4%B8%8EAI%E6%99%BA%E8%83%BD%E4%BD%93-%E6%9E%B6%E6%9E%84%E9%80%89%E5%9E%8B%E5%9B%9B%E7%BB%B4%E5%BA%A6%E5%8D%A1.md">Web与AI智能体-架构选型四维度卡</a>  </li>
-<li>考点 API：<code>kp-mobile-web</code>（多端 Web）· 案例域筛选 <strong>Web</strong></li>
+<li><strong>定义</strong>：以浏览器（或 Web 界面）为入口，基于 W3C 标准，经 HTTP/HTTPS 提供内容与服务的应用  </li>
+<li><strong>优势（案例可列）</strong>：易访问、免安装、易更新、易扩展、跨平台  </li>
+<li><strong>构建方式</strong>：传统服务端渲染 vs <strong>SPA</strong>（静态壳 + API）；新式特征含云托管、CI/CD、自动化测试</li>
 </ul>
+<h2 id="架构设计原则8-条--案例高频">架构设计原则（8 条 · 案例高频）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>原则</th>
+<th>答题一句</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><strong>分离关注点</strong></td>
+<td>UI / 业务 / 基础设施分开</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>封装</strong></td>
+<td>稳定接口、隐藏实现</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>依赖反转</strong></td>
+<td>依赖抽象，便于替换与测试</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>显式依赖</strong></td>
+<td>构造注入，避免隐式全局</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>单一责任</strong></td>
+<td>一服务一职责，微服务拆分依据</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>DRY</strong></td>
+<td>逻辑单点维护</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>持久性无知</strong></td>
+<td>领域模型不绑死 ORM</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>有界上下文</strong></td>
+<td>独立持久化边界，跨上下文用 API</td>
+</tr>
+</tbody></table></div>
+<h2 id="架构分类与模式">架构分类与模式</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>分类</th>
+<th>适用</th>
+<th>案例对比点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>整体式</strong></td>
+<td>低流量、小团队</td>
+<td>部署简单 vs 扩展难</td>
+</tr>
+<tr>
+<td><strong>微服务</strong></td>
+<td>高并发、复杂域</td>
+<td>独立扩展 vs 分布式复杂度</td>
+</tr>
+<tr>
+<td><strong>Serverless</strong></td>
+<td>事件驱动、短时任务</td>
+<td>按量计费 vs 冷启动</td>
+</tr>
+<tr>
+<td><strong>B/S 三层</strong></td>
+<td>表现 / 逻辑 / 数据</td>
+<td>职责分离</td>
+</tr>
+<tr>
+<td><strong>MVC / MVP</strong></td>
+<td>Web 页面组织</td>
+<td>Presenter 更利单测</td>
+</tr>
+<tr>
+<td><strong>前后端分离</strong></td>
+<td>SPA、多端复用后端</td>
+<td>REST/BFF</td>
+</tr>
+</tbody></table></div>
+<p><strong>REST</strong>：资源 URI + HTTP 动词 + 无状态 → 详见 <a href="./REST%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC-%E4%BD%93%E7%B3%BB%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%8D%A1.md">REST 学习卡</a><br><strong>Web + AI 智能体</strong>：四维度选型 → <a href="./Web%E4%B8%8EAI%E6%99%BA%E8%83%BD%E4%BD%93-%E6%9E%B6%E6%9E%84%E9%80%89%E5%9E%8B%E5%9B%9B%E7%BB%B4%E5%BA%A6%E5%8D%A1.md">Web与AI智能体-架构选型四维度卡</a></p>
+<h2 id="开发框架选型题">开发框架（选型题）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>栈</th>
+<th>代表</th>
+<th>角色</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Java EE</td>
+<td>Spring + Struts + Hibernate（SSH）</td>
+<td>MVC + IoC + ORM</td>
+</tr>
+<tr>
+<td>Java EE</td>
+<td>JSF</td>
+<td>标准 Web 框架</td>
+</tr>
+<tr>
+<td>.NET</td>
+<td>ASP.NET + ADO.NET</td>
+<td>微软全栈</td>
+</tr>
+<tr>
+<td>Web 层</td>
+<td>jQuery / AJAX 等</td>
+<td>异步交互</td>
+</tr>
+</tbody></table></div>
+<h2 id="通信--存储--客户端服务端">通信 · 存储 · 客户端/服务端</h2>
+<ul>
+<li><strong>HTTP/HTTPS</strong>：无状态；Session/Cookie 维护登录态  </li>
+<li><strong>缓存四级</strong>：应用缓存 → 全局 → 分布式（一致性哈希）→ <strong>CDN</strong>  </li>
+<li><strong>性能三板斧</strong>：负载均衡、连接池、缓存  </li>
+<li><strong>客户端/服务端</strong>：浏览器 + Web 服务器 + 应用服务器 + DB/中间件</li>
+</ul>
+<h2 id="部署">部署</h2>
+<p>版本与变更管理、交付前测试、支持制度、可回滚；容器/K8s 与 CI/CD 在案例中与「灰度/蓝绿」同写。</p>
+<h2 id="测试过程功能--性能--安全--web-服务">测试过程（功能 / 性能 / 安全 / Web 服务）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>功能</strong></td>
+<td>表单校验、异常、浏览器后退不破坏数据</td>
+</tr>
+<tr>
+<td><strong>性能</strong></td>
+<td>超正常点击率、递增负载、极限/崩溃</td>
+</tr>
+<tr>
+<td><strong>安全</strong></td>
+<td>认证、会话、注入/XSS、事务与审计</td>
+</tr>
+<tr>
+<td><strong>可靠性</strong></td>
+<td>数据准确、高影响缺陷</td>
+</tr>
+<tr>
+<td><strong>Web 服务</strong></td>
+<td>WSDL、SOAP/REST 互操作</td>
+</tr>
+</tbody></table></div>
+<p>流程：需求 → 策略 → 环境/用例/工具 → 执行与报告。</p>
+<h2 id="高并发65-案例信号">高并发（≈65% 案例信号）</h2>
+<p>CDN、读写分离、缓存（穿透/击穿/雪崩）、消息队列、限流降级、异步化。</p>
+<p><strong>回链</strong>：<code>ch16</code> · <code>kp-mobile-web</code> · <a href="/case/">/case/</a> 领域 <strong>Web</strong></p>

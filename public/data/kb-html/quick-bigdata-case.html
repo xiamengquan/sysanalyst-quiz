@@ -2,6 +2,10 @@
 <blockquote>
 <p><strong>教程</strong>：第 19 章 · <strong>归档</strong>：<a href="../%E7%AC%AC%E4%B8%89%E7%AF%87-%E6%A1%88%E4%BE%8B%E5%AE%9E%E8%B7%B5/%E7%AC%AC19%E7%AB%A0-%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1.md">第19章-大数据…</a> · <strong>API</strong>：<code>kp-big-data</code></p>
 </blockquote>
+<h2 id="分值">分值</h2>
+<ul>
+<li>综合 <strong>5–6 分</strong>；案例 <strong>7–10 分</strong>；与 AI/云常交叉（见 <a href="./AI%E4%B8%8E%E6%95%B0%E5%AD%97%E5%8C%96%E5%BA%94%E7%94%A8-%E8%80%83%E7%82%B9%E9%80%9F%E6%9F%A5.md">AI与数字化应用-考点速查</a>）</li>
+</ul>
 <h2 id="特征4v--5v">特征：4V / 5V</h2>
 <div class="table-wrap"><table>
 <thead>
@@ -14,12 +18,12 @@
 <tbody><tr>
 <td>Volume</td>
 <td>海量</td>
-<td>存储与分布式计算</td>
+<td>分布式存储与计算</td>
 </tr>
 <tr>
 <td>Velocity</td>
 <td>高速</td>
-<td>流处理 vs 批处理</td>
+<td>流 vs 批</td>
 </tr>
 <tr>
 <td>Variety</td>
@@ -42,38 +46,103 @@
 <li><strong>分而治之</strong>——分区、分片、并行  </li>
 <li><strong>移动计算而非移动数据</strong>——MapReduce 思想  </li>
 <li><strong>容错与副本</strong>——HDFS 多副本、任务重试  </li>
-<li><strong>异构数据统一接入</strong>——采集层 Flume/Kafka  </li>
-<li><strong>批流一体或分工明确</strong>——Lambda/Kappa 选型  </li>
-<li><strong>安全与治理</strong>——脱敏、权限、审计</li>
+<li><strong>异构数据统一接入</strong>——Flume/Kafka 等采集  </li>
+<li><strong>批流分工或一体</strong>——Lambda/Kappa 选型  </li>
+<li><strong>安全与治理</strong>——脱敏、权限、审计、元数据</li>
 </ol>
-<h2 id="分层架构简记">分层架构（简记）</h2>
-<p>采集 → 存储（HDFS/对象存储/NoSQL）→ 计算（MapReduce/Spark/Flink）→ 服务（Hive/Presto）→ 应用（BI/风控）</p>
-<h2 id="lambda-vs-kappa">Lambda vs Kappa</h2>
+<p>（教程 §2.1 另列：分布式、模块化、安全、性能、可靠、可运维——可与上表合并表述。）</p>
+<h2 id="分层架构">分层架构</h2>
+<p><strong>采集</strong> → <strong>存储</strong>（HDFS/对象存储/NoSQL）→ <strong>计算</strong>（MapReduce/Spark/Flink）→ <strong>服务</strong>（Hive/Presto）→ <strong>应用</strong>（BI/风控）</p>
+<h2 id="lambda--kappa--iota辨析">Lambda · Kappa · IOTA（辨析）</h2>
 <div class="table-wrap"><table>
 <thead>
 <tr>
 <th>架构</th>
-<th>批</th>
-<th>流</th>
+<th>要点</th>
 <th>适用</th>
 </tr>
 </thead>
 <tbody><tr>
 <td><strong>Lambda</strong></td>
-<td>批层 T+1</td>
-<td>速度层实时</td>
+<td>批层（全量）+ 速度层（实时）+ 服务层（查询合并）</td>
 <td>批流并存、逻辑可重复</td>
 </tr>
 <tr>
 <td><strong>Kappa</strong></td>
-<td>流统一</td>
-<td>重放日志补历史</td>
-<td>简化双轨、流为主</td>
+<td>以流为主，日志重放补历史</td>
+<td>简化双轨、流优先</td>
+</tr>
+<tr>
+<td><strong>IOTA（教程/案例语境）</strong></td>
+<td>面向 IoT/边缘海量接入：<strong>集成接入 → 组织存储 → 转换处理 → 分析应用</strong>；强调 <strong>即时查询、弱化传统 ETL</strong>、与 <strong>数据湖/边缘 SDK</strong> 衔接</td>
+<td>物联网 + 大数据、近实时分析</td>
 </tr>
 </tbody></table></div>
-<h2 id="测试与安全案例一句">测试与安全（案例一句）</h2>
+<h2 id="处理流程etl--elt">处理流程：ETL / ELT</h2>
 <ul>
-<li>测试：数据质量校验、采样对账、性能压测  </li>
-<li>安全：分级分类、脱敏、权限与审计</li>
+<li><strong>ETL</strong>：Extract → Transform → Load（传统仓库）  </li>
+<li><strong>ELT</strong>：先入库再转换（数据湖/弹性计算）  </li>
+<li><strong>六步转换</strong>（教程）：发现 → 映射 → 提取 → 代码生成 → 执行 → 审查  </li>
+<li><strong>清洗</strong>：缺失、异常、重复、标准化</li>
 </ul>
-<p><strong>练题</strong>：<a href="/case/">/case</a> 领域 <strong>大数据</strong> · 综合知识 <code>kp-big-data</code></p>
+<h2 id="技术栈选型简表">技术栈选型（简表）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>层次</th>
+<th>常见组件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>采集</td>
+<td>Flume、Kafka、Sqoop</td>
+</tr>
+<tr>
+<td>批计算</td>
+<td>Hadoop MapReduce、Spark</td>
+</tr>
+<tr>
+<td>流计算</td>
+<td>Storm、Flink、Spark Streaming</td>
+</tr>
+<tr>
+<td>存储</td>
+<td>HDFS、HBase、对象存储</td>
+</tr>
+<tr>
+<td>查询/仓库</td>
+<td>Hive、Presto、数据湖</td>
+</tr>
+<tr>
+<td>检索</td>
+<td>Elasticsearch</td>
+</tr>
+</tbody></table></div>
+<p><strong>行存 vs 列存</strong>：OLTP 行存；OLAP/分析列存（HBase 列族等）——见 <code>ch19</code> §2.3。</p>
+<h2 id="测试与安全">测试与安全</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>测试</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>功能</td>
+<td>分区、聚合、关联、清洗转换</td>
+</tr>
+<tr>
+<td>性能</td>
+<td>吞吐、延迟、扩展</td>
+</tr>
+<tr>
+<td>可靠</td>
+<td>副本、故障转移</td>
+</tr>
+<tr>
+<td>安全</td>
+<td>Kerberos/RBAC、加密、审计、分级 S1–S4</td>
+</tr>
+</tbody></table></div>
+<p><strong>生命周期</strong>：存储 → 管理（元数据/血缘）→ 处理 → 分析 → 部署；生产/测试隔离。</p>
+<p><strong>练题</strong>：<a href="/case/">/case/</a> 领域 <strong>大数据</strong> · <code>kp-big-data</code></p>
