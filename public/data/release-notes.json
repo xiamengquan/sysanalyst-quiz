@@ -1,6 +1,15 @@
 {
-  "latest": "0.9.49",
+  "latest": "0.9.50",
   "releases": [
+    {
+      "version": "0.9.50",
+      "date": "2026-10-08",
+      "title": "sitemap/robots 审计 v3.0 修复",
+      "highlights": [
+        "sitemap：api-ref 按 kp 编号排序、文件 mtime 作 lastmod、章练习热力分档 priority；kp-13-1 别名",
+        "robots：Bing/Yandex crawl-delay、Disallow 查询参数 URL；静态 sitemap 保序；check-sitemap 纳入 check:release"
+      ]
+    },
     {
       "version": "0.9.49",
       "date": "2026-10-08",

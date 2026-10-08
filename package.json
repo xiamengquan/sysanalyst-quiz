@@ -1,6 +1,6 @@
 {
   "name": "sysanalyst-quiz",
-  "version": "0.9.49",
+  "version": "0.9.50",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,8 +9,10 @@
     "lint": "eslint",
     "sync:kb": "node scripts/sync-kb.mjs",
     "sync:data": "node scripts/sync-data.mjs",
-    "sync:all": "npm run sync:kb && npm run sync:data",
-    "check:release": "node scripts/check-release.mjs && node scripts/check-kb-points.mjs && node scripts/check-kb-def-overrides.mjs && node scripts/check-question-stats.mjs && node scripts/check-kb-exam-links.mjs && node scripts/check-case-external-images.mjs",
+    "sync:all": "npm run sync:kb && npm run sync:data && npm run generate:seo",
+    "generate:seo": "node scripts/generate-seo.mjs",
+    "check:release": "node scripts/check-release.mjs && node scripts/check-kb-points.mjs && node scripts/check-kb-def-overrides.mjs && node scripts/check-question-stats.mjs && node scripts/check-kb-exam-links.mjs && node scripts/check-case-external-images.mjs && node scripts/check-sitemap.mjs",
+    "check:sitemap": "node scripts/check-sitemap.mjs",
     "check:kb-points": "node scripts/check-kb-points.mjs",
     "check:kb-def-overrides": "node scripts/check-kb-def-overrides.mjs",
     "rebuild:kb-def-overrides": "python3 scripts/python/rebuild_kb_def_overrides.py && python3 scripts/python/refine_kb_api_points.py && npm run sync:kb",

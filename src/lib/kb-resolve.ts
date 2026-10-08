@@ -1,4 +1,5 @@
 import type { KbItem } from "@/lib/types";
+import { resolveKbRouteAlias } from "@/lib/kb-route-aliases";
 
 export type KbFlatItem = KbItem & { sectionTitle?: string };
 
@@ -38,7 +39,7 @@ export function normalizeKbRouteId(raw: string): string {
       break;
     }
   }
-  return s;
+  return resolveKbRouteAlias(s);
 }
 
 export function findKbItemByRouteId(catalog: KbFlatItem[], routeId: string): KbFlatItem | null {
