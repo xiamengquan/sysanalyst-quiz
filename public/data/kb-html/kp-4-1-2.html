@@ -1,21 +1,18 @@
 <h1 id="大数据概述">大数据概述</h1>
 <blockquote>
-<p><strong>大纲</strong>：19.1 · <strong>教程</strong>：第19章 · <strong>分组</strong>：科目2 · 4. 大数据处理系统分析与设计 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+<p><strong>大纲</strong>：19.1 · <strong>教程</strong>：第19章 · <strong>分组</strong>：科目2 · 4. 大数据处理系统分析与设计 · <strong>状态</strong>：结构式重写 v2.0 · 审计通过</p>
 </blockquote>
 <h2 id="概述">概述</h2>
 <p><strong>大数据概述</strong>：定义：高效、综合的数据处理平台，处理和分析海量、多样、高速数据。</p>
 <h2 id="速懂">速懂</h2>
 <ul>
-<li><strong>一句话</strong>：企业门户：是集信息发布、应用集成、协作与单点登录于一体的企业 Web 入口。作用：用于统一员工访问渠道、整合后台应用与展示个性化工作台。</li>
+<li><strong>一句话</strong>：企业门户是集信息发布、应用集成、协作与单点登录于一体的企业 Web 入口。</li>
 <li><strong>考什么</strong>：大数据 Lambda/Kappa、批流（教程第 19 章）。</li>
 <li><strong>具体理解</strong>：<ul>
 <li>数据安全：认证 + 授权（Kerberos、RBAC、Sentry/Ranger）；产生→存储→使用→传输→展示→销毁全链路；S1—S4 表安全等级</li>
-<li>离线批处理：是有界数据，HDFS + MapReduce + Hive。作用：用于在综合知识选择与案例/论文中准确识别「大数据概述」相关概念、方法步骤及其适用边界与易混点辨析。</li>
-<li>实时流处理：是无界数据，Flume/Kafka + Storm/Spark Streaming + HBase/Redis。作用：用于在综合知识选择与案例/论文中准确识别「大数据概述」相关概念、方法步骤及其适用边界与易混点辨析。</li>
-<li>混合架构：是Lambda（批+流）/ Kappa / 数据湖。作用：用于在综合知识选择与案例/论文中准确识别「大数据概述」相关概念、方法步骤及其适用边界与易混点辨析。</li>
 </ul>
 </li>
-<li><strong>别搞混</strong>：与同章相邻考点区分；题干锚词：<strong>大数据概述</strong>。</li>
+<li><strong>别搞混</strong>：题干锚词：<strong>大数据概述</strong>。</li>
 </ul>
 <h2 id="定义">定义</h2>
 <ul>
@@ -30,14 +27,8 @@
 <h2 id="步骤与流程">步骤与流程</h2>
 <h3 id="流程要点">流程要点</h3>
 <p>存储 → 管理 → 处理 → 分析 → 部署</p>
-<h3 id="流程要点">流程要点</h3>
 <p>认证 + 授权（Kerberos、RBAC、Sentry/Ranger）；产生→存储→使用→传输→展示→销毁全链路；S1—S4 表安全等级</p>
 <h2 id="要点">要点</h2>
-<h1 id="第19章-大数据处理系统分析与设计">第19章 大数据处理系统分析与设计</h1>
-<blockquote>
-<p>出自《系统分析师教程》知识点精炼 · 第三篇分章。科目2/3相关。</p>
-</blockquote>
-<hr>
 <h2 id="一场景特征">一、场景特征</h2>
 <p><strong>定义</strong>：高效、综合的数据处理平台，处理和分析<strong>海量、多样、高速</strong>数据。</p>
 <p><strong>大数据特征（常考）</strong>：Volume、Velocity、Variety、Veracity（不同教材表述略有差异，考试以教程为准）</p>
@@ -49,7 +40,7 @@
 </ul>
 <p><strong>处理方式</strong>：</p>
 <h2 id="二架构原则与模式">二、架构原则与模式</h2>
-<h3 id="21-架构原则">2.1 架构原则</h3>
+<h3 id="架构原则">架构原则</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -82,7 +73,7 @@
 <td>监控预警、性能调优、故障排除、升级维护</td>
 </tr>
 </tbody></table></div>
-<h3 id="22-架构类型与模式">2.2 架构类型与模式</h3>
+<h3 id="架构类型与模式">架构类型与模式</h3>
 <p><strong>Lambda 架构三层</strong>：</p>
 <ul>
 <li>批处理层（Batch Layer）：全量历史视图</li>
@@ -91,7 +82,7 @@
 </ul>
 <p><strong>数据湖模式组件</strong>：通用数据模型、边缘 SDK、实时缓存、历史沉浸区、Dumper、Query Engine、模型反馈</p>
 <p><strong>特点</strong>：去 ETL 化、即时查询、边缘计算</p>
-<h3 id="23-存储选型">2.3 存储选型</h3>
+<h3 id="存储选型">存储选型</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -128,7 +119,7 @@
 </tbody></table></div>
 <p><strong>HBase</strong>：列族，平衡 OLTP/OLAP，水平扩展</p>
 <h2 id="三开发与测试要点">三、开发与测试要点</h2>
-<h3 id="31-数据生命周期">3.1 数据生命周期</h3>
+<h3 id="数据生命周期">数据生命周期</h3>
 <p><strong>存储</strong> → <strong>管理</strong> → <strong>处理</strong> → <strong>分析</strong> → <strong>部署</strong></p>
 <p><strong>数据管理四块</strong>：</p>
 <ol>
@@ -151,11 +142,11 @@
 </ul>
 <p><strong>ETL/数据转换六步</strong>：发现 → 映射 → 提取 → 代码生成 → 执行 → 审查</p>
 <p><strong>数据清洗</strong>：缺失值、异常值、重复记录、标准化、干净数据回流</p>
-<h3 id="32-系统部署">3.2 系统部署</h3>
+<h3 id="系统部署">系统部署</h3>
 <p><strong>隔离原则</strong>：生产/测试、集群、在线/离线、应用、数据</p>
 <p><strong>部署检查</strong>：集群规划、网络、安全、时间同步、SSH</p>
 <p><strong>变更管理</strong>：版本控制、内容一致、变更跟踪、版本对应、快速回滚、历史记录</p>
-<h3 id="33-测试特点与过程">3.3 测试特点与过程</h3>
+<h3 id="测试特点与过程">测试特点与过程</h3>
 <p><strong>特点</strong>：数据量大、类型多样、实时+批处理、高性能可扩展、逻辑复杂</p>
 <p><strong>过程</strong>：测试需求分析 → 计划方案 → 用例设计 → 执行 → 报告</p>
 <div class="table-wrap"><table>

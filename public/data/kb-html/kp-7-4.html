@@ -1,28 +1,21 @@
 <h1 id="访问控制blpbibalatticedacmacrbac-等">访问控制（BLP/Biba/Lattice、DAC/MAC/RBAC 等）</h1>
 <blockquote>
-<p><strong>大纲</strong>：9.4 · <strong>教程</strong>：第9章 · <strong>分组</strong>：科目1 · 7. 信息安全 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+<p><strong>大纲</strong>：9.4 · <strong>教程</strong>：第9章 · <strong>分组</strong>：科目1 · 7. 信息安全 · <strong>状态</strong>：结构式重写 v2.0 · 审计通过</p>
 </blockquote>
 <h2 id="概述">概述</h2>
 <p><strong>访问控制（BLP/Biba/Lattice、DAC/MAC/RBAC 等）</strong>：三要素：主体、客体、控制策略。</p>
 <h2 id="速懂">速懂</h2>
 <ul>
-<li><strong>一句话</strong>：上读(no read up)：是不能读高于自身级别的数据。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>一句话</strong>：上读(no read up)是不能读高于自身级别的数据。</li>
 <li><strong>考什么</strong>：访问控制模型、加密、容灾 RPO/RTO（教程第 9 章）。</li>
-<li><strong>具体理解</strong>：<ul>
-<li>上读(no read up)：是不能读高于自身级别的数据。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
-<li>下写(no write down)：是不能写低于自身级别的数据。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
-<li>下读(no read down)：是不能读低于自身级别的数据。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
-<li>上写(no write up)：是不能写高于自身级别的数据。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
-</ul>
-</li>
 <li><strong>别搞混</strong>：| 对比 | 区别 |</li>
 </ul>
 <h2 id="定义">定义</h2>
 <ul>
-<li><strong>上读(no read up)</strong>：是不能读高于自身级别的数据。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
-<li><strong>下写(no write down)</strong>：是不能写低于自身级别的数据。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
-<li><strong>下读(no read down)</strong>：是不能读低于自身级别的数据。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
-<li><strong>上写(no write up)</strong>：是不能写高于自身级别的数据。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>上读(no read up)</strong>：是不能读高于自身级别的数据。</li>
+<li><strong>下写(no write down)</strong>：是不能写低于自身级别的数据。</li>
+<li><strong>下读(no read down)</strong>：是不能读低于自身级别的数据。</li>
+<li><strong>上写(no write up)</strong>：是不能写高于自身级别的数据。</li>
 <li><strong>数字签名</strong>：数字签名是基于非对称加密技术，用发送方私钥对消息摘要进行加密而形成的认证标识。<strong>作用</strong>：用于验证发送方身份（鉴别）、保证消息未被篡改（完整性），以及防止发送方事后否认（不可否认）。</li>
 <li><strong>数字证书</strong>：数字证书是由可信的证书颁发机构（CA）签发、符合 X.509 标准的电子凭证，内含用户身份信息、公钥、有效期及 CA 数字签名。<strong>作用</strong>：用于在 PKI 体系中绑定公钥与持有者身份，使通信各方能够验证公钥归属并建立可信通信。</li>
 <li><strong>防火墙</strong>：防火墙是部署在网络边界、依据安全策略对进出流量进行过滤与控制的网络安全设备或系统。<strong>作用</strong>：用于实现访问控制、内容过滤与日志审计，隔离受信网络与不可信网络，降低外部攻击面。</li>
@@ -124,12 +117,40 @@
 <td>BLP(保密)</td>
 </tr>
 <tr>
-<td>对比项</td>
-<td>DAC</td>
+<td>--------</td>
+<td>-----------</td>
 </tr>
 <tr>
-<td>功能</td>
-<td>访问控制/隔离</td>
+<td>目标</td>
+<td>保密性：不上读/不下写</td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>DAC</th>
+<th>MAC</th>
+<th>RBAC</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>授权依据</td>
+<td>属主自主授权</td>
+<td>系统强制安全标签</td>
+<td>角色—权限映射</td>
+</tr>
+<tr>
+<td>灵活性</td>
+<td>高</td>
+<td>低</td>
+<td>中</td>
+</tr>
+<tr>
+<td>典型缺陷</td>
+<td>权限扩散</td>
+<td>管理复杂</td>
+<td>角色爆炸</td>
 </tr>
 </tbody></table></div>
 <h2 id="应试">应试</h2>

@@ -1,12 +1,12 @@
 <h1 id="web-应用及特征">Web 应用及特征</h1>
 <blockquote>
-<p><strong>大纲</strong>：16.1 · <strong>教程</strong>：第16章 · <strong>分组</strong>：科目2 · 1. Web 应用系统分析与设计 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+<p><strong>大纲</strong>：16.1 · <strong>教程</strong>：第16章 · <strong>分组</strong>：科目2 · 1. Web 应用系统分析与设计 · <strong>状态</strong>：结构式重写 v2.0 · 审计通过</p>
 </blockquote>
 <h2 id="概述">概述</h2>
 <p><strong>Web 应用及特征</strong>：Web 应用系统（答卷·定义）：Web 应用系统是以 Web 浏览器（或支持 Web 技术的可视化界面）为用户入口、基于 Web 技术与 W3C 标准、通过 HTTP/HTTPS 等协议向用户提供内容与服务的应用程序。</p>
 <h2 id="速懂">速懂</h2>
 <ul>
-<li><strong>一句话</strong>：Web 应用系统：Web 应用系统是以 Web 浏览器（或支持 Web 技术的可视化界面）为用户入口、基于 Web 技术与 W3C 标准、通过 HTTP/HTTPS 等协议向用户提供内容与服务的应用程序。作用：主要用于降低客户端安装与维护成本，实现跨平台、易访问的信息交互与业务处理；典型场景包括电子商务、企业门户、SaaS 与社交网络等。</li>
+<li><strong>一句话</strong>：Web 应用系统是以 Web 浏览器（或支持 Web 技术的可视化界面）为用户入口、基于 Web 技术与 W3C 标准、通过 HTTP/HTTPS 等协议向用户提供内容与服务的应用程序。</li>
 <li><strong>考什么</strong>：Web 峰值、缓存限流、B/S 与 MVC（教程第 16 章）。</li>
 <li><strong>具体理解</strong>：<ul>
 <li>传统应用 + SPA 并存：服务端渲染 MVC vs 客户端 SPA（Blazor WebAssembly 等）</li>
@@ -21,7 +21,7 @@
 <li><strong>Web 应用系统</strong>：Web 应用系统是以 Web 浏览器（或支持 Web 技术的可视化界面）为用户入口、基于 Web 技术与 W3C 标准、通过 HTTP/HTTPS 等协议向用户提供内容与服务的应用程序。<strong>作用</strong>：主要用于降低客户端安装与维护成本，实现跨平台、易访问的信息交互与业务处理；典型场景包括电子商务、企业门户、SaaS 与社交网络等。</li>
 </ul>
 <h2 id="步骤与流程">步骤与流程</h2>
-<h3 id="34-web-测试特点">3.4 Web 测试特点</h3>
+<h3 id="web-测试特点">Web 测试特点</h3>
 <ol>
 <li>用户量大，需跨平台全局访问与并发事务处理</li>
 <li>超文本链接关系须人工校验</li>
@@ -31,7 +31,7 @@
 <li>技术种类多，测试模型粒度难定义</li>
 <li>分布式、动态、多平台、交互、超文本</li>
 </ol>
-<h3 id="一场景特征">一、场景特征</h3>
+<h3 id="场景特征">场景特征</h3>
 <ol>
 <li><strong>云托管与可扩展性</strong>：低内存、高吞吐，容器/微服务友好</li>
 <li><strong>跨平台</strong>：Linux/macOS/Windows，Docker 部署</li>
@@ -39,7 +39,7 @@
 <li><strong>传统应用 + SPA 并存</strong>：服务端渲染 MVC vs 客户端 SPA（Blazor WebAssembly 等）</li>
 <li><strong>CI/CD 友好</strong>：Azure DevOps、GitHub Actions 等持续交付</li>
 </ol>
-<h3 id="24-开发框架案例技术选型">2.4 开发框架（案例技术选型）</h3>
+<h3 id="开发框架案例技术选型">开发框架（案例技术选型）</h3>
 <ol>
 <li>浏览器</li>
 <li>Struts(Controller)</li>
@@ -48,7 +48,7 @@
 <li>数据库</li>
 </ol>
 <h2 id="要点">要点</h2>
-<h3 id="一场景特征">一、场景特征</h3>
+<h3 id="场景特征">场景特征</h3>
 <p><strong>定义</strong>：用户界面驻留于 Web 浏览器（或支持 Web 技术的可视化界面）的应用程序，基于 Web 技术与 W3C 标准，通过 HTTP 等协议提供内容与服务。</p>
 <p><strong>典型场景</strong>：</p>
 <ul>
@@ -82,13 +82,6 @@
 </tr>
 </tbody></table></div>
 <p><strong>新式 Web 应用特征</strong>（与案例架构选型相关）：</p>
-<ol>
-<li><strong>云托管与可扩展性</strong>：低内存、高吞吐，容器/微服务友好</li>
-<li><strong>跨平台</strong>：Linux/macOS/Windows，Docker 部署</li>
-<li><strong>自动化测试</strong>：脚本模拟用户操作，可重复、可回归</li>
-<li><strong>传统应用 + SPA 并存</strong>：服务端渲染 MVC vs 客户端 SPA（Blazor WebAssembly 等）</li>
-<li><strong>CI/CD 友好</strong>：Azure DevOps、GitHub Actions 等持续交付</li>
-</ol>
 <p><strong>两种构建方式</strong>：</p>
 <ul>
 <li><strong>传统 Web 应用</strong>：大部分逻辑在服务器，每次操作完整页面重载</li>

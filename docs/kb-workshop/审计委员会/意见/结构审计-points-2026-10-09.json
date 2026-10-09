@@ -1,0 +1,1055 @@
+{
+  "date": "2026-10-09",
+  "summary": {
+    "total": 174,
+    "clean": 174,
+    "dirty": 0
+  },
+  "categories": {},
+  "files": [
+    {
+      "file": "kp-1-1-2.md",
+      "lines": 97,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-1-1.md",
+      "lines": 204,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-1-2-2.md",
+      "lines": 77,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-1-2.md",
+      "lines": 108,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-1-3-2.md",
+      "lines": 63,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-1-3.md",
+      "lines": 81,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-1-4-2.md",
+      "lines": 162,
+      "h2": 10,
+      "problems": []
+    },
+    {
+      "file": "kp-1-4.md",
+      "lines": 83,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-1-5-2.md",
+      "lines": 80,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-1-5.md",
+      "lines": 67,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-1-6.md",
+      "lines": 81,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-10-1.md",
+      "lines": 75,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-10-2.md",
+      "lines": 72,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-10-3.md",
+      "lines": 85,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-10-4.md",
+      "lines": 69,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-10-5.md",
+      "lines": 70,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-10-6.md",
+      "lines": 84,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-11-1.md",
+      "lines": 55,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-11-2.md",
+      "lines": 58,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-11-3.md",
+      "lines": 80,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-11-4.md",
+      "lines": 136,
+      "h2": 12,
+      "problems": []
+    },
+    {
+      "file": "kp-11-5.md",
+      "lines": 55,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-11-6.md",
+      "lines": 138,
+      "h2": 12,
+      "problems": []
+    },
+    {
+      "file": "kp-11-7.md",
+      "lines": 135,
+      "h2": 12,
+      "problems": []
+    },
+    {
+      "file": "kp-12-1.md",
+      "lines": 61,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-12-2.md",
+      "lines": 67,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-12-3.md",
+      "lines": 66,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-12-4.md",
+      "lines": 66,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-12-5.md",
+      "lines": 138,
+      "h2": 11,
+      "problems": []
+    },
+    {
+      "file": "kp-12-6.md",
+      "lines": 137,
+      "h2": 11,
+      "problems": []
+    },
+    {
+      "file": "kp-13-2.md",
+      "lines": 208,
+      "h2": 15,
+      "problems": []
+    },
+    {
+      "file": "kp-13-3.md",
+      "lines": 55,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-13-4.md",
+      "lines": 67,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-13-5.md",
+      "lines": 51,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-13-6.md",
+      "lines": 61,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-13-7.md",
+      "lines": 74,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-13-8.md",
+      "lines": 207,
+      "h2": 15,
+      "problems": []
+    },
+    {
+      "file": "kp-2-1-2.md",
+      "lines": 174,
+      "h2": 12,
+      "problems": []
+    },
+    {
+      "file": "kp-2-1.md",
+      "lines": 184,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-2-2-2.md",
+      "lines": 60,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-2-2.md",
+      "lines": 69,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-2-3-2.md",
+      "lines": 79,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-2-3.md",
+      "lines": 154,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-2-4-2.md",
+      "lines": 177,
+      "h2": 12,
+      "problems": []
+    },
+    {
+      "file": "kp-2-4.md",
+      "lines": 62,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-2-5-2.md",
+      "lines": 174,
+      "h2": 12,
+      "problems": []
+    },
+    {
+      "file": "kp-2-5.md",
+      "lines": 64,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-2-6.md",
+      "lines": 53,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-2-7.md",
+      "lines": 56,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-2-8.md",
+      "lines": 51,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-3-1-2.md",
+      "lines": 155,
+      "h2": 12,
+      "problems": []
+    },
+    {
+      "file": "kp-3-1.md",
+      "lines": 83,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-3-2-2.md",
+      "lines": 74,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-3-2.md",
+      "lines": 84,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-3-3-2.md",
+      "lines": 81,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-3-3.md",
+      "lines": 233,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-3-4-2.md",
+      "lines": 156,
+      "h2": 12,
+      "problems": []
+    },
+    {
+      "file": "kp-3-4.md",
+      "lines": 233,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-3-5-2.md",
+      "lines": 77,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-3-5.md",
+      "lines": 79,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-3-6.md",
+      "lines": 77,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-3-7.md",
+      "lines": 77,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-3-8.md",
+      "lines": 77,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-4-1-2.md",
+      "lines": 165,
+      "h2": 12,
+      "problems": []
+    },
+    {
+      "file": "kp-4-1.md",
+      "lines": 60,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-4-2-2.md",
+      "lines": 60,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-4-2.md",
+      "lines": 81,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-4-3-2.md",
+      "lines": 77,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-4-3.md",
+      "lines": 94,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-4-4-2.md",
+      "lines": 65,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-4-4.md",
+      "lines": 197,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-4-5.md",
+      "lines": 71,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-4-6.md",
+      "lines": 65,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-4-7.md",
+      "lines": 71,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-4-8.md",
+      "lines": 66,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-5-1.md",
+      "lines": 180,
+      "h2": 12,
+      "problems": []
+    },
+    {
+      "file": "kp-5-2-2.md",
+      "lines": 103,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-5-2.md",
+      "lines": 130,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-5-3-2.md",
+      "lines": 75,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-5-3.md",
+      "lines": 63,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-5-4-2.md",
+      "lines": 50,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-5-4.md",
+      "lines": 86,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-5-5.md",
+      "lines": 61,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-5-6.md",
+      "lines": 70,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-5-7.md",
+      "lines": 109,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-5-8.md",
+      "lines": 56,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-6-1-2.md",
+      "lines": 180,
+      "h2": 12,
+      "problems": []
+    },
+    {
+      "file": "kp-6-1.md",
+      "lines": 50,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-6-2-2.md",
+      "lines": 103,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-6-2.md",
+      "lines": 68,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-6-3-2.md",
+      "lines": 75,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-6-3.md",
+      "lines": 71,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-6-4-2.md",
+      "lines": 59,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-6-4.md",
+      "lines": 87,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-6-5-2.md",
+      "lines": 180,
+      "h2": 12,
+      "problems": []
+    },
+    {
+      "file": "kp-6-5.md",
+      "lines": 62,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-6-6-2.md",
+      "lines": 50,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-6-6.md",
+      "lines": 60,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-6-7.md",
+      "lines": 56,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-6-8.md",
+      "lines": 55,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-6-9.md",
+      "lines": 101,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-7-1.md",
+      "lines": 80,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-7-2.md",
+      "lines": 86,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-7-3.md",
+      "lines": 102,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-7-4.md",
+      "lines": 124,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-7-5.md",
+      "lines": 76,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-7-6.md",
+      "lines": 215,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-7-7.md",
+      "lines": 81,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-7-8.md",
+      "lines": 77,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-7-9.md",
+      "lines": 60,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-8-1.md",
+      "lines": 230,
+      "h2": 11,
+      "problems": []
+    },
+    {
+      "file": "kp-8-2.md",
+      "lines": 92,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-8-3.md",
+      "lines": 83,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-8-4.md",
+      "lines": 87,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-8-5.md",
+      "lines": 93,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-8-6.md",
+      "lines": 94,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-8-7.md",
+      "lines": 96,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-8-8.md",
+      "lines": 88,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-8-9.md",
+      "lines": 242,
+      "h2": 11,
+      "problems": []
+    },
+    {
+      "file": "kp-9-1.md",
+      "lines": 78,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-9-2.md",
+      "lines": 121,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-9-3.md",
+      "lines": 72,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-9-4.md",
+      "lines": 78,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-9-5.md",
+      "lines": 96,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-9-6.md",
+      "lines": 119,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-9-7.md",
+      "lines": 201,
+      "h2": 10,
+      "problems": []
+    },
+    {
+      "file": "kp-9-8.md",
+      "lines": 80,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-app-service-integration.md",
+      "lines": 195,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-app-system-analysis-design.md",
+      "lines": 68,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-big-data.md",
+      "lines": 74,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-case-tools.md",
+      "lines": 62,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-cloud-computing.md",
+      "lines": 73,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-cps-iot.md",
+      "lines": 64,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-data-integration-sharing.md",
+      "lines": 192,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-data-mgmt-analysis-modeling.md",
+      "lines": 113,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-data-mining.md",
+      "lines": 232,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-data-warehouse.md",
+      "lines": 235,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-dss.md",
+      "lines": 192,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-ecommerce-egovernment.md",
+      "lines": 199,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-english-reading-terms.md",
+      "lines": 84,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-enterprise-informatization.md",
+      "lines": 192,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-essay-content.md",
+      "lines": 210,
+      "h2": 17,
+      "problems": []
+    },
+    {
+      "file": "kp-essay-topic-db-modeling.md",
+      "lines": 59,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-essay-topic-enterprise-is.md",
+      "lines": 61,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-essay-topic-info-systems.md",
+      "lines": 69,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-essay-topic-network-planning.md",
+      "lines": 55,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-essay-topic-new-tech.md",
+      "lines": 63,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-essay-topic-open-source.md",
+      "lines": 55,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-essay-topic-security-analysis.md",
+      "lines": 55,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-essay-topic-system-integration.md",
+      "lines": 57,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-law-finance-org-hr-it-audit.md",
+      "lines": 83,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-low-code-nocode.md",
+      "lines": 168,
+      "h2": 12,
+      "problems": []
+    },
+    {
+      "file": "kp-math-stats-graph-theory-decision.md",
+      "lines": 82,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-microservices.md",
+      "lines": 90,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-mobile-web.md",
+      "lines": 55,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-network-planning-ops.md",
+      "lines": 154,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-oo-technology.md",
+      "lines": 99,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-open-source-community-stack.md",
+      "lines": 66,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-open-source-software.md",
+      "lines": 46,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-ops-metrics-mttr-mtbf-mttf-mtta.md",
+      "lines": 69,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-project-management-essay.md",
+      "lines": 232,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-quality-assurance-essay.md",
+      "lines": 63,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-realtime-systems.md",
+      "lines": 175,
+      "h2": 12,
+      "problems": []
+    },
+    {
+      "file": "kp-requirements-engineering.md",
+      "lines": 106,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-security-data-system.md",
+      "lines": 217,
+      "h2": 7,
+      "problems": []
+    },
+    {
+      "file": "kp-software-lifecycle.md",
+      "lines": 68,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-software-product-line.md",
+      "lines": 70,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-spi-cmmi.md",
+      "lines": 81,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-standards-ip-lifecycle.md",
+      "lines": 84,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-system-maintenance.md",
+      "lines": 208,
+      "h2": 15,
+      "problems": []
+    },
+    {
+      "file": "kp-system-planning-analysis.md",
+      "lines": 243,
+      "h2": 11,
+      "problems": []
+    },
+    {
+      "file": "kp-system-testing.md",
+      "lines": 61,
+      "h2": 8,
+      "problems": []
+    },
+    {
+      "file": "kp-thesis-writing-guide.md",
+      "lines": 216,
+      "h2": 17,
+      "problems": []
+    },
+    {
+      "file": "kp-tps.md",
+      "lines": 191,
+      "h2": 8,
+      "problems": []
+    }
+  ]
+}

@@ -1,12 +1,12 @@
 <h1 id="数据仓库olap概述设计方法">数据仓库（OLAP、概述、设计方法）</h1>
 <blockquote>
-<p><strong>大纲</strong>：5.6 · <strong>教程</strong>：第5章 · <strong>分组</strong>：科目1 · 3. 数据库系统基础知识 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+<p><strong>大纲</strong>：5.6 · <strong>教程</strong>：第5章 · <strong>分组</strong>：科目1 · 3. 数据库系统基础知识 · <strong>状态</strong>：结构式重写 v2.0 · 审计通过</p>
 </blockquote>
 <h2 id="概述">概述</h2>
 <p><strong>数据仓库（OLAP、概述、设计方法）</strong> 属本科目大纲考点，侧重概念辨析与案例/论文回扣。</p>
 <h2 id="速懂">速懂</h2>
 <ul>
-<li><strong>一句话</strong>：数据仓库：是面向主题、集成、相对稳定、反映历史变化。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>一句话</strong>：数据仓库是面向主题、集成、相对稳定、反映历史变化。</li>
 <li><strong>考什么</strong>：范式/事务/备份、ER 与 SQL 场景（教程第 5 章）。</li>
 <li><strong>具体理解</strong>：<ul>
 <li>数据仓库：面向主题、集成、相对稳定、反映历史变化。</li>
@@ -19,26 +19,18 @@
 </ul>
 <h2 id="定义">定义</h2>
 <ul>
-<li><strong>数据仓库</strong>：是面向主题、集成、相对稳定、反映历史变化。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
-<li><strong>OLTP vs OLAP</strong>：是操作型(事务) vs 分析型(决策)。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
-<li><strong>OLAP操作</strong>：是钻取、切片、切块、旋转。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
-<li><strong>数据仓库结构</strong>：是源数据层、数据存储层、OLAP引擎、前端。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
-<li><strong>数据均衡性原则</strong>：数据均衡性原则是指分片后各节点的数据量与访问压力应尽可能均匀。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
-<li><strong>业务相关性原则</strong>：业务相关性原则是指分片键与分片边界应紧贴核心业务场景与高频访问路径来设计。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
-<li><strong>可扩展性原则</strong>：可扩展性原则是指分片方案应支持业务增长时通过新增节点实现横向扩展。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>数据仓库</strong>：是面向主题、集成、相对稳定、反映历史变化。</li>
+<li><strong>OLTP vs OLAP</strong>：是操作型(事务) vs 分析型(决策)。</li>
+<li><strong>OLAP操作</strong>：是钻取、切片、切块、旋转。</li>
+<li><strong>数据仓库结构</strong>：是源数据层、数据存储层、OLAP引擎、前端。</li>
+<li><strong>数据均衡性原则</strong>：数据均衡性原则是指分片后各节点的数据量与访问压力应尽可能均匀。</li>
+<li><strong>业务相关性原则</strong>：业务相关性原则是指分片键与分片边界应紧贴核心业务场景与高频访问路径来设计。</li>
+<li><strong>可扩展性原则</strong>：可扩展性原则是指分片方案应支持业务增长时通过新增节点实现横向扩展。</li>
 <li><strong>数据分片</strong>：数据分片是把逻辑上统一的数据集合按既定规则划分到多个物理节点存储与访问的技术。<strong>作用</strong>：用于提升容量与并发扩展能力，并支撑故障隔离与按片备份恢复。</li>
 <li><strong>分片键</strong>：分片键是用于决定一条（或一组）数据路由到哪一个分片的属性或属性组合。</li>
 <li><strong>跨厅（跨站点）数据共享</strong>：跨厅数据共享是指不同业务网点之间能够按统一规则访问与使用同一业务域下的共享数据（如 A 厅取号、B 厅办理时读取原取号记录）。<strong>作用</strong>：用于支撑跨网点连续办理与实时协同，避免各厅数据孤岛。</li>
 <li><strong>数据持久化</strong>：数据持久化是将业务数据可靠写入可长期保存的存储介质，并在进程重启、节点故障后仍可恢复访问的能力。<strong>作用</strong>：用于满足长期保存、审计统计与故障后数据不丢等需求（如排队记录保存 ≥5 年）。</li>
 </ul>
-<h2 id="步骤与流程">步骤与流程</h2>
-<p>本节在教程中<strong>未单独列出固定步骤名</strong>；答题时可按下列指引组织答案：</p>
-<ol>
-<li>先在「要点」中找 <strong>阶段 / 活动 / → 流程链</strong> 表述；</li>
-<li>案例题常用 <strong>调查 → 分析 → 方案 → 验证</strong>（或题干给出的过程框架）；</li>
-<li>综合知识流程题优先写 <strong>编号步骤</strong> 或 <strong>阶段名称</strong>；</li>
-<li>需要完整步骤时打开文末 <strong>归档通章</strong> 对应小节对照誊写。</li>
-</ol>
 <h2 id="要点">要点</h2>
 <h3 id="数据仓库与olap">数据仓库与OLAP</h3>
 <ul>
@@ -51,13 +43,30 @@
 <div class="table-wrap"><table>
 <thead>
 <tr>
-<th>对比</th>
-<th>区别</th>
+<th>对比项</th>
+<th>OLTP</th>
+<th>OLAP</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>对比项</td>
-<td>OLTP</td>
+<td>目的</td>
+<td>日常事务处理</td>
+<td>决策分析支持</td>
+</tr>
+<tr>
+<td>操作</td>
+<td>增删改查</td>
+<td>多维分析</td>
+</tr>
+<tr>
+<td>数据</td>
+<td>当前、细节级</td>
+<td>历史、汇总级</td>
+</tr>
+<tr>
+<td>用户</td>
+<td>操作人员</td>
+<td>决策层/分析员</td>
 </tr>
 </tbody></table></div>
 <h2 id="应试">应试</h2>

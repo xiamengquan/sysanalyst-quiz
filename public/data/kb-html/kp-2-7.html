@@ -1,20 +1,14 @@
 <h1 id="web-服务">Web 服务</h1>
 <blockquote>
-<p><strong>大纲</strong>：4.7 · <strong>教程</strong>：第4章 · <strong>分组</strong>：科目1 · 2. 计算机网络与分布式系统 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+<p><strong>大纲</strong>：4.7 · <strong>教程</strong>：第4章 · <strong>分组</strong>：科目1 · 2. 计算机网络与分布式系统 · <strong>状态</strong>：结构式重写 v2.0 · 审计通过</p>
 </blockquote>
 <h2 id="概述">概述</h2>
 <p><strong>Web 服务</strong>：架构约束（选择高频）：客户端-服务器、无状态、可缓存、统一接口（URI + 动词）、分层系统、按需代码（可选）。</p>
 <h2 id="速懂">速懂</h2>
 <ul>
-<li><strong>一句话</strong>：REST：是一种 Web 架构风格，用 URI 标识资源、HTTP 标准方法表达操作语义、服务器无状态。作用：用于构建可缓存、易横向扩展的 Web API（2016/2018 案例高频）。</li>
+<li><strong>一句话</strong>：REST是一种 Web 架构风格，用 URI 标识资源、HTTP 标准方法表达操作语义、服务器无状态。</li>
 <li><strong>考什么</strong>：子网划分、协议对比、分布式与云（教程第 4 章）。</li>
-<li><strong>具体理解</strong>：<ul>
-<li>REST：是一种 Web 架构风格，用 URI 标识资源、HTTP 标准方法表达操作语义、服务器无状态。作用：用于构建可缓存、易横向扩展的 Web API（2016/2018 案例高频）。</li>
-<li>SOAP / RPC 风格：是基于 XML 信封的过程或对象调用，可承载 WS-Security 等规范。作用：用于企业级集成与强规范安全场景，与 REST 对比选型。</li>
-<li>架构约束：是含客户端-服务器、无状态、可缓存、统一接口、分层系统等 REST 约束。作用：用于辨析 REST 与 RPC/SOAP 的差异。</li>
-</ul>
-</li>
-<li><strong>别搞混</strong>：与同章相邻考点区分；题干锚词：<strong>Web / 服务</strong>。</li>
+<li><strong>别搞混</strong>：题干锚词：<strong>Web / 服务</strong>。</li>
 </ul>
 <h2 id="定义">定义</h2>
 <ul>
@@ -23,21 +17,12 @@
 <li><strong>HTTP 方法与幂等</strong>：是GET 用于查询（安全、幂等）；POST 用于创建（通常不幂等）；PUT 全量更新、DELETE 删除（幂等）。<strong>作用</strong>：用于接口设计与 REST 约束题。</li>
 <li><strong>架构约束</strong>：是含客户端-服务器、无状态、可缓存、统一接口、分层系统等 REST 约束。<strong>作用</strong>：用于辨析 REST 与 RPC/SOAP 的差异。</li>
 </ul>
-<h2 id="步骤与流程">步骤与流程</h2>
-<p>本节在教程中<strong>未单独列出固定步骤名</strong>；答题时可按下列指引组织答案：</p>
-<ol>
-<li>先在「要点」中找 <strong>阶段 / 活动 / → 流程链</strong> 表述；</li>
-<li>案例题常用 <strong>调查 → 分析 → 方案 → 验证</strong>（或题干给出的过程框架）；</li>
-<li>综合知识流程题优先写 <strong>编号步骤</strong> 或 <strong>阶段名称</strong>；</li>
-<li>需要完整步骤时打开文末 <strong>归档通章</strong> 对应小节对照誊写。</li>
-</ol>
 <h2 id="要点">要点</h2>
 <p><strong>架构约束（选择高频）</strong>：客户端-服务器、<strong>无状态</strong>、可缓存、<strong>统一接口</strong>（URI + 动词）、分层系统、按需代码（可选）。</p>
 <p><strong>HTTP 方法</strong>：GET 查（安全、幂等）；POST 建（通常不幂等）；PUT 全量更、DELETE 删（幂等）。</p>
 <p><strong>URI 惯例</strong>：名词复数集合 <code>/surveys</code>；实例 <code>/surveys/{id}</code>；编辑/视图可建模为子资源或查询参数。</p>
 <p><strong>REST vs SOAP</strong>：REST 用 URI 标识资源、HTTP 动词与无状态；SOAP 偏 XML 信封、RPC 与企业 WS-Security。案例常考 REST 选型理由（2016 上）与资源抽象（2018 上）。</p>
 <h2 id="易混辨析">易混辨析</h2>
-<p>（本节与相邻考点易混点见归档篇章「易混对比」；检索关键词：<strong>Web、服务</strong>。）</p>
 <h2 id="应试">应试</h2>
 <p><strong>常考结论</strong></p>
 <ul>

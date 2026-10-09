@@ -1,18 +1,18 @@
 <h1 id="开发框架java-eenetweb-层">开发框架（Java EE、.NET、Web 层）</h1>
 <blockquote>
-<p><strong>大纲</strong>：16.3 · <strong>教程</strong>：第16章 · <strong>分组</strong>：科目2 · 1. Web 应用系统分析与设计 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+<p><strong>大纲</strong>：16.3 · <strong>教程</strong>：第16章 · <strong>分组</strong>：科目2 · 1. Web 应用系统分析与设计 · <strong>状态</strong>：结构式重写 v2.0 · 审计通过</p>
 </blockquote>
 <h2 id="概述">概述</h2>
 <p><strong>开发框架（Java EE、.NET、Web 层）</strong>：HTTP 无状态（答卷·定义）：HTTP 是无连接、无状态的请求-响应协议，服务器默认不保留客户端历史请求上下文；用于简化服务器设计，但跨请求的用户状态须借助 Session/Cookie 等机制维护。</p>
 <h2 id="速懂">速懂</h2>
 <ul>
-<li><strong>一句话</strong>：数据库连接池：是复用连接以降低建立开销的机制。作用：用于 Web 高并发访问性能。</li>
+<li><strong>一句话</strong>：数据库连接池是复用连接以降低建立开销的机制。</li>
 <li><strong>考什么</strong>：Web 峰值、缓存限流、B/S 与 MVC（教程第 16 章）。</li>
 <li><strong>具体理解</strong>：<ul>
 <li>先背定义节「是什么 + 作用」，再展开要点中的表格或口诀。</li>
 </ul>
 </li>
-<li><strong>别搞混</strong>：与同章相邻考点区分；题干锚词：<strong>开发框架 / EE / NET</strong>。</li>
+<li><strong>别搞混</strong>：题干锚词：<strong>开发框架 / EE / NET</strong>。</li>
 </ul>
 <h2 id="定义">定义</h2>
 <ul>
@@ -22,7 +22,7 @@
 <li><strong>缓存（Redis 等）</strong>：是热点数据内存加速层。<strong>作用</strong>：用于降低 DB 压力与会话管理。</li>
 </ul>
 <h2 id="步骤与流程">步骤与流程</h2>
-<h3 id="24-开发框架案例技术选型">2.4 开发框架（案例技术选型）</h3>
+<h3 id="开发框架案例技术选型">开发框架（案例技术选型）</h3>
 <ol>
 <li>浏览器</li>
 <li>Struts(Controller)</li>
@@ -31,7 +31,7 @@
 <li>数据库</li>
 </ol>
 <h2 id="要点">要点</h2>
-<h3 id="31-通信协议">3.1 通信协议</h3>
+<h3 id="通信协议">通信协议</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -54,7 +54,6 @@
 </tbody></table></div>
 <p><strong>Session（答卷·定义）</strong>：Session 是服务器端为识别同一用户会话而维护的状态存储机制，通常通过 Session ID（常存于 Cookie）关联；<strong>用于</strong>在无状态 HTTP 之上跟踪登录态、购物车等跨请求业务状态。</p>
 <h2 id="易混辨析">易混辨析</h2>
-<p>（本节与相邻考点易混点见归档篇章「易混对比」；检索关键词：<strong>开发框架、EE、NET</strong>。）</p>
 <h2 id="应试">应试</h2>
 <ul>
 <li>「请说明 Web 应用架构设计应遵循的核心原则（至少 2 个）」→ 直接誊写 §2.1 八大原则答卷句。</li>

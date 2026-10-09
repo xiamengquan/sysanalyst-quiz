@@ -1,31 +1,28 @@
 <h1 id="cps-架构">CPS 架构</h1>
 <blockquote>
-<p><strong>大纲</strong>：21.2 · <strong>教程</strong>：第21章 · <strong>分组</strong>：科目2 · 6. 信息物理系统分析与设计 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+<p><strong>大纲</strong>：21.2 · <strong>教程</strong>：第21章 · <strong>分组</strong>：科目2 · 6. 信息物理系统分析与设计 · <strong>状态</strong>：结构式重写 v2.0 · 审计通过</p>
 </blockquote>
 <h2 id="概述">概述</h2>
 <p><strong>CPS 架构</strong>：基本闭环：传感器 → 决策控制单元 → 执行器 → 物理对象 → 再感知。</p>
 <h2 id="速懂">速懂</h2>
 <ul>
-<li><strong>一句话</strong>：决策层：是语义逻辑、用户-感知-控制耦合。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>一句话</strong>：决策层是语义逻辑、用户-感知-控制耦合。</li>
 <li><strong>考什么</strong>：CPS/IoT、边缘与信息物理融合（教程第 21 章）。</li>
 <li><strong>具体理解</strong>：<ul>
 <li>感知是基础（模拟→数字 ADC）</li>
-<li>决策层：是语义逻辑、用户-感知-控制耦合。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
-<li>物理层：是传感器/执行器与物理实体接口。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
-<li>三层逻辑：是决策层：语义逻辑、用户-感知-控制耦合；网络层：跨时空子系统互联；物理层：传感器/执行器与物理实体接口。作用：用于与本节相关的模型选型、特点对比与案例论述。</li>
 </ul>
 </li>
-<li><strong>别搞混</strong>：与同章相邻考点区分；题干锚词：<strong>CPS / 架构</strong>。</li>
+<li><strong>别搞混</strong>：题干锚词：<strong>CPS / 架构</strong>。</li>
 </ul>
 <h2 id="定义">定义</h2>
 <ul>
-<li><strong>决策层</strong>：是语义逻辑、用户-感知-控制耦合。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
-<li><strong>物理层</strong>：是传感器/执行器与物理实体接口。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>决策层</strong>：是语义逻辑、用户-感知-控制耦合。</li>
+<li><strong>物理层</strong>：是传感器/执行器与物理实体接口。</li>
 <li><strong>三层逻辑</strong>：是<strong>决策层</strong>：语义逻辑、用户-感知-控制耦合；<strong>网络层</strong>：跨时空子系统互联；<strong>物理层</strong>：传感器/执行器与物理实体接口。<strong>作用</strong>：用于与本节相关的模型选型、特点对比与案例论述。</li>
 <li><strong>通信模式</strong>：是DPC：确定性周期通信；DAC：确定性非周期。<strong>作用</strong>：用于与本节相关的模型选型、特点对比与案例论述。</li>
 </ul>
 <h2 id="步骤与流程">步骤与流程</h2>
-<h3 id="22-典型构成">2.2 典型构成</h3>
+<h3 id="典型构成">典型构成</h3>
 <ol>
 <li>多为封闭系统，通信距离短</li>
 <li>分布式、复杂度高、规模大</li>
@@ -37,7 +34,7 @@
 <li>异构（混合系统/SoS）</li>
 <li>高度自主（自组织/自配置/自维护/自优化/自保护）</li>
 </ol>
-<h3 id="21-分层架构">2.1 分层架构</h3>
+<h3 id="分层架构">分层架构</h3>
 <ol>
 <li>传感器</li>
 <li>决策控制单元</li>
@@ -45,7 +42,7 @@
 <li>物理对象</li>
 <li>再感知</li>
 </ol>
-<h3 id="23-技术框架">2.3 技术框架</h3>
+<h3 id="技术框架">技术框架</h3>
 <ol>
 <li><strong>感知与自动控制</strong>：智能感知、虚实融合控制</li>
 <li><strong>工业软件</strong>：嵌入式软件、MBD、CAX/MES/ERP/PLM/CRM/SCM</li>
@@ -53,14 +50,14 @@
 <li><strong>工业云与智能服务平台</strong>：边缘/雾/大数据分析</li>
 </ol>
 <h2 id="要点">要点</h2>
-<h3 id="21-分层架构">2.1 分层架构</h3>
+<h3 id="分层架构">分层架构</h3>
 <p><strong>三层逻辑</strong>：</p>
 <ul>
 <li><strong>网络层</strong>：跨时空子系统互联</li>
 </ul>
 <p><strong>基本闭环</strong>：传感器 → 决策控制单元 → 执行器 → 物理对象 → 再感知</p>
 <p><strong>SoS 级 CPS</strong>：多 CPS 系统协同（如产业链、产品服务系统）</p>
-<h3 id="22-典型构成">2.2 典型构成</h3>
+<h3 id="典型构成">典型构成</h3>
 <p><strong>功能单元</strong>：传感器(Sensor)、执行器(Actuator)、决策控制单元(DCU)</p>
 <p><strong>五大特点</strong>：</p>
 <ol>
@@ -80,7 +77,6 @@
 <li>安全关键（Safety + Security + Privacy）</li>
 <li>异构（混合系统/SoS）</li>
 <li>高可信赖</li>
-<li>高度自主（自组织/自配置/自维护/自优化/自保护）</li>
 <li>领域相关</li>
 </ol>
 <h2 id="易混辨析">易混辨析</h2>

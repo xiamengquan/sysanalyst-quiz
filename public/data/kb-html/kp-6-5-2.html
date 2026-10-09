@@ -1,19 +1,19 @@
 <h1 id="控制系统与网络通信">控制系统与网络通信</h1>
 <blockquote>
-<p><strong>大纲</strong>：21.5 · <strong>教程</strong>：第21章 · <strong>分组</strong>：科目2 · 6. 信息物理系统分析与设计 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+<p><strong>大纲</strong>：21.5 · <strong>教程</strong>：第21章 · <strong>分组</strong>：科目2 · 6. 信息物理系统分析与设计 · <strong>状态</strong>：结构式重写 v2.0 · 审计通过</p>
 </blockquote>
 <h2 id="概述">概述</h2>
 <p><strong>控制系统与网络通信</strong>：定义：包含物理部件、计算部件、网络的交互系统，实现信息空间与物理空间的深度融合与闭环控制。</p>
 <h2 id="速懂">速懂</h2>
 <ul>
-<li><strong>一句话</strong>：CPS 控制回路：是含传感、决策、执行与反馈闭环。作用：用于工控安全与实时性分析。</li>
+<li><strong>一句话</strong>：CPS 控制回路是含传感、决策、执行与反馈闭环。</li>
 <li><strong>考什么</strong>：CPS/IoT、边缘与信息物理融合（教程第 21 章）。</li>
 <li><strong>具体理解</strong>：<ul>
 <li>感知是基础（模拟→数字 ADC）</li>
 <li>网络：TSN、工业以太网、5G 切片</li>
 </ul>
 </li>
-<li><strong>别搞混</strong>：与同章相邻考点区分；题干锚词：<strong>控制系统与网络通信</strong>。</li>
+<li><strong>别搞混</strong>：题干锚词：<strong>控制系统与网络通信</strong>。</li>
 </ul>
 <h2 id="定义">定义</h2>
 <ul>
@@ -25,21 +25,15 @@
 <h2 id="步骤与流程">步骤与流程</h2>
 <h3 id="流程要点">流程要点</h3>
 <p>传感器 → 决策控制单元 → 执行器 → 物理对象 → 再感知</p>
-<h3 id="流程要点">流程要点</h3>
 <p>CPS vs IoT → 分层架构 → 感知-网络-决策-执行闭环 → 协议选型（实时/距离/功耗）→ 工业软件与平台 → 安全与实时性保障。</p>
 <h2 id="要点">要点</h2>
-<h1 id="第21章-信息物理系统cps分析与设计">第21章 信息物理系统（CPS）分析与设计</h1>
-<blockquote>
-<p>出自《系统分析师教程》知识点精炼 · 第三篇分章。科目2/3相关。</p>
-</blockquote>
-<hr>
 <h2 id="一场景特征">一、场景特征</h2>
 <p><strong>定义</strong>：包含<strong>物理部件、计算部件、网络</strong>的交互系统，实现信息空间与物理空间的深度融合与闭环控制。</p>
 <p><strong>与物联网关系</strong>：IoT 侧重连接与感知；CPS 侧重<strong>感知-分析-决策-执行</strong>闭环与实时控制。CPS 范围更广、实时性与安全性要求更高。</p>
 <p><strong>典型应用</strong>：智能制造、智能交通、智能电网、工业互联网、自动驾驶、医疗监护</p>
 <p><strong>CPS 与 SCADA/嵌入式区别</strong>：CPS 强调全局虚拟-局部物理、深度嵌入、事件驱动、以数据为中心、异构 SoS</p>
 <h2 id="二架构原则与模式">二、架构原则与模式</h2>
-<h3 id="21-分层架构">2.1 分层架构</h3>
+<h3 id="分层架构">分层架构</h3>
 <p><strong>三层逻辑</strong>：</p>
 <ul>
 <li><strong>决策层</strong>：语义逻辑、用户-感知-控制耦合</li>
@@ -48,7 +42,7 @@
 </ul>
 <p><strong>基本闭环</strong>：传感器 → 决策控制单元 → 执行器 → 物理对象 → 再感知</p>
 <p><strong>SoS 级 CPS</strong>：多 CPS 系统协同（如产业链、产品服务系统）</p>
-<h3 id="22-典型构成">2.2 典型构成</h3>
+<h3 id="典型构成">典型构成</h3>
 <p><strong>功能单元</strong>：传感器(Sensor)、执行器(Actuator)、决策控制单元(DCU)</p>
 <p><strong>五大特点</strong>：</p>
 <ol>
@@ -71,7 +65,7 @@
 <li>高度自主（自组织/自配置/自维护/自优化/自保护）</li>
 <li>领域相关</li>
 </ol>
-<h3 id="23-技术框架">2.3 技术框架</h3>
+<h3 id="技术框架">技术框架</h3>
 <p><strong>四大核心技术</strong>：</p>
 <ol>
 <li><strong>感知与自动控制</strong>：智能感知、虚实融合控制</li>
@@ -80,7 +74,7 @@
 <li><strong>工业云与智能服务平台</strong>：边缘/雾/大数据分析</li>
 </ol>
 <p><strong>支撑技术</strong>：普适/嵌入式/分布式/云/移动/自律/可信计算；NGI/NGN/5G；WSN/WSAN</p>
-<h3 id="24-协议标准选型对比">2.4 协议标准（选型对比）</h3>
+<h3 id="协议标准选型对比">协议标准（选型对比）</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -116,7 +110,7 @@
 <p><strong>ZigBee</strong>：802.15.4，Mesh，低功耗，250kb/s(2.4GHz)，适用工业控制</p>
 <p><strong>LoRa/LoRaWAN</strong>：LPWAN，Class A/B/C（功耗 vs 灵活性）</p>
 <p><strong>DDS</strong>：以数据为中心的中间件，发布-订阅</p>
-<h3 id="25-控制系统与通信">2.5 控制系统与通信</h3>
+<h3 id="控制系统与通信">控制系统与通信</h3>
 <p><strong>控制行为模式</strong>：嵌入控制、虚体控制、集控控制、目标控制</p>
 <p><strong>控制类型</strong>：开环、闭环、顺序、批量</p>
 <p><strong>事件类型</strong>：过程、诊断、维护</p>
@@ -127,14 +121,14 @@
 <li>NDC：非确定性</li>
 </ul>
 <h2 id="三开发与测试要点">三、开发与测试要点</h2>
-<h3 id="31-四类开发技术">3.1 四类开发技术</h3>
+<h3 id="四类开发技术">四类开发技术</h3>
 <ol>
 <li>感知控制：传感器、ADC、执行器、PLC</li>
 <li>工业软件：SCADA、MES、数字孪生</li>
 <li>网络：TSN、工业以太网、5G 切片</li>
 <li>服务平台：边缘计算、工业云</li>
 </ol>
-<h3 id="32-应用分析与设计">3.2 应用分析与设计</h3>
+<h3 id="应用分析与设计">应用分析与设计</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -159,7 +153,7 @@
 <td>SoS 集成、数据共享</td>
 </tr>
 </tbody></table></div>
-<h3 id="33-测试要点">3.3 测试要点</h3>
+<h3 id="测试要点">测试要点</h3>
 <ul>
 <li>实时性（时延、抖动、FTTI）</li>
 <li>安全性（Safety/Security）</li>

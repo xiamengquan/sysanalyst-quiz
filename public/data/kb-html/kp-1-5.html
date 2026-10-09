@@ -1,28 +1,25 @@
 <h1 id="多处理机系统mppsmp互连网络">多处理机系统（MPP/SMP、互连网络）</h1>
 <blockquote>
-<p><strong>大纲</strong>：3.5 · <strong>教程</strong>：第3章 · <strong>分组</strong>：科目1 · 1. 计算机系统基础知识 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+<p><strong>大纲</strong>：3.5 · <strong>教程</strong>：第3章 · <strong>分组</strong>：科目1 · 1. 计算机系统基础知识 · <strong>状态</strong>：结构式重写 v2.0 · 审计通过</p>
 </blockquote>
 <h2 id="概述">概述</h2>
 <p><strong>多处理机系统（MPP/SMP、互连网络）</strong> 属本科目大纲考点，侧重概念辨析与案例/论文回扣。</p>
 <h2 id="速懂">速懂</h2>
 <ul>
-<li><strong>一句话</strong>：MIMD：是多处理机，各自独立程序。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>一句话</strong>：MIMD是多处理机，各自独立程序。</li>
 <li><strong>考什么</strong>：Cache/RAID/存储层次、OS 与指令对比（教程第 3 章）。</li>
 <li><strong>具体理解</strong>：<ul>
 <li>MPP：海量并行；SMP：对称多处理，共享内存。</li>
-<li>MIMD：是多处理机，各自独立程序。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
-<li>SIMD：是并行/阵列处理机，单控制器多处理单元，适合矩阵运算。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
-<li>MPP：是海量并行；SMP：对称多处理，共享内存。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
 </ul>
 </li>
-<li><strong>别搞混</strong>：与同章相邻考点区分；题干锚词：<strong>多处理机系统 / MPP / SMP</strong>。</li>
+<li><strong>别搞混</strong>：题干锚词：<strong>多处理机系统 / MPP / SMP</strong>。</li>
 </ul>
 <h2 id="定义">定义</h2>
 <ul>
-<li><strong>MIMD</strong>：是多处理机，各自独立程序。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
-<li><strong>SIMD</strong>：是并行/阵列处理机，单控制器多处理单元，适合矩阵运算。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
-<li><strong>MPP</strong>：是海量并行；<strong>SMP</strong>：对称多处理，共享内存。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
-<li><strong>程序局部性</strong>：程序局部性是程序在执行过程中访问存储单元时呈现的非均匀分布规律，包括时间局部性与空间局部性。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>MIMD</strong>：是多处理机，各自独立程序。</li>
+<li><strong>SIMD</strong>：是并行/阵列处理机，单控制器多处理单元，适合矩阵运算。</li>
+<li><strong>MPP</strong>：是海量并行；<strong>SMP</strong>：对称多处理，共享内存。</li>
+<li><strong>程序局部性</strong>：程序局部性是程序在执行过程中访问存储单元时呈现的非均匀分布规律，包括时间局部性与空间局部性。</li>
 <li><strong>时间局部性</strong>：时间局部性是最近被访问过的存储单元在不久的将来很可能被再次访问的特性。<strong>作用</strong>：主要用于 Cache 设计——近期用过的数据块可保留在 Cache 中以提高命中率。</li>
 <li><strong>空间局部性</strong>：空间局部性是当前被访问单元邻近的存储单元在不久的将来很可能被访问的特性。<strong>作用</strong>：主要用于 Cache 块传输与预取设计——一次调入相邻数据块可提升后续访问命中概率。</li>
 <li><strong>Cache</strong>：Cache 是位于 CPU 与主存之间、由高速 SRAM 构成的小容量缓冲存储器。<strong>作用</strong>：主要用于利用程序局部性，在 CPU 与主存速度差距之间建立缓冲，降低平均访存时间。</li>
@@ -31,14 +28,6 @@
 <li><strong>DMA</strong>：DMA（直接存储器访问）是由 DMA 控制器直接在内存与外设之间批量传送数据、无需 CPU 逐字节参与控制的 I/O 方式。<strong>作用</strong>：主要用于高速、大批量数据传输，减轻 CPU 负担并提高并行度；CPU 仅负责预处理与后处理（如启动传输、处理完成中断）。</li>
 <li><strong>死锁</strong>：死锁是两个或多个进程因互相等待对方占有的资源而无法继续推进的运行状态。<strong>作用</strong>：用于理解死锁定义与四条件是分析死锁产生原因、制定预防/避免/检测与恢复策略的基础。</li>
 </ul>
-<h2 id="步骤与流程">步骤与流程</h2>
-<p>本节在教程中<strong>未单独列出固定步骤名</strong>；答题时可按下列指引组织答案：</p>
-<ol>
-<li>先在「要点」中找 <strong>阶段 / 活动 / → 流程链</strong> 表述；</li>
-<li>案例题常用 <strong>调查 → 分析 → 方案 → 验证</strong>（或题干给出的过程框架）；</li>
-<li>综合知识流程题优先写 <strong>编号步骤</strong> 或 <strong>阶段名称</strong>；</li>
-<li>需要完整步骤时打开文末 <strong>归档通章</strong> 对应小节对照誊写。</li>
-</ol>
 <h2 id="要点">要点</h2>
 <h3 id="多处理机">多处理机</h3>
 <ul>
@@ -47,7 +36,6 @@
 <li><strong>MPP</strong>：海量并行；<strong>SMP</strong>：对称多处理，共享内存。</li>
 </ul>
 <h2 id="易混辨析">易混辨析</h2>
-<p>（本节与相邻考点易混点见归档篇章「易混对比」；检索关键词：<strong>多处理机系统、MPP、SMP</strong>。）</p>
 <h2 id="应试">应试</h2>
 <p><strong>案例可能怎么问</strong>：Cache 命中率与平均周期计算；按 I/O 场景选查询/中断/DMA；死锁四条件识别与破坏策略；虚拟存储分页/分段与置换算法选型；局部性原理解释 Cache 或应用层缓存设计。</p>
 <p><strong>论文怎么用</strong>：性能优化可写「Cache/局部性→存储层次→I/O 方式选型→虚拟存储与并发」；可靠性场景可写 RAID 冗余；分布式系统可类比 DMA 减轻主节点负担、虚拟存储类比弹性资源池。</p>

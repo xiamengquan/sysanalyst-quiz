@@ -1,12 +1,12 @@
 <h1 id="架构原则模式">架构（原则、模式）</h1>
 <blockquote>
-<p><strong>大纲</strong>：20.2 · <strong>教程</strong>：第20章 · <strong>分组</strong>：科目2 · 5. 微服务系统分析与设计 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+<p><strong>大纲</strong>：20.2 · <strong>教程</strong>：第20章 · <strong>分组</strong>：科目2 · 5. 微服务系统分析与设计 · <strong>状态</strong>：结构式重写 v2.0 · 审计通过</p>
 </blockquote>
 <h2 id="概述">概述</h2>
 <p><strong>架构（原则、模式）</strong> 属本科目大纲考点。常考：<strong>定义</strong>  ·  全部功能集中于单一部署单元  ·  以独立服务为单位、通过标准接口实现跨系统集成的架构思想  ·  SOA 的细粒度实现，强调小服务、独立 DB、去中心化集成。</p>
 <h2 id="速懂">速懂</h2>
 <ul>
-<li><strong>一句话</strong>：DevOps：是开发、测试、运维协同的文化与工具链实践。作用：用于缩短交付周期与提高发布频率。</li>
+<li><strong>一句话</strong>：DevOps是开发、测试、运维协同的文化与工具链实践。</li>
 <li><strong>考什么</strong>：微服务治理、熔断限流、最终一致（教程第 20 章）。</li>
 <li><strong>具体理解</strong>：<ul>
 <li>先背定义节「是什么 + 作用」，再展开要点中的表格或口诀。</li>
@@ -22,13 +22,13 @@
 <li><strong>监控与可观测性</strong>：日志、指标、链路追踪。<strong>作用</strong>：用于线上故障定位与 SRE 实践。</li>
 </ul>
 <h2 id="步骤与流程">步骤与流程</h2>
-<h3 id="23-开发与运维组件">2.3 开发与运维组件</h3>
+<h3 id="开发与运维组件">开发与运维组件</h3>
 <ol>
 <li>| 监控 | ELK（Logstash</li>
 <li>ES</li>
 <li>Kibana）、Prometheus+Grafana、APM | 日志/指标/告警 |</li>
 </ol>
-<h3 id="一场景特征">一、场景特征</h3>
+<h3 id="场景特征">场景特征</h3>
 <ol>
 <li>服务粒度小、职责单一</li>
 <li>独立部署与演化</li>
@@ -36,7 +36,7 @@
 <li>技术异构（Java/Python/Go 混用）</li>
 <li>独立演化和部署</li>
 </ol>
-<h3 id="32-测试过程与类型">3.2 测试过程与类型</h3>
+<h3 id="测试过程与类型">测试过程与类型</h3>
 <ol>
 <li>单元（单服务）</li>
 <li>集成（服务间）</li>
@@ -46,7 +46,7 @@
 <li>安全</li>
 </ol>
 <h2 id="要点">要点</h2>
-<h3 id="21-九大架构原则">2.1 九大架构原则</h3>
+<h3 id="九大架构原则">九大架构原则</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>

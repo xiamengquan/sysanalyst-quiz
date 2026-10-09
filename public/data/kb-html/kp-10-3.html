@@ -1,18 +1,19 @@
 <h1 id="架构风格数据流调用返回数据中心虚拟机独立构件soa">架构风格（数据流/调用返回/数据中心/虚拟机/独立构件/SOA）</h1>
 <blockquote>
-<p><strong>大纲</strong>：12.3 · <strong>教程</strong>：第12章 · <strong>分组</strong>：科目1 · 10. 软件架构设计 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+<p><strong>大纲</strong>：12.3 · <strong>教程</strong>：第12章 · <strong>分组</strong>：科目1 · 10. 软件架构设计 · <strong>状态</strong>：结构式重写 v2.0 · 审计通过</p>
 </blockquote>
 <h2 id="概述">概述</h2>
 <p><strong>架构风格（数据流/调用返回/数据中心/虚拟机/独立构件/SOA）</strong> 属本科目大纲考点。常考：<strong>架构风格六大类及实例</strong>  ·  超高频。</p>
 <h2 id="速懂">速懂</h2>
 <ul>
-<li><strong>一句话</strong>：数据流风格：是管道-过滤器或批处理序列传递数据。作用：用于 ETL、编译器与流式处理架构。</li>
+<li><strong>一句话</strong>：数据流风格是管道-过滤器或批处理序列传递数据。</li>
 <li><strong>考什么</strong>：架构风格、SOA/微服务、质量属性（教程第 12 章）。</li>
 <li><strong>具体理解</strong>：<ul>
-<li>SOA / 微服务：是将能力封装为可发现、可组合的服务。作用：用于企业集成与云原生架构（与 ESB、注册中心常考）。</li>
+<li>管道-过滤器：过滤器无状态、高内聚；适合流式批处理，但不适交互强实时。</li>
+<li>批处理序列：整批顺序传递、延迟高；管道-过滤器可增量、可并发。</li>
 </ul>
 </li>
-<li><strong>别搞混</strong>：| 对比 | 区别 |</li>
+<li><strong>别搞混</strong>：题干锚词：<strong>数据流风格</strong>。</li>
 </ul>
 <h2 id="定义">定义</h2>
 <ul>
@@ -22,12 +23,12 @@
 <li><strong>SOA / 微服务</strong>：是将能力封装为可发现、可组合的服务。<strong>作用</strong>：用于企业集成与云原生架构（与 ESB、注册中心常考）。</li>
 </ul>
 <h2 id="步骤与流程">步骤与流程</h2>
-<h3 id="46-面向服务-soa">4.6 面向服务 SOA</h3>
+<h3 id="面向服务-soa">面向服务 SOA</h3>
 <ol>
 <li>：UDDI（注册）、SOAP（消息：Envelope/Header/Body）、WSDL（描述）、REST（无状态资源操作）。</li>
 </ol>
 <p>REST 展开：约束、HTTP 动词、与 SOAP 对比及案例表 5-2 → <a href="/kb/quick-rest/" class="kb-ref" data-kb-id="quick-rest" data-kb-path="速查/REST架构风格-体系化学习卡.md" title="预览：REST 架构风格 · 体系化学习卡"><code>速查/REST架构风格-体系化学习卡.md</code></a></p>
-<h3 id="五架构实现与质量属性">五、架构实现与质量属性</h3>
+<h3 id="架构实现与质量属性">架构实现与质量属性</h3>
 <ol>
 <li>需求</li>
 <li>设计</li>
@@ -45,7 +46,7 @@
 <li>刺激</li>
 </ol>
 <h2 id="要点">要点</h2>
-<h3 id="46-面向服务-soa">4.6 面向服务 SOA</h3>
+<h3 id="面向服务-soa">面向服务 SOA</h3>
 <p><strong>要点</strong>：功能定义为独立服务；松散耦合；三角色=提供者/请求者/注册中心。</p>
 <p><strong>关键技术</strong>：UDDI（注册）、SOAP（消息：Envelope/Header/Body）、WSDL（描述）、REST（无状态资源操作）。</p>
 <p><strong>REST 展开</strong>：约束、HTTP 动词、与 SOAP 对比及案例表 5-2 → <a href="/kb/quick-rest/" class="kb-ref" data-kb-id="quick-rest" data-kb-path="速查/REST架构风格-体系化学习卡.md" title="预览：REST 架构风格 · 体系化学习卡"><code>速查/REST架构风格-体系化学习卡.md</code></a>。</p>

@@ -1,12 +1,12 @@
 <h1 id="输入输出系统程序控制中断dma通道io-处理机总线io-接口">输入输出系统（程序控制/中断/DMA/通道/I/O 处理机、总线、I/O 接口）</h1>
 <blockquote>
-<p><strong>大纲</strong>：3.3 · <strong>教程</strong>：第3章 · <strong>分组</strong>：科目1 · 1. 计算机系统基础知识 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+<p><strong>大纲</strong>：3.3 · <strong>教程</strong>：第3章 · <strong>分组</strong>：科目1 · 1. 计算机系统基础知识 · <strong>状态</strong>：结构式重写 v2.0 · 审计通过</p>
 </blockquote>
 <h2 id="概述">概述</h2>
 <p><strong>输入输出系统（程序控制/中断/DMA/通道/I/O 处理机、总线、I/O 接口）</strong>：1. 程序控制：无条件传送、程序查询（CPU效率低） 2. 程序中断：CPU与外设并行，5阶段（请求→判优→响应→处理→返回） 3. DMA：DMAC控制，CPU暂停/分时/周期窃取 4. 通道：字节多路/选择/数组多路 5. I/O处理机：功能最强，可独立运算。</p>
 <h2 id="速懂">速懂</h2>
 <ul>
-<li><strong>一句话</strong>：程序中断：程序中断是 CPU 在执行程序过程中响应外设请求、暂停当前程序转去执行中断服务程序、处理完毕后再返回原程序的 I/O 控制方式。作用：主要用于使 CPU 与外设并行工作，提高 I/O 效率；适用于中速设备，CPU 仅在请求到达与处理首尾阶段参与。</li>
+<li><strong>一句话</strong>：程序中断是 CPU 在执行程序过程中响应外设请求、暂停当前程序转去执行中断服务程序、处理完毕后再返回原程序的 I/O 控制方式。</li>
 <li><strong>考什么</strong>：Cache/RAID/存储层次、OS 与指令对比（教程第 3 章）。</li>
 <li><strong>具体理解</strong>：<ul>
 <li>程序中断：CPU与外设并行，5阶段（请求→判优→响应→处理→返回）</li>
@@ -19,7 +19,7 @@
 <ul>
 <li><strong>程序中断</strong>：程序中断是 CPU 在执行程序过程中响应外设请求、暂停当前程序转去执行中断服务程序、处理完毕后再返回原程序的 I/O 控制方式。<strong>作用</strong>：主要用于使 CPU 与外设并行工作，提高 I/O 效率；适用于中速设备，CPU 仅在请求到达与处理首尾阶段参与。</li>
 <li><strong>DMA</strong>：DMA（直接存储器访问）是由 DMA 控制器直接在内存与外设之间批量传送数据、无需 CPU 逐字节参与控制的 I/O 方式。<strong>作用</strong>：主要用于高速、大批量数据传输，减轻 CPU 负担并提高并行度；CPU 仅负责预处理与后处理（如启动传输、处理完成中断）。</li>
-<li><strong>端口编址</strong>：独立编址(I/O指令) vs 统一编址(存储器映射)。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>端口编址</strong>：独立编址(I/O指令) vs 统一编址(存储器映射)。</li>
 </ul>
 <h2 id="步骤与流程">步骤与流程</h2>
 <h3 id="o系统">O系统</h3>
@@ -33,13 +33,6 @@
 <h2 id="要点">要点</h2>
 <h3 id="o系统">O系统</h3>
 <p><strong>5种工作方式（由低到高）</strong>：</p>
-<ol>
-<li><strong>程序控制</strong>：无条件传送、程序查询（CPU效率低）</li>
-<li><strong>程序中断</strong>：CPU与外设并行，5阶段（请求→判优→响应→处理→返回）</li>
-<li><strong>DMA</strong>：DMAC控制，CPU暂停/分时/周期窃取</li>
-<li><strong>通道</strong>：字节多路/选择/数组多路</li>
-<li><strong>I/O处理机</strong>：功能最强，可独立运算</li>
-</ol>
 <p><strong>总线</strong>：地址总线、数据总线、控制总线；并行/串行。</p>
 <p><strong>总线带宽</strong> = 总线宽度 × 总线频率（注意周期与猝发传输）。</p>
 <p><strong>端口编址</strong>：独立编址(I/O指令) vs 统一编址(存储器映射)。</p>
@@ -47,13 +40,35 @@
 <div class="table-wrap"><table>
 <thead>
 <tr>
-<th>对比</th>
-<th>区别</th>
+<th>对比项</th>
+<th>程序查询</th>
+<th>中断</th>
+<th>DMA</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>对比项</td>
-<td>程序查询</td>
+<td>CPU 介入</td>
+<td>全程轮询等待</td>
+<td>响应时介入处理</td>
+<td>仅传送时让出总线</td>
+</tr>
+<tr>
+<td>CPU 效率</td>
+<td>最低</td>
+<td>较高（部分并行）</td>
+<td>高（批量传送）</td>
+</tr>
+<tr>
+<td>数据路径</td>
+<td>外设→CPU→主存</td>
+<td>外设→CPU→主存</td>
+<td>外设↔主存直接</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>低速设备</td>
+<td>中低速、偶发事件</td>
+<td>高速块设备</td>
 </tr>
 </tbody></table></div>
 <h2 id="应试">应试</h2>

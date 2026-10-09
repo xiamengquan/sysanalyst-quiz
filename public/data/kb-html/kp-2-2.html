@@ -1,21 +1,19 @@
 <h1 id="网络体系结构与协议ositcpipip-与子网超网ipv6">网络体系结构与协议（OSI、TCP/IP、IP 与子网/超网/IPv6）</h1>
 <blockquote>
-<p><strong>大纲</strong>：4.2 · <strong>教程</strong>：第4章 · <strong>分组</strong>：科目1 · 2. 计算机网络与分布式系统 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+<p><strong>大纲</strong>：4.2 · <strong>教程</strong>：第4章 · <strong>分组</strong>：科目1 · 2. 计算机网络与分布式系统 · <strong>状态</strong>：结构式重写 v2.0 · 审计通过</p>
 </blockquote>
 <h2 id="概述">概述</h2>
 <p><strong>网络体系结构与协议（OSI、TCP/IP、IP 与子网/超网/IPv6）</strong>：OSI七层：物理→数据链路→网络→传输→会话→表示→应用。</p>
 <h2 id="速懂">速懂</h2>
 <ul>
-<li><strong>一句话</strong>：OSI 七层模型：是国际标准的网络协议分层参考模型。作用：用于理解各层职责与协议归属（物数网传会表应）。</li>
+<li><strong>一句话</strong>：OSI 七层模型是国际标准的网络协议分层参考模型。</li>
 <li><strong>考什么</strong>：子网划分、协议对比、分布式与云（教程第 4 章）。</li>
 <li><strong>具体理解</strong>：<ul>
-<li>OSI 七层模型：是国际标准的网络协议分层参考模型。作用：用于理解各层职责与协议归属（物数网传会表应）。</li>
-<li>TCP/IP 四层模型：是 Internet 事实标准（网络接口/网际/传输/应用）。作用：用于与 OSI 对照及协议选型。</li>
-<li>IP 与子网划分：是IP 提供主机寻址；子网掩码划分网络/主机位。作用：用于 CIDR、超网与路由聚合计算题。</li>
-<li>IPv6：是 128 位地址、简化首部、内置 IPsec 的下一代 IP。作用：用于地址耗尽、自动配置与过渡技术题。</li>
+<li>分层对应：OSI 7 层（物→数→网→传→会→表→应）；TCP/IP 4 层（网接→网际→传输→应用）。</li>
+<li>子网锚点：掩码位每 +1，主机数减半；可用主机 = 2^主机位 − 2。</li>
 </ul>
 </li>
-<li><strong>别搞混</strong>：| 对比 | 区别 |</li>
+<li><strong>别搞混</strong>：题干锚词：<strong>OSI / 子网</strong>。</li>
 </ul>
 <h2 id="定义">定义</h2>
 <ul>
@@ -24,14 +22,6 @@
 <li><strong>IP 与子网划分</strong>：是IP 提供主机寻址；子网掩码划分网络/主机位。<strong>作用</strong>：用于 CIDR、超网与路由聚合计算题。</li>
 <li><strong>IPv6</strong>：是 128 位地址、简化首部、内置 IPsec 的下一代 IP。<strong>作用</strong>：用于地址耗尽、自动配置与过渡技术题。</li>
 </ul>
-<h2 id="步骤与流程">步骤与流程</h2>
-<p>本节在教程中<strong>未单独列出固定步骤名</strong>；答题时可按下列指引组织答案：</p>
-<ol>
-<li>先在「要点」中找 <strong>阶段 / 活动 / → 流程链</strong> 表述；</li>
-<li>案例题常用 <strong>调查 → 分析 → 方案 → 验证</strong>（或题干给出的过程框架）；</li>
-<li>综合知识流程题优先写 <strong>编号步骤</strong> 或 <strong>阶段名称</strong>；</li>
-<li>需要完整步骤时打开文末 <strong>归档通章</strong> 对应小节对照誊写。</li>
-</ol>
 <h2 id="要点">要点</h2>
 <h3 id="网络体系结构">网络体系结构</h3>
 <p><strong>OSI七层</strong>：物理→数据链路→网络→传输→会话→表示→应用。</p>
@@ -81,26 +71,9 @@
 </tr>
 </tbody></table></div>
 <h2 id="易混辨析">易混辨析</h2>
-<div class="table-wrap"><table>
-<thead>
-<tr>
-<th>对比</th>
-<th>区别</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>对比项</td>
-<td>TCP</td>
-</tr>
-<tr>
-<td>应用</td>
-<td>HTTP/FTP/邮件</td>
-</tr>
-<tr>
-<td>依据</td>
-<td>MAC地址</td>
-</tr>
-</tbody></table></div>
+<p>| 对比项 | TCP | UDP |
+| 应用 | HTTP/FTP/邮件 | DNS/视频/VoIP |
+| 依据 | MAC地址 | IP地址 |</p>
 <h2 id="应试">应试</h2>
 <p><strong>常考结论</strong></p>
 <ul>

@@ -1,43 +1,9 @@
 <h1 id="现有系统演进">现有系统演进</h1>
 <blockquote>
-<p><strong>大纲</strong>：15.8 · <strong>教程</strong>：第15章 · <strong>分组</strong>：科目1 · 13. 系统运行与维护 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+<p><strong>大纲</strong>：15.8 · <strong>教程</strong>：第15章 · <strong>分组</strong>：科目1 · 13. 系统运行与维护 · <strong>状态</strong>：结构式重写 v2.0 · 审计通过</p>
 </blockquote>
 <h2 id="概述">概述</h2>
 <p><strong>现有系统演进</strong>：关系： - MTBF ↑ → 可靠性 ↑ - MTTR ↓ → 修复能力 ↑ - MTBF 不含计划内维护停机。</p>
-<h2 id="速懂">速懂</h2>
-<ul>
-<li><strong>一句话</strong>：现有系统演进：是在保留投资基础上对系统进行升级、重构或替换的路径。作用：用于遗留系统现代化决策。</li>
-<li><strong>考什么</strong>：维护四类、系统转换策略（教程第 15 章）。</li>
-<li><strong>具体理解</strong>：<ul>
-<li>MTBF ↑ → 可靠性 ↑</li>
-<li>MTTR ↓ → 修复能力 ↑</li>
-</ul>
-</li>
-<li><strong>别搞混</strong>：与同章相邻考点区分；题干锚词：<strong>现有系统演进</strong>。</li>
-</ul>
-<h2 id="定义">定义</h2>
-<ul>
-<li><strong>现有系统演进</strong>：是在保留投资基础上对系统进行升级、重构或替换的路径。<strong>作用</strong>：用于遗留系统现代化决策。</li>
-<li><strong>演进策略</strong>：是含封装、重构、替换、迁移等。<strong>作用</strong>：用于与完全重写对比及成本收益分析。</li>
-<li><strong>技术债务治理</strong>：是识别并偿还设计/文档/测试不足的过程。<strong>作用</strong>：用于可持续迭代与质量保障。</li>
-</ul>
-<h2 id="步骤与流程">步骤与流程</h2>
-<h3 id="流程要点">流程要点</h3>
-<ol>
-<li>按<strong>功能</strong>分阶段</li>
-<li>按<strong>部门</strong>分阶段</li>
-<li>按<strong>机器设备</strong>分阶段</li>
-<li><strong>切换前工具迁移</strong>（ETL，最主要）：一次迁移 vs 分次迁移</li>
-<li><strong>切换前手工录入</strong>：新旧结构差异大、期初数据无法从历史获得</li>
-<li><strong>切换后新系统生成</strong>：根据已迁移数据生成结果数据</li>
-</ol>
-<h2 id="要点">要点</h2>
-<h1 id="第15章-系统运行与维护">第15章 系统运行与维护</h1>
-<blockquote>
-<p>出自《系统分析师教程》知识点精炼 · 第二篇 · 关键技术（第10—15章）分章。</p>
-</blockquote>
-<hr>
-<h2 id="一本章考什么">一、本章考什么</h2>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -75,6 +41,34 @@
 </tr>
 </tbody></table></div>
 <hr>
+<h2 id="速懂">速懂</h2>
+<ul>
+<li><strong>一句话</strong>：现有系统演进是在保留投资基础上对系统进行升级、重构或替换的路径。</li>
+<li><strong>考什么</strong>：维护四类、系统转换策略（教程第 15 章）。</li>
+<li><strong>具体理解</strong>：<ul>
+<li>MTBF ↑ → 可靠性 ↑</li>
+<li>MTTR ↓ → 修复能力 ↑</li>
+</ul>
+</li>
+<li><strong>别搞混</strong>：题干锚词：<strong>现有系统演进</strong>。</li>
+</ul>
+<h2 id="定义">定义</h2>
+<ul>
+<li><strong>现有系统演进</strong>：是在保留投资基础上对系统进行升级、重构或替换的路径。<strong>作用</strong>：用于遗留系统现代化决策。</li>
+<li><strong>演进策略</strong>：是含封装、重构、替换、迁移等。<strong>作用</strong>：用于与完全重写对比及成本收益分析。</li>
+<li><strong>技术债务治理</strong>：是识别并偿还设计/文档/测试不足的过程。<strong>作用</strong>：用于可持续迭代与质量保障。</li>
+</ul>
+<h2 id="步骤与流程">步骤与流程</h2>
+<h3 id="流程要点">流程要点</h3>
+<ol>
+<li>按<strong>功能</strong>分阶段</li>
+<li>按<strong>部门</strong>分阶段</li>
+<li>按<strong>机器设备</strong>分阶段</li>
+<li><strong>切换前工具迁移</strong>（ETL，最主要）：一次迁移 vs 分次迁移</li>
+<li><strong>切换前手工录入</strong>：新旧结构差异大、期初数据无法从历史获得</li>
+<li><strong>切换后新系统生成</strong>：根据已迁移数据生成结果数据</li>
+</ol>
+<h2 id="要点">要点</h2>
 <h2 id="二运维技术指标">二、运维技术指标</h2>
 <div class="table-wrap"><table>
 <thead>
@@ -125,9 +119,9 @@
 <p><strong>故障处理流程</strong>：监视 → 调查 → 排查恢复 → 收尾。</p>
 <hr>
 <h2 id="四软件维护重点">四、软件维护（重点）</h2>
-<h3 id="41-维护占比">4.1 维护占比</h3>
+<h3 id="维护占比">维护占比</h3>
 <p>运行维护占生命周期 <strong>60%–80%</strong>。</p>
-<h3 id="42-维护四类必背">4.2 维护四类（必背）</h3>
+<h3 id="维护四类必背">维护四类（必背）</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -158,26 +152,26 @@
 </tr>
 </tbody></table></div>
 <p><strong>统计</strong>：完善性维护通常占比最大。</p>
-<h3 id="43-维护管理">4.3 维护管理</h3>
+<h3 id="维护管理">维护管理</h3>
 <p>维护申请→审批→计划→实施→验收→更新配置库。完善性维护通常占比最大。</p>
 <hr>
 <h2 id="五系统评价了解">五、系统评价（了解）</h2>
 <p>评价流程：确定对象→收集资料→实施评价→复核报送。指标驱动：效率/能力/效果/效益。</p>
 <hr>
 <h2 id="六遗留系统处置重点">六、遗留系统处置（重点）</h2>
-<h3 id="61-遗留系统特征">6.1 遗留系统特征</h3>
+<h3 id="遗留系统特征">遗留系统特征</h3>
 <ul>
 <li>不能满足全部要求</li>
 <li>性能落后、技术过时</li>
 <li>大型、难维护</li>
 <li>缺乏文档</li>
 </ul>
-<h3 id="62-评价活动">6.2 评价活动</h3>
+<h3 id="评价活动">评价活动</h3>
 <p>启动评价 → 业务价值评价 → 外部环境评价（硬件/支撑软件/IT 基础设施）→ 应用软件评价 → 分析结果。</p>
 <p><strong>综合技术水平</strong>：</p>
 <pre><code>OR = (P₁×ORH + P₂×ORS + P₃×OAF + P₄×ORA) / 4
 </code></pre>
-<h3 id="63-四象限演化策略必考">6.3 四象限演化策略（必考）</h3>
+<h3 id="四象限演化策略必考">四象限演化策略（必考）</h3>
 <pre><code>        高业务价值
             │
   改造      │      集成
@@ -219,9 +213,9 @@
 </tbody></table></div>
 <hr>
 <h2 id="七新旧系统转换重点">七、新旧系统转换（重点）</h2>
-<h3 id="71-转换前准备">7.1 转换前准备</h3>
+<h3 id="转换前准备">转换前准备</h3>
 <p>数据准备、文档准备、人员培训、设备安装、<strong>系统试运行</strong>。</p>
-<h3 id="72-三种转换策略">7.2 三种转换策略</h3>
+<h3 id="三种转换策略">三种转换策略</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -261,7 +255,7 @@
 <li>按<strong>机器设备</strong>分阶段</li>
 </ol>
 <p><strong>并行转换实施</strong>：以旧系统为正式作业，新系统结果作核对；验证后旧系统退出。</p>
-<h3 id="73-数据转换与迁移">7.3 数据转换与迁移</h3>
+<h3 id="数据转换与迁移">数据转换与迁移</h3>
 <p><strong>原则</strong>：<strong>数据不丢失</strong>。</p>
 <p><strong>三种方法</strong>：</p>
 <ol>
@@ -313,7 +307,6 @@
 </tr>
 </tbody></table></div>
 <h2 id="易混辨析">易混辨析</h2>
-<p>（本节与相邻考点易混点见归档篇章「易混对比」；检索关键词：<strong>现有系统演进</strong>。）</p>
 <h2 id="应试">应试</h2>
 <ul>
 <li><strong>本章练习热力</strong>：教程第 15 章约 40 题（站点练习库，不含真题卷 ch=99）。</li>

@@ -10,12 +10,12 @@ const sections = [
   "概述",
   "速懂",
   "定义",
-  "步骤与流程",
   "要点",
   "易混辨析",
   "应试",
   "相关考点",
 ];
+// 模板 v2：「步骤与流程」无实义内容时可省略（见 编制委员会/知识点结构式模板-v2.md）
 const badPhrases = ["本节要点中含可誊写句", "核心表述见下方要点", "待编制", "- ****："];
 const skip = new Set([]);
 let errors = [];
@@ -39,7 +39,8 @@ for (const sec of index.sections || []) {
     const qm = t.match(/## 速懂\n\n([\s\S]*?)\n\n## 定义/);
     if (qm) {
       const q = qm[1].trim();
-      if (q.length < 120) errors.push(`${it.id}: 速懂 too short (${q.length})`);
+      // 模板 v2：速懂为锚点摘要（一句话/考什么/别搞混），精简后 ≥100 字即合格
+      if (q.length < 100) errors.push(`${it.id}: 速懂 too short (${q.length})`);
       if (!q.includes("一句话") || !q.includes("考什么")) {
         errors.push(`${it.id}: 速懂须含「一句话」「考什么」`);
       }

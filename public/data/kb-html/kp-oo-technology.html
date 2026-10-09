@@ -1,12 +1,12 @@
 <h1 id="面向对象技术">面向对象技术</h1>
 <blockquote>
-<p><strong>大纲</strong>：第7章 UML、第11/13章 · <strong>教程</strong>：第7章 · <strong>分组</strong>：科目3 · 1. 信息系统开发及应用 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+<p><strong>大纲</strong>：第7章 UML、第11/13章 · <strong>教程</strong>：第7章 · <strong>分组</strong>：科目3 · 1. 信息系统开发及应用 · <strong>状态</strong>：结构式重写 v2.0 · 审计通过</p>
 </blockquote>
 <h2 id="概述">概述</h2>
 <p><strong>面向对象技术</strong> 属本科目大纲考点，侧重概念辨析与案例/论文回扣。</p>
 <h2 id="速懂">速懂</h2>
 <ul>
-<li><strong>一句话</strong>：面向对象技术：是以对象为基本单元组织软件，通过类、封装、继承与多态表达问题域的分析、设计与实现方法。作用：用于提高软件的复用性、可维护性与对变化的适应能力。</li>
+<li><strong>一句话</strong>：面向对象技术是以对象为基本单元组织软件，通过类、封装、继承与多态表达问题域的分析、设计与实现方法。</li>
 <li><strong>考什么</strong>：开发模型选型、UML、过程改进（教程第 7 章）。</li>
 <li><strong>具体理解</strong>：<ul>
 <li>依赖 Dependency：客户端元素依赖供应者元素，供应者变更可能影响客户端；非结构性、较弱，常用于使用、创建、调用、导入等。作用：表示较弱使用语义；虚线开放箭头：客户端 → 供应者。</li>
@@ -15,7 +15,7 @@
 <li>详解 → <a href="/kb/quick-uml-learn/" class="kb-ref" data-kb-id="quick-uml-learn" data-kb-path="速查/UML-体系化学习指南.md" title="预览：UML · 体系化学习指南（由简入深）"><code>速查/UML-体系化学习指南.md</code></a> · §2.2.1</li>
 </ul>
 </li>
-<li><strong>别搞混</strong>：与同章相邻考点区分；题干锚词：<strong>面向对象技术</strong>。</li>
+<li><strong>别搞混</strong>：题干锚词：<strong>面向对象技术</strong>。</li>
 </ul>
 <h2 id="定义">定义</h2>
 <ul>
@@ -48,7 +48,6 @@
 <li><strong>聚合 Aggregation</strong>：共享整—部分语义的关联；弱拥有，整体不负责部分生命周期，部分可独立存在、可被多整体共享。<strong>作用</strong>：可分离包含；<strong>实线空心菱在整体端</strong>。</li>
 <li><strong>组合 Composition</strong>：组合整—部分语义的关联；整体负责部分存在与存储，部分生命周期与整体绑定。<strong>作用</strong>：强拥有与构成；<strong>实线实心菱在整体端</strong>。</li>
 <li><strong>强度与选型</strong>：依赖弱于关联，关联弱于聚合，聚合弱于组合；泛化/实现不参与菱形强弱序；选型看生命周期是否从属整体与语义强弱。</li>
-<li>详解 → <a href="/kb/quick-uml-learn/" class="kb-ref" data-kb-id="quick-uml-learn" data-kb-path="速查/UML-体系化学习指南.md" title="预览：UML · 体系化学习指南（由简入深）"><code>速查/UML-体系化学习指南.md</code></a> · §2.2.1</li>
 </ul>
 </li>
 <li><strong>必考五图（定义 / 作用速记）</strong>：<ul>
@@ -73,7 +72,6 @@
 <li><strong>易混</strong>：include（必含，基→被含）vs extend（可选，扩展→基）；状态图（单对象生命周期）vs 活动图（流程/并行）；序列图（时间轴）vs 通信图/协作图（对象链接+序号）；聚合 vs 组合（生命周期）；泛化 vs 实现（实线/虚线）；边界类 vs 参与者（内 vs 外）。</li>
 </ul>
 <h2 id="易混辨析">易混辨析</h2>
-<p>（本节与相邻考点易混点见归档篇章「易混对比」；检索关键词：<strong>面向对象技术</strong>。）</p>
 <h2 id="应试">应试</h2>
 <p><strong>案例可能怎么问</strong>：根据项目特征（需求稳定度、团队规模、风险、工期）四选一或排序开发模型；RUP 四阶段/敏捷宣言/RAD 五阶段填空；逆向工程 vs 再工程 vs 正向工程概念辨析。</p>
 <p><strong>论文怎么用</strong>：近五年 RAD、敏捷、原型法、设计模式、ABSD 高频——按「背景→选型理由→过程（迭代/用例/原型）→度量改进→总结」写；CMMI/RUP 可作组织级过程改进段落，勿空泛堆名词。</p>
@@ -101,6 +99,5 @@
 <li>速查：<a href="../%E9%80%9F%E6%9F%A5/UML-%E4%BD%93%E7%B3%BB%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97.md">UML-体系化学习指南</a></li>
 <li><a href="/kb/kp-software-product-line">软件产品线</a></li>
 <li><a href="/kb/kp-project-management-essay">项目管理</a></li>
-<li>速查：<a href="../%E9%80%9F%E6%9F%A5/UML-%E4%BD%93%E7%B3%BB%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97.md">UML-体系化学习指南</a></li>
 <li>归档通章：<a href="../%E7%AC%AC%E4%B8%80%E7%AF%87-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AC%AC07%E7%AB%A0-%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B.md"><a href="/kb/ch07/" class="kb-ref" data-kb-id="ch07" data-kb-path="第07章-软件工程.md" title="预览：第07章 · 软件工程"><code>第07章-软件工程.md</code></a></a></li>
 </ul>

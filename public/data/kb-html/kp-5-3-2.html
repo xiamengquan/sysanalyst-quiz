@@ -1,18 +1,14 @@
 <h1 id="开发容器注册发现通信安全监控">开发（容器、注册发现、通信、安全、监控）</h1>
 <blockquote>
-<p><strong>大纲</strong>：20.3 · <strong>教程</strong>：第20章 · <strong>分组</strong>：科目2 · 5. 微服务系统分析与设计 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+<p><strong>大纲</strong>：20.3 · <strong>教程</strong>：第20章 · <strong>分组</strong>：科目2 · 5. 微服务系统分析与设计 · <strong>状态</strong>：结构式重写 v2.0 · 审计通过</p>
 </blockquote>
 <h2 id="概述">概述</h2>
 <p><strong>开发（容器、注册发现、通信、安全、监控）</strong>：- 服务多、依赖链长 - 需契约测试（Consumer-Driven Contract） - 需测试替身（Mock/Stub）与测试容器 - 分布式环境搭建复杂。</p>
 <h2 id="速懂">速懂</h2>
 <ul>
-<li><strong>一句话</strong>：微服务架构：是将应用拆分为可独立部署、围绕业务能力组织的小服务。作用：用于云原生、弹性伸缩与团队自治。</li>
+<li><strong>一句话</strong>：微服务架构是将应用拆分为可独立部署、围绕业务能力组织的小服务。</li>
 <li><strong>考什么</strong>：微服务治理、熔断限流、最终一致（教程第 20 章）。</li>
-<li><strong>具体理解</strong>：<ul>
-<li>容器编排：是Kubernetes 等负责调度、伸缩与自愈。作用：用于 DevOps 与 5.3 开发运维一体化。</li>
-</ul>
-</li>
-<li><strong>别搞混</strong>：与同章相邻考点区分；题干锚词：<strong>开发</strong>。</li>
+<li><strong>别搞混</strong>：题干锚词：<strong>开发</strong>。</li>
 </ul>
 <h2 id="定义">定义</h2>
 <ul>
@@ -22,7 +18,7 @@
 <li><strong>容器编排</strong>：是Kubernetes 等负责调度、伸缩与自愈。<strong>作用</strong>：用于 DevOps 与 5.3 开发运维一体化。</li>
 </ul>
 <h2 id="步骤与流程">步骤与流程</h2>
-<h3 id="32-测试过程与类型">3.2 测试过程与类型</h3>
+<h3 id="测试过程与类型">测试过程与类型</h3>
 <ol>
 <li>单元（单服务）</li>
 <li>集成（服务间）</li>
@@ -31,21 +27,21 @@
 <li>容错</li>
 <li>安全</li>
 </ol>
-<h3 id="23-开发与运维组件">2.3 开发与运维组件</h3>
+<h3 id="开发与运维组件">开发与运维组件</h3>
 <ol>
 <li>| 监控 | ELK（Logstash</li>
 <li>ES</li>
 <li>Kibana）、Prometheus+Grafana、APM | 日志/指标/告警 |</li>
 </ol>
 <h2 id="要点">要点</h2>
-<h3 id="31-测试特点">3.1 测试特点</h3>
+<h3 id="测试特点">测试特点</h3>
 <ul>
 <li>服务多、依赖链长</li>
 <li>需契约测试（Consumer-Driven Contract）</li>
 <li>需测试替身（Mock/Stub）与测试容器</li>
 <li>分布式环境搭建复杂</li>
 </ul>
-<h3 id="32-测试过程与类型">3.2 测试过程与类型</h3>
+<h3 id="测试过程与类型">测试过程与类型</h3>
 <p><strong>过程</strong>：单元（单服务）→ 集成（服务间）→ 端到端 → 性能 → 容错 → 安全</p>
 <div class="table-wrap"><table>
 <thead>
@@ -72,7 +68,6 @@
 </tr>
 </tbody></table></div>
 <h2 id="易混辨析">易混辨析</h2>
-<p>（本节与相邻考点易混点见归档篇章「易混对比」；检索关键词：<strong>开发</strong>。）</p>
 <h2 id="应试">应试</h2>
 <ul>
 <li>「说明从单体迁移微服务的理由与拆分原则」→ 写单体痛点 + 单一职责/隔离性/有界上下文等原则答卷句。</li>

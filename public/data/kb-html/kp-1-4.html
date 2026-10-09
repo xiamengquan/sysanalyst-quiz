@@ -1,12 +1,12 @@
 <h1 id="指令系统基本指令ciscrisc">指令系统（基本指令、CISC、RISC）</h1>
 <blockquote>
-<p><strong>大纲</strong>：3.4 · <strong>教程</strong>：第3章 · <strong>分组</strong>：科目1 · 1. 计算机系统基础知识 · <strong>状态</strong>：工坊精修 v1.3.4 · 审计通过</p>
+<p><strong>大纲</strong>：3.4 · <strong>教程</strong>：第3章 · <strong>分组</strong>：科目1 · 1. 计算机系统基础知识 · <strong>状态</strong>：结构式重写 v2.0 · 审计通过</p>
 </blockquote>
 <h2 id="概述">概述</h2>
 <p><strong>指令系统（基本指令、CISC、RISC）</strong>：CISC特点：指令多(100<del>250)、使用频率20/80、寻址方式多(5</del>20)、变长指令、微程序控制。</p>
 <h2 id="速懂">速懂</h2>
 <ul>
-<li><strong>一句话</strong>：CISC特点：指令多(100<del>250)、使用频率20/80、寻址方式多(5</del>20)、变长指令、微程序控制。作用：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>一句话</strong>：CISC特点：指令多(100<del>250)、使用频率20/80、寻址方式多(5</del>20)、变长指令、微程序控制。</li>
 <li><strong>考什么</strong>：Cache/RAID/存储层次、OS 与指令对比（教程第 3 章）。</li>
 <li><strong>具体理解</strong>：<ul>
 <li>RISC的I比CISC长20%<del>40%，但CPI≈1(vs CISC的4</del>10)，T约为CISC的1/3。</li>
@@ -17,10 +17,10 @@
 </ul>
 <h2 id="定义">定义</h2>
 <ul>
-<li><strong>CISC特点</strong>：指令多(100<del>250)、使用频率20/80、寻址方式多(5</del>20)、变长指令、微程序控制。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
-<li><strong>RISC特点</strong>：指令少、固定长度、Load/Store结构、硬布线控制、流水线、寄存器多(32+)、指令/数据Cache分离。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
-<li><strong>RISC关键技术</strong>：延迟转移、指令取消、重叠寄存器窗口、指令流调整。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
-<li><strong>程序局部性</strong>：程序局部性是程序在执行过程中访问存储单元时呈现的非均匀分布规律，包括时间局部性与空间局部性。<strong>作用</strong>：用于题干场景下的概念识别、对比选型与案例/论文回扣。</li>
+<li><strong>CISC特点</strong>：指令多(100<del>250)、使用频率20/80、寻址方式多(5</del>20)、变长指令、微程序控制。</li>
+<li><strong>RISC特点</strong>：指令少、固定长度、Load/Store结构、硬布线控制、流水线、寄存器多(32+)、指令/数据Cache分离。</li>
+<li><strong>RISC关键技术</strong>：延迟转移、指令取消、重叠寄存器窗口、指令流调整。</li>
+<li><strong>程序局部性</strong>：程序局部性是程序在执行过程中访问存储单元时呈现的非均匀分布规律，包括时间局部性与空间局部性。</li>
 <li><strong>时间局部性</strong>：时间局部性是最近被访问过的存储单元在不久的将来很可能被再次访问的特性。<strong>作用</strong>：主要用于 Cache 设计——近期用过的数据块可保留在 Cache 中以提高命中率。</li>
 <li><strong>空间局部性</strong>：空间局部性是当前被访问单元邻近的存储单元在不久的将来很可能被访问的特性。<strong>作用</strong>：主要用于 Cache 块传输与预取设计——一次调入相邻数据块可提升后续访问命中概率。</li>
 <li><strong>Cache</strong>：Cache 是位于 CPU 与主存之间、由高速 SRAM 构成的小容量缓冲存储器。<strong>作用</strong>：主要用于利用程序局部性，在 CPU 与主存速度差距之间建立缓冲，降低平均访存时间。</li>
@@ -29,21 +29,12 @@
 <li><strong>DMA</strong>：DMA（直接存储器访问）是由 DMA 控制器直接在内存与外设之间批量传送数据、无需 CPU 逐字节参与控制的 I/O 方式。<strong>作用</strong>：主要用于高速、大批量数据传输，减轻 CPU 负担并提高并行度；CPU 仅负责预处理与后处理（如启动传输、处理完成中断）。</li>
 <li><strong>死锁</strong>：死锁是两个或多个进程因互相等待对方占有的资源而无法继续推进的运行状态。<strong>作用</strong>：用于理解死锁定义与四条件是分析死锁产生原因、制定预防/避免/检测与恢复策略的基础。</li>
 </ul>
-<h2 id="步骤与流程">步骤与流程</h2>
-<p>本节在教程中<strong>未单独列出固定步骤名</strong>；答题时可按下列指引组织答案：</p>
-<ol>
-<li>先在「要点」中找 <strong>阶段 / 活动 / → 流程链</strong> 表述；</li>
-<li>案例题常用 <strong>调查 → 分析 → 方案 → 验证</strong>（或题干给出的过程框架）；</li>
-<li>综合知识流程题优先写 <strong>编号步骤</strong> 或 <strong>阶段名称</strong>；</li>
-<li>需要完整步骤时打开文末 <strong>归档通章</strong> 对应小节对照誊写。</li>
-</ol>
 <h2 id="要点">要点</h2>
 <h3 id="指令系统">指令系统</h3>
 <p><strong>CISC特点</strong>：指令多(100<del>250)、使用频率20/80、寻址方式多(5</del>20)、变长指令、微程序控制。</p>
 <p><strong>RISC特点</strong>：指令少、固定长度、Load/Store结构、硬布线控制、流水线、寄存器多(32+)、指令/数据Cache分离。</p>
 <p><strong>RISC性能公式</strong>：<strong>P = I × CPI × T</strong></p>
 <ul>
-<li>RISC的I比CISC长20%<del>40%，但CPI≈1(vs CISC的4</del>10)，T约为CISC的1/3。</li>
 <li><strong>综合：RISC比同规模CISC快3~5倍</strong>。</li>
 </ul>
 <p><strong>RISC关键技术</strong>：延迟转移、指令取消、重叠寄存器窗口、指令流调整。</p>
@@ -51,13 +42,40 @@
 <div class="table-wrap"><table>
 <thead>
 <tr>
-<th>对比</th>
-<th>区别</th>
+<th>对比项</th>
+<th>CISC</th>
+<th>RISC</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>对比项</td>
-<td>CISC</td>
+<td>指令数</td>
+<td>多（100~250）</td>
+<td>少</td>
+</tr>
+<tr>
+<td>指令长度</td>
+<td>变长</td>
+<td>固定</td>
+</tr>
+<tr>
+<td>寻址方式</td>
+<td>5~20种</td>
+<td>少</td>
+</tr>
+<tr>
+<td>控制器</td>
+<td>微程序</td>
+<td>硬布线</td>
+</tr>
+<tr>
+<td>CPI</td>
+<td>4~10</td>
+<td>≈1</td>
+</tr>
+<tr>
+<td>访存</td>
+<td>直接访存</td>
+<td>Load/Store</td>
 </tr>
 </tbody></table></div>
 <h2 id="应试">应试</h2>
