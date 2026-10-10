@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-10T14:40:56.401Z",
+  "generatedAt": "2026-10-10T15:02:52.387Z",
   "urls": [
     {
       "url": "https://maintruly.top/",
@@ -1293,7 +1293,13 @@
     },
     {
       "url": "https://maintruly.top/kb/quick-memory-plan/",
-      "lastModified": "2026-10-10T14:31:07.068Z",
+      "lastModified": "2026-10-10T15:02:48.772Z",
+      "changeFrequency": "weekly",
+      "priority": 0.75
+    },
+    {
+      "url": "https://maintruly.top/kb/quick-kp-map/",
+      "lastModified": "2026-10-10T14:57:45.250Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },

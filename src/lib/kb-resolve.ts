@@ -134,6 +134,9 @@ export function resolveKbRef(
     const title = it.title || "";
     return title === q || title.includes(q) || q.includes(title);
   });
+  // 精确同名标题优先：避免「软件产品线」被「5.6 软件产品线」等包含关系抢先命中
+  const exactTitle = byTitle.find((it) => (it.title || "") === q);
+  if (exactTitle) return exactTitle;
   if (byTitle.length === 1) return byTitle[0];
   // 书名常省略「速查 ·」前缀
   const loose = items.find((it) => {
