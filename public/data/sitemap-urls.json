@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-10T13:50:15.159Z",
+  "generatedAt": "2026-10-10T14:40:56.401Z",
   "urls": [
     {
       "url": "https://maintruly.top/",
@@ -483,55 +483,55 @@
     },
     {
       "url": "https://maintruly.top/kb/kp-7-1/",
-      "lastModified": "2026-10-09T13:09:45.482Z",
+      "lastModified": "2026-10-10T14:24:37.870Z",
       "changeFrequency": "weekly",
       "priority": 0.8
     },
     {
       "url": "https://maintruly.top/kb/kp-7-2/",
-      "lastModified": "2026-10-09T13:10:01.207Z",
+      "lastModified": "2026-10-10T14:24:37.877Z",
       "changeFrequency": "weekly",
       "priority": 0.8
     },
     {
       "url": "https://maintruly.top/kb/kp-7-3/",
-      "lastModified": "2026-10-09T13:09:45.483Z",
+      "lastModified": "2026-10-10T14:24:37.873Z",
       "changeFrequency": "weekly",
       "priority": 0.8
     },
     {
       "url": "https://maintruly.top/kb/kp-7-4/",
-      "lastModified": "2026-10-09T13:09:45.483Z",
+      "lastModified": "2026-10-10T14:24:37.872Z",
       "changeFrequency": "weekly",
       "priority": 0.8
     },
     {
       "url": "https://maintruly.top/kb/kp-7-5/",
-      "lastModified": "2026-10-09T13:09:45.483Z",
+      "lastModified": "2026-10-10T14:24:37.868Z",
       "changeFrequency": "weekly",
       "priority": 0.8
     },
     {
       "url": "https://maintruly.top/kb/kp-7-6/",
-      "lastModified": "2026-10-09T13:09:45.483Z",
+      "lastModified": "2026-10-10T14:24:37.875Z",
       "changeFrequency": "weekly",
       "priority": 0.8
     },
     {
       "url": "https://maintruly.top/kb/kp-7-7/",
-      "lastModified": "2026-10-09T13:09:45.483Z",
+      "lastModified": "2026-10-10T14:24:37.874Z",
       "changeFrequency": "weekly",
       "priority": 0.8
     },
     {
       "url": "https://maintruly.top/kb/kp-7-8/",
-      "lastModified": "2026-10-09T13:09:45.484Z",
+      "lastModified": "2026-10-10T14:24:37.881Z",
       "changeFrequency": "weekly",
       "priority": 0.8
     },
     {
       "url": "https://maintruly.top/kb/kp-7-9/",
-      "lastModified": "2026-10-09T13:10:01.208Z",
+      "lastModified": "2026-10-10T14:24:37.878Z",
       "changeFrequency": "weekly",
       "priority": 0.8
     },
@@ -1017,7 +1017,7 @@
     },
     {
       "url": "https://maintruly.top/kb/kp-security-data-system/",
-      "lastModified": "2026-10-10T01:23:45.089Z",
+      "lastModified": "2026-10-10T14:24:37.877Z",
       "changeFrequency": "weekly",
       "priority": 0.8
     },
@@ -1143,7 +1143,7 @@
     },
     {
       "url": "https://maintruly.top/kb/ch09/",
-      "lastModified": "2026-09-13T11:27:09.913Z",
+      "lastModified": "2026-10-10T14:24:37.860Z",
       "changeFrequency": "monthly",
       "priority": 0.55
     },
@@ -1288,6 +1288,12 @@
     {
       "url": "https://maintruly.top/kb/quick-exam-7d/",
       "lastModified": "2026-10-10T13:11:26.487Z",
+      "changeFrequency": "weekly",
+      "priority": 0.75
+    },
+    {
+      "url": "https://maintruly.top/kb/quick-memory-plan/",
+      "lastModified": "2026-10-10T14:31:07.068Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },

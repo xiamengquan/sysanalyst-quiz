@@ -60,12 +60,12 @@
 <tbody><tr>
 <td><strong>BLP</strong></td>
 <td>保密性(MAC)</td>
-<td><strong>上读下写</strong>（不可读高、不可写低）</td>
+<td><strong>下读上写</strong>（不上读、不下写）</td>
 </tr>
 <tr>
 <td><strong>Biba</strong></td>
 <td>完整性(MAC)</td>
-<td><strong>下读上写</strong>（与BLP相反）</td>
+<td><strong>上读下写</strong>（不下读、不上写，与BLP相反）</td>
 </tr>
 <tr>
 <td><strong>Lattice</strong></td>
@@ -158,7 +158,7 @@
 <p><strong>论文怎么用</strong>：DevSecOps/安全运维类可写「左移测试+流水线门禁+密钥/权限最小化」；可靠性段落用 MTBF/可用性公式、冗余策略与 RPO/RTO 目标对齐业务连续性。</p>
 <p><strong>常考结论</strong></p>
 <ul>
-<li><p>BLP：<strong>上读下写</strong>；Biba：<strong>下读上写</strong>（相反！）。</p>
+<li><p>BLP：<strong>下读上写</strong>（不上读、不下写）；Biba：<strong>上读下写</strong>（不下读、不上写）（相反！）。</p>
 </li>
 <li><p>可用性 = <strong>MTTF/MTBF × 100%</strong>。</p>
 </li>

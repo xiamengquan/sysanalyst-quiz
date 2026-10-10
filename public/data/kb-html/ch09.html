@@ -263,12 +263,12 @@
 <tbody><tr>
 <td><strong>BLP</strong></td>
 <td>保密性(MAC)</td>
-<td><strong>上读下写</strong>（不可读高、不可写低）</td>
+<td><strong>下读上写</strong>（不上读、不下写）</td>
 </tr>
 <tr>
 <td><strong>Biba</strong></td>
 <td>完整性(MAC)</td>
-<td><strong>下读上写</strong>（与BLP相反）</td>
+<td><strong>上读下写</strong>（不下读、不上写，与BLP相反）</td>
 </tr>
 <tr>
 <td><strong>Lattice</strong></td>
@@ -835,7 +835,7 @@
 </tbody></table></div>
 <h2 id="常考数字结论口诀">常考数字/结论/口诀</h2>
 <ul>
-<li>BLP：<strong>上读下写</strong>；Biba：<strong>下读上写</strong>（相反！）。</li>
+<li>BLP：<strong>下读上写</strong>（不上读、不下写）；Biba：<strong>上读下写</strong>（不下读、不上写）（相反！）。</li>
 <li>可用性 = <strong>MTTF/MTBF × 100%</strong>。</li>
 <li>指数分布：<strong>R(t)=e^(-λt)</strong>，<strong>MTTF=1/λ</strong>。</li>
 <li>串联：<strong>R=∏Ri</strong>；并联：<strong>R=1-∏(1-Ri)</strong>。</li>
