@@ -61,6 +61,9 @@
 - **练题入口**：[第 7 章练习（关键词 开源社区）](/?bank=practice&chapter=7&path=all&q=%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA)
 
 ## 相关考点
+- [开发环境与工具](/kb/kp-5-3)
+- [开源软件](/kb/kp-open-source-software)
+- [论文专题组 · 开源软件及应用](/kb/kp-essay-topic-open-source)
 
 - 速查：[UML-体系化学习指南](../速查/UML-体系化学习指南.md)
 - 归档通章：[`第07章-软件工程.md`](../第一篇-基础知识/第07章-软件工程.md)
