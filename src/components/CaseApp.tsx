@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { BookOpen } from "lucide-react";
 import { CH_NAMES, type CaseItem, type CasePack } from "@/lib/types";
 import { CASE_STORAGE_KEY, storageGet, storageRemove, storageSet } from "@/lib/storage";
@@ -11,6 +12,7 @@ import type { KbSearchDoc, KbSearchIndex } from "@/lib/kb-search";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ExamSprintBanner } from "@/components/ExamCountdown";
+import Link from "next/link";
 import { useMediaMinWidth } from "@/lib/use-media-min-width";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -24,6 +26,8 @@ const TRACK_LABEL: Record<string, string> = {
 };
 
 export function CaseApp() {
+  const searchParams = useSearchParams();
+  const appliedLink = useRef(false);
   const [all, setAll] = useState<CaseItem[]>([]);
   const [packs, setPacks] = useState<CasePack[]>([]);
   const [bank, setBank] = useState<"all" | "practice" | "real">("all");
@@ -76,6 +80,20 @@ export function CaseApp() {
       cancelled = true;
     };
   }, []);
+
+  /** 真题系统等外部入口的 URL 参数：?bank=real&year=2026上&domain=…&type=… */
+  useEffect(() => {
+    if (!ready || appliedLink.current) return;
+    appliedLink.current = true;
+    const b = searchParams.get("bank");
+    if (b === "real" || b === "practice") setBank(b);
+    const y = searchParams.get("year");
+    if (y?.trim()) setYearHalf(y.trim());
+    const d = searchParams.get("domain");
+    if (d?.trim()) setDomain(d.trim());
+    const t = searchParams.get("type");
+    if (t?.trim()) setTyp(t.trim());
+  }, [ready, searchParams]);
 
   const domains = useMemo(() => [...new Set(all.map((c) => c.domain))].sort(), [all]);
   const byId = useMemo(() => new Map(all.map((c) => [c.id, c])), [all]);
@@ -352,11 +370,39 @@ export function CaseApp() {
           <div className="layout-main setup-main">
             {phase === "setup" && (
               <div className="stack">
+                {/* 训练计划联动 · 案例主页 */}
+                <Card className="border-primary/30 bg-primary/[0.03] dark:bg-primary/[0.05] space-y-3 px-(--card-spacing) mb-4">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="min-w-0">
+                      <h2 className="text-[1.02rem] font-semibold text-foreground">
+                        案例强化 · 14 天训练计划
+                      </h2>
+                      <p className="mt-1 text-[0.88rem] leading-relaxed text-muted-foreground">
+                        考情画像 → 分型轮训（D2–D9 逐日配题）→ 全真模拟（D10–D12 真题卷）→
+                        止损策略。配合《四层七日背诵总册》D1–D6 每日「练题收口」使用。
+                      </p>
+                    </div>
+                    <Button asChild variant="default" className="shrink-0 gap-1.5 shadow-xs">
+                      <Link href="/kb/quick-case-training/">进入训练计划 →</Link>
+                    </Button>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <Button asChild variant="secondary" size="sm">
+                      <Link href="/kb/quick-case-four-types/">四类题型导航</Link>
+                    </Button>
+                    <Button asChild variant="secondary" size="sm">
+                      <Link href="/kb/quick-four-tier-7d/">四层七日背诵总册</Link>
+                    </Button>
+                    <Button asChild variant="secondary" size="sm">
+                      <Link href="/kb/quick-memory-plan/">记忆强化卡组</Link>
+                    </Button>
+                  </div>
+                </Card>
                 {packs.length > 0 && (
                   <Card className="space-y-4 border-border bg-surface/60 px-(--card-spacing) mb-4">
-                    <h2 className="text-[1rem] font-medium">模拟包 / 真题卷</h2>
+                    <h2 className="text-[1rem] font-medium">整卷演练 · 模拟包 / 真题卷</h2>
                     <p className="text-[0.85rem] leading-relaxed text-muted-foreground">
-                      真题包按卷演练；自编五选三包：第 1 题必答，其余选答两题。
+                      真题卷为<b>真题分池</b>（按卷演练）；自编五选三包：第 1 题必答，其余选答两题。
                     </p>
                     <ul className="list-gap">
                       {packs.map((p) => (
@@ -377,9 +423,10 @@ export function CaseApp() {
                   </Card>
                 )}
                 <Card className="space-y-3 px-(--card-spacing) mb-4">
-                  <h2 className="text-[1rem] font-medium">自由练习</h2>
+                  <h2 className="text-[1rem] font-medium">自由练习（自编 / 真题分池）</h2>
                   <p className="text-[0.9rem] leading-relaxed text-muted-foreground">
-                    左侧调筛选后点「列出练习」；真题配图可能为外链。
+                    左侧「题库」切换自编练习与真题分池；真题配图可能为外链。历年综合知识真题在
+                    <Link href="/real-exams/" className="underline underline-offset-2"> 真题系统</Link>。
                   </p>
                 </Card>
               </div>

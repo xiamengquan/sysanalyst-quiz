@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-10T15:19:54.868Z",
+  "generatedAt": "2026-10-10T16:39:08.144Z",
   "urls": [
     {
       "url": "https://maintruly.top/",
@@ -15,6 +15,12 @@
     },
     {
       "url": "https://maintruly.top/case/",
+      "lastModified": "2026-10-10T00:00:00.000Z",
+      "changeFrequency": "weekly",
+      "priority": 0.85
+    },
+    {
+      "url": "https://maintruly.top/real-exams/",
       "lastModified": "2026-10-10T00:00:00.000Z",
       "changeFrequency": "weekly",
       "priority": 0.85
@@ -1299,7 +1305,7 @@
     },
     {
       "url": "https://maintruly.top/kb/quick-four-tier-7d/",
-      "lastModified": "2026-10-10T15:16:17.347Z",
+      "lastModified": "2026-10-10T16:37:04.995Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },

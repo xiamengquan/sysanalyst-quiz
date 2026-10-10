@@ -20,7 +20,9 @@ import { KbPreviewDrawer, useKbCatalog } from "@/components/KbPreviewDrawer";
 import { KbQuickIndex } from "@/components/KbQuickIndex";
 import { GlobalSearchHintButton } from "@/components/GlobalSearch";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { quizHomeHref } from "@/lib/quiz-deep-link";
+import { SEVEN_DAYS, sevenDayChapterLabel } from "@/lib/kb-seven-day";
 import {
   compareKbItemsByExamPriority,
   examPriorityRank,
@@ -156,6 +158,8 @@ export function KbCatalog() {
   const [kind, setKind] = useState("point");
   const [sectionId, setSectionId] = useState("all");
   const [pointSort, setPointSort] = useState<"exam" | "outline">("exam");
+  /** learn = 四层七日学习主页（默认）；dict = 全量字典检索 */
+  const [view, setView] = useState<"learn" | "dict">("learn");
 
   useEffect(() => {
     fetch("/data/kb-index.json")
@@ -196,13 +200,111 @@ export function KbCatalog() {
   if (err) return <p className="text-[var(--bad)]">目录加载失败：{err}</p>;
   if (!data) return <p className="text-muted-foreground">正式目录加载中…</p>;
 
+  if (view === "learn") {
+    return (
+      <>
+        <h1 className="page-title">知识点 · 快速学习与复习</h1>
+        <p className="page-lead">
+          以《四层七日背诵总册》为学习主线：每日 必会 M → 重点 K → 补充 S → 可放弃 D + 强化记忆块
+          <br />
+          <span className="text-[0.82rem]">
+            背完当日就刷当日配题；查某一考点的完整定义时，再进「字典检索」（{data.meta?.apiPoints ?? 174} 篇考点参考）
+          </span>
+        </p>
+
+        <Card className="border-primary/30 bg-primary/[0.03] dark:bg-primary/[0.05] p-4 sm:p-5 shadow-xs mb-4">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="min-w-0">
+              <h2 className="text-[1.02rem] font-semibold text-foreground">四层七日背诵总册</h2>
+              <p className="mt-1 text-[0.88rem] leading-relaxed text-muted-foreground">
+                D1–D7 七日主线，每日六块：必会默写卡（M）→ 重点辨析题型（K）→ 补充速览（S）→
+                可放弃止损（D）→ 强化记忆（D-1 / D-3 / D-7 回收 + 自测问句）→ 练题收口
+              </p>
+            </div>
+            <Button asChild variant="default" className="shrink-0 gap-1.5 shadow-xs">
+              <Link href="/kb/quick-four-tier-7d/">进入总册开始今日背诵 →</Link>
+            </Button>
+          </div>
+        </Card>
+
+        <div className="grid gap-2.5 sm:grid-cols-2">
+          {SEVEN_DAYS.map((d) => (
+            <Card key={d.id} className="p-4">
+              <div className="flex items-center justify-between gap-2">
+                <h3 className="text-[0.95rem] font-medium text-foreground">
+                  {d.label} · {d.theme}
+                </h3>
+                <span className="badge shrink-0">{d.paper ? "P2 · 含论文" : "P0 主攻"}</span>
+              </div>
+              <p className="mt-1 text-[0.82rem] leading-relaxed text-muted-foreground">{d.focus}</p>
+              <p className="mt-0.5 text-[0.72rem] text-muted-foreground/80">
+                {sevenDayChapterLabel(d)}
+              </p>
+              <div className="mt-2.5 flex flex-wrap gap-2">
+                <Button asChild variant="secondary" size="sm">
+                  <Link href={`/kb/quick-four-tier-7d/#${d.id}`}>背总册 {d.label}</Link>
+                </Button>
+                <Button asChild variant="outline" size="sm">
+                  <Link href={quizHomeHref({ bank: "practice", path: "seven_day", day: d.id })}>
+                    刷当日配题 →
+                  </Link>
+                </Button>
+              </div>
+            </Card>
+          ))}
+        </div>
+
+        <Card className="p-4 mt-4">
+          <h2 className="text-[0.95rem] font-medium text-foreground">强化记忆 · 复习工具</h2>
+          <div className="mt-2.5 grid gap-2 sm:grid-cols-2">
+            {[
+              { href: "/kb/quick-memory-plan/", title: "记忆强化 · 间隔重复与硬记忆点卡组", desc: "1-2-4-7-15 日程 · 56 条硬记忆点" },
+              { href: "/kb/quick-kp-map/", title: "知识点地图 · 按记忆专题", desc: "T01–T18 分组抽屉快查" },
+              { href: "/kb/quick-exam-7d/", title: "考前 7 天背诵清单", desc: "重难点优先的冲刺清单" },
+              { href: "/kb/quick-compare/", title: "高频对比速查表", desc: "易混概念一表辨析" },
+              { href: "/kb/quick-case-training/", title: "案例强化 · 14 天训练计划", desc: "案例分型轮训与全真模拟" },
+              { href: "/kb/quick-pm-calc/", title: "项目管理计算速查表", desc: "挣值 / 关键路径公式卡" },
+            ].map((t) => (
+              <Link
+                key={t.href}
+                href={t.href}
+                className="rounded-lg border border-border bg-muted/30 px-3 py-2.5 transition-colors hover:bg-muted/60"
+              >
+                <span className="text-[0.9rem] font-medium text-foreground">{t.title}</span>
+                <span className="block text-xs text-muted-foreground mt-0.5">{t.desc}</span>
+              </Link>
+            ))}
+          </div>
+        </Card>
+
+        <div className="mt-4 flex justify-center">
+          <Button variant="outline" onClick={() => setView("dict")}>
+            进入字典检索（全部考点 / 章节 / 速查目录）
+          </Button>
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
-      <h1 className="page-title">知识点</h1>
+      <h1 className="page-title">知识点 · 字典检索</h1>
       <p className="page-lead">
         正式发布 {data.meta?.version || "v1.0"}
         {data.meta?.apiPoints ? ` · 考点参考 ${data.meta.apiPoints} 篇（API 式单页）` : ""} · 全文搜索请用顶栏或{" "}
         <kbd className="gs-kbd-inline">Ctrl+K</kbd> / <kbd className="gs-kbd-inline">⌘K</kbd>
+        <br />
+        <span className="text-[0.82rem]">
+          学习主线请回{" "}
+          <button
+            type="button"
+            className="underline underline-offset-2 hover:text-foreground"
+            onClick={() => setView("learn")}
+          >
+            四层七日学习主页
+          </button>
+          ；本页为字典层，按需查阅
+        </span>
       </p>
 
       <div className="layout-split">

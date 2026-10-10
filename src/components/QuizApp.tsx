@@ -1,7 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { BookOpen, Dices, Flame, LayoutGrid, Trophy } from "lucide-react";
 import { CH_NAMES, type Question } from "@/lib/types";
 import { QUIZ_STORAGE_KEY, storageGet, storageSet } from "@/lib/storage";
@@ -27,6 +28,7 @@ import {
   EXAM_CHOICE_MIN_MINUTES_BEFORE_SUBMIT,
 } from "@/lib/exam-schedule";
 import { parseQuizDeepLink } from "@/lib/quiz-deep-link";
+import { SEVEN_DAYS, sevenDayById } from "@/lib/kb-seven-day";
 import { useMediaMinWidth } from "@/lib/use-media-min-width";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
@@ -61,20 +63,30 @@ function shuffleArray<T>(items: T[]): T[] {
   return result;
 }
 
-export function QuizApp() {
+export function QuizApp({
+  realExamMode = false,
+  initialYearHalf,
+}: {
+  /** 真题系统模式：题库锁定为真题，隐藏自编学习路径与模拟卷 */
+  realExamMode?: boolean;
+  /** 初始场次筛选（真题系统用），如 2014上 */
+  initialYearHalf?: string;
+} = {}) {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const appliedDeepLink = useRef(false);
   const [all, setAll] = useState<Question[]>([]);
   const [meta, setMeta] = useState<Meta | null>(null);
   const [mockSets, setMockSets] = useState<MockSetsData | null>(null);
-  const [bank, setBank] = useState("practice");
-  const [yearHalf, setYearHalf] = useState("all");
+  const [bank, setBank] = useState(realExamMode ? "real" : "practice");
+  const [yearHalf, setYearHalf] = useState(initialYearHalf || "all");
   const [chapter, setChapter] = useState("all");
   const [keyword, setKeyword] = useState("");
   const [fromKbDeepLink, setFromKbDeepLink] = useState(false);
   const [diff, setDiff] = useState("all");
   const [path, setPath] = useState<
     | "all"
+    | "seven_day"
     | "frontend"
     | "math_easy"
     | "roi_boost"
@@ -83,7 +95,8 @@ export function QuizApp() {
     | "req_learn"
     | "sao_learn"
     | "random75"
-  >("scenario");
+  >("seven_day");
+  const [day, setDay] = useState("d1");
   const [mode, setMode] = useState<"continuous" | "practice" | "exam">("continuous");
   const [limit, setLimit] = useState(0);
   const [shuffle, setShuffle] = useState(false);
@@ -149,13 +162,22 @@ export function QuizApp() {
     appliedDeepLink.current = true;
     const link = parseQuizDeepLink(searchParams);
     if (!link.chapter && !link.q && !link.bank && !link.path) return;
+    // 练习侧不再承载真题：真题深链一律导入独立真题系统
+    if (!realExamMode && link.bank === "real") {
+      const target = link.year
+        ? `/real-exams/?session=${encodeURIComponent(link.year)}`
+        : "/real-exams/";
+      router.replace(target);
+      return;
+    }
     setFromKbDeepLink(true);
     if (link.bank) setBank(link.bank);
     if (link.path) setPath(link.path);
     else if (link.chapter != null) setPath("all");
+    if (link.day) setDay(link.day);
     if (link.chapter != null) setChapter(String(link.chapter));
     if (link.q) setKeyword(link.q);
-  }, [loading, searchParams]);
+  }, [loading, searchParams, realExamMode, router]);
 
   const yearHalves = useMemo(() => {
     const s = new Set<string>();
@@ -171,17 +193,50 @@ export function QuizApp() {
     return [...s].sort((a, b) => a - b);
   }, [all]);
 
-  /** 综合知识纯选择题候选池（排除论文自测题） */
+  /** 综合知识纯选择题候选池（排除论文自测题）；练习侧剔除真题，真题侧仅真题 */
   const pureChoiceQuestions = useMemo(
-    () => all.filter((q) => q.bank === "real" || q.bank === "practice" || q.bank === "workshop"),
-    [all]
+    () =>
+      realExamMode
+        ? all.filter((q) => q.bank === "real")
+        : all.filter((q) => q.bank === "practice" || q.bank === "workshop"),
+    [all, realExamMode]
   );
+
+  /** 七日巩固各日配题数（自编 + 工坊，D7 含论文自测） */
+  const dayCounts = useMemo(() => {
+    const m = new Map<string, number>();
+    for (const d of SEVEN_DAYS) {
+      const chs = new Set(d.chapters);
+      m.set(
+        d.id,
+        all.filter(
+          (q) =>
+            q.bank !== "real" &&
+            chs.has(q.ch) &&
+            (q.bank === "practice" ||
+              q.bank === "workshop" ||
+              (q.bank === "paper" && chs.has(22)))
+        ).length
+      );
+    }
+    return m;
+  }, [all]);
 
   const filtered = useMemo(() => {
     const feCh = new Set([4, 7, 9, 12, 13, 14, 15]);
     let list = all.filter((q) => {
+      // 练习池默认剔除真题（真题独立为 /real-exams 真题系统）
+      if (!realExamMode && q.bank === "real") return false;
+      // 七日巩固：按当日章节配题（自编 + 工坊；D7 含论文自测），不受题库选择限制
+      if (path === "seven_day") {
+        const dayCfg = sevenDayById(day);
+        const chs = new Set(dayCfg?.chapters ?? []);
+        if (!chs.has(q.ch)) return false;
+        if (q.bank === "paper") return chs.has(22);
+        return q.bank === "practice" || q.bank === "workshop";
+      }
       if (path === "random75") {
-        return q.bank === "real" || q.bank === "practice" || q.bank === "workshop";
+        return q.bank === "practice" || q.bank === "workshop";
       }
       if (bank === "paper") return q.bank === "paper";
       if (bank !== "all" && q.bank !== bank) return false;
@@ -207,13 +262,11 @@ export function QuizApp() {
         if (!feCh.has(q.ch) && !tagged) return false;
       }
       if (path === "math_easy") {
-        if (q.bank === "real") return true;
         if (q.ch === 2) return q.math_level === "intuition" || q.diff === "basic";
         if (feCh.has(q.ch)) return true;
         return Array.isArray(q.audience) && q.audience.includes("frontend");
       }
       if (path === "roi_boost") {
-        if (q.bank === "real") return true;
         if (q.bank === "paper") return true;
         // 大分值：加练章 + 绑案例的规划/需求
         const boostCh = new Set([3, 4, 5, 7, 9, 10, 11, 12, 14]);
@@ -221,7 +274,6 @@ export function QuizApp() {
         return boostCh.has(q.ch);
       }
       if (path === "roi_stable") {
-        if (q.bank === "real") return true;
         const stableCh = new Set([0, 1, 2, 6, 8, 13, 15]);
         if (q.intensity === "stable") return stableCh.has(q.ch) || q.ch === 1;
         return stableCh.has(q.ch);
@@ -265,7 +317,7 @@ export function QuizApp() {
     const effectiveLimit = path === "random75" && limit === 0 ? 75 : limit;
     if (effectiveLimit > 0) list = list.slice(0, effectiveLimit);
     return list;
-  }, [all, bank, yearHalf, chapter, diff, path, shuffle, limit, keyword]);
+  }, [all, bank, yearHalf, chapter, diff, path, day, shuffle, limit, keyword, realExamMode]);
 
   const persist = useCallback(async () => {
     try {
@@ -338,6 +390,39 @@ export function QuizApp() {
       setPhase("quiz");
     },
     [mockSets, all]
+  );
+
+  /** 七日巩固：按当日章节直接组卷（配合《四层七日背诵总册》） */
+  const startSevenDay = useCallback(
+    (dayId: string, preferredMode?: "continuous" | "practice" | "exam") => {
+      const cfg = sevenDayById(dayId);
+      if (!cfg) return;
+      const chs = new Set(cfg.chapters);
+      const list = all.filter((q) => {
+        if (q.bank === "real") return false;
+        if (!chs.has(q.ch)) return false;
+        if (q.bank === "paper") return chs.has(22);
+        return q.bank === "practice" || q.bank === "workshop";
+      });
+      if (!list.length) {
+        alert("该日次暂无配题，请稍候…");
+        return;
+      }
+      setDay(dayId);
+      setPath("seven_day");
+      setChapter("all");
+      setDiff("all");
+      setKeyword("");
+      setYearHalf("all");
+      setPool(list);
+      setIdx(0);
+      setAnswers({});
+      setRevealed({});
+      setIsRandom75Session(false);
+      setMode(preferredMode ?? "continuous");
+      setPhase("quiz");
+    },
+    [all]
   );
 
   const start = useCallback(
@@ -464,14 +549,27 @@ export function QuizApp() {
 
   return (
     <>
-      <h1 className="page-title">刷题</h1>
+      <h1 className="page-title">{realExamMode ? "真题 · 综合知识" : "刷题"}</h1>
       <p className="page-lead">
-        自编 {meta?.practice ?? "—"} · 真题 {meta?.real ?? "—"} · 工坊 {meta?.workshop ?? "—"} · 合计{" "}
-        {meta?.total ?? all.length}
-        <br />
-        <span className="text-[0.82rem]">
-          默认「场景混淆」；需求专攻可选「需求工程（L0→L4）」按关卡顺序学（建议关随机）
-        </span>
+        {realExamMode ? (
+          <>
+            历年综合知识真题 {meta?.real ?? "—"} 道 · 按场次成卷（每卷 75 题）
+            <br />
+            <span className="text-[0.82rem]">
+              选择场次后作答，建议配合「模拟（交卷后看结果）」模式还原考场体验
+            </span>
+          </>
+        ) : (
+          <>
+            自编 {meta?.practice ?? "—"} · 工坊 {meta?.workshop ?? "—"} · 论文自测 13 · 合计{" "}
+            {(meta?.practice ?? 0) + (meta?.workshop ?? 0) + 13}
+            <br />
+            <span className="text-[0.82rem]">
+              默认「七日巩固」按总册 D1–D7 每日配题；需求专攻可选「需求工程（L0→L4）」按关卡顺序学
+              · 历年真题已独立至<Link className="underline underline-offset-2 hover:text-foreground" href="/real-exams/">真题系统</Link>
+            </span>
+          </>
+        )}
       </p>
 
       {phase === "setup" && (
@@ -516,6 +614,7 @@ export function QuizApp() {
                 </Button>
               ) : null}
               <div className={cn("filter-stack", !wideSetup && !filtersOpen && "hidden")}>
+                {!realExamMode ? (
                 <label className="block text-[0.82rem] text-muted-foreground">
                   学习路径
                   <select
@@ -534,6 +633,10 @@ export function QuizApp() {
                       } else if (v !== "all") {
                         setBank("practice");
                       }
+                      if (v === "seven_day") {
+                        setChapter("all");
+                        setShuffle(false);
+                      }
                       if (v === "req_learn" || v === "sao_learn") {
                         setShuffle(false);
                         setChapter("11");
@@ -541,7 +644,8 @@ export function QuizApp() {
                       }
                     }}
                   >
-                    <option value="scenario">场景混淆（推荐）</option>
+                    <option value="seven_day">七日巩固 · 四层七日（推荐）</option>
+                    <option value="scenario">场景混淆</option>
                     <option value="random75">🎲 全库随机 75 题（模考冲刺）</option>
                     <option value="req_learn">需求工程（L0→L4）</option>
                     <option value="sao_learn">结构化与OO分析（L0→L4）</option>
@@ -552,35 +656,45 @@ export function QuizApp() {
                     <option value="all">不限路径</option>
                   </select>
                 </label>
+                ) : null}
+                {!realExamMode && path === "seven_day" ? (
+                  <label className="block text-[0.82rem] text-muted-foreground">
+                    巩固日次（配合总册 D1–D7）
+                    <select
+                      className="field mt-1.5"
+                      value={day}
+                      onChange={(e) => setDay(e.target.value)}
+                    >
+                      {SEVEN_DAYS.map((d) => (
+                        <option key={d.id} value={d.id}>
+                          {d.label} · {d.theme}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                ) : null}
+                {!realExamMode ? (
                 <label className="block text-[0.82rem] text-muted-foreground">
                   题库
                   <select
                     className="field mt-1.5"
                     value={bank}
-                    onChange={(e) => {
-                      const v = e.target.value;
-                      setBank(v);
-                      if (v === "real") {
-                        setPath("all");
-                        setShuffle(false);
-                        setDiff("all");
-                      }
-                    }}
+                    onChange={(e) => setBank(e.target.value)}
                   >
                     <option value="practice">自编练习</option>
                     <option value="workshop">出题工坊（新题）</option>
-                    <option value="real">综合知识真题</option>
                     <option value="paper">论文自测（结构要点）</option>
                     <option value="all">全部（含论文自测）</option>
                   </select>
                 </label>
+                ) : null}
+                {realExamMode ? (
                 <label className="block text-[0.82rem] text-muted-foreground">
-                  场次（综合知识真题）
+                  场次（历年真题）
                   <select
                     className="field mt-1.5"
                     value={yearHalf}
                     onChange={(e) => setYearHalf(e.target.value)}
-                    disabled={bank !== "real"}
                   >
                     <option value="all">全部场次</option>
                     {yearHalves.map((y) => (
@@ -590,6 +704,8 @@ export function QuizApp() {
                     ))}
                   </select>
                 </label>
+                ) : null}
+                {!realExamMode ? (
                 <label className="block text-[0.82rem] text-muted-foreground">
                   章节（自编）
                   <select className="field mt-1.5" value={chapter} onChange={(e) => setChapter(e.target.value)}>
@@ -601,6 +717,8 @@ export function QuizApp() {
                     ))}
                   </select>
                 </label>
+                ) : null}
+                {!realExamMode ? (
                 <label className="block text-[0.82rem] text-muted-foreground">
                   关键词（题干/考点）
                   <input
@@ -611,6 +729,7 @@ export function QuizApp() {
                     onChange={(e) => setKeyword(e.target.value)}
                   />
                 </label>
+                ) : null}
                 <label className="block text-[0.82rem] text-muted-foreground">
                   难度
                   <select className="field mt-1.5" value={diff} onChange={(e) => setDiff(e.target.value)}>
@@ -618,7 +737,6 @@ export function QuizApp() {
                     <option value="basic">仅基础</option>
                     <option value="medium">仅中等</option>
                     <option value="deep">仅深度</option>
-                    <option value="real">仅真题</option>
                   </select>
                 </label>
                 <label className="block text-[0.82rem] text-muted-foreground">
@@ -648,6 +766,57 @@ export function QuizApp() {
           </aside>
 
           <div className="layout-main setup-main space-y-4">
+            {/* 七日巩固 · 配合四层七日总册 */}
+            {!realExamMode ? (
+            <Card className="border-primary/30 bg-primary/[0.03] dark:bg-primary/[0.05] p-4 sm:p-5 shadow-xs">
+              <div className="flex items-start justify-between gap-3 mb-2.5">
+                <div className="flex items-center gap-2.5">
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
+                    <BookOpen className="size-4" />
+                  </span>
+                  <div>
+                    <h2 className="text-[1.02rem] font-semibold text-foreground">
+                      七日巩固 · 学完当日，立刻配题
+                    </h2>
+                    <p className="text-xs text-muted-foreground mt-0.5">
+                      配合《四层七日背诵总册》D1–D7 每日主题
+                    </p>
+                  </div>
+                </div>
+                <span className="shrink-0 rounded-full border border-primary/30 bg-primary/10 px-2.5 py-0.5 text-[0.72rem] font-medium text-primary">
+                  必会 K 层优先
+                </span>
+              </div>
+              <p className="text-[0.88rem] leading-relaxed text-muted-foreground mb-4">
+                背完当日「必会默写卡」与「重点辨析」后，点击对应日次，系统按当日章节从<b className="text-foreground">自编题库与工坊新题</b>中配出全部题目（真题已移至<a className="underline underline-offset-2" href="/real-exams/">真题系统</a>）。
+              </p>
+              <div className="flex flex-wrap items-center gap-2">
+                {SEVEN_DAYS.map((d) => (
+                  <Button
+                    key={d.id}
+                    type="button"
+                    variant="default"
+                    onClick={() => startSevenDay(d.id)}
+                    className="gap-1.5 shadow-xs"
+                    title={`${d.focus}（${dayCounts.get(d.id) ?? 0} 题）`}
+                  >
+                    <span className="font-semibold">{d.label}</span>
+                    <span className="text-[0.72rem] font-normal opacity-85">{d.theme}</span>
+                    <span className="text-[0.68rem] font-normal opacity-70">
+                      {dayCounts.get(d.id) ?? 0}题
+                    </span>
+                  </Button>
+                ))}
+              </div>
+              <p className="mt-2.5 text-[0.75rem] text-muted-foreground">
+                <Link href="/kb/quick-four-tier-7d/" className="underline underline-offset-2">
+                  先去背《四层七日背诵总册》→
+                </Link>
+                {" "}· 作答模式跟随「模式」选择（默认连续通关）
+              </p>
+            </Card>
+            ) : null}
+
             {/* 全真模拟 · 随机 75 题推荐卡片 */}
             <Card className="border-primary/30 bg-primary/[0.03] dark:bg-primary/[0.05] p-4 sm:p-5 shadow-xs">
               <div className="flex items-start justify-between gap-3 mb-2.5">
@@ -669,7 +838,7 @@ export function QuizApp() {
                 </span>
               </div>
               <p className="text-[0.88rem] leading-relaxed text-muted-foreground mb-4">
-                从全量 <b className="text-foreground">{pureChoiceQuestions.length || 1935}</b> 道选择题（历年真题、自编精选题与工坊新题）中<b>无偏随机抽取 75 道</b>。45 分合格线，每次抽取均为全新题目组合。
+                从全量 <b className="text-foreground">{pureChoiceQuestions.length || 75}</b> 道选择题（{realExamMode ? "历年综合知识真题" : "自编精选题与工坊新题"}）中<b>无偏随机抽取 75 道</b>。45 分合格线，每次抽取均为全新题目组合。
                 考场规则：上午综合与案例连续机考，选择题最长 {EXAM_CHOICE_MAX_MINUTES} 分钟，满{" "}
                 {EXAM_CHOICE_MIN_MINUTES_BEFORE_SUBMIT} 分钟可提前交卷并<strong className="text-foreground">直接进入案例分析</strong>。
               </p>
@@ -705,7 +874,7 @@ export function QuizApp() {
             </Card>
 
             {/* 模拟卷 · 对齐真题 75 题结构 */}
-            {mockSets ? (
+            {mockSets && !realExamMode ? (
               <Card className="border-primary/30 bg-primary/[0.03] dark:bg-primary/[0.05] p-4 sm:p-5 shadow-xs">
                 <div className="flex items-start justify-between gap-3 mb-2.5">
                   <div className="flex items-center gap-2.5">
