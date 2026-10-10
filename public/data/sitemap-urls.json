@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-10T15:02:52.387Z",
+  "generatedAt": "2026-10-10T15:19:54.868Z",
   "urls": [
     {
       "url": "https://maintruly.top/",
@@ -1287,19 +1287,25 @@
     },
     {
       "url": "https://maintruly.top/kb/quick-exam-7d/",
-      "lastModified": "2026-10-10T13:11:26.487Z",
+      "lastModified": "2026-10-10T15:19:11.292Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-memory-plan/",
-      "lastModified": "2026-10-10T15:02:48.772Z",
+      "lastModified": "2026-10-10T15:18:40.761Z",
+      "changeFrequency": "weekly",
+      "priority": 0.75
+    },
+    {
+      "url": "https://maintruly.top/kb/quick-four-tier-7d/",
+      "lastModified": "2026-10-10T15:16:17.347Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-kp-map/",
-      "lastModified": "2026-10-10T14:57:45.250Z",
+      "lastModified": "2026-10-10T15:18:40.685Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
