@@ -43,4 +43,4 @@
 
 ## 相关考点
 
-- [论文专题组 · 开源软件及应用](/kb/kp-essay-topic-info-systems-7)
+- [论文专题组 · 开源软件及应用](/kb/kp-essay-topic-open-source)

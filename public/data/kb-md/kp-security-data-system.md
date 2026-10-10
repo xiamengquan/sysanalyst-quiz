@@ -213,5 +213,5 @@
 - [安全管理措施（审计、CC、隐私）](/kb/kp-7-6)
 - [需求概述（层次、QFD、FURPS+）](/kb/kp-9-1)
 - [运维指标 MTTR/MTBF/MTTF/MTTA](/kb/kp-ops-metrics-mttr-mtbf-mttf-mtta)
-- [论文专题组 · 系统安全性分析](/kb/kp-essay-topic-info-systems-4)
+- [论文专题组 · 系统安全性分析](/kb/kp-essay-topic-security-analysis)
 - 归档通章：[`第09章-信息安全.md`](../第一篇-基础知识/第09章-信息安全.md)

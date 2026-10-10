@@ -1,0 +1,375 @@
+{
+  "date": "2026-10-10",
+  "stats": {
+    "旧节名引用(非points)": 70,
+    "§引用(信息级)": 144,
+    "§引用指向旧节名": 3
+  },
+  "issues": [
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/第二篇-关键技术/第15章-系统运行与维护.md:156",
+      "detail": "## 八、第15章易混对比"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/第二篇-关键技术/第13章-系统设计.md:101",
+      "detail": "## 六、第13章易混对比"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/第二篇-关键技术/第10章-系统规划与分析.md:336",
+      "detail": "## 七、第10章易混对比表"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/第二篇-关键技术/第12章-软件架构设计.md:183",
+      "detail": "## 六、第12章易混对比"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/第二篇-关键技术/第14章-软件实现与测试.md:128",
+      "detail": "## 四、第14章易混对比"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/第二篇-关键技术/第11章-软件需求工程.md:311",
+      "detail": "## 六、第11章易混对比"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/速查/UML-体系化学习指南.md:18",
+      "detail": "| **L3 加深** | 聚合组合、include/extend、包/组件/部署 | 1 小时 | 易混对比不翻车 |"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/第一篇-基础知识/第07章-软件工程.md:99",
+      "detail": "> **由简入深完整指南**：`速查/UML-体系化学习指南.md`（对齐 OMG UML 2.5.1；含五图读法、易混"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/第一篇-基础知识/第07章-软件工程.md:134",
+      "detail": "## 易混对比"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/第一篇-基础知识/第04章-计算机网络与分布式系统.md:87",
+      "detail": "## 易混对比"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/第一篇-基础知识/第09章-信息安全.md:254",
+      "detail": "## 易混对比"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/第一篇-基础知识/第01章-绪论.md:55",
+      "detail": "## 易混对比"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/第一篇-基础知识/第06章-企业信息化.md:140",
+      "detail": "## 易混对比"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/第一篇-基础知识/第03章-计算机系统.md:175",
+      "detail": "## 易混对比"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/第一篇-基础知识/第05章-数据库系统.md:231",
+      "detail": "## 易混对比"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/第一篇-基础知识/第02章-数学与工程基础.md:60",
+      "detail": "## 易混对比"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/第一篇-基础知识/第08章-项目管理.md:146",
+      "detail": "## 易混对比"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/第三篇-案例实践/第20章-微服务系统分析与设计.md:152",
+      "detail": "## 五、易混对比"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/第三篇-案例实践/第20章-微服务系统分析与设计.md:170",
+      "detail": "- 「对比微服务方案与传统 SOA/ESB 方案」→ 用 §一 对比表 + §五 易混对比展开。"
+    },
+    {
+      "kind": "§引用指向旧节名",
+      "where": "content/kb/第三篇-案例实践/第20章-微服务系统分析与设计.md:170",
+      "detail": "- 「对比微服务方案与传统 SOA/ESB 方案」→ 用 §一 对比表 + §五 易混对比展开。"
+    },
+    {
+      "kind": "§引用指向旧节名",
+      "where": "content/kb/第三篇-案例实践/第20章-微服务系统分析与设计.md:170",
+      "detail": "- 「对比微服务方案与传统 SOA/ESB 方案」→ 用 §一 对比表 + §五 易混对比展开。"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/第三篇-案例实践/第16章-Web应用系统分析与设计.md:239",
+      "detail": "## 五、易混对比"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/第三篇-案例实践/第16章-Web应用系统分析与设计.md:256",
+      "detail": "- 「对比 MVC 与 MVP / 传统 Web 与 SPA / 整体式与微服务」→ 用 §五 易混对比表展开。"
+    },
+    {
+      "kind": "§引用指向旧节名",
+      "where": "content/kb/第三篇-案例实践/第16章-Web应用系统分析与设计.md:256",
+      "detail": "- 「对比 MVC 与 MVP / 传统 Web 与 SPA / 整体式与微服务」→ 用 §五 易混对比表展开。"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-3-4-2.md:141",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-app-system-analysis-design.md:55",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-11-7.md:109",
+      "detail": "## 六、第13章易混对比"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-essay-content.md:198",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-11-6.md:109",
+      "detail": "## 六、第13章易混对比"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-6-6-2.md:36",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-12-5.md:107",
+      "detail": "## 四、第14章易混对比"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-2-1-2.md:160",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-3-5-2.md:63",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-essay-topic-new-tech.md:49",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-essay-topic-open-source.md:41",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-essay-topic-info-systems.md:55",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-essay-topic-db-modeling.md:45",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-3-2-2.md:59",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-5-7.md:50",
+      "detail": "> **由简入深完整指南**：`速查/UML-体系化学习指南.md`（对齐 OMG UML 2.5.1；含五图读法、易混"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-5-7.md:98",
+      "detail": "- > **由简入深完整指南**：`速查/UML-体系化学习指南.md`（对齐 OMG UML 2.5.1；含五图读法、"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-6-1-2.md:167",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-3-3-2.md:66",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-4-1-2.md:151",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-oo-technology.md:39",
+      "detail": "> **由简入深完整指南**：`速查/UML-体系化学习指南.md`（对齐 OMG UML 2.5.1；含五图读法、易混"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-big-data.md:55",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-essay-topic-enterprise-is.md:47",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-standards-ip-lifecycle.md:70",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-mobile-web.md:42",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-6-3-2.md:60",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-2-4-2.md:162",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-4-2-2.md:45",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-essay-topic-system-integration.md:43",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-4-3-2.md:62",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-3-1-2.md:141",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-2-5-2.md:160",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-6-2-2.md:88",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-cps-iot.md:49",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-13-8.md:183",
+      "detail": "## 八、第15章易混对比"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-6-5-2.md:165",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-2-2-2.md:45",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-4-4-2.md:51",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-open-source-software.md:34",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-12-6.md:107",
+      "detail": "## 四、第14章易混对比"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-essay-topic-network-planning.md:41",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-low-code-nocode.md:153",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-essay-topic-security-analysis.md:41",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-thesis-writing-guide.md:201",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-11-4.md:109",
+      "detail": "## 六、第13章易混对比"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-realtime-systems.md:160",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-system-maintenance.md:183",
+      "detail": "## 八、第15章易混对比"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-2-3-2.md:64",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-13-2.md:183",
+      "detail": "## 八、第15章易混对比"
+    },
+    {
+      "kind": "旧节名引用(非points)",
+      "where": "content/kb/points/kp-6-4-2.md:44",
+      "detail": "（同章归档篇章「易混对比」；刷题前对照相邻考点。）"
+    }
+  ]
+}

@@ -187,6 +187,6 @@
 
 ## 相关考点
 
-- [论文专题组 · 企业信息系统](/kb/kp-essay-topic-info-systems-6)
+- [论文专题组 · 企业信息系统](/kb/kp-essay-topic-enterprise-is)
 - [决策支持系统](/kb/kp-dss)
 - 归档通章：[`第06章-企业信息化.md`](../第一篇-基础知识/第06章-企业信息化.md)

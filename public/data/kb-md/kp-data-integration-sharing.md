@@ -187,6 +187,6 @@
 
 ## 相关考点
 
-- [论文专题组 · 应用系统集成](/kb/kp-essay-topic-info-systems-5)
+- [论文专题组 · 应用系统集成](/kb/kp-essay-topic-system-integration)
 - [应用集成/服务集成](/kb/kp-app-service-integration)
 - 归档通章：[`第06章-企业信息化.md`](../第一篇-基础知识/第06章-企业信息化.md)

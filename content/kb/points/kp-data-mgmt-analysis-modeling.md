@@ -108,6 +108,6 @@
 
 ## 相关考点
 
-- [论文专题组 · 数据库建模及应用](/kb/kp-essay-topic-info-systems-2)
+- [论文专题组 · 数据库建模及应用](/kb/kp-essay-topic-db-modeling)
 - [数据仓库](/kb/kp-data-warehouse)
 - 归档通章：[`第05章-数据库系统.md`](../第一篇-基础知识/第05章-数据库系统.md)
