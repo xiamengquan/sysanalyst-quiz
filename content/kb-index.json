@@ -2282,6 +2282,15 @@
           "note": "第十轮审计 · 工单1"
         },
         {
+          "id": "quick-case-training",
+          "title": "案例强化 · 14 天训练计划（薄弱专项）",
+          "path": "速查/案例强化-14天训练计划.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "howto",
+          "note": "案例薄弱专项 · 诊断→轮训→全真模拟"
+        },
+        {
           "id": "quick-case-diagnosis",
           "title": "案例 · 问题诊断与改进 · 答题模板",
           "path": "速查/案例-问题诊断与改进-答题模板.md",
