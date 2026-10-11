@@ -43,10 +43,17 @@ function linkifyMarkdownFileAnchors(
   return html.replace(
     /<a\s+([^>]*?)href="([^"]+)"([^>]*)>([\s\S]*?)<\/a>/gi,
     (full, before, href, after, inner) => {
-      if (!isKbMarkdownHref(href)) return full;
-      let query = href;
-      if (currentItemPath && (href.startsWith("./") || href.startsWith("../"))) {
-        query = resolveRelativeKbPath(currentItemPath, href);
+      // marked 会把 href 中的非 ASCII 字符 percent-encode；先还原成原文再查路由树
+      let decoded = String(href).trim();
+      try {
+        decoded = decodeURIComponent(decoded);
+      } catch {
+        /* 保留原串 */
+      }
+      if (!isKbMarkdownHref(decoded)) return full;
+      let query = decoded;
+      if (currentItemPath && (decoded.startsWith("./") || decoded.startsWith("../"))) {
+        query = resolveRelativeKbPath(currentItemPath, decoded);
       }
       const hit = resolveKbRef(items, query, { excludeId });
       if (!hit) return full;

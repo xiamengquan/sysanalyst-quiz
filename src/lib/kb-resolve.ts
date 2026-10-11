@@ -44,7 +44,8 @@ export function normalizeKbRouteId(raw: string): string {
 
 export function findKbItemByRouteId(catalog: KbFlatItem[], routeId: string): KbFlatItem | null {
   const norm = normalizeKbRouteId(routeId);
-  return catalog.find((it) => it.id === norm || it.id === routeId) ?? null;
+  const tree = getKbRouteTree(catalog);
+  return tree.byId.get(norm) ?? tree.byId.get(routeId) ?? null;
 }
 
 /** 相对当前正文文件路径，解析 Markdown 链接中的 ./ ../ 路径 */
@@ -91,29 +92,103 @@ export function looksLikeKbPath(text: string) {
 }
 
 /**
- * 解析路径 / 书名 / id 到正式条目。
- * 优先级：精确 path → 文件名 → 标题包含 → id
+ * KB 路由树：所有 id / 路径 / 文件名 / 标题的统一查找索引。
+ * 任何 KB 引用解析（链接改写、codespan、书名号、路由 id）都应先查树。
+ */
+export interface KbRouteTree {
+  items: KbFlatItem[];
+  byId: Map<string, KbFlatItem>;
+  byPath: Map<string, KbFlatItem[]>;
+  byFile: Map<string, KbFlatItem[]>;
+  byPathStem: Map<string, KbFlatItem[]>;
+  byTitle: Map<string, KbFlatItem[]>;
+}
+
+export function buildKbRouteTree(items: KbFlatItem[]): KbRouteTree {
+  const tree: KbRouteTree = {
+    items,
+    byId: new Map(),
+    byPath: new Map(),
+    byFile: new Map(),
+    byPathStem: new Map(),
+    byTitle: new Map(),
+  };
+  for (const it of items) {
+    if (it.id && !tree.byId.has(it.id)) tree.byId.set(it.id, it);
+    const p = normPath(it.path || "");
+    if (p) pushMap(tree.byPath, p, it);
+    const fn = fileName(p).toLowerCase();
+    if (fn) pushMap(tree.byFile, fn, it);
+    const stem = stripMd(fileName(p));
+    if (stem) pushMap(tree.byPathStem, stem, it);
+    const title = (it.title || "").trim();
+    if (title) pushMap(tree.byTitle, title, it);
+  }
+  return tree;
+}
+
+function pushMap<K>(map: Map<K, KbFlatItem[]>, key: K, it: KbFlatItem) {
+  const arr = map.get(key);
+  if (arr) arr.push(it);
+  else map.set(key, [it]);
+}
+
+/** 同一 items 数组引用只建一次树（flatten 产物在客户端/构建端均为稳定引用） */
+const routeTreeCache = new WeakMap<KbFlatItem[], KbRouteTree>();
+
+export function getKbRouteTree(items: KbFlatItem[]): KbRouteTree {
+  let tree = routeTreeCache.get(items);
+  if (!tree) {
+    tree = buildKbRouteTree(items);
+    routeTreeCache.set(items, tree);
+  }
+  return tree;
+}
+
+/** 引用查询串规范化：剥书名号壳 + 递归 percent-decode（marked 会把 href 编码） */
+function decodeKbRefQuery(raw: string): string {
+  let s = raw.trim().replace(/^《|》$/g, "").trim();
+  for (let i = 0; i < 3; i++) {
+    if (!/%[0-9A-Fa-f]{2}/.test(s)) break;
+    try {
+      const next = decodeURIComponent(s);
+      if (next === s) break;
+      s = next;
+    } catch {
+      break;
+    }
+  }
+  return s;
+}
+
+function filterEx(list: KbFlatItem[], exclude?: string) {
+  return exclude ? list.filter((it) => it.id !== exclude) : list;
+}
+
+/**
+ * 解析路径 / 书名 / id 到正式条目（统一走路由树）。
+ * 优先级：id → 精确 path → 文件名 → 标题包含
  */
 export function resolveKbRef(
   items: KbFlatItem[],
   raw: string,
   opts?: { excludeId?: string },
 ): KbFlatItem | null {
-  const q = raw.trim().replace(/^《|》$/g, "");
+  const q = decodeKbRefQuery(raw);
   if (!q) return null;
   const exclude = opts?.excludeId;
+  const tree = getKbRouteTree(items);
 
-  const byId = items.find((it) => it.id === q && it.id !== exclude);
+  const byId = filterEx([tree.byId.get(q)].filter(Boolean) as KbFlatItem[], exclude)[0];
   if (byId) return byId;
 
   const np = normPath(q);
-  const exact = items.find((it) => it.id !== exclude && normPath(it.path || "") === np);
-  if (exact) return exact;
+  const exact = filterEx(tree.byPath.get(np) ?? [], exclude);
+  if (exact.length === 1) return exact[0];
+  if (exact.length > 1) return exact.find((it) => normPath(it.path || "") === np) ?? exact[0];
 
   const fn = fileName(np);
-  const byFile = items.filter(
-    (it) => it.id !== exclude && fileName(it.path || "").toLowerCase() === fn.toLowerCase(),
-  );
+  const byFile = filterEx(tree.byFile.get(fn.toLowerCase()) ?? [], exclude);
   if (byFile.length === 1) return byFile[0];
   if (byFile.length > 1) {
     const withDir = byFile.find((it) => normPath(it.path || "").endsWith(np));

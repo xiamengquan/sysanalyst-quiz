@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-11T03:10:29.109Z",
+  "generatedAt": "2026-10-11T03:27:55.548Z",
   "urls": [
     {
       "url": "https://maintruly.top/",
@@ -1544,6 +1544,30 @@
       "priority": 0.75
     },
     {
+      "url": "https://maintruly.top/kb/quick-outline-se/",
+      "lastModified": "2026-10-11T01:35:03.389Z",
+      "changeFrequency": "weekly",
+      "priority": 0.75
+    },
+    {
+      "url": "https://maintruly.top/kb/quick-outline-db/",
+      "lastModified": "2026-10-11T01:35:03.384Z",
+      "changeFrequency": "weekly",
+      "priority": 0.75
+    },
+    {
+      "url": "https://maintruly.top/kb/quick-outline-arch/",
+      "lastModified": "2026-10-11T01:35:03.303Z",
+      "changeFrequency": "weekly",
+      "priority": 0.75
+    },
+    {
+      "url": "https://maintruly.top/kb/quick-ea-togaf/",
+      "lastModified": "2026-10-11T01:35:03.389Z",
+      "changeFrequency": "weekly",
+      "priority": 0.75
+    },
+    {
       "url": "https://maintruly.top/kb/essay-dir/",
       "lastModified": "2026-10-10T01:23:45.090Z",
       "changeFrequency": "monthly",
@@ -1552,6 +1576,48 @@
     {
       "url": "https://maintruly.top/kb/essay-arch-style/",
       "lastModified": "2026-09-05T14:23:12.000Z",
+      "changeFrequency": "monthly",
+      "priority": 0.65
+    },
+    {
+      "url": "https://maintruly.top/kb/essay-unify-card/",
+      "lastModified": "2026-09-06T15:36:07.000Z",
+      "changeFrequency": "monthly",
+      "priority": 0.65
+    },
+    {
+      "url": "https://maintruly.top/kb/essay-unify-common/",
+      "lastModified": "2026-09-06T15:36:07.000Z",
+      "changeFrequency": "monthly",
+      "priority": 0.65
+    },
+    {
+      "url": "https://maintruly.top/kb/essay-unify-01/",
+      "lastModified": "2026-09-06T15:36:07.000Z",
+      "changeFrequency": "monthly",
+      "priority": 0.65
+    },
+    {
+      "url": "https://maintruly.top/kb/essay-unify-02/",
+      "lastModified": "2026-09-06T15:36:07.000Z",
+      "changeFrequency": "monthly",
+      "priority": 0.65
+    },
+    {
+      "url": "https://maintruly.top/kb/essay-unify-03/",
+      "lastModified": "2026-09-06T15:36:07.000Z",
+      "changeFrequency": "monthly",
+      "priority": 0.65
+    },
+    {
+      "url": "https://maintruly.top/kb/essay-unify-04/",
+      "lastModified": "2026-09-06T15:36:28.000Z",
+      "changeFrequency": "monthly",
+      "priority": 0.65
+    },
+    {
+      "url": "https://maintruly.top/kb/essay-unify-05/",
+      "lastModified": "2026-09-06T15:36:07.000Z",
       "changeFrequency": "monthly",
       "priority": 0.65
     }

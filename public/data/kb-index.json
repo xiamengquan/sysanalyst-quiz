@@ -2596,6 +2596,35 @@
           "path": "速查/前端友好-鉴权与安全卡.md",
           "status": "正式",
           "kind": "quick"
+        },
+        {
+          "id": "quick-outline-se",
+          "title": "速查 · 考纲模块导航 · 软件工程",
+          "path": "速查/考纲模块导航-软件工程.md",
+          "status": "正式",
+          "kind": "quick"
+        },
+        {
+          "id": "quick-outline-db",
+          "title": "速查 · 考纲模块导航 · 数据库系统",
+          "path": "速查/考纲模块导航-数据库系统.md",
+          "status": "正式",
+          "kind": "quick"
+        },
+        {
+          "id": "quick-outline-arch",
+          "title": "速查 · 考纲模块导航 · 系统架构",
+          "path": "速查/考纲模块导航-系统架构.md",
+          "status": "正式",
+          "kind": "quick"
+        },
+        {
+          "id": "quick-ea-togaf",
+          "title": "速查 · 企业架构 · TOGAF 与 Zachman · 论文素材卡",
+          "path": "速查/企业架构-TOGAF与Zachman-论文素材卡.md",
+          "status": "正式",
+          "kind": "quick",
+          "note": "论文素材 · 架构风格类"
         }
       ]
     },
@@ -2618,6 +2647,56 @@
           "status": "正式",
           "kind": "appendix",
           "note": "练习范文"
+        },
+        {
+          "id": "essay-unify-card",
+          "title": "五篇论文 · 统一结构记忆卡（减差异版）",
+          "path": "论文范文/二次元周边商城-统一四题/00-统一结构记忆卡.md",
+          "status": "正式",
+          "kind": "essay",
+          "note": "统一四题入口"
+        },
+        {
+          "id": "essay-unify-common",
+          "title": "共用段落（五篇相同，只改【】占位）",
+          "path": "论文范文/二次元周边商城-统一四题/00-共用段落.md",
+          "status": "正式",
+          "kind": "essay"
+        },
+        {
+          "id": "essay-unify-01",
+          "title": "论软件测试技术及应用",
+          "path": "论文范文/二次元周边商城-统一四题/01-论软件测试技术及应用.md",
+          "status": "正式",
+          "kind": "essay"
+        },
+        {
+          "id": "essay-unify-02",
+          "title": "论软件设计模式在项目中的应用",
+          "path": "论文范文/二次元周边商城-统一四题/02-论软件设计模式在项目中的应用.md",
+          "status": "正式",
+          "kind": "essay"
+        },
+        {
+          "id": "essay-unify-03",
+          "title": "论云上运维技术及应用",
+          "path": "论文范文/二次元周边商城-统一四题/03-论云上运维技术及应用.md",
+          "status": "正式",
+          "kind": "essay"
+        },
+        {
+          "id": "essay-unify-04",
+          "title": "论业务流程分析及其应用",
+          "path": "论文范文/二次元周边商城-统一四题/04-论业务流程分析及其应用.md",
+          "status": "正式",
+          "kind": "essay"
+        },
+        {
+          "id": "essay-unify-05",
+          "title": "论Agent辅助开发技术及其应用",
+          "path": "论文范文/二次元周边商城-统一四题/05-论Agent辅助开发技术及其应用.md",
+          "status": "正式",
+          "kind": "essay"
         }
       ]
     }
