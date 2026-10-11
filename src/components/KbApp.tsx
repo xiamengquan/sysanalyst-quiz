@@ -300,6 +300,7 @@ export function KbCatalog() {
               { href: "/kb/quick-memory-plan/", title: "记忆强化 · 间隔重复与硬记忆点卡组", desc: "1-2-4-7-15 日程 · 58 条硬记忆点" },
               { href: "/kb/quick-kp-map/", title: "知识点地图 · 按记忆专题", desc: "T01–T18 分组抽屉快查" },
               { href: "/kb/quick-sprint-14d/", title: "考前 14 天冲刺计划", desc: "两轮制加速 · 战略放弃清单 · 每日日历" },
+              { href: "/audio/", title: "知识点洗脑音频 · 语音循环", desc: "零散时间听闪卡 · 洗脑式连读 / 问答式" },
               { href: "/kb/quick-exam-7d/", title: "考前 7 天背诵清单", desc: "重难点优先的冲刺清单" },
               { href: "/kb/quick-compare/", title: "高频对比速查表", desc: "易混概念一表辨析" },
               { href: "/kb/quick-case-training/", title: "案例强化 · 14 天训练计划", desc: "案例分型轮训与全真模拟" },

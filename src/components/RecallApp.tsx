@@ -278,6 +278,13 @@ export function RecallApp() {
                 .map((n, i) => `盒${i + 1}（隔${[1, 2, 4, 7, 15][i]}天）${n}`)
                 .join(" · ")}
             </p>
+            <p className="text-[0.78rem] text-muted-foreground">
+              零散时间磨耳朵？试试{" "}
+              <Link href="/audio/" className="underline underline-offset-2 hover:text-foreground">
+                知识点洗脑音频
+              </Link>
+              （语音循环播放闪卡）
+            </p>
           </Card>
         </>
       )}
