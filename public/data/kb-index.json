@@ -2255,6 +2255,15 @@
           "docType": "reference"
         },
         {
+          "id": "quick-sprint-14d",
+          "title": "考前 14 天冲刺计划（加速与战略放弃）",
+          "path": "速查/考前14天冲刺计划.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "howto",
+          "note": "两周冲刺：两轮制 + P0/P1/P2 分级 + 放弃清单 + 每日日历（题量数据支撑）"
+        },
+        {
           "id": "quick-exam-7d",
           "title": "考前 7 天背诵清单",
           "path": "速查/考前7天背诵清单.md",

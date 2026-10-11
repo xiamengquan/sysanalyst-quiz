@@ -236,6 +236,21 @@ export function KbCatalog() {
           </div>
         </Card>
 
+        <Card className="border-amber-500/40 bg-amber-500/[0.04] dark:bg-amber-500/[0.06] p-4 sm:p-5 shadow-xs mb-4">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="min-w-0">
+              <h2 className="text-[1.02rem] font-semibold text-foreground">考前 14 天冲刺 · 两周加速模式</h2>
+              <p className="mt-1 text-[0.88rem] leading-relaxed text-muted-foreground">
+                两轮制：第 1–7 天总册铺底 + 七日巩固配题，第 8–14 天真题成卷 + 案例专攻 + 论文限时；
+                含 P0/P1/P2 优先级分级与「战略放弃清单」，把时间押在题量最高的模块
+              </p>
+            </div>
+            <Button asChild variant="default" className="shrink-0 gap-1.5 shadow-xs">
+              <Link href="/kb/quick-sprint-14d/">进入冲刺计划 →</Link>
+            </Button>
+          </div>
+        </Card>
+
         <Card className="border-primary/30 bg-primary/[0.03] dark:bg-primary/[0.05] p-4 sm:p-5 shadow-xs mb-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
@@ -284,6 +299,7 @@ export function KbCatalog() {
             {[
               { href: "/kb/quick-memory-plan/", title: "记忆强化 · 间隔重复与硬记忆点卡组", desc: "1-2-4-7-15 日程 · 58 条硬记忆点" },
               { href: "/kb/quick-kp-map/", title: "知识点地图 · 按记忆专题", desc: "T01–T18 分组抽屉快查" },
+              { href: "/kb/quick-sprint-14d/", title: "考前 14 天冲刺计划", desc: "两轮制加速 · 战略放弃清单 · 每日日历" },
               { href: "/kb/quick-exam-7d/", title: "考前 7 天背诵清单", desc: "重难点优先的冲刺清单" },
               { href: "/kb/quick-compare/", title: "高频对比速查表", desc: "易混概念一表辨析" },
               { href: "/kb/quick-case-training/", title: "案例强化 · 14 天训练计划", desc: "案例分型轮训与全真模拟" },
