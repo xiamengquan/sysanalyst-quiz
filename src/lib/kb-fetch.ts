@@ -8,7 +8,8 @@ function looksLikeErrorPage(text: string): boolean {
 }
 
 async function fetchText(url: string, signal?: AbortSignal): Promise<string> {
-  const res = await fetch(url, { signal, cache: "force-cache" });
+  // no-cache：本地缓存须回源验证（etag 304 命中零成本），避免部署后 SPA 拿到 force-cache 的陈旧正文
+  const res = await fetch(url, { signal, cache: "no-cache" });
   if (!res.ok) throw new Error(`HTTP ${res.status} · ${url}`);
   const text = await res.text();
   if (!text.trim()) throw new Error(`empty body · ${url}`);
