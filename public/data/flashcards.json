@@ -1,9 +1,9 @@
 {
   "meta": {
-    "builtAt": "2026-10-11T01:46:36.271Z",
-    "total": 153,
+    "builtAt": "2026-10-11T02:04:09.984Z",
+    "total": 155,
     "m": 97,
-    "k": 56,
+    "k": 58,
     "hard": 30,
     "source": [
       "速查/四层七日背诵总册.md · 必会默写卡",
@@ -330,6 +330,30 @@
       "hard": false,
       "front": "模型选型？",
       "back": "模型选型：需求稳→瀑布/V；风险大→螺旋；要快→RAD/敏捷；OO→喷泉/RUP",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T05"
+      }
+    },
+    {
+      "id": "fc-k-t05-06",
+      "day": "d1",
+      "tier": "K",
+      "hard": false,
+      "front": "UML 关系强弱？",
+      "back": "UML 关系强弱：组合＞聚合＞关联＞依赖；泛化/实现属类型契约，不参与此序",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T05"
+      }
+    },
+    {
+      "id": "fc-k-t05-07",
+      "day": "d1",
+      "tier": "K",
+      "hard": false,
+      "front": "include/extend 方向？",
+      "back": "include/extend 方向：include 必含（基→被含）；extend 可选（扩展→基）；菱形恒画整体端",
       "src": {
         "href": "/kb/quick-memory-plan/",
         "label": "记忆卡组 · T05"
@@ -760,8 +784,8 @@
       "day": "d1",
       "tier": "M",
       "hard": false,
-      "front": "UML 六关系强弱？请排序或辨析",
-      "back": "泛化＝实现 ＞ 关联 ＞ 聚合 ＞ 组合 ＞ 依赖",
+      "front": "UML 关系强弱？请排序或辨析",
+      "back": "组合 ＞ 聚合 ＞ 关联 ＞ 依赖（整—部分与使用联系）；泛化＝实现属类型/契约关系，不参与此序（实线=泛化、虚线=实现）",
       "src": {
         "href": "/kb/quick-four-tier-7d/#d1",
         "label": "总册 D1 · 必会卡"
@@ -784,8 +808,8 @@
       "day": "d1",
       "tier": "M",
       "hard": false,
-      "front": "UML 五图读法？（默写要点）",
-      "back": "静态（类图/对象图/包图/构件图/部署图）动态（用例/活动/状态/顺序/通信）",
+      "front": "UML 常考十图？（默写要点）",
+      "back": "静态五种（类/对象/包/组件〔旧称构件〕/部署）动态五种（用例/活动/状态机/序列〔旧称顺序〕/通信〔旧称协作〕）；UML 2.5 全集 14 图",
       "src": {
         "href": "/kb/quick-four-tier-7d/#d1",
         "label": "总册 D1 · 必会卡"
@@ -797,7 +821,7 @@
       "tier": "M",
       "hard": false,
       "front": "OO 三特性？（默写要点）",
-      "back": "封装、继承、多态；OO 七原则之一「高内聚低耦合」贯穿",
+      "back": "封装（隐藏实现仅暴露接口）、继承（复用并特化）、多态（同一消息不同响应）；设计评价尺度为「高内聚、低耦合」",
       "src": {
         "href": "/kb/quick-four-tier-7d/#d1",
         "label": "总册 D1 · 必会卡"

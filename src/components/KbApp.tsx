@@ -282,7 +282,7 @@ export function KbCatalog() {
           <h2 className="text-[0.95rem] font-medium text-foreground">强化记忆 · 复习工具</h2>
           <div className="mt-2.5 grid gap-2 sm:grid-cols-2">
             {[
-              { href: "/kb/quick-memory-plan/", title: "记忆强化 · 间隔重复与硬记忆点卡组", desc: "1-2-4-7-15 日程 · 56 条硬记忆点" },
+              { href: "/kb/quick-memory-plan/", title: "记忆强化 · 间隔重复与硬记忆点卡组", desc: "1-2-4-7-15 日程 · 58 条硬记忆点" },
               { href: "/kb/quick-kp-map/", title: "知识点地图 · 按记忆专题", desc: "T01–T18 分组抽屉快查" },
               { href: "/kb/quick-exam-7d/", title: "考前 7 天背诵清单", desc: "重难点优先的冲刺清单" },
               { href: "/kb/quick-compare/", title: "高频对比速查表", desc: "易混概念一表辨析" },

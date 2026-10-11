@@ -23,7 +23,7 @@
 <td><strong>L1 积木</strong></td>
 <td>事物 / 关系 / 图种总表</td>
 <td>30 分钟</td>
-<td>闭卷写出 5 种关系 + 5 种必考图</td>
+<td>闭卷写出六种关系 + 5 种必考图</td>
 </tr>
 <tr>
 <td><strong>L2 必考五图</strong></td>
@@ -338,6 +338,12 @@
 <td>类图是描述类、接口及其属性、操作与静态关系的结构图。</td>
 <td>用于展示问题域或设计中的概念结构与类间联系。</td>
 <td>★★★★★</td>
+</tr>
+<tr>
+<td><strong>对象图</strong></td>
+<td>对象图是描述某一时刻对象实例及其链接的结构图（类图的实例快照）。</td>
+<td>用于展示系统运行某一时刻的具体对象与链接状态。</td>
+<td>★★</td>
 </tr>
 <tr>
 <td><strong>序列图</strong></td>
@@ -908,8 +914,8 @@
 <p><strong>聚合（答卷·定义）</strong>：聚合是具有共享整—部分语义的关联；整体与部分是弱拥有关系，整体不负责部分的生命周期，部分可独立存在，并可能被多个整体共享。符号为实线空心菱形，菱形位于整体端。<br><strong>聚合的作用（答卷）</strong>：用于表示可分离的整—部分包含及共享归属。</p>
 <p><strong>组合（答卷·定义）</strong>：组合是具有组合整—部分语义的关联；整体负责部分的存在与存储，部分生命周期通常与整体绑定；整体销毁时，部分通常失去独立存在意义。符号为实线实心菱形，菱形位于整体端。<br><strong>组合的作用（答卷）</strong>：用于表示强拥有与构成，部分不能独立于整体存在。</p>
 <div class="mermaid-wrap"><div class="mermaid">flowchart LR
-  W1[Whole] --o P1[Part]
-  W2[Whole] --* P2[Part]
+  W1[Whole] o-- P1[Part]
+  W2[Whole] *-- P2[Part]
 </div></div>
 <div class="table-wrap"><table>
 <thead>
