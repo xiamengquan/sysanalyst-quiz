@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { Brain, ChevronLeft, RotateCcw, Shuffle } from "lucide-react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Brain, CheckCircle2, ChevronLeft, RotateCcw, Send, Shuffle, TriangleAlert, XCircle } from "lucide-react";
 import {
   MAX_BOX,
   RECALL_STORAGE_KEY,
@@ -16,6 +16,7 @@ import {
   type RecallGrade,
   type RecallState,
 } from "@/lib/flashcards";
+import { judgeAnswer, type MatchResult } from "@/lib/answer-match";
 import { SEVEN_DAYS } from "@/lib/kb-seven-day";
 import { storageGet, storageSet } from "@/lib/storage";
 import { Button } from "@/components/ui/button";
@@ -60,8 +61,11 @@ export function RecallApp() {
   const [queue, setQueue] = useState<Flashcard[]>([]);
   const [idx, setIdx] = useState(0);
   const [shown, setShown] = useState(false);
+  const [answer, setAnswer] = useState("");
+  const [result, setResult] = useState<MatchResult | null>(null);
   const [sessionStat, setSessionStat] = useState({ forgot: 0, fuzzy: 0, known: 0 });
   const [phase, setPhase] = useState<"setup" | "quiz" | "done">("setup");
+  const answerRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     Promise.all([
@@ -100,11 +104,28 @@ export function RecallApp() {
     setQueue(q);
     setIdx(0);
     setShown(false);
+    setAnswer("");
+    setResult(null);
     setSessionStat({ forgot: 0, fuzzy: 0, known: 0 });
     setPhase("quiz");
   }, [dueList, filtered, state, sessionSize]);
 
+  // 切卡：清空作答与判定，聚焦输入框
+  useEffect(() => {
+    setAnswer("");
+    setResult(null);
+    if (phase === "quiz") answerRef.current?.focus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [idx]);
+
   const current = queue[idx];
+
+  const submit = useCallback(() => {
+    if (!current || !answer.trim()) return;
+    setResult(judgeAnswer(current.front, current.back, answer));
+  }, [current, answer]);
+
+  const reveal = useCallback(() => setShown(true), []);
 
   const grade = useCallback(
     (g: RecallGrade) => {
@@ -132,6 +153,19 @@ export function RecallApp() {
     setPhase("setup");
   }, []);
 
+  /** 系统判定 → 预选自评档位（对→记住 / 部分→模糊 / 错→忘了 / 跳过→忘了 / 无法判定→不预选） */
+  const preselect: RecallGrade | null = result
+    ? result.verdict === "correct"
+      ? "known"
+      : result.verdict === "partial"
+        ? "fuzzy"
+        : result.verdict === "wrong"
+          ? "forgot"
+          : null
+    : shown
+      ? "forgot"
+      : null;
+
   if (!ready) return <p className="text-muted-foreground">加载卡库中…</p>;
 
   const todayCount = state.today && state.today.date === todayKey() ? state.today.count : 0;
@@ -144,7 +178,7 @@ export function RecallApp() {
         {data?.meta.k ?? "—"}（★ 错卡高发 {data?.meta.hard ?? "—"}）
         <br />
         <span className="text-[0.82rem]">
-          先默写再看答案 · 自评后按 1-2-4-7-15 间隔排程 · 进度存本机
+          线上作答：系统自动比对关键点判定对错（可改判）· 1-2-4-7-15 间隔排程 · 进度存本机
         </span>
       </p>
 
@@ -275,34 +309,131 @@ export function RecallApp() {
           <div className="mb-6 rounded-[12px] border border-border bg-muted/40 p-5 text-[1.05rem] leading-[1.7] font-medium whitespace-pre-wrap break-words sm:text-[1.1rem]">
             {current.front}
           </div>
-          {!shown ? (
-            <div className="sticky-actions">
-              <div className="sticky-actions-primary">
-                <Button type="button" variant="default" onClick={() => setShown(true)}>
-                  显示答案（先默写）
-                </Button>
-              </div>
-            </div>
-          ) : (
+          {result || shown ? (
             <>
+              {result && result.verdict !== "manual" && (
+                <div
+                  className={cn(
+                    "mb-3 flex items-center gap-2 rounded-[12px] border p-3.5 text-[0.9rem] font-medium",
+                    result.verdict === "correct" &&
+                      "border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300",
+                    result.verdict === "partial" &&
+                      "border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-300",
+                    result.verdict === "wrong" &&
+                      "border-rose-500/40 bg-rose-500/10 text-rose-700 dark:text-rose-300"
+                  )}
+                >
+                  {result.verdict === "correct" ? (
+                    <CheckCircle2 className="size-4.5 shrink-0" />
+                  ) : (
+                    <XCircle className="size-4.5 shrink-0" />
+                  )}
+                  <span>
+                    {result.verdict === "correct"
+                      ? "判定正确 · 关键点全命中"
+                      : result.verdict === "partial"
+                        ? `部分命中（关键点 ${result.hits}/${result.total}）· 建议按「模糊」记`
+                        : `判定未通过（关键点 ${result.hits}/${result.total}）· 建议按「忘了」重学`}
+                  </span>
+                </div>
+              )}
+              {result && result.verdict === "manual" && (
+                <div className="mb-3 flex items-center gap-2 rounded-[12px] border border-border bg-muted/40 p-3.5 text-[0.9rem] text-muted-foreground">
+                  <TriangleAlert className="size-4.5 shrink-0" />
+                  <span>该卡无可自动比对的关键点（如公式/图形题），请对照答案自评</span>
+                </div>
+              )}
+              {result && (result.hitTokens.length > 0 || result.missTokens.length > 0) && (
+                <div className="mb-4 flex flex-wrap gap-1.5">
+                  {result.hitTokens.map((t) => (
+                    <span
+                      key={`hit-${t}`}
+                      className="rounded-md border border-emerald-500/40 bg-emerald-500/10 px-2 py-0.5 text-[0.78rem] text-emerald-700 dark:text-emerald-300"
+                    >
+                      ✓ {t}
+                    </span>
+                  ))}
+                  {result.missTokens.map((t) => (
+                    <span
+                      key={`miss-${t}`}
+                      className="rounded-md border border-rose-500/40 bg-rose-500/10 px-2 py-0.5 text-[0.78rem] text-rose-700 dark:text-rose-300"
+                    >
+                      ✗ {t}
+                    </span>
+                  ))}
+                </div>
+              )}
               <div className="mb-5 rounded-[12px] border border-emerald-500/40 bg-emerald-500/10 p-5 text-[1rem] leading-[1.75] whitespace-pre-wrap break-words">
                 {current.back}
               </div>
               <p className="mb-2.5 text-[0.82rem] text-muted-foreground">
-                对照刚才的默写，诚实自评：
+                {result && result.verdict !== "manual"
+                  ? "系统已按判定预选，如判定与你实际掌握不符，可改判后确认："
+                  : "对照答案，诚实自评："}
               </p>
               <div className="btn-row">
-                <Button type="button" variant="outline" onClick={() => grade("forgot")}>
+                <Button
+                  type="button"
+                  variant={preselect === "forgot" ? "default" : "outline"}
+                  onClick={() => grade("forgot")}
+                >
                   忘了（回 1 盒）
                 </Button>
-                <Button type="button" variant="outline" onClick={() => grade("fuzzy")}>
+                <Button
+                  type="button"
+                  variant={preselect === "fuzzy" ? "default" : "outline"}
+                  onClick={() => grade("fuzzy")}
+                >
                   模糊（原地）
                 </Button>
-                <Button type="button" variant="default" onClick={() => grade("known")}>
+                <Button
+                  type="button"
+                  variant={preselect === "known" ? "default" : "outline"}
+                  onClick={() => grade("known")}
+                >
                   记住（升盒）
                 </Button>
               </div>
             </>
+          ) : (
+            <div className="mb-6">
+              <textarea
+                ref={answerRef}
+                value={answer}
+                onChange={(e) => setAnswer(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
+                    e.preventDefault();
+                    submit();
+                  }
+                }}
+                rows={3}
+                placeholder="在此默写答案（命中关键点即可，不必逐字一致）…"
+                className="w-full resize-y rounded-[12px] border border-border bg-background p-4 text-[0.95rem] leading-relaxed outline-none focus:ring-2 focus:ring-ring/40"
+              />
+              <div className="mt-3 flex flex-wrap items-center gap-3">
+                <Button
+                  type="button"
+                  variant="default"
+                  onClick={submit}
+                  disabled={!answer.trim()}
+                  className="gap-1.5"
+                >
+                  <Send className="size-4" />
+                  提交答案（自动比对）
+                </Button>
+                <button
+                  type="button"
+                  onClick={reveal}
+                  className="text-[0.82rem] text-muted-foreground underline underline-offset-2 hover:text-foreground"
+                >
+                  想不起来，直接看答案（按「忘了」记）
+                </button>
+              </div>
+              <p className="mt-2 text-[0.78rem] text-muted-foreground">
+                Enter 提交 · Shift+Enter 换行
+              </p>
+            </div>
           )}
           <div className="sticky-actions mt-4 border-t border-border pt-4">
             <div className="sticky-actions-primary">
@@ -345,7 +476,7 @@ export function RecallApp() {
           </div>
           <p className="mb-4 text-[0.88rem] leading-relaxed text-muted-foreground">
             「忘了」的卡片回到 1 盒（隔 1 天再出现）；「记住」的卡片升盒，间隔拉长到 2/4/7/15 天。
-            明天再来时，到期卡会优先出现。今日已复习 <b className="text-foreground">{todayCount}</b> 张。
+            系统判定仅按关键点命中预选档位，改判权始终在你手上。明天再来时，到期卡会优先出现。今日已复习 <b className="text-foreground">{todayCount}</b> 张。
           </p>
           <div className="btn-row">
             <Button type="button" variant="default" onClick={() => setPhase("setup")}>
