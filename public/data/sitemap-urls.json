@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-11T02:27:39.751Z",
+  "generatedAt": "2026-10-11T02:45:27.218Z",
   "urls": [
     {
       "url": "https://maintruly.top/",
@@ -1305,7 +1305,7 @@
     },
     {
       "url": "https://maintruly.top/kb/quick-sprint-14d/",
-      "lastModified": "2026-10-11T02:18:37.018Z",
+      "lastModified": "2026-10-11T02:44:52.678Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
@@ -1346,8 +1346,14 @@
       "priority": 0.75
     },
     {
+      "url": "https://maintruly.top/kb/quick-case-start/",
+      "lastModified": "2026-10-11T02:44:20.986Z",
+      "changeFrequency": "weekly",
+      "priority": 0.75
+    },
+    {
       "url": "https://maintruly.top/kb/quick-case-training/",
-      "lastModified": "2026-10-10T13:45:12.478Z",
+      "lastModified": "2026-10-11T02:45:05.288Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },

@@ -303,6 +303,7 @@ export function KbCatalog() {
               { href: "/audio/", title: "知识点洗脑音频 · 语音循环", desc: "零散时间听闪卡 · 洗脑式连读 / 问答式" },
               { href: "/kb/quick-exam-7d/", title: "考前 7 天背诵清单", desc: "重难点优先的冲刺清单" },
               { href: "/kb/quick-compare/", title: "高频对比速查表", desc: "易混概念一表辨析" },
+              { href: "/kb/quick-case-start/", title: "案例作答启动手册 · 告别头脑空白", desc: "启动句式表 · 骨架先行 · 每日 30 分钟微训练" },
               { href: "/kb/quick-case-training/", title: "案例强化 · 14 天训练计划", desc: "案例分型轮训与全真模拟" },
               { href: "/kb/quick-pm-calc/", title: "项目管理计算速查表", desc: "挣值 / 关键路径公式卡" },
             ].map((t) => (

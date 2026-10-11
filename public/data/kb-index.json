@@ -2318,6 +2318,15 @@
           "note": "第十轮审计 · 工单1"
         },
         {
+          "id": "quick-case-start",
+          "title": "案例作答启动手册 · 告别头脑空白",
+          "path": "速查/案例作答启动手册-告别头脑空白.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "howto",
+          "note": "启动句式表 + 骨架先行 + 每日 30 分钟微训练闭环（四类题型对齐）"
+        },
+        {
           "id": "quick-case-training",
           "title": "案例强化 · 14 天训练计划（薄弱专项）",
           "path": "速查/案例强化-14天训练计划.md",
