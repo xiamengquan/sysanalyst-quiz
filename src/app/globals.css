@@ -964,6 +964,45 @@ textarea.field {
   max-width: 100%;
   height: auto;
 }
+/* 内嵌 UML 图示 · 主题自适应：md 源内 svg 的深色硬编码按当前主题变量覆盖 */
+.md-body .uml-figure svg text.t {
+  fill: var(--foreground);
+}
+.md-body .uml-figure svg text.s {
+  fill: var(--muted-foreground);
+}
+.md-body .uml-figure svg rect.box,
+.md-body .uml-figure svg rect.bound,
+.md-body .uml-figure svg rect.uc,
+.md-body .uml-figure svg rect.st {
+  fill: var(--card);
+}
+.md-body .uml-figure svg rect.box {
+  stroke: var(--border);
+}
+.md-body .uml-figure svg rect.bound,
+.md-body .uml-figure svg rect.uc,
+.md-body .uml-figure svg rect.st {
+  stroke: var(--primary);
+}
+.md-body .uml-figure svg .div {
+  stroke: var(--border);
+}
+.md-body .uml-figure svg .line {
+  stroke: var(--muted-foreground);
+}
+.md-body .uml-figure svg [fill="#c5d0dc"] {
+  fill: var(--foreground);
+}
+.md-body .uml-figure svg [stroke="#c5d0dc"] {
+  stroke: var(--muted-foreground);
+}
+.md-body .uml-figure svg [fill="#0f141c"] {
+  fill: var(--surface);
+}
+.md-body .uml-figure svg [fill="#7eb8da"] {
+  fill: var(--primary);
+}
 .md-body pre.uml-ascii {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 0.78rem;
