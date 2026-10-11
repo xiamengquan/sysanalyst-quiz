@@ -11,11 +11,30 @@ import { cn } from "@/lib/utils";
 
 type PlayMode = "qa" | "drill";
 type Order = "seq" | "rand";
+type Pool = "flash" | "drill";
 
 const REPEAT_OPTIONS = [2, 3, 5];
 const LIMIT_OPTIONS = [0, 15, 30, 60]; // 分钟，0 = 不限
 
 const AUDIO_SETTINGS_KEY = "sysanalyst_audio_settings_v1";
+
+/** 演练卡（来自 drills.json） */
+type DrillDeckLite = {
+  id: string;
+  title: string;
+  steps: { idx: number; name: string; ask: string; model: string; role?: string }[];
+};
+
+/** 统一播放卡：flash 卡与演练卡共用 */
+type AnyCard = {
+  id: string;
+  front: string;
+  back: string;
+  /** 问答模式自定义问/答（演练卡用范例句作答） */
+  qText?: string;
+  aText?: string;
+  group?: string;
+};
 
 /** TTS 读文本清理：去 markdown 残留，符号转口语，提升听感 */
 export function speakText(raw: string): string {
@@ -39,21 +58,38 @@ type PlayItem = {
   key: string;
   front: string;
   back: string;
+  group?: string;
   /** 依模式生成的朗读行序列 */
   lines: { text: string; kind: "q" | "a" }[];
 };
 
-function buildItems(cards: Flashcard[], mode: PlayMode, repeat: number): PlayItem[] {
+function buildItems(cards: AnyCard[], mode: PlayMode, repeat: number): PlayItem[] {
   return cards.map((c) => {
     const lines: PlayItem["lines"] = [];
     if (mode === "qa") {
-      lines.push({ text: speakText(c.front), kind: "q" });
-      lines.push({ text: speakText(c.back), kind: "a" });
+      lines.push({ text: speakText(c.qText || c.front), kind: "q" });
+      lines.push({ text: speakText(c.aText || c.back), kind: "a" });
     } else {
       for (let i = 0; i < repeat; i++) lines.push({ text: speakText(c.back), kind: "a" });
     }
-    return { key: c.id, front: c.front, back: c.back, lines };
+    return { key: c.id, front: c.front, back: c.back, group: c.group, lines };
   });
+}
+
+/** 演练步骤 → 音频卡：洗脑文本 =「图名。范例句。作用句」；问答式问 = 格子提问、答 = 范例句 */
+function drillToCards(decks: DrillDeckLite[], deckFilter: string): AnyCard[] {
+  return decks
+    .filter((d) => deckFilter === "all" || d.id === deckFilter)
+    .flatMap((d) =>
+      d.steps.map((s) => ({
+        id: `dr-${d.id}-${s.idx}`,
+        group: d.title,
+        front: `${s.name} · 定义与作用`,
+        back: `${s.name}。${s.model}。${(s.role || "").replace(/^一句话[—–-]*\s*/, "")}`,
+        qText: s.ask,
+        aText: `${s.model}${s.role ? `。${s.role.replace(/^一句话[—–-]*\s*/, "")}` : ""}`,
+      })),
+    );
 }
 
 function shuffle<T>(items: T[]): T[] {
@@ -79,6 +115,11 @@ export function AudioApp() {
   const [limitMin, setLimitMin] = useState(0);
   const [dayFilter, setDayFilter] = useState("all");
   const [tierFilter, setTierFilter] = useState("all");
+  const [pool, setPool] = useState<Pool>("flash");
+  const [drillDecks, setDrillDecks] = useState<DrillDeckLite[]>([]);
+  const [drillFilter, setDrillFilter] = useState("all");
+  const [loopAll, setLoopAll] = useState(false);
+  const loopAllRef = useRef(loopAll);
 
   const [phase, setPhase] = useState<"setup" | "playing">("setup");
   const [items, setItems] = useState<PlayItem[]>([]);
@@ -106,6 +147,9 @@ export function AudioApp() {
         if (typeof s.limitMin === "number") setLimitMin(s.limitMin);
         if (s.dayFilter) setDayFilter(s.dayFilter);
         if (s.tierFilter) setTierFilter(s.tierFilter);
+        if (s.pool) setPool(s.pool);
+        if (s.drillFilter) setDrillFilter(s.drillFilter);
+        if (typeof s.loopAll === "boolean") setLoopAll(s.loopAll);
       } catch {}
     }
   }, []);
@@ -113,9 +157,13 @@ export function AudioApp() {
   useEffect(() => {
     localStorage.setItem(
       AUDIO_SETTINGS_KEY,
-      JSON.stringify({ mode, repeat, rate, order, limitMin, dayFilter, tierFilter })
+      JSON.stringify({ mode, repeat, rate, order, limitMin, dayFilter, tierFilter, pool, drillFilter, loopAll })
     );
-  }, [mode, repeat, rate, order, limitMin, dayFilter, tierFilter]);
+  }, [mode, repeat, rate, order, limitMin, dayFilter, tierFilter, pool, drillFilter, loopAll]);
+
+  useEffect(() => {
+    loopAllRef.current = loopAll;
+  }, [loopAll]);
 
   useEffect(() => {
     rateRef.current = rate;
@@ -142,6 +190,12 @@ export function AudioApp() {
         setReady(true);
       })
       .catch(() => setReady(true));
+    fetch("/data/drills.json")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (d?.decks) setDrillDecks(d.decks);
+      })
+      .catch(() => undefined);
     return () => {
       if (typeof window !== "undefined" && "speechSynthesis" in window)
         window.speechSynthesis.cancel();
@@ -149,13 +203,14 @@ export function AudioApp() {
   }, []);
 
   const filtered = useMemo(() => {
+    if (pool === "drill") return drillToCards(drillDecks, drillFilter);
     if (!data) return [];
     return data.cards.filter(
       (c) =>
         (dayFilter === "all" || c.day === dayFilter) &&
         (tierFilter === "all" || c.tier === tierFilter)
     );
-  }, [data, dayFilter, tierFilter]);
+  }, [pool, data, dayFilter, tierFilter, drillDecks, drillFilter]);
 
   const pickVoice = useCallback(() => {
     if (!voiceURI) return undefined;
@@ -201,6 +256,14 @@ export function AudioApp() {
         return;
       }
       if (idxRef.current >= list.length) {
+        if (loopAllRef.current && list.length) {
+          // 整组无限循环：回到第一张继续
+          idxRef.current = 0;
+          lineRef.current = 0;
+          setPlayIdx(0);
+          setTimeout(() => step(list, gen), 1500);
+          return;
+        }
         stop();
         return;
       }
@@ -291,7 +354,7 @@ export function AudioApp() {
     <>
       <h1 className="page-title">知识点洗脑音频 · 语音循环</h1>
       <p className="page-lead">
-        {data?.meta.total ?? "—"} 张闪卡转为语音流：问答式（读题→停顿→读答案）或洗脑式（答案连读 N 遍）
+        {data?.meta.total ?? "—"} 张闪卡 + 演练卡组（步骤链定义与作用）转为语音流：问答式（读题→停顿→读答案）或洗脑式（答案连读 N 遍），支持整组 ∞ 无限循环
         <br />
         <span className="text-[0.82rem]">
           适合通勤/散步等零散时间 · 语音由设备合成，免下载 · 注意：锁屏后部分手机会暂停，建议亮屏播放或连接耳机
@@ -300,6 +363,31 @@ export function AudioApp() {
 
       {phase === "setup" && (
         <Card className="px-(--card-spacing) mb-4 space-y-4">
+          <div>
+            <h2 className="mb-2 text-[1rem] font-medium">卡池</h2>
+            <div className="flex flex-wrap gap-1.5">
+              {(
+                [
+                  ["flash", "闪卡库（总册 M/K）"],
+                  ["drill", "演练卡组（步骤链 · 定义与作用）"],
+                ] as const
+              ).map(([v, label]) => (
+                <button
+                  key={v}
+                  type="button"
+                  onClick={() => setPool(v)}
+                  className={cn(
+                    "rounded-lg border px-2.5 py-1.5 text-[0.8rem] transition-colors",
+                    pool === v
+                      ? "border-primary bg-primary/10 font-medium text-primary"
+                      : "border-border bg-muted/30 text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
           <div>
             <h2 className="mb-2 text-[1rem] font-medium">播放模式</h2>
             <div className="flex flex-wrap gap-1.5">
@@ -345,52 +433,100 @@ export function AudioApp() {
               )}
             </div>
           </div>
-          <div className="flex flex-wrap gap-6">
-            <div>
-              <h2 className="mb-2 text-[1rem] font-medium">范围（总册日次）</h2>
-              <div className="flex flex-wrap gap-1.5">
-                {[{ value: "all", label: "全部" }, ...SEVEN_DAYS.map((d) => ({ value: d.id, label: `${d.label} ${d.theme}` }))].map(
-                  (f) => (
+          {pool === "flash" ? (
+            <div className="flex flex-wrap gap-6">
+              <div>
+                <h2 className="mb-2 text-[1rem] font-medium">范围（总册日次）</h2>
+                <div className="flex flex-wrap gap-1.5">
+                  {[{ value: "all", label: "全部" }, ...SEVEN_DAYS.map((d) => ({ value: d.id, label: `${d.label} ${d.theme}` }))].map(
+                    (f) => (
+                      <button
+                        key={f.value}
+                        type="button"
+                        onClick={() => setDayFilter(f.value)}
+                        className={cn(
+                          "rounded-lg border px-2.5 py-1.5 text-[0.8rem] transition-colors",
+                          dayFilter === f.value
+                            ? "border-primary bg-primary/10 font-medium text-primary"
+                            : "border-border bg-muted/30 text-muted-foreground hover:text-foreground"
+                        )}
+                      >
+                        {f.label}
+                      </button>
+                    )
+                  )}
+                </div>
+              </div>
+              <div>
+                <h2 className="mb-2 text-[1rem] font-medium">层级</h2>
+                <div className="flex flex-wrap gap-1.5">
+                  {[
+                    ["all", "全部层级"],
+                    ["M", "必会 M"],
+                    ["K", "重点 K"],
+                  ].map(([v, label]) => (
                     <button
-                      key={f.value}
+                      key={v}
                       type="button"
-                      onClick={() => setDayFilter(f.value)}
+                      onClick={() => setTierFilter(v)}
                       className={cn(
                         "rounded-lg border px-2.5 py-1.5 text-[0.8rem] transition-colors",
-                        dayFilter === f.value
+                        tierFilter === v
                           ? "border-primary bg-primary/10 font-medium text-primary"
                           : "border-border bg-muted/30 text-muted-foreground hover:text-foreground"
                       )}
                     >
-                      {f.label}
+                      {label}
                     </button>
-                  )
-                )}
+                  ))}
+                </div>
               </div>
             </div>
+          ) : (
             <div>
-              <h2 className="mb-2 text-[1rem] font-medium">层级</h2>
+              <h2 className="mb-2 text-[1rem] font-medium">演练链</h2>
               <div className="flex flex-wrap gap-1.5">
-                {[
-                  ["all", "全部层级"],
-                  ["M", "必会 M"],
-                  ["K", "重点 K"],
-                ].map(([v, label]) => (
+                {[{ id: "all", title: "全部演练链" }, ...drillDecks].map((d) => (
                   <button
-                    key={v}
+                    key={d.id}
                     type="button"
-                    onClick={() => setTierFilter(v)}
+                    onClick={() => setDrillFilter(d.id)}
                     className={cn(
                       "rounded-lg border px-2.5 py-1.5 text-[0.8rem] transition-colors",
-                      tierFilter === v
+                      drillFilter === d.id
                         ? "border-primary bg-primary/10 font-medium text-primary"
                         : "border-border bg-muted/30 text-muted-foreground hover:text-foreground"
                     )}
                   >
-                    {label}
+                    {d.title}
                   </button>
                 ))}
               </div>
+            </div>
+          )}
+          <div>
+            <h2 className="mb-2 text-[1rem] font-medium">整组循环</h2>
+            <div className="flex flex-wrap gap-1.5">
+              {(
+                [
+                  [false, "播完一遍停止"],
+                  [true, "∞ 无限循环"],
+                ] as const
+              ).map(([v, label]) => (
+                <button
+                  key={String(v)}
+                  type="button"
+                  onClick={() => setLoopAll(v)}
+                  className={cn(
+                    "rounded-lg border px-2.5 py-1.5 text-[0.8rem] transition-colors",
+                    loopAll === v
+                      ? "border-primary bg-primary/10 font-medium text-primary"
+                      : "border-border bg-muted/30 text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  {label}
+                </button>
+              ))}
             </div>
           </div>
           <div className="flex flex-wrap gap-6">
@@ -484,12 +620,11 @@ export function AudioApp() {
         <Card className="px-(--card-spacing) mb-4">
           <div className="mb-3 flex items-center justify-between text-[0.85rem] text-muted-foreground">
             <span>
-              第 {playIdx + 1} / {items.length} 张
+              第 {playIdx + 1} / {items.length} 张 · {loopAll ? "∞ 无限循环" : "单遍"}{limitMin ? ` · 定时 ${limitMin} 分钟` : ""}
             </span>
-            <span>{limitMin ? `定时 ${limitMin} 分钟` : "循环播放"}</span>
           </div>
           <div className="mb-4 flex flex-wrap gap-1.5">
-            <span className="badge">{current.key.startsWith("fc-m") ? "必会 M" : "重点 K"}</span>
+            <span className="badge">{current.group ? `演练 · ${current.group}` : current.key.startsWith("fc-m") ? "必会 M" : "重点 K"}</span>
             {current.front && <span className="badge">问：{current.front}</span>}
           </div>
           <div className="mb-5 rounded-[12px] border border-emerald-500/40 bg-emerald-500/10 p-5 text-[1rem] leading-[1.75] whitespace-pre-wrap break-words">
