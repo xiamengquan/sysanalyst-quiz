@@ -32,7 +32,7 @@ export type DayPlan = {
 export const SPRINT_START = "2026-10-11";
 export const SPRINT_END = "2026-10-24";
 export const EXAM_DATE = "2026-10-25";
-export const TODAY_PLAN_VERSION = 1;
+export const TODAY_PLAN_VERSION = 2;
 
 const LINKS = {
   audio: "/audio/",
@@ -72,7 +72,8 @@ const DAYS: DayPlan[] = [
     tag: "D2 · 需求·规划",
     main: [
       { text: "总册 D2 背诵：M 卡默写 + 需求链条 K 辨析（40'）", href: "/kb/quick-four-tier-7d/#d2", link: "总册 D2" },
-      { text: "七日巩固 d2 配题（35'）", href: LINKS.seven("d2"), link: "d2 配题" },
+      { text: "案例整题独立计时 60'：2022上·案例一·博客系统（结构化 vs OO、用例建模、需求评审；加班日可半题 45'：读题标注+骨架+对答自评）", href: LINKS.caseById("ZT-2022上-案例01"), link: "案例整题" },
+      { text: "错题回炉 20'", href: LINKS.recall, link: "随机问答" },
     ],
   },
   {
@@ -80,9 +81,9 @@ const DAYS: DayPlan[] = [
     weekday: "周二（20:30 起）",
     tag: "D3 上 · 架构",
     main: [
-      { text: "总册 D3 背诵：架构风格对比表 + 质量属性（60'）", href: "/kb/quick-four-tier-7d/#d3", link: "总册 D3" },
-      { text: "架构 12 章配题（d3 前半）", href: LINKS.seven("d3"), link: "d3 配题" },
-      { text: "错题回炉 30'", href: LINKS.recall, link: "随机问答" },
+      { text: "总册 D3 背诵：架构风格对比表 + 质量属性（40'）", href: "/kb/quick-four-tier-7d/#d3", link: "总册 D3" },
+      { text: "案例整题独立计时 60'：2020上·案例五·O2O 外卖平台（架构风格选型 + 消息队列）", href: LINKS.caseById("ZT-2020上-案例05"), link: "案例整题" },
+      { text: "错题回炉 20'", href: LINKS.recall, link: "随机问答" },
     ],
   },
   {
@@ -90,8 +91,9 @@ const DAYS: DayPlan[] = [
     weekday: "周三（加班日 22:30 起）",
     tag: "D3 下 · Web·微服务",
     main: [
-      { text: "Web 16 + 微服务 20 章配题（d3 后半，题量最大段）", href: LINKS.seven("d3"), link: "d3 配题" },
-      { text: "案例微卡复述（昨日骨架对照的漏点）", href: "/kb/quick-case-start/", link: "启动手册" },
+      { text: "总册 D3 续背：Web 16 + 微服务 20 章要点（40'）", href: "/kb/quick-four-tier-7d/#d3", link: "总册 D3" },
+      { text: "案例整题独立计时 60'：2025下·案例四·气象系统（前后端分离 + MVP/MVVM + 微服务演进；加班日可半题 45'）", href: LINKS.caseById("ZT-2025下-案例04"), link: "案例整题" },
+      { text: "错题回炉 20'", href: LINKS.recall, link: "随机问答" },
     ],
   },
   {
@@ -99,9 +101,9 @@ const DAYS: DayPlan[] = [
     weekday: "周四（20:30 起）",
     tag: "D4 · 数据库·测试",
     main: [
-      { text: "总册 D4 背诵：范式/事务并发/测试阶段（60'）", href: "/kb/quick-four-tier-7d/#d4", link: "总册 D4" },
-      { text: "d4 配题 + 挣值公式卡过一遍", href: LINKS.seven("d4"), link: "d4 配题" },
-      { text: "错题回炉 30'", href: LINKS.recall, link: "随机问答" },
+      { text: "总册 D4 背诵：范式/事务并发/测试阶段（40'）", href: "/kb/quick-four-tier-7d/#d4", link: "总册 D4" },
+      { text: "案例整题独立计时 60'：2025下·案例二·电商大促 Redis 缓存（问题诊断三问）", href: LINKS.caseById("ZT-2025下-案例02"), link: "案例整题" },
+      { text: "错题回炉 20'（含挣值公式卡过一遍）", href: LINKS.recall, link: "随机问答" },
     ],
   },
   {
@@ -109,9 +111,9 @@ const DAYS: DayPlan[] = [
     weekday: "周五（20:30 起）",
     tag: "D5 · 安全·项管",
     main: [
-      { text: "总册 D5 背诵：BLP/Biba、密钥体系、项管计算（60'）", href: "/kb/quick-four-tier-7d/#d5", link: "总册 D5" },
-      { text: "d5 配题 + 关键路径手算 5 题", href: LINKS.seven("d5"), link: "d5 配题" },
-      { text: "错题回炉 30'", href: LINKS.recall, link: "随机问答" },
+      { text: "总册 D5 背诵：BLP/Biba、密钥体系、项管计算（40'）", href: "/kb/quick-four-tier-7d/#d5", link: "总册 D5" },
+      { text: "案例整题独立计时 60'：2019上·案例一·PERT 图与关键路径（项管计算）", href: LINKS.caseById("ZT-2019上-案例01"), link: "案例整题" },
+      { text: "错题回炉 20'（关键路径手算再练 2 题）", href: LINKS.recall, link: "随机问答" },
     ],
   },
   {
@@ -129,9 +131,10 @@ const DAYS: DayPlan[] = [
     weekday: "周日",
     tag: "D7 · 企信·论文 + 案例全真",
     main: [
-      { text: "上午：总册 D7 背诵 + 论文 2 个主打方向定型（近五年范围分析）", href: "/kb/quick-essay/", link: "论文范围" },
+      { text: "上午：总册 D7 背诵 + 论文 2 个主打方向定型 + 素材卡固化（近五年范围分析）", href: "/kb/quick-essay/", link: "论文范围" },
       { text: "下午：案例全真 1 场（计时 90 分钟，骨架先行）+ 启动手册复盘", href: LINKS.caseReal, link: "案例真题" },
-      { text: "晚上：微卡清账 + 明日真题预告", href: LINKS.caseStart, link: "启动手册" },
+      { text: "晚上：论文限时第 1 篇（90 分钟完稿，用上午定型方向）+ 自评：背景→选型→过程→度量→总结", href: LINKS.essay, link: "论文框架" },
+      { text: "睡前：微卡清账 + 第 1 篇自评问题记入清单（第 2、3 篇针对性重练）", href: LINKS.caseStart, link: "微卡复盘" },
     ],
   },
   {
@@ -163,19 +166,19 @@ const DAYS: DayPlan[] = [
   {
     date: "2026-10-22",
     weekday: "周四（20:30 起）",
-    tag: "论文周 · 第 1 篇",
+    tag: "论文周 · 第 2 篇",
     main: [
-      { text: "论文限时第 1 篇（90 分钟完稿 + 自评：背景→选型→过程→度量→总结）", href: LINKS.essay, link: "论文框架" },
-      { text: "素材卡背诵 45'（主打方向 1 素材）", href: LINKS.essay, link: "论文素材" },
+      { text: "论文限时第 2 篇（90 分钟完稿 + 自评；针对第 1 篇自评问题重练对应段落）", href: LINKS.essay, link: "论文框架" },
+      { text: "素材卡背诵 45'（主打方向 2 素材）", href: LINKS.essay, link: "论文素材" },
     ],
   },
   {
     date: "2026-10-23",
     weekday: "周五（20:30 起）",
-    tag: "论文周 · 第 2 篇",
+    tag: "论文周 · 第 3 篇",
     main: [
       { text: "错题清零 + 高频对比速查表过一遍", href: "/kb/quick-compare/", link: "对比速查" },
-      { text: "论文限时第 2 篇（90 分钟完稿 + 自评）", href: LINKS.essay, link: "论文框架" },
+      { text: "论文限时第 3 篇（90 分钟完稿 + 自评）", href: LINKS.essay, link: "论文框架" },
     ],
   },
   {
@@ -202,18 +205,18 @@ const DAYS: DayPlan[] = [
 /** 午休案例骨架主题（按天） */
 const LUNCH_TOPIC: Record<string, { text: string; href?: string; link?: string }> = {
   "2026-10-11": { text: "案例微训练第 1 题：2025下·案例一·需求识别与确认（并入今日全天主线，五步完整闭环）", href: LINKS.caseById("ZT-2025下-案例01"), link: "微训练第 1 题" },
-  "2026-10-12": { text: "运用演练《需求工程步骤链》：每格先写作用句再对答案（剩余时间做需求获取骨架）", href: LINKS.drill("需求工程步骤链"), link: "运用演练" },
-  "2026-10-13": { text: "架构域小问：读题标注 + 计时骨架", href: LINKS.caseArch, link: "案例真题" },
-  "2026-10-14": { text: "微服务/Web 小问：读题标注 + 计时骨架", href: LINKS.caseMicro, link: "案例真题" },
-  "2026-10-15": { text: "运用演练《数据库设计步骤链》：六格默写每步产出（剩余时间做数据库骨架）", href: LINKS.drill("数据库设计步骤链"), link: "运用演练" },
-  "2026-10-16": { text: "问题诊断小问：管理/技术/过程/人员四维扫骨架", href: LINKS.caseReal, link: "案例真题" },
+  "2026-10-12": { text: "运用演练《需求工程步骤链》：每格先写作用句再对答案（剩余时间 d2 配题）", href: LINKS.drill("需求工程步骤链"), link: "运用演练" },
+  "2026-10-13": { text: "d3 前半配题（架构 12 章）：先刷配题，剩余时间架构域小问骨架", href: LINKS.seven("d3"), link: "d3 配题" },
+  "2026-10-14": { text: "d3 后半配题（Web 16 + 微服务 20，题量最大段）+ 微服务/Web 小问骨架", href: LINKS.seven("d3"), link: "d3 配题" },
+  "2026-10-15": { text: "运用演练《数据库设计步骤链》：六格默写每步产出（剩余时间 d4 配题）", href: LINKS.drill("数据库设计步骤链"), link: "运用演练" },
+  "2026-10-16": { text: "d5 配题：先刷 d5 配题，剩余时间问题诊断小问四维扫骨架（管理/技术/过程/人员）", href: LINKS.seven("d5"), link: "d5 配题" },
   "2026-10-17": { text: "微卡复述（周六午休并入主线，可只复述不写新骨架）", href: LINKS.caseStart, link: "启动手册" },
   "2026-10-18": { text: "微卡复述（案例全真在下午主线）", href: LINKS.caseStart, link: "启动手册" },
   "2026-10-19": { text: "需求类骨架：真题错题暴露的框架重练", href: LINKS.caseReq, link: "案例真题" },
   "2026-10-20": { text: "运用演练《UML 建模步骤链》：六图逐格默写作用与差异（DFD 补全手画 5 分钟并入）", href: LINKS.drill("UML-建模步骤链"), link: "运用演练" },
   "2026-10-21": { text: "微服务/Web 骨架：微卡连漏点定向练", href: LINKS.caseMicro, link: "案例真题" },
-  "2026-10-22": { text: "论文素材口述 1 遍（主块写第 1 篇前的预热）", href: LINKS.essay, link: "论文框架" },
-  "2026-10-23": { text: "论文素材口述 1 遍（第 2 篇预热）", href: LINKS.essay, link: "论文框架" },
+  "2026-10-22": { text: "论文素材口述 1 遍（第 2 篇前的预热）", href: LINKS.essay, link: "论文框架" },
+  "2026-10-23": { text: "论文素材口述 1 遍（第 3 篇预热）", href: LINKS.essay, link: "论文框架" },
   "2026-10-24": { text: "启动句式表重背（只复盘不写新题）", href: LINKS.caseStart, link: "启动手册" },
   "2026-10-25": { text: "考场启动句式默背 1 遍", href: LINKS.caseStart, link: "启动手册" },
 };
