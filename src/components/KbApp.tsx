@@ -160,6 +160,7 @@ export function KbCatalog() {
   const [pointSort, setPointSort] = useState<"exam" | "outline">("exam");
   /** learn = 四层七日学习主页（默认）；dict = 全量字典检索 */
   const [view, setView] = useState<"learn" | "dict">("learn");
+  const [fcMeta, setFcMeta] = useState<{ total: number; m: number; k: number } | null>(null);
 
   useEffect(() => {
     fetch("/data/kb-index.json")
@@ -169,6 +170,12 @@ export function KbCatalog() {
       })
       .then(setData)
       .catch((e) => setErr(e.message));
+    fetch("/data/flashcards.json")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (d?.meta) setFcMeta({ total: d.meta.total, m: d.meta.m, k: d.meta.k });
+      })
+      .catch(() => undefined);
   }, []);
 
   const flat = useMemo(() => {
@@ -211,6 +218,23 @@ export function KbCatalog() {
             背完当日就刷当日配题；查某一考点的完整定义时，再进「字典检索」（{data.meta?.apiPoints ?? 174} 篇考点参考）
           </span>
         </p>
+
+        <Card className="border-primary/30 bg-primary/[0.03] dark:bg-primary/[0.05] p-4 sm:p-5 shadow-xs mb-4">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="min-w-0">
+              <h2 className="text-[1.02rem] font-semibold text-foreground">随机问答 · 必会与重点</h2>
+              <p className="mt-1 text-[0.88rem] leading-relaxed text-muted-foreground">
+                {fcMeta
+                  ? `${fcMeta.total} 张闪卡（必会 M ${fcMeta.m} + 重点 K ${fcMeta.k}）`
+                  : "总册必会卡 + 记忆卡组硬记忆点"}
+                · 先默写再自评 · 按 1-2-4-7-15 间隔自动排程，到期卡优先出现
+              </p>
+            </div>
+            <Button asChild variant="default" className="shrink-0 gap-1.5 shadow-xs">
+              <Link href="/recall/">开始问答 →</Link>
+            </Button>
+          </div>
+        </Card>
 
         <Card className="border-primary/30 bg-primary/[0.03] dark:bg-primary/[0.05] p-4 sm:p-5 shadow-xs mb-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">

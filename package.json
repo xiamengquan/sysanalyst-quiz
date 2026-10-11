@@ -1,6 +1,6 @@
 {
   "name": "sysanalyst-quiz",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -22,7 +22,8 @@
     "audit:workshop": "node scripts/audit-workshop.mjs",
     "build:kb-search": "node scripts/build-kb-search.mjs",
     "build:kb-html": "npx tsx scripts/build-kb-html.ts",
-    "build:mock": "python3 scripts/python/build_mock_sets.py"
+    "build:mock": "python3 scripts/python/build_mock_sets.py",
+    "build:flashcards": "node scripts/build-flashcards.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.116.0",

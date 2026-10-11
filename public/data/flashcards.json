@@ -1,0 +1,1851 @@
+{
+  "meta": {
+    "builtAt": "2026-10-11T01:39:52.766Z",
+    "total": 153,
+    "m": 97,
+    "k": 56,
+    "hard": 30,
+    "source": [
+      "速查/四层七日背诵总册.md · 必会默写卡",
+      "速查/记忆强化-间隔重复与硬记忆点卡组.md · §4"
+    ]
+  },
+  "cards": [
+    {
+      "id": "fc-k-t01-01",
+      "day": "d6",
+      "tier": "K",
+      "hard": true,
+      "front": "Cache 均访？",
+      "back": "Cache 均访：t3 = tc×h + tm×(1-h)",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T01"
+      }
+    },
+    {
+      "id": "fc-k-t01-02",
+      "day": "d6",
+      "tier": "K",
+      "hard": false,
+      "front": "RISC 性能？",
+      "back": "RISC 性能：P=I×CPI×T（快 3~5 倍）；CISC 80/20",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T01"
+      }
+    },
+    {
+      "id": "fc-k-t01-03",
+      "day": "d6",
+      "tier": "K",
+      "hard": true,
+      "front": "填空默写：RAID____ 利用率 ____",
+      "back": "RAID1 利用率 50%",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T01"
+      }
+    },
+    {
+      "id": "fc-k-t01-04",
+      "day": "d6",
+      "tier": "K",
+      "hard": false,
+      "front": "I/O 递进？",
+      "back": "I/O 递进：查询→中断→DMA→通道→I/O 处理机",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T01"
+      }
+    },
+    {
+      "id": "fc-k-t01-05",
+      "day": "d6",
+      "tier": "K",
+      "hard": false,
+      "front": "总线带宽如何计算？",
+      "back": "总线带宽 = 宽度 × 频率",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T01"
+      }
+    },
+    {
+      "id": "fc-k-t01-06",
+      "day": "d6",
+      "tier": "K",
+      "hard": false,
+      "front": "填空默写：USB 最多 ____；____ 最多 ____",
+      "back": "USB 最多 127；1394 最多 63",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T01"
+      }
+    },
+    {
+      "id": "fc-k-t02-01",
+      "day": "d6",
+      "tier": "K",
+      "hard": true,
+      "front": "填空默写：子网主机数 = ____^m − ____",
+      "back": "子网主机数 = 2^m − 2",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T02"
+      }
+    },
+    {
+      "id": "fc-k-t02-02",
+      "day": "d6",
+      "tier": "K",
+      "hard": false,
+      "front": "填空默写：IPv____ ____ 位 / IPv____ ____ 位；OSI ____ 层 / TCP-IP ____ 层",
+      "back": "IPv4 32 位 / IPv6 128 位；OSI 7 层 / TCP-IP 4 层",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T02"
+      }
+    },
+    {
+      "id": "fc-k-t02-03",
+      "day": "d6",
+      "tier": "K",
+      "hard": false,
+      "front": "端口？",
+      "back": "端口：HTTP 80 · HTTPS 443 · FTP 21 · DNS 53",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T02"
+      }
+    },
+    {
+      "id": "fc-k-t02-04",
+      "day": "d6",
+      "tier": "K",
+      "hard": false,
+      "front": "填空默写：以太网帧最小 ____ 字节",
+      "back": "以太网帧最小 64 字节",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T02"
+      }
+    },
+    {
+      "id": "fc-k-t03-01",
+      "day": "d4",
+      "tier": "K",
+      "hard": false,
+      "front": "ACID？",
+      "back": "ACID：原一隔持",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T03"
+      }
+    },
+    {
+      "id": "fc-k-t03-02",
+      "day": "d4",
+      "tier": "K",
+      "hard": false,
+      "front": "范式递进？",
+      "back": "范式递进：1→2→3→BCNF→4NF",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T03"
+      }
+    },
+    {
+      "id": "fc-k-t03-03",
+      "day": "d4",
+      "tier": "K",
+      "hard": false,
+      "front": "授权粒度？",
+      "back": "授权粒度：库→表→行→列（4 级）",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T03"
+      }
+    },
+    {
+      "id": "fc-k-t03-04",
+      "day": "d4",
+      "tier": "K",
+      "hard": true,
+      "front": "增量备份和差异备份各基于哪次备份？",
+      "back": "增量备份基于「上次任意备份」；差异基于「上次完全备份」",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T03"
+      }
+    },
+    {
+      "id": "fc-k-t03-05",
+      "day": "d4",
+      "tier": "K",
+      "hard": false,
+      "front": "分片设计原则？",
+      "back": "分片设计原则：均衡、相关、可扩展",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T03"
+      }
+    },
+    {
+      "id": "fc-k-t03-06",
+      "day": "d4",
+      "tier": "K",
+      "hard": true,
+      "front": "分片正确性准则？",
+      "back": "分片正确性准则：完备、重构、不相交",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T03"
+      }
+    },
+    {
+      "id": "fc-k-t03-07",
+      "day": "d4",
+      "tier": "K",
+      "hard": false,
+      "front": "安全审计与标识鉴别，哪个发生在事前、哪个在事后？",
+      "back": "审计=事后；标识鉴别=事前",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T03"
+      }
+    },
+    {
+      "id": "fc-k-t03-08",
+      "day": "d4",
+      "tier": "K",
+      "hard": false,
+      "front": "备份口诀？",
+      "back": "备份口诀：物逻分，冷热全增异",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T03"
+      }
+    },
+    {
+      "id": "fc-k-t04-01",
+      "day": "d7",
+      "tier": "K",
+      "hard": false,
+      "front": "SCM 五环节？",
+      "back": "SCM 五环节：计采制配退",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T04"
+      }
+    },
+    {
+      "id": "fc-k-t04-02",
+      "day": "d7",
+      "tier": "K",
+      "hard": false,
+      "front": "BI 三组件？",
+      "back": "BI 三组件：仓库 + OLAP + 挖掘",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T04"
+      }
+    },
+    {
+      "id": "fc-k-t04-03",
+      "day": "d7",
+      "tier": "K",
+      "hard": false,
+      "front": "ERP 三阶段？",
+      "back": "ERP 三阶段：准备→试运行→交付",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T04"
+      }
+    },
+    {
+      "id": "fc-k-t04-04",
+      "day": "d7",
+      "tier": "K",
+      "hard": false,
+      "front": "填空默写：电商 B____B/B____C/C____C/B____G/O____O；政务 G____G/G____B/G____C/G____E",
+      "back": "电商 B2B/B2C/C2C/B2G/O2O；政务 G2G/G2B/G2C/G2E",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T04"
+      }
+    },
+    {
+      "id": "fc-k-t05-01",
+      "day": "d1",
+      "tier": "K",
+      "hard": true,
+      "front": "CMMI 五级？",
+      "back": "CMMI 五级：初可已定优",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T05"
+      }
+    },
+    {
+      "id": "fc-k-t05-02",
+      "day": "d1",
+      "tier": "K",
+      "hard": false,
+      "front": "RUP 四阶段？",
+      "back": "RUP 四阶段：初细构移 + 三特点（用例驱动/架构中心/迭代增量）",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T05"
+      }
+    },
+    {
+      "id": "fc-k-t05-03",
+      "day": "d1",
+      "tier": "K",
+      "hard": false,
+      "front": "螺旋每轮四步？",
+      "back": "螺旋每轮四步：计风实评",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T05"
+      }
+    },
+    {
+      "id": "fc-k-t05-04",
+      "day": "d1",
+      "tier": "K",
+      "hard": false,
+      "front": "RAD 五阶段？",
+      "back": "RAD 五阶段：业数过应测",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T05"
+      }
+    },
+    {
+      "id": "fc-k-t05-05",
+      "day": "d1",
+      "tier": "K",
+      "hard": false,
+      "front": "模型选型？",
+      "back": "模型选型：需求稳→瀑布/V；风险大→螺旋；要快→RAD/敏捷；OO→喷泉/RUP",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T05"
+      }
+    },
+    {
+      "id": "fc-k-t06-01",
+      "day": "d5",
+      "tier": "K",
+      "hard": false,
+      "front": "填空默写：沟通渠道 n(n−____)/____",
+      "back": "沟通渠道 n(n−1)/2",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T06"
+      }
+    },
+    {
+      "id": "fc-k-t06-02",
+      "day": "d5",
+      "tier": "K",
+      "hard": true,
+      "front": "填空默写：PERT 期望 (O+____M+P)/____",
+      "back": "PERT 期望 (O+4M+P)/6",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T06"
+      }
+    },
+    {
+      "id": "fc-k-t06-03",
+      "day": "d5",
+      "tier": "K",
+      "hard": true,
+      "front": "挣值？",
+      "back": "挣值：CV=EV−AC、SV=EV−PV、CPI=EV/AC、SPI=EV/PV",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T06"
+      }
+    },
+    {
+      "id": "fc-k-t06-04",
+      "day": "d5",
+      "tier": "K",
+      "hard": false,
+      "front": "填空默写：CPI/SPI >____ 好 <____ 差；EAC=BAC/CPI",
+      "back": "CPI/SPI >1 好 <1 差；EAC=BAC/CPI",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T06"
+      }
+    },
+    {
+      "id": "fc-k-t06-05",
+      "day": "d5",
+      "tier": "K",
+      "hard": false,
+      "front": "填空默写：WBS ____ 规则；网络图单起止单终止无回路无双向",
+      "back": "WBS 100% 规则；网络图单起止单终止无回路无双向",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T06"
+      }
+    },
+    {
+      "id": "fc-k-t07-01",
+      "day": "d5",
+      "tier": "K",
+      "hard": true,
+      "front": "BLP 与 Biba 各允许怎么读、怎么写？分别保护什么属性？",
+      "back": "BLP 下读上写（不上读、不下写·保密）；Biba 上读下写（不下读、不上写·完整）",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T07"
+      }
+    },
+    {
+      "id": "fc-k-t07-02",
+      "day": "d5",
+      "tier": "K",
+      "hard": true,
+      "front": "填空默写：可用性 = MTTF/MTBF×____；R(t)=e^(−λt)、MTTF=____/λ",
+      "back": "可用性 = MTTF/MTBF×100%；R(t)=e^(−λt)、MTTF=1/λ",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T07"
+      }
+    },
+    {
+      "id": "fc-k-t07-03",
+      "day": "d5",
+      "tier": "K",
+      "hard": true,
+      "front": "填空默写：串联 R=∏Ri；并联 R=____−∏(____−Ri)",
+      "back": "串联 R=∏Ri；并联 R=1−∏(1−Ri)",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T07"
+      }
+    },
+    {
+      "id": "fc-k-t07-04",
+      "day": "d5",
+      "tier": "K",
+      "hard": false,
+      "front": "填空默写：模冗余 ____n+____ 容忍 n 个故障",
+      "back": "模冗余 2n+1 容忍 n 个故障",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T07"
+      }
+    },
+    {
+      "id": "fc-k-t07-05",
+      "day": "d5",
+      "tier": "K",
+      "hard": false,
+      "front": "等保五级？",
+      "back": "等保五级：自审标结验",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T07"
+      }
+    },
+    {
+      "id": "fc-k-t07-06",
+      "day": "d5",
+      "tier": "K",
+      "hard": true,
+      "front": "N 版本与恢复块，谁是前向恢复、谁是后向恢复？",
+      "back": "N 版本=前向恢复/静态；恢复块=后向恢复/动态",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T07"
+      }
+    },
+    {
+      "id": "fc-k-t07-07",
+      "day": "d5",
+      "tier": "K",
+      "hard": false,
+      "front": "口令认证的弱点是什么？动态口令的特点？",
+      "back": "口令极不安全；动态口令一次一密",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T07"
+      }
+    },
+    {
+      "id": "fc-k-t09-01",
+      "day": "d2",
+      "tier": "K",
+      "hard": false,
+      "front": "需求三层？",
+      "back": "需求三层：业务/用户/系统（§23a）",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T09"
+      }
+    },
+    {
+      "id": "fc-k-t09-02",
+      "day": "d2",
+      "tier": "K",
+      "hard": false,
+      "front": "需求获取五法的选型口诀？各适用什么场景？",
+      "back": "获取五法选型一句话（访谈深/问卷广/观察真/原型快/JRP 共识）",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T09"
+      }
+    },
+    {
+      "id": "fc-k-t09-03",
+      "day": "d2",
+      "tier": "K",
+      "hard": true,
+      "front": "DFD 父子图「平衡」指什么？",
+      "back": "DFD 父子图平衡",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T09"
+      }
+    },
+    {
+      "id": "fc-k-t09-04",
+      "day": "d2",
+      "tier": "K",
+      "hard": true,
+      "front": "include 与 extend 的区别？",
+      "back": "include 必选复用 / extend 可选附加",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T09"
+      }
+    },
+    {
+      "id": "fc-k-t10-01",
+      "day": "d3",
+      "tier": "K",
+      "hard": false,
+      "front": "4+1？",
+      "back": "4+1：场景 + 逻辑/开发/进程/物理",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T10"
+      }
+    },
+    {
+      "id": "fc-k-t10-02",
+      "day": "d3",
+      "tier": "K",
+      "hard": true,
+      "front": "五大风格族锚词？",
+      "back": "五大风格族锚词：管道过滤·批处理｜分层·C/S 三层｜仓库·黑板｜解释器·规则｜事件·进程通信",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T10"
+      }
+    },
+    {
+      "id": "fc-k-t10-03",
+      "day": "d3",
+      "tier": "K",
+      "hard": false,
+      "front": "质量属性六元组是什么？ATAM 的敏感点与权衡点？",
+      "back": "质量属性六元 + ATAM 敏感点/权衡点",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T10"
+      }
+    },
+    {
+      "id": "fc-k-t11-01",
+      "day": "d6",
+      "tier": "K",
+      "hard": true,
+      "front": "耦合从低到高七级？内聚从高到低七级？各哪种最优？",
+      "back": "耦合低→高七级；内聚高→低七级（功能内聚最优）",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T11"
+      }
+    },
+    {
+      "id": "fc-k-t11-02",
+      "day": "d6",
+      "tier": "K",
+      "hard": false,
+      "front": "SOLID 是哪五个原则？ECB 是哪三层？",
+      "back": "SOLID 五原则；ECB 三层",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T11"
+      }
+    },
+    {
+      "id": "fc-k-t11-03",
+      "day": "d6",
+      "tier": "K",
+      "hard": false,
+      "front": "设计模式三类速记？",
+      "back": "设计模式三类速记：创建 5 / 结构 7 / 行为 11",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T11"
+      }
+    },
+    {
+      "id": "fc-k-t12-01",
+      "day": "d4",
+      "tier": "K",
+      "hard": true,
+      "front": "V 模型对应？",
+      "back": "V 模型对应：单元↔详细设计、集成↔概要、系统↔需求、验收↔用户",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T12"
+      }
+    },
+    {
+      "id": "fc-k-t12-02",
+      "day": "d4",
+      "tier": "K",
+      "hard": false,
+      "front": "冒烟测试与回归测试的区别？",
+      "back": "冒烟=主流程可跑；回归=改后未坏",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T12"
+      }
+    },
+    {
+      "id": "fc-k-t13-01",
+      "day": "d6",
+      "tier": "K",
+      "hard": true,
+      "front": "MTBF、MTTF、MTTR 的关系公式？",
+      "back": "MTBF = MTTF + MTTR",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T13"
+      }
+    },
+    {
+      "id": "fc-k-t13-02",
+      "day": "d6",
+      "tier": "K",
+      "hard": false,
+      "front": "维护四类？",
+      "back": "维护四类：改正/适应/完善/预防（完善占比最大）",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T13"
+      }
+    },
+    {
+      "id": "fc-k-t13-03",
+      "day": "d6",
+      "tier": "K",
+      "hard": false,
+      "front": "转换四策略？",
+      "back": "转换四策略：直接/并行/分段/试点（风险↔成本）",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T13"
+      }
+    },
+    {
+      "id": "fc-k-t13-04",
+      "day": "d6",
+      "tier": "K",
+      "hard": false,
+      "front": "遗留系统四象限？",
+      "back": "遗留系统四象限：淘汰/继承/改造/集成",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T13"
+      }
+    },
+    {
+      "id": "fc-k-t14-01",
+      "day": "d7",
+      "tier": "K",
+      "hard": false,
+      "front": "微服务四保护？",
+      "back": "微服务四保护：限流/熔断/降级/灰度；CPS-IoT 四层：感知/网络/平台/应用",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T14"
+      }
+    },
+    {
+      "id": "fc-m-d1-001",
+      "day": "d1",
+      "tier": "M",
+      "hard": false,
+      "front": "开发模型选型口诀是什么？请完整展开",
+      "back": "需求稳→瀑布/V；风险大→螺旋；要快→RAD/敏捷；OO→喷泉/RUP",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d1",
+        "label": "总册 D1 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d1-002",
+      "day": "d1",
+      "tier": "M",
+      "hard": false,
+      "front": "螺旋每轮四步？（默写要点）",
+      "back": "计风实评（计划→风险评估→实施→评估）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d1",
+        "label": "总册 D1 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d1-003",
+      "day": "d1",
+      "tier": "M",
+      "hard": false,
+      "front": "RUP？（默写要点）",
+      "back": "四阶段「初细构移」三特点「用例驱动、架构中心、迭代增量」",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d1",
+        "label": "总册 D1 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d1-004",
+      "day": "d1",
+      "tier": "M",
+      "hard": false,
+      "front": "RAD 五阶段？（默写要点）",
+      "back": "业数过应测（业务建模→数据建模→过程建模→应用生成→测试交付）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d1",
+        "label": "总册 D1 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d1-005",
+      "day": "d1",
+      "tier": "M",
+      "hard": false,
+      "front": "CMMI 五级？（默写要点）",
+      "back": "初可已定优（初始→可重复→已定义→已管理→优化）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d1",
+        "label": "总册 D1 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d1-006",
+      "day": "d1",
+      "tier": "M",
+      "hard": false,
+      "front": "敏捷宣言？（默写要点）",
+      "back": "右优于左——个体互动 / 可用软件 / 客户协作 / 响应变化",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d1",
+        "label": "总册 D1 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d1-007",
+      "day": "d1",
+      "tier": "M",
+      "hard": false,
+      "front": "UML 六关系强弱？请排序或辨析",
+      "back": "泛化＝实现 ＞ 关联 ＞ 聚合 ＞ 组合 ＞ 依赖",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d1",
+        "label": "总册 D1 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d1-008",
+      "day": "d1",
+      "tier": "M",
+      "hard": false,
+      "front": "include vs extend？（默写要点）",
+      "back": "include 必选复用；extend 可选附加（条件触发）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d1",
+        "label": "总册 D1 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d1-009",
+      "day": "d1",
+      "tier": "M",
+      "hard": false,
+      "front": "UML 五图读法？（默写要点）",
+      "back": "静态（类图/对象图/包图/构件图/部署图）动态（用例/活动/状态/顺序/通信）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d1",
+        "label": "总册 D1 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d1-010",
+      "day": "d1",
+      "tier": "M",
+      "hard": false,
+      "front": "OO 三特性？（默写要点）",
+      "back": "封装、继承、多态；OO 七原则之一「高内聚低耦合」贯穿",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d1",
+        "label": "总册 D1 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d1-011",
+      "day": "d1",
+      "tier": "M",
+      "hard": false,
+      "front": "生命周期产出？（默写要点）",
+      "back": "可行性报告→需求规格(SRS)→概要/详细设计→代码→测试报告→运维手册",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d1",
+        "label": "总册 D1 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d1-012",
+      "day": "d1",
+      "tier": "M",
+      "hard": false,
+      "front": "再工程？（默写要点）",
+      "back": "逆向工程（恢复设计）重构正向工程，不是重写",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d1",
+        "label": "总册 D1 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d2-013",
+      "day": "d2",
+      "tier": "M",
+      "hard": false,
+      "front": "需求三层？（默写要点）",
+      "back": "业务需求（为什么）→ 用户需求（做什么）→ 系统需求（怎么做，含功能+非功能）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d2",
+        "label": "总册 D2 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d2-014",
+      "day": "d2",
+      "tier": "M",
+      "hard": false,
+      "front": "获取五法？（默写要点）",
+      "back": "访谈（深）、问卷（广）、观察（真）、原型（快）、JRP/联合需求计划（共识）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d2",
+        "label": "总册 D2 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d2-015",
+      "day": "d2",
+      "tier": "M",
+      "hard": false,
+      "front": "DFD 四要素？（默写要点）",
+      "back": "外部实体（矩形）、加工（圆/圆角）、数据流（箭头）、数据存储（双横线）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d2",
+        "label": "总册 D2 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d2-016",
+      "day": "d2",
+      "tier": "M",
+      "hard": false,
+      "front": "DFD 父子图平衡？（默写要点）",
+      "back": "子图输入输出流与父图对应加工一致；分层不宜超过 5 层",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d2",
+        "label": "总册 D2 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d2-017",
+      "day": "d2",
+      "tier": "M",
+      "hard": false,
+      "front": "数据字典？（默写要点）",
+      "back": "对数据流/存储/条目的定义集合，与 DFD 配套",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d2",
+        "label": "总册 D2 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d2-018",
+      "day": "d2",
+      "tier": "M",
+      "hard": false,
+      "front": "STD 状态迁移图？（默写要点）",
+      "back": "状态 + 事件触发的迁移，刻画动态行为",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d2",
+        "label": "总册 D2 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d2-019",
+      "day": "d2",
+      "tier": "M",
+      "hard": false,
+      "front": "SRS 特性？（默写要点）",
+      "back": "正确、无二义、完整、一致、可验证、可跟踪",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d2",
+        "label": "总册 D2 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d2-020",
+      "day": "d2",
+      "tier": "M",
+      "hard": false,
+      "front": "需求验证？（默写要点）",
+      "back": "评审 + 原型演示；「确认」≠「测试」",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d2",
+        "label": "总册 D2 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d2-021",
+      "day": "d2",
+      "tier": "M",
+      "hard": false,
+      "front": "需求变更？（默写要点）",
+      "back": "CCB（变更控制委员会）审批 → 影响分析 → 基线更新",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d2",
+        "label": "总册 D2 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d2-022",
+      "day": "d2",
+      "tier": "M",
+      "hard": false,
+      "front": "需求跟踪？（默写要点）",
+      "back": "前向/后向跟踪矩阵，保证双向可追溯",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d2",
+        "label": "总册 D2 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d2-023",
+      "day": "d2",
+      "tier": "M",
+      "hard": false,
+      "front": "可行性四维？（默写要点）",
+      "back": "技术、经济、操作（运行）、社会（法律）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d2",
+        "label": "总册 D2 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d2-024",
+      "day": "d2",
+      "tier": "M",
+      "hard": false,
+      "front": "成本效益？（默写要点）",
+      "back": "NPV≥0 可行；静态/动态回收期（动态贴现）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d2",
+        "label": "总册 D2 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d2-025",
+      "day": "d2",
+      "tier": "M",
+      "hard": false,
+      "front": "规划三法？（默写要点）",
+      "back": "BSP 自上而下、CSF 关键成功因素、SST 策略集合转化",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d2",
+        "label": "总册 D2 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d2-026",
+      "day": "d2",
+      "tier": "M",
+      "hard": false,
+      "front": "业务流程建模？（默写要点）",
+      "back": "TFD 业务流程图（职能）vs DFD 数据流（数据视角）；BAM 业务活动图",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d2",
+        "label": "总册 D2 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d3-027",
+      "day": "d3",
+      "tier": "M",
+      "hard": false,
+      "front": "4+1 视图？（默写要点）",
+      "back": "场景（+1）统摄 逻辑/开发/进程/物理 四视图",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d3",
+        "label": "总册 D3 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d3-028",
+      "day": "d3",
+      "tier": "M",
+      "hard": false,
+      "front": "五大风格族锚词？（默写要点）",
+      "back": "数据流（管道-过滤/批处理）｜调用返回（分层/C-S/三层/OO）｜数据中心（仓库/黑板/超文本）｜虚拟机（解释器/规则系统）｜独立构件（事件/进程通信）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d3",
+        "label": "总册 D3 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d3-029",
+      "day": "d3",
+      "tier": "M",
+      "hard": false,
+      "front": "SOA 与微服务？（默写要点）",
+      "back": "SOA 靠 ESB 集中总线；微服务去中心化、按业务拆分、独立部署",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d3",
+        "label": "总册 D3 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d3-030",
+      "day": "d3",
+      "tier": "M",
+      "hard": false,
+      "front": "质量属性六元？（默写要点）",
+      "back": "性能、可用性、安全性、可修改性、可测试性、易用性",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d3",
+        "label": "总册 D3 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d3-031",
+      "day": "d3",
+      "tier": "M",
+      "hard": false,
+      "front": "ATAM？（默写要点）",
+      "back": "敏感点=单属性拐点；权衡点=多属性冲突点（如加密=安全↑性能↓）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d3",
+        "label": "总册 D3 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d3-032",
+      "day": "d3",
+      "tier": "M",
+      "hard": false,
+      "front": "REST 约束？（默写要点）",
+      "back": "无状态、统一接口、资源 URI、分层、缓存（可按需加载客户端代码）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d3",
+        "label": "总册 D3 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d3-033",
+      "day": "d3",
+      "tier": "M",
+      "hard": false,
+      "front": "单体 vs 微服务选型？（默写要点）",
+      "back": "小团队快交付→单体；独立扩展/独立部署/多语言→微服务",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d3",
+        "label": "总册 D3 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d3-034",
+      "day": "d3",
+      "tier": "M",
+      "hard": false,
+      "front": "微服务四保护？（默写要点）",
+      "back": "限流（入口）、熔断（依赖故障断路）、降级（保核心弃边缘）、灰度（放量）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d3",
+        "label": "总册 D3 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d3-035",
+      "day": "d3",
+      "tier": "M",
+      "hard": false,
+      "front": "缓存三问题？（默写要点）",
+      "back": "穿透（查不存在→布隆/空值缓存）、击穿（热点过期→互斥/永不过期）、雪崩（同时失效→错峰TTL）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d3",
+        "label": "总册 D3 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d3-036",
+      "day": "d3",
+      "tier": "M",
+      "hard": false,
+      "front": "注册与发现？（默写要点）",
+      "back": "服务注册中心（如 Nacos/Consul），客户端/服务端两种发现模式",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d3",
+        "label": "总册 D3 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d3-037",
+      "day": "d3",
+      "tier": "M",
+      "hard": false,
+      "front": "MVC vs MVP vs MVVM？（默写要点）",
+      "back": "V 与 M 是否直接对话；MVVM 双向绑定（VM 观察者）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d3",
+        "label": "总册 D3 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d3-038",
+      "day": "d3",
+      "tier": "M",
+      "hard": false,
+      "front": "灰度发布？（默写要点）",
+      "back": "按流量比例放量 + 快速回滚，配合并行核对",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d3",
+        "label": "总册 D3 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d4-039",
+      "day": "d4",
+      "tier": "M",
+      "hard": false,
+      "front": "三级模式两级映像？（默写要点）",
+      "back": "外模式/概念模式/内模式；外-概念映像（逻辑独立性）、概念-内映像（物理独立性）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d4",
+        "label": "总册 D4 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d4-040",
+      "day": "d4",
+      "tier": "M",
+      "hard": false,
+      "front": "ACID？（默写要点）",
+      "back": "原子、一致、隔离、持久（原一隔持）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d4",
+        "label": "总册 D4 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d4-041",
+      "day": "d4",
+      "tier": "M",
+      "hard": false,
+      "front": "范式链？（默写要点）",
+      "back": "1NF→2NF（消部分依赖）→3NF（消传递依赖）→BCNF（主属性也决定）→4NF",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d4",
+        "label": "总册 D4 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d4-042",
+      "day": "d4",
+      "tier": "M",
+      "hard": false,
+      "front": "授权粒度？（默写要点）",
+      "back": "库→表→行→列（4 级）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d4",
+        "label": "总册 D4 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d4-043",
+      "day": "d4",
+      "tier": "M",
+      "hard": false,
+      "front": "备份口诀是什么？请完整展开",
+      "back": "物逻分，冷热全增异",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d4",
+        "label": "总册 D4 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d4-044",
+      "day": "d4",
+      "tier": "M",
+      "hard": true,
+      "front": "增量 vs 差异？（默写要点）",
+      "back": "增量基于「上次任意备份」；差异基于「上次完全备份」（易混！）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d4",
+        "label": "总册 D4 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d4-045",
+      "day": "d4",
+      "tier": "M",
+      "hard": false,
+      "front": "分片设计原则？（默写要点）",
+      "back": "均衡、相关、可扩展",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d4",
+        "label": "总册 D4 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d4-046",
+      "day": "d4",
+      "tier": "M",
+      "hard": true,
+      "front": "分片正确性准则？（默写要点）",
+      "back": "完备、重构、不相交（勿与上条混答）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d4",
+        "label": "总册 D4 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d4-047",
+      "day": "d4",
+      "tier": "M",
+      "hard": false,
+      "front": "E-R 转关系模式？（默写要点）",
+      "back": "实体→表；m:n 联系单独成表（主键=双方主键组合）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d4",
+        "label": "总册 D4 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d4-048",
+      "day": "d4",
+      "tier": "M",
+      "hard": false,
+      "front": "OLTP vs OLAP？（默写要点）",
+      "back": "事务（增删改、行级、当前）vs 分析（聚合、多维、历史）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d4",
+        "label": "总册 D4 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d4-049",
+      "day": "d4",
+      "tier": "M",
+      "hard": false,
+      "front": "CAP？（默写要点）",
+      "back": "一致性/可用性/分区容忍三选二；分区必然存在→实质 P 必选，C 与 A 权衡",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d4",
+        "label": "总册 D4 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d4-050",
+      "day": "d4",
+      "tier": "M",
+      "hard": false,
+      "front": "NoSQL 四型？（默写要点）",
+      "back": "列（HBase）、文档（MongoDB）、键值（Redis）、图（Neo4j）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d4",
+        "label": "总册 D4 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d4-051",
+      "day": "d4",
+      "tier": "M",
+      "hard": false,
+      "front": "数仓四特性？（默写要点）",
+      "back": "面向主题、集成、相对稳定、时变",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d4",
+        "label": "总册 D4 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d4-052",
+      "day": "d4",
+      "tier": "M",
+      "hard": false,
+      "front": "V 模型对应？（默写要点）",
+      "back": "单元↔详细设计、集成↔概要设计、系统↔需求、验收↔用户需求",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d4",
+        "label": "总册 D4 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d4-053",
+      "day": "d4",
+      "tier": "M",
+      "hard": false,
+      "front": "黑白盒方法？（默写要点）",
+      "back": "黑盒=等价类/边界值/因果图/判定表；白盒=语句/判定/条件/判定-条件/路径覆盖",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d4",
+        "label": "总册 D4 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d4-054",
+      "day": "d4",
+      "tier": "M",
+      "hard": false,
+      "front": "冒烟 vs 回归？（默写要点）",
+      "back": "冒烟=主流程可跑再细测；回归=修改后确认未引入新问题",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d4",
+        "label": "总册 D4 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d5-055",
+      "day": "d5",
+      "tier": "M",
+      "hard": false,
+      "front": "DAC/MAC/RBAC？（默写要点）",
+      "back": "自主（属主授权）/强制（安全标签 lattice）/基于角色（用户-角色-权限）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d5",
+        "label": "总册 D5 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d5-056",
+      "day": "d5",
+      "tier": "M",
+      "hard": false,
+      "front": "加密三兄弟？（默写要点）",
+      "back": "对称（AES 快、密钥分发难）、非对称（RSA 慢、公私钥）、摘要（MD5/SHA 防篡改不加密）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d5",
+        "label": "总册 D5 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d5-057",
+      "day": "d5",
+      "tier": "M",
+      "hard": false,
+      "front": "数字签名？（默写要点）",
+      "back": "私钥加密摘要，公钥验证——不可抵赖",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d5",
+        "label": "总册 D5 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d5-058",
+      "day": "d5",
+      "tier": "M",
+      "hard": false,
+      "front": "PKI/KMI/SPK？（默写要点）",
+      "back": "第三方 CA 体系 / 单向密钥管理 / 混合对钥",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d5",
+        "label": "总册 D5 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d5-059",
+      "day": "d5",
+      "tier": "M",
+      "hard": false,
+      "front": "防火墙/VPN/IDS？（默写要点）",
+      "back": "边界隔离 / 加密隧道（IPSec） / 入侵检测（旁路监听）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d5",
+        "label": "总册 D5 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d5-060",
+      "day": "d5",
+      "tier": "M",
+      "hard": false,
+      "front": "SSL/HTTPS/IPSec？（默写要点）",
+      "back": "传输层安全=应用层；HTTPS=HTTP+SSL；IPSec=网络层",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d5",
+        "label": "总册 D5 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d5-061",
+      "day": "d5",
+      "tier": "M",
+      "hard": false,
+      "front": "Kerberos？（默写要点）",
+      "back": "第三方票据认证（AS+TGS），防重放用时间戳",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d5",
+        "label": "总册 D5 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d5-062",
+      "day": "d5",
+      "tier": "M",
+      "hard": false,
+      "front": "容灾？（默写要点）",
+      "back": "RTO（恢复时长）/RPO（数据丢失量）；等级 1-6（国际/share78）或 1-5（国标）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d5",
+        "label": "总册 D5 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d5-063",
+      "day": "d5",
+      "tier": "M",
+      "hard": true,
+      "front": "可靠性？（默写要点）",
+      "back": "串联 R=∏Ri；并联 R=1−∏(1−Ri)；模冗余 2n+1 容忍 n 故障",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d5",
+        "label": "总册 D5 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d5-064",
+      "day": "d5",
+      "tier": "M",
+      "hard": true,
+      "front": "N 版本 vs 恢复块？（默写要点）",
+      "back": "前向恢复/静态冗余 vs 后向恢复/动态冗余（设计多样性）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d5",
+        "label": "总册 D5 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d5-065",
+      "day": "d5",
+      "tier": "M",
+      "hard": true,
+      "front": "挣值四公式？（默写要点）",
+      "back": "CV=EV−AC、SV=EV−PV、CPI=EV/AC、SPI=EV/PV；>1/正值=好",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d5",
+        "label": "总册 D5 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d5-066",
+      "day": "d5",
+      "tier": "M",
+      "hard": false,
+      "front": "完工预测？（默写要点）",
+      "back": "EAC=BAC/CPI（典型偏差持续）；ETC=EAC−AC",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d5",
+        "label": "总册 D5 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d5-067",
+      "day": "d5",
+      "tier": "M",
+      "hard": false,
+      "front": "WBS 100% 规则？（默写要点）",
+      "back": "分解包含全部工作且不重叠",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d5",
+        "label": "总册 D5 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d5-068",
+      "day": "d5",
+      "tier": "M",
+      "hard": false,
+      "front": "风险应对？（默写要点）",
+      "back": "规避/转移/减轻/接受；团队五阶段：形成→震荡→规范→成熟（执行）→解体",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d5",
+        "label": "总册 D5 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d6-069",
+      "day": "d6",
+      "tier": "M",
+      "hard": true,
+      "front": "Cache 均访？（默写要点）",
+      "back": "t3 = tc×h + tm×(1−h)",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d6",
+        "label": "总册 D6 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d6-070",
+      "day": "d6",
+      "tier": "M",
+      "hard": false,
+      "front": "RISC vs CISC？（默写要点）",
+      "back": "RISC P=I×CPI×T 快 3~5 倍；CISC 80/20",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d6",
+        "label": "总册 D6 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d6-071",
+      "day": "d6",
+      "tier": "M",
+      "hard": false,
+      "front": "I/O 递进？（默写要点）",
+      "back": "查询→中断→DMA→通道→I/O 处理机",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d6",
+        "label": "总册 D6 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d6-072",
+      "day": "d6",
+      "tier": "M",
+      "hard": false,
+      "front": "死锁四条件？（默写要点）",
+      "back": "互斥、占有等待、不可剥夺、环路等待；破坏任一即可预防",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d6",
+        "label": "总册 D6 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d6-073",
+      "day": "d6",
+      "tier": "M",
+      "hard": true,
+      "front": "PV 操作？（默写要点）",
+      "back": "P 减 1 阻塞、V 加 1 唤醒；互斥信号量初值 1，同步初值 0/资源数",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d6",
+        "label": "总册 D6 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d6-074",
+      "day": "d6",
+      "tier": "M",
+      "hard": false,
+      "front": "页面置换？（默写要点）",
+      "back": "LRU 最近最久未用、FIFO（有 Belady 异常）、OPT 理论最优",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d6",
+        "label": "总册 D6 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d6-075",
+      "day": "d6",
+      "tier": "M",
+      "hard": false,
+      "front": "端口？（默写要点）",
+      "back": "HTTP 80 / HTTPS 443 / FTP 21 / DNS 53",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d6",
+        "label": "总册 D6 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d6-076",
+      "day": "d6",
+      "tier": "M",
+      "hard": true,
+      "front": "耦合七级（低→高）？（默写要点）",
+      "back": "非直接、数据、标记、控制、外部、公共、内容",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d6",
+        "label": "总册 D6 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d6-077",
+      "day": "d6",
+      "tier": "M",
+      "hard": true,
+      "front": "内聚七级（高→低）？（默写要点）",
+      "back": "功能、顺序、通信、过程、时间、逻辑、偶然。功能内聚最优",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d6",
+        "label": "总册 D6 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d6-078",
+      "day": "d6",
+      "tier": "M",
+      "hard": false,
+      "front": "SOLID？（默写要点）",
+      "back": "单一职责/开闭/里氏替换/接口隔离/依赖倒置；ECB=实体-控制-边界",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d6",
+        "label": "总册 D6 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d6-079",
+      "day": "d6",
+      "tier": "M",
+      "hard": true,
+      "front": "设计模式三类？（默写要点）",
+      "back": "创建 5（单例/工厂/抽象工厂/建造者/原型）、结构 7（适配器/桥/组合/装饰/外观/享元/代理）、行为 11（观察者/策略/命令/状态…）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d6",
+        "label": "总册 D6 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d6-080",
+      "day": "d6",
+      "tier": "M",
+      "hard": false,
+      "front": "运维指标？（默写要点）",
+      "back": "MTBF=MTTF+MTTR；A=MTTF/MTBF×100%",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d6",
+        "label": "总册 D6 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d6-081",
+      "day": "d6",
+      "tier": "M",
+      "hard": true,
+      "front": "维护四类？（默写要点）",
+      "back": "改正/适应/完善/预防（完善占比最大）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d6",
+        "label": "总册 D6 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d6-082",
+      "day": "d6",
+      "tier": "M",
+      "hard": false,
+      "front": "转换四策略？（默写要点）",
+      "back": "直接/并行/分段/试点（风险↔成本：并行最稳最贵）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d6",
+        "label": "总册 D6 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d6-083",
+      "day": "d6",
+      "tier": "M",
+      "hard": false,
+      "front": "遗留系统四象限？（默写要点）",
+      "back": "淘汰/继承/改造/集成（按技术水平×业务价值）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d6",
+        "label": "总册 D6 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d7-084",
+      "day": "d7",
+      "tier": "M",
+      "hard": false,
+      "front": "规划三法？（默写要点）",
+      "back": "BSP 自上而下、CSF 关键成功因素、SST 策略集转化（与 D2 呼应，考场二选一必出）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d7",
+        "label": "总册 D7 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d7-085",
+      "day": "d7",
+      "tier": "M",
+      "hard": false,
+      "front": "BPR 原则？（默写要点）",
+      "back": "以流程为中心、组织围绕流程、授权到一线、信息技术使能",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d7",
+        "label": "总册 D7 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d7-086",
+      "day": "d7",
+      "tier": "M",
+      "hard": false,
+      "front": "EAI 三层？（默写要点）",
+      "back": "数据集成、应用集成（API/消息）、业务流程集成（BPM）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d7",
+        "label": "总册 D7 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d7-087",
+      "day": "d7",
+      "tier": "M",
+      "hard": true,
+      "front": "SCM 五环节？（默写要点）",
+      "back": "计采制配退（计划、采购、制造、配送、退货）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d7",
+        "label": "总册 D7 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d7-088",
+      "day": "d7",
+      "tier": "M",
+      "hard": false,
+      "front": "BI 三组件？（默写要点）",
+      "back": "仓库 + OLAP + 挖掘",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d7",
+        "label": "总册 D7 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d7-089",
+      "day": "d7",
+      "tier": "M",
+      "hard": false,
+      "front": "电商/政务模式？（默写要点）",
+      "back": "B2B/B2C/C2C/B2G/O2O；G2G/G2B/G2C/G2E",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d7",
+        "label": "总册 D7 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d7-090",
+      "day": "d7",
+      "tier": "M",
+      "hard": false,
+      "front": "案例单题 7 步法？（默写要点）",
+      "back": "看问题→圈约束→判题型→列骨架→答采分点→回扣题干→查卷面（25–30 min）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d7",
+        "label": "总册 D7 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d7-091",
+      "day": "d7",
+      "tier": "M",
+      "hard": false,
+      "front": "四类题型判定？（默写要点）",
+      "back": "对比选型→论证；补图填空→建模；问题改进→诊断；获取干系人→需求识别",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d7",
+        "label": "总册 D7 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d7-092",
+      "day": "d7",
+      "tier": "M",
+      "hard": false,
+      "front": "论证四步骨架？（默写要点）",
+      "back": "结论先行→分维度（性能/一致性/成本/演进）→风险+缓解→回扣约束",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d7",
+        "label": "总册 D7 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d7-093",
+      "day": "d7",
+      "tier": "M",
+      "hard": false,
+      "front": "诊断三段式？（默写要点）",
+      "back": "现象→根因（分层：容量/架构/流程）→措施+指标（TPS/RT/可用性）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d7",
+        "label": "总册 D7 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d7-094",
+      "day": "d7",
+      "tier": "M",
+      "hard": false,
+      "front": "论文摘要四句式？（默写要点）",
+      "back": "背景一句 + 角色一句 + 做了什么一句 + 结果一句（300 字）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d7",
+        "label": "总册 D7 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d7-095",
+      "day": "d7",
+      "tier": "M",
+      "hard": false,
+      "front": "论文正文 2500 字骨架？（默写要点）",
+      "back": "项目背景→理论衔接→我的实践（分点）→效果数据→不足改进",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d7",
+        "label": "总册 D7 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d7-096",
+      "day": "d7",
+      "tier": "M",
+      "hard": false,
+      "front": "数学卡？（默写要点）",
+      "back": "PERT 期望、沟通渠道、期望值决策=概率×收益求和（线性规划只画图解）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d7",
+        "label": "总册 D7 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d7-097",
+      "day": "d7",
+      "tier": "M",
+      "hard": false,
+      "front": "杂项？（默写要点）",
+      "back": "国标 GB 强制/推荐分级；著作权自创作完成即得（登记非前提）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d7",
+        "label": "总册 D7 · 必会卡"
+      }
+    }
+  ]
+}

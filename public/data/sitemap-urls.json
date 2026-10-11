@@ -1,39 +1,45 @@
 {
-  "generatedAt": "2026-10-10T16:39:08.144Z",
+  "generatedAt": "2026-10-11T01:42:13.033Z",
   "urls": [
     {
       "url": "https://maintruly.top/",
-      "lastModified": "2026-10-10T00:00:00.000Z",
+      "lastModified": "2026-10-11T00:00:00.000Z",
       "changeFrequency": "weekly",
       "priority": 1
     },
     {
       "url": "https://maintruly.top/kb/",
-      "lastModified": "2026-10-10T00:00:00.000Z",
+      "lastModified": "2026-10-11T00:00:00.000Z",
       "changeFrequency": "weekly",
       "priority": 0.9
     },
     {
       "url": "https://maintruly.top/case/",
-      "lastModified": "2026-10-10T00:00:00.000Z",
+      "lastModified": "2026-10-11T00:00:00.000Z",
       "changeFrequency": "weekly",
       "priority": 0.85
     },
     {
       "url": "https://maintruly.top/real-exams/",
-      "lastModified": "2026-10-10T00:00:00.000Z",
+      "lastModified": "2026-10-11T00:00:00.000Z",
       "changeFrequency": "weekly",
       "priority": 0.85
     },
     {
+      "url": "https://maintruly.top/recall/",
+      "lastModified": "2026-10-11T00:00:00.000Z",
+      "changeFrequency": "weekly",
+      "priority": 0.8
+    },
+    {
       "url": "https://maintruly.top/about/",
-      "lastModified": "2026-10-10T00:00:00.000Z",
+      "lastModified": "2026-10-11T00:00:00.000Z",
       "changeFrequency": "monthly",
       "priority": 0.5
     },
     {
       "url": "https://maintruly.top/changelog/",
-      "lastModified": "2026-10-10T00:00:00.000Z",
+      "lastModified": "2026-10-11T00:00:00.000Z",
       "changeFrequency": "weekly",
       "priority": 0.4
     },
@@ -1083,13 +1089,13 @@
     },
     {
       "url": "https://maintruly.top/kb/map/",
-      "lastModified": "2026-10-10T13:11:26.491Z",
+      "lastModified": "2026-10-11T01:35:03.389Z",
       "changeFrequency": "monthly",
       "priority": 0.65
     },
     {
       "url": "https://maintruly.top/kb/case-tutorial/",
-      "lastModified": "2026-10-10T13:11:26.491Z",
+      "lastModified": "2026-10-11T01:35:03.388Z",
       "changeFrequency": "monthly",
       "priority": 0.65
     },
@@ -1137,7 +1143,7 @@
     },
     {
       "url": "https://maintruly.top/kb/ch07/",
-      "lastModified": "2026-10-10T13:11:26.487Z",
+      "lastModified": "2026-10-11T01:35:03.384Z",
       "changeFrequency": "monthly",
       "priority": 0.55
     },
@@ -1173,13 +1179,13 @@
     },
     {
       "url": "https://maintruly.top/kb/ch11/",
-      "lastModified": "2026-10-10T13:11:26.491Z",
+      "lastModified": "2026-10-11T01:35:03.389Z",
       "changeFrequency": "monthly",
       "priority": 0.55
     },
     {
       "url": "https://maintruly.top/kb/ch12/",
-      "lastModified": "2026-10-10T13:11:26.491Z",
+      "lastModified": "2026-10-11T01:35:03.389Z",
       "changeFrequency": "monthly",
       "priority": 0.55
     },
@@ -1215,7 +1221,7 @@
     },
     {
       "url": "https://maintruly.top/kb/ch16/",
-      "lastModified": "2026-10-10T13:11:26.491Z",
+      "lastModified": "2026-10-11T01:35:03.389Z",
       "changeFrequency": "monthly",
       "priority": 0.55
     },
@@ -1257,7 +1263,7 @@
     },
     {
       "url": "https://maintruly.top/kb/quick-req-five/",
-      "lastModified": "2026-10-10T13:11:26.491Z",
+      "lastModified": "2026-10-11T01:35:03.388Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
@@ -1269,7 +1275,7 @@
     },
     {
       "url": "https://maintruly.top/kb/quick-uml-learn/",
-      "lastModified": "2026-10-10T13:11:26.379Z",
+      "lastModified": "2026-10-11T01:35:03.295Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
@@ -1287,7 +1293,7 @@
     },
     {
       "url": "https://maintruly.top/kb/quick-compare/",
-      "lastModified": "2026-10-10T13:11:26.487Z",
+      "lastModified": "2026-10-11T01:35:03.388Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
@@ -1305,7 +1311,7 @@
     },
     {
       "url": "https://maintruly.top/kb/quick-four-tier-7d/",
-      "lastModified": "2026-10-10T16:37:04.995Z",
+      "lastModified": "2026-10-11T01:41:07.773Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
@@ -1317,13 +1323,13 @@
     },
     {
       "url": "https://maintruly.top/kb/quick-case-predict-set2/",
-      "lastModified": "2026-10-10T13:11:26.491Z",
+      "lastModified": "2026-10-11T01:35:03.388Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-case-four-types/",
-      "lastModified": "2026-10-10T13:11:26.491Z",
+      "lastModified": "2026-10-11T01:35:03.389Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
@@ -1335,139 +1341,139 @@
     },
     {
       "url": "https://maintruly.top/kb/quick-case-diagnosis/",
-      "lastModified": "2026-10-10T13:11:26.491Z",
+      "lastModified": "2026-10-11T01:35:03.389Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-case-tech-arg/",
-      "lastModified": "2026-10-10T13:11:26.491Z",
+      "lastModified": "2026-10-11T01:35:03.388Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-case-design/",
-      "lastModified": "2026-10-10T13:11:26.491Z",
+      "lastModified": "2026-10-11T01:35:03.388Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-essay-requirements/",
-      "lastModified": "2026-10-10T13:11:26.487Z",
+      "lastModified": "2026-10-11T01:35:03.384Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-pm-calc/",
-      "lastModified": "2026-10-10T13:11:26.487Z",
+      "lastModified": "2026-10-11T01:35:03.384Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-exam-misconceptions/",
-      "lastModified": "2026-10-10T13:11:26.491Z",
+      "lastModified": "2026-10-11T01:35:03.389Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-essay-hot-2026/",
-      "lastModified": "2026-10-10T13:11:26.491Z",
+      "lastModified": "2026-10-11T01:35:03.389Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-case-practice-nav/",
-      "lastModified": "2026-10-10T13:11:26.491Z",
+      "lastModified": "2026-10-11T01:35:03.389Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-web-case/",
-      "lastModified": "2026-10-10T13:11:26.491Z",
+      "lastModified": "2026-10-11T01:35:03.389Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-bigdata-case/",
-      "lastModified": "2026-10-10T13:11:26.487Z",
+      "lastModified": "2026-10-11T01:35:03.388Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-cloud-native/",
-      "lastModified": "2026-10-10T13:11:26.375Z",
+      "lastModified": "2026-10-11T01:35:03.285Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-embedded-case/",
-      "lastModified": "2026-10-10T13:11:26.487Z",
+      "lastModified": "2026-10-11T01:35:03.388Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-mobile-case/",
-      "lastModified": "2026-10-10T13:11:26.435Z",
+      "lastModified": "2026-10-11T01:35:03.352Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-microservice-case/",
-      "lastModified": "2026-10-10T13:11:26.344Z",
+      "lastModified": "2026-10-11T01:35:03.234Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-cps-case/",
-      "lastModified": "2026-10-10T13:11:26.491Z",
+      "lastModified": "2026-10-11T01:35:03.388Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-ai-digital/",
-      "lastModified": "2026-10-10T13:11:26.435Z",
+      "lastModified": "2026-10-11T01:35:03.352Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-swot-case/",
-      "lastModified": "2026-10-10T13:11:26.487Z",
+      "lastModified": "2026-10-11T01:35:03.384Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-error-control/",
-      "lastModified": "2026-10-10T13:11:26.359Z",
+      "lastModified": "2026-10-11T01:35:03.259Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-bpm-idef-petri/",
-      "lastModified": "2026-10-10T13:11:26.491Z",
+      "lastModified": "2026-10-11T01:35:03.389Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-ea-digital/",
-      "lastModified": "2026-10-10T13:11:26.491Z",
+      "lastModified": "2026-10-11T01:35:03.388Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-essay-index/",
-      "lastModified": "2026-10-10T13:11:26.452Z",
+      "lastModified": "2026-10-11T01:35:03.356Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-security-dj0/",
-      "lastModified": "2026-10-10T13:11:26.491Z",
+      "lastModified": "2026-10-11T01:35:03.388Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
     {
       "url": "https://maintruly.top/kb/quick-dist-bpmn/",
-      "lastModified": "2026-10-10T13:11:26.487Z",
+      "lastModified": "2026-10-11T01:35:03.388Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
@@ -1479,7 +1485,7 @@
     },
     {
       "url": "https://maintruly.top/kb/quick-rest/",
-      "lastModified": "2026-10-10T13:11:26.491Z",
+      "lastModified": "2026-10-11T01:35:03.389Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
@@ -1497,7 +1503,7 @@
     },
     {
       "url": "https://maintruly.top/kb/quick-net-abbr/",
-      "lastModified": "2026-10-10T13:11:26.345Z",
+      "lastModified": "2026-10-11T01:35:03.258Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },
