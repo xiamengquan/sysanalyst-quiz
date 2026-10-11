@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-11T03:27:55.548Z",
+  "generatedAt": "2026-10-11T03:38:28.172Z",
   "urls": [
     {
       "url": "https://maintruly.top/",
@@ -42,6 +42,12 @@
       "lastModified": "2026-10-11T00:00:00.000Z",
       "changeFrequency": "daily",
       "priority": 0.9
+    },
+    {
+      "url": "https://maintruly.top/drill/",
+      "lastModified": "2026-10-11T00:00:00.000Z",
+      "changeFrequency": "weekly",
+      "priority": 0.8
     },
     {
       "url": "https://maintruly.top/about/",
@@ -1311,7 +1317,7 @@
     },
     {
       "url": "https://maintruly.top/kb/quick-sprint-14d/",
-      "lastModified": "2026-10-11T02:54:19.924Z",
+      "lastModified": "2026-10-11T03:37:55.066Z",
       "changeFrequency": "weekly",
       "priority": 0.75
     },

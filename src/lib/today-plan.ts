@@ -37,6 +37,7 @@ export const TODAY_PLAN_VERSION = 1;
 const LINKS = {
   audio: "/audio/",
   recall: "/recall/",
+  drill: (id: string) => `/drill/?deck=${encodeURIComponent(id)}`,
   sprint: "/kb/quick-sprint-14d/",
   caseStart: "/kb/quick-case-start/",
   exam7d: "/kb/quick-exam-7d/",
@@ -200,15 +201,15 @@ const DAYS: DayPlan[] = [
 /** 午休案例骨架主题（按天） */
 const LUNCH_TOPIC: Record<string, { text: string; href?: string; link?: string }> = {
   "2026-10-11": { text: "案例微训练第 1 题：需求识别类（并入今日全天主线）", href: LINKS.caseReq, link: "案例真题" },
-  "2026-10-12": { text: "需求获取类小问：读题标注 + 计时骨架", href: LINKS.caseReq, link: "案例真题" },
+  "2026-10-12": { text: "运用演练《需求工程步骤链》：每格先写作用句再对答案（剩余时间做需求获取骨架）", href: LINKS.drill("需求工程步骤链"), link: "运用演练" },
   "2026-10-13": { text: "架构域小问：读题标注 + 计时骨架", href: LINKS.caseArch, link: "案例真题" },
   "2026-10-14": { text: "微服务/Web 小问：读题标注 + 计时骨架", href: LINKS.caseMicro, link: "案例真题" },
-  "2026-10-15": { text: "数据库设计小问：读题标注 + 计时骨架", href: LINKS.caseDb, link: "案例真题" },
+  "2026-10-15": { text: "运用演练《数据库设计步骤链》：六格默写每步产出（剩余时间做数据库骨架）", href: LINKS.drill("数据库设计步骤链"), link: "运用演练" },
   "2026-10-16": { text: "问题诊断小问：管理/技术/过程/人员四维扫骨架", href: LINKS.caseReal, link: "案例真题" },
   "2026-10-17": { text: "微卡复述（周六午休并入主线，可只复述不写新骨架）", href: LINKS.caseStart, link: "启动手册" },
   "2026-10-18": { text: "微卡复述（案例全真在下午主线）", href: LINKS.caseStart, link: "启动手册" },
   "2026-10-19": { text: "需求类骨架：真题错题暴露的框架重练", href: LINKS.caseReq, link: "案例真题" },
-  "2026-10-20": { text: "建模类骨架（DFD 补全手画 5 分钟）", href: LINKS.caseReq, link: "案例真题" },
+  "2026-10-20": { text: "运用演练《UML 建模步骤链》：六图逐格默写作用与差异（DFD 补全手画 5 分钟并入）", href: LINKS.drill("UML-建模步骤链"), link: "运用演练" },
   "2026-10-21": { text: "微服务/Web 骨架：微卡连漏点定向练", href: LINKS.caseMicro, link: "案例真题" },
   "2026-10-22": { text: "论文素材口述 1 遍（主块写第 1 篇前的预热）", href: LINKS.essay, link: "论文框架" },
   "2026-10-23": { text: "论文素材口述 1 遍（第 2 篇预热）", href: LINKS.essay, link: "论文框架" },
@@ -278,7 +279,7 @@ export function buildFallbackTasks(dateKeyStr: string): TodayTasks {
     tasks.push({ id: `${dateKeyStr}-${++n}`, slot, text, href, link });
   add("metroAm", "《洗脑音频》问答式播放到期卡", LINKS.audio, "洗脑音频");
   add("desk", "《随机问答》到期卡", LINKS.recall, "随机问答");
-  add("lunch", "案例骨架（30'）：任选 1 小问，读题标注 + 计时骨架", LINKS.caseReal, "案例真题");
+  add("lunch", "案例骨架（30'）：任选 1 小问，读题标注 + 计时骨架；或走 /drill 一条步骤链", LINKS.drill("需求工程步骤链"), "运用演练");
   add("metroPm", "《洗脑音频》洗脑式循环 ×3", LINKS.audio, "洗脑音频");
   for (const m of plan.main) add("main", m.text, m.href, m.link);
   const order: Slot[] = ["metroAm", "desk", "lunch", "metroPm", "main"];
