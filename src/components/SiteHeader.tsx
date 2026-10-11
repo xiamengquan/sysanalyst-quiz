@@ -7,6 +7,7 @@ import {
   FileText,
   BookOpen,
   Sparkles,
+  CalendarCheck,
   Info,
 } from "lucide-react";
 import { AuthButton } from "@/components/AuthButton";
@@ -17,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const tabs = [
+  { href: "/today/", label: "今日", short: "今日", icon: CalendarCheck },
   { href: "/", label: "刷题", short: "刷题", icon: ListChecks },
   { href: "/real-exams/", label: "真题", short: "真题", icon: FileText },
   { href: "/case/", label: "案例", short: "案例", icon: FileText },
@@ -117,7 +119,7 @@ export function SiteHeader() {
         aria-label="底部导航"
       >
         <div
-          className="mx-auto grid grid-cols-6"
+          className="mx-auto grid grid-cols-7"
           style={{ height: "var(--tabbar-h)", maxWidth: "var(--content-max)" }}
         >
           {tabs.map((t) => {
