@@ -44,6 +44,8 @@ const FULL2HALF: Record<string, string> = {
 export function normalizeAnswer(s: string): string {
   let t = s;
   for (const [f, h] of Object.entries(FULL2HALF)) t = t.split(f).join(h);
+  // 常见等义改写：卡面「此序」＝答题者自然语言「排序」（语义全等，不应判失分）
+  t = t.split("此序").join("排序");
   return t
     .toLowerCase()
     .replace(/\s+/g, "")

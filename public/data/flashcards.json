@@ -1,6 +1,6 @@
 {
   "meta": {
-    "builtAt": "2026-10-11T02:04:09.984Z",
+    "builtAt": "2026-10-11T07:22:31.208Z",
     "total": 155,
     "m": 97,
     "k": 58,
@@ -280,8 +280,8 @@
       "day": "d1",
       "tier": "K",
       "hard": true,
-      "front": "CMMI 五级？",
-      "back": "CMMI 五级：初重定管优",
+      "front": "CMM 五级？",
+      "back": "CMM 五级：初重定管优 （CMMI 阶段式=初管定量优）",
       "src": {
         "href": "/kb/quick-memory-plan/",
         "label": "记忆卡组 · T05"
@@ -292,8 +292,8 @@
       "day": "d1",
       "tier": "K",
       "hard": false,
-      "front": "RUP 四阶段？",
-      "back": "RUP 四阶段：初细构移 + 三特点（用例驱动/架构中心/迭代增量）",
+      "front": "RUP 四阶段与三特点？",
+      "back": "RUP 四阶段与三特点：初始→细化→构建→移交（初细构移）；用例驱动、架构中心、迭代增量",
       "src": {
         "href": "/kb/quick-memory-plan/",
         "label": "记忆卡组 · T05"
@@ -737,7 +737,7 @@
       "tier": "M",
       "hard": false,
       "front": "RUP？（默写要点）",
-      "back": "四阶段「初细构移」三特点「用例驱动、架构中心、迭代增量」",
+      "back": "四阶段「初细构移」（初始→细化→构建→移交）；三特点「用例驱动、架构中心、迭代增量」",
       "src": {
         "href": "/kb/quick-four-tier-7d/#d1",
         "label": "总册 D1 · 必会卡"
@@ -760,8 +760,8 @@
       "day": "d1",
       "tier": "M",
       "hard": false,
-      "front": "CMMI 五级？（默写要点）",
-      "back": "初重定管优（初始→可重复→已定义→已管理→优化）",
+      "front": "CMM 五级？（默写要点）",
+      "back": "初重定管优（初始→可重复→已定义→已管理→优化）；CMMI 阶段式：初管定量优（初始→已管理→已定义→量化管理→优化）",
       "src": {
         "href": "/kb/quick-four-tier-7d/#d1",
         "label": "总册 D1 · 必会卡"

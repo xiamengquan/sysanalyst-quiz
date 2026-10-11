@@ -337,7 +337,9 @@ export function RecallApp() {
                   )}
                   <span>
                     {result.verdict === "correct"
-                      ? "判定正确 · 关键点全命中"
+                      ? result.hits === result.total
+                        ? "判定正确 · 关键点全命中 · 建议按「记住」记"
+                        : `判定正确（关键点 ${result.hits}/${result.total}）· 达标通过，缺失词见下方 ✗ · 建议按「记住」记`
                       : result.verdict === "partial"
                         ? `部分命中（关键点 ${result.hits}/${result.total}）· 建议按「模糊」记`
                         : `判定未通过（关键点 ${result.hits}/${result.total}）· 建议按「忘了」重学`}
