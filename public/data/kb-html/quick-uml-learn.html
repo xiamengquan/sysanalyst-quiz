@@ -152,45 +152,49 @@
   <text class="s" x="300" y="66">实线连接</text>
 
   <!-- 依赖 -->
-<p>  <text class="t" x="24" y="110">2 依赖 Dependency ·「用一下」</text>
+  <text class="t" x="24" y="110">2 依赖 Dependency ·「用一下」</text>
   <rect class="box" x="40" y="126" width="70" height="36"/><text class="t" x="58" y="149">A</text>
   <line class="line dash" x1="110" y1="144" x2="190" y2="144"/>
   <polygon points="200,144 188,138 188,150" fill="#c5d0dc"/>
   <rect class="box" x="200" y="126" width="70" height="36"/><text class="t" x="218" y="149">B</text>
-  <text class="s" x="300" y="148">虚线 + 开放箭头（指向被依赖方）</text></p>
+  <text class="s" x="300" y="148">虚线 + 开放箭头（指向被依赖方）</text>
+
   <!-- 泛化 -->
-<p>  <text class="t" x="24" y="192">3 泛化 Generalization ·「是一种」</text>
+  <text class="t" x="24" y="192">3 泛化 Generalization ·「是一种」</text>
   <rect class="box" x="40" y="208" width="70" height="36"/><text class="t" x="52" y="231">子类</text>
   <line class="line" x1="110" y1="226" x2="185" y2="226"/>
   <polygon points="200,226 185,216 185,236" fill="#0f141c" stroke="#c5d0dc" stroke-width="2"/>
   <rect class="box" x="200" y="208" width="70" height="36"/><text class="t" x="52" y="0"></text><text class="t" x="212" y="231">父类</text>
-  <text class="s" x="300" y="230">空心三角 · 指向一般（父）</text></p>
+  <text class="s" x="300" y="230">空心三角 · 指向一般（父）</text>
+
   <!-- 实现 -->
-<p>  <text class="t" x="24" y="274">4 实现 Realization ·「兑现契约」</text>
+  <text class="t" x="24" y="274">4 实现 Realization ·「兑现契约」</text>
   <rect class="box" x="40" y="290" width="70" height="36"/><text class="t" x="55" y="313">类</text>
   <line class="line dash" x1="110" y1="308" x2="185" y2="308"/>
   <polygon points="200,308 185,298 185,318" fill="#0f141c" stroke="#c5d0dc" stroke-width="2"/>
   <rect class="box" x="200" y="290" width="90" height="36" stroke-dasharray="5 3"/><text class="t" x="215" y="313">«接口»</text>
-  <text class="s" x="310" y="312">空心三角 + 虚线</text></p>
+  <text class="s" x="310" y="312">空心三角 + 虚线</text>
+
   <!-- 聚合 / 组合 -->
-<p>  <text class="t" x="400" y="28">5 聚合 Aggregation ·「有一些」</text>
+  <text class="t" x="400" y="28">5 聚合 Aggregation ·「有一些」</text>
   <rect class="box" x="420" y="44" width="70" height="36"/><text class="t" x="432" y="67">整体</text>
   <polygon points="500,62 512,54 524,62 512,70" fill="#0f141c" stroke="#c5d0dc" stroke-width="2"/>
   <line class="line" x1="524" y1="62" x2="580" y2="62"/>
   <rect class="box" x="580" y="44" width="70" height="36"/><text class="t" x="592" y="67">部分</text>
-  <text class="s" x="420" y="100">空心菱形在整体侧</text></p>
-<p>  <text class="t" x="400" y="140">6 组合 Composition ·「长在身上」</text>
+  <text class="s" x="420" y="100">空心菱形在整体侧</text>
+
+  <text class="t" x="400" y="140">6 组合 Composition ·「长在身上」</text>
   <rect class="box" x="420" y="156" width="70" height="36"/><text class="t" x="432" y="179">整体</text>
   <polygon points="500,174 512,166 524,174 512,182" fill="#c5d0dc"/>
   <line class="line" x1="524" y1="174" x2="580" y2="174"/>
   <rect class="box" x="580" y="156" width="70" height="36"/><text class="t" x="592" y="179">部分</text>
-  <text class="s" x="420" y="212">实心菱形 · 同生共死</text></p>
-<p>  <text class="s" x="400" y="260">记忆：菱形永远贴着「整体」；</text>
+  <text class="s" x="420" y="212">实心菱形 · 同生共死</text>
+
+  <text class="s" x="400" y="260">记忆：菱形永远贴着「整体」；</text>
   <text class="s" x="400" y="280">空心=可拆散；实心=拆不了。</text>
-</svg></p>
+</svg>
 <figcaption>图 L1 · UML 六种关系符号一览（考试默画用）</figcaption>
 </figure>
-
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -435,11 +439,10 @@
   <polygon points="378,120 388,115 388,125" fill="#7eb8da"/>
   <text class="s" x="385" y="108">«extend»</text>
 
-<p>  <text class="s" x="170" y="290">边界内=用例；边界外=参与者</text>
-</svg></p>
+  <text class="s" x="170" y="290">边界内=用例；边界外=参与者</text>
+</svg>
 <figcaption>图 3-1 · 用例图：参与者、边界、用例、include / extend</figcaption>
 </figure>
-
 <h4 id="include-vs-extend答卷">include vs extend（答卷）</h4>
 <div class="table-wrap"><table>
 <thead>
@@ -542,7 +545,6 @@
 </svg>
 <figcaption>图 3-2 · 类盒子三格 + 组合关系 + 分析类三角色</figcaption>
 </figure>
-
 <p><strong>三格</strong>：类名 / 属性 / 操作()。可见性：<code>+</code> public · <code>-</code> private · <code>#</code> protected。</p>
 <p><strong>分析类三角色 BCE（答卷·定义 / 作用）</strong></p>
 <div class="table-wrap"><table>
@@ -686,7 +688,6 @@
 </pre>
 <figcaption>图 3-3 · 序列图读法：对象（顶框）→ 生命线（竖虚线）→ 消息（箭头）；激活条=正在执行</figcaption>
 </figure>
-
 <p><strong>扩展元素（读图常考，非案例四大 / 非选择三大）</strong>：</p>
 <div class="table-wrap"><table>
 <thead>
@@ -731,13 +732,12 @@
                                     │ 订单控制  │──────────►│  订单   │
                                     └──────────┘           └────────┘
 
-<p>  · 对象用矩形（可写 对象名:类名）
+  · 对象用矩形（可写 对象名:类名）
   · 对象间实线 = 链接（Link，表示可通信）
   · 箭头旁写「序号:消息名」——序号代替生命线表达顺序
-</pre></p>
+</pre>
 <figcaption>图 3-3b · 通信图读法：链接上的带序号消息（与图 3-3 同一场景）</figcaption>
 </figure>
-
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -852,7 +852,6 @@
 </svg>
 <figcaption>图 3-4 · 订单状态机：初态● → 状态 → 终态◉；箭头旁写事件</figcaption>
 </figure>
-
 <div class="table-wrap"><table>
 <thead>
 <tr>

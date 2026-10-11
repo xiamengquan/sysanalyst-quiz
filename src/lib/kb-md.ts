@@ -65,8 +65,29 @@ function linkifyMarkdownFileAnchors(
 
 /**
  * Markdown → HTML；可识别的 `` `*.md` `` / 路径 codespan、书名号转为 `.kb-ref`。
+ * 内嵌 raw HTML 块（<figure>/<svg> 等）先提取占位：CommonMark 的 HTML block
+ * 在块内 blank line（含含空格的伪空行）处截断，会打断多行内嵌图示。
  */
+const RAW_BLOCK_PLACEHOLDER_RE = /<p>\s*KBRAWBLOCK(\d+)\s*<\/p>|KBRAWBLOCK(\d+)/g;
+
+function extractRawHtmlBlocks(md: string): { text: string; blocks: string[] } {
+  const blocks: string[] = [];
+  const text = md.replace(/<(figure|svg|pre)[\s\S]*?<\/\1>/gi, (raw) => {
+    const idx = blocks.push(raw) - 1;
+    return `\n\nKBRAWBLOCK${idx}\n\n`;
+  });
+  return { text, blocks };
+}
+
+function restoreRawHtmlBlocks(html: string, blocks: string[]): string {
+  return html.replace(RAW_BLOCK_PLACEHOLDER_RE, (_m, a, b) => {
+    const idx = Number(a ?? b);
+    return blocks[idx] ?? _m;
+  });
+}
+
 export function renderKbMarkdown(md: string, items: KbFlatItem[] = [], excludeId?: string) {
+  const { text: sourceMd, blocks: rawBlocks } = extractRawHtmlBlocks(md);
   const renderer = new Renderer();
   renderer.heading = ({ text, depth }) => {
     const plain = String(text).replace(/<[^>]+>/g, "");
@@ -90,7 +111,8 @@ export function renderKbMarkdown(md: string, items: KbFlatItem[] = [], excludeId
     return `<code>${escapeHtml(raw)}</code>`;
   };
   marked.setOptions({ gfm: true, breaks: false });
-  let html = marked.parse(md, { renderer }) as string;
+  let html = marked.parse(sourceMd, { renderer }) as string;
+  html = restoreRawHtmlBlocks(html, rawBlocks);
   html = html.replace(/<table[\s\S]*?<\/table>/gi, (table) => `<div class="table-wrap">${table}</div>`);
   html = html.replace(
     /<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/gi,
