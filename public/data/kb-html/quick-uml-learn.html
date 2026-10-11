@@ -1,6 +1,6 @@
 <h1 id="速查--uml-体系化学习指南由简入深">速查 · UML 体系化学习指南（由简入深）</h1>
 <blockquote>
-<p><strong>对齐</strong>：大纲 §5.7 统一建模语言 UML（教程第7章）+ 面向对象分析用例（第11章）<br><strong>规范依据</strong>：OMG UML 2.5.1（结构 / 行为图分类、关系语义）<br><strong>本站旧稿</strong>：第7章仅列图种与关系名；第11章仅有用例模型要点——本指南补全「读法、画法、易混、案例填空」并配<strong>图形解释</strong><br><strong>读者画像</strong>：前端向、弱数学；先看图再记口诀<br><strong>写作准则（定义 / 作用）</strong>：凡「定义」「作用」写成可直接答卷的完整句——定义用「X 是……」；作用用「用于…… / 主要作用是……」；口诀仅助记。</p>
+<p><strong>对齐</strong>：大纲 §5.7 统一建模语言 UML（教程第7章）+ 面向对象分析用例（第11章）<br><strong>规范依据</strong>：OMG UML 2.5.1（现行正式规范；共定义 <strong>14 种图</strong> = 7 结构 + 7 行为，本文精讲考点高频 10 种）<br><strong>配套</strong>：考点速记见 <a href="/kb/kp-5-7/" class="kb-ref" data-kb-id="kp-5-7" data-kb-path="points/kp-5-7.md" title="预览：5.7 统一建模语言 UML"><code>points/kp-5-7.md</code></a> 与 <a href="/kb/kp-oo-technology/" class="kb-ref" data-kb-id="kp-oo-technology" data-kb-path="points/kp-oo-technology.md" title="预览：面向对象技术"><code>points/kp-oo-technology.md</code></a>（其「详解 →」均指向本指南）；演练与音频见 <code>/drill</code> 与 <code>/audio</code><br><strong>写作准则（定义 / 作用）</strong>：凡「定义」「作用」写成可直接答卷的完整句——定义用「X 是……」；作用用「用于…… / 主要作用是……」；口诀仅助记。</p>
 </blockquote>
 <hr>
 <h2 id="0-怎么用15-分钟地图">0. 怎么用（15 分钟地图）</h2>
@@ -67,6 +67,7 @@
     P[包图]
     Cmp[组件图]
     D[部署图]
+    O[对象图]
   end
   subgraph B["行为图 · 系统怎么动"]
     U[用例图]
@@ -77,6 +78,9 @@
   S -.静态.-> Sys((系统模型))
   B -.动态.-> Sys
 </div></div>
+<blockquote>
+<p>UML 2.5.1 共 14 种图：结构图 7 种（类、对象、包、组件、部署、复合结构、型构 Profile）+ 行为图 7 种（活动、序列、状态机、用例、通信、交互概览、时间）。上表与下表列的是<strong>考点高频 10 种</strong>。</p>
+</blockquote>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -322,6 +326,9 @@
 <p><strong>口诀（助记，勿当答卷）</strong>：关联「认识」· 依赖「用一下」· 泛化「是一种」· 实现「兑现契约」· 聚合「有一些」· 组合「长在身上」。</p>
 <p><strong>前端类比（勿写进答案）</strong>：关联≈模块间稳定引用；依赖≈临时 import；泛化≈继承；实现≈兑现接口约定；聚合≈可挪走的子项；组合≈随父卸载的子项。</p>
 <h3 id="23-图种--答卷定义与作用结构--行为">2.3 图种 · 答卷定义与作用（结构 / 行为）</h3>
+<blockquote>
+<p>下表为<strong>考点高频 10 种</strong>（UML 2.5.1 全集 14 种，另 4 种——复合结构图、型构 Profile、交互概览图、时间图——软考极少涉及，了解即可）。</p>
+</blockquote>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -363,7 +370,7 @@
 </tr>
 <tr>
 <td><strong>状态机图</strong></td>
-<td>状态机图是描述某一个对象在生命周期中状态及迁移的行为图。</td>
+<td>状态机图是描述某一个对象在生命周期中状态及迁移的行为图（UML 1.x 称状态图，教程亦沿用「状态图」）。</td>
 <td>用于说明对象在何种事件下从一状态转到另一状态。</td>
 <td>★★★★</td>
 </tr>
@@ -786,9 +793,9 @@
 <td>较强（对象自由排布 + 链接）</td>
 </tr>
 <tr>
-<td>旧称 / 现称</td>
-<td>顺序图 ≈ 序列图</td>
-<td>协作图 ≈ 通信图（UML 2）</td>
+<td>名称口径</td>
+<td>「序列图」为 UML 2 规范名；「顺序图」是教材常用别名，同图</td>
+<td>「通信图」为 UML 2 规范名；「协作图」是 UML 1.x 旧称，同图</td>
 </tr>
 <tr>
 <td>题干信号</td>
@@ -800,7 +807,7 @@
 <ul>
 <li>通信图 ≠ 类图：类图是静态结构（类与关系）；通信图是某次协作中的<strong>对象实例</strong>与<strong>消息</strong>。</li>
 <li>通信图 ≠ 活动图：活动图描述流程步骤/并行；通信图描述对象间消息协作。</li>
-<li>软考材料若写「协作图」，按 UML 2 答「通信图」即可，二者概念等价。</li>
+<li>软考材料若写「协作图」，按 UML 2 答「通信图」即可，二者概念等价；「顺序图」同理，即「序列图」的教材别名。</li>
 </ul>
 <p><strong>何时优先画通信图</strong>：题干强调参与对象有哪些、彼此如何连接、消息挂在哪条链上；或要求与序列图对照转换时。</p>
 <hr>
@@ -1026,7 +1033,44 @@
   SEQ --> DES[设计类/组件]
   DES --> DEP[部署]
 </div></div>
-<h3 id="54-30-秒默写">5.4 30 秒默写</h3>
+<h3 id="54-41-视图模型">5.4 4+1 视图模型</h3>
+<p><strong>答卷·定义</strong>：4+1 视图模型是用<strong>用例视图</strong>（+1，贯穿并验证其余四视图）为核心，辅以<strong>逻辑视图、进程视图、实现（开发）视图、部署视图</strong>从不同角度描述软件架构的模型（Kruchten 提出）。<br><strong>答卷·作用</strong>：用于从多个视角完整刻画架构，满足不同干系人（用户、开发者、集成者、运维）的关注点，并保证各视图通过用例保持一致。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>视图</th>
+<th>回答的问题</th>
+<th>常用 UML 图</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>用例视图（场景，+1）</td>
+<td>系统为谁做什么</td>
+<td>用例图</td>
+</tr>
+<tr>
+<td>逻辑视图</td>
+<td>功能如何组织</td>
+<td>类图、对象图</td>
+</tr>
+<tr>
+<td>进程视图</td>
+<td>并发与同步如何处理</td>
+<td>活动图、序列图</td>
+</tr>
+<tr>
+<td>实现（开发）视图</td>
+<td>代码模块如何组织</td>
+<td>组件图</td>
+</tr>
+<tr>
+<td>部署视图</td>
+<td>物理节点如何布置</td>
+<td>部署图</td>
+</tr>
+</tbody></table></div>
+<p><strong>易混</strong>：进程视图关注运行时并发（不是「开发进度」）；实现视图对应<strong>组件图</strong>（不是部署图）。</p>
+<h3 id="55-30-秒默写">5.5 30 秒默写</h3>
 <ul>
 <li><input disabled="" type="checkbox"> UML 定义 + 作用各一句  </li>
 <li><input disabled="" type="checkbox"> 结构图 / 行为图：定义 + 作用  </li>
@@ -1037,6 +1081,7 @@
 <li><input disabled="" type="checkbox"> include / extend：定义、作用、箭头方向  </li>
 <li><input disabled="" type="checkbox"> 聚合 vs 组合：定义 + 作用  </li>
 <li><input disabled="" type="checkbox"> 分析类三角色  </li>
+<li><input disabled="" type="checkbox"> 4+1 视图：五视图各对应哪张 UML 图  </li>
 <li><input disabled="" type="checkbox"> 状态图 vs 活动图</li>
 </ul>
 <hr>
@@ -1053,8 +1098,12 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>第7章 UML 概要</td>
-<td>考前 30 秒回忆</td>
+<td>第7章 UML 概要（<a href="/kb/kp-5-7/" class="kb-ref" data-kb-id="kp-5-7" title="预览：5.7 统一建模语言 UML">points/kp-5-7.md</a>）</td>
+<td>由简入深完整指南 + 考前 30 秒回忆，与本页互补</td>
+</tr>
+<tr>
+<td>OO 技术考点（<a href="/kb/kp-oo-technology/" class="kb-ref" data-kb-id="kp-oo-technology" title="预览：面向对象技术">points/kp-oo-technology.md</a>）</td>
+<td>六关系 / 分析类三角色详解</td>
 </tr>
 <tr>
 <td>第11章 用例模型</td>
@@ -1064,12 +1113,21 @@
 <td>案例分析真题</td>
 <td>五图实战场</td>
 </tr>
+<tr>
+<td>演练场 <a href="/drill/">/drill</a></td>
+<td>UML 建模步骤链 · 分步演练</td>
+</tr>
+<tr>
+<td>听音频 <a href="/audio/">/audio</a></td>
+<td>演练链洗脑音频 · 通勤循环</td>
+</tr>
 </tbody></table></div>
-<p>站点知识点页已支持 <strong>Mermaid 图形渲染</strong>；本页 SVG / ASCII 图无需外网亦可看。</p>
+<p>站点知识点页已支持 <strong>Mermaid 图形渲染</strong>；本页内嵌 SVG 图随主题自适应（浅色 / 深色 / 护眼）。</p>
 <hr>
 <h2 id="8-规范说明">8. 规范说明</h2>
 <ul>
-<li>对齐 <strong>OMG UML 2.5.1</strong>。软考或用「顺序图/协作图」旧称，与序列图/通信图概念等价即可（通信图详解见 §3.3b）。  </li>
+<li>图种口径：<strong>OMG UML 2.5.1 共 14 种图</strong>（结构 7 + 行为 7）；本文精讲考点高频 10 种，其余 4 种（复合结构、型构 Profile、交互概览、时间）软考极少涉及。  </li>
+<li>名称口径：<strong>「序列图」是 UML 2 规范名，「顺序图」为教材常用别名</strong>；<strong>「通信图」是 UML 2 规范名，「协作图」为 UML 1.x 旧称</strong>；<strong>「状态机图」旧称「状态图」，教程亦沿用</strong>。软考材料用旧称时按等价概念作答即可（通信图详解见 §3.3b）。  </li>
 <li><strong>定义 / 作用写作准则</strong>：凡「定义」「作用」须可直接用于案例/简答——定义用「X 是……」，作用用「用于…… / 主要作用是……」；口诀与前端类比仅助记。  </li>
-<li>关系详解见 §2.2.1；图种详解见 §2.3 与 §3；聚合/组合与组件/部署见 §4。</li>
+<li>关系详解见 §2.2.1；图种详解见 §2.3 与 §3；聚合/组合与组件/部署见 §4；4+1 视图见 §5.4。</li>
 </ul>
