@@ -9,11 +9,12 @@
 <li><strong>一句话</strong>：软件过程改进是依据评估结果对组织软件过程进行优化，以提升质量、生产率与可预测性的持续活动。</li>
 <li><strong>考什么</strong>：开发模型选型、UML、过程改进（教程第 7 章）。</li>
 <li><strong>具体理解</strong>：<ul>
-<li>阶段式：5级成熟度（沿袭CMM）。</li>
-<li>连续式：过程域能力等级（未实施→已实施→已管理→已定义→量化管理→持续优化）。</li>
+<li>CMM（老模型）五级：初始 → 可重复 → 已定义 → 已管理 → 优化。</li>
+<li>CMMI 阶段式：成熟度 5 级（初始 → 已管理 → 已定义 → 量化管理 → 优化）。</li>
+<li>CMMI 连续式：过程域能力等级 6 级（不完整/未实施 → 已执行 → 已管理 → 已定义 → 量化管理 → 优化）。</li>
 </ul>
 </li>
-<li><strong>别搞混</strong>：题干锚词：<strong>软件过程改进</strong>。</li>
+<li><strong>别搞混</strong>：CMM 与 CMMI 等级名不同——CMM 有「可重复级」且「已定义在已管理前」；CMMI 无「可重复级」、「已管理在已定义前」并新增「量化管理级」。题干锚词：<strong>软件过程改进</strong>。</li>
 </ul>
 <h2 id="定义">定义</h2>
 <ul>
@@ -31,9 +32,9 @@
 <li>实施过程与培训。</li>
 <li>度量与再评估，持续优化。</li>
 </ol>
-<p><strong>五级成熟度</strong>：初始 → 可重复 → 已定义 → 已管理 → 优化。</p>
+<p><strong>五级成熟度（CMM）</strong>：初始 → 可重复 → 已定义 → 已管理 → 优化。<br><strong>五级成熟度（CMMI 阶段式）</strong>：初始 → 已管理 → 已定义 → 量化管理 → 优化。</p>
 <h2 id="要点">要点</h2>
-<p><strong>5个成熟度等级</strong>：</p>
+<p><strong>CMM 五个成熟度等级（老模型，真题高频）</strong>：</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -50,7 +51,7 @@
 <tr>
 <td>2</td>
 <td>可重复级</td>
-<td>基本项目管理，可重复成功</td>
+<td>基本项目管理，可跟踪成本、进度与功能</td>
 </tr>
 <tr>
 <td>3</td>
@@ -60,7 +61,42 @@
 <tr>
 <td>4</td>
 <td>已管理级(可管理级)</td>
-<td>量化管理、可预测</td>
+<td>量化管理、可预测（度量、统计）</td>
+</tr>
+<tr>
+<td>5</td>
+<td>优化级</td>
+<td>持续改进（定量分析 + 持续优化）</td>
+</tr>
+</tbody></table></div>
+<p><strong>CMMI 阶段式五个成熟度等级（教材口径）</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>等级</th>
+<th>名称</th>
+<th>特征</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>初始级</td>
+<td>过程无序、依赖个人</td>
+</tr>
+<tr>
+<td>2</td>
+<td>已管理级</td>
+<td>项目级基本管理、可重复</td>
+</tr>
+<tr>
+<td>3</td>
+<td>已定义级</td>
+<td>组织级标准过程</td>
+</tr>
+<tr>
+<td>4</td>
+<td>量化管理级</td>
+<td>定量度量与预测</td>
 </tr>
 <tr>
 <td>5</td>
@@ -68,18 +104,24 @@
 <td>持续改进</td>
 </tr>
 </tbody></table></div>
-<p><strong>两种表示</strong>：</p>
+<p><strong>两种表示（CMMI）</strong>：</p>
 <ul>
-<li><strong>阶段式</strong>：5级成熟度（沿袭CMM）。</li>
-<li><strong>连续式</strong>：过程域能力等级（未实施→已实施→已管理→已定义→量化管理→持续优化）。</li>
+<li><strong>阶段式</strong>：成熟度 5 级（初始 → 已管理 → 已定义 → 量化管理 → 优化）。</li>
+<li><strong>连续式</strong>：过程域能力等级 6 级（不完整/未实施 → 已执行 → 已管理 → 已定义 → 量化管理 → 优化）。</li>
 </ul>
 <h2 id="易混辨析">易混辨析</h2>
+<ul>
+<li><strong>CMM vs CMMI（阶段式）</strong>：CMM 有「可重复级」且「已定义在已管理前」；CMMI 无「可重复级」、「已管理在已定义前」，并把 4 级明确命名为「量化管理级」。真题问特征（基本项目管理=可重复、量化统计=已管理、持续优化=优化）时按 CMM 答；题干明写「CMMI 阶段式」才按 CMMI 序列答。</li>
+<li><strong>CMMI 阶段式 vs 连续式</strong>：「成熟度等级」是阶段式用词，「能力等级」是连续式用词，不可混搭。</li>
+</ul>
 <h2 id="应试">应试</h2>
 <p><strong>案例可能怎么问</strong>：根据项目特征（需求稳定度、团队规模、风险、工期）四选一或排序开发模型；RUP 四阶段/敏捷宣言/RAD 五阶段填空；逆向工程 vs 再工程 vs 正向工程概念辨析。</p>
 <p><strong>论文怎么用</strong>：近五年 RAD、敏捷、原型法、设计模式、ABSD 高频——按「背景→选型理由→过程（迭代/用例/原型）→度量改进→总结」写；CMMI/RUP 可作组织级过程改进段落，勿空泛堆名词。</p>
 <p><strong>常考结论</strong></p>
 <ul>
-<li>CMMI <strong>5</strong> 级：<strong>初重定管优</strong>（初始→可重复→已定义→已管理→优化）。</li>
+<li>CMM <strong>5</strong> 级：<strong>初重定管优</strong>（初始→可重复→已定义→已管理→优化）。<strong>真题高频</strong>：特征映射——基本项目管理/跟踪成本进度=可重复、量化统计=已管理、定量分析+持续优化=优化。</li>
+<li>CMMI 阶段式 <strong>5</strong> 级：<strong>初管定量优</strong>（初始→已管理→已定义→量化管理→优化）。与 CMM 区分：无「可重复级」、已管理/已定义顺序相反、4 级叫「量化管理级」。</li>
+<li>CMMI 连续式能力等级 6 级：不完整/未实施→已执行→已管理→已定义→量化管理→优化（关键词「能力等级」，非「成熟度等级」）。</li>
 <li>RUP <strong>4</strong> 阶段：<strong>初细构移</strong>。</li>
 <li>RUP三特点：<strong>用例驱动、架构中心、迭代增量</strong>。</li>
 <li>螺旋每轮 <strong>4</strong> 步：<strong>计风实评</strong>。</li>

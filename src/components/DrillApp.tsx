@@ -75,6 +75,7 @@ export function DrillApp() {
   const [idx, setIdx] = useState(0);
   const [answer, setAnswer] = useState("");
   const [result, setResult] = useState<MatchResult | null>(null);
+  const [hintLevel, setHintLevel] = useState(0); // 0=无 1=答题句式 2=要点词
   const [session, setSession] = useState<{ correct: number; partial: number; wrong: number; weak: string[] }>({
     correct: 0,
     partial: 0,
@@ -107,6 +108,7 @@ export function DrillApp() {
     setIdx(0);
     setAnswer("");
     setResult(null);
+    setHintLevel(0);
     setSession({ correct: 0, partial: 0, wrong: 0, weak: [] });
     setPhase("run");
     void src; // 保留参数签名，深链时无需再读 state
@@ -157,6 +159,7 @@ export function DrillApp() {
     setIdx((i) => i + 1);
     setAnswer("");
     setResult(null);
+    setHintLevel(0);
   }, [idx, queue.length, deck, session]);
 
   const retryWeak = useCallback(() => {
@@ -167,6 +170,7 @@ export function DrillApp() {
     setIdx(0);
     setAnswer("");
     setResult(null);
+    setHintLevel(0);
     setSession({ correct: 0, partial: 0, wrong: 0, weak: [] });
     setPhase("run");
   }, [deck, session.weak]);
@@ -197,7 +201,7 @@ export function DrillApp() {
       <h1 className="page-title">运用演练场 · 步骤链</h1>
       <p className="page-lead">
         知识点「记住了」≠「写得出来」。Tutorial 式一格一格练：
-        <span className="text-[0.82rem]"> 自己写出这一步的<b>作用与差异</b> → 系统比对关键点 → 对照可抄上卷的范例句与易错点。</span>
+        <span className="text-[0.82rem]"> 自己写出这一步的<b>作用与差异</b> → 系统比对关键点 → 对照可抄上卷的范例句与易错点。卡住了用「阶梯提示」：先给答题句式，再给要点词，最后一档才看范例。</span>
       </p>
 
       {phase === "select" && (
@@ -286,15 +290,53 @@ export function DrillApp() {
                     onChange={(e) => setAnswer(e.target.value)}
                     rows={4}
                     disabled={!!result}
-                    placeholder="像写在答题纸上一样，写出这一步做什么、作用是什么（至少包含步骤动作与产出物）…"
+                    placeholder="像写在答题纸上一样作答。句式：第几步 + 绘制/进行〈什么〉：对〈……〉进行〈……〉，形成〈产出〉，为〈下一步〉提供依据。作用：用于……"
                     className="w-full rounded-lg border border-border bg-muted/30 p-3 text-[0.9rem] outline-none focus:border-primary disabled:opacity-70"
                   />
-                  {!result ? (
-                    <Button className="w-full" onClick={submit} disabled={!answer.trim()}>
-                      <Send className="h-4 w-4" aria-hidden /> 提交比对
-                    </Button>
-                  ) : (
-                    meta && (
+                  {!result && (
+                    <div className="space-y-2">
+                      {hintLevel >= 1 && (
+                        <div className="rounded-lg border border-primary/25 bg-primary/5 px-3 py-2.5">
+                          <p className="mb-1 text-[0.78rem] font-medium text-primary">🪜 提示一 · 答题句式（三件套缺一不可）</p>
+                          <p className="text-[0.86rem] leading-relaxed">
+                            <b>① 动作</b>：第几步 + 绘制／进行〈什么〉；<b>② 产出</b>：形成〈图／模型／文档〉；<b>③ 作用</b>：用于……，为〈下一步〉提供依据。
+                            <br />
+                            句式模板：「第 X 步〈绘制 XX 图 / 进行 XX〉：对〈……〉进行〈……〉，形成〈……〉，为后续〈……〉提供依据。」
+                          </p>
+                        </div>
+                      )}
+                      {hintLevel >= 2 && step.key && (
+                        <div className="rounded-lg border border-amber-500/30 bg-amber-500/5 px-3 py-2.5">
+                          <p className="mb-1.5 text-[0.78rem] font-medium text-amber-600 dark:text-amber-400">🪜 提示二 · 本步要点词（比对就看这些词——先自己憋完句子再看）</p>
+                          <div className="flex flex-wrap gap-1.5">
+                            {step.key
+                              .split(/[／/、]/)
+                              .map((w) => w.trim())
+                              .filter(Boolean)
+                              .map((w) => (
+                                <span key={w} className="rounded-full bg-amber-500/10 px-2 py-0.5 text-[0.75rem] text-amber-700 dark:text-amber-400">
+                                  {w}
+                                </span>
+                              ))}
+                          </div>
+                          <p className="mt-1.5 text-[0.75rem] text-muted-foreground">别只罗列名词——把每个词织进句式模板，「动词 + 产出 + 作用」才是能上卷的完整句。</p>
+                        </div>
+                      )}
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="w-full"
+                        disabled={result || hintLevel >= (step.key ? 2 : 1)}
+                        onClick={() => setHintLevel((h) => Math.min(step.key ? 2 : 1, h + 1))}
+                      >
+                        {hintLevel === 0 ? "🪜 卡住了？点提示" : hintLevel === 1 && step.key ? "🪜 还不行？给要点词" : "提示已全开（写完提交吧）"}
+                      </Button>
+                      <Button className="w-full" onClick={submit} disabled={!answer.trim()}>
+                        <Send className="h-4 w-4" aria-hidden /> 提交比对
+                      </Button>
+                    </div>
+                  )}
+                  {result && meta && (
                       <div className={cn("flex items-center gap-2 text-[0.88rem] font-medium", meta.cls)}>
                         <meta.Icon className="h-4 w-4" aria-hidden />
                         {meta.text}
@@ -304,7 +346,6 @@ export function DrillApp() {
                           </span>
                         )}
                       </div>
-                    )
                   )}
                   {result && result.hitTokens.length > 0 && (
                     <div className="flex flex-wrap gap-1.5">
