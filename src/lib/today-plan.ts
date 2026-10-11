@@ -248,6 +248,17 @@ export function dateKey(d = new Date()): string {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
 
+/** 日期平移（按本地日历日，正数往后） */
+export function shiftDate(dateKeyStr: string, deltaDays: number): string {
+  const [y, m, d] = dateKeyStr.split("-").map(Number);
+  return dateKey(new Date(y, m - 1, d + deltaDays));
+}
+
+/** 冲刺窗口内全部日计划（总览用，按日期升序；sprintDay 从 1 起，末位为考试日） */
+export function planRoster(): { date: string; weekday: string; tag: string; sprintDay: number }[] {
+  return DAYS.map((d, i) => ({ date: d.date, weekday: d.weekday, tag: d.tag, sprintDay: i + 1 }));
+}
+
 export function sprintDayNumber(dateKeyStr: string): number {
   const idx = DAYS.findIndex((d) => d.date === dateKeyStr);
   return idx >= 0 ? idx + 1 : 0;
