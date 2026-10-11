@@ -23,6 +23,7 @@ type DrillStep = {
   role: string;
   diff: string;
   trap: string;
+  story?: string;
   src?: { href: string; label: string };
 };
 
@@ -31,6 +32,7 @@ type DrillDeck = {
   title: string;
   domain: string;
   scene: string;
+  story?: string;
   steps: DrillStep[];
 };
 
@@ -39,6 +41,7 @@ type DrillsData = { meta: { builtAt: string; decks: number; steps: number }; dec
 /** 本机记录：每链完成次数与最近成绩 */
 type DrillRecord = Record<string, { runs: number; best: string; weak: string[] }>;
 const STORAGE_KEY = "sysanalyst_drill_v1";
+const STORY_MODE_KEY = "sysanalyst_drill_story_v1";
 
 type Phase = "select" | "run" | "done";
 
@@ -53,6 +56,18 @@ export function DrillApp() {
   const [data, setData] = useState<DrillsData | null>(null);
   const [record, setRecord] = useState<DrillRecord>({});
   const [ready, setReady] = useState(false);
+  const [storyMode, setStoryMode] = useState(() =>
+    typeof window !== "undefined" ? window.localStorage.getItem(STORY_MODE_KEY) !== "0" : true,
+  );
+
+  const toggleStory = useCallback((next: boolean) => {
+    setStoryMode(next);
+    try {
+      window.localStorage.setItem(STORY_MODE_KEY, next ? "1" : "0");
+    } catch {
+      /* ignore */
+    }
+  }, []);
 
   const [phase, setPhase] = useState<Phase>("select");
   const [deck, setDeck] = useState<DrillDeck | null>(null);
@@ -222,9 +237,26 @@ export function DrillApp() {
             <button type="button" className="inline-flex items-center gap-1 hover:text-foreground" onClick={back}>
               <ChevronLeft className="h-3.5 w-3.5" aria-hidden /> 换链
             </button>
-            <span>
-              {deck.title} · 第 {idx + 1}/{queue.length} 格
-            </span>
+            <div className="flex items-center gap-3">
+              {deck?.story ? (
+                <button
+                  type="button"
+                  className={cn(
+                    "rounded-full border px-2 py-0.5 text-[0.72rem] transition-colors",
+                    storyMode
+                      ? "border-primary/50 bg-primary/10 text-primary"
+                      : "border-border text-muted-foreground hover:text-foreground",
+                  )}
+                  aria-pressed={storyMode}
+                  onClick={() => toggleStory(!storyMode)}
+                >
+                  🎭 故事 {storyMode ? "开" : "关"}
+                </button>
+              ) : null}
+              <span>
+                {deck.title} · 第 {idx + 1}/{queue.length} 格
+              </span>
+            </div>
           </div>
           <div className="h-1.5 overflow-hidden rounded-full bg-muted" role="progressbar" aria-valuenow={progress} aria-valuemin={0} aria-valuemax={100}>
             <div className="h-full rounded-full bg-primary transition-all" style={{ width: `${progress}%` }} />
@@ -236,6 +268,12 @@ export function DrillApp() {
             const meta = result ? VERDICT_META[result.verdict] : null;
             return (
               <>
+                {idx === 0 && deck?.story && storyMode ? (
+                  <Card className="px-(--card-spacing) py-3 space-y-1 border-primary/30 bg-primary/5">
+                    <p className="text-[0.78rem] font-medium text-primary">🎭 故事线开场（帮脑子挂上钩，考场忘词时顺着剧情推）</p>
+                    <p className="text-[0.86rem] leading-relaxed">{deck.story}</p>
+                  </Card>
+                ) : null}
                 <Card className="px-(--card-spacing) py-4 space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[0.75rem] font-medium text-primary">
@@ -296,6 +334,12 @@ export function DrillApp() {
                         <p className="text-[0.88rem] text-muted-foreground">{step.role}</p>
                       </div>
                     )}
+                    {storyMode && step.story ? (
+                      <div className="rounded-lg border border-primary/25 bg-primary/5 px-3 py-2.5">
+                        <p className="mb-1 text-[0.78rem] font-medium text-primary">🎭 记忆剧情</p>
+                        <p className="text-[0.86rem] leading-relaxed">{step.story}</p>
+                      </div>
+                    ) : null}
                     {step.diff && (
                       <div>
                         <p className="mb-1 text-[0.78rem] font-medium text-primary">⚖ 与相邻步骤 / 易混概念的差异</p>

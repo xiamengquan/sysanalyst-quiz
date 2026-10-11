@@ -24,6 +24,7 @@ type DrillStep = {
   role: string;
   diff: string;
   trap: string;
+  story?: string;
   src?: { href: string; label: string };
 };
 
@@ -32,16 +33,18 @@ type DrillDeck = {
   title: string;
   domain: string;
   scene: string;
+  story?: string;
   steps: DrillStep[];
 };
 
-const FIELD_RE = /^- \*\*(问|要点|范例|作用|辨析|易错|溯源)\*\*：(.*)$/;
+const FIELD_RE = /^- \*\*(问|要点|范例|作用|辨析|易错|故事|溯源)\*\*：(.*)$/;
 
 function parseDeck(md: string, fileStem: string, items: KbFlatItem[]): DrillDeck | null {
   const titleM = md.match(/^# 演练 · (.+)$/m);
   if (!titleM) return null;
   const domainM = md.match(/^> \*\*域\*\*：(.+)$/m);
   const sceneM = md.match(/^> \*\*情境\*\*：([\s\S]+?)$/m);
+  const storyM = md.match(/^> \*\*故事线\*\*：(.+)$/m);
 
   const steps: DrillStep[] = [];
   const stepBlocks = md.split(/^## /m).slice(1);
@@ -72,6 +75,7 @@ function parseDeck(md: string, fileStem: string, items: KbFlatItem[]): DrillDeck
       role: fields["作用"] || "",
       diff: fields["辨析"] || "",
       trap: fields["易错"] || "",
+      story: fields["故事"] || undefined,
       src,
     });
   }
@@ -81,6 +85,7 @@ function parseDeck(md: string, fileStem: string, items: KbFlatItem[]): DrillDeck
     title: titleM[1].trim(),
     domain: domainM?.[1]?.trim() || "综合",
     scene: sceneM?.[1]?.trim() || "",
+    story: storyM?.[1]?.trim() || undefined,
     steps,
   };
 }
