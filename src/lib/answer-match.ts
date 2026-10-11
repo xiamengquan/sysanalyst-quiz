@@ -34,6 +34,7 @@ const FULL2HALF: Record<string, string> = {
   "，": ",",
   "（": "(",
   "）": ")",
+  "−": "-", // U+2212 数学负号
 };
 
 /**
@@ -49,8 +50,9 @@ export function normalizeAnswer(s: string): string {
     .replace(/[『』「」"'`“”‘’·。．…—–_｜|〔〕【】]/g, "");
 }
 
-/** 关键点切分符：不含 > <（顺序语义）与 -（公式语义） */
-const TOKEN_SPLIT = /[,，、;；。:：()（）[\]【】{}=+·？！?…「」『』]/;
+/** 关键点切分符：含 /（中文列举分隔）与空白（词首字口诀匹配按原始串分词）；不含 > <（顺序语义）与 -（公式语义） */
+const TOKEN_SPLIT = /[\s,，、;；。:：()（）[\]【】{}=+·？！?…「」『』\/]/;
+const SEP_RE = new RegExp(TOKEN_SPLIT.source, "g");
 
 const STOP_TOKENS = new Set([
   "用于",
@@ -77,23 +79,50 @@ const STOP_TOKENS = new Set([
   "分别",
 ]);
 
-/** 计数描述词（三特点/四阶段/五级…）：题面通常已含，不参与判定 */
-const COUNT_RE = /^[一二三四五六七八九十百0-9]{0,3}(条|点|个|种|类|阶段|步|项|层|级|大|特点|特性|原则|要素|性质|机制|方式|方法)$/u;
+/** 计数描述词（三特点/四阶段/五种/静态五种…）：修饰性计数，不参与判定 */
+const COUNT_RE = /^[^0-9]*[一二三四五六七八九十百\d]{1,3}(种|类|条|点|个|阶段|步|项|层|级|大|特点|特性|原则|要素|性质|机制|方式|方法)$/u;
 
 function tokensOf(back: string, frontNorm: string): string[] {
   const norm = normalizeAnswer(back);
   const out: string[] = [];
   for (const raw of norm.split(TOKEN_SPLIT)) {
-    const t = raw.trim();
+    let t = raw.trim();
     if (!t) continue;
-    if (/^旧称/.test(t)) continue; // 括注帮助信息，不参与判定
+    t = t.replace(/旧称.*$/, ""); // 〔旧称XX〕括注（可能黏在 token 尾部），不参与判定
+    if (!t) continue;
     if (t.length < 2 && !/[a-z0-9]/.test(t)) continue;
     if (STOP_TOKENS.has(t)) continue;
-    if (t.length <= 6 && COUNT_RE.test(t)) continue;
+    if (t.length <= 8 && COUNT_RE.test(t)) continue;
     if (frontNorm.includes(t)) continue; // 题面已含的概念词（如「CMMI 五级」）
     if (!out.includes(t)) out.push(t);
   }
   return out;
+}
+
+/**
+ * 口诀词定位匹配：标准答案里的口诀压缩串（如「初重定管优」「业数过应测」），
+ * 用户展开列举（「初始 可重复 已定义 已管理 优化」）时，口诀各字按序在词序列中
+ * 定位（每词消耗一次，字可在词中任意位置——「定」落在「已定义」）即算命中。
+ * 仅当用户答案按分隔符切成 ≥3 个词且关键点为 3–8 字纯中文串时启用，防止巧合误判。
+ */
+function acronymHit(t: string, rawUser: string): boolean {
+  const core = t.replace(/[^一-鿿]/g, "");
+  if (core.length < 3 || core.length > 8) return false;
+  const words = rawUser.split(SEP_RE).map((w) => w.trim()).filter(Boolean);
+  if (words.length < 3) return false;
+  let start = 0;
+  for (const ch of core) {
+    let found = -1;
+    for (let j = start; j < words.length; j++) {
+      if (words[j].includes(ch)) {
+        found = j;
+        break;
+      }
+    }
+    if (found < 0) return false;
+    start = found + 1;
+  }
+  return true;
 }
 
 /**
@@ -111,7 +140,9 @@ export function judgeAnswer(front: string, back: string, user: string): MatchRes
 
   // 弱符号（书写习惯差异大）：匹配前双方剔除；> < → ← 为顺序语义，保留另处理
   const stripWeak = (s: string) => s.replace(/[/+=-]/g, "");
-  const u2 = stripWeak(u);
+  // 分隔符 + 弱符号都移除：用户答案用顿号/逗号/冒号等分隔时仍能命中关键点
+  const stripAll = (s: string) => stripWeak(s.replace(SEP_RE, ""));
+  const u2 = stripAll(u);
 
   let hits = 0;
   let seqHit = false; // 是否命中了核心排序点（如「组合>聚合>关联>依赖」）
@@ -123,7 +154,7 @@ export function judgeAnswer(front: string, back: string, user: string): MatchRes
       // 顺序敏感点：按词序列在用户答案中依序出现（写法宽松、顺序严格）
       const seq = t
         .split(/[>→<←]/)
-        .map(stripWeak)
+        .map(stripAll)
         .filter((w) => w.length >= 2 || /[a-z0-9]/.test(w));
       if (seq.length) {
         let pos = 0;
@@ -134,11 +165,11 @@ export function judgeAnswer(front: string, back: string, user: string): MatchRes
           return true;
         });
       } else {
-        hit = u2.includes(stripWeak(t));
+        hit = u2.includes(stripAll(t));
       }
       if (hit) seqHit = true;
     } else {
-      hit = u2.includes(stripWeak(t));
+      hit = u2.includes(stripAll(t)) || acronymHit(t, user);
     }
     if (hit) {
       hits += 1;
@@ -149,7 +180,7 @@ export function judgeAnswer(front: string, back: string, user: string): MatchRes
   }
   const score = hits / tokens.length;
   let verdict: MatchVerdict =
-    score >= 0.75 ? "correct" : score >= 0.45 ? "partial" : "wrong";
+    score >= 0.65 ? "correct" : score >= 0.45 ? "partial" : "wrong";
   // 核心排序点命中但整体不足：保底 partial（细节可改判）
   if (verdict === "wrong" && seqHit) verdict = "partial";
   return { verdict, hits, total: tokens.length, hitTokens, missTokens };
