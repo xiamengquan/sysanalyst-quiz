@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useId, useRef, useState, type MouseEvent } from "react";
-import { ChevronLeft, ExternalLink, Pin, PinOff, X } from "lucide-react";
+import { ChevronLeft, ExternalLink, Maximize2, Minimize2, Pin, PinOff, X } from "lucide-react";
 import { fetchKbBody } from "@/lib/kb-fetch";
 import { renderKbMarkdown, runMermaidIn } from "@/lib/kb-md";
 import {
@@ -28,6 +28,9 @@ type StackEntry = { id: string; title: string };
 
 // 模块级内存缓存：已拉取过的 HTML/MD 不重复 fetch
 const kbBodyCache = new Map<string, string>();
+
+/** 抽屉宽屏展开状态持久化 */
+const DRAWER_EXPANDED_KEY = "sysanalyst_drawer_expanded_v1";
 
 export type KbRelatedChip = {
   id: string;
@@ -61,6 +64,8 @@ function DrawerChrome({
   pinned,
   onPinnedChange,
   hidePin = false,
+  expanded,
+  onExpandedChange,
   stack,
   onBack,
   onClose,
@@ -82,6 +87,9 @@ function DrawerChrome({
   onPinnedChange?: (pinned: boolean) => void;
   /** 窄屏隐藏固钉 */
   hidePin?: boolean;
+  /** 桌面浮层扩展到 80% 屏宽（固钉/移动端不适用） */
+  expanded: boolean;
+  onExpandedChange?: (expanded: boolean) => void;
   stack: StackEntry[];
   onBack: () => void;
   onClose: () => void;
@@ -119,6 +127,20 @@ function DrawerChrome({
           ) : null}
         </div>
         <div className="btn-row shrink-0">
+          {onExpandedChange && !docked ? (
+            <Button
+              type="button"
+              variant={expanded ? "default" : "ghost"}
+              size="sm"
+              className="hidden min-h-11 gap-1 px-2.5 sm:inline-flex sm:min-h-0"
+              aria-pressed={expanded}
+              title={expanded ? "恢复默认宽度" : "展开到 80% 屏宽（表格 / 代码更宽松）"}
+              onClick={() => onExpandedChange(!expanded)}
+            >
+              {expanded ? <Minimize2 size={16} strokeWidth={2} aria-hidden /> : <Maximize2 size={16} strokeWidth={2} aria-hidden />}
+              <span className="hidden md:inline">{expanded ? "收窄" : "宽屏"}</span>
+            </Button>
+          ) : null}
           {onPinnedChange && !hidePin ? (
             <Button
               type="button"
@@ -262,10 +284,24 @@ export function KbPreviewDrawer({
   const [html, setHtml] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "err">("idle");
   const [msg, setMsg] = useState("");
+  const [expanded, setExpanded] = useState(() =>
+    typeof window !== "undefined"
+      ? window.localStorage.getItem(DRAWER_EXPANDED_KEY) === "1"
+      : false,
+  );
   const [isMobile, setIsMobile] = useState(() =>
     typeof window !== "undefined" ? window.innerWidth < 640 : false,
   );
   const [viewportReady, setViewportReady] = useState(() => typeof window !== "undefined");
+
+  const onExpandedChange = useCallback((next: boolean) => {
+    setExpanded(next);
+    try {
+      window.localStorage.setItem(DRAWER_EXPANDED_KEY, next ? "1" : "0");
+    } catch {
+      /* 隐私模式忽略 */
+    }
+  }, []);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 639px)");
@@ -385,6 +421,8 @@ export function KbPreviewDrawer({
       pinned={pinned}
       onPinnedChange={onPinnedChange}
       hidePin={isMobile}
+      expanded={expanded}
+      onExpandedChange={onExpandedChange}
       stack={stack}
       onBack={onBack}
       onClose={onClose}
@@ -430,7 +468,10 @@ export function KbPreviewDrawer({
         className={
           isMobile
             ? "kb-drawer-panel gap-0 border-border bg-card p-0 text-card-foreground h-[min(85dvh,720px)] max-h-[min(85dvh,720px)] rounded-t-2xl flex flex-col"
-            : "kb-drawer-panel w-full gap-0 border-border bg-card p-0 text-card-foreground sm:max-w-md data-[side=right]:inset-y-auto data-[side=right]:top-[calc(var(--safe-t)+3.75rem)] data-[side=right]:bottom-0 data-[side=right]:h-[calc(100dvh-var(--safe-t)-3.75rem)] flex flex-col"
+            : cn(
+                "kb-drawer-panel w-full gap-0 border-border bg-card p-0 text-card-foreground data-[side=right]:inset-y-auto data-[side=right]:top-[calc(var(--safe-t)+3.75rem)] data-[side=right]:bottom-0 data-[side=right]:h-[calc(100dvh-var(--safe-t)-3.75rem)] flex flex-col",
+                expanded ? "sm:max-w-[80vw] lg:max-w-[min(80vw,72rem)]" : "sm:max-w-md",
+              )
         }
       >
         <SheetHeader className="sr-only">
