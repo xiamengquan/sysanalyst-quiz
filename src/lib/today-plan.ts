@@ -45,6 +45,7 @@ const LINKS = {
   essay: "/kb/quick-essay/",
   caseReal: "/case/?bank=real",
   caseReq: "/case/?bank=real&domain=%E9%9C%80%E6%B1%82",
+  caseById: (id: string) => `/case/?id=${encodeURIComponent(id)}`,
   caseArch: "/case/?domain=%E6%9E%B6%E6%9E%84",
   caseDb: "/case/?domain=%E6%95%B0%E6%8D%AE%E5%BA%93",
   caseMicro: "/case/?domain=%E5%BE%AE%E6%9C%8D%E5%8A%A1",
@@ -59,7 +60,7 @@ const DAYS: DayPlan[] = [
     main: [
       { text: "总册 D1 全过：M 卡逐张默写 + K 辨析 + UML 指南 L1–L3", href: "/kb/quick-four-tier-7d/#d1", link: "总册 D1" },
       { text: "通读《案例作答启动手册》：启动句式表 + 骨架先行", href: "/kb/quick-case-start/", link: "启动手册" },
-      { text: "案例微训练第 1 题（需求识别类，五步完整闭环）", href: LINKS.caseReq, link: "案例真题" },
+      { text: "案例微训练第 1 题：2025下·案例一·需求识别与确认（需求获取方法选型，五步完整闭环）", href: LINKS.caseById("ZT-2025下-案例01"), link: "微训练第 1 题" },
       { text: "七日巩固 d1 配题 + 错题回炉", href: LINKS.seven("d1"), link: "d1 配题" },
       { text: "D2 预习：需求获取/分析/验证链条 + DFD 概念", href: LINKS.seven("d2"), link: "D2 预览" },
       { text: "/recall 首轮建档（D1 卡）+ /audio 选发音人、调语速", href: LINKS.recall, link: "随机问答" },
@@ -200,7 +201,7 @@ const DAYS: DayPlan[] = [
 
 /** 午休案例骨架主题（按天） */
 const LUNCH_TOPIC: Record<string, { text: string; href?: string; link?: string }> = {
-  "2026-10-11": { text: "案例微训练第 1 题：需求识别类（并入今日全天主线）", href: LINKS.caseReq, link: "案例真题" },
+  "2026-10-11": { text: "案例微训练第 1 题：2025下·案例一·需求识别与确认（并入今日全天主线，五步完整闭环）", href: LINKS.caseById("ZT-2025下-案例01"), link: "微训练第 1 题" },
   "2026-10-12": { text: "运用演练《需求工程步骤链》：每格先写作用句再对答案（剩余时间做需求获取骨架）", href: LINKS.drill("需求工程步骤链"), link: "运用演练" },
   "2026-10-13": { text: "架构域小问：读题标注 + 计时骨架", href: LINKS.caseArch, link: "案例真题" },
   "2026-10-14": { text: "微服务/Web 小问：读题标注 + 计时骨架", href: LINKS.caseMicro, link: "案例真题" },

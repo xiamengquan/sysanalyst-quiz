@@ -81,10 +81,29 @@ export function CaseApp() {
     };
   }, []);
 
-  /** 真题系统等外部入口的 URL 参数：?bank=real&year=2026上&domain=…&type=… */
+  /** 真题系统等外部入口的 URL 参数：?bank=real&year=2026上&domain=…&type=…；?id=案例ID 直达单题 */
   useEffect(() => {
     if (!ready || appliedLink.current) return;
     appliedLink.current = true;
+    const cid = searchParams.get("id");
+    if (cid?.trim()) {
+      const raw = cid.trim();
+      const target =
+        all.find((c) => c.id === raw) ||
+        all.find((c) => decodeURIComponent(raw) === c.id);
+      if (target) {
+        setBank(target.bank === "real" ? "real" : "practice");
+        setDomain(target.domain);
+        setYearHalf(target.bank === "real" && target.year ? `${target.year}${target.half || ""}` : "all");
+        setPool([target]);
+        setPackHint("");
+        setIdx(0);
+        setReveal(false);
+        setQuizTab("answer");
+        setPhase("quiz");
+        return;
+      }
+    }
     const b = searchParams.get("bank");
     if (b === "real" || b === "practice") setBank(b);
     const y = searchParams.get("year");
@@ -93,6 +112,7 @@ export function CaseApp() {
     if (d?.trim()) setDomain(d.trim());
     const t = searchParams.get("type");
     if (t?.trim()) setTyp(t.trim());
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- appliedLink 守卫保证只应用一次
   }, [ready, searchParams]);
 
   const domains = useMemo(() => [...new Set(all.map((c) => c.domain))].sort(), [all]);
