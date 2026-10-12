@@ -55,7 +55,7 @@ export function RecallApp() {
   const [data, setData] = useState<FlashcardsData | null>(null);
   const [state, setState] = useState<RecallState>(newRecallState());
   const [ready, setReady] = useState(false);
-  const [dayFilter, setDayFilter] = useState("all");
+  const [daySet, setDaySet] = useState<string[]>([]); // 空 = 全部；支持多选
   const [tierFilter, setTierFilter] = useState("all");
   const [sessionSize, setSessionSize] = useState(10);
   const [queue, setQueue] = useState<Flashcard[]>([]);
@@ -84,16 +84,25 @@ export function RecallApp() {
     if (!data) return [];
     return data.cards.filter(
       (c) =>
-        (dayFilter === "all" || c.day === dayFilter) &&
+        (daySet.length === 0 || (c.day !== null && daySet.includes(c.day))) &&
         (tierFilter === "all" || c.tier === tierFilter)
     );
-  }, [data, dayFilter, tierFilter]);
+  }, [data, daySet, tierFilter]);
 
   const dueList = useMemo(() => filtered.filter((c) => isCardDue(c, state)), [filtered, state]);
+  const dueReviewCount = useMemo(
+    () => dueList.filter((c) => !!state.progress[c.id]).length,
+    [dueList, state]
+  );
+  const dueNewCount = dueList.length - dueReviewCount;
   const distribution = useMemo(() => boxDistribution(filtered, state), [filtered, state]);
 
   const start = useCallback(() => {
-    const due = shuffle(dueList);
+    // 到期卡内先复习到期（有进度的），再喂新卡，避免新卡挤占复习债
+    const due =
+      shuffle(dueList.filter((c) => state.progress[c.id])).concat(
+        shuffle(dueList.filter((c) => !state.progress[c.id]))
+      );
     const rest = shuffle(filtered.filter((c) => !isCardDue(c, state)));
     const n = sessionSize === 0 ? dueList.length : sessionSize;
     const q = [...due, ...rest].slice(0, Math.max(n, Math.min(due.length, 5)));
@@ -186,30 +195,41 @@ export function RecallApp() {
         <>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 mb-4">
             {[
-              ["到期待复习", dueList.length],
-              ["今日已复习", todayCount],
-              ["卡库总量", filtered.length],
-              ["毕业卡", distribution[MAX_BOX]],
-            ].map(([k, v]) => (
+              ["到期待复习", dueList.length, `复习 ${dueReviewCount} · 新卡 ${dueNewCount}`],
+              ["今日已复习", todayCount, null],
+              ["卡库总量", filtered.length, null],
+              ["毕业卡", distribution[MAX_BOX], null],
+            ].map(([k, v, sub]) => (
               <Card key={String(k)} className="p-3.5 text-center">
                 <span className="text-[0.75rem] text-muted-foreground">{k}</span>
                 <b className="mt-1 block text-[1.2rem]">{v}</b>
+                {sub ? (
+                  <span className="mt-0.5 block text-[0.7rem] text-muted-foreground">{sub}</span>
+                ) : null}
               </Card>
             ))}
           </div>
 
           <Card className="px-(--card-spacing) mb-4 space-y-4">
             <div>
-              <h2 className="mb-2 text-[1rem] font-medium">范围（总册日次）</h2>
+              <h2 className="mb-2 text-[1rem] font-medium">范围（总册日次 · 可多选）</h2>
               <div className="flex flex-wrap gap-1.5">
                 {DAY_FILTERS.map((f) => (
                   <button
                     key={f.value}
                     type="button"
-                    onClick={() => setDayFilter(f.value)}
+                    onClick={() =>
+                      setDaySet((s) =>
+                        f.value === "all"
+                          ? []
+                          : s.includes(f.value)
+                            ? s.filter((x) => x !== f.value)
+                            : [...s, f.value]
+                      )
+                    }
                     className={cn(
                       "rounded-lg border px-2.5 py-1.5 text-[0.8rem] transition-colors",
-                      dayFilter === f.value
+                      (f.value === "all" ? daySet.length === 0 : daySet.includes(f.value))
                         ? "border-primary bg-primary/10 font-medium text-primary"
                         : "border-border bg-muted/30 text-muted-foreground hover:text-foreground"
                     )}
