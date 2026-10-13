@@ -51,6 +51,42 @@ function dayLabel(day: string | null): string {
   return d ? d.label : day;
 }
 
+/** 答题轨道（/track）错题点 → 合成卡：未首过的点自动进 /recall 复习池（无进度=永远到期） */
+const TRACK_STORAGE_KEY = "sysanalyst_track_v1";
+
+async function mergeTrackWrongCards(): Promise<Flashcard[]> {
+  try {
+    const [tracks, trackRec] = await Promise.all([
+      fetch("/data/tracks.json").then((r) => (r.ok ? r.json() : null)),
+      storageGet<{
+        points: Record<string, { right: number; wrong: number; firstTry: boolean }>;
+      }>(TRACK_STORAGE_KEY),
+    ]);
+    if (!tracks?.courses || !trackRec?.points) return [];
+    const out: Flashcard[] = [];
+    for (const course of tracks.courses) {
+      for (const unit of course.units ?? []) {
+        for (const p of unit.points ?? []) {
+          const rec = trackRec.points[p.id];
+          if (!rec || rec.firstTry || rec.wrong < 1) continue;
+          out.push({
+            id: `TRK-${p.id}`,
+            day: course.day ?? null,
+            tier: "K",
+            hard: true,
+            front: `${p.title}？（轨道错题卡）`,
+            back: `${p.core}｜辨析：${p.vs}｜案例钩子：${p.hook}`,
+            src: { href: "/track/", label: "答题轨道" },
+          });
+        }
+      }
+    }
+    return out;
+  } catch {
+    return [];
+  }
+}
+
 export function RecallApp() {
   const [data, setData] = useState<FlashcardsData | null>(null);
   const [state, setState] = useState<RecallState>(newRecallState());
@@ -71,9 +107,10 @@ export function RecallApp() {
     Promise.all([
       fetch("/data/flashcards.json").then((r) => r.json()),
       storageGet<RecallState>(RECALL_STORAGE_KEY),
+      mergeTrackWrongCards(),
     ])
-      .then(([d, s]) => {
-        setData(d);
+      .then(([d, s, trackCards]) => {
+        setData({ ...d, cards: [...d.cards, ...trackCards] });
         if (s && typeof s === "object" && s.progress) setState(s);
         setReady(true);
       })

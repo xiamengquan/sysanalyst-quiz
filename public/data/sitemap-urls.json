@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-13T13:26:20.984Z",
+  "generatedAt": "2026-10-13T14:15:12.817Z",
   "urls": [
     {
       "url": "https://maintruly.top/",
@@ -48,6 +48,12 @@
       "lastModified": "2026-10-13T00:00:00.000Z",
       "changeFrequency": "weekly",
       "priority": 0.8
+    },
+    {
+      "url": "https://maintruly.top/track/",
+      "lastModified": "2026-10-13T00:00:00.000Z",
+      "changeFrequency": "daily",
+      "priority": 0.9
     },
     {
       "url": "https://maintruly.top/about/",

@@ -7,6 +7,7 @@ import {
   FileText,
   BookOpen,
   Dumbbell,
+  Route,
   Sparkles,
   CalendarCheck,
   Info,
@@ -24,6 +25,7 @@ const tabs = [
   { href: "/real-exams/", label: "真题", short: "真题", icon: FileText },
   { href: "/case/", label: "案例", short: "案例", icon: FileText },
   { href: "/drill/", label: "演练", short: "演练", icon: Dumbbell },
+  { href: "/track/", label: "轨道", short: "轨道", icon: Route },
   { href: "/kb/", label: "知识点", short: "知识", icon: BookOpen },
   { href: "/changelog/", label: "更新", short: "更新", icon: Sparkles },
   { href: "/about/", label: "关于", short: "关于", icon: Info },
@@ -121,7 +123,7 @@ export function SiteHeader() {
         aria-label="底部导航"
       >
         <div
-          className="mx-auto grid grid-cols-8"
+          className="mx-auto grid grid-cols-9"
           style={{ height: "var(--tabbar-h)", maxWidth: "var(--content-max)" }}
         >
           {tabs.map((t) => {
