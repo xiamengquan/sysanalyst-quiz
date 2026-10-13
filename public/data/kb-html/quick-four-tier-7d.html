@@ -1,323 +1,278 @@
-<h1 id="速查--四层七日背诵总册必会--重点--补充--可放弃--强化记忆">速查 · 四层七日背诵总册（必会 / 重点 / 补充 / 可放弃 × 强化记忆）</h1>
+<h1 id="速查--四层背诵总册四大方面重构版">速查 · 四层背诵总册（四大方面重构版）</h1>
 <blockquote>
-<p><strong>定位</strong>：知识点内容架构 v3 的学习主文档。取代按考点逐篇背诵的旧路径——按「天」组织，按「四层」定深度，内置间隔重复与错卡机制。
-<strong>四层</strong>：必会 M（默写级）· 重点 K（理解会做）· 补充 S（眼熟即可）· 可放弃 D（出现即止损）。
-<strong>架构规格</strong>：仓库 <code>docs/kb-workshop/编制委员会/知识点内容架构-v3-四层七日.md</code>。
-<strong>配套</strong>：<a href="/kb/quick-memory-plan/" class="kb-ref" data-kb-id="quick-memory-plan" title="预览：记忆强化 · 间隔重复日程与硬记忆点卡组">记忆强化卡组</a> · <a href="/kb/quick-kp-map/" class="kb-ref" data-kb-id="quick-kp-map" title="预览：知识点地图 · 按记忆专题（T01–T18）">知识点地图</a> · <strong><a href="/kb/quick-sprint-14d/" class="kb-ref" data-kb-id="quick-sprint-14d" title="预览：考前 14 天冲刺计划（加速与战略放弃）">考前 14 天冲刺计划</a></strong>（两周加速 · 战略放弃）· <a href="/kb/quick-exam-7d/" class="kb-ref" data-kb-id="quick-exam-7d" title="预览：考前 7 天背诵清单">考前 7 天背诵清单</a> · <a href="/kb/quick-case-training/" class="kb-ref" data-kb-id="quick-case-training" title="预览：案例强化 · 14 天训练计划（薄弱专项）">案例强化 14 天训练计划</a> · <strong><a href="/recall/">随机问答</a></strong>（本册必会卡 + 卡组硬记忆点 = 闪卡，1-2-4-7-15 排程）</p>
+<p><strong>定位</strong>：按<strong>四大方面</strong>重构——需求工程 / Web / 微服务 / 数据库（对齐案例出题重心：试题一需求铁律 + Web 22 席 + 数据库 12 席 + D3 下微服务主背域），其余模块压缩为精华章。四层不变：必会 M（默写级）· 重点 K（理解会做）· 补充 S（眼熟即可）· 可放弃 D（出现即止损）。
+<strong>日次骨架 D1–D7 保留</strong>：四大方面挂 D2（需求）/ D3（Web+微服务）/ D4（数据库）；其余模块精华挂 D1 / D5 / D6 / D7——today-plan、/recall 日次筛选、七日配题、洗脑音频全链路不变。
+<strong>同源配套</strong>：<a href="/track/">答题轨道 /track</a>（四大方面 39 个答题知识点：选择+填空即时反馈背诵）· 配套仿真案例 CA-131（需求）~ CA-134（数据库）（<code>/case</code> 自编池，单元收官深链直达）· <a href="/kb/quick-memory-plan/" class="kb-ref" data-kb-id="quick-memory-plan" title="预览：记忆强化 · 间隔重复日程与硬记忆点卡组">记忆强化卡组</a>（K 层 56 张独立成册）· <a href="/kb/quick-sprint-14d/" class="kb-ref" data-kb-id="quick-sprint-14d" title="预览：考前 14 天冲刺计划（加速与战略放弃）">考前 14 天冲刺计划</a>（v3：案例三部曲 + 真题重复刷）· <a href="/recall/">随机问答</a>（本册 M 卡 + 卡组 K 卡 = 闪卡，1-2-4-7-15 排程；轨道错题点自动转卡并入）</p>
 </blockquote>
-<p><strong>通用规则</strong>：每天 25 分钟记忆微循环（早 10 默写提取 / 午 5 新学编码 / 晚 10 间隔回收+错卡）。错卡一条一行，连续 3 次全对销卡。「能默写出来才算记住，眼熟不算。」</p>
-<hr>
-<p><a id="d1"></a></p>
-<h2 id="d1--软件工程--uml--oo教程-7--p0">D1 · 软件工程 · UML · OO（教程 7 · P0）</h2>
-<h3 id="必会--默写卡m">必会 · 默写卡（M）</h3>
-<ol>
-<li><strong>开发模型选型口诀</strong>：需求稳→瀑布/V；风险大→螺旋；要快→RAD/敏捷；OO→喷泉/RUP。</li>
-<li><strong>螺旋每轮四步</strong>：计风实评（计划→风险评估→实施→评估）。</li>
-<li><strong>RUP</strong>：四阶段「初细构移」（初始→细化→构建→移交）；三特点「用例驱动、架构中心、迭代增量」。</li>
-<li><strong>RAD 五阶段</strong>：业数过应测（业务建模→数据建模→过程建模→应用生成→测试交付）。</li>
-<li><strong>CMM 五级</strong>：初重定管优（初始→可重复→已定义→已管理→优化）；CMMI 阶段式：初管定量优（初始→已管理→已定义→量化管理→优化）。</li>
-<li><strong>敏捷宣言</strong>：右优于左——个体互动 / 可用软件 / 客户协作 / 响应变化。</li>
-<li><strong>UML 关系强弱</strong>：组合 ＞ 聚合 ＞ 关联 ＞ 依赖（整—部分与使用联系）；泛化＝实现属类型/契约关系，不参与此序（实线=泛化、虚线=实现）。</li>
-<li><strong>include vs extend</strong>：include 必选复用；extend 可选附加（条件触发）。</li>
-<li><strong>UML 常考十图</strong>：静态五种（类/对象/包/组件〔旧称构件〕/部署）＋动态五种（用例/活动/状态机/序列〔旧称顺序〕/通信〔旧称协作〕）；UML 2.5 全集 14 图。</li>
-<li><strong>OO 三特性</strong>：封装（隐藏实现仅暴露接口）、继承（复用并特化）、多态（同一消息不同响应）；设计评价尺度为「高内聚、低耦合」。</li>
-<li><strong>生命周期产出</strong>：可行性报告→需求规格(SRS)→概要/详细设计→代码→测试报告→运维手册。</li>
-<li><strong>再工程</strong>：逆向工程（恢复设计）＋重构＋正向工程，不是重写。</li>
-</ol>
-<h3 id="重点--辨析与题型k">重点 · 辨析与题型（K）</h3>
-<ul>
-<li>§1 模型对比表遮列默写：重点盯「瀑布 vs 增量（整体规划）」「螺旋 vs 原型（风险驱动）」「RUP vs 敏捷（重量 vs 轻量）」。</li>
-<li>§28 CMM/CMMI：CMM 已停用，CMMI 五级代表过程域数量递增；三级「已定义」=组织级标准过程。</li>
-<li>辨析：聚合（部分可独立存活）vs 组合（部分随整体生灭）；关联 vs 依赖（结构 vs 使用）。</li>
-<li>题型：给场景选模型 → 先找题干锚词「需求明确/风险/工期紧/OO」。</li>
-</ul>
-<h3 id="补充--速览s">补充 · 速览（S）</h3>
-<p><a href="/kb/kp-case-tools/" class="kb-ref" data-kb-id="kp-case-tools" title="预览：计算机辅助软件工程 CASE">《计算机辅助软件工程 CASE》</a> · <a href="/kb/kp-software-product-line/" class="kb-ref" data-kb-id="kp-software-product-line" title="预览：软件产品线">《软件产品线》</a> · <a href="/kb/kp-spi-cmmi/" class="kb-ref" data-kb-id="kp-spi-cmmi" title="预览：软件过程改进">《软件过程改进》</a> · <a href="/kb/kp-oo-technology/" class="kb-ref" data-kb-id="kp-oo-technology" title="预览：面向对象技术">《面向对象技术》</a> · <a href="/kb/kp-open-source-community-stack/" class="kb-ref" data-kb-id="kp-open-source-community-stack" title="预览：开源社区、许可、语言平台、框架库、服务器、工具、评估">《开源社区、许可、语言平台、框架库、服务器、工具、评估》</a> · <a href="/kb/kp-5-7/" class="kb-ref" data-kb-id="kp-5-7" title="预览：5.7 统一建模语言 UML">《统一建模语言 UML》</a></p>
-<h3 id="可放弃--止损d">可放弃 · 止损（D）</h3>
-<ul>
-<li><a href="/kb/kp-5-8/" class="kb-ref" data-kb-id="kp-5-8" title="预览：5.8 形式化方法">《形式化方法》</a>——判定信号：数学化规约（Z 语言/ Petri 网证明级）。替代动作：只背「用数学语言严格规约与验证」一句话，其余放弃。</li>
-<li>SPI 等级评估细则、CASE 工具分类细节——选择题出现凭语感，不投入。</li>
-</ul>
-<h3 id="强化记忆块">强化记忆块</h3>
-<ul>
-<li>回收：首日，无；明晚回收本日 M 卡。</li>
-<li>自测问句：①螺旋四步顺序？②CMMI 第 3 级叫什么？③include 与 extend 谁是必选？④聚合和组合的生死差别？⑤RAD 五阶段口诀？</li>
-<li>错卡：写不出的卡抄一行进错卡，明早重默。</li>
-</ul>
-<h3 id="练题收口">练题收口</h3>
-<p>第 7 章练习（练习页选第 7 章）20 分钟 15 题；错题解析里的结论抄错卡。</p>
+<p><strong>通用规则</strong>：碎片背诵时段（工位 <code>/recall</code> 到期卡 / 地铁 <code>/audio</code> 问答式）为主战场；晚主块不排新背诵（v3 起让位案例三部曲与真题重刷）。「能默写出来才算记住，眼熟不算。」错卡一条一行，连续 3 次全对销卡。</p>
 <hr>
 <p><a id="d2"></a></p>
-<h2 id="d2--需求工程--系统规划与分析教程-1110--p0">D2 · 需求工程 + 系统规划与分析（教程 11、10 · P0）</h2>
+<h2 id="d2--需求工程四大方面--一--教程-11--p0">D2 · 需求工程（四大方面 · 一 · 教程 11 · P0）</h2>
+<blockquote>
+<p>试题一必答域：近 6 场真题试题一 100% 需求域。配套轨道：<code>/track</code> 需求工程课程 10 点 · 仿真案例 CA-131。</p>
+</blockquote>
 <h3 id="必会--默写卡m">必会 · 默写卡（M）</h3>
 <ol>
-<li><strong>需求三层</strong>：业务需求（为什么）→ 用户需求（做什么）→ 系统需求（怎么做，含功能+非功能）。</li>
-<li><strong>获取五法</strong>：访谈（深）、问卷（广）、观察（真）、原型（快）、JRP/联合需求计划（共识）。</li>
-<li><strong>DFD 四要素</strong>：外部实体（矩形）、加工（圆/圆角）、数据流（箭头）、数据存储（双横线）。</li>
-<li><strong>DFD 父子图平衡</strong>：子图输入输出流与父图对应加工一致；分层不宜超过 5 层。</li>
-<li><strong>数据字典</strong>：对数据流/存储/条目的定义集合，与 DFD 配套。</li>
-<li><strong>STD 状态迁移图</strong>：状态 + 事件触发的迁移，刻画动态行为。</li>
-<li><strong>SRS 特性</strong>：正确、无二义、完整、一致、可验证、可跟踪。</li>
-<li><strong>需求验证</strong>：评审 + 原型演示；「确认」≠「测试」。</li>
-<li><strong>需求变更</strong>：CCB（变更控制委员会）审批 → 影响分析 → 基线更新。</li>
-<li><strong>需求跟踪</strong>：前向/后向跟踪矩阵，保证双向可追溯。</li>
-<li><strong>可行性四维</strong>：技术、经济、操作（运行）、社会（法律）。</li>
-<li><strong>成本效益</strong>：NPV≥0 可行；静态/动态回收期（动态贴现）。</li>
-<li><strong>规划三法</strong>：BSP 自上而下、CSF 关键成功因素、SST 策略集合转化。</li>
-<li><strong>业务流程建模</strong>：TFD 业务流程图（职能）vs DFD 数据流（数据视角）；BAM 业务活动图。</li>
+<li><strong>需求三层</strong>：业务需求（组织目标，为什么做）→ 用户需求（用户要完成的任务）→ 系统需求（功能 + 非功能，SRS 的主体）。</li>
+<li><strong>需求获取五法与选型</strong>：访谈（一对一深挖，灵活费时）；问卷（大样本广度）；联合需求计划 JRP（多方 workshop 高效共识）；原型法（需求模糊时可视化确认——把「用嘴确认」换成「用眼看」）；现场观察（拿一手实际流程）。口诀：说不清→原型；多方分歧→JRP；深挖→访谈；量大→问卷；流程脱节→观察。</li>
+<li><strong>结构化分析与 DFD</strong>：DFD 四要素：外部实体（方框，边界外数据源/汇）、加工（圆角框，数据变换）、数据存储（开口矩形，静态数据）、数据流（箭头）；父图子图平衡；数据字典定义各要素含义。</li>
+<li><strong>用例建模与 include/extend</strong>：参与者（系统外交互角色，含人/设备/外部系统）+ 用例（参与者完成的完整目标功能）；include=必然复用的子功能；extend=有条件才触发的可选扩展；用例规约=前置条件+主流程+备选流+后置条件。</li>
+<li><strong>SRS 内容与作用</strong>：范围、功能需求（输入-处理-输出）、非功能需求（性能/安全/可靠性/易用性/可维护性）、约束、接口；作用：开发与测试的依据、验收标准、需求基线。只写「做什么」不写「怎么实现」。</li>
+<li><strong>需求验证四法</strong>：需求评审（正式评审会，最常用）；原型验证（运行演示确认理解一致）；测试设计验证（设计测试用例反推需求可测性）；形式化验证（数学证明，成本高，用于安全关键系统）。</li>
+<li><strong>需求评审六查</strong>：正确性、完整性、一致性（无冲突）、无二义性（每条可唯一理解）、可验证/可测试性（「快速响应」不合格，「P95≤2s」合格）、可跟踪性（每条可溯源到上层需求）。</li>
+<li><strong>需求跟踪矩阵</strong>：正向跟踪（需求→设计→代码→测试用例，保每条被实现验证）；反向跟踪（设计/代码→需求，防镀金与冗余）；用途：变更影响分析、覆盖率检查。</li>
+<li><strong>需求变更控制 CCB</strong>：提出书面变更申请 → CCB（变更控制委员会）评估影响（成本/进度/质量/风险）→ 批准或拒绝 → 更新需求基线与跟踪矩阵 → 通知全部干系人。基线后任何口头直改都是变更失控。</li>
+<li><strong>需求状态与基线</strong>：状态链建议→批准→实现→验证→完成（或拒绝/延期）；基线=通过正式评审并冻结的版本，基线化后进入配置管理；需求管理三件套=变更控制 + 状态/版本跟踪 + 跟踪矩阵。</li>
 </ol>
 <h3 id="重点--辨析与题型k">重点 · 辨析与题型（K）</h3>
 <ul>
-<li>§23a 需求三层答卷句 + §23d 获取四维五法对比表（遮列默写：方法×深广真假共识）。</li>
-<li>§23c DFD 四要素答卷版 + 父子平衡判断题（「子图多了/少了流」是经典错误选项）。</li>
-<li>NPV 计算流：贴现率→各年现值→求和→与投资比较；回收期=累计现值转正年份。</li>
-<li>辨析：需求获取 vs 需求确认（拿到 vs 核实）；功能 vs 非功能（性能/安全/可用属后者）。</li>
+<li>辨析：业务需求≠功能需求（「线上办理率 60%」是业务，「在线提交申请」才是系统功能）；验证≠确认（需求写对了吗 vs 做的是用户要的吗）。</li>
+<li>DFD 填图判据：名词人/组织=外部实体，名词表/账/库=数据存储，动词=加工。</li>
+<li>include/extend 判据：必然=include，看情况=extend。</li>
+<li>案例题型：获取方法选型（按场景挑 2–3 法 + 理由）；SRS 评审改错（挑二义/不可验证条目并改写）；变更流程五步。</li>
 </ul>
 <h3 id="补充--速览s">补充 · 速览（S）</h3>
-<p><a href="/kb/kp-8-3/" class="kb-ref" data-kb-id="kp-8-3" title="预览：8.3 系统分析概述">《系统分析概述》</a> · <a href="/kb/kp-8-4/" class="kb-ref" data-kb-id="kp-8-4" title="预览：8.4 问题分析">《问题分析》</a> · <a href="/kb/kp-8-2/" class="kb-ref" data-kb-id="kp-8-2" title="预览：8.2 项目提出与选择">《项目提出与选择》</a> · <a href="/kb/kp-8-9/" class="kb-ref" data-kb-id="kp-8-9" title="预览：8.9 系统方案建议">《系统方案建议》</a> · <a href="/kb/kp-9-3/" class="kb-ref" data-kb-id="kp-9-3" title="预览：9.3 需求分析">《需求分析》</a> · <a href="/kb/kp-9-6/" class="kb-ref" data-kb-id="kp-9-6" title="预览：9.6 需求定义（SRS）">《需求定义（SRS）》</a></p>
+<p><a href="/kb/kp-8-3/" class="kb-ref" data-kb-id="kp-8-3" title="预览：8.3 系统分析概述">《系统分析概述》</a> · <a href="/kb/kp-8-4/" class="kb-ref" data-kb-id="kp-8-4" title="预览：8.4 问题分析">《问题分析》</a> · <a href="/kb/kp-8-2/" class="kb-ref" data-kb-id="kp-8-2" title="预览：8.2 项目提出与选择">《项目提出与选择》</a> · <a href="/kb/kp-9-3/" class="kb-ref" data-kb-id="kp-9-3" title="预览：9.3 需求分析">《需求分析》</a> · <a href="/kb/kp-9-6/" class="kb-ref" data-kb-id="kp-9-6" title="预览：9.6 需求定义（SRS）">《需求定义（SRS）》</a></p>
 <h3 id="可放弃--止损d">可放弃 · 止损（D）</h3>
 <ul>
-<li>可行性报告的章节格式细节、立项申请书模板——判定信号：问「报告包含哪几节」。替代动作：知道「四维可行性+结论建议」即可。</li>
+<li>可行性报告章节格式细节、立项模板——判定信号：问「报告包含哪几节」。替代动作：知道「四维可行性 + 结论建议」即可。</li>
 </ul>
 <h3 id="强化记忆块">强化记忆块</h3>
 <ul>
-<li>回收 D-1：D1 全部 M 卡（12 张）默写；错卡优先。</li>
-<li>自测问句：①DFD 四要素画法？②增量备份基于哪次备份（D4 内容预警）？③CCB 作用？④BSP 与 CSF 方向差别？⑤动态回收期为什么 ≤ 静态？</li>
-<li>错卡：新错 + D1 存量一并重默。</li>
+<li>回收 D-1：D1 精华 M 卡；回收 D-3：D4 数据库 M 卡。</li>
+<li>自测问句：①需求三层各举一例？②说不清/多方分歧分别选什么获取法？③DFD 四要素图符？④include 与 extend 判据？⑤SRS 只写什么不写什么？⑥评审六查？⑦CCB 流程五步？</li>
+<li>错卡：写不出的卡抄一行进错卡，明早重默；<code>/track</code> 需求课程未首过点自动转卡进 <code>/recall</code>。</li>
 </ul>
 <h3 id="练题收口">练题收口</h3>
-<p>第 11 章 + 第 10 章练习各 15 题；本章热力最高（177 题），错题重点回收。</p>
+<p>第 11 章练习 15 题；<code>/track</code> 需求工程单元打一课；配套案例 CA-131（试题一仿真）三部曲练一轮。</p>
 <hr>
 <p><a id="d3"></a></p>
-<h2 id="d3--软件架构--web--微服务案例域教程-121620--p0">D3 · 软件架构 + Web / 微服务案例域（教程 12、16、20 · P0）</h2>
+<h2 id="d3--web--微服务四大方面--二三--教程-1620--p0">D3 · Web + 微服务（四大方面 · 二/三 · 教程 16、20 · P0）</h2>
+<blockquote>
+<p>选做池第一大域：Web 22 席（建模与设计 10 席居首）+ D3 下微服务主背域。配套轨道：<code>/track</code> Web 课程 10 点 + 微服务课程 9 点 · 仿真案例 CA-132 / CA-133。</p>
+</blockquote>
 <h3 id="必会--默写卡m">必会 · 默写卡（M）</h3>
+<p><strong>Web 篇（10 张）</strong></p>
 <ol>
-<li><strong>4+1 视图</strong>：场景（+1）统摄 逻辑/开发/进程/物理 四视图。</li>
-<li><strong>五大风格族锚词</strong>：数据流（管道-过滤/批处理）｜调用返回（分层/C-S/三层/OO）｜数据中心（仓库/黑板/超文本）｜虚拟机（解释器/规则系统）｜独立构件（事件/进程通信）。</li>
-<li><strong>SOA 与微服务</strong>：SOA 靠 ESB 集中总线；微服务去中心化、按业务拆分、独立部署。</li>
-<li><strong>质量属性六元</strong>：性能、可用性、安全性、可修改性、可测试性、易用性。</li>
-<li><strong>ATAM</strong>：敏感点=单属性拐点；权衡点=多属性冲突点（如加密=安全↑性能↓）。</li>
-<li><strong>REST 约束</strong>：无状态、统一接口、资源 URI、分层、缓存（可按需加载客户端代码）。</li>
-<li><strong>单体 vs 微服务选型</strong>：小团队快交付→单体；独立扩展/独立部署/多语言→微服务。</li>
-<li><strong>微服务四保护</strong>：限流（入口）、熔断（依赖故障断路）、降级（保核心弃边缘）、灰度（放量）。</li>
-<li><strong>缓存三问题</strong>：穿透（查不存在→布隆/空值缓存）、击穿（热点过期→互斥/永不过期）、雪崩（同时失效→错峰TTL）。</li>
-<li><strong>注册与发现</strong>：服务注册中心（如 Nacos/Consul），客户端/服务端两种发现模式。</li>
-<li><strong>MVC vs MVP vs MVVM</strong>：V 与 M 是否直接对话；MVVM 双向绑定（VM 观察者）。</li>
-<li><strong>灰度发布</strong>：按流量比例放量 + 快速回滚，配合并行核对。</li>
-<li><strong>事件系统风格（隐式调用）三部件</strong>：事件源（产生并声明事件）→ 事件管理器（事件队列/绑定表，登记与派遣）→ 事件处理器（注册处理过程，事件触发时被调用）；口诀「源-管-理」。锚例：商家发布配送单=源、平台派单=管理器、骑手接单=处理器（2020上案例五真题填空考过部件名）。</li>
+<li><strong>前后端分离</strong>：后端只出数据 API（JSON），前端独立负责渲染与交互；收益：前后端并行开发、一套 API 多端复用；代价：首屏性能与 SEO（SSR 缓解）、接口契约管理。</li>
+<li><strong>MVC vs MVP vs MVVM</strong>：判据=视图 V 与模型 M 是否直接对话。MVC：V 可直接读 M；MVP：V 与 M 完全隔离，Presenter 中介；MVVM：ViewModel 用双向绑定（观察者）自动同步 V——「双向绑定」只属于 MVVM。</li>
+<li><strong>负载均衡层次与策略</strong>：DNS（地理级）→ 反向代理（Nginx，应用入口）→ 应用集群 → 数据层（读写分离/分库）；策略：轮询、最少连接、源 IP 哈希（会话粘滞）、加权。</li>
+<li><strong>REST 约束</strong>：资源由 URI 唯一标识、统一接口（GET/POST/PUT/DELETE）、无状态（请求自带全部上下文）、可缓存、分层系统。无状态≠不保存业务数据（是服务端不存会话状态）。</li>
+<li><strong>缓存三问题</strong>：穿透（查不存在的数据绕过缓存→布隆过滤器/空值缓存）、击穿（单个热点 key 过期瞬间高并发→互斥重建/逻辑过期/热点永不过期）、雪崩（大量 key 同时失效或缓存宕机→TTL 加随机错峰/多级缓存/缓存集群高可用）。判据三字诀：不存在=穿透，单个热点=击穿，一大片=雪崩。</li>
+<li><strong>会话与令牌</strong>：Session（状态存服务端，需粘滞或集中存储 Redis）；JWT（自包含签名令牌 Header.Payload.Signature，无状态适配分布式；缺点难吊销→短有效期+刷新令牌）。</li>
+<li><strong>XSS 与 CSRF</strong>：XSS=向页面注入恶意脚本在用户浏览器执行→输出转义、CSP、HttpOnly Cookie；CSRF=借用户已登录身份伪造跨站请求→CSRF Token、SameSite Cookie、校验 Referer。</li>
+<li><strong>API 网关</strong>：路由转发、统一鉴权、限流熔断入口、响应聚合、日志监控；限流三算法：计数器、漏桶（恒速）、令牌桶（允许突发）；业务逻辑不下放网关。</li>
+<li><strong>同步与异步</strong>：同步 RPC/HTTP（实时强一致、耦合高）；异步消息队列（解耦、削峰、最终一致，须幂等消费）；选型：主交易链路→同步，旁路动作（通知/积分/日志）与峰值缓冲→异步。</li>
+<li><strong>单体到微服务演进判据</strong>：单体适合小团队快交付低复杂度；演进信号：模块耦合发布互相拖累、局部热点需独立扩展、团队并行受限；路径：先模块化单体解耦→按业务边界（限界上下文）拆→独立部署，反对一步到位。</li>
+</ol>
+<p><strong>微服务篇（9 张）</strong></p>
+<ol start="11">
+<li><strong>微服务特征与 SOA 对比</strong>：四字诀「小（单一职责按业务拆）、独（独立进程独立部署）、轻（轻量通信 REST/消息）、去（去中心化治理与数据）」；SOA=ESB 集中智能总线，微服务=去中心化、管道保持笨。</li>
+<li><strong>拆分原则与粒度</strong>：按业务能力/限界上下文拆（不按技术层拆）；数据库随服务走；粒度以一个小团队（两个披萨）可独立开发部署运维为准；按技术层拆=分布式单体（最差结局）。</li>
+<li><strong>注册与发现</strong>：注册中心（Nacos/Consul/Eureka）：服务启动注册元数据→消费者查询实例列表→心跳健康检查自动剔除故障实例；客户端发现（消费者自行负载均衡）vs 服务端发现（中间负载均衡器选）。</li>
+<li><strong>通信与事件驱动三部件</strong>：同步 REST（通用）/gRPC（内部高性能二进制）；异步消息队列（解耦削峰）；事件驱动架构：事件源（产生并声明事件）→事件管理器（事件队列/绑定表，登记与派遣）→事件处理器（注册处理过程，事件触发时被调用）；口诀「源-管-理」（2020上案例五真题考部件名）。</li>
+<li><strong>治理四保护</strong>：限流（入口过载，令牌桶允许突发）、熔断（依赖故障快速失败，断路器三态：关闭→打开→半开试探恢复）、降级（保核心弃边缘返回兜底数据）、灰度（按比例放量，秒级回滚）。</li>
+<li><strong>可观测三支柱</strong>：日志（集中聚合检索，ELK）、指标（时序监控告警，Prometheus）、链路追踪（全局 TraceId 串起跨服务调用链，定位慢点与故障环）；「一次下单慢在哪」→链路追踪。</li>
+<li><strong>配置中心与容器编排</strong>：配置中心（集中配置动态下发不重启生效——限流阈值/灰度开关热更新）；容器（Docker 镜像保证环境一致性）；K8s 三大能力：滚动更新、自愈、弹性伸缩（HPA）。</li>
+<li><strong>每服务一库（数据自治）</strong>：每个微服务独占自己的库；跨服务取数只走对方 API 或订阅事件，禁直连他库；代价：跨库 JOIN 消失→字段级冗余/事件最终同步/聚合服务。</li>
+<li><strong>最终一致 Saga 与 TCC</strong>：Saga=本地事务序列+失败时补偿事务（逆向回滚，补偿须幂等）；TCC=Try 预留→Confirm 提交→Cancel 释放（应用层两阶段，不锁数据库资源）；判据：资金强一致→TCC/2PC；高并发允许秒级不一致→Saga/消息最终一致。</li>
 </ol>
 <h3 id="重点--辨析与题型k">重点 · 辨析与题型（K）</h3>
 <ul>
-<li>§7 架构风格对比表：每族记 1 实例 + 1 缺点（管道过滤=性能瓶颈在过滤器；黑板=无顺序依赖问题求解；事件=触发不确定难调试）。</li>
-<li>§13 Web 架构 / §16 微服务模式对比表：负载均衡层次、API 网关职责（路由/鉴权/限流聚合）。</li>
+<li>辨析：限流管「太多」，熔断管「坏了」，降级是熔断后的自救动作，灰度管「发布风险」；漏桶=绝对恒速，令牌桶=突发友好。</li>
+<li>判据：视图与模型是否直接对话（MVC/MVP/MVVM）；缓存三字诀（不存在/单热点/一大片）；XSS 注入脚本 vs CSRF 借身份发请求。</li>
 <li>案例论证四步骨架：①亮结论 ②分维度（性能/一致性/成本/演进）③风险+缓解 ④回扣题干约束。</li>
-<li>辨析：限流 vs 熔断（预防过载 vs 断开故障依赖）；部署蓝绿 vs 灰度（全量切换 vs 比例放量）。</li>
+<li>题型：技术方案论证（前后端分离/演进判据/四保护选型）、建模补图（事件系统三部件）、问题诊断（缓存三故障对号）。</li>
 </ul>
 <h3 id="补充--速览s">补充 · 速览（S）</h3>
-<p><a href="/kb/kp-10-4/" class="kb-ref" data-kb-id="kp-10-4" title="预览：10.4 架构标准">《架构标准》</a> · <a href="/kb/kp-10-5/" class="kb-ref" data-kb-id="kp-10-5" title="预览：10.5 架构实现">《架构实现》</a> · <a href="/kb/kp-1-1-2/" class="kb-ref" data-kb-id="kp-1-1-2" title="预览：1.1 Web 应用及特征">《Web 应用及特征》</a> · <a href="/kb/kp-1-3-2/" class="kb-ref" data-kb-id="kp-1-3-2" title="预览：1.3 开发框架（Java EE、.NET、Web 层）">《开发框架（Java EE、.NET、Web 层）》</a> · <a href="/kb/kp-1-4-2/" class="kb-ref" data-kb-id="kp-1-4-2" title="预览：1.4 系统开发（协议、存储、客户端/服务端、部署）">《系统开发（协议、存储、客户端/服务端、部署）》</a> · <a href="/kb/kp-1-5-2/" class="kb-ref" data-kb-id="kp-1-5-2" title="预览：1.5 Web 应用测试">《Web 应用测试》</a> · <a href="/kb/kp-5-1/" class="kb-ref" data-kb-id="kp-5-1" title="预览：5.1 微服务概述与特征">《微服务概述与特征》</a> · <a href="/kb/kp-low-code-nocode/" class="kb-ref" data-kb-id="kp-low-code-nocode" title="预览：无代码/低代码">《无代码/低代码》</a></p>
+<p><a href="/kb/kp-1-1-2/" class="kb-ref" data-kb-id="kp-1-1-2" title="预览：1.1 Web 应用及特征">《Web 应用及特征》</a> · <a href="/kb/kp-1-3-2/" class="kb-ref" data-kb-id="kp-1-3-2" title="预览：1.3 开发框架（Java EE、.NET、Web 层）">《开发框架（Java EE、.NET、Web 层）》</a> · <a href="/kb/kp-1-4-2/" class="kb-ref" data-kb-id="kp-1-4-2" title="预览：1.4 系统开发（协议、存储、客户端/服务端、部署）">《系统开发（协议、存储、客户端/服务端、部署）》</a> · <a href="/kb/kp-5-1/" class="kb-ref" data-kb-id="kp-5-1" title="预览：5.1 微服务概述与特征">《微服务概述与特征》</a> · <a href="/kb/kp-low-code-nocode/" class="kb-ref" data-kb-id="kp-low-code-nocode" title="预览：无代码/低代码">《无代码/低代码》</a></p>
 <h3 id="可放弃--止损d">可放弃 · 止损（D）</h3>
 <ul>
-<li><a href="/kb/kp-10-4/" class="kb-ref" data-kb-id="kp-10-4" title="预览：10.4 架构标准">《架构标准》</a>条文细节（如 SABR/具体标准编号）——判定信号：问「标准编号/发布机构」。替代动作：记一句「有架构描述标准与评估标准」。</li>
+<li>Service Mesh（Istio/边车）内部机制细节——判定信号：问 sidecar 注入/流量规则 YAML。替代动作：记一句「服务网格把治理能力下沉基础设施层」。</li>
+<li>特定注册中心产品参数（Nacos 分区容错模式配置项）。</li>
 </ul>
 <h3 id="强化记忆块">强化记忆块</h3>
 <ul>
-<li>回收 D-1：D2 全部 M 卡；回收 D-3：D1 卡组。</li>
-<li>自测问句：①五风格族各举一例？②敏感点 vs 权衡点？③穿透/击穿/雪崩对策各一？④限流和熔断谁管入口？⑤4+1 的 +1 是什么？⑥事件系统三部件是什么（源-管-理）？</li>
-<li>错卡按日归档（D3 前缀）。</li>
+<li>回收 D-1：D2 需求 M 卡；回收 D-3：D1 精华 M 卡。</li>
+<li>自测问句：①MVVM 的双向绑定靠什么实现？②缓存三问题判据三字诀？③REST 五约束？④限流/熔断/降级/灰度各管什么？⑤事件系统三部件口诀？⑥拆分依据什么、什么粒度？⑦Saga 失败靠什么回滚？</li>
+<li>错卡：轨道 Web/微服务课程未首过点自动转卡进 <code>/recall</code>。</li>
 </ul>
 <h3 id="练题收口">练题收口</h3>
-<p>第 12 章练习 15 题；案例域（Web/微服务）速查卡各 10 分钟。</p>
+<p>第 16、20 章练习各 15 题；<code>/track</code> Web + 微服务单元各打一课；配套案例 CA-132 / CA-133 三部曲练一轮。</p>
 <hr>
 <p><a id="d4"></a></p>
-<h2 id="d4--数据库--实现与测试教程-514--p0">D4 · 数据库 + 实现与测试（教程 5、14 · P0）</h2>
+<h2 id="d4--数据库四大方面--四--教程-5--p0">D4 · 数据库（四大方面 · 四 · 教程 5 · P0）</h2>
+<blockquote>
+<p>选做池第二主力：真题 12 席（建模与诊断双考）。配套轨道：<code>/track</code> 数据库课程 10 点 · 仿真案例 CA-134。</p>
+</blockquote>
 <h3 id="必会--默写卡m">必会 · 默写卡（M）</h3>
 <ol>
 <li><strong>三级模式两级映像</strong>：外模式/概念模式/内模式；外-概念映像（逻辑独立性）、概念-内映像（物理独立性）。</li>
-<li><strong>ACID</strong>：原子、一致、隔离、持久（原一隔持）。</li>
-<li><strong>范式链</strong>：1NF→2NF（消部分依赖）→3NF（消传递依赖）→BCNF（主属性也决定）→4NF。</li>
-<li><strong>授权粒度</strong>：库→表→行→列（4 级）。</li>
-<li><strong>备份口诀</strong>：物逻分，冷热全增异。</li>
-<li><strong>增量 vs 差异</strong>：增量基于「上次任意备份」；差异基于「上次完全备份」（易混！）★</li>
-<li><strong>分片设计原则</strong>：均衡、相关、可扩展。</li>
-<li><strong>分片正确性准则</strong>：完备、重构、不相交（勿与上条混答）★</li>
-<li><strong>E-R 转关系模式</strong>：实体→表；m:n 联系单独成表（主键=双方主键组合）。</li>
-<li><strong>OLTP vs OLAP</strong>：事务（增删改、行级、当前）vs 分析（聚合、多维、历史）。</li>
-<li><strong>CAP</strong>：一致性/可用性/分区容忍三选二；分区必然存在→实质 P 必选，C 与 A 权衡。</li>
-<li><strong>NoSQL 四型</strong>：列（HBase）、文档（MongoDB）、键值（Redis）、图（Neo4j）。</li>
-<li><strong>数仓四特性</strong>：面向主题、集成、相对稳定、时变。</li>
-<li><strong>V 模型对应</strong>：单元↔详细设计、集成↔概要设计、系统↔需求、验收↔用户需求。</li>
-<li><strong>黑白盒方法</strong>：黑盒=等价类/边界值/因果图/判定表；白盒=语句/判定/条件/判定-条件/路径覆盖。</li>
-<li><strong>冒烟 vs 回归</strong>：冒烟=主流程可跑再细测；回归=修改后确认未引入新问题。</li>
+<li><strong>ER 建模与联系转化</strong>：实体（矩形）/属性（椭圆）/联系（菱形）1:1/1:N/M:N；转关系模式：1:N 联系并入 N 端加外键；M:N 联系必须单独建关系模式（两端主键+联系自身属性）；1:1 并入任意一端。</li>
+<li><strong>范式判定</strong>：1NF 属性原子不可再分；2NF 消除非主属性对码的部分函数依赖（联合主码场景高发）；3NF 消除传递依赖；BCNF 每个决定因素都包含码。口诀：部分依赖→2NF，传递依赖→3NF。</li>
+<li><strong>反范式设计</strong>：有意引入冗余（冗余列/派生列/历史快照）换查询性能；代价：冗余一致性维护；适用：读多写少、JOIN 代价高、报表统计；快照式冗余（订单存下单时商品名与单价）最正当。</li>
+<li><strong>视图与索引</strong>：视图=虚表，只存「定义」不存数据；作用：简化查询、行列级权限、逻辑独立性。索引 B+ 树有序→等值/范围快；代价：写放大+空间；联合索引最左前缀。</li>
+<li><strong>事务 ACID</strong>：原子性（全做或全不做，undo）、一致性（约束不被破坏，是目的）、隔离性（并发互不干扰，锁+MVCC）、持久性（提交即落盘，redo/WAL）。</li>
+<li><strong>并发问题与隔离级别</strong>：脏读（读未提交）、不可重复读（同行值变——他人 update 提交）、幻读（行数变——他人 insert/delete）；级别：读未提交＜读已提交＜可重复读（MySQL 默认）＜串行化。</li>
+<li><strong>封锁协议与死锁</strong>：两段锁 2PL（先全部加锁再统一解锁）保证可串行化调度但不防死锁；死锁四条件：互斥、占有且等待、不可剥夺、循环等待；预防：一次封锁法/顺序封锁法；DBMS 检测+牺牲最年轻事务。</li>
+<li><strong>分布式事务 2PC/TCC</strong>：2PC 两阶段：准备（投票）+提交，强一致；缺陷：同步阻塞、协调者单点、资源锁定长；TCC=Try 预留/Confirm 提交/Cancel 释放（应用层两阶段不锁库）；判据：资金强一致→2PC/TCC，高并发容忍秒级不一致→消息最终一致。</li>
+<li><strong>CAP 与 BASE、分库分表</strong>：CAP：分区容错 P 为网络必然（必选），实际在 C 与 A 权衡（CP=ZooKeeper 宁停不错；AP=Eureka 保可用返回略旧）；BASE=基本可用、软状态、最终一致。拆分：先垂直按业务拆库，单表过大再水平按行分片（哈希/范围）；分片键选查询最高频且分布均匀列；读写分离主写从读，复制延迟→强一致读强制读主库。</li>
 </ol>
 <h3 id="重点--辨析与题型k">重点 · 辨析与题型（K）</h3>
 <ul>
-<li>§23 范式判定流程：找候选键→查部分依赖（2NF）→查传递依赖（3NF）→主属性对键的依赖（BCNF）。</li>
-<li>并发控制：两段锁协议（扩展期只加锁）保证可串行化；死锁=预防（一次锁全）vs 检测（等待图）。</li>
-<li>§8 测试方法对比表：判定覆盖 vs 条件覆盖 vs 判定-条件覆盖（最易混三兄弟）。</li>
-<li>计算题：事务并发调度（冲突可串行化判定用前趋图找环）。</li>
+<li>判定链：范式三步（非原子→部分→传递）；联系转化先判 1:1/1:N/M:N；三读判据（未提交=脏读，值变=不可重复读，行数变=幻读）。</li>
+<li>隔离级别阶梯：级别越高一致性越强、并发性能越低。</li>
+<li>案例题型：ER 转关系模式（M:N 单独建表是高频扣分点）；范式判定与规范化路径；读写分离/分库分表论证（含复制延迟对策）。</li>
 </ul>
 <h3 id="补充--速览s">补充 · 速览（S）</h3>
-<p><a href="/kb/kp-data-mining/" class="kb-ref" data-kb-id="kp-data-mining" title="预览：数据挖掘">《数据挖掘》</a> · <a href="/kb/kp-3-3/" class="kb-ref" data-kb-id="kp-3-3" title="预览：3.3 数据库控制（并发、完整性、安全、备份恢复、优化）">《数据库控制（并发、完整性、安全、备份恢复、优化）》</a> · <a href="/kb/kp-12-1/" class="kb-ref" data-kb-id="kp-12-1" title="预览：12.1 软件实现">《软件实现》</a> · <a href="/kb/kp-12-2/" class="kb-ref" data-kb-id="kp-12-2" title="预览：12.2 测试概述">《测试概述》</a> · <a href="/kb/kp-12-5/" class="kb-ref" data-kb-id="kp-12-5" title="预览：12.5 测试组织">《测试组织》</a> · <a href="/kb/kp-12-6/" class="kb-ref" data-kb-id="kp-12-6" title="预览：12.6 软件部署">《软件部署》</a> · <a href="/kb/kp-data-mgmt-analysis-modeling/" class="kb-ref" data-kb-id="kp-data-mgmt-analysis-modeling" title="预览：数据管理/分析/建模/管理/应用">《数据管理/分析/建模/管理/应用》</a></p>
+<p><a href="/kb/kp-3-3/" class="kb-ref" data-kb-id="kp-3-3" title="预览：3.3 数据库控制（并发、完整性、安全、备份恢复、优化）">《数据库控制（并发、完整性、安全、备份恢复、优化）》</a> · 《NoSQL（列/文档/键值/图四型）》 · <a href="/kb/kp-data-warehouse/" class="kb-ref" data-kb-id="kp-data-warehouse" title="预览：数据仓库">《数据仓库与数据挖掘》</a></p>
 <h3 id="可放弃--止损d">可放弃 · 止损（D）</h3>
 <ul>
-<li>关系代数复杂推导（除法/多步连接优化）——判定信号：题干给复杂查询要求写代数式。替代动作：写自然语言步骤拿结构分。</li>
-<li>NoSQL 内部存储引擎实现细节。</li>
+<li>关系代数复杂推导（除法/多步连接优化）——判定信号：要求写代数式。替代动作：写自然语言步骤拿结构分。</li>
+<li>NoSQL 存储引擎实现细节、数仓建模维度细节。</li>
 </ul>
 <h3 id="强化记忆块">强化记忆块</h3>
 <ul>
-<li>回收 D-1：D3 M 卡；回收 D-3：D2 M 卡。</li>
-<li>自测问句：①逻辑独立性靠哪级映像？②差异备份基于哪次备份？③分片原则 vs 准则各三条？④CAP 实际怎么选？⑤判定覆盖和条件覆盖的区别？</li>
-<li>错卡回收 + 新错。</li>
+<li>回收 D-1：D3 Web+微服务 M 卡；回收 D-3：D2 需求 M 卡。</li>
+<li>自测问句：①M:N 联系怎么转？②部分依赖/传递依赖分别卡哪级范式？③视图存什么？④脏读/不可重复读/幻读各一句判据？⑤2PL 保证什么不保证什么？⑥CAP 实际选什么、为什么？⑦分片键怎么选？</li>
+<li>错卡：轨道数据库课程未首过点自动转卡进 <code>/recall</code>。</li>
 </ul>
 <h3 id="练题收口">练题收口</h3>
-<p>第 5、14 章练习各 15 题；范式判定题至少手推 2 道。</p>
+<p>第 5 章练习 15 题；<code>/track</code> 数据库单元打一课；配套案例 CA-134 三部曲练一轮。</p>
+<hr>
+<p><a id="d1"></a></p>
+<h2 id="d1--其余模块精华--软工-uml-oo教程-7--p0">D1 · 其余模块精华 · 软工 UML OO（教程 7 · P0）</h2>
+<blockquote>
+<p>四大方面之外的高频模块精华压缩章（综合知识上午题主力；案例域 UML 建模题支撑）。</p>
+</blockquote>
+<h3 id="必会--默写卡m">必会 · 默写卡（M）</h3>
+<ol>
+<li><strong>开发模型选型口诀</strong>：需求稳→瀑布/V；风险大→螺旋；要快→RAD/敏捷；OO→喷泉/RUP。螺旋每轮四步：计风实评。</li>
+<li><strong>RUP</strong>：四阶段「初细构移」；三特点「用例驱动、架构中心、迭代增量」。</li>
+<li><strong>CMM/CMMI</strong>：CMM 五级「初重定管优」；CMMI 阶段式「初管定量优」；三级「已定义」=组织级标准过程。</li>
+<li><strong>UML 关系强弱</strong>：组合 ＞ 聚合 ＞ 关联 ＞ 依赖；泛化/实现属类型/契约关系不参与此序（实线=泛化、虚线=实现）。聚合部分可独立存活，组合部分随整体生灭。</li>
+<li><strong>UML 常考十图</strong>：静态五种（类/对象/包/组件/部署）＋动态五种（用例/活动/状态机/序列/通信）；UML 2.5 全集 14 图。</li>
+<li><strong>OO 三特性</strong>：封装（隐藏实现仅暴露接口）、继承（复用并特化）、多态（同一消息不同响应）；评价尺度「高内聚、低耦合」。</li>
+</ol>
+<h3 id="重点--辨析与题型k">重点 · 辨析与题型（K）</h3>
+<ul>
+<li>给场景选模型：先找题干锚词「需求明确/风险/工期紧/OO」。</li>
+<li>辨析：瀑布 vs 增量（整体规划）；螺旋 vs 原型（风险驱动）；RUP vs 敏捷（重量 vs 轻量）。</li>
+</ul>
+<h3 id="补充--速览s">补充 · 速览（S）</h3>
+<p><a href="/kb/kp-spi-cmmi/" class="kb-ref" data-kb-id="kp-spi-cmmi" title="预览：软件过程改进">《软件过程改进》</a> · <a href="/kb/kp-oo-technology/" class="kb-ref" data-kb-id="kp-oo-technology" title="预览：面向对象技术">《面向对象技术》</a> · <a href="/kb/kp-5-7/" class="kb-ref" data-kb-id="kp-5-7" title="预览：5.7 统一建模语言 UML">《统一建模语言 UML》</a> · <a href="/kb/kp-software-product-line/" class="kb-ref" data-kb-id="kp-software-product-line" title="预览：软件产品线">《软件产品线》</a></p>
+<h3 id="可放弃--止损d">可放弃 · 止损（D）</h3>
+<ul>
+<li><a href="/kb/kp-5-8/" class="kb-ref" data-kb-id="kp-5-8" title="预览：5.8 形式化方法">《形式化方法》</a>（Z 语言/Petri 网证明级）——只背「用数学语言严格规约与验证」一句。</li>
+<li>SPI 等级评估细则、CASE 工具分类细节。</li>
+</ul>
+<h3 id="强化记忆块">强化记忆块</h3>
+<ul>
+<li>回收 D-1：D7 企信论文精华；回收 D-3：D5 安全项管精华。</li>
+<li>自测问句：①螺旋四步？②CMMI 第 3 级？③聚合与组合的生死差别？④静态五图？⑤OO 三特性各一句？</li>
+</ul>
 <hr>
 <p><a id="d5"></a></p>
-<h2 id="d5--信息安全--项目管理计算教程-98--p0">D5 · 信息安全 + 项目管理计算（教程 9、8 · P0）</h2>
+<h2 id="d5--其余模块精华--安全--项管计算教程-98--p0">D5 · 其余模块精华 · 安全 + 项管计算（教程 9、8 · P0）</h2>
 <h3 id="必会--默写卡m">必会 · 默写卡（M）</h3>
 <ol>
-<li><strong>BLP</strong>（保密）：下读上写——不上读、不下写。★</li>
-<li><strong>Biba</strong>（完整）：上读下写——不下读、不上写。与 BLP 相反。★</li>
-<li><strong>DAC/MAC/RBAC</strong>：自主（属主授权）/强制（安全标签 lattice）/基于角色（用户-角色-权限）。</li>
-<li><strong>加密三兄弟</strong>：对称（AES 快、密钥分发难）、非对称（RSA 慢、公私钥）、摘要（MD5/SHA 防篡改不加密）。</li>
-<li><strong>数字签名</strong>：私钥加密摘要，公钥验证——不可抵赖。</li>
-<li><strong>PKI/KMI/SPK</strong>：第三方 CA 体系 / 单向密钥管理 / 混合对钥。</li>
-<li><strong>防火墙/VPN/IDS</strong>：边界隔离 / 加密隧道（IPSec） / 入侵检测（旁路监听）。</li>
-<li><strong>SSL/HTTPS/IPSec</strong>：传输层安全=应用层；HTTPS=HTTP+SSL；IPSec=网络层。</li>
-<li><strong>Kerberos</strong>：第三方票据认证（AS+TGS），防重放用时间戳。</li>
-<li><strong>容灾</strong>：RTO（恢复时长）/RPO（数据丢失量）；等级 1-6（国际/share78）或 1-5（国标）。</li>
-<li><strong>可靠性</strong>：串联 R=∏Ri；并联 R=1−∏(1−Ri)；模冗余 2n+1 容忍 n 故障。★</li>
-<li><strong>可用性</strong> = MTTF/MTBF×100%；MTBF = MTTF + MTTR。</li>
-<li><strong>N 版本 vs 恢复块</strong>：前向恢复/静态冗余 vs 后向恢复/动态冗余（设计多样性）。★</li>
-<li><strong>挣值四公式</strong>：CV=EV−AC、SV=EV−PV、CPI=EV/AC、SPI=EV/PV；&gt;1/正值=好。★</li>
-<li><strong>完工预测</strong>：EAC=BAC/CPI（典型偏差持续）；ETC=EAC−AC。</li>
-<li><strong>沟通渠道</strong> n(n−1)/2；<strong>PERT</strong> 期望 (O+4M+P)/6。★</li>
-<li><strong>WBS 100% 规则</strong>：分解包含全部工作且不重叠。</li>
-<li><strong>风险应对</strong>：规避/转移/减轻/接受；团队五阶段：形成→震荡→规范→成熟（执行）→解体。</li>
+<li><strong>BLP 与 Biba</strong>：BLP（保密）下读上写——不上读、不下写；Biba（完整）上读下写，与 BLP 相反。★</li>
+<li><strong>访问控制三模型</strong>：DAC（属主授权）/MAC（安全标签 lattice）/RBAC（用户-角色-权限）。</li>
+<li><strong>加密三兄弟 + 数字签名</strong>：对称（AES 快、密钥分发难）、非对称（RSA 慢、公私钥）、摘要（MD5/SHA 防篡改不加密）；数字签名=私钥加密摘要、公钥验证——不可抵赖。</li>
+<li><strong>边界三件套与协议层</strong>：防火墙（边界隔离）/VPN（加密隧道 IPSec=网络层）/IDS（旁路监听）；HTTPS=HTTP+SSL（传输层）。</li>
+<li><strong>容灾</strong>：RTO（恢复时长）/RPO（数据丢失量）；等级国际 1-6 / 国标 1-5。</li>
+<li><strong>可靠性</strong>：串联 R=∏Ri；并联 R=1−∏(1−Ri)；模冗余 2n+1 容忍 n 故障；可用性=MTTF/MTBF×100%，MTBF=MTTF+MTTR。★</li>
+<li><strong>挣值四公式</strong>：CV=EV−AC、SV=EV−PV、CPI=EV/AC、SPI=EV/PV；&gt;1/正值=好；EAC=BAC/CPI（典型偏差持续）。★</li>
+<li><strong>PERT 与沟通</strong>：PERT 期望 (O+4M+P)/6、方差 ((P−O)/6)²；沟通渠道 n(n−1)/2。★</li>
 </ol>
 <h3 id="重点--辨析与题型k">重点 · 辨析与题型（K）</h3>
 <ul>
-<li>§6 访问控制对比表（BLP/Biba/Lattice 方向与适用域：军事保密 vs 金融完整）。</li>
-<li>§20 加密认证表（对称 vs 非对称用途组合：非对称传对称密钥，对称加密数据）。</li>
-<li>§21 防火墙（包过滤=网络层快但弱；应用网关=代理强但慢）＋ §22 容灾等级表。</li>
-<li><strong>挣值计算四步流程</strong>：①定基线 PV ②读题取 EV/AC ③套四公式判好差 ④若问预测→EAC=BAC/CPI。</li>
-<li>进度压缩：赶工（加资源加成本）vs 快速跟进（并行加风险）。</li>
+<li>挣值计算四步：①定基线 PV ②读题取 EV/AC ③套四公式判好差 ④问预测→EAC=BAC/CPI。</li>
+<li>N 版本 vs 恢复块：前向恢复/静态冗余 vs 后向恢复/动态冗余。★</li>
+<li>风险应对四策：规避/转移/减轻/接受；团队五阶段：形成→震荡→规范→成熟→解体。</li>
 </ul>
 <h3 id="补充--速览s">补充 · 速览（S）</h3>
-<p><a href="/kb/kp-7-1/" class="kb-ref" data-kb-id="kp-7-1" title="预览：7.1 信息系统安全体系">《信息系统安全体系》</a> · <a href="/kb/kp-7-6/" class="kb-ref" data-kb-id="kp-7-6" title="预览：7.6 安全管理措施（审计、CC、隐私）">《安全管理措施（审计、CC、隐私）》</a> · <a href="/kb/kp-6-6/" class="kb-ref" data-kb-id="kp-6-6" title="预览：6.6 质量管理（McCall、PDCA、QA/QC）">《质量管理（McCall、PDCA、QA/QC）》</a> · <a href="/kb/kp-6-9/" class="kb-ref" data-kb-id="kp-6-9" title="预览：6.9 信息（文档）管理 GB/T 8567">《信息（文档）管理 GB/T 8567》</a> · <a href="/kb/kp-6-7/" class="kb-ref" data-kb-id="kp-6-7" title="预览：6.7 人力资源管理（团队阶段、沟通）">《人力资源管理（团队阶段、沟通）》</a> · <a href="/kb/kp-6-2/" class="kb-ref" data-kb-id="kp-6-2" title="预览：6.2 范围管理（WBS）">《范围管理（WBS）》</a> · <a href="/kb/kp-6-8/" class="kb-ref" data-kb-id="kp-6-8" title="预览：6.8 风险管理">《风险管理》</a> · <a href="/kb/kp-6-5/" class="kb-ref" data-kb-id="kp-6-5" title="预览：6.5 配置管理">《配置管理》</a></p>
+<p><a href="/kb/kp-7-1/" class="kb-ref" data-kb-id="kp-7-1" title="预览：7.1 信息系统安全体系">《信息系统安全体系》</a> · <a href="/kb/kp-7-6/" class="kb-ref" data-kb-id="kp-7-6" title="预览：7.6 安全管理措施（审计、CC、隐私）">《安全管理措施》</a> · <a href="/kb/kp-6-6/" class="kb-ref" data-kb-id="kp-6-6" title="预览：6.6 质量管理（McCall、PDCA、QA/QC）">《质量管理》</a> · <a href="/kb/kp-6-8/" class="kb-ref" data-kb-id="kp-6-8" title="预览：6.8 风险管理">《风险管理》</a> · <a href="/kb/kp-6-5/" class="kb-ref" data-kb-id="kp-6-5" title="预览：6.5 配置管理">《配置管理》</a></p>
 <h3 id="可放弃--止损d">可放弃 · 止损（D）</h3>
 <ul>
-<li>RSA 密钥计算/大数分解级数学——判定信号：要求算具体密钥。替代动作：写「公钥加密私钥解密」概念分。</li>
-<li>CC 评估等级（EAL1–7）逐级内容、GB 17859 与等保的逐条映射。</li>
+<li>RSA 大数计算、CC 评估等级（EAL）逐级内容、等保逐条映射。</li>
 </ul>
 <h3 id="强化记忆块">强化记忆块</h3>
 <ul>
-<li>回收 D-1：D4 M 卡（含增量/差异★）；回收 D-3：D3 M 卡。</li>
-<li>自测问句：①BLP 允许怎么读写？②挣值四公式各用什么基线？③CPI&lt;1 意味着什么？④EAC 典型公式？⑤模冗余 3 模块容忍几个故障？</li>
-<li>错卡：安全方向类错卡（BLP/Biba、增量/差异）强制每日重默直到销卡。</li>
+<li>回收 D-1：D6 计组网络精华；回收 D-3：D1 软工精华。</li>
+<li>自测问句：①BLP 允许怎么读写？②挣值四公式？③CPI&lt;1 意味着？④模冗余 3 模块容忍几故障？⑤PERT 期望公式？</li>
 </ul>
-<h3 id="练题收口">练题收口</h3>
-<p>第 9、8 章练习各 15 题；挣值计算题手算 2 道（quick-pm-calc）。</p>
 <hr>
 <p><a id="d6"></a></p>
-<h2 id="d6--计算机系统--网络--设计--运维教程-341315--p1">D6 · 计算机系统 + 网络 + 设计 + 运维（教程 3、4、13、15 · P1）</h2>
+<h2 id="d6--其余模块精华--计组网络--架构--设计运维教程-34121315--p1">D6 · 其余模块精华 · 计组网络 + 架构 + 设计运维（教程 3、4、12、13、15 · P1）</h2>
 <h3 id="必会--默写卡m">必会 · 默写卡（M）</h3>
 <ol>
-<li><strong>Cache 均访</strong>：t3 = tc×h + tm×(1−h)。★</li>
-<li><strong>RISC vs CISC</strong>：RISC P=I×CPI×T 快 3~5 倍；CISC 80/20。</li>
-<li><strong>RAID1 利用率 50%</strong>；RAID5 分布式校验。</li>
-<li><strong>I/O 递进</strong>：查询→中断→DMA→通道→I/O 处理机。</li>
-<li><strong>总线带宽</strong> = 宽度 × 频率（注意单位换算）。</li>
-<li><strong>死锁四条件</strong>：互斥、占有等待、不可剥夺、环路等待；破坏任一即可预防。</li>
 <li><strong>PV 操作</strong>：P 减 1 阻塞、V 加 1 唤醒；互斥信号量初值 1，同步初值 0/资源数。★</li>
 <li><strong>页面置换</strong>：LRU 最近最久未用、FIFO（有 Belady 异常）、OPT 理论最优。</li>
-<li><strong>子网主机数</strong> = 2^m − 2（去网络地址+广播地址）。★</li>
-<li><strong>端口</strong>：HTTP 80 / HTTPS 443 / FTP 21 / DNS 53。</li>
-<li><strong>IPv4 32 位 / IPv6 128 位</strong>；OSI 7 层 ↔ TCP/IP 4 层。</li>
-<li><strong>耦合七级（低→高）</strong>：非直接、数据、标记、控制、外部、公共、内容。★</li>
-<li><strong>内聚七级（高→低）</strong>：功能、顺序、通信、过程、时间、逻辑、偶然。功能内聚最优。★</li>
-<li><strong>SOLID</strong>：单一职责/开闭/里氏替换/接口隔离/依赖倒置；ECB=实体-控制-边界。</li>
+<li><strong>子网主机数</strong>：2^m − 2（去网络地址+广播地址）；IPv4 32 位 / IPv6 128 位；OSI 7 层 ↔ TCP/IP 4 层。★</li>
+<li><strong>耦合七级（低→高）</strong>：非直接、数据、标记、控制、外部、公共、内容。内聚七级（高→低）：功能、顺序、通信、过程、时间、逻辑、偶然；功能内聚最优。★</li>
 <li><strong>设计模式三类</strong>：创建 5（单例/工厂/抽象工厂/建造者/原型）、结构 7（适配器/桥/组合/装饰/外观/享元/代理）、行为 11（观察者/策略/命令/状态…）。★</li>
-<li><strong>运维指标</strong>：MTBF=MTTF+MTTR；A=MTTF/MTBF×100%。</li>
-<li><strong>维护四类</strong>：改正/适应/完善/预防（完善占比最大）。★</li>
-<li><strong>转换四策略</strong>：直接/并行/分段/试点（风险↔成本：并行最稳最贵）。</li>
-<li><strong>遗留系统四象限</strong>：淘汰/继承/改造/集成（按技术水平×业务价值）。</li>
+<li><strong>4+1 视图</strong>：场景（+1）统摄 逻辑/开发/进程/物理 四视图。</li>
+<li><strong>五大风格族锚词</strong>：数据流（管道-过滤/批处理）｜调用返回（分层/C-S/三层/OO）｜数据中心（仓库/黑板/超文本）｜虚拟机（解释器/规则系统）｜独立构件（事件系统/进程通信）。</li>
+<li><strong>质量属性六元与 ATAM</strong>：性能、可用性、安全性、可修改性、可测试性、易用性；敏感点=单属性拐点，权衡点=多属性冲突点（加密=安全↑性能↓）。</li>
+<li><strong>维护四类</strong>：改正/适应/完善/预防（完善占比最大）；转换四策略：直接/并行/分段/试点（并行最稳最贵）。★</li>
+<li><strong>V 模型与测试方法</strong>：单元↔详细设计、集成↔概要设计、系统↔需求、验收↔用户需求；黑盒=等价类/边界值/因果图/判定表，白盒=语句/判定/条件/判定-条件/路径覆盖；冒烟=主流程可跑再细测，回归=改后确认未引入新问题。</li>
 </ol>
 <h3 id="重点--辨析与题型k">重点 · 辨析与题型（K）</h3>
 <ul>
-<li>§4 RAID 对比表（0 条带 /1 镜像 /5 校验 /10 组合：容量×冗余×成本）。</li>
-<li>§25 耦合内聚表：给模块场景判级别（共享数据缓冲=公共耦合；通过参数传递记录=标记耦合）。</li>
-<li>§26 设计模式三类速记表 + 场景选模式（发布订阅=观察者；算法可换=策略；接口不兼容=适配器）。</li>
-<li>§9 维护类型判定：改 bug=改正；环境变=适应；加功能=完善；防患=预防。</li>
-<li>§10 转换对比 + §29 遗留四象限决策矩阵。</li>
-<li>子网计算题流程：m 位主机位→2^m−2→掩码位数→聚合取最长公共前缀。</li>
+<li>耦合内聚判级：共享全局变量=公共耦合；通过参数传记录=标记耦合。</li>
+<li>场景选模式：发布订阅=观察者；算法可换=策略；接口不兼容=适配器。</li>
+<li>架构风格对比表：每族记 1 实例 + 1 缺点（管道过滤=瓶颈在过滤器；事件系统=触发不确定难调试）。</li>
 </ul>
 <h3 id="补充--速览s">补充 · 速览（S）</h3>
-<p><a href="/kb/kp-1-5/" class="kb-ref" data-kb-id="kp-1-5" title="预览：1.5 多处理机系统（MPP/SMP、互连网络）">《多处理机系统（MPP/SMP、互连网络）》</a> · <a href="/kb/kp-2-4/" class="kb-ref" data-kb-id="kp-2-4" title="预览：2.4 网络工程（规划、设计、实施）">《网络工程（规划、设计、实施）》</a> · <a href="/kb/kp-11-2/" class="kb-ref" data-kb-id="kp-11-2" title="预览：11.2 处理流程设计（工作流 WFMS）">《处理流程设计（工作流 WFMS）》</a> · <a href="/kb/kp-11-6/" class="kb-ref" data-kb-id="kp-11-6" title="预览：11.6 输入输出设计">《输入输出设计》</a> · <a href="/kb/kp-11-7/" class="kb-ref" data-kb-id="kp-11-7" title="预览：11.7 人机交互设计">《人机交互设计》</a> · <a href="/kb/kp-13-2/" class="kb-ref" data-kb-id="kp-13-2" title="预览：13.2 运行管理">《运行管理》</a> · <a href="/kb/kp-13-3/" class="kb-ref" data-kb-id="kp-13-3" title="预览：13.3 故障管理">《故障管理》</a> · <a href="/kb/kp-13-5/" class="kb-ref" data-kb-id="kp-13-5" title="预览：13.5 系统评价">《系统评价》</a> · <a href="/kb/kp-2-3-2/" class="kb-ref" data-kb-id="kp-2-3-2" title="预览：2.3 嵌入式 OS（调度、优先级反转）">《嵌入式 OS（调度、优先级反转）》</a></p>
+<p><a href="/kb/kp-1-5/" class="kb-ref" data-kb-id="kp-1-5" title="预览：1.5 多处理机系统（MPP/SMP、互连网络）">《多处理机系统》</a> · <a href="/kb/kp-2-4/" class="kb-ref" data-kb-id="kp-2-4" title="预览：2.4 网络工程（规划、设计、实施）">《网络工程》</a> · <a href="/kb/kp-11-2/" class="kb-ref" data-kb-id="kp-11-2" title="预览：11.2 处理流程设计（工作流 WFMS）">《处理流程设计》</a> · <a href="/kb/kp-11-6/" class="kb-ref" data-kb-id="kp-11-6" title="预览：11.6 输入输出设计">《输入输出设计》</a> · <a href="/kb/kp-11-7/" class="kb-ref" data-kb-id="kp-11-7" title="预览：11.7 人机交互设计">《人机交互设计》</a> · <a href="/kb/kp-13-2/" class="kb-ref" data-kb-id="kp-13-2" title="预览：13.2 运行管理">《运行管理》</a></p>
 <h3 id="可放弃--止损d">可放弃 · 止损（D）</h3>
 <ul>
-<li>互连网络拓扑计算（立方体/混洗交换网直径、度数）——判定信号：问「N 节点直径」。替代动作：放弃。</li>
-<li>RAID 各级具体校验块分布图、中断时序细节计算。</li>
+<li>互连网络拓扑计算（立方体/混洗交换网）、RAID 校验块分布图、中断时序计算。</li>
 </ul>
 <h3 id="强化记忆块">强化记忆块</h3>
 <ul>
-<li>回收 D-1：D5 M 卡（挣值/BLP★）；回收 D-3：D4 M 卡；回收 D-7 周期起：D1。</li>
-<li>自测问句：①PV 操作互斥信号量初值？②Belady 异常属于哪种置换？③内容耦合为什么最差？④观察者模式的场景？⑤并行转换为什么最稳？</li>
-<li>错卡：本日新增 14 卡是错卡高发区（公式+七级表）。</li>
+<li>回收 D-1：D5 安全项管精华；回收 D-3：D2 需求 M 卡。</li>
+<li>自测问句：①PV 互斥信号量初值？②Belady 异常属于谁？③耦合最高/内聚最优？④观察者场景？⑤敏感点 vs 权衡点？</li>
 </ul>
-<h3 id="练题收口">练题收口</h3>
-<p>第 3、4、13、15 章练习各 10 题（题量分散，抓错题）。</p>
 <hr>
 <p><a id="d7"></a></p>
-<h2 id="d7--企业信息化--案例全域--论文--收尾教程-61721222--p2p3论文-p0">D7 · 企业信息化 + 案例全域 + 论文 + 收尾（教程 6、17–21、22、2 · P2/P3，论文 P0）</h2>
+<h2 id="d7--其余模块精华--企信--论文方法--收尾教程-621022--p2p3论文-p0">D7 · 其余模块精华 · 企信 + 论文方法 + 收尾（教程 6、2、10、22 · P2/P3，论文 P0）</h2>
 <h3 id="必会--默写卡m">必会 · 默写卡（M）</h3>
 <ol>
-<li><strong>规划三法</strong>：BSP 自上而下、CSF 关键成功因素、SST 策略集转化（与 D2 呼应，考场二选一必出）。</li>
-<li><strong>BPR 原则</strong>：以流程为中心、组织围绕流程、授权到一线、信息技术使能。</li>
-<li><strong>EAI 三层</strong>：数据集成、应用集成（API/消息）、业务流程集成（BPM）。</li>
-<li><strong>SCM 五环节</strong>：计采制配退（计划、采购、制造、配送、退货）。★</li>
-<li><strong>BI 三组件</strong>：仓库 + OLAP + 挖掘。</li>
-<li><strong>电商/政务模式</strong>：B2B/B2C/C2C/B2G/O2O；G2G/G2B/G2C/G2E。</li>
-<li><strong>案例单题 7 步法</strong>：看问题→圈约束→判题型→列骨架→答采分点→回扣题干→查卷面（25–30 min）。</li>
-<li><strong>四类题型判定</strong>：对比选型→论证；补图填空→建模；问题改进→诊断；获取干系人→需求识别。</li>
-<li><strong>论证四步骨架</strong>：结论先行→分维度（性能/一致性/成本/演进）→风险+缓解→回扣约束。</li>
-<li><strong>诊断三段式</strong>：现象→根因（分层：容量/架构/流程）→措施+指标（TPS/RT/可用性）。</li>
-<li><strong>论文摘要四句式</strong>：背景一句 + 角色一句 + 做了什么一句 + 结果一句（300 字）。</li>
-<li><strong>论文正文 2500 字骨架</strong>：项目背景→理论衔接→我的实践（分点）→效果数据→不足改进。</li>
-<li><strong>数学卡</strong>：PERT 期望、沟通渠道、期望值决策=概率×收益求和（线性规划只画图解）。</li>
-<li><strong>杂项</strong>：国标 GB 强制/推荐分级；著作权自创作完成即得（登记非前提）。</li>
+<li><strong>规划三法</strong>：BSP 自上而下、CSF 关键成功因素、SST 策略集合转化（考场二选一常考，与 D2 呼应）。</li>
+<li><strong>EAI 三层与 SCM</strong>：EAI=数据集成、应用集成（API/消息）、业务流程集成（BPM）；SCM 五环节：计采制配退。★</li>
+<li><strong>可行性四维 + 成本效益</strong>：技术、经济、操作（运行）、社会（法律）；NPV≥0 可行；动态回收期≤静态（贴现）。</li>
+<li><strong>案例单题 7 步法</strong>：看问题→圈约束→判题型→列骨架→答采分点→回扣题干→查卷面；四类题型判定：对比选型→论证；补图填空→建模；问题改进→诊断；获取干系人→需求识别。</li>
+<li><strong>论证与诊断骨架</strong>：论证四步=结论先行→分维度（性能/一致性/成本/演进）→风险+缓解→回扣约束；诊断三段式=现象→根因（分层）→措施+指标（TPS/RT/可用性）。</li>
+<li><strong>论文摘要四句式</strong>：背景一句 + 角色一句 + 做了什么一句 + 结果一句（300 字）；正文 2500 字骨架：项目背景→理论衔接→我的实践（分点）→效果数据→不足改进。</li>
+<li><strong>数学三小点</strong>：期望值决策=概率×收益求和；连通图最少 n−1 条边；线性规划只画图解。★</li>
+<li><strong>法条年限（核心 2 条）</strong>：发明专利 20 年、实用新型 10 年；著作权自创作完成即得（登记非前提）、署名权不受时间限制。</li>
 </ol>
 <h3 id="重点--辨析与题型k">重点 · 辨析与题型（K）</h3>
 <ul>
-<li>§11 BPR/ERP/CRM/SCM 定位表 + §12 EAI 表（数据/应用/流程集成判断）。</li>
-<li>案例域速查：嵌入式（调度算法/优先级反转→优先级继承）、移动（原生/混合/小程序选型）、大数据（Lambda vs Kappa、分片键）、CPS（感知/网络/平台/应用四层）。</li>
-<li>§15 大数据 + §18 CPS 对比表：只记锚词与适用域。</li>
-<li>论文评分四维（切题/实践深度/结构/文摘），SWOT 用于方案对比类论文与论证题。</li>
+<li>BPR 原则：以流程为中心、组织围绕流程、授权一线、IT 使能。</li>
+<li>电商/政务模式：B2B/B2C/C2C/O2O；G2G/G2B/G2C/G2E。</li>
+<li>论文评分四维：切题/实践深度/结构/文摘。</li>
 </ul>
 <h3 id="补充--速览s">补充 · 速览（S）</h3>
-<p><a href="/kb/kp-4-1/" class="kb-ref" data-kb-id="kp-4-1" title="预览：4.1 企业信息化概述">《企业信息化概述》</a> · <a href="/kb/kp-4-2/" class="kb-ref" data-kb-id="kp-4-2" title="预览：4.2 信息资源管理（概述、标准、规划、资源网）">《信息资源管理（概述、标准、规划、资源网）》</a> · <a href="/kb/kp-4-5/" class="kb-ref" data-kb-id="kp-4-5" title="预览：4.5 电子商务">《电子商务》</a> · <a href="/kb/kp-4-6/" class="kb-ref" data-kb-id="kp-4-6" title="预览：4.6 电子政务">《电子政务》</a> · <a href="/kb/kp-dss/" class="kb-ref" data-kb-id="kp-dss" title="预览：决策支持系统">《决策支持系统》</a> · <a href="/kb/kp-tps/" class="kb-ref" data-kb-id="kp-tps" title="预览：事务处理系统">《事务处理系统》</a> · <a href="/kb/kp-data-integration-sharing/" class="kb-ref" data-kb-id="kp-data-integration-sharing" title="预览：数据集成与共享">《数据集成与共享》</a> · <a href="/kb/kp-app-service-integration/" class="kb-ref" data-kb-id="kp-app-service-integration" title="预览：应用集成/服务集成">《应用集成/服务集成》</a> · <a href="/kb/kp-data-warehouse/" class="kb-ref" data-kb-id="kp-data-warehouse" title="预览：数据仓库">《数据仓库》</a> · <a href="/kb/kp-network-planning-ops/" class="kb-ref" data-kb-id="kp-network-planning-ops" title="预览：网络规划/优化/配置/部署/实施">《网络规划/优化/配置/部署/实施》</a> · <a href="/kb/kp-cloud-computing/" class="kb-ref" data-kb-id="kp-cloud-computing" title="预览：云计算">《云计算》</a> · <a href="/kb/kp-realtime-systems/" class="kb-ref" data-kb-id="kp-realtime-systems" title="预览：实时系统开发">《实时系统开发》</a> · <a href="/kb/kp-2-2-2/" class="kb-ref" data-kb-id="kp-2-2-2" title="预览：2.2 嵌入式数据库">《嵌入式数据库》</a> · <a href="/kb/kp-2-5-2/" class="kb-ref" data-kb-id="kp-2-5-2" title="预览：2.5 嵌入式验证与测试">《嵌入式验证与测试》</a></p>
+<p><a href="/kb/kp-4-1/" class="kb-ref" data-kb-id="kp-4-1" title="预览：4.1 企业信息化概述">《企业信息化概述》</a> · <a href="/kb/kp-4-5/" class="kb-ref" data-kb-id="kp-4-5" title="预览：4.5 电子商务">《电子商务》</a> · <a href="/kb/kp-4-6/" class="kb-ref" data-kb-id="kp-4-6" title="预览：4.6 电子政务">《电子政务》</a> · <a href="/kb/kp-dss/" class="kb-ref" data-kb-id="kp-dss" title="预览：决策支持系统">《决策支持系统》</a> · <a href="/kb/kp-data-warehouse/" class="kb-ref" data-kb-id="kp-data-warehouse" title="预览：数据仓库">《数据仓库》</a> · <a href="/kb/kp-cloud-computing/" class="kb-ref" data-kb-id="kp-cloud-computing" title="预览：云计算">《云计算》</a></p>
 <h3 id="可放弃--止损d">可放弃 · 止损（D）</h3>
 <ul>
-<li><strong>嵌入式/CPS 协议细节</strong>（CAN/Modbus 报文格式、工业通信时序）——判定信号：案例选做题三道都偏协议。替代动作：按 stop_loss 规则换题或写结构分。</li>
-<li>图论难题（最短路证明级/网络流建模）；英语阅读题（留 5 分钟语感作答即弃）。</li>
-<li>老法条数字堆背（专利/商标年限只背核心 2 条：发明 20 年、实用新型 10 年）。</li>
+<li>嵌入式/CPS 协议细节（CAN/Modbus 报文）——按放弃清单换题或写结构分。</li>
+<li>图论证明级难题、英语阅读（留 5 分钟语感作答）。</li>
 </ul>
 <h3 id="强化记忆块">强化记忆块</h3>
 <ul>
-<li>回收 D-1：D6 M 卡（耦合内聚七级★）；回收 D-3：D5 M 卡（挣值★）。</li>
-<li>自测问句：①SCM 五环节？②EAI 三层？③论证题第一步是什么？④诊断题必须给什么才算完整？⑤摘要四句各占什么信息？</li>
-<li>第 8 天起进入循环：每天回收 D-1/D-3/D-7 的日册 + 错卡清零；每周一套真题卷全检索。</li>
-</ul>
-<h3 id="练题收口">练题收口</h3>
-<ul>
-<li>第 6 章练习 10 题；案例卷（2026 上全卷，3×30min）按案例强化计划 D10 执行；论文任选一方向写摘要。</li>
+<li>回收 D-1：D6 计组网络精华；回收 D-3：D4 数据库 M 卡。</li>
+<li>自测问句：①SCM 五环节？②EAI 三层？③论证题第一步？④摘要四句各占什么信息？⑤期望值决策公式？</li>
 </ul>
 <hr>
-<h2 id="七日之后循环与收口">七日之后：循环与收口</h2>
+<h2 id="四大方面使用法冲刺期口径">四大方面使用法（冲刺期口径）</h2>
 <ul>
-<li><strong>第 2 周</strong>：同一份总册从 D1 重新开始，但 M 层只默错卡、K 层只做表内错行；S/D 层不再投入。</li>
-<li><strong>考前 7 天</strong>：切换到<a href="/kb/quick-exam-7d/" class="kb-ref" data-kb-id="quick-exam-7d" title="预览：考前 7 天背诵清单">考前 7 天背诵清单</a>按日程走，总册作为查漏地图。</li>
-<li><strong>考前 30 分钟</strong>：只翻各日「强化记忆块」的自测问句答案行。</li>
+<li><strong>主线（四大方面）</strong>：D2/D3/D4 三个 M 卡群与 <code>/track</code> 四域 39 点一一同源——碎片背诵走 <code>/recall</code>（到期卡含轨道错题转卡），主动回忆走 <code>/track</code> lesson（选择+填空），实战收口走配套仿真案例 CA-131~134（做→批→卡）。</li>
+<li><strong>精华（其余模块）</strong>：D1/D5/D6/D7 只背 M 精华卡，K 层只做表内错行，S/D 层不投入——综合知识熟悉度按 v3 计划完全交给真题重复刷（午休 25&#39; 块 + 隔天错题二刷 + 周末整卷 ×2）。</li>
+<li><strong>考前 7 天</strong>：切换到<a href="/kb/quick-exam-7d/" class="kb-ref" data-kb-id="quick-exam-7d" title="预览：考前 7 天背诵清单">考前 7 天背诵清单</a>按日程走，本册作为查漏地图；考前 30 分钟只翻各章「强化记忆块」自测问句答案行。</li>
 </ul>
 <hr>
-<p><em>四层判定依据与迁移策略见仓库 <code>docs/kb-workshop/编制委员会/知识点内容架构-v3-四层七日.md</code>；M 层卡片与<a href="/kb/quick-memory-plan/" class="kb-ref" data-kb-id="quick-memory-plan" title="预览：记忆强化 · 间隔重复日程与硬记忆点卡组">记忆强化卡组</a>互为正反两面（卡组=按专题，本册=按日程）。</em></p>
+<p><em>M 层卡片与<a href="/kb/quick-memory-plan/" class="kb-ref" data-kb-id="quick-memory-plan" title="预览：记忆强化 · 间隔重复日程与硬记忆点卡组">记忆强化卡组</a>互为正反两面（卡组=按专题，本册=按四大方面+日次骨架）；四大方面知识体系与 <code>/track</code> 答题轨道、CA-131~134 仿真案例同源对齐。</em></p>
