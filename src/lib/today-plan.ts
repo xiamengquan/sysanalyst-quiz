@@ -1,5 +1,7 @@
 /**
  * 考前 14 天 · 每日任务计划（结构化自《考前 14 天冲刺计划》§4/§5）
+ * v3 · 案例核心三部曲（做→批→卡）+ 出题重心排题（试题一=需求铁律；选做池 Web 22 席＞需求/数据库各 12 席）
+ * 综合知识 = 真题重复刷（午休 25' 块 + 周末整卷 + 隔天错题二刷）；碎片背诵（/audio 地铁 + /recall 工位）保留，晚主块不再排新背诵
  * 数据与内容文档手工对齐；修改任务请同步 content/kb/速查/考前14天冲刺计划.md
  */
 
@@ -32,7 +34,7 @@ export type DayPlan = {
 export const SPRINT_START = "2026-10-11";
 export const SPRINT_END = "2026-10-24";
 export const EXAM_DATE = "2026-10-25";
-export const TODAY_PLAN_VERSION = 2;
+export const TODAY_PLAN_VERSION = 3;
 
 const LINKS = {
   audio: "/audio/",
@@ -79,60 +81,60 @@ const DAYS: DayPlan[] = [
   {
     date: "2026-10-13",
     weekday: "周二（20:30 起）",
-    tag: "D3 上 · 架构",
+    tag: "D3 · 三部曲切换日",
     main: [
-      { text: "总册 D3 背诵：架构风格对比表 + 质量属性（40'）", href: "/kb/quick-four-tier-7d/#d3", link: "总册 D3" },
-      { text: "案例整题独立计时 60'：2020上·案例五·O2O 外卖平台（架构风格选型 + 消息队列）", href: LINKS.caseById("ZT-2020上-案例05"), link: "案例整题" },
-      { text: "错题回炉 20'", href: LINKS.recall, link: "随机问答" },
+      { text: "案例三部曲 · 卡阶段收口：2020上·案例五已做完批完（12/25），三张微卡（事件系统三部件「源-管-理」/ 外卖流程链 / 补图方法论）入 /recall 建档 + 口述复述 1 遍", href: LINKS.caseById("ZT-2020上-案例05"), link: "案例三部曲" },
+      { text: "综合错题回炉（模考 6 条清单）：网络协议数字卡 / PV 顺序与 LRU 手算 / DB 三连 / 内聚七级与覆盖四级 / 数学三小点 / 法规年限", href: LINKS.recall, link: "随机问答" },
+      { text: "总册 D3 背诵碎片化：架构风格对比表 + 质量属性不再占晚主块，交 /recall 到期卡 + 地铁 /audio 维护（明早工位 30′ 清债）", href: "/kb/quick-four-tier-7d/#d3", link: "总册 D3" },
     ],
   },
   {
     date: "2026-10-14",
     weekday: "周三（加班日 22:30 起）",
-    tag: "D3 下 · Web·微服务",
+    tag: "三部曲 · Web 域 #1（论证）",
     main: [
-      { text: "总册 D3 续背：Web 16 + 微服务 20 章要点（40'）", href: "/kb/quick-four-tier-7d/#d3", link: "总册 D3" },
-      { text: "案例整题独立计时 60'：2025下·案例四·气象系统（前后端分离 + MVP/MVVM + 微服务演进；加班日可半题 45'）", href: LINKS.caseById("ZT-2025下-案例04"), link: "案例整题" },
-      { text: "错题回炉 20'", href: LINKS.recall, link: "随机问答" },
+      { text: "案例三部曲 · 半题 45'：做 20'（读题标注 + 限时作答）→ 批 15'（对照参考逐点打分，错因分三类：关键词错 / 结构漏 / 知识缺）→ 卡 10'（一问一卡挂 D3）——2025下·案例四·气象系统（Web·技术方案论证：前后端分离 + MVP/MVVM + 微服务演进，选择题不吃图）", href: LINKS.caseById("ZT-2025下-案例04"), link: "案例三部曲" },
+      { text: "综合真题重刷 40'：昨午错题二刷清零 + 次场次推进（只碰真题，不碰模拟题）", href: "/real-exams/", link: "真题成卷" },
+      { text: "微卡复述 10'：事件系统三部件「源-管-理」+ 昨日全部微卡口述", href: LINKS.recall, link: "随机问答" },
     ],
   },
   {
     date: "2026-10-15",
     weekday: "周四（20:30 起）",
-    tag: "D4 · 数据库·测试",
+    tag: "三部曲 · 数据库域 #1（诊断）",
     main: [
-      { text: "总册 D4 背诵：范式/事务并发/测试阶段（40'）", href: "/kb/quick-four-tier-7d/#d4", link: "总册 D4" },
-      { text: "案例整题独立计时 60'：2025下·案例二·电商大促 Redis 缓存（问题诊断三问）", href: LINKS.caseById("ZT-2025下-案例02"), link: "案例整题" },
-      { text: "错题回炉 20'（含挣值公式卡过一遍）", href: LINKS.recall, link: "随机问答" },
+      { text: "案例三部曲 · 整题 60'：做 30'（读题标注 5' + 限时作答 25'，骨架先行不翻书）→ 批 15'（逐空/逐点打分，标错因）→ 卡 15'（一问一卡挂 D4）——2025下·案例二·电商大促 Redis 缓存（数据库·问题诊断三问：穿透/击穿/雪崩对策）", href: LINKS.caseById("ZT-2025下-案例02"), link: "案例三部曲" },
+      { text: "综合真题重刷 45'：错题隔天二刷 + 新场次推进", href: "/real-exams/", link: "真题成卷" },
+      { text: "微卡复述 10' + 挣值公式卡碎片维护", href: LINKS.recall, link: "随机问答" },
     ],
   },
   {
     date: "2026-10-16",
     weekday: "周五（20:30 起）",
-    tag: "D5 · 安全·项管",
+    tag: "三部曲 · Web 域 #2（建模）",
     main: [
-      { text: "总册 D5 背诵：BLP/Biba、密钥体系、项管计算（40'）", href: "/kb/quick-four-tier-7d/#d5", link: "总册 D5" },
-      { text: "案例整题独立计时 60'：2019上·案例一·PERT 图与关键路径（项管计算）", href: LINKS.caseById("ZT-2019上-案例01"), link: "案例整题" },
-      { text: "错题回炉 20'（关键路径手算再练 2 题）", href: LINKS.recall, link: "随机问答" },
+      { text: "案例三部曲 · 整题 60'：做 30' → 批 15' → 卡 15'——2026上·案例二·书房预约系统（Web·建模与设计：用例/类图补全 + 流程建模；Web·建模与设计 10 席为全池单一最大重心格子）", href: LINKS.caseById("ZT-2026上-案例02"), link: "案例三部曲" },
+      { text: "综合真题重刷 45'（周末整卷前清当日错题）", href: "/real-exams/", link: "真题成卷" },
+      { text: "微卡复述 10'：缓存三问题 + Web 建模链口述；项管 PERT/关键路径让位真题回炉（项管案例仅 1 席，非重心）", href: LINKS.recall, link: "随机问答" },
     ],
   },
   {
     date: "2026-10-17",
     weekday: "周六",
-    tag: "D6 · 计组·网络·设计·运维 + 真题首场",
+    tag: "综合真题第 1 场 + 案例微卡总复述",
     main: [
-      { text: "上午：总册 D6 背诵 + 配题", href: "/kb/quick-four-tier-7d/#d6", link: "总册 D6" },
-      { text: "下午：综合真题第 1 场（计时 150 分钟，对齐考试状态）", href: "/real-exams/", link: "真题成卷" },
-      { text: "晚上：真题复盘 + 微卡清账 + 错题回炉", href: LINKS.recall, link: "随机问答" },
+      { text: "上午：案例微卡总复述（全部一问一卡连口述）+ /recall 到期卡清债（碎片背诵主战场）", href: LINKS.recall, link: "随机问答" },
+      { text: "下午 14:00：综合真题第 1 场整卷计时 150'（对齐考试状态）+ 当场对答案批分", href: "/real-exams/", link: "真题成卷" },
+      { text: "晚上：真题第 1 场错题逐题标注（进午休重刷池）+ 微卡复述；不做新案例题，护状态", href: "/real-exams/", link: "真题成卷" },
     ],
   },
   {
     date: "2026-10-18",
     weekday: "周日",
-    tag: "D7 · 企信·论文 + 案例全真",
+    tag: "论文定型 + 案例全真（重心整卷）",
     main: [
-      { text: "上午：总册 D7 背诵 + 论文 2 个主打方向定型 + 素材卡固化（近五年范围分析）", href: "/kb/quick-essay/", link: "论文范围" },
-      { text: "下午：案例全真 1 场（计时 90 分钟，骨架先行）+ 启动手册复盘", href: LINKS.caseReal, link: "案例真题" },
+      { text: "上午：论文 2 个主打方向定型 + 素材卡固化（近五年范围分析）；总册 D6/D7 背诵碎片化交 /recall 维护", href: "/kb/quick-essay/", link: "论文范围" },
+      { text: "下午：案例全真 1 场三部曲 90'：做 65'（2026上整卷：试题一需求必答 + Web/数据库四选二，计时骨架先行）→ 批 15' → 卡 10'", href: LINKS.caseById("ZT-2026上-案例01"), link: "案例全真" },
       { text: "晚上：论文限时第 1 篇（90 分钟完稿，用上午定型方向）+ 自评：背景→选型→过程→度量→总结", href: LINKS.essay, link: "论文框架" },
       { text: "睡前：微卡清账 + 第 1 篇自评问题记入清单（第 2、3 篇针对性重练）", href: LINKS.caseStart, link: "微卡复盘" },
     ],
@@ -140,45 +142,51 @@ const DAYS: DayPlan[] = [
   {
     date: "2026-10-19",
     weekday: "周一（加班日 22:30 起）",
-    tag: "实卷 · 错题回炉",
+    tag: "三部曲 · 需求域回补（论证）",
     main: [
-      { text: "综合真题第 1 场错题逐题回炉（P0 章优先）", href: "/real-exams/", link: "真题成卷" },
+      { text: "案例三部曲 · 半题 45'：做 20' → 批 15' → 卡 10'——2021上·案例一·在线运动器材销售（需求·技术方案论证：FAST 开发方式论证；试题一风向回补——「识别与确认」三连后防轮换）", href: LINKS.caseById("ZT-2021上-案例01"), link: "案例三部曲" },
+      { text: "综合真题第 1 场错题隔天二刷（P0 章优先）+ 重刷池清零", href: "/real-exams/", link: "真题成卷" },
+      { text: "微卡复述 10'（含周末全部新卡）", href: LINKS.recall, link: "随机问答" },
     ],
   },
   {
     date: "2026-10-20",
     weekday: "周二（20:30 起）",
-    tag: "实卷 · 定向刷题",
+    tag: "三部曲 · 数据库域 #2（建模）",
     main: [
-      { text: "P0 章薄弱点定向刷题（错题本驱动）", href: "/?bank=practice&path=all", link: "刷题" },
-      { text: "案例真题小问 2 题：需求 + 建模（骨架先行）", href: LINKS.caseReq, link: "案例真题" },
+      { text: "案例三部曲 · 整题 60'：做 30' → 批 15' → 卡 15'——2026上·案例四·政务大厅排队叫号升级（数据库·建模与设计：ER/关系模式/规范化小问）", href: LINKS.caseById("ZT-2026上-案例04"), link: "案例三部曲" },
+      { text: "综合真题重刷 45'：错题三轮清零 + 新场次推进", href: "/real-exams/", link: "真题成卷" },
+      { text: "微卡复述 10'", href: LINKS.recall, link: "随机问答" },
     ],
   },
   {
     date: "2026-10-21",
     weekday: "周三（加班日 22:30 起）",
-    tag: "实卷 · 错题续清",
+    tag: "三部曲 · Web 域 #3（建模）",
     main: [
-      { text: "真题剩余错题回炉 + 微卡清账", href: "/real-exams/", link: "真题成卷" },
-      { text: "案例微服务/Web 小问 1 题", href: LINKS.caseMicro, link: "案例真题" },
+      { text: "案例三部曲 · 半题 45'：做 20' → 批 15' → 卡 10'——2023上·案例一·软件系统分析与建模（Web·建模与设计；补 2023 风向）", href: LINKS.caseById("ZT-2023上-案例01"), link: "案例三部曲" },
+      { text: "综合真题重刷 40'：剩余错题 + 高频错因卡清零", href: "/real-exams/", link: "真题成卷" },
+      { text: "微卡复述 10'", href: LINKS.recall, link: "随机问答" },
     ],
   },
   {
     date: "2026-10-22",
     weekday: "周四（20:30 起）",
-    tag: "论文周 · 第 2 篇",
+    tag: "论文第 2 篇 + 真题收口",
     main: [
       { text: "论文限时第 2 篇（90 分钟完稿 + 自评；针对第 1 篇自评问题重练对应段落）", href: LINKS.essay, link: "论文框架" },
-      { text: "素材卡背诵 45'（主打方向 2 素材）", href: LINKS.essay, link: "论文素材" },
+      { text: "综合真题重刷 30'：错题末轮 + 素材卡口述（主打方向 2 素材）", href: "/real-exams/", link: "真题成卷" },
+      { text: "案例微卡复述（只复盘不写新题，论文让位）", href: LINKS.caseStart, link: "启动手册" },
     ],
   },
   {
     date: "2026-10-23",
     weekday: "周五（20:30 起）",
-    tag: "论文周 · 第 3 篇",
+    tag: "论文第 3 篇 + 案例总复述",
     main: [
-      { text: "错题清零 + 高频对比速查表过一遍", href: "/kb/quick-compare/", link: "对比速查" },
       { text: "论文限时第 3 篇（90 分钟完稿 + 自评）", href: LINKS.essay, link: "论文框架" },
+      { text: "案例微卡总复述 + 启动句式表重背（全部一问一卡连复述，只复盘不写新题）", href: LINKS.caseStart, link: "启动手册" },
+      { text: "综合真题错题最后一轮 + 高频对比速查表过一遍", href: "/kb/quick-compare/", link: "对比速查" },
     ],
   },
   {
@@ -187,8 +195,8 @@ const DAYS: DayPlan[] = [
     tag: "考前收口",
     main: [
       { text: "上午：考前 7 天背诵清单全过 + /recall 筛「必会 M」全刷", href: LINKS.exam7d, link: "考前清单" },
-      { text: "下午：综合真题第 2 场（计时 150 分钟，考前状态测试）", href: "/real-exams/", link: "真题成卷" },
-      { text: "晚上：微卡最后一遍 + 早睡（不做新题）", href: LINKS.caseStart, link: "微卡复盘" },
+      { text: "下午：综合真题第 2 场整卷计时 150'（考前状态测试；选已刷过 1 遍的场次，验熟悉度增量——真题复用真实存在，重刷 = 可能直接撞原题）", href: "/real-exams/", link: "真题成卷" },
+      { text: "晚上：微卡最后一遍 + 启动句式默背 + 早睡（不做任何新题）", href: LINKS.caseStart, link: "微卡复盘" },
     ],
   },
   {
@@ -202,22 +210,22 @@ const DAYS: DayPlan[] = [
   },
 ];
 
-/** 午休案例骨架主题（按天） */
+/** 午休综合真题块主题（按天，v3 重心版：真题重复刷提熟悉度） */
 const LUNCH_TOPIC: Record<string, { text: string; href?: string; link?: string }> = {
   "2026-10-11": { text: "案例微训练第 1 题：2025下·案例一·需求识别与确认（并入今日全天主线，五步完整闭环）", href: LINKS.caseById("ZT-2025下-案例01"), link: "微训练第 1 题" },
   "2026-10-12": { text: "运用演练《需求工程步骤链》：每格先写作用句再对答案（剩余时间 d2 配题）", href: LINKS.drill("需求工程步骤链"), link: "运用演练" },
-  "2026-10-13": { text: "d3 前半配题（架构 12 章）：先刷配题，剩余时间架构域小问骨架", href: LINKS.seven("d3"), link: "d3 配题" },
-  "2026-10-14": { text: "d3 后半配题（Web 16 + 微服务 20，题量最大段）+ 微服务/Web 小问骨架", href: LINKS.seven("d3"), link: "d3 配题" },
-  "2026-10-15": { text: "运用演练《数据库设计步骤链》：六格默写每步产出（剩余时间 d4 配题）", href: LINKS.drill("数据库设计步骤链"), link: "运用演练" },
-  "2026-10-16": { text: "d5 配题：先刷 d5 配题，剩余时间问题诊断小问四维扫骨架（管理/技术/过程/人员）", href: LINKS.seven("d5"), link: "d5 配题" },
-  "2026-10-17": { text: "微卡复述（周六午休并入主线，可只复述不写新骨架）", href: LINKS.caseStart, link: "启动手册" },
+  "2026-10-13": { text: "真题 25 题限时块：模考错 19 题对应考点回扫（网络数字卡/PV-LRU/DB 三连/内聚覆盖/数学/法规），错题标注入晚块重刷池", href: "/real-exams/", link: "真题成卷" },
+  "2026-10-14": { text: "真题 25 题限时块：新场次推进 + 错题即时标注（不碰模拟题）", href: "/real-exams/", link: "真题成卷" },
+  "2026-10-15": { text: "真题 25 题限时块：新场次推进 + 昨日错题带看", href: "/real-exams/", link: "真题成卷" },
+  "2026-10-16": { text: "真题 25 题限时块：周末整卷前最后一个推进块", href: "/real-exams/", link: "真题成卷" },
+  "2026-10-17": { text: "微卡复述（周六午休并入主线；整卷在下午 14:00）", href: LINKS.caseStart, link: "启动手册" },
   "2026-10-18": { text: "微卡复述（案例全真在下午主线）", href: LINKS.caseStart, link: "启动手册" },
-  "2026-10-19": { text: "需求类骨架：真题错题暴露的框架重练", href: LINKS.caseReq, link: "案例真题" },
-  "2026-10-20": { text: "运用演练《UML 建模步骤链》：六图逐格默写作用与差异（DFD 补全手画 5 分钟并入）", href: LINKS.drill("UML-建模步骤链"), link: "运用演练" },
-  "2026-10-21": { text: "微服务/Web 骨架：微卡连漏点定向练", href: LINKS.caseMicro, link: "案例真题" },
-  "2026-10-22": { text: "论文素材口述 1 遍（第 2 篇前的预热）", href: LINKS.essay, link: "论文框架" },
-  "2026-10-23": { text: "论文素材口述 1 遍（第 3 篇预热）", href: LINKS.essay, link: "论文框架" },
-  "2026-10-24": { text: "启动句式表重背（只复盘不写新题）", href: LINKS.caseStart, link: "启动手册" },
+  "2026-10-19": { text: "真题 25 题限时块：第 1 场整卷错题二刷（P0 章优先）", href: "/real-exams/", link: "真题成卷" },
+  "2026-10-20": { text: "真题 25 题限时块：新场次推进 + 连错考点标记", href: "/real-exams/", link: "真题成卷" },
+  "2026-10-21": { text: "真题 25 题限时块：剩余错题末刷 + 连错两日考点写进考前 7 天清单", href: "/real-exams/", link: "真题成卷" },
+  "2026-10-22": { text: "真题错题 20 分钟：连错考点终刷（剩余时间论文素材口述预热第 2 篇）", href: "/real-exams/", link: "真题成卷" },
+  "2026-10-23": { text: "真题错题最后一轮（剩余时间论文素材口述预热第 3 篇）", href: "/real-exams/", link: "真题成卷" },
+  "2026-10-24": { text: "启动句式表重背（只复盘不做新题）", href: LINKS.caseStart, link: "启动手册" },
   "2026-10-25": { text: "考场启动句式默背 1 遍", href: LINKS.caseStart, link: "启动手册" },
 };
 
@@ -235,7 +243,7 @@ export function buildTodayTasks(dateKey: string): TodayTasks | null {
   add("metroAm", "《洗脑音频》问答式播放昨日卡（听题默答，检验昨晚所学）", LINKS.audio, "洗脑音频");
   add("desk", "《随机问答》到期卡清债（间隔排程自动只给快忘的）", LINKS.recall, "随机问答");
   const lt = LUNCH_TOPIC[dateKey];
-  add("lunch", `案例骨架（30'）：${lt.text}`, lt.href, lt.link);
+  add("lunch", `综合真题（30'）：${lt.text}`, lt.href, lt.link);
   add("metroPm", "《洗脑音频》洗脑式播放当日新卡 ×3（下班路上完成编码）", LINKS.audio, "洗脑音频");
   for (const m of plan.main) add("main", m.text, m.href, m.link);
 
@@ -294,7 +302,7 @@ export function buildFallbackTasks(dateKeyStr: string): TodayTasks {
     tasks.push({ id: `${dateKeyStr}-${++n}`, slot, text, href, link });
   add("metroAm", "《洗脑音频》问答式播放到期卡", LINKS.audio, "洗脑音频");
   add("desk", "《随机问答》到期卡", LINKS.recall, "随机问答");
-  add("lunch", "案例骨架（30'）：任选 1 小问，读题标注 + 计时骨架；或走 /drill 一条步骤链", LINKS.drill("需求工程步骤链"), "运用演练");
+  add("lunch", "综合真题（30'）：25 题限时块 + 错题即时标注（真题重复刷提熟悉度）", "/real-exams/", "真题成卷");
   add("metroPm", "《洗脑音频》洗脑式循环 ×3", LINKS.audio, "洗脑音频");
   for (const m of plan.main) add("main", m.text, m.href, m.link);
   const order: Slot[] = ["metroAm", "desk", "lunch", "metroPm", "main"];
