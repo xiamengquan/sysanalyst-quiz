@@ -13,10 +13,11 @@ const zc = path.join(root, "content/kb/速查/四层七日背诵总册.md");
 const deck = path.join(root, "content/kb/速查/记忆强化-间隔重复与硬记忆点卡组.md");
 const out = path.join(root, "public/data/flashcards.json");
 
-/** 卡组专题 → 总册日次（对齐 kb-seven-day 章节映射） */
+/** 卡组专题 → 总册日次（对齐四大方面骨架：T09/T19/T20/T03 = 四大方面 D2/D3/D3/D4） */
 const TOPIC_DAY = {
-  T01: "d6", T02: "d6", T03: "d4", T04: "d7", T05: "d1", T06: "d5",
-  T07: "d5", T08: "d2", T09: "d2", T10: "d3", T11: "d6", T12: "d4",
+  T09: "d2", T19: "d3", T20: "d3", T03: "d4", // 四大方面
+  T01: "d6", T02: "d6", T04: "d7", T05: "d1", T06: "d5", // 其余模块
+  T07: "d5", T08: "d2", T10: "d3", T11: "d6", T12: "d4",
   T13: "d6", T14: "d7", T15: null, T16: "d3", T17: "d7", T18: "d7",
 };
 

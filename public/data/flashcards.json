@@ -1,10 +1,10 @@
 {
   "meta": {
-    "builtAt": "2026-10-13T14:52:45.280Z",
-    "total": 129,
+    "builtAt": "2026-10-13T15:09:58.051Z",
+    "total": 145,
     "m": 71,
-    "k": 58,
-    "hard": 29,
+    "k": 74,
+    "hard": 37,
     "source": [
       "速查/四层七日背诵总册.md · 必会默写卡",
       "速查/记忆强化-间隔重复与硬记忆点卡组.md · §4"
@@ -222,6 +222,42 @@
       "hard": false,
       "front": "备份口诀？",
       "back": "备份口诀：物逻分，冷热全增异",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T03"
+      }
+    },
+    {
+      "id": "fc-k-t03-09",
+      "day": "d4",
+      "tier": "K",
+      "hard": true,
+      "front": "三读判据？",
+      "back": "三读判据：未提交=脏读；同行值变=不可重复读；行数变=幻读",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T03"
+      }
+    },
+    {
+      "id": "fc-k-t03-10",
+      "day": "d4",
+      "tier": "K",
+      "hard": false,
+      "front": "隔离级别阶梯？",
+      "back": "隔离级别阶梯：读未提交＜读已提交＜可重复读（MySQL 默认）＜串行化；越高一致性越强、并发越低",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T03"
+      }
+    },
+    {
+      "id": "fc-k-t03-11",
+      "day": "d4",
+      "tier": "K",
+      "hard": true,
+      "front": "死锁与 2PL？",
+      "back": "死锁与 2PL：2PL 保证可串行化但不防死锁；死锁四条件=互斥/占有且等待/不可剥夺/循环等待",
       "src": {
         "href": "/kb/quick-memory-plan/",
         "label": "记忆卡组 · T03"
@@ -552,6 +588,42 @@
       }
     },
     {
+      "id": "fc-k-t09-05",
+      "day": "d2",
+      "tier": "K",
+      "hard": false,
+      "front": "需求验证四法？",
+      "back": "需求验证四法：评审（最常用）/原型/测试设计/形式化；验证=写对了吗，确认=做的是用户要的吗",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T09"
+      }
+    },
+    {
+      "id": "fc-k-t09-06",
+      "day": "d2",
+      "tier": "K",
+      "hard": false,
+      "front": "SRS 条目可测性？",
+      "back": "SRS 条目可测性：每条须可验证——「快速响应」不合格，「P95≤2 秒」合格",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T09"
+      }
+    },
+    {
+      "id": "fc-k-t09-07",
+      "day": "d2",
+      "tier": "K",
+      "hard": false,
+      "front": "需求变更失控信号？",
+      "back": "需求变更失控信号：基线后口头直改、无 CCB 评估、未更新跟踪矩阵（诊断题信号词）",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T09"
+      }
+    },
+    {
       "id": "fc-k-t10-01",
       "day": "d3",
       "tier": "K",
@@ -705,6 +777,126 @@
       "src": {
         "href": "/kb/quick-memory-plan/",
         "label": "记忆卡组 · T14"
+      }
+    },
+    {
+      "id": "fc-k-t19-01",
+      "day": "d3",
+      "tier": "K",
+      "hard": true,
+      "front": "MVC/MVP/MVVM 判据？",
+      "back": "MVC/MVP/MVVM 判据：视图 V 与模型 M 是否直接对话；双向绑定只属于 MVVM",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T19"
+      }
+    },
+    {
+      "id": "fc-k-t19-02",
+      "day": "d3",
+      "tier": "K",
+      "hard": true,
+      "front": "缓存三字诀？",
+      "back": "缓存三字诀：不存在=穿透（布隆/空值缓存）；单热点=击穿（互斥重建）；一大片=雪崩（TTL 错峰/多级缓存）",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T19"
+      }
+    },
+    {
+      "id": "fc-k-t19-03",
+      "day": "d3",
+      "tier": "K",
+      "hard": true,
+      "front": "XSS 与 CSRF？",
+      "back": "XSS 与 CSRF：XSS 注入脚本在浏览器执行（输出转义/HttpOnly）；CSRF 借已登录身份发请求（Token/SameSite）",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T19"
+      }
+    },
+    {
+      "id": "fc-k-t19-04",
+      "day": "d3",
+      "tier": "K",
+      "hard": false,
+      "front": "限流双桶？",
+      "back": "限流双桶：漏桶=绝对恒速；令牌桶=允许突发",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T19"
+      }
+    },
+    {
+      "id": "fc-k-t19-05",
+      "day": "d3",
+      "tier": "K",
+      "hard": false,
+      "front": "REST 无状态？",
+      "back": "REST 无状态：服务端不存会话状态（≠不保存业务数据），水平扩展友好",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T19"
+      }
+    },
+    {
+      "id": "fc-k-t20-01",
+      "day": "d3",
+      "tier": "K",
+      "hard": true,
+      "front": "四保护各管一句？",
+      "back": "四保护各管一句：限流管「太多」、熔断管「坏了」、降级是熔断后自救、灰度管「发布风险」",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T20"
+      }
+    },
+    {
+      "id": "fc-k-t20-02",
+      "day": "d3",
+      "tier": "K",
+      "hard": true,
+      "front": "事件系统三部件口诀？",
+      "back": "事件系统三部件口诀：源-管-理（事件源→事件管理器→事件处理器）",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T20"
+      }
+    },
+    {
+      "id": "fc-k-t20-03",
+      "day": "d3",
+      "tier": "K",
+      "hard": false,
+      "front": "微服务四字诀？",
+      "back": "微服务四字诀：小独轻去；SOA=ESB 集中智能，微服务=去中心化、管道保持笨",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T20"
+      }
+    },
+    {
+      "id": "fc-k-t20-04",
+      "day": "d3",
+      "tier": "K",
+      "hard": true,
+      "front": "微服务拆分依据？",
+      "back": "微服务拆分依据：按业务边界（限界上下文）；按技术层拆=分布式单体（最差结局）",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T20"
+      }
+    },
+    {
+      "id": "fc-k-t20-05",
+      "day": "d3",
+      "tier": "K",
+      "hard": false,
+      "front": "跨服务取数？",
+      "back": "跨服务取数：只走对方 API 或订阅事件，禁直连他库；跨库 JOIN 消失→字段冗余/事件最终同步",
+      "src": {
+        "href": "/kb/quick-memory-plan/",
+        "label": "记忆卡组 · T20"
       }
     },
     {
