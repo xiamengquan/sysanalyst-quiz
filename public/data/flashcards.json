@@ -1,8 +1,8 @@
 {
   "meta": {
-    "builtAt": "2026-10-11T07:22:31.208Z",
-    "total": 155,
-    "m": 97,
+    "builtAt": "2026-10-13T13:00:23.812Z",
+    "total": 156,
+    "m": 98,
     "k": 58,
     "hard": 30,
     "source": [
@@ -1164,7 +1164,19 @@
       }
     },
     {
-      "id": "fc-m-d4-039",
+      "id": "fc-m-d3-039",
+      "day": "d3",
+      "tier": "M",
+      "hard": false,
+      "front": "事件系统风格（隐式调用）三部件？（默写要点）",
+      "back": "事件源（产生并声明事件）→ 事件管理器（事件队列/绑定表，登记与派遣）→ 事件处理器（注册处理过程，事件触发时被调用）；口诀「源-管-理」。锚例：商家发布配送单=源、平台派单=管理器、骑手接单=处理器（2020上案例五真题填空考过部件名）",
+      "src": {
+        "href": "/kb/quick-four-tier-7d/#d3",
+        "label": "总册 D3 · 必会卡"
+      }
+    },
+    {
+      "id": "fc-m-d4-040",
       "day": "d4",
       "tier": "M",
       "hard": false,
@@ -1176,7 +1188,7 @@
       }
     },
     {
-      "id": "fc-m-d4-040",
+      "id": "fc-m-d4-041",
       "day": "d4",
       "tier": "M",
       "hard": false,
@@ -1188,7 +1200,7 @@
       }
     },
     {
-      "id": "fc-m-d4-041",
+      "id": "fc-m-d4-042",
       "day": "d4",
       "tier": "M",
       "hard": false,
@@ -1200,7 +1212,7 @@
       }
     },
     {
-      "id": "fc-m-d4-042",
+      "id": "fc-m-d4-043",
       "day": "d4",
       "tier": "M",
       "hard": false,
@@ -1212,7 +1224,7 @@
       }
     },
     {
-      "id": "fc-m-d4-043",
+      "id": "fc-m-d4-044",
       "day": "d4",
       "tier": "M",
       "hard": false,
@@ -1224,7 +1236,7 @@
       }
     },
     {
-      "id": "fc-m-d4-044",
+      "id": "fc-m-d4-045",
       "day": "d4",
       "tier": "M",
       "hard": true,
@@ -1236,7 +1248,7 @@
       }
     },
     {
-      "id": "fc-m-d4-045",
+      "id": "fc-m-d4-046",
       "day": "d4",
       "tier": "M",
       "hard": false,
@@ -1248,7 +1260,7 @@
       }
     },
     {
-      "id": "fc-m-d4-046",
+      "id": "fc-m-d4-047",
       "day": "d4",
       "tier": "M",
       "hard": true,
@@ -1260,7 +1272,7 @@
       }
     },
     {
-      "id": "fc-m-d4-047",
+      "id": "fc-m-d4-048",
       "day": "d4",
       "tier": "M",
       "hard": false,
@@ -1272,7 +1284,7 @@
       }
     },
     {
-      "id": "fc-m-d4-048",
+      "id": "fc-m-d4-049",
       "day": "d4",
       "tier": "M",
       "hard": false,
@@ -1284,7 +1296,7 @@
       }
     },
     {
-      "id": "fc-m-d4-049",
+      "id": "fc-m-d4-050",
       "day": "d4",
       "tier": "M",
       "hard": false,
@@ -1296,7 +1308,7 @@
       }
     },
     {
-      "id": "fc-m-d4-050",
+      "id": "fc-m-d4-051",
       "day": "d4",
       "tier": "M",
       "hard": false,
@@ -1308,7 +1320,7 @@
       }
     },
     {
-      "id": "fc-m-d4-051",
+      "id": "fc-m-d4-052",
       "day": "d4",
       "tier": "M",
       "hard": false,
@@ -1320,7 +1332,7 @@
       }
     },
     {
-      "id": "fc-m-d4-052",
+      "id": "fc-m-d4-053",
       "day": "d4",
       "tier": "M",
       "hard": false,
@@ -1332,7 +1344,7 @@
       }
     },
     {
-      "id": "fc-m-d4-053",
+      "id": "fc-m-d4-054",
       "day": "d4",
       "tier": "M",
       "hard": false,
@@ -1344,7 +1356,7 @@
       }
     },
     {
-      "id": "fc-m-d4-054",
+      "id": "fc-m-d4-055",
       "day": "d4",
       "tier": "M",
       "hard": false,
@@ -1356,7 +1368,7 @@
       }
     },
     {
-      "id": "fc-m-d5-055",
+      "id": "fc-m-d5-056",
       "day": "d5",
       "tier": "M",
       "hard": false,
@@ -1368,7 +1380,7 @@
       }
     },
     {
-      "id": "fc-m-d5-056",
+      "id": "fc-m-d5-057",
       "day": "d5",
       "tier": "M",
       "hard": false,
@@ -1380,7 +1392,7 @@
       }
     },
     {
-      "id": "fc-m-d5-057",
+      "id": "fc-m-d5-058",
       "day": "d5",
       "tier": "M",
       "hard": false,
@@ -1392,7 +1404,7 @@
       }
     },
     {
-      "id": "fc-m-d5-058",
+      "id": "fc-m-d5-059",
       "day": "d5",
       "tier": "M",
       "hard": false,
@@ -1404,7 +1416,7 @@
       }
     },
     {
-      "id": "fc-m-d5-059",
+      "id": "fc-m-d5-060",
       "day": "d5",
       "tier": "M",
       "hard": false,
@@ -1416,7 +1428,7 @@
       }
     },
     {
-      "id": "fc-m-d5-060",
+      "id": "fc-m-d5-061",
       "day": "d5",
       "tier": "M",
       "hard": false,
@@ -1428,7 +1440,7 @@
       }
     },
     {
-      "id": "fc-m-d5-061",
+      "id": "fc-m-d5-062",
       "day": "d5",
       "tier": "M",
       "hard": false,
@@ -1440,7 +1452,7 @@
       }
     },
     {
-      "id": "fc-m-d5-062",
+      "id": "fc-m-d5-063",
       "day": "d5",
       "tier": "M",
       "hard": false,
@@ -1452,7 +1464,7 @@
       }
     },
     {
-      "id": "fc-m-d5-063",
+      "id": "fc-m-d5-064",
       "day": "d5",
       "tier": "M",
       "hard": true,
@@ -1464,7 +1476,7 @@
       }
     },
     {
-      "id": "fc-m-d5-064",
+      "id": "fc-m-d5-065",
       "day": "d5",
       "tier": "M",
       "hard": true,
@@ -1476,7 +1488,7 @@
       }
     },
     {
-      "id": "fc-m-d5-065",
+      "id": "fc-m-d5-066",
       "day": "d5",
       "tier": "M",
       "hard": true,
@@ -1488,7 +1500,7 @@
       }
     },
     {
-      "id": "fc-m-d5-066",
+      "id": "fc-m-d5-067",
       "day": "d5",
       "tier": "M",
       "hard": false,
@@ -1500,7 +1512,7 @@
       }
     },
     {
-      "id": "fc-m-d5-067",
+      "id": "fc-m-d5-068",
       "day": "d5",
       "tier": "M",
       "hard": false,
@@ -1512,7 +1524,7 @@
       }
     },
     {
-      "id": "fc-m-d5-068",
+      "id": "fc-m-d5-069",
       "day": "d5",
       "tier": "M",
       "hard": false,
@@ -1524,7 +1536,7 @@
       }
     },
     {
-      "id": "fc-m-d6-069",
+      "id": "fc-m-d6-070",
       "day": "d6",
       "tier": "M",
       "hard": true,
@@ -1536,7 +1548,7 @@
       }
     },
     {
-      "id": "fc-m-d6-070",
+      "id": "fc-m-d6-071",
       "day": "d6",
       "tier": "M",
       "hard": false,
@@ -1548,7 +1560,7 @@
       }
     },
     {
-      "id": "fc-m-d6-071",
+      "id": "fc-m-d6-072",
       "day": "d6",
       "tier": "M",
       "hard": false,
@@ -1560,7 +1572,7 @@
       }
     },
     {
-      "id": "fc-m-d6-072",
+      "id": "fc-m-d6-073",
       "day": "d6",
       "tier": "M",
       "hard": false,
@@ -1572,7 +1584,7 @@
       }
     },
     {
-      "id": "fc-m-d6-073",
+      "id": "fc-m-d6-074",
       "day": "d6",
       "tier": "M",
       "hard": true,
@@ -1584,7 +1596,7 @@
       }
     },
     {
-      "id": "fc-m-d6-074",
+      "id": "fc-m-d6-075",
       "day": "d6",
       "tier": "M",
       "hard": false,
@@ -1596,7 +1608,7 @@
       }
     },
     {
-      "id": "fc-m-d6-075",
+      "id": "fc-m-d6-076",
       "day": "d6",
       "tier": "M",
       "hard": false,
@@ -1608,7 +1620,7 @@
       }
     },
     {
-      "id": "fc-m-d6-076",
+      "id": "fc-m-d6-077",
       "day": "d6",
       "tier": "M",
       "hard": true,
@@ -1620,7 +1632,7 @@
       }
     },
     {
-      "id": "fc-m-d6-077",
+      "id": "fc-m-d6-078",
       "day": "d6",
       "tier": "M",
       "hard": true,
@@ -1632,7 +1644,7 @@
       }
     },
     {
-      "id": "fc-m-d6-078",
+      "id": "fc-m-d6-079",
       "day": "d6",
       "tier": "M",
       "hard": false,
@@ -1644,7 +1656,7 @@
       }
     },
     {
-      "id": "fc-m-d6-079",
+      "id": "fc-m-d6-080",
       "day": "d6",
       "tier": "M",
       "hard": true,
@@ -1656,7 +1668,7 @@
       }
     },
     {
-      "id": "fc-m-d6-080",
+      "id": "fc-m-d6-081",
       "day": "d6",
       "tier": "M",
       "hard": false,
@@ -1668,7 +1680,7 @@
       }
     },
     {
-      "id": "fc-m-d6-081",
+      "id": "fc-m-d6-082",
       "day": "d6",
       "tier": "M",
       "hard": true,
@@ -1680,7 +1692,7 @@
       }
     },
     {
-      "id": "fc-m-d6-082",
+      "id": "fc-m-d6-083",
       "day": "d6",
       "tier": "M",
       "hard": false,
@@ -1692,7 +1704,7 @@
       }
     },
     {
-      "id": "fc-m-d6-083",
+      "id": "fc-m-d6-084",
       "day": "d6",
       "tier": "M",
       "hard": false,
@@ -1704,7 +1716,7 @@
       }
     },
     {
-      "id": "fc-m-d7-084",
+      "id": "fc-m-d7-085",
       "day": "d7",
       "tier": "M",
       "hard": false,
@@ -1716,7 +1728,7 @@
       }
     },
     {
-      "id": "fc-m-d7-085",
+      "id": "fc-m-d7-086",
       "day": "d7",
       "tier": "M",
       "hard": false,
@@ -1728,7 +1740,7 @@
       }
     },
     {
-      "id": "fc-m-d7-086",
+      "id": "fc-m-d7-087",
       "day": "d7",
       "tier": "M",
       "hard": false,
@@ -1740,7 +1752,7 @@
       }
     },
     {
-      "id": "fc-m-d7-087",
+      "id": "fc-m-d7-088",
       "day": "d7",
       "tier": "M",
       "hard": true,
@@ -1752,7 +1764,7 @@
       }
     },
     {
-      "id": "fc-m-d7-088",
+      "id": "fc-m-d7-089",
       "day": "d7",
       "tier": "M",
       "hard": false,
@@ -1764,7 +1776,7 @@
       }
     },
     {
-      "id": "fc-m-d7-089",
+      "id": "fc-m-d7-090",
       "day": "d7",
       "tier": "M",
       "hard": false,
@@ -1776,7 +1788,7 @@
       }
     },
     {
-      "id": "fc-m-d7-090",
+      "id": "fc-m-d7-091",
       "day": "d7",
       "tier": "M",
       "hard": false,
@@ -1788,7 +1800,7 @@
       }
     },
     {
-      "id": "fc-m-d7-091",
+      "id": "fc-m-d7-092",
       "day": "d7",
       "tier": "M",
       "hard": false,
@@ -1800,7 +1812,7 @@
       }
     },
     {
-      "id": "fc-m-d7-092",
+      "id": "fc-m-d7-093",
       "day": "d7",
       "tier": "M",
       "hard": false,
@@ -1812,7 +1824,7 @@
       }
     },
     {
-      "id": "fc-m-d7-093",
+      "id": "fc-m-d7-094",
       "day": "d7",
       "tier": "M",
       "hard": false,
@@ -1824,7 +1836,7 @@
       }
     },
     {
-      "id": "fc-m-d7-094",
+      "id": "fc-m-d7-095",
       "day": "d7",
       "tier": "M",
       "hard": false,
@@ -1836,7 +1848,7 @@
       }
     },
     {
-      "id": "fc-m-d7-095",
+      "id": "fc-m-d7-096",
       "day": "d7",
       "tier": "M",
       "hard": false,
@@ -1848,7 +1860,7 @@
       }
     },
     {
-      "id": "fc-m-d7-096",
+      "id": "fc-m-d7-097",
       "day": "d7",
       "tier": "M",
       "hard": false,
@@ -1860,7 +1872,7 @@
       }
     },
     {
-      "id": "fc-m-d7-097",
+      "id": "fc-m-d7-098",
       "day": "d7",
       "tier": "M",
       "hard": false,
