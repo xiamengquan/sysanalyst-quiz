@@ -2279,7 +2279,7 @@
           "status": "正式",
           "kind": "quick",
           "docType": "howto",
-          "note": "记忆薄弱专项 · 58 条卡组 + 1-2-4-7-15 日程"
+          "note": "记忆薄弱专项 · 74 条卡组（四域前置 + T19 Web/T20 微服务新组） + 1-2-4-7-15 日程"
         },
         {
           "id": "quick-four-tier-7d",
@@ -2289,6 +2289,15 @@
           "kind": "quick",
           "docType": "howto",
           "note": "架构 v3 学习主文档：每日 M/K/S/D 四层 + 七日册 + 强化记忆块"
+        },
+        {
+          "id": "quick-first-principles",
+          "title": "第一性原理 · 四大方面一通到底",
+          "path": "速查/第一性原理-四大方面一通到底.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "tutorial",
+          "note": "四域 39 点逐点讲透：第一性拆解 + 费曼讲法 + 一通到底 + 考场回扣，先懂后背（编号= /track id）"
         },
         {
           "id": "quick-kp-map",
