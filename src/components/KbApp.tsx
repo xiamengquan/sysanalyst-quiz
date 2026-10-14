@@ -212,10 +212,10 @@ export function KbCatalog() {
       <>
         <h1 className="page-title">知识点 · 快速学习与复习</h1>
         <p className="page-lead">
-          以《四层七日背诵总册》为学习主线：每日 必会 M → 重点 K → 补充 S → 可放弃 D + 强化记忆块
+          以《四层背诵总册（四大方面重构版）》为学习主线：需求工程（D2）→ Web + 微服务（D3）→ 数据库（D4）四大方面主背，其余模块精华收尾（D1/D5/D6/D7）；每日 必会 M → 重点 K → 补充 S → 可放弃 D + 强化记忆块
           <br />
           <span className="text-[0.82rem]">
-            背完当日就刷当日配题；查某一考点的完整定义时，再进「字典检索」（{data.meta?.apiPoints ?? 174} 篇考点参考）
+            四域 39 张必会卡与 /track 答题轨道同源；背完当日就刷当日配题，查完整定义进「字典检索」（{data.meta?.apiPoints ?? 174} 篇考点参考）
           </span>
         </p>
 
@@ -254,9 +254,10 @@ export function KbCatalog() {
         <Card className="border-primary/30 bg-primary/[0.03] dark:bg-primary/[0.05] p-4 sm:p-5 shadow-xs mb-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
-              <h2 className="text-[1.02rem] font-semibold text-foreground">四层七日背诵总册</h2>
+              <h2 className="text-[1.02rem] font-semibold text-foreground">四层背诵总册 · 四大方面重构版</h2>
               <p className="mt-1 text-[0.88rem] leading-relaxed text-muted-foreground">
-                D1–D7 七日主线，每日六块：必会默写卡（M）→ 重点辨析题型（K）→ 补充速览（S）→
+                四大方面前置：D2 需求工程（10 卡）→ D3 Web + 微服务（19 卡）→ D4 数据库（10 卡），四域 M 卡与 /track 轨道同源；
+                其余模块压缩精华（D1/D5/D6/D7）。每日六块：必会默写（M）→ 重点辨析（K）→ 补充速览（S）→
                 可放弃止损（D）→ 强化记忆（D-1 / D-3 / D-7 回收 + 自测问句）→ 练题收口
               </p>
             </div>
@@ -267,13 +268,25 @@ export function KbCatalog() {
         </Card>
 
         <div className="grid gap-2.5 sm:grid-cols-2">
-          {SEVEN_DAYS.map((d) => (
+          {[...SEVEN_DAYS]
+            .sort((a, b) => {
+              // 四大方面（d2/d3/d4）前置，其余模块（d1/d5/d6/d7）随后，组内保持日次序
+              const rank = (id: string) => (id === "d2" || id === "d3" || id === "d4" ? 0 : 1);
+              return rank(a.id) - rank(b.id);
+            })
+            .map((d) => (
             <Card key={d.id} className="p-4">
               <div className="flex items-center justify-between gap-2">
                 <h3 className="text-[0.95rem] font-medium text-foreground">
                   {d.label} · {d.theme}
                 </h3>
-                <span className="badge shrink-0">{d.paper ? "P2 · 含论文" : "P0 主攻"}</span>
+                <span className="badge shrink-0">
+                  {d.paper
+                    ? "其余模块 · 含论文"
+                    : d.id === "d2" || d.id === "d3" || d.id === "d4"
+                      ? "四大方面 · 主攻"
+                      : "其余模块 · 精华"}
+                </span>
               </div>
               <p className="mt-1 text-[0.82rem] leading-relaxed text-muted-foreground">{d.focus}</p>
               <p className="mt-0.5 text-[0.72rem] text-muted-foreground/80">
