@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 
 type PlayMode = "qa" | "drill";
 type Order = "seq" | "rand";
-type Pool = "flash" | "drill";
+type Pool = "flash" | "drill" | "article";
 
 const REPEAT_OPTIONS = [2, 3, 5];
 const LIMIT_OPTIONS = [0, 15, 30, 60]; // 分钟，0 = 不限
@@ -23,6 +23,17 @@ type DrillDeckLite = {
   id: string;
   title: string;
   steps: { idx: number; name: string; ask: string; model: string; role?: string }[];
+};
+
+/** 讲透文章（来自 audio-articles.json：39 点逐点讲透，连贯朗读） */
+type ArticleParagraph = { id: string; no: number; pid: string; title: string; text: string };
+type ArticleDoc = {
+  id: string;
+  title: string;
+  group: string;
+  prefix: string;
+  intro: string;
+  paragraphs: ArticleParagraph[];
 };
 
 /** 统一播放卡：flash 卡与演练卡共用 */
@@ -101,6 +112,22 @@ function shuffle<T>(items: T[]): T[] {
   return r;
 }
 
+/** 讲透文章段 → 音频卡：问 = 章节标题播报，答 = 该点完整讲透文本 */
+function articleToCards(docs: ArticleDoc[], filter: string): AnyCard[] {
+  return docs
+    .filter((d) => filter === "all" || d.prefix === filter)
+    .flatMap((d) =>
+      d.paragraphs.map((p) => ({
+        id: p.id,
+        group: d.group.replace("文章", ""),
+        front: `第${p.no}点 ${p.title}`,
+        back: p.text,
+        qText: `第${p.no}点，${p.title}。`,
+        aText: p.text,
+      }))
+    );
+}
+
 export function AudioApp() {
   const [data, setData] = useState<FlashcardsData | null>(null);
   const [ready, setReady] = useState(false);
@@ -118,6 +145,8 @@ export function AudioApp() {
   const [pool, setPool] = useState<Pool>("flash");
   const [drillDecks, setDrillDecks] = useState<DrillDeckLite[]>([]);
   const [drillFilter, setDrillFilter] = useState("all");
+  const [articleDocs, setArticleDocs] = useState<ArticleDoc[]>([]);
+  const [articleFilter, setArticleFilter] = useState("all");
   const [loopAll, setLoopAll] = useState(false);
   const loopAllRef = useRef(loopAll);
 
@@ -149,6 +178,7 @@ export function AudioApp() {
         if (s.tierFilter) setTierFilter(s.tierFilter);
         if (s.pool) setPool(s.pool);
         if (s.drillFilter) setDrillFilter(s.drillFilter);
+        if (s.articleFilter) setArticleFilter(s.articleFilter);
         if (typeof s.loopAll === "boolean") setLoopAll(s.loopAll);
       } catch {}
     }
@@ -157,9 +187,9 @@ export function AudioApp() {
   useEffect(() => {
     localStorage.setItem(
       AUDIO_SETTINGS_KEY,
-      JSON.stringify({ mode, repeat, rate, order, limitMin, dayFilter, tierFilter, pool, drillFilter, loopAll })
+      JSON.stringify({ mode, repeat, rate, order, limitMin, dayFilter, tierFilter, pool, drillFilter, articleFilter, loopAll })
     );
-  }, [mode, repeat, rate, order, limitMin, dayFilter, tierFilter, pool, drillFilter, loopAll]);
+  }, [mode, repeat, rate, order, limitMin, dayFilter, tierFilter, pool, drillFilter, articleFilter, loopAll]);
 
   useEffect(() => {
     loopAllRef.current = loopAll;
@@ -196,6 +226,12 @@ export function AudioApp() {
         if (d?.decks) setDrillDecks(d.decks);
       })
       .catch(() => undefined);
+    fetch("/data/audio-articles.json")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (d?.articles) setArticleDocs(d.articles);
+      })
+      .catch(() => undefined);
     return () => {
       if (typeof window !== "undefined" && "speechSynthesis" in window)
         window.speechSynthesis.cancel();
@@ -203,6 +239,7 @@ export function AudioApp() {
   }, []);
 
   const filtered = useMemo(() => {
+    if (pool === "article") return articleToCards(articleDocs, articleFilter);
     if (pool === "drill") return drillToCards(drillDecks, drillFilter);
     if (!data) return [];
     return data.cards.filter(
@@ -210,7 +247,7 @@ export function AudioApp() {
         (dayFilter === "all" || c.day === dayFilter) &&
         (tierFilter === "all" || c.tier === tierFilter)
     );
-  }, [pool, data, dayFilter, tierFilter, drillDecks, drillFilter]);
+  }, [pool, data, dayFilter, tierFilter, drillDecks, drillFilter, articleDocs, articleFilter]);
 
   const pickVoice = useCallback(() => {
     if (!voiceURI) return undefined;
@@ -354,7 +391,7 @@ export function AudioApp() {
     <>
       <h1 className="page-title">知识点洗脑音频 · 语音循环</h1>
       <p className="page-lead">
-        {data?.meta.total ?? "—"} 张闪卡 + 演练卡组（步骤链定义与作用）转为语音流：问答式（读题→停顿→读答案）或洗脑式（答案连读 N 遍），支持整组 ∞ 无限循环
+        {data?.meta.total ?? "—"} 张闪卡 + 演练卡组（步骤链定义与作用）+ 四大方面 39 点讲透文章（连贯朗读）转为语音流：问答式（读题→停顿→读答案）或洗脑式（答案连读 N 遍），支持整组 ∞ 无限循环
         <br />
         <span className="text-[0.82rem]">
           适合通勤/散步等零散时间 · 语音由设备合成，免下载 · 注意：锁屏后部分手机会暂停，建议亮屏播放或连接耳机
@@ -370,6 +407,7 @@ export function AudioApp() {
                 [
                   ["flash", "闪卡库（总册 M/K）"],
                   ["drill", "演练卡组（步骤链 · 定义与作用）"],
+                  ["article", "文章 · 39 点讲透（连贯朗读）"],
                 ] as const
               ).map(([v, label]) => (
                 <button
@@ -482,7 +520,7 @@ export function AudioApp() {
                 </div>
               </div>
             </div>
-          ) : (
+          ) : pool === "drill" ? (
             <div>
               <h2 className="mb-2 text-[1rem] font-medium">演练链</h2>
               <div className="flex flex-wrap gap-1.5">
@@ -499,6 +537,35 @@ export function AudioApp() {
                     )}
                   >
                     {d.title}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div>
+              <h2 className="mb-2 text-[1rem] font-medium">文章范围（四大方面 39 点）</h2>
+              <div className="flex flex-wrap gap-1.5">
+                {(
+                  [
+                    ["all", "全部（39 点）"],
+                    ["req", "需求工程（10 点）"],
+                    ["web", "Web 架构（10 点）"],
+                    ["mic", "微服务（9 点）"],
+                    ["db", "数据库（10 点）"],
+                  ] as const
+                ).map(([v, label]) => (
+                  <button
+                    key={v}
+                    type="button"
+                    onClick={() => setArticleFilter(v)}
+                    className={cn(
+                      "rounded-lg border px-2.5 py-1.5 text-[0.8rem] transition-colors",
+                      articleFilter === v
+                        ? "border-primary bg-primary/10 font-medium text-primary"
+                        : "border-border bg-muted/30 text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    {label}
                   </button>
                 ))}
               </div>
@@ -624,7 +691,7 @@ export function AudioApp() {
             </span>
           </div>
           <div className="mb-4 flex flex-wrap gap-1.5">
-            <span className="badge">{current.group ? `演练 · ${current.group}` : current.key.startsWith("fc-m") ? "必会 M" : "重点 K"}</span>
+            <span className="badge">{current.key.startsWith("ar-") ? `讲透文章 · ${current.group}` : current.group ? `演练 · ${current.group}` : current.key.startsWith("fc-m") ? "必会 M" : "重点 K"}</span>
             {current.front && <span className="badge">问：{current.front}</span>}
           </div>
           <div className="mb-5 rounded-[12px] border border-emerald-500/40 bg-emerald-500/10 p-5 text-[1rem] leading-[1.75] whitespace-pre-wrap break-words">
