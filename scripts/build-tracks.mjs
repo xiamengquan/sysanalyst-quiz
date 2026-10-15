@@ -23,6 +23,7 @@ function validateCourse(course) {
   let points = 0;
   let choice = 0;
   let fill = 0;
+  let short = 0;
   for (const unit of course.units ?? []) {
     if (!unit.id || !unit.title) errs.push(`${course.id}: unit 缺 id/title`);
     for (const p of unit.points ?? []) {
@@ -44,6 +45,12 @@ function validateCourse(course) {
         if (!f.explain) errs.push(`${p.id}: 填空题缺 explain`);
         fill += 1;
       }
+      if (!p.short?.length) errs.push(`${p.id}: 缺简答题`);
+      for (const s of p.short ?? []) {
+        if (!s.q) errs.push(`${p.id}: 简答题缺题干 q`);
+        if (!s.reference) errs.push(`${p.id}: 简答题缺 reference`);
+        short += 1;
+      }
     }
   }
   // caseSet 覆盖矩阵：本域每点都应出现在 qmap 中；且对应案例 md 存在
@@ -58,7 +65,7 @@ function validateCourse(course) {
     if (!Number.isInteger(no) || !fs.existsSync(path.join(CASE_DIR, `案例${no}.md`)))
       errs.push(`${course.id}: 案例源文件不存在 ${cs.id}`);
   }
-  return { errs, stats: { points, choice, fill } };
+  return { errs, stats: { points, choice, fill, short } };
 }
 
 function main() {
@@ -66,7 +73,7 @@ function main() {
   const byTitle = new Map(files.map((f) => [path.basename(f, ".json"), JSON.parse(fs.readFileSync(path.join(SRC, f), "utf8"))]));
   const courses = [];
   const errs = [];
-  const meta = { courses: 0, units: 0, points: 0, choice: 0, fill: 0 };
+  const meta = { courses: 0, units: 0, points: 0, choice: 0, fill: 0, short: 0 };
   for (const title of ORDER) {
     const course = byTitle.get(title);
     if (!course) {
@@ -80,6 +87,7 @@ function main() {
     meta.points += v.stats.points;
     meta.choice += v.stats.choice;
     meta.fill += v.stats.fill;
+    meta.short += v.stats.short;
     courses.push({
       id: course.id,
       title: course.title,
@@ -109,7 +117,7 @@ function main() {
   const out = { meta: { builtAt: new Date().toISOString(), ...meta }, courses };
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
   fs.writeFileSync(OUT, JSON.stringify(out), "utf8");
-  console.log(`build-tracks ok · courses ${meta.courses} · units ${meta.units} · points ${meta.points} · choice ${meta.choice} · fill ${meta.fill}`);
+  console.log(`build-tracks ok · courses ${meta.courses} · units ${meta.units} · points ${meta.points} · choice ${meta.choice} · fill ${meta.fill} · short ${meta.short}`);
 }
 
 main();

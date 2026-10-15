@@ -14,6 +14,7 @@ import {
   ArrowRight,
   BookOpen,
   CheckCircle2,
+  Eye,
   Flame,
   RotateCcw,
   Target,
@@ -33,6 +34,7 @@ type TrackPoint = {
   hook: string;
   choice: { q: string; options: string[]; answer: number; explain: string }[];
   fill: { q: string; blanks: string[][]; explain: string }[];
+  short: { q: string; reference: string }[];
 };
 
 type TrackUnit = { id: string; title: string; points: TrackPoint[] };
@@ -48,7 +50,8 @@ type TracksData = { meta: { builtAt: string; courses: number; units: number; poi
 
 type ChoiceItem = { kind: "choice"; pid: string; ptitle: string; q: string; options: string[]; answer: number; explain: string };
 type FillItem = { kind: "fill"; pid: string; ptitle: string; q: string; blanks: string[][]; explain: string };
-type LessonItem = ChoiceItem | FillItem;
+type ShortItem = { kind: "short"; pid: string; ptitle: string; q: string; reference: string };
+type LessonItem = ChoiceItem | FillItem | ShortItem;
 
 type PointRecord = { right: number; wrong: number; firstTry: boolean; lastAt: number };
 type LessonRecord = { runs: number; best: number; at: number };
@@ -112,6 +115,9 @@ export function TrackApp() {
   const [picked, setPicked] = useState<number | null>(null);
   const [fillInputs, setFillInputs] = useState<string[]>([]);
   const [fillChecked, setFillChecked] = useState<boolean[] | null>(null);
+  const [shortDraft, setShortDraft] = useState("");
+  const [shortRevealed, setShortRevealed] = useState(false);
+  const [shortJudged, setShortJudged] = useState<boolean | null>(null);
   const [firstSeen, setFirstSeen] = useState<Set<string>>(new Set());
   const [streak, setStreak] = useState(0);
   const [maxStreak, setMaxStreak] = useState(0);
@@ -164,6 +170,7 @@ export function TrackApp() {
       u.points.flatMap((p) => [
         ...(p.choice ?? []).map((c) => ({ kind: "choice" as const, pid: p.id, ptitle: p.title, ...c })),
         ...(p.fill ?? []).map((f) => ({ kind: "fill" as const, pid: p.id, ptitle: p.title, ...f })),
+        ...(p.short ?? []).map((s) => ({ kind: "short" as const, pid: p.id, ptitle: p.title, ...s })),
       ])
     );
     setUnit(u);
@@ -262,11 +269,26 @@ export function TrackApp() {
     if (!ok) setQueue((q) => [...q, current]);
   };
 
+  // 简答题（自评式）：先自己作答（草稿不判分）→ 揭晓参考答案 → 自评「答到了 / 没答到」
+  const submitShort = (ok: boolean) => {
+    if (!current || current.kind !== "short" || shortJudged !== null) return;
+    setShortJudged(ok);
+    const key = `${current.pid}:s:${current.q}`;
+    const first = !firstSeen.has(key);
+    if (first) setFirstSeen((s) => new Set(s).add(key));
+    if (first) setFirstPass((f) => ({ ...f, right: f.right + (ok ? 1 : 0) }));
+    applyJudgment(current.pid, ok, first);
+    if (!ok) setQueue((q) => [...q, current]);
+  };
+
   const next = () => {
     setIdx((i) => i + 1);
     setPicked(null);
     setFillInputs([]);
     setFillChecked(null);
+    setShortDraft("");
+    setShortRevealed(false);
+    setShortJudged(null);
   };
 
   if (!ready) {
@@ -383,7 +405,7 @@ export function TrackApp() {
         </div>
         <Card className="p-4 sm:p-5">
           <p className="text-[0.7rem] font-medium uppercase tracking-wide text-muted-foreground">
-            {current.kind === "choice" ? "选择题" : "填空题"}
+            {current.kind === "choice" ? "选择题" : current.kind === "fill" ? "填空题" : "简答题"}
           </p>
           <p className="mt-1.5 text-base font-medium leading-relaxed">{current.q}</p>
 
@@ -411,7 +433,7 @@ export function TrackApp() {
                 );
               })}
             </div>
-          ) : (
+          ) : current.kind === "fill" ? (
             <div className="mt-4 space-y-2">
               {current.blanks.map((aliases, i) => (
                 <div key={i} className="flex items-center gap-2">
@@ -448,9 +470,67 @@ export function TrackApp() {
                 </Button>
               ) : null}
             </div>
-          )}
+          ) : current.kind === "short" ? (
+            <div className="mt-4 space-y-3">
+              <textarea
+                value={shortDraft}
+                disabled={shortRevealed}
+                onChange={(e) => setShortDraft(e.target.value)}
+                placeholder="先自己在纸上或这里作答（可选，不作判分依据），再看参考答案自评"
+                rows={4}
+                className="w-full rounded-lg border border-border/70 bg-background px-3 py-2.5 text-sm outline-none transition-colors focus:border-foreground/40"
+              />
+              {shortRevealed ? (
+                <div className="rounded-lg border border-border/70 bg-muted/30 p-3">
+                  <p className="mb-1 text-xs font-semibold text-muted-foreground">参考作答要点（非唯一答案）</p>
+                  <p className="whitespace-pre-wrap text-sm leading-relaxed">{current.reference}</p>
+                </div>
+              ) : null}
+              {!shortRevealed ? (
+                <Button size="sm" onClick={() => setShortRevealed(true)}>
+                  看参考答案 <Eye className="size-3.5" />
+                </Button>
+              ) : shortJudged === null ? (
+                <div className="flex flex-wrap gap-2">
+                  <Button size="sm" variant="outline" onClick={() => submitShort(true)} className="border-green-500/60 hover:bg-green-500/10">
+                    <CheckCircle2 className="size-3.5 text-green-600 dark:text-green-400" /> 答到了
+                  </Button>
+                  <Button size="sm" variant="outline" onClick={() => submitShort(false)} className="border-red-500/60 hover:bg-red-500/10">
+                    <XCircle className="size-3.5 text-red-600 dark:text-red-400" /> 没答到（本题重入）
+                  </Button>
+                </div>
+              ) : null}
+            </div>
+          ) : null}
 
-          {picked !== null || fillChecked !== null ? (
+          {current.kind === "short" ? (
+            shortJudged !== null ? (
+              <div
+                className={cn(
+                  "mt-4 rounded-lg border p-3 text-sm leading-relaxed",
+                  shortJudged ? "border-green-500/50 bg-green-500/10" : "border-red-500/50 bg-red-500/10"
+                )}
+              >
+                <div className="mb-1 flex items-center gap-1.5 font-semibold">
+                  {shortJudged ? (
+                    <>
+                      <CheckCircle2 className="size-4 text-green-600 dark:text-green-400" /> 自评：答到了
+                    </>
+                  ) : (
+                    <>
+                      <XCircle className="size-4 text-red-600 dark:text-red-400" /> 自评：没答到（本题稍后重入）
+                    </>
+                  )}
+                </div>
+                <p className="text-muted-foreground">
+                  简答题以自评为准：能对着参考要点复述出采分点，就算过关。没答到的题会在本轮稍后重新出现。
+                </p>
+                <Button size="sm" onClick={next} className="mt-3">
+                  继续 <ArrowRight className="size-3.5" />
+                </Button>
+              </div>
+            ) : null
+          ) : picked !== null || fillChecked !== null ? (
             <div
               className={cn(
                 "mt-4 rounded-lg border p-3 text-sm leading-relaxed",
