@@ -8,7 +8,7 @@
  * 数据：public/data/tracks.json（npm run build:tracks 由 content/tracks/*.json 构建）
  */
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -20,6 +20,7 @@ import {
   Target,
   Trophy,
   XCircle,
+  Zap,
 } from "lucide-react";
 import { storageGet, storageSet } from "@/lib/storage";
 import { Button } from "@/components/ui/button";
@@ -127,12 +128,26 @@ function Ring({ pct, size = 44 }: { pct: number; size?: number }) {
   );
 }
 
+/** ⚡ 冲击模式题数：choice+bool+fill（不含简答/配对/排序） */
+function barrageCount(c: TrackCourse): number {
+  return c.units.reduce(
+    (n, u) =>
+      n +
+      u.points.reduce(
+        (m, p) => m + (p.choice?.length ?? 0) + (p.bool?.length ?? 0) + (p.fill?.length ?? 0),
+        0
+      ),
+    0
+  );
+}
+
 export function TrackApp() {
   const [data, setData] = useState<TracksData | null>(null);
   const [record, setRecord] = useState<TrackRecord>({ points: {}, lessons: {} });
   const [ready, setReady] = useState(false);
   const [courseId, setCourseId] = useState<string | null>(null);
   const [unit, setUnit] = useState<TrackUnit | null>(null);
+  const [barrage, setBarrage] = useState(false);
   const [queue, setQueue] = useState<LessonItem[]>([]);
   const [idx, setIdx] = useState(0);
   const [picked, setPicked] = useState<number | null>(null);
@@ -207,6 +222,27 @@ export function TrackApp() {
         ...(p.short ?? []).map((s) => ({ kind: "short" as const, pid: p.id, ptitle: p.title, ...s })),
       ])
     );
+    setBarrage(false);
+    beginSession(items, u);
+  }, []);
+
+  /** ⚡ 冲击模式：全课程按知识点连击（choice/bool/fill 连续题流），错题不重入不打断，错点自动进 /recall 排程 */
+  const startBarrage = useCallback((c: TrackCourse) => {
+    const items: LessonItem[] = c.units.flatMap((u) =>
+      u.points.flatMap((p) => {
+        const pick = <T,>(arr: T[]) => shuffle(arr);
+        return [
+          ...pick(p.choice ?? []).map((x) => ({ kind: "choice" as const, pid: p.id, ptitle: p.title, ...x })),
+          ...pick(p.bool ?? []).map((x) => ({ kind: "bool" as const, pid: p.id, ptitle: p.title, ...x })),
+          ...pick(p.fill ?? []).map((x) => ({ kind: "fill" as const, pid: p.id, ptitle: p.title, ...x })),
+        ];
+      })
+    );
+    setBarrage(true);
+    beginSession(items, null);
+  }, []);
+
+  const beginSession = (items: LessonItem[], u: TrackUnit | null) => {
     setUnit(u);
     setQueue(items);
     setIdx(0);
@@ -219,7 +255,7 @@ export function TrackApp() {
     setFirstPass({ right: 0, total: items.length });
     setWrongPoints([]);
     setPhase("lesson");
-  }, []);
+  };
 
   const applyJudgment = useCallback(
     (pid: string, ok: boolean, isFirstEncounter: boolean) => {
@@ -255,9 +291,18 @@ export function TrackApp() {
   const current = queue[idx] ?? null;
   const lessonDone = phase === "lesson" && queue.length > 0 && idx >= queue.length;
 
-  // 收官：写入 lesson 记录 + 汇总错题点
+  // 收官：写入 lesson 记录 + 汇总错题点（冲击模式只切收官页，不写单元记录）
+  const barrageRef = useRef(barrage);
   useEffect(() => {
-    if (!lessonDone || !unit) return;
+    barrageRef.current = barrage;
+  }, [barrage]);
+  useEffect(() => {
+    if (!lessonDone) return;
+    if (barrageRef.current || !unit) {
+      setWrongPoints([]);
+      setPhase("done");
+      return;
+    }
     const wrongPids = [...firstSeen].length
       ? unit.points.filter((p) => {
           const rec = record.points[p.id];
@@ -287,7 +332,7 @@ export function TrackApp() {
     if (first) setFirstSeen((s) => new Set(s).add(key));
     if (first) setFirstPass((f) => ({ ...f, right: f.right + (ok ? 1 : 0) }));
     applyJudgment(current.pid, ok, first);
-    if (!ok) setQueue((q) => [...q, current]); // 错题当课重入
+    if (!ok && !barrage) setQueue((q) => [...q, current]); // 错题当课重入（冲击模式不重入，保持连续）
   };
 
   const submitFill = () => {
@@ -300,7 +345,7 @@ export function TrackApp() {
     if (first) setFirstSeen((s) => new Set(s).add(key));
     if (first) setFirstPass((f) => ({ ...f, right: f.right + (ok ? 1 : 0) }));
     applyJudgment(current.pid, ok, first);
-    if (!ok) setQueue((q) => [...q, current]);
+    if (!ok && !barrage) setQueue((q) => [...q, current]);
   };
 
   // 简答题（自评式）：先自己作答（草稿不判分）→ 揭晓参考答案 → 自评「答到了 / 没答到」
@@ -312,7 +357,7 @@ export function TrackApp() {
     if (first) setFirstSeen((s) => new Set(s).add(key));
     if (first) setFirstPass((f) => ({ ...f, right: f.right + (ok ? 1 : 0) }));
     applyJudgment(current.pid, ok, first);
-    if (!ok) setQueue((q) => [...q, current]);
+    if (!ok && !barrage) setQueue((q) => [...q, current]);
   };
 
   // 判断题：对 / 错 二选一
@@ -325,7 +370,7 @@ export function TrackApp() {
     if (first) setFirstSeen((s) => new Set(s).add(key));
     if (first) setFirstPass((f) => ({ ...f, right: f.right + (ok ? 1 : 0) }));
     applyJudgment(current.pid, ok, first);
-    if (!ok) setQueue((q) => [...q, current]);
+    if (!ok && !barrage) setQueue((q) => [...q, current]);
   };
 
   // 配对题：左列选中 → 点右列配对；配错闪红计数不建立配对；全部配对完成自动判定（零配错=过）
@@ -474,7 +519,19 @@ export function TrackApp() {
                     );
                   })}
                 </div>
-                <Button asChild variant="outline" size="sm" className="mt-3 w-full">
+                <Button
+                  variant="default"
+                  size="sm"
+                  className="mt-3 w-full"
+                  onClick={() => {
+                    setCourseId(c.id);
+                    startBarrage(c);
+                  }}
+                >
+                  <Zap className="size-3.5" />
+                  ⚡ 连续冲击 · {barrageCount(c)} 题一杆到底（不含简答）
+                </Button>
+                <Button asChild variant="outline" size="sm" className="mt-2 w-full">
                   <Link href={c.caseSet.href}>
                     <BookOpen className="size-3.5" /> 收官配套仿真案例：{c.caseSet.id}
                   </Link>
@@ -530,7 +587,9 @@ export function TrackApp() {
           </span>
         </div>
         <div className="mb-2 text-xs text-muted-foreground">
-          {course.title} · {unit?.title} · 知识点「{current.ptitle}」
+          {barrage
+            ? "⚡ 连续冲击模式 · 错题不重入，错点自动进 /recall 排程"
+            : `${course.title} · ${unit?.title ?? ""} · 知识点「${current.ptitle}」`}
         </div>
         <Card className="p-4 sm:p-5">
           <p className="text-[0.7rem] font-medium uppercase tracking-wide text-muted-foreground">
@@ -842,10 +901,10 @@ export function TrackApp() {
       <Card className="p-6 text-center">
         <Trophy className={cn("mx-auto size-10", pct >= 100 ? "text-amber-500" : "text-muted-foreground/60")} />
         <h2 className="mt-3 text-lg font-bold">
-          {pct >= 100 ? "完美通关！" : "单元完成"}
+          {barrage ? "⚡ 连续冲击完成！" : pct >= 100 ? "完美通关！" : "单元完成"}
         </h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          {course.title} · {unit?.title}
+          {barrage ? `${course.title} · 全课程 ${firstPass.total} 题连击` : `${course.title} · ${unit?.title ?? ""}`}
         </p>
         <div className="mt-4 grid grid-cols-3 gap-2 text-center">
           <div className="rounded-lg border border-border/70 p-3">
@@ -877,9 +936,15 @@ export function TrackApp() {
               <BookOpen className="size-3.5" /> 打配套仿真案例（{course.caseSet.id}）
             </Link>
           </Button>
-          <Button variant="outline" size="sm" onClick={() => unit && startLesson(unit)}>
-            <RotateCcw className="size-3.5" /> 再练一遍本单元
-          </Button>
+          {barrage ? (
+            <Button variant="outline" size="sm" onClick={() => startBarrage(course)}>
+              <Zap className="size-3.5" /> 再冲一轮
+            </Button>
+          ) : (
+            <Button variant="outline" size="sm" onClick={() => unit && startLesson(unit)}>
+              <RotateCcw className="size-3.5" /> 再练一遍本单元
+            </Button>
+          )}
           <Button variant="outline" size="sm" onClick={() => setPhase("map")}>
             回课程地图
           </Button>
