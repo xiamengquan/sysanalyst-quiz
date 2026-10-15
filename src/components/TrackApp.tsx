@@ -35,6 +35,9 @@ type TrackPoint = {
   choice: { q: string; options: string[]; answer: number; explain: string }[];
   fill: { q: string; blanks: string[][]; explain: string }[];
   short: { q: string; reference: string }[];
+  bool: { q: string; answer: boolean; explain: string }[];
+  match: { title: string; pairs: [string, string][]; explain: string }[];
+  order: { title: string; steps: string[]; explain: string }[];
 };
 
 type TrackUnit = { id: string; title: string; points: TrackPoint[] };
@@ -51,7 +54,10 @@ type TracksData = { meta: { builtAt: string; courses: number; units: number; poi
 type ChoiceItem = { kind: "choice"; pid: string; ptitle: string; q: string; options: string[]; answer: number; explain: string };
 type FillItem = { kind: "fill"; pid: string; ptitle: string; q: string; blanks: string[][]; explain: string };
 type ShortItem = { kind: "short"; pid: string; ptitle: string; q: string; reference: string };
-type LessonItem = ChoiceItem | FillItem | ShortItem;
+type BoolItem = { kind: "bool"; pid: string; ptitle: string; q: string; answer: boolean; explain: string };
+type MatchItem = { kind: "match"; pid: string; ptitle: string; title: string; pairs: [string, string][]; explain: string };
+type OrderItem = { kind: "order"; pid: string; ptitle: string; title: string; steps: string[]; explain: string };
+type LessonItem = ChoiceItem | FillItem | ShortItem | BoolItem | MatchItem | OrderItem;
 
 type PointRecord = { right: number; wrong: number; firstTry: boolean; lastAt: number };
 type LessonRecord = { runs: number; best: number; at: number };
@@ -68,6 +74,23 @@ function shuffle<T>(arr: T[]): T[] {
     [a[i], a[j]] = [a[j], a[i]];
   }
   return a;
+}
+
+/** 确定性打乱索引（seed 控制稳定）：同一题重渲染不重排，且保证结果 ≠ 原序 */
+function shuffleIdx(n: number, seed: string): number[] {
+  let h = 2166136261;
+  for (const ch of seed) {
+    h ^= ch.charCodeAt(0);
+    h = Math.imul(h, 16777619);
+  }
+  const idx = Array.from({ length: n }, (_, i) => i);
+  for (let i = n - 1; i > 0; i--) {
+    h = (Math.imul(h, 1103515245) + 12345) >>> 0;
+    const j = h % (i + 1);
+    [idx[i], idx[j]] = [idx[j], idx[i]];
+  }
+  if (n > 1 && idx.every((v, i) => v === i)) [idx[0], idx[1]] = [idx[1], idx[0]];
+  return idx;
 }
 
 const norm = (s: string) =>
@@ -118,6 +141,14 @@ export function TrackApp() {
   const [shortDraft, setShortDraft] = useState("");
   const [shortRevealed, setShortRevealed] = useState(false);
   const [shortJudged, setShortJudged] = useState<boolean | null>(null);
+  const [boolPicked, setBoolPicked] = useState<boolean | null>(null);
+  const [matchSel, setMatchSel] = useState<number | null>(null); // 左列选中项（显示序）
+  const [matchPairs, setMatchPairs] = useState<Record<number, number>>({}); // 左显示序 → 右显示序
+  const [matchWrong, setMatchWrong] = useState<{ side: "l" | "r"; idx: number } | null>(null);
+  const [matchErrors, setMatchErrors] = useState(0);
+  const [matchDone, setMatchDone] = useState(false);
+  const [orderSeq, setOrderSeq] = useState<number[]>([]); // 候选显示序组成的答案序列
+  const [orderDone, setOrderDone] = useState(false);
   const [firstSeen, setFirstSeen] = useState<Set<string>>(new Set());
   const [streak, setStreak] = useState(0);
   const [maxStreak, setMaxStreak] = useState(0);
@@ -169,7 +200,10 @@ export function TrackApp() {
     const items: LessonItem[] = shuffle(
       u.points.flatMap((p) => [
         ...(p.choice ?? []).map((c) => ({ kind: "choice" as const, pid: p.id, ptitle: p.title, ...c })),
+        ...(p.bool ?? []).map((b) => ({ kind: "bool" as const, pid: p.id, ptitle: p.title, ...b })),
         ...(p.fill ?? []).map((f) => ({ kind: "fill" as const, pid: p.id, ptitle: p.title, ...f })),
+        ...(p.match ?? []).map((m) => ({ kind: "match" as const, pid: p.id, ptitle: p.title, ...m })),
+        ...(p.order ?? []).map((o) => ({ kind: "order" as const, pid: p.id, ptitle: p.title, ...o })),
         ...(p.short ?? []).map((s) => ({ kind: "short" as const, pid: p.id, ptitle: p.title, ...s })),
       ])
     );
@@ -281,6 +315,71 @@ export function TrackApp() {
     if (!ok) setQueue((q) => [...q, current]);
   };
 
+  // 判断题：对 / 错 二选一
+  const submitBool = (v: boolean) => {
+    if (!current || current.kind !== "bool" || boolPicked !== null) return;
+    setBoolPicked(v);
+    const ok = v === current.answer;
+    const key = `${current.pid}:b:${current.q}`;
+    const first = !firstSeen.has(key);
+    if (first) setFirstSeen((s) => new Set(s).add(key));
+    if (first) setFirstPass((f) => ({ ...f, right: f.right + (ok ? 1 : 0) }));
+    applyJudgment(current.pid, ok, first);
+    if (!ok) setQueue((q) => [...q, current]);
+  };
+
+  // 配对题：左列选中 → 点右列配对；配错闪红计数不建立配对；全部配对完成自动判定（零配错=过）
+  const matchLeft = useMemo(() => (current?.kind === "match" ? shuffleIdx(current.pairs.length, current.title + "l") : []), [current]);
+  const matchRight = useMemo(() => (current?.kind === "match" ? shuffleIdx(current.pairs.length, current.title + "r") : []), [current]);
+
+  const tryMatch = (rightShowIdx: number) => {
+    if (!current || current.kind !== "match" || matchDone) return;
+    if (matchSel === null) {
+      setMatchWrong({ side: "r", idx: rightShowIdx });
+      setTimeout(() => setMatchWrong(null), 450);
+      return;
+    }
+    const leftOrig = matchLeft[matchSel];
+    const rightOrig = matchRight[rightShowIdx];
+    if (leftOrig === rightOrig) {
+      const done = { ...matchPairs, [matchSel]: rightShowIdx };
+      setMatchPairs(done);
+      setMatchSel(null);
+      if (Object.keys(done).length === current.pairs.length) finishMatch();
+    } else {
+      setMatchErrors((e) => e + 1);
+      setMatchWrong({ side: "r", idx: rightShowIdx });
+      setTimeout(() => setMatchWrong(null), 450);
+    }
+  };
+
+  const finishMatch = () => {
+    if (!current || current.kind !== "match") return;
+    setMatchDone(true);
+    const ok = matchErrors === 0;
+    const key = `${current.pid}:m:${current.title}`;
+    const first = !firstSeen.has(key);
+    if (first) setFirstSeen((s) => new Set(s).add(key));
+    if (first) setFirstPass((f) => ({ ...f, right: f.right + (ok ? 1 : 0) }));
+    applyJudgment(current.pid, ok, first);
+    if (!ok) setQueue((q) => [...q, current]);
+  };
+
+  // 排序题：按正确顺序点击候选 chips 组成序列，提交判定
+  const orderPool = useMemo(() => (current?.kind === "order" ? shuffleIdx(current.steps.length, current.title) : []), [current]);
+
+  const submitOrder = () => {
+    if (!current || current.kind !== "order" || orderDone) return;
+    const ok = orderSeq.map((i) => orderPool[i]).join("|") === current.steps.join("|");
+    setOrderDone(true);
+    const key = `${current.pid}:o:${current.title}`;
+    const first = !firstSeen.has(key);
+    if (first) setFirstSeen((s) => new Set(s).add(key));
+    if (first) setFirstPass((f) => ({ ...f, right: f.right + (ok ? 1 : 0) }));
+    applyJudgment(current.pid, ok, first);
+    if (!ok) setQueue((q) => [...q, current]);
+  };
+
   const next = () => {
     setIdx((i) => i + 1);
     setPicked(null);
@@ -289,6 +388,14 @@ export function TrackApp() {
     setShortDraft("");
     setShortRevealed(false);
     setShortJudged(null);
+    setBoolPicked(null);
+    setMatchSel(null);
+    setMatchPairs({});
+    setMatchWrong(null);
+    setMatchErrors(0);
+    setMatchDone(false);
+    setOrderSeq([]);
+    setOrderDone(false);
   };
 
   if (!ready) {
@@ -309,7 +416,7 @@ export function TrackApp() {
         <header className="mb-5">
           <h1 className="text-xl font-bold tracking-tight sm:text-2xl">答题轨道</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            四域课程 · 选择 + 填空 · 即时反馈 · 错题重入直到答对 · 错题点自动进 /recall
+            四域课程 · 选择/填空/判断/配对/排序/简答六题型 · 即时反馈 · 错题重入直到答对 · 错题点自动进 /recall
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
             排程建议：碎片背诵时段（工位 / 地铁）打lesson；单元收官后打配套仿真案例题。
@@ -383,6 +490,21 @@ export function TrackApp() {
   // ---------- Lesson 播放器 ----------
   if (phase === "lesson" && current) {
     const progress = firstPass.total ? (idx / queue.length) * 100 : 0;
+    const kindLabel = ({ choice: "选择题", fill: "填空题", short: "简答题", bool: "判断题", match: "配对题", order: "排序题" } as const)[current.kind];
+    const genericJudged =
+      current.kind === "choice" ? picked !== null
+      : current.kind === "fill" ? fillChecked !== null
+      : current.kind === "bool" ? boolPicked !== null
+      : current.kind === "match" ? matchDone
+      : current.kind === "order" ? orderDone
+      : false;
+    const genericOk =
+      current.kind === "choice" ? picked === current.answer
+      : current.kind === "fill" ? (fillChecked?.every(Boolean) ?? false)
+      : current.kind === "bool" ? boolPicked === current.answer
+      : current.kind === "match" ? matchErrors === 0
+      : current.kind === "order" ? orderSeq.map((i) => orderPool[i]).join("|") === current.steps.join("|")
+      : false;
     return (
       <div className="mx-auto w-full max-w-2xl px-4 pb-28 pt-4 sm:pb-12">
         <div className="mb-3 flex items-center gap-2">
@@ -405,9 +527,11 @@ export function TrackApp() {
         </div>
         <Card className="p-4 sm:p-5">
           <p className="text-[0.7rem] font-medium uppercase tracking-wide text-muted-foreground">
-            {current.kind === "choice" ? "选择题" : current.kind === "fill" ? "填空题" : "简答题"}
+            {kindLabel}
           </p>
-          <p className="mt-1.5 text-base font-medium leading-relaxed">{current.q}</p>
+          <p className="mt-1.5 text-base font-medium leading-relaxed">
+            {current.kind === "match" || current.kind === "order" ? current.title : current.q}
+          </p>
 
           {current.kind === "choice" ? (
             <div className="mt-4 grid gap-2">
@@ -429,6 +553,30 @@ export function TrackApp() {
                   >
                     <span className="mr-2 text-xs text-muted-foreground">{String.fromCharCode(65 + i)}</span>
                     {opt}
+                  </button>
+                );
+              })}
+            </div>
+          ) : current.kind === "bool" ? (
+            <div className="mt-4 grid grid-cols-2 gap-2">
+              {[true, false].map((v) => {
+                const isAnswer = v === current.answer;
+                const isPicked = boolPicked === v;
+                return (
+                  <button
+                    key={String(v)}
+                    disabled={boolPicked !== null}
+                    onClick={() => submitBool(v)}
+                    className={cn(
+                      "flex items-center justify-center gap-1.5 rounded-lg border border-border/70 px-3.5 py-3 text-sm font-medium transition-colors",
+                      boolPicked === null && "hover:border-foreground/40 hover:bg-muted/40",
+                      boolPicked !== null && isAnswer && "border-green-500/60 bg-green-500/10",
+                      boolPicked !== null && isPicked && !isAnswer && "border-red-500/60 bg-red-500/10",
+                      boolPicked !== null && !isPicked && !isAnswer && "opacity-60"
+                    )}
+                  >
+                    {v ? <CheckCircle2 className="size-4" /> : <XCircle className="size-4" />}
+                    {v ? "对" : "错"}
                   </button>
                 );
               })}
@@ -501,6 +649,99 @@ export function TrackApp() {
                 </div>
               ) : null}
             </div>
+          ) : current.kind === "match" ? (
+            <div className="mt-4 space-y-2">
+              <p className="text-xs text-muted-foreground">
+                点左列术语选中，再点右列对应含义；配错会计数闪红，{current.pairs.length} 对全部配对完成后自动判定（零配错才算过）。
+              </p>
+              <div className="grid grid-cols-2 gap-2">
+                <div className="space-y-2">
+                  {matchLeft.map((orig, show) => {
+                    const matched = matchPairs[show] !== undefined;
+                    return (
+                      <button
+                        key={orig}
+                        disabled={matched || matchDone}
+                        onClick={() => setMatchSel(matchSel === show ? null : show)}
+                        className={cn(
+                          "w-full rounded-lg border border-border/70 px-2.5 py-2 text-left text-[0.82rem] leading-snug transition-colors",
+                          "focus:border-foreground/40",
+                          matched && "border-green-500/60 bg-green-500/10 opacity-50",
+                          !matched && matchSel === show && "border-primary bg-primary/10 font-medium",
+                          !matched && matchSel !== show && "hover:border-foreground/40 hover:bg-muted/40"
+                        )}
+                      >
+                        {current.pairs[orig][0]}
+                      </button>
+                    );
+                  })}
+                </div>
+                <div className="space-y-2">
+                  {matchRight.map((orig, show) => {
+                    const matched = Object.values(matchPairs).includes(show);
+                    const flashWrong = matchWrong?.side === "r" && matchWrong.idx === show;
+                    return (
+                      <button
+                        key={orig}
+                        disabled={matched || matchDone}
+                        onClick={() => tryMatch(show)}
+                        className={cn(
+                          "w-full rounded-lg border border-border/70 px-2.5 py-2 text-left text-[0.82rem] leading-snug transition-colors",
+                          matched && "border-green-500/60 bg-green-500/10 opacity-50",
+                          !matched && flashWrong && "border-red-500/60 bg-red-500/10",
+                          !matched && !flashWrong && "hover:border-foreground/40 hover:bg-muted/40"
+                        )}
+                      >
+                        {current.pairs[orig][1]}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          ) : current.kind === "order" ? (
+            <div className="mt-4 space-y-2">
+              <p className="text-xs text-muted-foreground">
+                按正确顺序点击下方步骤组成答案（点答案中的步骤可撤回），集齐 {current.steps.length} 步后提交。
+              </p>
+              <div className="min-h-9 space-y-1.5">
+                {orderSeq.length === 0 ? (
+                  <p className="text-xs text-muted-foreground">（点击下方步骤开始作答）</p>
+                ) : (
+                  orderSeq.map((show, i) => (
+                    <button
+                      key={i}
+                      disabled={orderDone}
+                      onClick={() => setOrderSeq(orderSeq.filter((_, k) => k !== i))}
+                      className="flex w-full items-center gap-2 rounded-lg border border-border/70 bg-muted/40 px-3 py-2 text-left text-sm hover:border-foreground/40"
+                    >
+                      <span className="shrink-0 text-xs text-muted-foreground">{i + 1}</span>
+                      {current.steps[orderPool[show]]}
+                    </button>
+                  ))
+                )}
+              </div>
+              {!orderDone ? (
+                <div className="flex flex-wrap gap-1.5">
+                  {orderPool.map((orig, show) =>
+                    orderSeq.includes(show) ? null : (
+                      <button
+                        key={orig}
+                        onClick={() => setOrderSeq([...orderSeq, show])}
+                        className="rounded-lg border border-border/70 bg-background px-2.5 py-1.5 text-[0.82rem] transition-colors hover:border-foreground/40 hover:bg-muted/40"
+                      >
+                        {current.steps[orig]}
+                      </button>
+                    )
+                  )}
+                </div>
+              ) : null}
+              {!orderDone ? (
+                <Button size="sm" disabled={orderSeq.length !== current.steps.length} onClick={submitOrder} className={cn(orderSeq.length !== current.steps.length && "opacity-40")}>
+                  提交顺序 <Target className="size-3.5" />
+                </Button>
+              ) : null}
+            </div>
           ) : null}
 
           {current.kind === "short" ? (
@@ -530,17 +771,15 @@ export function TrackApp() {
                 </Button>
               </div>
             ) : null
-          ) : picked !== null || fillChecked !== null ? (
+          ) : genericJudged ? (
             <div
               className={cn(
                 "mt-4 rounded-lg border p-3 text-sm leading-relaxed",
-                (current.kind === "choice" ? picked === current.answer : fillChecked?.every(Boolean))
-                  ? "border-green-500/50 bg-green-500/10"
-                  : "border-red-500/50 bg-red-500/10"
+                genericOk ? "border-green-500/50 bg-green-500/10" : "border-red-500/50 bg-red-500/10"
               )}
             >
               <div className="mb-1 flex items-center gap-1.5 font-semibold">
-                {(current.kind === "choice" ? picked === current.answer : fillChecked?.every(Boolean)) ? (
+                {genericOk ? (
                   <>
                     <CheckCircle2 className="size-4 text-green-600 dark:text-green-400" /> 答对了
                   </>
@@ -555,6 +794,12 @@ export function TrackApp() {
                 <p className="mt-1 text-muted-foreground">
                   正确答案：{current.blanks.map((b) => b[0]).join("｜")}
                 </p>
+              ) : null}
+              {current.kind === "match" && !genericOk ? (
+                <p className="mt-1 text-muted-foreground">配错 {matchErrors} 次。正确配对：{current.pairs.map(([l, r]) => `${l}=${r}`).join("；")}</p>
+              ) : null}
+              {current.kind === "order" && !genericOk ? (
+                <p className="mt-1 text-muted-foreground">正确顺序：{current.steps.map((s, i) => `${i + 1}.${s}`).join(" → ")}</p>
               ) : null}
               <Button size="sm" onClick={next} className="mt-3">
                 继续 <ArrowRight className="size-3.5" />

@@ -24,6 +24,9 @@ function validateCourse(course) {
   let choice = 0;
   let fill = 0;
   let short = 0;
+  let bool = 0;
+  let match = 0;
+  let order = 0;
   for (const unit of course.units ?? []) {
     if (!unit.id || !unit.title) errs.push(`${course.id}: unit 缺 id/title`);
     for (const p of unit.points ?? []) {
@@ -51,8 +54,30 @@ function validateCourse(course) {
         if (!s.reference) errs.push(`${p.id}: 简答题缺 reference`);
         short += 1;
       }
+      if (!p.bool?.length) errs.push(`${p.id}: 缺判断题`);
+      for (const b of p.bool ?? []) {
+        if (typeof b.answer !== "boolean") errs.push(`${p.id}: 判断题 answer 须为 boolean`);
+        if (!b.explain) errs.push(`${p.id}: 判断题缺 explain`);
+        bool += 1;
+      }
+      for (const m of p.match ?? []) {
+        if (!m.title) errs.push(`${p.id}: 配对题缺 title`);
+        if (!Array.isArray(m.pairs) || m.pairs.length < 3 || m.pairs.length > 6) errs.push(`${p.id}: 配对题 pairs 须 3–6 对`);
+        else if (m.pairs.some(([l, r]) => !l || !r)) errs.push(`${p.id}: 配对题存在空项`);
+        if (!m.explain) errs.push(`${p.id}: 配对题缺 explain`);
+        match += 1;
+      }
+      for (const o of p.order ?? []) {
+        if (!o.title) errs.push(`${p.id}: 排序题缺 title`);
+        if (!Array.isArray(o.steps) || o.steps.length < 3 || o.steps.length > 8) errs.push(`${p.id}: 排序题 steps 须 3–8 步`);
+        if (!o.explain) errs.push(`${p.id}: 排序题缺 explain`);
+        order += 1;
+      }
     }
   }
+  // 配对/排序是域级题型：本域需 ≥2 道，挂在任意点下均可
+  if (match < 2) errs.push(`${course.id}: 配对题不足 2 道（现有 ${match}）`);
+  if (order < 2) errs.push(`${course.id}: 排序题不足 2 道（现有 ${order}）`);
   // caseSet 覆盖矩阵：本域每点都应出现在 qmap 中；且对应案例 md 存在
   const cs = course.caseSet;
   if (!cs?.id) errs.push(`${course.id}: 缺 caseSet.id`);
@@ -65,7 +90,7 @@ function validateCourse(course) {
     if (!Number.isInteger(no) || !fs.existsSync(path.join(CASE_DIR, `案例${no}.md`)))
       errs.push(`${course.id}: 案例源文件不存在 ${cs.id}`);
   }
-  return { errs, stats: { points, choice, fill, short } };
+  return { errs, stats: { points, choice, fill, short, bool, match, order } };
 }
 
 function main() {
@@ -73,7 +98,7 @@ function main() {
   const byTitle = new Map(files.map((f) => [path.basename(f, ".json"), JSON.parse(fs.readFileSync(path.join(SRC, f), "utf8"))]));
   const courses = [];
   const errs = [];
-  const meta = { courses: 0, units: 0, points: 0, choice: 0, fill: 0, short: 0 };
+  const meta = { courses: 0, units: 0, points: 0, choice: 0, fill: 0, short: 0, bool: 0, match: 0, order: 0 };
   for (const title of ORDER) {
     const course = byTitle.get(title);
     if (!course) {
@@ -88,6 +113,9 @@ function main() {
     meta.choice += v.stats.choice;
     meta.fill += v.stats.fill;
     meta.short += v.stats.short;
+    meta.bool += v.stats.bool;
+    meta.match += v.stats.match;
+    meta.order += v.stats.order;
     courses.push({
       id: course.id,
       title: course.title,
@@ -117,7 +145,7 @@ function main() {
   const out = { meta: { builtAt: new Date().toISOString(), ...meta }, courses };
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
   fs.writeFileSync(OUT, JSON.stringify(out), "utf8");
-  console.log(`build-tracks ok · courses ${meta.courses} · units ${meta.units} · points ${meta.points} · choice ${meta.choice} · fill ${meta.fill} · short ${meta.short}`);
+  console.log(`build-tracks ok · courses ${meta.courses} · units ${meta.units} · points ${meta.points} · choice ${meta.choice} · fill ${meta.fill} · short ${meta.short} · bool ${meta.bool} · match ${meta.match} · order ${meta.order}`);
 }
 
 main();
