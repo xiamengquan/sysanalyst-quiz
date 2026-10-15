@@ -2283,21 +2283,12 @@
         },
         {
           "id": "quick-four-tier-7d",
-          "title": "四层七日背诵总册 · 必会/重点/补充/可放弃",
+          "title": "四层七日背诵总册（含四大方面 39 点一通到底）",
           "path": "速查/四层七日背诵总册.md",
           "status": "正式",
           "kind": "quick",
           "docType": "howto",
-          "note": "架构 v3 学习主文档：每日 M/K/S/D 四层 + 七日册 + 强化记忆块"
-        },
-        {
-          "id": "quick-first-principles",
-          "title": "第一性原理 · 四大方面一通到底",
-          "path": "速查/第一性原理-四大方面一通到底.md",
-          "status": "正式",
-          "kind": "quick",
-          "docType": "tutorial",
-          "note": "四域 39 点逐点讲透：第一性拆解 + 费曼讲法 + 一通到底 + 考场回扣，先懂后背（编号= /track id）"
+          "note": "v4 合并版：四大方面 39 点「默写卡+逐点讲透」同章 + 七日册四层（原独立卷第一性原理一通到底已并入并退役）"
         },
         {
           "id": "quick-kp-map",
