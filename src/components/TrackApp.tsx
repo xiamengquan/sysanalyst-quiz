@@ -491,6 +491,13 @@ export function TrackApp() {
   if (phase === "lesson" && current) {
     const progress = firstPass.total ? (idx / queue.length) * 100 : 0;
     const kindLabel = ({ choice: "选择题", fill: "填空题", short: "简答题", bool: "判断题", match: "配对题", order: "排序题" } as const)[current.kind];
+    const kbAnchorMap: Record<string, string> = {
+      req: "/kb/quick-four-tier-7d/#d2",
+      web: "/kb/quick-four-tier-7d/#d3",
+      mic: "/kb/quick-four-tier-7d/#d3",
+      db: "/kb/quick-four-tier-7d/#d4",
+    };
+    const kbAnchor = kbAnchorMap[current.pid.replace(/-p\d+$/, "")] ?? "";
     const genericJudged =
       current.kind === "choice" ? picked !== null
       : current.kind === "fill" ? fillChecked !== null
@@ -765,6 +772,14 @@ export function TrackApp() {
                 </div>
                 <p className="text-muted-foreground">
                   简答题以自评为准：能对着参考要点复述出采分点，就算过关。没答到的题会在本轮稍后重新出现。
+                  {kbAnchor ? (
+                    <>
+                      {" "}
+                      <Link href={kbAnchor} className="underline underline-offset-2">
+                        📖 没答到？先回总册重学此点
+                      </Link>
+                    </>
+                  ) : null}
                 </p>
                 <Button size="sm" onClick={next} className="mt-3">
                   继续 <ArrowRight className="size-3.5" />
@@ -790,6 +805,13 @@ export function TrackApp() {
                 )}
               </div>
               <p className="text-muted-foreground">{current.explain}</p>
+              {kbAnchor ? (
+                <p className="mt-1 text-[0.8rem]">
+                  <Link href={kbAnchor} className="underline underline-offset-2">
+                    📖 重学此点 → 总册逐点讲透（在练习中重复学习）
+                  </Link>
+                </p>
+              ) : null}
               {current.kind === "fill" && fillChecked && !fillChecked.every(Boolean) ? (
                 <p className="mt-1 text-muted-foreground">
                   正确答案：{current.blanks.map((b) => b[0]).join("｜")}

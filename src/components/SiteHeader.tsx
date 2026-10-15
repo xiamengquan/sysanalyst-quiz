@@ -3,14 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  ListChecks,
-  FileText,
-  BookOpen,
-  Dumbbell,
-  Route,
-  Sparkles,
   CalendarCheck,
-  Info,
+  Dumbbell,
+  BookOpen,
+  Sparkles,
 } from "lucide-react";
 import { AuthButton } from "@/components/AuthButton";
 import { ExamCountdown } from "@/components/ExamCountdown";
@@ -21,17 +17,18 @@ import { cn } from "@/lib/utils";
 
 const tabs = [
   { href: "/today/", label: "今日", short: "今日", icon: CalendarCheck },
-  { href: "/", label: "刷题", short: "刷题", icon: ListChecks },
-  { href: "/real-exams/", label: "真题", short: "真题", icon: FileText },
-  { href: "/case/", label: "案例", short: "案例", icon: FileText },
-  { href: "/drill/", label: "演练", short: "演练", icon: Dumbbell },
-  { href: "/track/", label: "轨道", short: "轨道", icon: Route },
-  { href: "/kb/", label: "知识点", short: "知识", icon: BookOpen },
+  { href: "/practice/", label: "练习场", short: "练习", icon: Dumbbell },
+  { href: "/kb/", label: "知识库", short: "知识", icon: BookOpen },
   { href: "/changelog/", label: "更新", short: "更新", icon: Sparkles },
-  { href: "/about/", label: "关于", short: "关于", icon: Info },
 ];
 
+/** 练习场组：这些页面在导航上归属「练习场」高亮（页面 URL 全部保留，只做归组） */
+const PRACTICE_GROUP = ["/", "/quiz/", "/real-exams/", "/case/", "/drill/", "/track/", "/recall/", "/audio/"];
+
 function isActive(pathname: string, href: string) {
+  if (href === "/practice/") {
+    return pathname === "/" || PRACTICE_GROUP.some((p) => (p === "/" ? pathname === "/" : pathname.startsWith(p)));
+  }
   if (href === "/") return pathname === "/";
   return pathname === href || pathname.startsWith(href);
 }
@@ -123,7 +120,7 @@ export function SiteHeader() {
         aria-label="底部导航"
       >
         <div
-          className="mx-auto grid grid-cols-9"
+          className="mx-auto grid grid-cols-4"
           style={{ height: "var(--tabbar-h)", maxWidth: "var(--content-max)" }}
         >
           {tabs.map((t) => {

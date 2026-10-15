@@ -185,6 +185,7 @@ export function buildSitemapUrls(root) {
 
   const staticRoutes = [
     { loc: absoluteUrl(root, "/"), lastmod: siteUpdated, changefreq: "weekly", priority: 1 },
+    { loc: absoluteUrl(root, "/practice"), lastmod: siteUpdated, changefreq: "weekly", priority: 0.95 },
     { loc: absoluteUrl(root, "/kb"), lastmod: siteUpdated, changefreq: "weekly", priority: 0.9 },
     { loc: absoluteUrl(root, "/case"), lastmod: siteUpdated, changefreq: "weekly", priority: 0.85 },
     { loc: absoluteUrl(root, "/real-exams"), lastmod: siteUpdated, changefreq: "weekly", priority: 0.85 },
