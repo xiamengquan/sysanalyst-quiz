@@ -187,6 +187,37 @@ export function TrackApp() {
       .catch(() => setReady(true));
   }, []);
 
+  // 深链：/track/?point=<pid> 或 /track/?course=<cid> —— 总控台风险项/矩阵点格直达
+  useEffect(() => {
+    if (!ready || !data) return;
+    const q = new URLSearchParams(window.location.search);
+    const point = q.get("point");
+    const cid = q.get("course");
+    if (!point && !cid) return;
+    let target: typeof data.courses[number] | null = cid ? data.courses.find((c) => c.id === cid) ?? null : null;
+    let unitId: string | null = null;
+    if (point && !target) {
+      for (const c of data.courses) {
+        const u = c.units.find((u) => u.points.some((p) => p.id === point));
+        if (u) {
+          target = c;
+          unitId = u.id;
+          break;
+        }
+      }
+    } else if (point && target) {
+      const u = target.units.find((u) => u.points.some((p) => p.id === point));
+      if (u) unitId = u.id;
+    }
+    if (!target) return;
+    setCourseId(target.id);
+    const t = window.setTimeout(() => {
+      const el = unitId ? document.getElementById(`unit-${unitId}`) : document.getElementById(`course-${target!.id}`);
+      el?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 60);
+    return () => window.clearTimeout(t);
+  }, [ready, data]);
+
   const persist = useCallback((next: TrackRecord) => {
     setRecord(next);
     void storageSet(STORAGE_KEY, next);
@@ -472,7 +503,7 @@ export function TrackApp() {
             const st = courseStats(c);
             const unitsDone = c.units.filter((u) => record.lessons[u.id]).length;
             return (
-              <Card key={c.id} className="p-4">
+              <Card key={c.id} className="p-4" id={`course-${c.id}`}>
                 <div className="flex items-center gap-3">
                   <Ring pct={st.mastered / st.total} size={52} />
                   <div className="min-w-0 flex-1">
@@ -495,6 +526,7 @@ export function TrackApp() {
                     return (
                       <button
                         key={u.id}
+                        id={`unit-${u.id}`}
                         onClick={() => {
                           setCourseId(c.id);
                           startLesson(u);

@@ -28,8 +28,8 @@ const pools = [
     href: "/track/",
     icon: Route,
     title: "轨道课程",
-    desc: "四域 39 点 · 选择/填空/判断/配对/排序/简答六题型",
-    stat: "211 题 · 错题重入",
+    desc: "四域 39 点 · 选择/填空/判断/配对/排序/简答六题型 · ⚡连续冲击",
+    stat: "406 题 · 错题重入",
   },
   {
     href: "/quiz/",
@@ -60,11 +60,11 @@ const pools = [
     stat: "步骤链 · 范例句",
   },
   {
-    href: "/today/",
+    href: "/system/",
     icon: CalendarCheck,
-    title: "今日计划",
-    desc: "上午 / 午休 / 晚主块编排 · 深链直达",
-    stat: "每日入口",
+    title: "总控台",
+    desc: "使命 · 分解 · 基线 · 控制 · 反馈——闭环系统管理",
+    stat: "全链指挥中枢",
   },
 ];
 
@@ -149,6 +149,9 @@ export default function PracticePage() {
       </Card>
 
       <div className="flex justify-center gap-4 text-[0.8rem] text-muted-foreground">
+        <Link href="/system/" className="underline underline-offset-2 hover:text-foreground">
+          总控台
+        </Link>
         <Link href="/kb/" className="underline underline-offset-2 hover:text-foreground">
           知识库
         </Link>

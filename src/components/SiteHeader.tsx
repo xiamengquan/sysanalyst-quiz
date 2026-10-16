@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  CalendarCheck,
   Dumbbell,
   BookOpen,
+  Radar,
   Sparkles,
 } from "lucide-react";
 import { AuthButton } from "@/components/AuthButton";
@@ -16,16 +16,22 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const tabs = [
-  { href: "/today/", label: "今日", short: "今日", icon: CalendarCheck },
+  { href: "/system/", label: "总控", short: "总控", icon: Radar },
   { href: "/practice/", label: "练习场", short: "练习", icon: Dumbbell },
   { href: "/kb/", label: "知识库", short: "知识", icon: BookOpen },
   { href: "/changelog/", label: "更新", short: "更新", icon: Sparkles },
 ];
 
+/** 总控组：这些页面在导航上归属「总控」高亮（/today 执行单已并入总控基线层，URL 保留） */
+const CONTROL_GROUP = ["/today/"];
+
 /** 练习场组：这些页面在导航上归属「练习场」高亮（页面 URL 全部保留，只做归组） */
 const PRACTICE_GROUP = ["/", "/quiz/", "/real-exams/", "/case/", "/drill/", "/track/", "/recall/", "/audio/"];
 
 function isActive(pathname: string, href: string) {
+  if (href === "/system/") {
+    return pathname.startsWith("/system") || CONTROL_GROUP.some((p) => pathname.startsWith(p));
+  }
   if (href === "/practice/") {
     return pathname === "/" || PRACTICE_GROUP.some((p) => (p === "/" ? pathname === "/" : pathname.startsWith(p)));
   }

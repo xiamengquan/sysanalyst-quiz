@@ -27,7 +27,7 @@ type CheckStore = Record<string, Record<string, boolean>>;
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
-export function TodayApp() {
+export function TodayApp({ embedded = false }: { embedded?: boolean }) {
   const today = useMemo(() => dateKey(), []);
   const [viewDate, setViewDate] = useState(today);
   const [overview, setOverview] = useState(false);
@@ -112,6 +112,103 @@ export function TodayApp() {
   const sprintDay = sprintDayNumber(viewDate);
   const toExam = daysUntilExamOf(viewDate);
   const allDone = total > 0 && done === total;
+
+  // 总控台内嵌模式：只渲染执行单本体（进度 + 任务组），勾选实时写回基线
+  if (embedded) {
+    return (
+      <div className="mx-auto w-full">
+        <Card className="px-(--card-spacing) mb-4">
+          <div className="flex items-center justify-between gap-3">
+            <div className="min-w-0 flex-1">
+              <div className="mb-1.5 flex items-baseline justify-between text-[0.82rem]">
+                <span className="text-muted-foreground">
+                  {isToday ? "今日进度" : `${viewDate} 进度`} <b className="text-foreground">{done}</b> / {total}
+                </span>
+                <span className={cn("font-medium", allDone ? "text-emerald-600 dark:text-emerald-400" : "text-muted-foreground")}>
+                  {pct}%
+                </span>
+              </div>
+              <div className="h-2 overflow-hidden rounded-full bg-muted">
+                <div
+                  className={cn("h-full rounded-full transition-all", allDone ? "bg-emerald-500" : "bg-primary")}
+                  style={{ width: `${pct}%` }}
+                />
+              </div>
+            </div>
+            <Button type="button" variant="ghost" size="sm" onClick={reset} className="shrink-0 gap-1 text-muted-foreground">
+              <RotateCcw className="size-3.5" />
+              重置
+            </Button>
+          </div>
+          {allDone && (
+            <p className="mt-3 rounded-[10px] border border-emerald-500/40 bg-emerald-500/10 px-3 py-2 text-[0.85rem] text-emerald-700 dark:text-emerald-300">
+              🎉 该日任务全部完成——这就是当天的胜利，早点休息，第二天排程会自动就位。
+            </p>
+          )}
+        </Card>
+        {tasks.groups.map((g) => {
+          const meta = SLOT_META[g.slot];
+          return (
+            <Card key={g.slot} className="px-(--card-spacing) mb-3">
+              <div className="mb-2.5 flex items-baseline justify-between">
+                <h2 className="text-[0.95rem] font-medium text-foreground">{meta.label}</h2>
+                <span className="text-[0.75rem] text-muted-foreground">{meta.time}</span>
+              </div>
+              <div className="space-y-1.5">
+                {g.tasks.map((t) => {
+                  const checked = !!checks[t.id];
+                  return (
+                    <div
+                      key={t.id}
+                      className={cn(
+                        "flex items-start gap-2.5 rounded-[10px] border p-2.5 transition-colors",
+                        checked ? "border-emerald-500/30 bg-emerald-500/[0.06]" : "border-border bg-muted/30"
+                      )}
+                    >
+                      <button
+                        type="button"
+                        role="checkbox"
+                        aria-checked={checked}
+                        aria-label={t.text}
+                        onClick={() => toggle(t.id)}
+                        className={cn(
+                          "mt-0.5 flex size-4.5 shrink-0 items-center justify-center rounded border transition-colors",
+                          checked
+                            ? "border-emerald-500 bg-emerald-500 text-white"
+                            : "border-border bg-background hover:border-foreground/40"
+                        )}
+                      >
+                        {checked && <CheckCheck className="size-3" />}
+                      </button>
+                      <div className="min-w-0 flex-1">
+                        <p className={cn("text-[0.88rem] leading-relaxed", checked && "text-muted-foreground line-through")}>
+                          {t.text}
+                        </p>
+                        {t.href && (
+                          <Link
+                            href={t.href}
+                            className="mt-0.5 inline-block text-[0.76rem] text-primary underline underline-offset-2 hover:opacity-80"
+                          >
+                            {t.link ?? "直达"} →
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </Card>
+          );
+        })}
+        <p className="mt-2 text-center text-[0.75rem] text-muted-foreground">
+          勾选实时写回基线 · 完整日期导航与 15 天总览见{" "}
+          <Link href="/today/" className="underline underline-offset-2 hover:text-foreground">
+            /today/ 执行单
+          </Link>
+        </p>
+      </div>
+    );
+  }
 
   return (
     <>
