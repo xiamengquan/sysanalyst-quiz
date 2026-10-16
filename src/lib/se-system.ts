@@ -139,7 +139,8 @@ type TracksJson = {
 
 function statusOf(rec: PointRecord | undefined): PointStatus {
   if (!rec) return "new";
-  if (rec.wrong > 0) return "risky";
+  // 风险 = 错比对多（缺陷未清）；纠偏后（答对追平/反超）自动降级，不再终身红标
+  if (rec.wrong > rec.right) return "risky";
   if (rec.firstTry) return "mastered";
   return "drilling";
 }

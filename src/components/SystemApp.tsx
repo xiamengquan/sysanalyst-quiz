@@ -249,7 +249,7 @@ export function SystemApp() {
               <span className={cn("size-2 rounded-full", STATUS_META[s].dot)} /> {STATUS_META[s].label}
             </span>
           ))}
-          <span>· 状态机：未启动 → 巩固中 → 已掌握；答错即登记风险（回归缺陷）</span>
+          <span>· 状态机：未启动 → 巩固中 → 已掌握；错比对多 = 风险在册，纠偏答对后自动解除</span>
         </p>
       </div>
 

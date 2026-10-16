@@ -446,7 +446,8 @@ export function TrackApp() {
 
   const submitOrder = () => {
     if (!current || current.kind !== "order" || orderDone) return;
-    const ok = orderSeq.map((i) => orderPool[i]).join("|") === current.steps.join("|");
+    // 修复：orderSeq 存的是显示序，须经 orderPool 映射回原始下标再取标签文本比较（此前误比下标 vs 文本，恒判错）
+    const ok = orderSeq.map((i) => current.steps[orderPool[i]]).join("|") === current.steps.join("|");
     setOrderDone(true);
     const key = `${current.pid}:o:${current.title}`;
     const first = !firstSeen.has(key);
@@ -599,7 +600,7 @@ export function TrackApp() {
       : current.kind === "fill" ? (fillChecked?.every(Boolean) ?? false)
       : current.kind === "bool" ? boolPicked === current.answer
       : current.kind === "match" ? matchErrors === 0
-      : current.kind === "order" ? orderSeq.map((i) => orderPool[i]).join("|") === current.steps.join("|")
+      : current.kind === "order" ? orderSeq.map((i) => current.steps[orderPool[i]]).join("|") === current.steps.join("|")
       : false;
     return (
       <div className="mx-auto w-full max-w-2xl px-4 pb-28 pt-4 sm:pb-12">
