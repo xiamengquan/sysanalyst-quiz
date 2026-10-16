@@ -1,6 +1,6 @@
 {
   "name": "sysanalyst-quiz",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -11,8 +11,8 @@
     "sync:data": "node scripts/sync-data.mjs",
     "sync:all": "npm run sync:kb && npm run sync:data && npm run build:tracks && npm run generate:seo",
     "generate:seo": "node scripts/generate-seo.mjs",
-    "check:release": "node scripts/build-audio-articles.mjs && node scripts/check-release.mjs && node scripts/check-tracks.mjs && node scripts/check-kb-points.mjs && node scripts/check-kb-def-overrides.mjs && node scripts/check-question-stats.mjs && node scripts/check-kb-exam-links.mjs && node scripts/check-case-external-images.mjs && node scripts/check-sitemap.mjs",
-    "check:release:strict": "node scripts/check-release.mjs --strict-out && node scripts/check-tracks.mjs && node scripts/check-kb-points.mjs && node scripts/check-kb-def-overrides.mjs && node scripts/check-question-stats.mjs && node scripts/check-kb-exam-links.mjs && node scripts/check-case-external-images.mjs && node scripts/check-sitemap.mjs --strict-out",
+    "check:release": "node scripts/build-audio-articles.mjs && node scripts/check-release.mjs && node scripts/check-tracks.mjs && node scripts/check-traceability.mjs && node scripts/check-kb-points.mjs && node scripts/check-kb-def-overrides.mjs && node scripts/check-question-stats.mjs && node scripts/check-kb-exam-links.mjs && node scripts/check-case-external-images.mjs && node scripts/check-sitemap.mjs",
+    "check:release:strict": "node scripts/check-release.mjs --strict-out && node scripts/check-tracks.mjs && node scripts/check-traceability.mjs && node scripts/check-kb-points.mjs && node scripts/check-kb-def-overrides.mjs && node scripts/check-question-stats.mjs && node scripts/check-kb-exam-links.mjs && node scripts/check-case-external-images.mjs && node scripts/check-sitemap.mjs --strict-out",
     "check:sitemap": "node scripts/check-sitemap.mjs",
     "check:live-seo": "node scripts/check-live-seo.mjs",
     "check:kb-points": "node scripts/check-kb-points.mjs",

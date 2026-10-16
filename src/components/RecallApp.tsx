@@ -18,6 +18,7 @@ import {
 } from "@/lib/flashcards";
 import { judgeAnswer, type MatchResult } from "@/lib/answer-match";
 import { SEVEN_DAYS } from "@/lib/kb-seven-day";
+import type { CaseItem } from "@/lib/types";
 import { storageGet, storageSet } from "@/lib/storage";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -87,6 +88,49 @@ async function mergeTrackWrongCards(): Promise<Flashcard[]> {
   }
 }
 
+/** 轻量去 markdown：闪卡答案区按纯文本渲染，剥离常见行内标记 */
+function stripMd(s: string): string {
+  return s.replace(/\*\*/g, "").replace(/`/g, "").replace(/^#+\s*/gm, "").trim();
+}
+
+/** 案例作答草稿（/case）→ 一问一卡（P1-A5）：做过的每道小问自动沉淀为记忆资产，做题产出即入排程 */
+async function mergeCaseDraftCards(): Promise<Flashcard[]> {
+  try {
+    const drafts = await storageGet<Record<string, Record<string, string>>>("sysanalyst_case_v1");
+    if (!drafts || typeof drafts !== "object") return [];
+    const answered = Object.entries(drafts).flatMap(([cid, qs]) =>
+      Object.entries(qs ?? {})
+        .filter(([, v]) => typeof v === "string" && v.trim().length >= 8)
+        .map(([qnum]) => ({ cid, qnum: Number(qnum) }))
+    );
+    if (!answered.length) return [];
+    const cases: CaseItem[] = await fetch("/data/cases.json").then((r) => (r.ok ? r.json() : []));
+    const byId = new Map((cases ?? []).map((c) => [c.id, c]));
+    const out: Flashcard[] = [];
+    for (const { cid, qnum } of answered) {
+      const c = byId.get(cid);
+      const q = c?.questions.find((x) => x.qnum === qnum);
+      if (!c || !q) continue;
+      const back = stripMd(q.rubric?.sample || (q.rubric?.must_hit ?? []).join("；"));
+      if (!back) continue;
+      const ask = stripMd(q.prompt);
+      const label = c.point || `${c.domain} · ${c.case_type}`;
+      out.push({
+        id: `CASE-${c.id}-${q.qnum}`,
+        day: null,
+        tier: "K",
+        hard: false,
+        front: `案例微卡 · ${label} 第${q.qnum}问：${ask.length > 60 ? `${ask.slice(0, 60)}…` : ask}`,
+        back,
+        src: { href: `/case/?id=${encodeURIComponent(c.id)}`, label: "案例微卡 · 回看原题" },
+      });
+    }
+    return out;
+  } catch {
+    return [];
+  }
+}
+
 export function RecallApp() {
   const [data, setData] = useState<FlashcardsData | null>(null);
   const [state, setState] = useState<RecallState>(newRecallState());
@@ -108,9 +152,10 @@ export function RecallApp() {
       fetch("/data/flashcards.json").then((r) => r.json()),
       storageGet<RecallState>(RECALL_STORAGE_KEY),
       mergeTrackWrongCards(),
+      mergeCaseDraftCards(),
     ])
-      .then(([d, s, trackCards]) => {
-        setData({ ...d, cards: [...d.cards, ...trackCards] });
+      .then(([d, s, trackCards, caseCards]) => {
+        setData({ ...d, cards: [...d.cards, ...trackCards, ...caseCards] });
         if (s && typeof s === "object" && s.progress) setState(s);
         setReady(true);
       })
