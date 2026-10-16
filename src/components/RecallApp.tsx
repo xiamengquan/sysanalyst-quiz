@@ -117,6 +117,13 @@ export function RecallApp() {
       .catch(() => setReady(true));
   }, []);
 
+  // 深链：/recall/?day=<d1..d7> —— 总控台「背此卡」直达指定日卡组
+  useEffect(() => {
+    if (!ready) return;
+    const q = new URLSearchParams(window.location.search).get("day");
+    if (q && SEVEN_DAYS.some((d) => d.id === q)) setDaySet([q]);
+  }, [ready]);
+
   const filtered = useMemo(() => {
     if (!data) return [];
     return data.cards.filter(

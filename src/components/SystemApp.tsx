@@ -7,7 +7,7 @@
  *  使命层  考期倒计时 + 冲刺日次 + 三科里程碑（V 模型验证节点）
  *  分解层  39 个案例知识点 = 39 个配置项状态矩阵（未启动/巩固中/风险/已掌握）
  *  基线层  今日执行单（TodayApp embedded）——计划为基线，勾选为实际
- *  控制层  风险登记册——薄弱点排行 + 纠偏动作直达（⚡冲该域 / 📖重学）
+ *  控制层  风险登记册——薄弱点排行 + 纠偏动作直达执行器（⚡练此点 / 🧠背此卡 / ✍️做此题 / 📖重学）
  *  反馈层  背诵闭环——/recall 盒级分布 + 到期卡
  */
 
@@ -17,6 +17,7 @@ import {
   Activity,
   AlertTriangle,
   BookOpenCheck,
+  Brain,
   CalendarCheck,
   ClipboardCheck,
   Flame,
@@ -249,7 +250,7 @@ export function SystemApp() {
               <span className={cn("size-2 rounded-full", STATUS_META[s].dot)} /> {STATUS_META[s].label}
             </span>
           ))}
-          <span>· 状态机：未启动 → 巩固中 → 已掌握；错比对多 = 风险在册，纠偏答对后自动解除</span>
+          <span>· 状态机：未启动 → 巩固中 → 已掌握；错比对多 = 风险在册，纠偏答对后自动解除；已掌握超 7 天未触自动降级巩固中</span>
         </p>
       </div>
 
@@ -257,7 +258,7 @@ export function SystemApp() {
       <SectionHead
         icon={AlertTriangle}
         title="控制层 · 风险登记册"
-        desc="偏差分析：答错过的知识点按风险排序，每项给出纠偏动作——先清风险，再谈进度"
+        desc="偏差分析：薄弱点按风险排序，每项直达纠偏执行器——练此点 / 背此卡 / 做此题 / 重学，先清风险，再谈进度"
       />
       {risks.length === 0 ? (
         <Card size="sm">
@@ -286,10 +287,22 @@ export function SystemApp() {
                     </p>
                   </div>
                 </div>
-                <div className="flex shrink-0 items-center gap-1.5">
+                <div className="flex shrink-0 flex-wrap items-center justify-end gap-1.5">
                   <Button asChild variant="outline" size="sm" className="h-7 gap-1 px-2 text-[0.7rem]">
-                    <Link href={`/track/?course=${encodeURIComponent(r.courseId)}`}>
-                      <Zap className="size-3" /> 冲该域
+                    <Link href={`/track/?point=${encodeURIComponent(r.pid)}`}>
+                      <Zap className="size-3" /> 练此点
+                    </Link>
+                  </Button>
+                  {r.day && (
+                    <Button asChild variant="outline" size="sm" className="h-7 gap-1 px-2 text-[0.7rem]">
+                      <Link href={`/recall/?day=${encodeURIComponent(r.day)}`}>
+                        <Brain className="size-3" /> 背此卡
+                      </Link>
+                    </Button>
+                  )}
+                  <Button asChild variant="outline" size="sm" className="h-7 gap-1 px-2 text-[0.7rem]">
+                    <Link href={r.caseHref}>
+                      <PenLine className="size-3" /> 做此题
                     </Link>
                   </Button>
                   {r.kbAnchor && (

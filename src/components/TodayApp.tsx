@@ -16,6 +16,7 @@ import {
   sprintDayNumber,
   type TodayTasks,
 } from "@/lib/today-plan";
+import { loadComposedTasks } from "@/lib/today-compose";
 import { storageGet, storageSet } from "@/lib/storage";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -42,13 +43,23 @@ export function TodayApp({ embedded = false }: { embedded?: boolean }) {
   }, [today]);
 
   useEffect(() => {
-    const built = buildTodayTasks(viewDate) || buildFallbackTasks(viewDate);
-    setTasks(built);
+    let live = true;
+    // 今日任务 = 静态基线 + 连错自动入池（仅今天合成，历史日次基线稳定）
+    loadComposedTasks(viewDate, today)
+      .then((built) => {
+        if (live) setTasks(built);
+      })
+      .catch(() => {
+        if (live) setTasks(buildTodayTasks(viewDate) || buildFallbackTasks(viewDate));
+      });
     storageGet<CheckStore>(CHECKS_KEY)
       .then((s) => setStore(s ?? {}))
       .catch(() => setStore({}))
       .finally(() => setReady(true));
-  }, [viewDate]);
+    return () => {
+      live = false;
+    };
+  }, [viewDate, today]);
 
   // 日期切换时同步深链（不触发导航）
   useEffect(() => {

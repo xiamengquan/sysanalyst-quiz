@@ -26,6 +26,7 @@ import {
   shiftDate,
   sprintDayNumber,
 } from "@/lib/today-plan";
+import { injectRetryTasks, pickRetryPoints, type RetryPoint } from "@/lib/today-compose";
 
 export const TRACK_STORAGE_KEY = "sysanalyst_track_v1";
 export const TODAY_CHECKS_KEY = "sysanalyst_today_checks_v1";
@@ -38,6 +39,9 @@ type LessonRecord = { runs: number; best: number; at: number };
 
 /** 配置项状态机：未启动 → 巩固中 → 已掌握；wrong>0 即重新登记风险（回归缺陷） */
 export type PointStatus = "new" | "drilling" | "risky" | "mastered";
+
+/** 掌握保鲜期（P0-A3）：已掌握后 7 天未触即降级巩固中——记忆是时变系统，模型不再按静态系统建 */
+const MASTERED_TTL_MS = 7 * 86_400_000;
 
 export type PointState = {
   pid: string;
@@ -100,6 +104,10 @@ export type RiskItem = {
   errRate: number;
   /** 重学锚点（总册） */
   kbAnchor: string;
+  /** 所属课日次（P0-A1：背诵直达 /recall/?day=） */
+  day: string | null;
+  /** 课程配套案例整题（P0-A1：做题直达） */
+  caseHref: string;
 };
 
 export type SeSystemState = {
@@ -137,24 +145,31 @@ type TracksJson = {
   }[];
 };
 
-function statusOf(rec: PointRecord | undefined): PointStatus {
+function statusOf(rec: PointRecord | undefined, now = Date.now()): PointStatus {
   if (!rec) return "new";
   // 风险 = 错比对多（缺陷未清）；纠偏后（答对追平/反超）自动降级，不再终身红标
   if (rec.wrong > rec.right) return "risky";
-  if (rec.firstTry) return "mastered";
+  // 保鲜衰减（P0-A3）：首过掌握但超 7 天未触碰 → 降级巩固中，等待间隔重复复验
+  if (rec.firstTry) return now - (rec.lastAt || 0) > MASTERED_TTL_MS ? "drilling" : "mastered";
   return "drilling";
 }
 
 /** 今日勾选存储：date → { taskId: true } */
 export type CheckStore = Record<string, Record<string, boolean>>;
 
-/** 当日任务清单（冲刺窗口内用计划，窗口外用兜底模板） */
-function tasksOf(date: string) {
-  return buildTodayTasks(date) ?? buildFallbackTasks(date);
+/** 当日任务清单（冲刺窗口内用计划，窗口外用兜底模板；仅「今天」额外合成连错入池任务，历史基线保持稳定） */
+function tasksOf(date: string, today: string, retry: RetryPoint[] = []) {
+  const base = buildTodayTasks(date) ?? buildFallbackTasks(date);
+  return date === today ? injectRetryTasks(base, date, retry) : base;
 }
 
-function dayPct(store: CheckStore, date: string): { done: number; total: number; pct: number } {
-  const ids = tasksOf(date).groups.flatMap((g) => g.tasks.map((t) => t.id));
+function dayPct(
+  store: CheckStore,
+  date: string,
+  today: string,
+  retry: RetryPoint[] = []
+): { done: number; total: number; pct: number } {
+  const ids = tasksOf(date, today, retry).groups.flatMap((g) => g.tasks.map((t) => t.id));
   const total = ids.length;
   const done = ids.filter((id) => store[date]?.[id]).length;
   return { done, total, pct: total ? Math.round((done / total) * 100) : 0 };
@@ -172,6 +187,15 @@ export async function loadSeSystemState(): Promise<SeSystemState> {
 
   const today = dateKey();
   const rec = trackRec?.points ?? {};
+
+  // —— 纠偏执行器数据（P0-A1/A2）：连错点清单 + 课程日次/案例链映射 ——
+  const retry = pickRetryPoints(tracks, rec);
+  const courseDay = new Map<string, string | null>();
+  const courseCaseHref = new Map<string, string>();
+  for (const c of tracks?.courses ?? []) {
+    courseDay.set(c.id, c.day ?? null);
+    courseCaseHref.set(c.id, c.caseSet?.href ?? "/case/");
+  }
 
   // —— 分解层：39 点配置项状态机 ——
   const points: PointState[] = [];
@@ -231,13 +255,13 @@ export async function loadSeSystemState(): Promise<SeSystemState> {
     todayCount: recallState.today && recallState.today.date === today ? recallState.today.count : 0,
   };
 
-  // —— 基线层：今日执行 + 连续执行 + 最近 7 日 ——
+  // —— 基线层：今日执行 + 连续执行 + 最近 7 日（今天额外计入连错入池任务，P0-A2） ——
   const store = checks ?? {};
-  const t = dayPct(store, today);
+  const t = dayPct(store, today, today, retry);
   const last7: ExecutionSnapshot["last7"] = [];
   for (let i = 6; i >= 0; i--) {
     const d = shiftDate(today, -i);
-    const s = dayPct(store, d);
+    const s = dayPct(store, d, today, retry);
     last7.push({ date: d, pct: s.pct });
   }
   // 连续执行：今日完成从今日起算，否则从昨天回溯
@@ -245,7 +269,7 @@ export async function loadSeSystemState(): Promise<SeSystemState> {
   const startFrom = t.done > 0 ? today : shiftDate(today, -1);
   for (let i = 0; i < 30; i++) {
     const d = shiftDate(startFrom, -i);
-    if (dayPct(store, d).done > 0) streak++;
+    if (dayPct(store, d, today, retry).done > 0) streak++;
     else break;
   }
   const execution: ExecutionSnapshot = { date: today, total: t.total, done: t.done, pct: t.pct, streak, last7 };
@@ -263,6 +287,8 @@ export async function loadSeSystemState(): Promise<SeSystemState> {
       wrong: p.wrong,
       errRate: Math.round((p.wrong / Math.max(1, p.right + p.wrong)) * 100),
       kbAnchor: KB_ANCHOR[p.courseId.replace(/-p\d+$/, "")] ?? "",
+      day: courseDay.get(p.courseId) ?? null,
+      caseHref: courseCaseHref.get(p.courseId) ?? "/case/",
     }))
     .sort((a, b) => b.wrong - a.wrong || b.errRate - a.errRate);
 
