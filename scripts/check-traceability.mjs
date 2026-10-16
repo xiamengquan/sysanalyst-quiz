@@ -26,6 +26,7 @@ const KB_ANCHOR = {
   web: "/kb/quick-four-tier-7d/#d3",
   mic: "/kb/quick-four-tier-7d/#d3",
   db: "/kb/quick-four-tier-7d/#d4",
+  mod: "/kb/quick-four-tier-7d/#d1",
 };
 
 const VALID_DAYS = new Set(["d1", "d2", "d3", "d4", "d5", "d6", "d7"]);

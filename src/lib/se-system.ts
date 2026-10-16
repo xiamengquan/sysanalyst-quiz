@@ -132,12 +132,13 @@ export type SeSystemState = {
   risks: RiskItem[];
 };
 
-/** 域 → 总册重学锚点（与 TrackApp 反馈块一致） */
+/** 域 → 总册重学锚点（与 TrackApp 反馈块一致；mod=建模域，D1 为软工·UML·OO 总册日次） */
 const KB_ANCHOR: Record<string, string> = {
   req: "/kb/quick-four-tier-7d/#d2",
   web: "/kb/quick-four-tier-7d/#d3",
   mic: "/kb/quick-four-tier-7d/#d3",
   db: "/kb/quick-four-tier-7d/#d4",
+  mod: "/kb/quick-four-tier-7d/#d1",
 };
 
 type TracksJson = {

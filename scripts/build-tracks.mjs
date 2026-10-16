@@ -14,7 +14,7 @@ const SRC = path.join(ROOT, "content/tracks");
 const CASE_DIR = path.join(ROOT, "content/banks/cases");
 const OUT = path.join(ROOT, "public/data/tracks.json");
 
-const ORDER = ["需求工程", "Web", "微服务", "数据库"];
+const ORDER = ["需求工程", "Web", "微服务", "数据库", "建模"];
 
 /** 校验并归一一门课程 */
 function validateCourse(course) {

@@ -586,6 +586,7 @@ export function TrackApp() {
       web: "/kb/quick-four-tier-7d/#d3",
       mic: "/kb/quick-four-tier-7d/#d3",
       db: "/kb/quick-four-tier-7d/#d4",
+      mod: "/kb/quick-four-tier-7d/#d1",
     };
     const kbAnchor = kbAnchorMap[current.pid.replace(/-p\d+$/, "")] ?? "";
     const genericJudged =

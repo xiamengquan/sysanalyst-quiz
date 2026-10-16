@@ -117,7 +117,7 @@ export function SystemApp() {
               </p>
               <p className="mt-0.5 text-[0.78rem] text-muted-foreground">
                 距考 <b className="text-foreground">{mission.daysLeft}</b> 天 · 冲刺第{" "}
-                <b className="text-foreground">{Math.min(mission.sprintDay, 14)}</b>/14 天 · 39 点已掌握 {mastered}/{totalPoints}
+                <b className="text-foreground">{Math.min(mission.sprintDay, 14)}</b>/14 天 · {totalPoints} 点已掌握 {mastered}/{totalPoints}
               </p>
             </div>
           </div>
@@ -163,7 +163,7 @@ export function SystemApp() {
           <div className="flex items-center gap-2">
             <LayoutGrid className="size-4 text-foreground" aria-hidden />
             <div className="min-w-0">
-              <p className="text-[0.68rem] text-muted-foreground">39 点掌握</p>
+              <p className="text-[0.68rem] text-muted-foreground">{totalPoints} 点掌握</p>
               <p className="text-[0.95rem] font-semibold">
                 {mastered}/{totalPoints}
                 {risky > 0 && <span className="ml-1 text-[0.68rem] font-normal text-red-600 dark:text-red-400">风险 {risky}</span>}
@@ -215,8 +215,8 @@ export function SystemApp() {
       {/* ===== 分解层：39 点配置项状态矩阵 ===== */}
       <SectionHead
         icon={LayoutGrid}
-        title="分解层 · 39 点状态矩阵"
-        desc="WBS 分解：每个案例知识点是一个配置项，带独立状态机；点格点击直达对应练习舱"
+        title={`分解层 · ${totalPoints} 点状态矩阵`}
+        desc="WBS 分解：每个考点是一个配置项，带独立状态机；点格点击直达对应练习舱"
       />
       <div className="space-y-2">
         {courses.map((c) => (
