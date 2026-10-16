@@ -13,7 +13,9 @@
 import { storageGet } from "@/lib/storage";
 import {
   RECALL_STORAGE_KEY,
+  RETENTION_RISK,
   isCardDue,
+  predictedRetention,
   type RecallState,
   type FlashcardsData,
 } from "@/lib/flashcards";
@@ -79,6 +81,10 @@ export type RecallSnapshot = {
   due: number;
   /** 今日已刷 */
   todayCount: number;
+  /** 平均预测保持率 %（P2-A6，仅统计在册卡；无在册卡 = 100） */
+  avgRetention: number;
+  /** 记忆风险卡数：在册且预测保持率 < 70%（P2-A6） */
+  atRisk: number;
 };
 
 export type ExecutionSnapshot = {
@@ -248,11 +254,24 @@ export async function loadSeSystemState(): Promise<SeSystemState> {
     boxes[p ? Math.min(p.box, 5) : 0] += 1;
     if (isCardDue(card, recallState)) due++;
   }
+  // 记忆保持率（P2-A6）：在册卡（含案例微卡/轨道错题卡等合成卡）的平均预测保持率 + 风险卡数
+  let retSum = 0;
+  let retN = 0;
+  let atRisk = 0;
+  for (const p of Object.values(recallState.progress)) {
+    if (!p) continue;
+    const r = predictedRetention(p);
+    retSum += r;
+    retN++;
+    if (r < RETENTION_RISK) atRisk++;
+  }
   const recall: RecallSnapshot = {
     total: cards.length,
     boxes,
     due,
     todayCount: recallState.today && recallState.today.date === today ? recallState.today.count : 0,
+    avgRetention: retN ? Math.round((retSum / retN) * 100) : 100,
+    atRisk,
   };
 
   // —— 基线层：今日执行 + 连续执行 + 最近 7 日（今天额外计入连错入池任务，P0-A2） ——

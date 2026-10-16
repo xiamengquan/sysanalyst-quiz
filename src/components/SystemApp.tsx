@@ -181,6 +181,10 @@ export function SystemApp() {
               </p>
             </div>
           </div>
+          <p className="text-[0.68rem] text-muted-foreground">
+            保持率 {recall.avgRetention}%
+            {recall.atRisk > 0 && <span className="ml-1 text-amber-600 dark:text-amber-400">风险卡 {recall.atRisk}</span>}
+          </p>
           <div className="flex h-1.5 gap-0.5 overflow-hidden rounded-full">
             {recall.boxes.map((n, i) => (
               <div

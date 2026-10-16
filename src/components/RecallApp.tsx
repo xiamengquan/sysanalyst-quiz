@@ -6,10 +6,13 @@ import { Brain, CheckCircle2, ChevronLeft, RotateCcw, Send, Shuffle, TriangleAle
 import {
   MAX_BOX,
   RECALL_STORAGE_KEY,
+  RETENTION_RISK,
   applyGrade,
   boxDistribution,
   isCardDue,
   newRecallState,
+  predictedRetention,
+  retentionStats,
   todayKey,
   type Flashcard,
   type FlashcardsData,
@@ -185,6 +188,8 @@ export function RecallApp() {
   );
   const dueNewCount = dueList.length - dueReviewCount;
   const distribution = useMemo(() => boxDistribution(filtered, state), [filtered, state]);
+  // 记忆保持率（P2-A6）：平均预测保持率 + 风险卡（自适应排程的健康度仪表）
+  const retention = useMemo(() => retentionStats(filtered, state), [filtered, state]);
 
   const start = useCallback(() => {
     // 到期卡内先复习到期（有进度的），再喂新卡，避免新卡挤占复习债
@@ -388,6 +393,13 @@ export function RecallApp() {
                 .join(" · ")}
             </p>
             <p className="text-[0.78rem] text-muted-foreground">
+              记忆保持率（FSRS 式预测）：平均 {Math.round(retention.avg * 100)}%
+              {retention.atRisk > 0
+                ? ` · 风险卡 ${retention.atRisk} 张（预测 <70%，到期后会优先出现）`
+                : " · 暂无风险卡"}
+              ；「记住」拉长间隔、「忘了」缩短间隔，排程随你的记忆自动适应
+            </p>
+            <p className="text-[0.78rem] text-muted-foreground">
               零散时间磨耳朵？试试{" "}
               <Link href="/audio/" className="underline underline-offset-2 hover:text-foreground">
                 知识点洗脑音频
@@ -417,7 +429,20 @@ export function RecallApp() {
               </span>
             ) : null}
             {state.progress[current.id] ? (
-              <span className="badge">盒 {state.progress[current.id].box}</span>
+              <>
+                <span className="badge">盒 {state.progress[current.id].box}</span>
+                <span
+                  className={cn(
+                    "badge",
+                    predictedRetention(state.progress[current.id]) < RETENTION_RISK
+                      ? "border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-400"
+                      : "border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+                  )}
+                  title="FSRS 式预测：距离自评时点的记忆保持率；低于 70% 标黄提示优先复刷"
+                >
+                  预测保持率 {Math.round(predictedRetention(state.progress[current.id]) * 100)}%
+                </span>
+              </>
             ) : (
               <span className="badge">新卡</span>
             )}
