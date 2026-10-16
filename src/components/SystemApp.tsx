@@ -26,12 +26,14 @@ import {
   PenLine,
   RefreshCcw,
   ShieldCheck,
+  Workflow,
   Zap,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { loadSeSystemState, type PointStatus, type SeSystemState } from "@/lib/se-system";
+import { MODELING_GROUPS, MODELING_ITEMS } from "@/lib/modeling-points";
 import { TodayApp } from "@/components/TodayApp";
 
 const STATUS_META: Record<PointStatus, { label: string; cell: string; dot: string }> = {
@@ -257,6 +259,42 @@ export function SystemApp() {
           <span>· 状态机：未启动 → 巩固中 → 已掌握；错比对多 = 风险在册，纠偏答对后自动解除；已掌握超 7 天未触自动降级巩固中</span>
         </p>
       </div>
+
+      {/* ===== 分解层 · 建模语法链 ===== */}
+      <SectionHead
+        icon={Workflow}
+        title="分解层 · 建模语法链（SA / OOA）"
+        desc="39 点是词汇，建模是语法——芯片直达步骤链卡组与速查，悬停看高频易错点"
+      />
+      <Card size="sm" className="space-y-3">
+        <p className="text-[0.78rem] leading-relaxed text-muted-foreground">
+          语法层总纲：
+          <Link href="/kb/quick-sao-learn/" className="underline underline-offset-2 hover:text-foreground">
+            结构化与面向对象分析体系化学习路径（L0→L4）
+          </Link>
+          ，15 分钟看懂地图后按芯片逐点击破
+        </p>
+        {MODELING_GROUPS.map((g) => (
+          <div key={g.id}>
+            <p className="mb-1.5 text-[0.72rem] font-medium uppercase tracking-wide text-muted-foreground">
+              {g.label}
+              <span className="ml-1.5 font-normal normal-case">· {g.hint}</span>
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {MODELING_ITEMS.filter((it) => it.group === g.id).map((it) => (
+                <Link
+                  key={it.id}
+                  href={it.href}
+                  title={`${it.level} · ${it.trap}`}
+                  className="rounded-lg border border-border bg-muted/30 px-2.5 py-1 text-[0.78rem] text-foreground transition-colors hover:border-foreground/40 hover:bg-muted"
+                >
+                  {it.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+        ))}
+      </Card>
 
       {/* ===== 控制层：风险登记册 ===== */}
       <SectionHead
