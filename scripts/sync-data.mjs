@@ -6,6 +6,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
+import { tagRealChapter } from "./real-chapter-tags.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -66,7 +67,7 @@ function buildQuestions() {
   }
   const real = loadJsonl(realPath).map((q, i) => ({
     no: 100000 + i + 1,
-    ch: 99,
+    ch: tagRealChapter(q), // 真题章节打标（关键词判据，未命中回退 99=未分类）
     point: `${q.year || ""}${q.half || ""}·第${q.qnum || ""}题${q.blank ? `·空${q.blank}` : ""}`,
     stem: q.stem,
     opts: q.opts,
@@ -142,11 +143,14 @@ function buildQuestions() {
   const workshopOk = workshop.filter((q) => q.ch >= 0 && q.ch <= 15);
 
   const combined = [...practice, ...real, ...workshopOk];
+  const realChDist = {};
+  for (const q of real) realChDist[q.ch] = (realChDist[q.ch] || 0) + 1;
   const meta = {
     practice: practice.length,
     real: real.length,
     workshop: workshopOk.length,
     total: combined.length,
+    real_chapters: realChDist, // 真题章节分布（99=未分类），供前端分割刷
   };
   writeJson(path.join(OUT, "questions.json"), combined);
   writeJson(path.join(OUT, "question-meta.json"), meta);

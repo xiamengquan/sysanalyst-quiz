@@ -66,11 +66,14 @@ function shuffleArray<T>(items: T[]): T[] {
 export function QuizApp({
   realExamMode = false,
   initialYearHalf,
+  initialChapters,
 }: {
   /** 真题系统模式：题库锁定为真题，隐藏自编学习路径与模拟卷 */
   realExamMode?: boolean;
   /** 初始场次筛选（真题系统用），如 2014上 */
   initialYearHalf?: string;
+  /** 初始关注章节（真题系统分割刷用），如 [8, 11, 12]；空数组 = 不限章节 */
+  initialChapters?: number[];
 } = {}) {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -81,6 +84,8 @@ export function QuizApp({
   const [bank, setBank] = useState(realExamMode ? "real" : "practice");
   const [yearHalf, setYearHalf] = useState(initialYearHalf || "all");
   const [chapter, setChapter] = useState("all");
+  /** 真题分割刷：关注章节多选（空 = 不限；99 = 未分类归「其他」） */
+  const [chapterSet, setChapterSet] = useState<number[]>(initialChapters || []);
   const [keyword, setKeyword] = useState("");
   const [fromKbDeepLink, setFromKbDeepLink] = useState(false);
   const [diff, setDiff] = useState("all");
@@ -193,6 +198,16 @@ export function QuizApp({
     return [...s].sort((a, b) => a - b);
   }, [all]);
 
+  /** 真题章节分布（打标后 ch 0–22；99=未分类归「其他」），供分割刷 chips */
+  const realChapterDist = useMemo(() => {
+    const m = new Map<number, number>();
+    all.filter((q) => q.bank === "real").forEach((q) => m.set(q.ch, (m.get(q.ch) || 0) + 1));
+    return [...m.entries()].sort((a, b) => (a[0] === 99 ? 1 : b[0] === 99 ? -1 : a[0] - b[0]));
+  }, [all]);
+
+  const toggleChapter = (c: number) =>
+    setChapterSet((prev) => (prev.includes(c) ? prev.filter((x) => x !== c) : [...prev, c].sort((a, b) => a - b)));
+
   /** 综合知识纯选择题候选池（排除论文自测题）；练习侧剔除真题，真题侧仅真题 */
   const pureChoiceQuestions = useMemo(
     () =>
@@ -245,6 +260,8 @@ export function QuizApp({
         const yh = `${q.year || ""}${q.half || ""}`;
         if (yh !== yearHalf) return false;
       }
+      // 真题分割刷：只保留关注章节（空 = 不限）
+      if (bank === "real" && chapterSet.length > 0 && !chapterSet.includes(q.ch)) return false;
       if ((bank === "practice" || bank === "all") && chapter !== "all" && String(q.ch) !== chapter) {
         if (q.bank === "paper") return path === "roi_boost" || path === "all";
         return false;
@@ -317,7 +334,7 @@ export function QuizApp({
     const effectiveLimit = path === "random75" && limit === 0 ? 75 : limit;
     if (effectiveLimit > 0) list = list.slice(0, effectiveLimit);
     return list;
-  }, [all, bank, yearHalf, chapter, diff, path, day, shuffle, limit, keyword, realExamMode]);
+  }, [all, bank, yearHalf, chapter, chapterSet, diff, path, day, shuffle, limit, keyword, realExamMode]);
 
   const persist = useCallback(async () => {
     try {
@@ -704,6 +721,49 @@ export function QuizApp({
                     ))}
                   </select>
                 </label>
+                ) : null}
+                {realExamMode ? (
+                <div className="text-[0.82rem] text-muted-foreground">
+                  章节（关注分割 · 可多选）
+                  <div className="mt-1.5 flex flex-wrap gap-1.5">
+                    <button
+                      type="button"
+                      className={cn(
+                        "rounded-full border px-2.5 py-1 text-xs transition-colors",
+                        chapterSet.length === 0
+                          ? "border-primary/50 bg-primary/10 text-primary"
+                          : "border-border bg-muted/30 hover:bg-muted/60"
+                      )}
+                      onClick={() => setChapterSet([])}
+                    >
+                      不限
+                    </button>
+                    {realChapterDist.map(([c, n]) => {
+                      const active = chapterSet.includes(c);
+                      return (
+                        <button
+                          key={c}
+                          type="button"
+                          aria-pressed={active}
+                          className={cn(
+                            "rounded-full border px-2.5 py-1 text-xs transition-colors",
+                            active
+                              ? "border-primary/50 bg-primary/10 text-primary"
+                              : "border-border bg-muted/30 hover:bg-muted/60"
+                          )}
+                          onClick={() => toggleChapter(c)}
+                        >
+                          {c === 99 ? "其他" : CH_NAMES[c] || `第${c}章`} · {n}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <p className="mt-1 text-[0.72rem]">
+                    {chapterSet.length > 0
+                      ? `已选 ${chapterSet.length} 章 · 当前匹配 ${filtered.length} 题`
+                      : "勾选关注的章节，只刷这部分真题"}
+                  </p>
+                </div>
                 ) : null}
                 {!realExamMode ? (
                 <label className="block text-[0.82rem] text-muted-foreground">

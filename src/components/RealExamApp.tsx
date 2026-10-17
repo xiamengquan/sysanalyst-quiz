@@ -3,11 +3,17 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
-import { ChevronLeft, FileText, ListChecks } from "lucide-react";
+import { ChevronLeft, Crosshair, FileText, ListChecks } from "lucide-react";
 import type { CaseItem, Question } from "@/lib/types";
+import { CH_NAMES } from "@/lib/types";
 import { QuizApp } from "@/components/QuizApp";
 import { ExamSprintBanner } from "@/components/ExamCountdown";
+import { storageGet, storageSet } from "@/lib/storage";
 import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+
+/** 关注章节 IDB 键（真题分割刷） */
+const FOCUS_CHAPTERS_KEY = "sysanalyst_focus_chapters_v1";
 
 type SessionInfo = {
   key: string;
@@ -29,6 +35,23 @@ export function RealExamApp() {
   const [all, setAll] = useState<Question[]>([]);
   const [cases, setCases] = useState<CaseItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [focusChapters, setFocusChapters] = useState<number[]>([]);
+  const [focusLoaded, setFocusLoaded] = useState(false);
+
+  // 关注章节持久化（IndexedDB）
+  useEffect(() => {
+    storageGet<number[]>(FOCUS_CHAPTERS_KEY)
+      .then((v) => {
+        if (Array.isArray(v) && v.length > 0) setFocusChapters(v);
+      })
+      .finally(() => setFocusLoaded(true));
+  }, []);
+  const toggleFocus = (c: number) =>
+    setFocusChapters((prev) => {
+      const next = prev.includes(c) ? prev.filter((x) => x !== c) : [...prev, c].sort((a, b) => a - b);
+      void storageSet(FOCUS_CHAPTERS_KEY, next);
+      return next;
+    });
 
   useEffect(() => {
     let cancelled = false;
@@ -69,7 +92,23 @@ export function RealExamApp() {
     return [...map.values()].sort((a, b) => b.key.localeCompare(a.key, "zh"));
   }, [all, cases]);
 
+  /** 真题章节分布（打标后 ch 0–22；99=未分类归「其他」），供分割刷 */
+  const realChDist = useMemo(() => {
+    const m = new Map<number, number>();
+    all.filter((q) => q.bank === "real").forEach((q) => m.set(q.ch, (m.get(q.ch) || 0) + 1));
+    return [...m.entries()].sort((a, b) => (a[0] === 99 ? 1 : b[0] === 99 ? -1 : a[0] - b[0]));
+  }, [all]);
+
   if (loading) return <p className="text-muted-foreground">加载真题库中…</p>;
+
+  // 深链分割刷：/real-exams/?session=all&chapters=8,11,12
+  const chaptersParam = searchParams.get("chapters");
+  const initialChapters = chaptersParam
+    ? chaptersParam
+        .split(",")
+        .map((s) => Number(s.trim()))
+        .filter((n) => Number.isInteger(n) && n >= 0)
+    : undefined;
 
   // 场次作答视图：复用刷题引擎的真题模式
   if (session) {
@@ -84,7 +123,11 @@ export function RealExamApp() {
             返回真题目录{session !== "all" ? ` · ${formatSessionLabel(session)}` : " · 全部场次"}
           </Link>
         </div>
-        <QuizApp realExamMode initialYearHalf={session === "all" ? undefined : session} />
+        <QuizApp
+          realExamMode
+          initialYearHalf={session === "all" ? undefined : session}
+          initialChapters={initialChapters && initialChapters.length > 0 ? initialChapters : undefined}
+        />
       </div>
     );
   }
@@ -93,6 +136,14 @@ export function RealExamApp() {
   const partialSessions = sessions.filter((s) => s.choiceCount > 0 && s.choiceCount !== 75);
   const totalChoice = sessions.reduce((n, s) => n + s.choiceCount, 0);
   const totalCase = sessions.reduce((n, s) => n + s.caseCount, 0);
+  const focusCount = focusChapters.reduce(
+    (n, c) => n + (realChDist.find(([k]) => k === c)?.[1] || 0),
+    0
+  );
+  const focusHref =
+    focusChapters.length > 0
+      ? `/real-exams/?session=all&chapters=${focusChapters.join(",")}`
+      : "/real-exams/?session=all";
 
   return (
     <>
@@ -107,6 +158,54 @@ export function RealExamApp() {
       </p>
 
       <ExamSprintBanner />
+
+      <Card className="px-(--card-spacing) mb-4 border-primary/25">
+        <div className="mb-3 flex items-center gap-2.5">
+          <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
+            <Crosshair className="size-4" />
+          </span>
+          <div>
+            <h2 className="text-[1rem] font-medium">只刷我关注的真题 · 按章节分割</h2>
+            <p className="text-xs text-muted-foreground mt-0.5">
+              勾选关注的章节（自动记住），只刷这部分真题——距考试只剩几天，把时间花在刀刃上
+            </p>
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-1.5">
+          {realChDist.map(([c, n]) => {
+            const active = focusLoaded && focusChapters.includes(c);
+            return (
+              <button
+                key={c}
+                type="button"
+                aria-pressed={active}
+                className={cn(
+                  "rounded-full border px-2.5 py-1 text-xs transition-colors",
+                  active
+                    ? "border-primary/50 bg-primary/10 text-primary"
+                    : "border-border bg-muted/30 text-muted-foreground hover:bg-muted/60"
+                )}
+                onClick={() => toggleFocus(c)}
+              >
+                {c === 99 ? "其他" : CH_NAMES[c] || `第${c}章`} · {n}
+              </button>
+            );
+          })}
+        </div>
+        <Link
+          href={focusHref}
+          className={cn(
+            "mt-3 flex items-center justify-center gap-1.5 rounded-lg px-3 py-2.5 text-[0.92rem] font-medium transition-colors",
+            focusChapters.length > 0
+              ? "border border-primary/30 bg-primary/[0.06] text-primary hover:bg-primary/[0.12]"
+              : "border border-border bg-muted/30 text-muted-foreground"
+          )}
+        >
+          {focusChapters.length > 0
+            ? `只刷我关注的（${focusChapters.length} 章 · ${focusCount} 题）`
+            : "先勾选上方章节，再开始分割刷"}
+        </Link>
+      </Card>
 
       <Card className="px-(--card-spacing) mb-4">
         <div className="mb-3 flex items-center gap-2.5">
