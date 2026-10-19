@@ -1,6 +1,6 @@
 import type { KbItem } from "@/lib/types";
 
-/** 综合知识 / 案例 / 论文 三条主路径上的速查锚点 */
+/** 案例分析主路径上的速查锚点（综合知识路径仅作考点归组辅助） */
 export const LEARNING_TRACKS = {
   choice: {
     id: "choice" as const,
@@ -22,26 +22,16 @@ export const LEARNING_TRACKS = {
       { quickId: "quick-sao-learn", label: "DFD·结构化", chapters: [10, 11] },
     ],
   },
-  essay: {
-    id: "essay" as const,
-    label: "论文",
-    segments: [
-      { quickId: "quick-essay-index", label: "论文方向索引", chapters: [22] },
-      { quickId: "quick-compare", label: "架构对比", chapters: [12] },
-      { quickId: "quick-web-agent-arch", label: "Web·新技术", chapters: [20] },
-    ],
-  },
 };
+
 
 export type LearningTrackId = keyof typeof LEARNING_TRACKS;
 
 export function pickTrack(item: KbItem): LearningTrackId {
   if (item.kind === "quick") {
     const p = item.path || "";
-    if (p.includes("论文")) return "essay";
     if (p.includes("案例") || p.includes("Checklist")) return "case";
   }
-  if (item.group?.includes("论文") || item.chapter === 22) return "essay";
   if (item.chapter != null && [15, 16, 17, 18, 19, 20, 21].includes(item.chapter)) {
     return "case";
   }

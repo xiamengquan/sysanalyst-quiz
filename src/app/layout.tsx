@@ -17,12 +17,12 @@ const plexSans = IBM_Plex_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
-  title: "系统分析师 · 刷题站",
-  description: "软考系统分析师本地/边缘刷题：选择题、案例分析、知识点精炼",
+  title: "系统分析师 · 案例分析考点库",
+  description: "软考系统分析师下午一案例分析考点库：学考点、背套路，纯阅读无作答",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "系分刷题",
+    title: "系分考点库",
   },
   formatDetection: {
     telephone: false,

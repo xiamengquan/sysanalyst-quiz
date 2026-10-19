@@ -66,8 +66,7 @@ for (const id of ["kp-requirements-engineering", "kp-software-lifecycle", "kp-3-
 }
 
 for (const rel of [
-  "public/data/questions.json",
-  "public/data/cases.json",
+  "public/data/case-map.json",
   "public/data/kb-index.json",
   "public/data/kb-search-index.json",
   "public/data/sitemap-urls.json",
@@ -135,12 +134,7 @@ console.log(`check-release · package ${pkgVer || "?"} · latest ${notes?.latest
 for (const w of warns) console.warn("  warn:", w);
 for (const e of errors) console.error("  error:", e);
 
-const reorg = spawnSync("node", ["scripts/validate-reorg.mjs"], { cwd: root, encoding: "utf8" });
-if (reorg.status !== 0) {
-  errors.push("validate-reorg 未通过");
-  if (reorg.stderr) console.error(reorg.stderr);
-  if (reorg.stdout) console.error(reorg.stdout);
-}
+// 题库分册重组校验（validate-reorg）已随题库下线移除（2026-10-19）
 
 if (errors.length) {
   process.exit(1);

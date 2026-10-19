@@ -19,160 +19,6 @@
       "title": "考点参考（API · 一考点一篇）",
       "items": [
         {
-          "id": "kp-1-1",
-          "title": "1.1 计算机系统概述（层次结构、硬件、软件）",
-          "path": "points/kp-1-1.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 1. 计算机系统基础知识",
-          "outlineRef": "3.1",
-          "chapter": 3,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-1-2",
-          "title": "1.2 存储器系统（RAM/ROM、辅助存储、RAID、Cache、网络存储 DAS/NAS/SAN、虚拟存储）",
-          "path": "points/kp-1-2.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 1. 计算机系统基础知识",
-          "outlineRef": "3.2",
-          "chapter": 3,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-1-3",
-          "title": "1.3 输入输出系统（程序控制/中断/DMA/通道/I/O 处理机、总线、I/O 接口）",
-          "path": "points/kp-1-3.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 1. 计算机系统基础知识",
-          "outlineRef": "3.3",
-          "chapter": 3,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-1-4",
-          "title": "1.4 指令系统（基本指令、CISC、RISC）",
-          "path": "points/kp-1-4.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 1. 计算机系统基础知识",
-          "outlineRef": "3.4",
-          "chapter": 3,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-1-5",
-          "title": "1.5 多处理机系统（MPP/SMP、互连网络）",
-          "path": "points/kp-1-5.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 1. 计算机系统基础知识",
-          "outlineRef": "3.5",
-          "chapter": 3,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-1-6",
-          "title": "1.6 操作系统（概述、进程、存储、设备、文件、作业/UI、国产 OS）",
-          "path": "points/kp-1-6.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 1. 计算机系统基础知识",
-          "outlineRef": "3.6",
-          "chapter": 3,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-2-1",
-          "title": "2.1 计算机网络基础（带宽/奈奎斯特、编码、差错控制）",
-          "path": "points/kp-2-1.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 2. 计算机网络与分布式系统",
-          "outlineRef": "4.1",
-          "chapter": 4,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-2-2",
-          "title": "2.2 网络体系结构与协议（OSI、TCP/IP、IP 与子网/超网/IPv6）",
-          "path": "points/kp-2-2.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 2. 计算机网络与分布式系统",
-          "outlineRef": "4.2",
-          "chapter": 4,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-2-3",
-          "title": "2.3 局域网与广域网（拓扑、以太网、WLAN、WAN）",
-          "path": "points/kp-2-3.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 2. 计算机网络与分布式系统",
-          "outlineRef": "4.3",
-          "chapter": 4,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-2-4",
-          "title": "2.4 网络工程（规划、设计、实施）",
-          "path": "points/kp-2-4.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 2. 计算机网络与分布式系统",
-          "outlineRef": "4.4",
-          "chapter": 4,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-2-5",
-          "title": "2.5 分布式系统",
-          "path": "points/kp-2-5.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 2. 计算机网络与分布式系统",
-          "outlineRef": "4.5",
-          "chapter": 4,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-2-6",
-          "title": "2.6 构件与中间件",
-          "path": "points/kp-2-6.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 2. 计算机网络与分布式系统",
-          "outlineRef": "4.6",
-          "chapter": 4,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-2-7",
-          "title": "2.7 Web 服务",
-          "path": "points/kp-2-7.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 2. 计算机网络与分布式系统",
-          "outlineRef": "4.7",
-          "chapter": 4,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-2-8",
-          "title": "2.8 云计算",
-          "path": "points/kp-2-8.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 2. 计算机网络与分布式系统",
-          "outlineRef": "4.8",
-          "chapter": 4,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
           "id": "kp-3-1",
           "title": "3.1 数据库管理系统（DBMS、三级模式、数据模型）",
           "path": "points/kp-3-1.md",
@@ -181,7 +27,13 @@
           "group": "科目1 · 3. 数据库系统基础知识",
           "outlineRef": "5.1",
           "chapter": 5,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "数据库"
+          ],
+          "caseFreq": 19,
+          "caseNote": "数据库出题区"
         },
         {
           "id": "kp-3-2",
@@ -192,7 +44,13 @@
           "group": "科目1 · 3. 数据库系统基础知识",
           "outlineRef": "5.2",
           "chapter": 5,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "数据库"
+          ],
+          "caseFreq": 19,
+          "caseNote": "数据库出题区"
         },
         {
           "id": "kp-3-3",
@@ -203,7 +61,13 @@
           "group": "科目1 · 3. 数据库系统基础知识",
           "outlineRef": "5.3",
           "chapter": 5,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "数据库"
+          ],
+          "caseFreq": 19,
+          "caseNote": "数据库出题区"
         },
         {
           "id": "kp-3-4",
@@ -214,7 +78,13 @@
           "group": "科目1 · 3. 数据库系统基础知识",
           "outlineRef": "5.4",
           "chapter": 5,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "数据库"
+          ],
+          "caseFreq": 19,
+          "caseNote": "数据库出题区"
         },
         {
           "id": "kp-3-5",
@@ -225,7 +95,13 @@
           "group": "科目1 · 3. 数据库系统基础知识",
           "outlineRef": "5.5",
           "chapter": 5,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "数据库"
+          ],
+          "caseFreq": 19,
+          "caseNote": "数据库出题区"
         },
         {
           "id": "kp-3-6",
@@ -236,7 +112,13 @@
           "group": "科目1 · 3. 数据库系统基础知识",
           "outlineRef": "5.6",
           "chapter": 5,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "数据库"
+          ],
+          "caseFreq": 19,
+          "caseNote": "数据库出题区"
         },
         {
           "id": "kp-3-7",
@@ -247,7 +129,13 @@
           "group": "科目1 · 3. 数据库系统基础知识",
           "outlineRef": "5.7",
           "chapter": 5,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "数据库"
+          ],
+          "caseFreq": 19,
+          "caseNote": "数据库出题区"
         },
         {
           "id": "kp-3-8",
@@ -258,95 +146,13 @@
           "group": "科目1 · 3. 数据库系统基础知识",
           "outlineRef": "5.8",
           "chapter": 5,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-4-1",
-          "title": "4.1 企业信息化概述",
-          "path": "points/kp-4-1.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 4. 企业信息化基础知识",
-          "outlineRef": "6.1",
-          "chapter": 6,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-4-2",
-          "title": "4.2 信息资源管理（概述、标准、规划、资源网）",
-          "path": "points/kp-4-2.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 4. 企业信息化基础知识",
-          "outlineRef": "6.2",
-          "chapter": 6,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-4-3",
-          "title": "4.3 企业信息化规划（内容、与战略关系、规划方法 BSP/CSF/SST/SDP 等、ERP）",
-          "path": "points/kp-4-3.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 4. 企业信息化基础知识",
-          "outlineRef": "6.3",
-          "chapter": 6,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-4-4",
-          "title": "4.4 企业信息系统（CRM、SCM、PDM、PLM、KM、BI、门户、DSS、开发方法）",
-          "path": "points/kp-4-4.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 4. 企业信息化基础知识",
-          "outlineRef": "6.4",
-          "chapter": 6,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-4-5",
-          "title": "4.5 电子商务",
-          "path": "points/kp-4-5.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 4. 企业信息化基础知识",
-          "outlineRef": "6.5",
-          "chapter": 6,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-4-6",
-          "title": "4.6 电子政务",
-          "path": "points/kp-4-6.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 4. 企业信息化基础知识",
-          "outlineRef": "6.6",
-          "chapter": 6,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-4-7",
-          "title": "4.7 业务流程重组 BPR",
-          "path": "points/kp-4-7.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 4. 企业信息化基础知识",
-          "outlineRef": "6.7",
-          "chapter": 6,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-4-8",
-          "title": "4.8 企业应用集成 EAI",
-          "path": "points/kp-4-8.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 4. 企业信息化基础知识",
-          "outlineRef": "6.8",
-          "chapter": 6,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "数据库"
+          ],
+          "caseFreq": 19,
+          "caseNote": "数据库出题区"
         },
         {
           "id": "kp-software-lifecycle",
@@ -357,7 +163,13 @@
           "group": "科目1 · 5. 软件工程",
           "outlineRef": "7.1",
           "chapter": 7,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "related",
+          "caseDomains": [
+            "建模与设计",
+            "需求"
+          ],
+          "caseNote": "软件工程基础：需求/建模答题的支撑"
         },
         {
           "id": "kp-5-2",
@@ -368,7 +180,13 @@
           "group": "科目1 · 5. 软件工程",
           "outlineRef": "7.2",
           "chapter": 7,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "related",
+          "caseDomains": [
+            "建模与设计",
+            "需求"
+          ],
+          "caseNote": "软件工程基础：需求/建模答题的支撑"
         },
         {
           "id": "kp-5-3",
@@ -379,7 +197,13 @@
           "group": "科目1 · 5. 软件工程",
           "outlineRef": "7.3",
           "chapter": 7,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "related",
+          "caseDomains": [
+            "建模与设计",
+            "需求"
+          ],
+          "caseNote": "软件工程基础：需求/建模答题的支撑"
         },
         {
           "id": "kp-5-4",
@@ -390,7 +214,13 @@
           "group": "科目1 · 5. 软件工程",
           "outlineRef": "7.4",
           "chapter": 7,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "related",
+          "caseDomains": [
+            "建模与设计",
+            "需求"
+          ],
+          "caseNote": "软件工程基础：需求/建模答题的支撑"
         },
         {
           "id": "kp-5-5",
@@ -401,7 +231,13 @@
           "group": "科目1 · 5. 软件工程",
           "outlineRef": "7.5",
           "chapter": 7,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "related",
+          "caseDomains": [
+            "建模与设计",
+            "需求"
+          ],
+          "caseNote": "软件工程基础：需求/建模答题的支撑"
         },
         {
           "id": "kp-5-6",
@@ -412,7 +248,13 @@
           "group": "科目1 · 5. 软件工程",
           "outlineRef": "7.6",
           "chapter": 7,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "related",
+          "caseDomains": [
+            "建模与设计",
+            "需求"
+          ],
+          "caseNote": "软件工程基础：需求/建模答题的支撑"
         },
         {
           "id": "kp-5-7",
@@ -423,7 +265,13 @@
           "group": "科目1 · 5. 软件工程",
           "outlineRef": "7.7",
           "chapter": 7,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "related",
+          "caseDomains": [
+            "建模与设计",
+            "需求"
+          ],
+          "caseNote": "软件工程基础：需求/建模答题的支撑"
         },
         {
           "id": "kp-5-8",
@@ -434,7 +282,13 @@
           "group": "科目1 · 5. 软件工程",
           "outlineRef": "7.8",
           "chapter": 7,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "related",
+          "caseDomains": [
+            "建模与设计",
+            "需求"
+          ],
+          "caseNote": "软件工程基础：需求/建模答题的支撑"
         },
         {
           "id": "kp-6-1",
@@ -445,7 +299,13 @@
           "group": "科目1 · 6. 项目管理",
           "outlineRef": "8.1",
           "chapter": 8,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "项目管理"
+          ],
+          "caseFreq": 1,
+          "caseNote": "项目管理：案例低频出现"
         },
         {
           "id": "kp-6-2",
@@ -456,7 +316,13 @@
           "group": "科目1 · 6. 项目管理",
           "outlineRef": "8.2",
           "chapter": 8,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "项目管理"
+          ],
+          "caseFreq": 1,
+          "caseNote": "项目管理：案例低频出现"
         },
         {
           "id": "kp-6-3",
@@ -467,7 +333,13 @@
           "group": "科目1 · 6. 项目管理",
           "outlineRef": "8.3",
           "chapter": 8,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "项目管理"
+          ],
+          "caseFreq": 1,
+          "caseNote": "项目管理：案例低频出现"
         },
         {
           "id": "kp-6-4",
@@ -478,7 +350,13 @@
           "group": "科目1 · 6. 项目管理",
           "outlineRef": "8.4",
           "chapter": 8,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "项目管理"
+          ],
+          "caseFreq": 1,
+          "caseNote": "项目管理：案例低频出现"
         },
         {
           "id": "kp-6-5",
@@ -489,7 +367,13 @@
           "group": "科目1 · 6. 项目管理",
           "outlineRef": "8.5",
           "chapter": 8,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "项目管理"
+          ],
+          "caseFreq": 1,
+          "caseNote": "项目管理：案例低频出现"
         },
         {
           "id": "kp-6-6",
@@ -500,7 +384,13 @@
           "group": "科目1 · 6. 项目管理",
           "outlineRef": "8.6",
           "chapter": 8,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "项目管理"
+          ],
+          "caseFreq": 1,
+          "caseNote": "项目管理：案例低频出现"
         },
         {
           "id": "kp-6-7",
@@ -511,7 +401,13 @@
           "group": "科目1 · 6. 项目管理",
           "outlineRef": "8.7",
           "chapter": 8,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "项目管理"
+          ],
+          "caseFreq": 1,
+          "caseNote": "项目管理：案例低频出现"
         },
         {
           "id": "kp-6-8",
@@ -522,7 +418,13 @@
           "group": "科目1 · 6. 项目管理",
           "outlineRef": "8.8",
           "chapter": 8,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "项目管理"
+          ],
+          "caseFreq": 1,
+          "caseNote": "项目管理：案例低频出现"
         },
         {
           "id": "kp-6-9",
@@ -533,7 +435,13 @@
           "group": "科目1 · 6. 项目管理",
           "outlineRef": "8.9",
           "chapter": 8,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "项目管理"
+          ],
+          "caseFreq": 1,
+          "caseNote": "项目管理：案例低频出现"
         },
         {
           "id": "kp-7-1",
@@ -544,7 +452,13 @@
           "group": "科目1 · 7. 信息安全",
           "outlineRef": "9.1",
           "chapter": 9,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "安全"
+          ],
+          "caseFreq": 6,
+          "caseNote": "安全出题区"
         },
         {
           "id": "kp-7-2",
@@ -555,7 +469,13 @@
           "group": "科目1 · 7. 信息安全",
           "outlineRef": "9.2",
           "chapter": 9,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "安全"
+          ],
+          "caseFreq": 6,
+          "caseNote": "安全出题区"
         },
         {
           "id": "kp-7-3",
@@ -566,7 +486,13 @@
           "group": "科目1 · 7. 信息安全",
           "outlineRef": "9.3",
           "chapter": 9,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "安全"
+          ],
+          "caseFreq": 6,
+          "caseNote": "安全出题区"
         },
         {
           "id": "kp-7-4",
@@ -577,7 +503,13 @@
           "group": "科目1 · 7. 信息安全",
           "outlineRef": "9.4",
           "chapter": 9,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "安全"
+          ],
+          "caseFreq": 6,
+          "caseNote": "安全出题区"
         },
         {
           "id": "kp-7-5",
@@ -588,7 +520,13 @@
           "group": "科目1 · 7. 信息安全",
           "outlineRef": "9.5",
           "chapter": 9,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "安全"
+          ],
+          "caseFreq": 6,
+          "caseNote": "安全出题区"
         },
         {
           "id": "kp-7-6",
@@ -599,7 +537,13 @@
           "group": "科目1 · 7. 信息安全",
           "outlineRef": "9.6",
           "chapter": 9,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "安全"
+          ],
+          "caseFreq": 6,
+          "caseNote": "安全出题区"
         },
         {
           "id": "kp-7-7",
@@ -610,7 +554,13 @@
           "group": "科目1 · 7. 信息安全",
           "outlineRef": "9.7",
           "chapter": 9,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "安全"
+          ],
+          "caseFreq": 6,
+          "caseNote": "安全出题区"
         },
         {
           "id": "kp-7-8",
@@ -621,7 +571,13 @@
           "group": "科目1 · 7. 信息安全",
           "outlineRef": "9.8",
           "chapter": 9,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "安全"
+          ],
+          "caseFreq": 6,
+          "caseNote": "安全出题区"
         },
         {
           "id": "kp-7-9",
@@ -632,7 +588,13 @@
           "group": "科目1 · 7. 信息安全",
           "outlineRef": "9.9",
           "chapter": 9,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "安全"
+          ],
+          "caseFreq": 6,
+          "caseNote": "安全出题区"
         },
         {
           "id": "kp-8-1",
@@ -643,7 +605,13 @@
           "group": "科目1 · 8. 系统规划与分析",
           "outlineRef": "10.1",
           "chapter": 10,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "系统规划"
+          ],
+          "caseFreq": 2,
+          "caseNote": "系统规划出题区"
         },
         {
           "id": "kp-8-2",
@@ -654,7 +622,13 @@
           "group": "科目1 · 8. 系统规划与分析",
           "outlineRef": "10.2",
           "chapter": 10,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "系统规划"
+          ],
+          "caseFreq": 2,
+          "caseNote": "系统规划出题区"
         },
         {
           "id": "kp-8-3",
@@ -665,7 +639,13 @@
           "group": "科目1 · 8. 系统规划与分析",
           "outlineRef": "10.3",
           "chapter": 10,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "系统规划"
+          ],
+          "caseFreq": 2,
+          "caseNote": "系统规划出题区"
         },
         {
           "id": "kp-8-4",
@@ -676,7 +656,13 @@
           "group": "科目1 · 8. 系统规划与分析",
           "outlineRef": "10.4",
           "chapter": 10,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "系统规划"
+          ],
+          "caseFreq": 2,
+          "caseNote": "系统规划出题区"
         },
         {
           "id": "kp-8-5",
@@ -687,7 +673,13 @@
           "group": "科目1 · 8. 系统规划与分析",
           "outlineRef": "10.5",
           "chapter": 10,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "系统规划"
+          ],
+          "caseFreq": 2,
+          "caseNote": "系统规划出题区"
         },
         {
           "id": "kp-8-6",
@@ -698,7 +690,13 @@
           "group": "科目1 · 8. 系统规划与分析",
           "outlineRef": "10.6",
           "chapter": 10,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "系统规划"
+          ],
+          "caseFreq": 2,
+          "caseNote": "系统规划出题区"
         },
         {
           "id": "kp-8-7",
@@ -709,7 +707,13 @@
           "group": "科目1 · 8. 系统规划与分析",
           "outlineRef": "10.7",
           "chapter": 10,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "系统规划"
+          ],
+          "caseFreq": 2,
+          "caseNote": "系统规划出题区"
         },
         {
           "id": "kp-8-8",
@@ -720,7 +724,13 @@
           "group": "科目1 · 8. 系统规划与分析",
           "outlineRef": "10.8",
           "chapter": 10,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "系统规划"
+          ],
+          "caseFreq": 2,
+          "caseNote": "系统规划出题区"
         },
         {
           "id": "kp-8-9",
@@ -731,7 +741,13 @@
           "group": "科目1 · 8. 系统规划与分析",
           "outlineRef": "10.9",
           "chapter": 10,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "系统规划"
+          ],
+          "caseFreq": 2,
+          "caseNote": "系统规划出题区"
         },
         {
           "id": "kp-9-1",
@@ -742,7 +758,13 @@
           "group": "科目1 · 9. 软件需求工程",
           "outlineRef": "11.1",
           "chapter": 11,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "需求"
+          ],
+          "caseFreq": 28,
+          "caseNote": "需求出题区（第二大出题区）"
         },
         {
           "id": "kp-9-2",
@@ -753,7 +775,13 @@
           "group": "科目1 · 9. 软件需求工程",
           "outlineRef": "11.2",
           "chapter": 11,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "需求"
+          ],
+          "caseFreq": 28,
+          "caseNote": "需求出题区（第二大出题区）"
         },
         {
           "id": "kp-9-3",
@@ -764,7 +792,13 @@
           "group": "科目1 · 9. 软件需求工程",
           "outlineRef": "11.3",
           "chapter": 11,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "需求"
+          ],
+          "caseFreq": 28,
+          "caseNote": "需求出题区（第二大出题区）"
         },
         {
           "id": "kp-9-4",
@@ -775,7 +809,13 @@
           "group": "科目1 · 9. 软件需求工程",
           "outlineRef": "11.4",
           "chapter": 11,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "需求"
+          ],
+          "caseFreq": 28,
+          "caseNote": "需求出题区（第二大出题区）"
         },
         {
           "id": "kp-9-5",
@@ -786,7 +826,13 @@
           "group": "科目1 · 9. 软件需求工程",
           "outlineRef": "11.5",
           "chapter": 11,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "需求"
+          ],
+          "caseFreq": 28,
+          "caseNote": "需求出题区（第二大出题区）"
         },
         {
           "id": "kp-9-6",
@@ -797,7 +843,13 @@
           "group": "科目1 · 9. 软件需求工程",
           "outlineRef": "11.6",
           "chapter": 11,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "需求"
+          ],
+          "caseFreq": 28,
+          "caseNote": "需求出题区（第二大出题区）"
         },
         {
           "id": "kp-9-7",
@@ -808,7 +860,13 @@
           "group": "科目1 · 9. 软件需求工程",
           "outlineRef": "11.7",
           "chapter": 11,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "需求"
+          ],
+          "caseFreq": 28,
+          "caseNote": "需求出题区（第二大出题区）"
         },
         {
           "id": "kp-9-8",
@@ -819,7 +877,13 @@
           "group": "科目1 · 9. 软件需求工程",
           "outlineRef": "11.8",
           "chapter": 11,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "需求"
+          ],
+          "caseFreq": 28,
+          "caseNote": "需求出题区（第二大出题区）"
         },
         {
           "id": "kp-10-1",
@@ -830,7 +894,14 @@
           "group": "科目1 · 10. 软件架构设计",
           "outlineRef": "12.1",
           "chapter": 12,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "架构",
+            "集成"
+          ],
+          "caseFreq": 20,
+          "caseNote": "架构出题区 + 应用系统集成"
         },
         {
           "id": "kp-10-2",
@@ -841,7 +912,14 @@
           "group": "科目1 · 10. 软件架构设计",
           "outlineRef": "12.2",
           "chapter": 12,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "架构",
+            "集成"
+          ],
+          "caseFreq": 20,
+          "caseNote": "架构出题区 + 应用系统集成"
         },
         {
           "id": "kp-10-3",
@@ -852,7 +930,14 @@
           "group": "科目1 · 10. 软件架构设计",
           "outlineRef": "12.3",
           "chapter": 12,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "架构",
+            "集成"
+          ],
+          "caseFreq": 20,
+          "caseNote": "架构出题区 + 应用系统集成"
         },
         {
           "id": "kp-10-4",
@@ -863,7 +948,14 @@
           "group": "科目1 · 10. 软件架构设计",
           "outlineRef": "12.4",
           "chapter": 12,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "架构",
+            "集成"
+          ],
+          "caseFreq": 20,
+          "caseNote": "架构出题区 + 应用系统集成"
         },
         {
           "id": "kp-10-5",
@@ -874,7 +966,14 @@
           "group": "科目1 · 10. 软件架构设计",
           "outlineRef": "12.5",
           "chapter": 12,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "架构",
+            "集成"
+          ],
+          "caseFreq": 20,
+          "caseNote": "架构出题区 + 应用系统集成"
         },
         {
           "id": "kp-10-6",
@@ -885,7 +984,14 @@
           "group": "科目1 · 10. 软件架构设计",
           "outlineRef": "12.6",
           "chapter": 12,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "架构",
+            "集成"
+          ],
+          "caseFreq": 20,
+          "caseNote": "架构出题区 + 应用系统集成"
         },
         {
           "id": "kp-11-1",
@@ -896,7 +1002,13 @@
           "group": "科目1 · 11. 系统设计",
           "outlineRef": "13.1",
           "chapter": 13,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "建模与设计"
+          ],
+          "caseFreq": 67,
+          "caseNote": "建模与设计为案例第一题型载体"
         },
         {
           "id": "kp-11-2",
@@ -907,7 +1019,13 @@
           "group": "科目1 · 11. 系统设计",
           "outlineRef": "13.2",
           "chapter": 13,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "建模与设计"
+          ],
+          "caseFreq": 67,
+          "caseNote": "建模与设计为案例第一题型载体"
         },
         {
           "id": "kp-11-3",
@@ -918,7 +1036,13 @@
           "group": "科目1 · 11. 系统设计",
           "outlineRef": "13.3",
           "chapter": 13,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "建模与设计"
+          ],
+          "caseFreq": 67,
+          "caseNote": "建模与设计为案例第一题型载体"
         },
         {
           "id": "kp-11-4",
@@ -929,7 +1053,13 @@
           "group": "科目1 · 11. 系统设计",
           "outlineRef": "13.4",
           "chapter": 13,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "建模与设计"
+          ],
+          "caseFreq": 67,
+          "caseNote": "建模与设计为案例第一题型载体"
         },
         {
           "id": "kp-11-5",
@@ -940,7 +1070,13 @@
           "group": "科目1 · 11. 系统设计",
           "outlineRef": "13.5",
           "chapter": 13,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "建模与设计"
+          ],
+          "caseFreq": 67,
+          "caseNote": "建模与设计为案例第一题型载体"
         },
         {
           "id": "kp-11-6",
@@ -951,7 +1087,13 @@
           "group": "科目1 · 11. 系统设计",
           "outlineRef": "13.6",
           "chapter": 13,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "建模与设计"
+          ],
+          "caseFreq": 67,
+          "caseNote": "建模与设计为案例第一题型载体"
         },
         {
           "id": "kp-11-7",
@@ -962,7 +1104,13 @@
           "group": "科目1 · 11. 系统设计",
           "outlineRef": "13.7",
           "chapter": 13,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "建模与设计"
+          ],
+          "caseFreq": 67,
+          "caseNote": "建模与设计为案例第一题型载体"
         },
         {
           "id": "kp-12-1",
@@ -973,7 +1121,13 @@
           "group": "科目1 · 12. 软件实现与测试",
           "outlineRef": "14.1",
           "chapter": 14,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "测试"
+          ],
+          "caseFreq": 7,
+          "caseNote": "测试出题区"
         },
         {
           "id": "kp-12-2",
@@ -984,7 +1138,13 @@
           "group": "科目1 · 12. 软件实现与测试",
           "outlineRef": "14.2",
           "chapter": 14,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "测试"
+          ],
+          "caseFreq": 7,
+          "caseNote": "测试出题区"
         },
         {
           "id": "kp-12-3",
@@ -995,7 +1155,13 @@
           "group": "科目1 · 12. 软件实现与测试",
           "outlineRef": "14.3",
           "chapter": 14,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "测试"
+          ],
+          "caseFreq": 7,
+          "caseNote": "测试出题区"
         },
         {
           "id": "kp-12-4",
@@ -1006,7 +1172,13 @@
           "group": "科目1 · 12. 软件实现与测试",
           "outlineRef": "14.4",
           "chapter": 14,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "测试"
+          ],
+          "caseFreq": 7,
+          "caseNote": "测试出题区"
         },
         {
           "id": "kp-12-5",
@@ -1017,7 +1189,13 @@
           "group": "科目1 · 12. 软件实现与测试",
           "outlineRef": "14.5",
           "chapter": 14,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "测试"
+          ],
+          "caseFreq": 7,
+          "caseNote": "测试出题区"
         },
         {
           "id": "kp-12-6",
@@ -1028,7 +1206,13 @@
           "group": "科目1 · 12. 软件实现与测试",
           "outlineRef": "14.6",
           "chapter": 14,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "测试"
+          ],
+          "caseFreq": 7,
+          "caseNote": "测试出题区"
         },
         {
           "id": "kp-ops-metrics-mttr-mtbf-mttf-mtta",
@@ -1039,7 +1223,13 @@
           "group": "科目1 · 13. 系统运行与维护",
           "outlineRef": "15.1",
           "chapter": 15,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "运维"
+          ],
+          "caseFreq": 6,
+          "caseNote": "运维出题区"
         },
         {
           "id": "kp-13-2",
@@ -1050,7 +1240,13 @@
           "group": "科目1 · 13. 系统运行与维护",
           "outlineRef": "15.2",
           "chapter": 15,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "运维"
+          ],
+          "caseFreq": 6,
+          "caseNote": "运维出题区"
         },
         {
           "id": "kp-13-3",
@@ -1061,7 +1257,13 @@
           "group": "科目1 · 13. 系统运行与维护",
           "outlineRef": "15.3",
           "chapter": 15,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "运维"
+          ],
+          "caseFreq": 6,
+          "caseNote": "运维出题区"
         },
         {
           "id": "kp-13-4",
@@ -1072,7 +1274,13 @@
           "group": "科目1 · 13. 系统运行与维护",
           "outlineRef": "15.4",
           "chapter": 15,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "运维"
+          ],
+          "caseFreq": 6,
+          "caseNote": "运维出题区"
         },
         {
           "id": "kp-13-5",
@@ -1083,7 +1291,13 @@
           "group": "科目1 · 13. 系统运行与维护",
           "outlineRef": "15.5",
           "chapter": 15,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "运维"
+          ],
+          "caseFreq": 6,
+          "caseNote": "运维出题区"
         },
         {
           "id": "kp-13-6",
@@ -1094,7 +1308,13 @@
           "group": "科目1 · 13. 系统运行与维护",
           "outlineRef": "15.6",
           "chapter": 15,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "运维"
+          ],
+          "caseFreq": 6,
+          "caseNote": "运维出题区"
         },
         {
           "id": "kp-13-7",
@@ -1105,7 +1325,13 @@
           "group": "科目1 · 13. 系统运行与维护",
           "outlineRef": "15.7",
           "chapter": 15,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "运维"
+          ],
+          "caseFreq": 6,
+          "caseNote": "运维出题区"
         },
         {
           "id": "kp-13-8",
@@ -1116,61 +1342,13 @@
           "group": "科目1 · 13. 系统运行与维护",
           "outlineRef": "15.8",
           "chapter": 15,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-open-source-community-stack",
-          "title": "开源社区、许可、语言平台、框架库、服务器、工具、评估",
-          "path": "points/kp-open-source-community-stack.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 14. 开源软件开发与应用",
-          "outlineRef": "—（大纲专章；结合第7章工具、第16—21章开源组件）",
-          "chapter": 7,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-standards-ip-lifecycle",
-          "title": "标准类型、生命周期、知识产权",
-          "path": "points/kp-standards-ip-lifecycle.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 15. 标准化与知识产权",
-          "outlineRef": "—（第6.2 规范标准、第8.9 文档标准部分相关）",
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-law-finance-org-hr-it-audit",
-          "title": "企业法律制度、会计、财务成本、组织、HR、文化、IT 审计",
-          "path": "points/kp-law-finance-org-hr-it-audit.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 16. 经济、管理等相关知识",
-          "outlineRef": "—（第2章 2.5 工程伦理；第8章 成本管理；第10章 成本效益部分相关）",
-          "chapter": 2,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-math-stats-graph-theory-decision",
-          "title": "概率统计、图论、预测决策、数学建模、工程伦理",
-          "path": "points/kp-math-stats-graph-theory-decision.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 17. 数学与工程基础",
-          "outlineRef": "2.1—2.5",
-          "chapter": 2,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-english-reading-terms",
-          "title": "英文阅读、领域术语",
-          "path": "points/kp-english-reading-terms.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目1 · 18. 专业英语",
-          "outlineRef": "全书英文缩写；第1章绪论 + 各科技术章",
-          "chapter": 1,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "运维"
+          ],
+          "caseFreq": 6,
+          "caseNote": "运维出题区"
         },
         {
           "id": "kp-1-1-2",
@@ -1181,7 +1359,13 @@
           "group": "科目2 · 1. Web 应用系统分析与设计",
           "outlineRef": "16.1",
           "chapter": 16,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "Web"
+          ],
+          "caseFreq": 39,
+          "caseNote": "Web 出题区（第一大出题区）"
         },
         {
           "id": "kp-1-2-2",
@@ -1192,7 +1376,13 @@
           "group": "科目2 · 1. Web 应用系统分析与设计",
           "outlineRef": "16.2",
           "chapter": 16,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "Web"
+          ],
+          "caseFreq": 39,
+          "caseNote": "Web 出题区（第一大出题区）"
         },
         {
           "id": "kp-1-3-2",
@@ -1203,7 +1393,13 @@
           "group": "科目2 · 1. Web 应用系统分析与设计",
           "outlineRef": "16.3",
           "chapter": 16,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "Web"
+          ],
+          "caseFreq": 39,
+          "caseNote": "Web 出题区（第一大出题区）"
         },
         {
           "id": "kp-1-4-2",
@@ -1214,7 +1410,13 @@
           "group": "科目2 · 1. Web 应用系统分析与设计",
           "outlineRef": "16.4",
           "chapter": 16,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "Web"
+          ],
+          "caseFreq": 39,
+          "caseNote": "Web 出题区（第一大出题区）"
         },
         {
           "id": "kp-1-5-2",
@@ -1225,7 +1427,13 @@
           "group": "科目2 · 1. Web 应用系统分析与设计",
           "outlineRef": "16.5",
           "chapter": 16,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "Web"
+          ],
+          "caseFreq": 39,
+          "caseNote": "Web 出题区（第一大出题区）"
         },
         {
           "id": "kp-2-1-2",
@@ -1236,7 +1444,13 @@
           "group": "科目2 · 2. 嵌入式系统分析与设计",
           "outlineRef": "17.1",
           "chapter": 17,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "嵌入式"
+          ],
+          "caseFreq": 16,
+          "caseNote": "嵌入式出题区"
         },
         {
           "id": "kp-2-2-2",
@@ -1247,7 +1461,13 @@
           "group": "科目2 · 2. 嵌入式系统分析与设计",
           "outlineRef": "17.2",
           "chapter": 17,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "嵌入式"
+          ],
+          "caseFreq": 16,
+          "caseNote": "嵌入式出题区"
         },
         {
           "id": "kp-2-3-2",
@@ -1258,7 +1478,13 @@
           "group": "科目2 · 2. 嵌入式系统分析与设计",
           "outlineRef": "17.3",
           "chapter": 17,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "嵌入式"
+          ],
+          "caseFreq": 16,
+          "caseNote": "嵌入式出题区"
         },
         {
           "id": "kp-2-4-2",
@@ -1269,7 +1495,13 @@
           "group": "科目2 · 2. 嵌入式系统分析与设计",
           "outlineRef": "17.4",
           "chapter": 17,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "嵌入式"
+          ],
+          "caseFreq": 16,
+          "caseNote": "嵌入式出题区"
         },
         {
           "id": "kp-2-5-2",
@@ -1280,7 +1512,13 @@
           "group": "科目2 · 2. 嵌入式系统分析与设计",
           "outlineRef": "17.5",
           "chapter": 17,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "嵌入式"
+          ],
+          "caseFreq": 16,
+          "caseNote": "嵌入式出题区"
         },
         {
           "id": "kp-3-1-2",
@@ -1291,7 +1529,13 @@
           "group": "科目2 · 3. 移动应用系统分析与设计",
           "outlineRef": "18.1",
           "chapter": 18,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "移动"
+          ],
+          "caseFreq": 16,
+          "caseNote": "移动应用出题区"
         },
         {
           "id": "kp-3-2-2",
@@ -1302,7 +1546,13 @@
           "group": "科目2 · 3. 移动应用系统分析与设计",
           "outlineRef": "18.2",
           "chapter": 18,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "移动"
+          ],
+          "caseFreq": 16,
+          "caseNote": "移动应用出题区"
         },
         {
           "id": "kp-3-3-2",
@@ -1313,7 +1563,13 @@
           "group": "科目2 · 3. 移动应用系统分析与设计",
           "outlineRef": "18.3",
           "chapter": 18,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "移动"
+          ],
+          "caseFreq": 16,
+          "caseNote": "移动应用出题区"
         },
         {
           "id": "kp-3-4-2",
@@ -1324,7 +1580,13 @@
           "group": "科目2 · 3. 移动应用系统分析与设计",
           "outlineRef": "18.4",
           "chapter": 18,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "移动"
+          ],
+          "caseFreq": 16,
+          "caseNote": "移动应用出题区"
         },
         {
           "id": "kp-3-5-2",
@@ -1335,7 +1597,13 @@
           "group": "科目2 · 3. 移动应用系统分析与设计",
           "outlineRef": "18.5",
           "chapter": 18,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "移动"
+          ],
+          "caseFreq": 16,
+          "caseNote": "移动应用出题区"
         },
         {
           "id": "kp-4-1-2",
@@ -1346,7 +1614,13 @@
           "group": "科目2 · 4. 大数据处理系统分析与设计",
           "outlineRef": "19.1",
           "chapter": 19,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "大数据"
+          ],
+          "caseFreq": 11,
+          "caseNote": "大数据出题区"
         },
         {
           "id": "kp-4-2-2",
@@ -1357,7 +1631,13 @@
           "group": "科目2 · 4. 大数据处理系统分析与设计",
           "outlineRef": "19.2",
           "chapter": 19,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "大数据"
+          ],
+          "caseFreq": 11,
+          "caseNote": "大数据出题区"
         },
         {
           "id": "kp-4-3-2",
@@ -1368,7 +1648,13 @@
           "group": "科目2 · 4. 大数据处理系统分析与设计",
           "outlineRef": "19.3",
           "chapter": 19,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "大数据"
+          ],
+          "caseFreq": 11,
+          "caseNote": "大数据出题区"
         },
         {
           "id": "kp-4-4-2",
@@ -1379,7 +1665,13 @@
           "group": "科目2 · 4. 大数据处理系统分析与设计",
           "outlineRef": "19.4",
           "chapter": 19,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "大数据"
+          ],
+          "caseFreq": 11,
+          "caseNote": "大数据出题区"
         },
         {
           "id": "kp-5-1",
@@ -1390,7 +1682,13 @@
           "group": "科目2 · 5. 微服务系统分析与设计",
           "outlineRef": "20.1",
           "chapter": 20,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "微服务"
+          ],
+          "caseFreq": 16,
+          "caseNote": "微服务出题区"
         },
         {
           "id": "kp-5-2-2",
@@ -1401,7 +1699,13 @@
           "group": "科目2 · 5. 微服务系统分析与设计",
           "outlineRef": "20.2",
           "chapter": 20,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "微服务"
+          ],
+          "caseFreq": 16,
+          "caseNote": "微服务出题区"
         },
         {
           "id": "kp-5-3-2",
@@ -1412,7 +1716,13 @@
           "group": "科目2 · 5. 微服务系统分析与设计",
           "outlineRef": "20.3",
           "chapter": 20,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "微服务"
+          ],
+          "caseFreq": 16,
+          "caseNote": "微服务出题区"
         },
         {
           "id": "kp-5-4-2",
@@ -1423,7 +1733,13 @@
           "group": "科目2 · 5. 微服务系统分析与设计",
           "outlineRef": "20.4",
           "chapter": 20,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "微服务"
+          ],
+          "caseFreq": 16,
+          "caseNote": "微服务出题区"
         },
         {
           "id": "kp-6-1-2",
@@ -1434,7 +1750,13 @@
           "group": "科目2 · 6. 信息物理系统分析与设计",
           "outlineRef": "21.1",
           "chapter": 21,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "CPS"
+          ],
+          "caseFreq": 10,
+          "caseNote": "信息物理系统出题区"
         },
         {
           "id": "kp-6-2-2",
@@ -1445,7 +1767,13 @@
           "group": "科目2 · 6. 信息物理系统分析与设计",
           "outlineRef": "21.2",
           "chapter": 21,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "CPS"
+          ],
+          "caseFreq": 10,
+          "caseNote": "信息物理系统出题区"
         },
         {
           "id": "kp-6-3-2",
@@ -1456,7 +1784,13 @@
           "group": "科目2 · 6. 信息物理系统分析与设计",
           "outlineRef": "21.3",
           "chapter": 21,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "CPS"
+          ],
+          "caseFreq": 10,
+          "caseNote": "信息物理系统出题区"
         },
         {
           "id": "kp-6-4-2",
@@ -1467,7 +1801,13 @@
           "group": "科目2 · 6. 信息物理系统分析与设计",
           "outlineRef": "21.4",
           "chapter": 21,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "CPS"
+          ],
+          "caseFreq": 10,
+          "caseNote": "信息物理系统出题区"
         },
         {
           "id": "kp-6-5-2",
@@ -1478,7 +1818,13 @@
           "group": "科目2 · 6. 信息物理系统分析与设计",
           "outlineRef": "21.5",
           "chapter": 21,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "CPS"
+          ],
+          "caseFreq": 10,
+          "caseNote": "信息物理系统出题区"
         },
         {
           "id": "kp-6-6-2",
@@ -1489,7 +1835,13 @@
           "group": "科目2 · 6. 信息物理系统分析与设计",
           "outlineRef": "21.6",
           "chapter": 21,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "CPS"
+          ],
+          "caseFreq": 10,
+          "caseNote": "信息物理系统出题区"
         },
         {
           "id": "kp-essay-topic-info-systems",
@@ -1499,7 +1851,12 @@
           "kind": "point",
           "group": "科目3 · 1. 信息系统开发及应用",
           "outlineRef": "主要教程章节",
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "综合案例"
+          ],
+          "caseNote": "案例教材主线章节"
         },
         {
           "id": "kp-system-planning-analysis",
@@ -1510,7 +1867,12 @@
           "group": "科目3 · 1. 信息系统开发及应用",
           "outlineRef": "第10章",
           "chapter": 10,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "综合案例"
+          ],
+          "caseNote": "案例教材主线章节"
         },
         {
           "id": "kp-requirements-engineering",
@@ -1521,7 +1883,12 @@
           "group": "科目3 · 1. 信息系统开发及应用",
           "outlineRef": "第11章",
           "chapter": 11,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "综合案例"
+          ],
+          "caseNote": "案例教材主线章节"
         },
         {
           "id": "kp-system-testing",
@@ -1532,7 +1899,12 @@
           "group": "科目3 · 1. 信息系统开发及应用",
           "outlineRef": "第14章",
           "chapter": 14,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "综合案例"
+          ],
+          "caseNote": "案例教材主线章节"
         },
         {
           "id": "kp-system-maintenance",
@@ -1543,7 +1915,12 @@
           "group": "科目3 · 1. 信息系统开发及应用",
           "outlineRef": "第15章",
           "chapter": 15,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "综合案例"
+          ],
+          "caseNote": "案例教材主线章节"
         },
         {
           "id": "kp-project-management-essay",
@@ -1554,7 +1931,12 @@
           "group": "科目3 · 1. 信息系统开发及应用",
           "outlineRef": "第8章",
           "chapter": 8,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "综合案例"
+          ],
+          "caseNote": "案例教材主线章节"
         },
         {
           "id": "kp-quality-assurance-essay",
@@ -1565,7 +1947,12 @@
           "group": "科目3 · 1. 信息系统开发及应用",
           "outlineRef": "第8章 6.6、第14章",
           "chapter": 8,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "综合案例"
+          ],
+          "caseNote": "案例教材主线章节"
         },
         {
           "id": "kp-oo-technology",
@@ -1576,7 +1963,12 @@
           "group": "科目3 · 1. 信息系统开发及应用",
           "outlineRef": "第7章 UML、第11/13章",
           "chapter": 7,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "综合案例"
+          ],
+          "caseNote": "案例教材主线章节"
         },
         {
           "id": "kp-case-tools",
@@ -1587,7 +1979,12 @@
           "group": "科目3 · 1. 信息系统开发及应用",
           "outlineRef": "第7章 7.3",
           "chapter": 7,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "综合案例"
+          ],
+          "caseNote": "案例教材主线章节"
         },
         {
           "id": "kp-spi-cmmi",
@@ -1598,7 +1995,12 @@
           "group": "科目3 · 1. 信息系统开发及应用",
           "outlineRef": "第7章 7.4 CMM/CMMI",
           "chapter": 7,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "综合案例"
+          ],
+          "caseNote": "案例教材主线章节"
         },
         {
           "id": "kp-realtime-systems",
@@ -1609,7 +2011,12 @@
           "group": "科目3 · 1. 信息系统开发及应用",
           "outlineRef": "第17章",
           "chapter": 17,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "综合案例"
+          ],
+          "caseNote": "案例教材主线章节"
         },
         {
           "id": "kp-app-system-analysis-design",
@@ -1619,7 +2026,12 @@
           "kind": "point",
           "group": "科目3 · 1. 信息系统开发及应用",
           "outlineRef": "第10—15章、第16—21章",
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "综合案例"
+          ],
+          "caseNote": "案例教材主线章节"
         },
         {
           "id": "kp-software-product-line",
@@ -1630,7 +2042,12 @@
           "group": "科目3 · 1. 信息系统开发及应用",
           "outlineRef": "第7章 7.6",
           "chapter": 7,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "综合案例"
+          ],
+          "caseNote": "案例教材主线章节"
         },
         {
           "id": "kp-essay-topic-db-modeling",
@@ -1640,7 +2057,12 @@
           "kind": "point",
           "group": "科目3 · 2. 数据库建模及应用",
           "outlineRef": "主要教程章节",
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "数据库"
+          ],
+          "caseNote": "数据库建模（案例教材）"
         },
         {
           "id": "kp-data-mgmt-analysis-modeling",
@@ -1651,7 +2073,12 @@
           "group": "科目3 · 2. 数据库建模及应用",
           "outlineRef": "第5章",
           "chapter": 5,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "数据库"
+          ],
+          "caseNote": "数据库建模（案例教材）"
         },
         {
           "id": "kp-data-warehouse",
@@ -1662,7 +2089,12 @@
           "group": "科目3 · 2. 数据库建模及应用",
           "outlineRef": "第5章 5.6、第19章",
           "chapter": 5,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "数据库"
+          ],
+          "caseNote": "数据库建模（案例教材）"
         },
         {
           "id": "kp-data-mining",
@@ -1673,7 +2105,12 @@
           "group": "科目3 · 2. 数据库建模及应用",
           "outlineRef": "第5章 5.7、第19章",
           "chapter": 5,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "数据库"
+          ],
+          "caseNote": "数据库建模（案例教材）"
         },
         {
           "id": "kp-essay-topic-network-planning",
@@ -1683,7 +2120,12 @@
           "kind": "point",
           "group": "科目3 · 3. 网络规划及应用",
           "outlineRef": "主要教程章节",
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "related",
+          "caseDomains": [
+            "网络规划"
+          ],
+          "caseNote": "网络规划：案例间接相关"
         },
         {
           "id": "kp-network-planning-ops",
@@ -1694,7 +2136,12 @@
           "group": "科目3 · 3. 网络规划及应用",
           "outlineRef": "第4章 4.4",
           "chapter": 4,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "related",
+          "caseDomains": [
+            "网络规划"
+          ],
+          "caseNote": "网络规划：案例间接相关"
         },
         {
           "id": "kp-essay-topic-security-analysis",
@@ -1704,7 +2151,12 @@
           "kind": "point",
           "group": "科目3 · 4. 系统安全性分析",
           "outlineRef": "主要教程章节",
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "安全"
+          ],
+          "caseNote": "系统安全性分析（案例教材）"
         },
         {
           "id": "kp-security-data-system",
@@ -1715,7 +2167,12 @@
           "group": "科目3 · 4. 系统安全性分析",
           "outlineRef": "第9章",
           "chapter": 9,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "安全"
+          ],
+          "caseNote": "系统安全性分析（案例教材）"
         },
         {
           "id": "kp-essay-topic-system-integration",
@@ -1725,7 +2182,12 @@
           "kind": "point",
           "group": "科目3 · 5. 应用系统集成",
           "outlineRef": "主要教程章节",
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "集成"
+          ],
+          "caseNote": "应用系统集成出题区"
         },
         {
           "id": "kp-data-integration-sharing",
@@ -1736,7 +2198,12 @@
           "group": "科目3 · 5. 应用系统集成",
           "outlineRef": "第6章 6.8、第5章",
           "chapter": 6,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "集成"
+          ],
+          "caseNote": "应用系统集成出题区"
         },
         {
           "id": "kp-app-service-integration",
@@ -1747,7 +2214,12 @@
           "group": "科目3 · 5. 应用系统集成",
           "outlineRef": "第6章 EAI、第12章 SOA、第20章",
           "chapter": 6,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "集成"
+          ],
+          "caseNote": "应用系统集成出题区"
         },
         {
           "id": "kp-essay-topic-enterprise-is",
@@ -1757,7 +2229,13 @@
           "kind": "point",
           "group": "科目3 · 6. 企业信息系统",
           "outlineRef": "主要教程章节",
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "related",
+          "caseDomains": [
+            "集成",
+            "需求"
+          ],
+          "caseNote": "企业信息系统：集成/需求间接相关"
         },
         {
           "id": "kp-ecommerce-egovernment",
@@ -1768,7 +2246,13 @@
           "group": "科目3 · 6. 企业信息系统",
           "outlineRef": "第6章 6.5—6.6",
           "chapter": 6,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "related",
+          "caseDomains": [
+            "集成",
+            "需求"
+          ],
+          "caseNote": "企业信息系统：集成/需求间接相关"
         },
         {
           "id": "kp-tps",
@@ -1779,7 +2263,13 @@
           "group": "科目3 · 6. 企业信息系统",
           "outlineRef": "第6章、第3章",
           "chapter": 6,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "related",
+          "caseDomains": [
+            "集成",
+            "需求"
+          ],
+          "caseNote": "企业信息系统：集成/需求间接相关"
         },
         {
           "id": "kp-dss",
@@ -1790,7 +2280,13 @@
           "group": "科目3 · 6. 企业信息系统",
           "outlineRef": "第6章 6.4.8",
           "chapter": 6,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "related",
+          "caseDomains": [
+            "集成",
+            "需求"
+          ],
+          "caseNote": "企业信息系统：集成/需求间接相关"
         },
         {
           "id": "kp-enterprise-informatization",
@@ -1801,7 +2297,13 @@
           "group": "科目3 · 6. 企业信息系统",
           "outlineRef": "第6章 6.1—6.3",
           "chapter": 6,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "related",
+          "caseDomains": [
+            "集成",
+            "需求"
+          ],
+          "caseNote": "企业信息系统：集成/需求间接相关"
         },
         {
           "id": "kp-essay-topic-open-source",
@@ -1811,7 +2313,12 @@
           "kind": "point",
           "group": "科目3 · 7. 开源软件及应用",
           "outlineRef": "主要教程章节",
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "related",
+          "caseDomains": [
+            "综合案例"
+          ],
+          "caseNote": "开源软件：案例间接相关"
         },
         {
           "id": "kp-open-source-software",
@@ -1821,7 +2328,12 @@
           "kind": "point",
           "group": "科目3 · 7. 开源软件及应用",
           "outlineRef": "大纲§14 + 第7/16—21章开源组件",
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "related",
+          "caseDomains": [
+            "综合案例"
+          ],
+          "caseNote": "开源软件：案例间接相关"
         },
         {
           "id": "kp-essay-topic-new-tech",
@@ -1831,7 +2343,13 @@
           "kind": "point",
           "group": "科目3 · 8. 新技术及其应用",
           "outlineRef": "主要教程章节",
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "微服务",
+            "大数据"
+          ],
+          "caseNote": "新技术及其应用（微服务/大数据/AI 落地）"
         },
         {
           "id": "kp-cloud-computing",
@@ -1842,7 +2360,13 @@
           "group": "科目3 · 8. 新技术及其应用",
           "outlineRef": "第4章 4.8",
           "chapter": 4,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "微服务",
+            "大数据"
+          ],
+          "caseNote": "新技术及其应用（微服务/大数据/AI 落地）"
         },
         {
           "id": "kp-big-data",
@@ -1853,7 +2377,13 @@
           "group": "科目3 · 8. 新技术及其应用",
           "outlineRef": "第19章",
           "chapter": 19,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "微服务",
+            "大数据"
+          ],
+          "caseNote": "新技术及其应用（微服务/大数据/AI 落地）"
         },
         {
           "id": "kp-microservices",
@@ -1864,7 +2394,13 @@
           "group": "科目3 · 8. 新技术及其应用",
           "outlineRef": "第20章",
           "chapter": 20,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "微服务",
+            "大数据"
+          ],
+          "caseNote": "新技术及其应用（微服务/大数据/AI 落地）"
         },
         {
           "id": "kp-mobile-web",
@@ -1874,7 +2410,13 @@
           "kind": "point",
           "group": "科目3 · 8. 新技术及其应用",
           "outlineRef": "第16、18章",
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "微服务",
+            "大数据"
+          ],
+          "caseNote": "新技术及其应用（微服务/大数据/AI 落地）"
         },
         {
           "id": "kp-cps-iot",
@@ -1885,7 +2427,13 @@
           "group": "科目3 · 8. 新技术及其应用",
           "outlineRef": "第21章",
           "chapter": 21,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "微服务",
+            "大数据"
+          ],
+          "caseNote": "新技术及其应用（微服务/大数据/AI 落地）"
         },
         {
           "id": "kp-low-code-nocode",
@@ -1896,28 +2444,13 @@
           "group": "科目3 · 8. 新技术及其应用",
           "outlineRef": "第18章 18.5",
           "chapter": 18,
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-essay-content",
-          "title": "论文写作方法 · 注意事项与评分",
-          "path": "points/kp-essay-content.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目3 · 论文写作方法",
-          "outlineRef": "教程节",
-          "note": "审计通过 v1.3.4-api"
-        },
-        {
-          "id": "kp-thesis-writing-guide",
-          "title": "注意事项、解答步骤、摘要正文、评分",
-          "path": "points/kp-thesis-writing-guide.md",
-          "status": "正式",
-          "kind": "point",
-          "group": "科目3 · 论文写作方法",
-          "outlineRef": "22.1—22.5",
-          "chapter": 22,
-          "note": "审计通过 v1.3.4-api"
+          "note": "审计通过 v1.3.4-api",
+          "case": "core",
+          "caseDomains": [
+            "微服务",
+            "大数据"
+          ],
+          "caseNote": "新技术及其应用（微服务/大数据/AI 落地）"
         }
       ]
     },
@@ -1957,57 +2490,12 @@
           "note": "建议从「考点（API）」按章浏览"
         },
         {
-          "id": "ch01",
-          "title": "第01章 · 绪论",
-          "path": "第一篇-基础知识/第01章-绪论.md",
-          "status": "归档",
-          "kind": "legacy",
-          "chapter": 1,
-          "note": "正文已迁移至考点 API（points/）"
-        },
-        {
-          "id": "ch02",
-          "title": "第02章 · 数学与工程基础",
-          "path": "第一篇-基础知识/第02章-数学与工程基础.md",
-          "status": "归档",
-          "kind": "legacy",
-          "chapter": 2,
-          "note": "正文已迁移至考点 API（points/）"
-        },
-        {
-          "id": "ch03",
-          "title": "第03章 · 计算机系统",
-          "path": "第一篇-基础知识/第03章-计算机系统.md",
-          "status": "归档",
-          "kind": "legacy",
-          "chapter": 3,
-          "note": "正文已迁移至考点 API（points/）"
-        },
-        {
-          "id": "ch04",
-          "title": "第04章 · 计算机网络与分布式系统",
-          "path": "第一篇-基础知识/第04章-计算机网络与分布式系统.md",
-          "status": "归档",
-          "kind": "legacy",
-          "chapter": 4,
-          "note": "正文已迁移至考点 API（points/）"
-        },
-        {
           "id": "ch05",
           "title": "第05章 · 数据库系统",
           "path": "第一篇-基础知识/第05章-数据库系统.md",
           "status": "归档",
           "kind": "legacy",
           "chapter": 5,
-          "note": "正文已迁移至考点 API（points/）"
-        },
-        {
-          "id": "ch06",
-          "title": "第06章 · 企业信息化",
-          "path": "第一篇-基础知识/第06章-企业信息化.md",
-          "status": "归档",
-          "kind": "legacy",
-          "chapter": 6,
           "note": "正文已迁移至考点 API（points/）"
         },
         {
@@ -2186,15 +2674,6 @@
           "kind": "legacy",
           "chapter": 21,
           "note": "正文已迁移至考点 API（points/）"
-        },
-        {
-          "id": "ch22",
-          "title": "第22章 · 系统分析师论文写作要点",
-          "path": "第三篇-案例实践/第22章-系统分析师论文写作要点.md",
-          "status": "归档",
-          "kind": "legacy",
-          "chapter": 22,
-          "note": "正文已迁移至考点 API（points/）"
         }
       ]
     },
@@ -2363,15 +2842,6 @@
           "note": "建模与设计类 · 审计补强 A-03"
         },
         {
-          "id": "quick-essay-requirements",
-          "title": "需求侧论文写作框架",
-          "path": "速查/需求侧论文写作框架.md",
-          "status": "正式",
-          "kind": "quick",
-          "docType": "howto",
-          "note": "第十轮审计 · 工单3"
-        },
-        {
           "id": "quick-pm-calc",
           "title": "项目管理计算速查表",
           "path": "速查/项目管理计算速查表.md",
@@ -2388,15 +2858,6 @@
           "kind": "quick",
           "docType": "howto",
           "note": "第十轮审计 · 工单6"
-        },
-        {
-          "id": "quick-essay-hot-2026",
-          "title": "论文热点方向写作框架（2026）",
-          "path": "速查/论文热点方向写作框架-2026.md",
-          "status": "正式",
-          "kind": "quick",
-          "docType": "howto",
-          "note": "第十三轮 · 微服务测试/数据治理/云原生/DDD/DevSecOps"
         },
         {
           "id": "quick-case-practice-nav",
@@ -2489,15 +2950,6 @@
           "note": "2026 新增对比题型 · 第十六轮"
         },
         {
-          "id": "quick-error-control",
-          "title": "差错控制 · 计算速查",
-          "path": "速查/差错控制-计算速查.md",
-          "status": "正式",
-          "kind": "quick",
-          "docType": "reference",
-          "note": "海明码/CRC/ARQ · 第十六轮"
-        },
-        {
           "id": "quick-bpm-idef-petri",
           "title": "业务流程建模 · IDEF 与 Petri 网",
           "path": "速查/业务流程建模-IDEF与Petri网-速查.md",
@@ -2514,15 +2966,6 @@
           "kind": "quick",
           "docType": "reference",
           "note": "EA/数字化 · 第十六轮"
-        },
-        {
-          "id": "quick-essay-index",
-          "title": "论文方向写作索引",
-          "path": "速查/论文方向写作索引.md",
-          "status": "正式",
-          "kind": "quick",
-          "docType": "howto",
-          "note": "论文方向 → 考点回链 · 审计 A-04"
         },
         {
           "id": "quick-security-dj0",
@@ -2561,36 +3004,6 @@
           "note": "REST vs SOAP、约束、幂等；2016/2018 案例"
         },
         {
-          "id": "quick-essay",
-          "title": "近五年论文范围分析",
-          "path": "速查/近五年论文范围分析.md",
-          "status": "正式",
-          "kind": "quick"
-        },
-        {
-          "id": "quick-math-plain",
-          "title": "前端友好 · 数学白话卡",
-          "path": "速查/前端友好-数学白话卡.md",
-          "status": "正式",
-          "kind": "quick",
-          "note": "数学弱项"
-        },
-        {
-          "id": "quick-net-abbr",
-          "title": "前端友好 · 网络英文缩写卡",
-          "path": "速查/前端友好-网络英文缩写卡.md",
-          "status": "正式",
-          "kind": "quick",
-          "note": "英语弱项"
-        },
-        {
-          "id": "quick-http-cache",
-          "title": "前端友好 · HTTP缓存对照卡",
-          "path": "速查/前端友好-HTTP缓存对照卡.md",
-          "status": "正式",
-          "kind": "quick"
-        },
-        {
           "id": "quick-auth-sec",
           "title": "前端友好 · 鉴权与安全卡",
           "path": "速查/前端友好-鉴权与安全卡.md",
@@ -2617,88 +3030,14 @@
           "path": "速查/考纲模块导航-系统架构.md",
           "status": "正式",
           "kind": "quick"
-        },
-        {
-          "id": "quick-ea-togaf",
-          "title": "速查 · 企业架构 · TOGAF 与 Zachman · 论文素材卡",
-          "path": "速查/企业架构-TOGAF与Zachman-论文素材卡.md",
-          "status": "正式",
-          "kind": "quick",
-          "note": "论文素材 · 架构风格类"
         }
       ]
     },
     {
       "id": "essay",
       "title": "论文范文",
-      "items": [
-        {
-          "id": "essay-dir",
-          "title": "论文范文目录",
-          "path": "论文范文/README.md",
-          "status": "正式",
-          "kind": "entry",
-          "note": "练习用，已登记地图"
-        },
-        {
-          "id": "essay-arch-style",
-          "title": "论软件架构风格",
-          "path": "论文范文/论软件架构风格.md",
-          "status": "正式",
-          "kind": "appendix",
-          "note": "练习范文"
-        },
-        {
-          "id": "essay-unify-card",
-          "title": "五篇论文 · 统一结构记忆卡（减差异版）",
-          "path": "论文范文/二次元周边商城-统一四题/00-统一结构记忆卡.md",
-          "status": "正式",
-          "kind": "essay",
-          "note": "统一四题入口"
-        },
-        {
-          "id": "essay-unify-common",
-          "title": "共用段落（五篇相同，只改【】占位）",
-          "path": "论文范文/二次元周边商城-统一四题/00-共用段落.md",
-          "status": "正式",
-          "kind": "essay"
-        },
-        {
-          "id": "essay-unify-01",
-          "title": "论软件测试技术及应用",
-          "path": "论文范文/二次元周边商城-统一四题/01-论软件测试技术及应用.md",
-          "status": "正式",
-          "kind": "essay"
-        },
-        {
-          "id": "essay-unify-02",
-          "title": "论软件设计模式在项目中的应用",
-          "path": "论文范文/二次元周边商城-统一四题/02-论软件设计模式在项目中的应用.md",
-          "status": "正式",
-          "kind": "essay"
-        },
-        {
-          "id": "essay-unify-03",
-          "title": "论云上运维技术及应用",
-          "path": "论文范文/二次元周边商城-统一四题/03-论云上运维技术及应用.md",
-          "status": "正式",
-          "kind": "essay"
-        },
-        {
-          "id": "essay-unify-04",
-          "title": "论业务流程分析及其应用",
-          "path": "论文范文/二次元周边商城-统一四题/04-论业务流程分析及其应用.md",
-          "status": "正式",
-          "kind": "essay"
-        },
-        {
-          "id": "essay-unify-05",
-          "title": "论Agent辅助开发技术及其应用",
-          "path": "论文范文/二次元周边商城-统一四题/05-论Agent辅助开发技术及其应用.md",
-          "status": "正式",
-          "kind": "essay"
-        }
-      ]
+      "items": [],
+      "_removed": "论文范文：下午二卷退出站点范围（2026-10-19 决策）"
     }
   ]
 }

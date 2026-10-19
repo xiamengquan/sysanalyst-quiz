@@ -3,27 +3,16 @@
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AudioLines, Pause, Play, Square } from "lucide-react";
-import { SEVEN_DAYS } from "@/lib/kb-seven-day";
-import type { Flashcard, FlashcardsData } from "@/lib/flashcards";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 type PlayMode = "qa" | "drill";
 type Order = "seq" | "rand";
-type Pool = "flash" | "drill" | "article";
-
 const REPEAT_OPTIONS = [2, 3, 5];
 const LIMIT_OPTIONS = [0, 15, 30, 60]; // 分钟，0 = 不限
 
 const AUDIO_SETTINGS_KEY = "sysanalyst_audio_settings_v1";
-
-/** 演练卡（来自 drills.json） */
-type DrillDeckLite = {
-  id: string;
-  title: string;
-  steps: { idx: number; name: string; ask: string; model: string; role?: string }[];
-};
 
 /** 讲透文章（来自 audio-articles.json：39 点逐点讲透，连贯朗读） */
 type ArticleParagraph = { id: string; no: number; pid: string; title: string; text: string };
@@ -87,22 +76,6 @@ function buildItems(cards: AnyCard[], mode: PlayMode, repeat: number): PlayItem[
   });
 }
 
-/** 演练步骤 → 音频卡：洗脑文本 =「图名。范例句。作用句」；问答式问 = 格子提问、答 = 范例句 */
-function drillToCards(decks: DrillDeckLite[], deckFilter: string): AnyCard[] {
-  return decks
-    .filter((d) => deckFilter === "all" || d.id === deckFilter)
-    .flatMap((d) =>
-      d.steps.map((s) => ({
-        id: `dr-${d.id}-${s.idx}`,
-        group: d.title,
-        front: `${s.name} · 定义与作用`,
-        back: `${s.name}。${s.model}。${(s.role || "").replace(/^一句话[—–-]*\s*/, "")}`,
-        qText: s.ask,
-        aText: `${s.model}${s.role ? `。${s.role.replace(/^一句话[—–-]*\s*/, "")}` : ""}`,
-      })),
-    );
-}
-
 function shuffle<T>(items: T[]): T[] {
   const r = [...items];
   for (let i = r.length - 1; i > 0; i--) {
@@ -129,7 +102,6 @@ function articleToCards(docs: ArticleDoc[], filter: string): AnyCard[] {
 }
 
 export function AudioApp() {
-  const [data, setData] = useState<FlashcardsData | null>(null);
   const [ready, setReady] = useState(false);
   const [supported, setSupported] = useState(true);
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
@@ -140,11 +112,6 @@ export function AudioApp() {
   const [rate, setRate] = useState(1.1);
   const [order, setOrder] = useState<Order>("seq");
   const [limitMin, setLimitMin] = useState(0);
-  const [dayFilter, setDayFilter] = useState("all");
-  const [tierFilter, setTierFilter] = useState("all");
-  const [pool, setPool] = useState<Pool>("flash");
-  const [drillDecks, setDrillDecks] = useState<DrillDeckLite[]>([]);
-  const [drillFilter, setDrillFilter] = useState("all");
   const [articleDocs, setArticleDocs] = useState<ArticleDoc[]>([]);
   const [articleFilter, setArticleFilter] = useState("all");
   const [loopAll, setLoopAll] = useState(false);
@@ -174,10 +141,6 @@ export function AudioApp() {
         if (s.rate) setRate(s.rate);
         if (s.order) setOrder(s.order);
         if (typeof s.limitMin === "number") setLimitMin(s.limitMin);
-        if (s.dayFilter) setDayFilter(s.dayFilter);
-        if (s.tierFilter) setTierFilter(s.tierFilter);
-        if (s.pool) setPool(s.pool);
-        if (s.drillFilter) setDrillFilter(s.drillFilter);
         if (s.articleFilter) setArticleFilter(s.articleFilter);
         if (typeof s.loopAll === "boolean") setLoopAll(s.loopAll);
       } catch {}
@@ -187,9 +150,9 @@ export function AudioApp() {
   useEffect(() => {
     localStorage.setItem(
       AUDIO_SETTINGS_KEY,
-      JSON.stringify({ mode, repeat, rate, order, limitMin, dayFilter, tierFilter, pool, drillFilter, articleFilter, loopAll })
+      JSON.stringify({ mode, repeat, rate, order, limitMin, articleFilter, loopAll })
     );
-  }, [mode, repeat, rate, order, limitMin, dayFilter, tierFilter, pool, drillFilter, articleFilter, loopAll]);
+  }, [mode, repeat, rate, order, limitMin, articleFilter, loopAll]);
 
   useEffect(() => {
     loopAllRef.current = loopAll;
@@ -213,19 +176,6 @@ export function AudioApp() {
     };
     loadVoices();
     window.speechSynthesis.onvoiceschanged = loadVoices;
-    fetch("/data/flashcards.json")
-      .then((r) => r.json())
-      .then((d) => {
-        setData(d);
-        setReady(true);
-      })
-      .catch(() => setReady(true));
-    fetch("/data/drills.json")
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d) => {
-        if (d?.decks) setDrillDecks(d.decks);
-      })
-      .catch(() => undefined);
     fetch("/data/audio-articles.json")
       .then((r) => (r.ok ? r.json() : null))
       .then((d) => {
@@ -238,16 +188,7 @@ export function AudioApp() {
     };
   }, []);
 
-  const filtered = useMemo(() => {
-    if (pool === "article") return articleToCards(articleDocs, articleFilter);
-    if (pool === "drill") return drillToCards(drillDecks, drillFilter);
-    if (!data) return [];
-    return data.cards.filter(
-      (c) =>
-        (dayFilter === "all" || c.day === dayFilter) &&
-        (tierFilter === "all" || c.tier === tierFilter)
-    );
-  }, [pool, data, dayFilter, tierFilter, drillDecks, drillFilter, articleDocs, articleFilter]);
+  const filtered = useMemo(() => articleToCards(articleDocs, articleFilter), [articleDocs, articleFilter]);
 
   const pickVoice = useCallback(() => {
     if (!voiceURI) return undefined;
@@ -391,7 +332,7 @@ export function AudioApp() {
     <>
       <h1 className="page-title">知识点洗脑音频 · 语音循环</h1>
       <p className="page-lead">
-        {data?.meta.total ?? "—"} 张闪卡 + 演练卡组（步骤链定义与作用）+ 四大方面 39 点讲透文章（连贯朗读）转为语音流：问答式（读题→停顿→读答案）或洗脑式（答案连读 N 遍），支持整组 ∞ 无限循环
+        四大方面 39 点讲透文章（连贯朗读）转为语音流：问答式（读题→停顿→读答案）或洗脑式（答案连读 N 遍），支持整组 ∞ 无限循环
         <br />
         <span className="text-[0.82rem]">
           适合通勤/散步等零散时间 · 语音由设备合成，免下载 · 注意：锁屏后部分手机会暂停，建议亮屏播放或连接耳机
@@ -402,30 +343,6 @@ export function AudioApp() {
         <Card className="px-(--card-spacing) mb-4 space-y-4">
           <div>
             <h2 className="mb-2 text-[1rem] font-medium">卡池</h2>
-            <div className="flex flex-wrap gap-1.5">
-              {(
-                [
-                  ["flash", "闪卡库（总册 M/K）"],
-                  ["drill", "演练卡组（步骤链 · 定义与作用）"],
-                  ["article", "文章 · 39 点讲透（连贯朗读）"],
-                ] as const
-              ).map(([v, label]) => (
-                <button
-                  key={v}
-                  type="button"
-                  onClick={() => setPool(v)}
-                  className={cn(
-                    "rounded-lg border px-2.5 py-1.5 text-[0.8rem] transition-colors",
-                    pool === v
-                      ? "border-primary bg-primary/10 font-medium text-primary"
-                      : "border-border bg-muted/30 text-muted-foreground hover:text-foreground"
-                  )}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
-          </div>
           <div>
             <h2 className="mb-2 text-[1rem] font-medium">播放模式</h2>
             <div className="flex flex-wrap gap-1.5">
@@ -471,78 +388,7 @@ export function AudioApp() {
               )}
             </div>
           </div>
-          {pool === "flash" ? (
-            <div className="flex flex-wrap gap-6">
-              <div>
-                <h2 className="mb-2 text-[1rem] font-medium">范围（总册日次）</h2>
-                <div className="flex flex-wrap gap-1.5">
-                  {[{ value: "all", label: "全部" }, ...SEVEN_DAYS.map((d) => ({ value: d.id, label: `${d.label} ${d.theme}` }))].map(
-                    (f) => (
-                      <button
-                        key={f.value}
-                        type="button"
-                        onClick={() => setDayFilter(f.value)}
-                        className={cn(
-                          "rounded-lg border px-2.5 py-1.5 text-[0.8rem] transition-colors",
-                          dayFilter === f.value
-                            ? "border-primary bg-primary/10 font-medium text-primary"
-                            : "border-border bg-muted/30 text-muted-foreground hover:text-foreground"
-                        )}
-                      >
-                        {f.label}
-                      </button>
-                    )
-                  )}
-                </div>
-              </div>
-              <div>
-                <h2 className="mb-2 text-[1rem] font-medium">层级</h2>
-                <div className="flex flex-wrap gap-1.5">
-                  {[
-                    ["all", "全部层级"],
-                    ["M", "必会 M"],
-                    ["K", "重点 K"],
-                  ].map(([v, label]) => (
-                    <button
-                      key={v}
-                      type="button"
-                      onClick={() => setTierFilter(v)}
-                      className={cn(
-                        "rounded-lg border px-2.5 py-1.5 text-[0.8rem] transition-colors",
-                        tierFilter === v
-                          ? "border-primary bg-primary/10 font-medium text-primary"
-                          : "border-border bg-muted/30 text-muted-foreground hover:text-foreground"
-                      )}
-                    >
-                      {label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ) : pool === "drill" ? (
-            <div>
-              <h2 className="mb-2 text-[1rem] font-medium">演练链</h2>
-              <div className="flex flex-wrap gap-1.5">
-                {[{ id: "all", title: "全部演练链" }, ...drillDecks].map((d) => (
-                  <button
-                    key={d.id}
-                    type="button"
-                    onClick={() => setDrillFilter(d.id)}
-                    className={cn(
-                      "rounded-lg border px-2.5 py-1.5 text-[0.8rem] transition-colors",
-                      drillFilter === d.id
-                        ? "border-primary bg-primary/10 font-medium text-primary"
-                        : "border-border bg-muted/30 text-muted-foreground hover:text-foreground"
-                    )}
-                  >
-                    {d.title}
-                  </button>
-                ))}
-              </div>
-            </div>
-          ) : (
-            <div>
+          <div>
               <h2 className="mb-2 text-[1rem] font-medium">文章范围（四大方面 39 点）</h2>
               <div className="flex flex-wrap gap-1.5">
                 {(
@@ -570,7 +416,7 @@ export function AudioApp() {
                 ))}
               </div>
             </div>
-          )}
+          </div>
           <div>
             <h2 className="mb-2 text-[1rem] font-medium">整组循环</h2>
             <div className="flex flex-wrap gap-1.5">
@@ -719,11 +565,6 @@ export function AudioApp() {
         </Card>
       )}
 
-      <div className="mt-4 flex justify-center gap-4">
-        <Link href="/recall/" className="text-[0.85rem] text-muted-foreground underline underline-offset-2 hover:text-foreground">
-          想检验效果？去随机问答线上作答 →
-        </Link>
-      </div>
     </>
   );
 }

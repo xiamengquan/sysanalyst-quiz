@@ -95,15 +95,17 @@ export function sortKbEntriesForSitemap(entries) {
 }
 
 function loadChapterHeat(root) {
+  // 题库已于 2026-10-19 下线：章节热度改由 case-map（案例真题蒸馏统计）提供
   const heat = new Map();
   try {
-    const rows = JSON.parse(
-      fs.readFileSync(path.join(root, "public/data/questions.json"), "utf8"),
+    const map = JSON.parse(
+      fs.readFileSync(path.join(root, "public/data/case-map.json"), "utf8"),
     );
-    for (const row of rows) {
-      const ch = row.ch;
-      if (ch == null || ch === 0 || ch === 99 || row.bank === "real") continue;
-      heat.set(ch, (heat.get(ch) ?? 0) + 1);
+    for (const d of map.domains ?? []) {
+      for (const ch of d.chapters ?? []) {
+        if (ch == null || ch === 0 || ch === 99) continue;
+        heat.set(ch, (heat.get(ch) ?? 0) + d.caseCount);
+      }
     }
   } catch {
     /* optional */
@@ -185,15 +187,8 @@ export function buildSitemapUrls(root) {
 
   const staticRoutes = [
     { loc: absoluteUrl(root, "/"), lastmod: siteUpdated, changefreq: "weekly", priority: 1 },
-    { loc: absoluteUrl(root, "/system"), lastmod: siteUpdated, changefreq: "daily", priority: 1 },
-    { loc: absoluteUrl(root, "/practice"), lastmod: siteUpdated, changefreq: "weekly", priority: 0.95 },
     { loc: absoluteUrl(root, "/kb"), lastmod: siteUpdated, changefreq: "weekly", priority: 0.9 },
-    { loc: absoluteUrl(root, "/case"), lastmod: siteUpdated, changefreq: "weekly", priority: 0.85 },
-    { loc: absoluteUrl(root, "/real-exams"), lastmod: siteUpdated, changefreq: "weekly", priority: 0.85 },
-    { loc: absoluteUrl(root, "/recall"), lastmod: siteUpdated, changefreq: "weekly", priority: 0.8 },
     { loc: absoluteUrl(root, "/audio"), lastmod: siteUpdated, changefreq: "weekly", priority: 0.7 },
-    { loc: absoluteUrl(root, "/today"), lastmod: siteUpdated, changefreq: "daily", priority: 0.9 },
-    { loc: absoluteUrl(root, "/drill"), lastmod: siteUpdated, changefreq: "weekly", priority: 0.8 },
     { loc: absoluteUrl(root, "/track"), lastmod: siteUpdated, changefreq: "daily", priority: 0.9 },
     { loc: absoluteUrl(root, "/about"), lastmod: siteUpdated, changefreq: "monthly", priority: 0.5 },
     {

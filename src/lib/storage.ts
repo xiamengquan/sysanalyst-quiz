@@ -134,10 +134,6 @@ export async function storageSetQuiet(key: string, value: unknown): Promise<void
 export async function storageSet(key: string, value: unknown): Promise<void> {
   await idbPut(key, value);
   clearLocalStorageKey(key);
-  if (key === QUIZ_STORAGE_KEY || key === CASE_STORAGE_KEY) {
-    // 动态导入避免与 cloud-sync 循环依赖
-    void import("@/lib/cloud-sync").then((m) => m.scheduleCloudPush(key)).catch(() => undefined);
-  }
 }
 
 export async function storageRemove(key: string): Promise<void> {

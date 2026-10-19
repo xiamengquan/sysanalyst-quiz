@@ -3,12 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  Dumbbell,
+  Layers,
   BookOpen,
-  Radar,
+  Headphones,
   Sparkles,
 } from "lucide-react";
-import { AuthButton } from "@/components/AuthButton";
 import { ExamCountdown } from "@/components/ExamCountdown";
 import { GlobalSearch } from "@/components/GlobalSearch";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -16,26 +15,22 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const tabs = [
-  { href: "/system/", label: "总控", short: "总控", icon: Radar },
-  { href: "/practice/", label: "练习场", short: "练习", icon: Dumbbell },
-  { href: "/kb/", label: "知识库", short: "知识", icon: BookOpen },
+  { href: "/kb/", label: "考点库", short: "考点", icon: BookOpen },
+  { href: "/track/", label: "出题区专题", short: "专题", icon: Layers },
+  { href: "/audio/", label: "音频讲透", short: "音频", icon: Headphones },
   { href: "/changelog/", label: "更新", short: "更新", icon: Sparkles },
 ];
 
-/** 总控组：这些页面在导航上归属「总控」高亮（/today 执行单已并入总控基线层，URL 保留） */
-const CONTROL_GROUP = ["/today/"];
-
-/** 练习场组：这些页面在导航上归属「练习场」高亮（页面 URL 全部保留，只做归组） */
-const PRACTICE_GROUP = ["/", "/quiz/", "/real-exams/", "/case/", "/drill/", "/track/", "/recall/", "/audio/"];
-
 function isActive(pathname: string, href: string) {
-  if (href === "/system/") {
-    return pathname.startsWith("/system") || CONTROL_GROUP.some((p) => pathname.startsWith(p));
+  if (href === "/kb/") {
+    return pathname.startsWith("/kb") || pathname.startsWith("/knowledge");
   }
-  if (href === "/practice/") {
-    return pathname === "/" || PRACTICE_GROUP.some((p) => (p === "/" ? pathname === "/" : pathname.startsWith(p)));
+  if (href === "/track/") {
+    return pathname.startsWith("/track");
   }
-  if (href === "/") return pathname === "/";
+  if (href === "/audio/") {
+    return pathname.startsWith("/audio");
+  }
   return pathname === href || pathname.startsWith(href);
 }
 
@@ -75,8 +70,8 @@ export function SiteHeader() {
                 </svg>
               </div>
               <span className="truncate text-sm font-semibold tracking-tight text-foreground sm:text-[0.95rem]">
-                <span className="hidden sm:inline">系统分析师 · 刷题站</span>
-                <span className="sm:hidden">系分刷题</span>
+                <span className="hidden sm:inline">系统分析师 · 案例分析考点库</span>
+                <span className="sm:hidden">系分考点库</span>
               </span>
             </Link>
             <ExamCountdown className="max-[420px]:hidden" />
@@ -115,7 +110,6 @@ export function SiteHeader() {
             <div className="h-4 w-px bg-border/80 hidden sm:block mx-1" />
             <GlobalSearch />
             <ThemeToggle />
-            <AuthButton />
           </div>
         </div>
       </header>

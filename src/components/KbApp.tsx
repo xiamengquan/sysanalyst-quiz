@@ -21,7 +21,6 @@ import { KbQuickIndex } from "@/components/KbQuickIndex";
 import { GlobalSearchHintButton } from "@/components/GlobalSearch";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { quizHomeHref } from "@/lib/quiz-deep-link";
 import { SEVEN_DAYS, sevenDayChapterLabel } from "@/lib/kb-seven-day";
 import {
   compareKbItemsByExamPriority,
@@ -75,14 +74,14 @@ type PointSortMode = "exam" | "outline";
 function LearningPathBar({ item }: { item: KbItem }) {
   const [track, setTrack] = useState<LearningTrackId>(() => pickTrack(item));
   const chapterForHighlight =
-    track === "essay" ? 22 : track === "case" ? (item.chapter ?? 11) : item.chapter;
+    track === "case" ? (item.chapter ?? 11) : item.chapter;
   const activeSegments = segmentsForTrack(track, chapterForHighlight);
 
   return (
     <div className="mb-3 rounded-lg border border-border/80 bg-muted/30 px-3 py-2 text-[0.78rem]">
       <div className="mb-1.5 flex flex-wrap items-center gap-2">
         <span className="text-muted-foreground">学习路径</span>
-        {(["choice", "case", "essay"] as LearningTrackId[]).map((t) => (
+        {(["choice", "case"] as LearningTrackId[]).map((t) => (
           <button
             key={t}
             type="button"
@@ -160,7 +159,6 @@ export function KbCatalog() {
   const [pointSort, setPointSort] = useState<"exam" | "outline">("exam");
   /** learn = 四层七日学习主页（默认）；dict = 全量字典检索 */
   const [view, setView] = useState<"learn" | "dict">("learn");
-  const [fcMeta, setFcMeta] = useState<{ total: number; m: number; k: number } | null>(null);
 
   useEffect(() => {
     fetch("/data/kb-index.json")
@@ -170,12 +168,6 @@ export function KbCatalog() {
       })
       .then(setData)
       .catch((e) => setErr(e.message));
-    fetch("/data/flashcards.json")
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d) => {
-        if (d?.meta) setFcMeta({ total: d.meta.total, m: d.meta.m, k: d.meta.k });
-      })
-      .catch(() => undefined);
   }, []);
 
   const flat = useMemo(() => {
@@ -215,26 +207,9 @@ export function KbCatalog() {
           以《四层背诵总册（四大方面重构版）》为学习主线：需求工程（D2）→ Web + 微服务（D3）→ 数据库（D4）四大方面主背，其余模块精华收尾（D1/D5/D6/D7）；每日 必会 M → 重点 K → 补充 S → 可放弃 D + 强化记忆块
           <br />
           <span className="text-[0.82rem]">
-            四域 39 张必会卡与 /track 答题轨道同源；背完当日就刷当日配题，查完整定义进「字典检索」（{data.meta?.apiPoints ?? 174} 篇考点参考）
+            四大方面 39 点以总册为背诵主线，查完整定义进「字典检索」（{data.meta?.apiPoints ?? 174} 篇考点参考）
           </span>
         </p>
-
-        <Card className="border-primary/30 bg-primary/[0.03] dark:bg-primary/[0.05] p-4 sm:p-5 shadow-xs mb-4">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div className="min-w-0">
-              <h2 className="text-[1.02rem] font-semibold text-foreground">随机问答 · 必会与重点</h2>
-              <p className="mt-1 text-[0.88rem] leading-relaxed text-muted-foreground">
-                {fcMeta
-                  ? `${fcMeta.total} 张闪卡（必会 M ${fcMeta.m} + 重点 K ${fcMeta.k}）`
-                  : "总册必会卡 + 记忆卡组硬记忆点"}
-                · 先默写再自评 · 按 1-2-4-7-15 间隔自动排程，到期卡优先出现
-              </p>
-            </div>
-            <Button asChild variant="default" className="shrink-0 gap-1.5 shadow-xs">
-              <Link href="/recall/">开始问答 →</Link>
-            </Button>
-          </div>
-        </Card>
 
         <Card className="border-amber-500/40 bg-amber-500/[0.04] dark:bg-amber-500/[0.06] p-4 sm:p-5 shadow-xs mb-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -295,11 +270,6 @@ export function KbCatalog() {
               <div className="mt-2.5 flex flex-wrap gap-2">
                 <Button asChild variant="secondary" size="sm">
                   <Link href={`/kb/quick-four-tier-7d/#${d.id}`}>背总册 {d.label}</Link>
-                </Button>
-                <Button asChild variant="outline" size="sm">
-                  <Link href={quizHomeHref({ bank: "practice", path: "seven_day", day: d.id })}>
-                    刷当日配题 →
-                  </Link>
                 </Button>
               </div>
             </Card>
@@ -421,7 +391,7 @@ export function KbCatalog() {
         <div className="layout-main">
           <Card className="mb-4 border-border bg-surface/60 text-[0.92rem] leading-relaxed px-(--card-spacing)">
             <b>正式发布 {data.meta?.version || "v1.0"}</b>（{data.meta?.effective || "—"}）
-            ：审计通过内容；可站内阅读，也可跳转对应章节刷题。正文内关联知识点以抽屉预览。
+            ：审计通过内容，站内纯阅读；正文内关联知识点以抽屉预览。
           </Card>
 
           {grouped.map((sec) => {
@@ -535,13 +505,6 @@ export function KbReader({ id: routeIdProp }: { id: string }) {
   const [kbPinned, setKbPinned] = useState(false);
   const bodyRef = useRef<HTMLDivElement>(null);
   const previewOpen = stack.length > 0;
-
-  const quizChapterHref = useMemo(() => {
-    if (!item?.chapter) return null;
-    const t = displayTitle(item.title);
-    const kw = t.split(/[^\u4e00-\u9fffA-Za-z0-9]+/).find((w) => w.length >= 2);
-    return quizHomeHref({ chapter: item.chapter, q: kw });
-  }, [item]);
 
   const pointIndexGroups = useMemo(() => {
     const points = catalog.filter((c) => c.kind === "point");
@@ -835,11 +798,6 @@ export function KbReader({ id: routeIdProp }: { id: string }) {
       </div>
 
       <nav className="kb-nav-fab" aria-label="阅读页快捷操作">
-        {quizChapterHref ? (
-          <Link href={quizChapterHref} className="kb-fab-btn is-primary">
-            本章刷题
-          </Link>
-        ) : null}
         <Link href="/kb/" className="kb-fab-btn">
           返回目录
         </Link>
