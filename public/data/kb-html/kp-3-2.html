@@ -81,28 +81,20 @@
 <p><strong>论文怎么用</strong>：数据迁移/多源集成类（23上、24上）可写「源库→中间层→目标库」割接步骤、一致性校验与回滚；OLTP/OLAP 分离、读写分离、缓存与索引优化可作为性能段落素材；多网点政务/连锁类可写分片键与故障隔离。</p>
 <p><strong>常考结论</strong></p>
 <ul>
-<li><p>授权粒度：<strong>库→表→行→列</strong>（4级，由大到小）。</p>
-</li>
-<li><p>审计=<strong>事后</strong>；标识鉴别=<strong>事前</strong>。</p>
-</li>
-<li><p>ACID：<strong>原一隔持</strong>。</p>
-</li>
-<li><p>范式递进：<strong>1→2→3→BCNF→4NF</strong>。</p>
-</li>
-<li><p>备份口诀：<strong>物逻分，冷热全增异</strong>。</p>
-</li>
-<li><p>增量备份基于&quot;上次任意备份&quot;，差异备份基于&quot;上次完全备份&quot;（易混！）。</p>
-</li>
-<li><p>分片<strong>设计</strong>原则口诀：<strong>均衡、相关、可扩展</strong>（写全名：数据均衡性 / 业务相关性 / 可扩展性）。</p>
-</li>
-<li><p>分片<strong>正确性</strong>准则：<strong>完备、重构、不相交</strong>（勿与上条混答）。</p>
-</li>
-<li><p><strong>本章练习热力</strong>：教程第 5 章约 84 题（站点练习库，不含真题卷 ch=99）。</p>
-</li>
-<li><p><strong>题库考点标签</strong>：CAP理论、E-R图、NoSQL类型、OLAP、三级模式。</p>
-</li>
-<li><p><strong>练题入口</strong>：<a href="/?bank=practice&chapter=5&path=all&q=%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93">第 5 章练习（关键词 关系数据库）</a></p>
-</li>
+<li>授权粒度：<strong>库→表→行→列</strong>（4级，由大到小）。</li>
+<li>审计=<strong>事后</strong>；标识鉴别=<strong>事前</strong>。</li>
+<li>ACID：<strong>原一隔持</strong>。</li>
+<li>范式递进：<strong>1→2→3→BCNF→4NF</strong>。</li>
+<li>备份口诀：<strong>物逻分，冷热全增异</strong>。</li>
+<li>增量备份基于&quot;上次任意备份&quot;，差异备份基于&quot;上次完全备份&quot;（易混！）。</li>
+<li>分片<strong>设计</strong>原则口诀：<strong>均衡、相关、可扩展</strong>（写全名：数据均衡性 / 业务相关性 / 可扩展性）。</li>
+<li>分片<strong>正确性</strong>准则：<strong>完备、重构、不相交</strong>（勿与上条混答）。</li>
+</ul>
+<h2 id="案例三件套编制稿-v018--依据-case-map-真题蒸馏">案例三件套（编制稿 v0.18 · 依据 case-map 真题蒸馏）</h2>
+<ul>
+<li><strong>怎么考</strong>：给表结构与函数依赖求候选键、判定范式等级；或问「是否应该反规范化，理由与代价是什么」。</li>
+<li><strong>怎么答</strong>：候选键推导——从未在函数依赖右侧出现的属性必属候选键，再逐属性求闭包验证；范式判定按阶梯——1NF 属性原子，2NF 消除非主属性对候选键的部分依赖，3NF 消除传递依赖，BCNF 进一步要求主属性无依赖，判定时必须引用题干中的具体依赖；反规范化用于以受控冗余换取读性能，须写明冗余字段与一致性维护手段（触发器、定时同步任务）。</li>
+<li><strong>易错与扣分</strong>：候选键漏组合键；范式判定不引用具体依赖凭感觉下结论；反规范化只说「加快查询」不答一致性维护代价。</li>
 </ul>
 <h2 id="相关考点">相关考点</h2>
 <ul>

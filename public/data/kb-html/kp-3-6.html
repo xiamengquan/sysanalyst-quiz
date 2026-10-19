@@ -74,28 +74,20 @@
 <p><strong>论文怎么用</strong>：数据迁移/多源集成类（23上、24上）可写「源库→中间层→目标库」割接步骤、一致性校验与回滚；OLTP/OLAP 分离、读写分离、缓存与索引优化可作为性能段落素材；多网点政务/连锁类可写分片键与故障隔离。</p>
 <p><strong>常考结论</strong></p>
 <ul>
-<li><p>授权粒度：<strong>库→表→行→列</strong>（4级，由大到小）。</p>
-</li>
-<li><p>审计=<strong>事后</strong>；标识鉴别=<strong>事前</strong>。</p>
-</li>
-<li><p>ACID：<strong>原一隔持</strong>。</p>
-</li>
-<li><p>范式递进：<strong>1→2→3→BCNF→4NF</strong>。</p>
-</li>
-<li><p>备份口诀：<strong>物逻分，冷热全增异</strong>。</p>
-</li>
-<li><p>增量备份基于&quot;上次任意备份&quot;，差异备份基于&quot;上次完全备份&quot;（易混！）。</p>
-</li>
-<li><p>分片<strong>设计</strong>原则口诀：<strong>均衡、相关、可扩展</strong>（写全名：数据均衡性 / 业务相关性 / 可扩展性）。</p>
-</li>
-<li><p>分片<strong>正确性</strong>准则：<strong>完备、重构、不相交</strong>（勿与上条混答）。</p>
-</li>
-<li><p><strong>本章练习热力</strong>：教程第 5 章约 84 题（站点练习库，不含真题卷 ch=99）。</p>
-</li>
-<li><p><strong>题库考点标签</strong>：OLAP、数据仓库、数据仓库 vs OLTP、OLTP、备份恢复。</p>
-</li>
-<li><p><strong>练题入口</strong>：<a href="/?bank=practice&chapter=5&path=all&q=%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93">第 5 章练习（关键词 数据仓库）</a></p>
-</li>
+<li>授权粒度：<strong>库→表→行→列</strong>（4级，由大到小）。</li>
+<li>审计=<strong>事后</strong>；标识鉴别=<strong>事前</strong>。</li>
+<li>ACID：<strong>原一隔持</strong>。</li>
+<li>范式递进：<strong>1→2→3→BCNF→4NF</strong>。</li>
+<li>备份口诀：<strong>物逻分，冷热全增异</strong>。</li>
+<li>增量备份基于&quot;上次任意备份&quot;，差异备份基于&quot;上次完全备份&quot;（易混！）。</li>
+<li>分片<strong>设计</strong>原则口诀：<strong>均衡、相关、可扩展</strong>（写全名：数据均衡性 / 业务相关性 / 可扩展性）。</li>
+<li>分片<strong>正确性</strong>准则：<strong>完备、重构、不相交</strong>（勿与上条混答）。</li>
+</ul>
+<h2 id="案例三件套编制稿-v018--依据-case-map-真题蒸馏">案例三件套（编制稿 v0.18 · 依据 case-map 真题蒸馏）</h2>
+<ul>
+<li><strong>怎么考</strong>：给「领导层需要多维报表与历史趋势分析」场景，问「数据仓库与业务数据库的区别」或「OLAP 的基本操作」。</li>
+<li><strong>怎么答</strong>：数据仓库用于支撑分析决策，是面向主题的、集成的、相对稳定的、反映历史变化的数据集合；与业务库的区别按用途（分析 vs 事务）、数据时限（历史 vs 当前）、操作类型（读多聚合 vs 增删改）成对比较；OLAP 四操作结合报表场景举例——钻取（下钻明细）、卷取（上卷汇总）、切片（固定一维）、旋转（维度置换）。</li>
+<li><strong>易错与扣分</strong>：把数据仓库答成「更大的业务数据库」；四个操作名与行为对应错；漏「反映历史变化」这一关键特征。</li>
 </ul>
 <h2 id="相关考点">相关考点</h2>
 <ul>
