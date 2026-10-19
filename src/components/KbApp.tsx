@@ -231,9 +231,9 @@ export function KbCatalog() {
             <div className="min-w-0">
               <h2 className="text-[1.02rem] font-semibold text-foreground">四层背诵总册 · 四大方面重构版</h2>
               <p className="mt-1 text-[0.88rem] leading-relaxed text-muted-foreground">
-                四大方面前置：D2 需求工程（10 卡）→ D3 Web + 微服务（19 卡）→ D4 数据库（10 卡），四域 M 卡与 /track 轨道同源；
+                四大方面前置：D2 需求工程（10 卡）→ D3 Web + 微服务（19 卡）→ D4 数据库（10 卡），四域 M 卡与出题区地图 T1/T2 同源；
                 其余模块压缩精华（D1/D5/D6/D7）。每日六块：必会默写（M）→ 重点辨析（K）→ 补充速览（S）→
-                可放弃止损（D）→ 强化记忆（D-1 / D-3 / D-7 回收 + 自测问句）→ 练题收口
+                可放弃止损（D）→ 强化记忆（D-1 / D-3 / D-7 回收 + 自测问句）→ 案例收口
               </p>
             </div>
             <Button asChild variant="default" className="shrink-0 gap-1.5 shadow-xs">
@@ -283,7 +283,7 @@ export function KbCatalog() {
               { href: "/kb/quick-memory-plan/", title: "记忆强化 · 间隔重复与硬记忆点卡组", desc: "1-2-4-7-15 日程 · 58 条硬记忆点" },
               { href: "/kb/quick-kp-map/", title: "知识点地图 · 按记忆专题", desc: "T01–T18 分组抽屉快查" },
               { href: "/kb/quick-sprint-14d/", title: "考前 14 天冲刺计划", desc: "两轮制加速 · 战略放弃清单 · 每日日历" },
-              { href: "/audio/", title: "知识点洗脑音频 · 语音循环", desc: "零散时间听闪卡 · 洗脑式连读 / 问答式" },
+              { href: "/audio/", title: "知识点洗脑音频 · 语音循环", desc: "零散时间听考点讲透 · 洗脑式连读 / 问答式" },
               { href: "/kb/quick-exam-7d/", title: "考前 7 天背诵清单", desc: "重难点优先的冲刺清单" },
               { href: "/kb/quick-compare/", title: "高频对比速查表", desc: "易混概念一表辨析" },
               { href: "/kb/quick-case-start/", title: "案例作答启动手册 · 告别头脑空白", desc: "启动句式表 · 骨架先行 · 每日 30 分钟微训练" },

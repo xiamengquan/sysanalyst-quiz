@@ -73,15 +73,6 @@ export default function AboutPage() {
             </div>
 
             <div className="space-y-2">
-              <h3 className="text-[0.98rem] font-medium text-foreground">账户与同步（可选）</h3>
-              <ul className="list-disc space-y-1.5 pl-5">
-                <li>邮箱密码注册/登录，或 Magic Link 无密码登录</li>
-                <li>默认仍只写 IndexedDB；登录后<strong>显式开启云同步</strong>才上传刷题进度与案例草稿</li>
-                <li>冲突按时间戳 Last-Write-Wins；支持立即同步</li>
-              </ul>
-            </div>
-
-            <div className="space-y-2">
               <h3 className="text-[0.98rem] font-medium text-foreground">界面与主题</h3>
               <ul className="list-disc space-y-1.5 pl-5">
                 <li>界面参照 Cursor.com 极简现代设计语言，自研纯粹轻量组件体系，移除繁重 shadcn 依赖</li>
@@ -92,7 +83,7 @@ export default function AboutPage() {
                   </a>
                   ：历次发版要点；新版本首次打开会弹窗提示
                 </li>
-                <li>数字等宽显示，题号与进度对齐更稳</li>
+                <li>数字等宽显示，长文阅读节奏更稳</li>
               </ul>
             </div>
           </CardContent>

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  Layers,
+  Map,
   BookOpen,
   Headphones,
   Sparkles,
@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils";
 
 const tabs = [
   { href: "/kb/", label: "考点库", short: "考点", icon: BookOpen },
-  { href: "/track/", label: "出题区专题", short: "专题", icon: Layers },
+  { href: "/map/", label: "出题区地图", short: "地图", icon: Map },
   { href: "/audio/", label: "音频讲透", short: "音频", icon: Headphones },
   { href: "/changelog/", label: "更新", short: "更新", icon: Sparkles },
 ];
@@ -25,8 +25,8 @@ function isActive(pathname: string, href: string) {
   if (href === "/kb/") {
     return pathname.startsWith("/kb") || pathname.startsWith("/knowledge");
   }
-  if (href === "/track/") {
-    return pathname.startsWith("/track");
+  if (href === "/map/") {
+    return pathname.startsWith("/map");
   }
   if (href === "/audio/") {
     return pathname.startsWith("/audio");

@@ -52,49 +52,7 @@ export type Question = {
   learn_stage?: string;
 };
 
-export type CaseItem = {
-  no: number;
-  id: string;
-  subject?: string;
-  bank?: "practice" | "real" | "workshop" | string;
-  year?: string;
-  half?: string;
-  exam_no?: number;
-  chapter: number;
-  domain: string;
-  case_type: string;
-  point: string;
-  track?: "P0" | "P1" | "P2" | string;
-  stop_loss?: boolean;
-  depth?: string;
-  stem: string;
-  questions: {
-    qnum: number;
-    prompt: string;
-    answer_type?: string;
-    word_limit?: number;
-    score?: number;
-    rubric?: { must_hit?: string[]; sample?: string };
-    hint?: string;
-  }[];
-  /** 《案例分析答题教程》单题 7 步法（针对本题） */
-  seven_steps?: { title: string; how: string; why: string }[];
-  source?: string;
-  time_limit_min?: number;
-};
-
-export type CasePack = {
-  id: string;
-  title: string;
-  rule?: string;
-  mandatory?: number;
-  elective?: number[];
-  select_hint?: string;
-  cases: string[];
-  bank?: string;
-  year?: string;
-  half?: string;
-};
+;
 
 export type KbItem = {
   id: string;

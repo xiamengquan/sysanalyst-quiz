@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BookOpen, Layers, Headphones, Map, ExternalLink } from "lucide-react";
+import { BookOpen, Headphones, Map, ExternalLink } from "lucide-react";
 
 const entries = [
   {
@@ -7,12 +7,6 @@ const entries = [
     icon: BookOpen,
     title: "案例考点库",
     desc: "145 篇案例相关考点精炼（一考点一篇），只留案例分析可能出现的考点，含考频标签与案例出题区映射。",
-  },
-  {
-    href: "/track/",
-    icon: Layers,
-    title: "出题区专题",
-    desc: "按案例固定出题区组织的深度阅读路径：需求工程 / Web / 微服务 / 数据库 / 系统分析与建模。",
   },
   {
     href: "/audio/",

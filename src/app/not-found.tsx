@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-/** 静态导出 404：避免托管把未知路径 fallback 到首页时用户误以为是「只有刷题」 */
+/** 静态导出 404 页：给出本站 URL 形态提示与返回入口 */
 export default function NotFound() {
   return (
     <div
@@ -23,7 +23,7 @@ export default function NotFound() {
           href="/"
           className="rounded-md border border-border px-4 py-2 text-sm text-muted-foreground hover:bg-muted"
         >
-          返回刷题
+          返回首页
         </Link>
       </div>
     </div>

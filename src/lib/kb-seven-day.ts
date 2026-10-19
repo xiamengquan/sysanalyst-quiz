@@ -1,8 +1,8 @@
 import { CH_NAMES } from "@/lib/types";
 
 /**
- * 「四层七日背诵总册」D1–D7 与题库章节的映射。
- * 内容架构 v3：知识点系统以总册为学习主线，刷题/案例系统按日配题巩固。
+ * 「四层七日背诵总册」D1–D7 与考点章节的映射。
+ * 内容架构 v3：知识点系统以总册为学习主线，考点精炼按日巩固。
  * 总册：/kb/quick-four-tier-7d/
  */
 export type SevenDay = {
@@ -10,7 +10,7 @@ export type SevenDay = {
   label: string;
   /** 当日主题（对齐总册标题） */
   theme: string;
-  /** 题库章节（CH_NAMES 章号） */
+  /** 考点章节（CH_NAMES 章号） */
   chapters: number[];
   /** 当日主打考点（一句速览，用于卡片副标题） */
   focus: string;

@@ -184,7 +184,7 @@ export function ExamCountdown({ className }: { className?: string }) {
                 <span>综合知识（上午第一场）</span>
               </div>
               <p className="text-muted-foreground leading-relaxed pl-5">
-                高分章节集中在第11章需求工程、第12章软件架构、第07章软件工程与第04章网络系统。每日通过错题与自编练习保持题感；若选择题已稳，可考虑满{" "}
+                高分章节集中在第11章需求工程、第12章软件架构、第07章软件工程与第04章网络系统。每日保持综合知识与案例分析题感；若选择题已稳，可考虑满{" "}
                 {EXAM_CHOICE_MIN_MINUTES_BEFORE_SUBMIT} 分钟交卷，为案例留足时间。
               </p>
             </div>
@@ -217,7 +217,7 @@ export function ExamCountdown({ className }: { className?: string }) {
               className="w-full"
               onClick={() => setOpen(false)}
             >
-              我知道了，开始刷题
+              我知道了，开始复习
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -226,7 +226,7 @@ export function ExamCountdown({ className }: { className?: string }) {
   );
 }
 
-/** 页面级冲刺提示横条组件（用于刷题/案例首页） */
+/** 页面级冲刺提示横条组件（用于首页/考点库） */
 export function ExamSprintBanner({ className }: { className?: string }) {
   const [info, setInfo] = useState<ExamCountdownInfo | null>(null);
 
