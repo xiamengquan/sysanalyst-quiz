@@ -189,6 +189,7 @@ export function buildSitemapUrls(root) {
     { loc: absoluteUrl(root, "/"), lastmod: siteUpdated, changefreq: "weekly", priority: 1 },
     { loc: absoluteUrl(root, "/kb"), lastmod: siteUpdated, changefreq: "weekly", priority: 0.9 },
     { loc: absoluteUrl(root, "/audio"), lastmod: siteUpdated, changefreq: "weekly", priority: 0.7 },
+    { loc: absoluteUrl(root, "/map"), lastmod: siteUpdated, changefreq: "weekly", priority: 0.85 },
     { loc: absoluteUrl(root, "/track"), lastmod: siteUpdated, changefreq: "daily", priority: 0.9 },
     { loc: absoluteUrl(root, "/about"), lastmod: siteUpdated, changefreq: "monthly", priority: 0.5 },
     {

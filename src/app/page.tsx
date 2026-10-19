@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BookOpen, Layers, Headphones, ExternalLink } from "lucide-react";
+import { BookOpen, Layers, Headphones, Map, ExternalLink } from "lucide-react";
 
 const entries = [
   {
@@ -19,6 +19,12 @@ const entries = [
     icon: Headphones,
     title: "音频讲透",
     desc: "四大方面 39 点「逐点讲透 · 一通到底」，通勤场景的伴随复习，纯收听不测验。",
+  },
+  {
+    href: "/map/",
+    icon: Map,
+    title: "出题区地图",
+    desc: "197 道真题蒸馏的押题分级：T1 押题区每场必出，T2 轮换备选，T3 战略放弃——时间花在刀刃上。",
   },
 ];
 
@@ -41,7 +47,7 @@ export default function HomePage() {
         </p>
       </div>
 
-      <div className="mt-8 grid gap-3 sm:mt-10 sm:grid-cols-3 sm:gap-4">
+      <div className="mt-8 grid gap-3 sm:mt-10 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
         {entries.map((e) => {
           const Icon = e.icon;
           return (
