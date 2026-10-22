@@ -1,0 +1,105 @@
+{
+  "generatedAt": "2026-10-22T00:00:00.000Z",
+  "source": "《系统分析师·案例分析通关》视频课程（UP主：酒哥编程）音频转写整理",
+  "items": [
+    {
+      "id": "00-handbook",
+      "no": 0,
+      "title": "总复习手册",
+      "subtitle": "全 8 讲汇编 · 方法论 + 四专题 + 架构演化 + 综合实战",
+      "kind": "汇编",
+      "duration": "",
+      "published": "2026-10-22",
+      "video": "",
+      "summary": "八集内容汇编：案例答题方法论、结构化分析、面向对象建模、架构风格选型、数据库设计、网站架构演化、综合实战与真题带练，附一页纸速查、模板总表、失分清单与时间轴。"
+    },
+    {
+      "id": "01-case-method",
+      "no": 1,
+      "title": "案例怎么答",
+      "subtitle": "五道做三道、按点给分与九十分钟怎么分",
+      "kind": "方法论",
+      "duration": "11:13",
+      "published": "2026-10-07",
+      "video": "https://www.bilibili.com/video/BV1xvHC69EQq/",
+      "summary": "案例是题型不是章节；连考 240 分钟切出案例 90～120 分钟；五道做三道（一必答四选二）；一个得分点＝一个结论＋一句理由；四步落笔与六条底线守住 45 分。"
+    },
+    {
+      "id": "02-structured-analysis",
+      "no": 2,
+      "title": "结构化分析",
+      "subtitle": "四种符号、六条挑错原则与数据流图怎么改",
+      "kind": "专题",
+      "duration": "11:10",
+      "published": "2026-10-08",
+      "video": "https://www.bilibili.com/video/BV1akH96fEYF/",
+      "summary": "数据流图考挑错不考画图：四种符号、检查修改六原则、三层图编号规则、数据守恒（黑洞/奇迹）、数据字典六类条目，答法为「错在哪、违反什么、怎么改」三句。"
+    },
+    {
+      "id": "03-oo-modeling",
+      "no": 3,
+      "title": "面向对象建模",
+      "subtitle": "三种元素、三种关系与六种类关系怎么判",
+      "kind": "专题",
+      "duration": "13:50",
+      "published": "2026-10-09",
+      "video": "https://www.bilibili.com/video/BV1rKpb63Edy/",
+      "summary": "用例图三元素（参与者/用例/通信关联）、用例三关系（包含/扩展/泛化，口诀：必走包含、偶走扩展、父子同类泛化）、用例规约、分析模型四步、类六种关系（聚合组合看生命周期）。"
+    },
+    {
+      "id": "04-arch-style",
+      "no": 4,
+      "title": "架构风格选型",
+      "subtitle": "六类风格、构件连接件与选型四句模板",
+      "kind": "专题",
+      "duration": "13:26",
+      "published": "2026-10-10",
+      "video": "https://www.bilibili.com/video/BV1V2pu6GEoN/",
+      "summary": "选风格就是选构件和连接件：风格＝词汇表＋约束；六类风格（数据流/调用返回/数据中心/虚拟机/独立构件/面向服务）、五问定风格、四句模板（选什么、构件连接件、为什么、代价）。"
+    },
+    {
+      "id": "05-db-design",
+      "no": 5,
+      "title": "数据库设计",
+      "subtitle": "五阶段、三要素与范式四步怎么判",
+      "kind": "专题",
+      "duration": "13:41",
+      "published": "2026-10-11",
+      "video": "https://www.bilibili.com/video/BV1ifp76KEVw/",
+      "summary": "一半考流程一半考范式：设计五阶段、E-R 图三要素与属性三类画法、图示法求候选键（入度为零遍历）、四档范式逐级加严（一般到 3NF 即可）、反规范化两面答。"
+    },
+    {
+      "id": "06-web-arch-evolution",
+      "no": 6,
+      "title": "网站架构演化",
+      "subtitle": "拆是为了独立、八条原则与选型三句",
+      "kind": "专题",
+      "duration": "13:57",
+      "published": "2026-10-14",
+      "video": "https://www.bilibili.com/video/BV1Eapz6PEKJ/",
+      "summary": "拆是为了独立不是为了时髦：架构八条原则（单一责任/有界上下文最常考）、三类架构（整体式/微服务/无服务器）、三种模式（B-S/P2P/MVC-MVP）、微服务七特征、拆分三代价与四条应对＋容错机制。"
+    },
+    {
+      "id": "07-integrated-practice",
+      "no": 7,
+      "title": "综合实战",
+      "subtitle": "审题三步、四专题认领与综合题怎么拆",
+      "kind": "实战",
+      "duration": "13:58",
+      "published": "2026-10-14",
+      "video": "https://www.bilibili.com/video/BV1HWpz6zEUi/",
+      "summary": "综合题是一条主线走四步（需求→建模→架构→数据）：审题三步（圈动词/认领考点/判断题型）、需求十一章五段抓手、时间分配与答题顺序、判定清单四样（结论/依据/结果/分寸）、四步模板。"
+    },
+    {
+      "id": "08-real-exam",
+      "no": 8,
+      "title": "真题带练",
+      "subtitle": "四问示范、排版三原则与真题十二分怎么拿",
+      "kind": "实战",
+      "duration": "13:07",
+      "published": "2026-10-14",
+      "video": "https://www.bilibili.com/video/BV1pWpz6zEK6/",
+      "summary": "收官带练：智慧停车四问示范（需求/建模/架构/数据各一版）、排版三原则（分条编号/结论先行/依据跟上）、真题网络约车平台 12 分拿法（定义→对比→结合题干收口）。"
+    }
+  ]
+}

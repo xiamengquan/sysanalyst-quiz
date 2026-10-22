@@ -7,6 +7,7 @@ import {
   BookOpen,
   Headphones,
   Sparkles,
+  NotebookPen,
 } from "lucide-react";
 import { ExamCountdown } from "@/components/ExamCountdown";
 import { GlobalSearch } from "@/components/GlobalSearch";
@@ -18,6 +19,7 @@ const tabs = [
   { href: "/kb/", label: "考点库", short: "考点", icon: BookOpen },
   { href: "/map/", label: "出题区地图", short: "地图", icon: Map },
   { href: "/audio/", label: "音频讲透", short: "音频", icon: Headphones },
+  { href: "/notes/", label: "视频笔记", short: "笔记", icon: NotebookPen },
   { href: "/changelog/", label: "更新", short: "更新", icon: Sparkles },
 ];
 
@@ -120,7 +122,7 @@ export function SiteHeader() {
         aria-label="底部导航"
       >
         <div
-          className="mx-auto grid grid-cols-4"
+          className="mx-auto grid grid-cols-5"
           style={{ height: "var(--tabbar-h)", maxWidth: "var(--content-max)" }}
         >
           {tabs.map((t) => {

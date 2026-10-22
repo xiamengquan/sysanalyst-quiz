@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BookOpen, Headphones, Map, ExternalLink } from "lucide-react";
+import { BookOpen, Headphones, Map, NotebookPen, ExternalLink } from "lucide-react";
 
 const entries = [
   {
@@ -19,6 +19,12 @@ const entries = [
     icon: Map,
     title: "出题区地图",
     desc: "197 道真题蒸馏的押题分级：T1 押题区每场必出，T2 轮换备选，T3 战略放弃——时间花在刀刃上。",
+  },
+  {
+    href: "/notes/",
+    icon: NotebookPen,
+    title: "视频笔记",
+    desc: "《案例分析通关》8 讲视频完整整理：方法论、四大专题、架构演化与真题带练，附模板与失分清单。",
   },
 ];
 
