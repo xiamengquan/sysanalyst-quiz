@@ -12,7 +12,8 @@ type Order = "seq" | "rand";
 const REPEAT_OPTIONS = [2, 3, 5];
 const LIMIT_OPTIONS = [0, 15, 30, 60]; // 分钟，0 = 不限
 
-const AUDIO_SETTINGS_KEY = "sysanalyst_audio_settings_v1";
+const AUDIO_SETTINGS_KEY = "sysanalyst_audio_settings_v1"; // v1：loopAll 旧语义（默认 false = 播完停止）
+const AUDIO_SETTINGS_KEY_V2 = "sysanalyst_audio_settings_v2"; // v2：默认连续循环；首次读取时从 v1 迁移并强制开启连续
 
 /** 讲透文章（来自 audio-articles.json：39 点逐点讲透，连贯朗读） */
 type ArticleParagraph = { id: string; no: number; pid: string; title: string; text: string };
@@ -114,7 +115,7 @@ export function AudioApp() {
   const [limitMin, setLimitMin] = useState(0);
   const [articleDocs, setArticleDocs] = useState<ArticleDoc[]>([]);
   const [articleFilter, setArticleFilter] = useState("all");
-  const [loopAll, setLoopAll] = useState(false);
+  const [loopAll, setLoopAll] = useState(true); // 默认连续循环播放
   const loopAllRef = useRef(loopAll);
 
   const [phase, setPhase] = useState<"setup" | "playing">("setup");
@@ -130,26 +131,84 @@ export function AudioApp() {
   /** 播放世代号：stop/跳转时自增，使旧播放链（cancel 触发的 onend/onerror）失效 */
   const genRef = useRef(0);
 
-  // 设置持久化
-  useEffect(() => {
-    const saved = localStorage.getItem(AUDIO_SETTINGS_KEY);
-    if (saved) {
-      try {
-        const s = JSON.parse(saved);
-        if (s.mode) setMode(s.mode);
-        if (s.repeat) setRepeat(s.repeat);
-        if (s.rate) setRate(s.rate);
-        if (s.order) setOrder(s.order);
-        if (typeof s.limitMin === "number") setLimitMin(s.limitMin);
-        if (s.articleFilter) setArticleFilter(s.articleFilter);
-        if (typeof s.loopAll === "boolean") setLoopAll(s.loopAll);
-      } catch {}
+  // 屏幕常亮锁：播放中申请，停止/暂停时释放；回到前台自动补申请
+  const wakeLockRef = useRef<{ release?: () => Promise<void> } | null>(null);
+
+  const releaseWakeLock = useCallback(() => {
+    try {
+      wakeLockRef.current?.release?.();
+    } catch {}
+    wakeLockRef.current = null;
+  }, []);
+
+  const requestWakeLock = useCallback(async () => {
+    try {
+      if (typeof navigator !== "undefined" && "wakeLock" in navigator && !wakeLockRef.current) {
+        wakeLockRef.current = await (
+          navigator as Navigator & { wakeLock: { request: (t: "screen") => Promise<{ release?: () => Promise<void> }> } }
+        ).wakeLock.request("screen");
+      }
+    } catch {
+      /* 不支持或被拒绝：静默降级 */
     }
   }, []);
 
   useEffect(() => {
+    if (phase === "playing" && !paused) {
+      void requestWakeLock();
+    } else {
+      releaseWakeLock();
+    }
+  }, [phase, paused, requestWakeLock, releaseWakeLock]);
+
+  useEffect(() => {
+    const onVisible = () => {
+      if (document.visibilityState === "visible" && phase === "playing" && !paused) {
+        void requestWakeLock();
+      }
+    };
+    document.addEventListener("visibilitychange", onVisible);
+    return () => {
+      document.removeEventListener("visibilitychange", onVisible);
+      releaseWakeLock();
+    };
+  }, [phase, paused, requestWakeLock, releaseWakeLock]);
+
+  // 设置持久化（v2；老用户从 v1 迁移：其余设置保留，连续循环强制开启）
+  useEffect(() => {
+    const load = () => {
+      try {
+        const v2raw = localStorage.getItem(AUDIO_SETTINGS_KEY_V2);
+        if (v2raw) {
+          const s = JSON.parse(v2raw);
+          if (s.mode) setMode(s.mode);
+          if (s.repeat) setRepeat(s.repeat);
+          if (s.rate) setRate(s.rate);
+          if (s.order) setOrder(s.order);
+          if (typeof s.limitMin === "number") setLimitMin(s.limitMin);
+          if (s.articleFilter) setArticleFilter(s.articleFilter);
+          if (typeof s.loopAll === "boolean") setLoopAll(s.loopAll);
+          return;
+        }
+        const saved = localStorage.getItem(AUDIO_SETTINGS_KEY);
+        if (saved) {
+          const s = JSON.parse(saved);
+          if (s.mode) setMode(s.mode);
+          if (s.repeat) setRepeat(s.repeat);
+          if (s.rate) setRate(s.rate);
+          if (s.order) setOrder(s.order);
+          if (typeof s.limitMin === "number") setLimitMin(s.limitMin);
+          if (s.articleFilter) setArticleFilter(s.articleFilter);
+          // v1 的 loopAll 不迁移：v2 起默认连续循环
+        }
+      } catch {}
+    };
+    load();
+  }, []);
+
+  useEffect(() => {
     localStorage.setItem(
-      AUDIO_SETTINGS_KEY,
+      AUDIO_SETTINGS_KEY_V2,
       JSON.stringify({ mode, repeat, rate, order, limitMin, articleFilter, loopAll })
     );
   }, [mode, repeat, rate, order, limitMin, articleFilter, loopAll]);
@@ -332,10 +391,10 @@ export function AudioApp() {
     <>
       <h1 className="page-title">知识点洗脑音频 · 语音循环</h1>
       <p className="page-lead">
-        四大方面 39 点讲透文章（连贯朗读）转为语音流：问答式（读题→停顿→读答案）或洗脑式（答案连读 N 遍），支持整组 ∞ 无限循环
+        四大方面 39 点讲透文章（连贯朗读）转为语音流：问答式（读题→停顿→读答案）或洗脑式（答案连读 N 遍），默认整组连续循环，播完自动接下一轮
         <br />
         <span className="text-[0.82rem]">
-          适合通勤/散步等零散时间 · 语音由设备合成，免下载 · 注意：锁屏后部分手机会暂停，建议亮屏播放或连接耳机
+          适合通勤/散步等零散时间 · 播放中保持屏幕常亮减少中断 · 语音由设备合成，免下载 · 部分手机锁屏后仍会暂停，建议亮屏播放或连接耳机
         </span>
       </p>
 
@@ -422,8 +481,8 @@ export function AudioApp() {
             <div className="flex flex-wrap gap-1.5">
               {(
                 [
+                  [true, "∞ 连续循环"],
                   [false, "播完一遍停止"],
-                  [true, "∞ 无限循环"],
                 ] as const
               ).map(([v, label]) => (
                 <button
@@ -438,6 +497,7 @@ export function AudioApp() {
                   )}
                 >
                   {label}
+                  {v === true && "（默认）"}
                 </button>
               ))}
             </div>
@@ -533,7 +593,7 @@ export function AudioApp() {
         <Card className="px-(--card-spacing) mb-4">
           <div className="mb-3 flex items-center justify-between text-[0.85rem] text-muted-foreground">
             <span>
-              第 {playIdx + 1} / {items.length} 张 · {loopAll ? "∞ 无限循环" : "单遍"}{limitMin ? ` · 定时 ${limitMin} 分钟` : ""}
+              第 {playIdx + 1} / {items.length} 张 · {loopAll ? "∞ 连续循环" : "单遍"}{limitMin ? ` · 定时 ${limitMin} 分钟` : ""}
             </span>
           </div>
           <div className="mb-4 flex flex-wrap gap-1.5">
