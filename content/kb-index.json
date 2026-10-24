@@ -2700,6 +2700,15 @@
           "note": "教程化问答 · 对齐大纲§9"
         },
         {
+          "id": "quick-req-tools",
+          "title": "需求分析工具 · 定义与用法速查",
+          "path": "速查/需求分析工具-定义与用法速查.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "reference",
+          "note": "加工三件套/DFD/DD/E-R/STD/Petri/UML/因果图 · 对齐第11章"
+        },
+        {
           "id": "quick-uml-learn",
           "title": "UML · 体系化学习指南（由简入深）",
           "path": "速查/UML-体系化学习指南.md",
