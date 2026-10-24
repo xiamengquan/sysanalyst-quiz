@@ -2,7 +2,7 @@
 <blockquote>
 <p><strong>docType</strong>：howto · 场景：考前一晚 60–90 分钟定向过卡（也可慢慢精读）<br><strong>选题前提</strong>：嵌入式放养；选答锁定 <strong>数据库 + Web/微服务</strong>，规划计算保底<br><strong>关联</strong>：<a href="/kb/quick-exam-7d/" class="kb-ref" data-kb-id="quick-exam-7d" title="预览：考前 7 天背诵清单">考前7天背诵清单</a> · <a href="/kb/quick-req-five/" class="kb-ref" data-kb-id="quick-req-five" title="预览：案例必答 · 需求获取五法对比卡">需求获取五法对比卡</a> · <a href="/kb/quick-req-tools/" class="kb-ref" data-kb-id="quick-req-tools" title="预览：需求分析工具 · 定义与用法速查">需求分析工具速查</a> · <a href="/kb/quick-microservice-case/" class="kb-ref" data-kb-id="quick-microservice-case" title="预览：微服务系统 · 案例考点速查">微服务案例速查</a> · <a href="/kb/quick-web-case/" class="kb-ref" data-kb-id="quick-web-case" title="预览：Web应用案例分析 · 考点速查">Web应用案例速查</a></p>
 </blockquote>
-<p><strong>可检索摘要</strong>：考前一晚完整冲刺——①卷面规则与选题策略；②试题一必答：需求获取七法定义/用法/效果与四维对比、需求三层、需求管理三件（基线/CCB/跟踪矩阵）、加工逻辑三件套（结构化语言/判定表/判定树）、DFD 定义绘制纠错；③UML 与用例：UML 总览、用例图四阶段与 include/extend、类图六关系与 BCE、序列图三大/四大口径、状态机图、活动图分支分叉之辨、选图口诀；④Web 高并发：CDN/LB/网关/缓存/Redis/MQ/分库分表逐项定义与效果，防超卖、幂等、超时释放机制；⑤微服务：拆分策略、治理五件套、单体对比五维、最终一致性机制；⑥数据库：范式判定、三类异常、SQL 关键字、反规范化与索引；⑦回收期/NPV/可行性公式；⑧90 分钟时间表。</p>
+<p><strong>可检索摘要</strong>：考前一晚完整冲刺——①卷面规则与选题策略；②试题一必答：需求获取七法定义/用法/效果与四维对比、需求三层、需求管理三件（基线/CCB/跟踪矩阵）、加工逻辑三件套、DFD 与结构化分析（SA）补全（四要素命名改错、0/1 层图、数据字典符号、SA 三模型、改错清单）、面向对象分析（OOA）补全（系统分析建模定义/作用、OO 建模四步与 CRC、用例三要素、业务 vs 系统用例、OOA 产物、SA/OOA 选型信号）；③UML 与用例：UML 总览、用例图四阶段与 include/extend、类图六关系与 BCE、序列图三大/四大口径、状态机图、活动图分支分叉之辨、选图口诀；④Web 高并发：CDN/LB/网关/缓存/Redis/MQ/分库分表逐项定义与效果，防超卖、幂等、超时释放机制；⑤微服务：拆分策略、治理五件套、单体对比五维、最终一致性机制；⑥数据库：范式判定、三类异常、SQL 关键字、反规范化与索引；⑦回收期/NPV/可行性公式；⑧90 分钟时间表。</p>
 <hr>
 <h2 id="一卷面规则与选题策略先定心">一、卷面规则与选题策略（先定心）</h2>
 <div class="table-wrap"><table>
@@ -224,6 +224,180 @@
 <li><strong>需求阶段三作用</strong>：理解表达用户需求；概括内部逻辑作设计基础；存档与修改开发计划的依据。</li>
 <li><strong>配套</strong>：数据字典 DD 精确定义六类条目（数据元素/数据结构/数据流/数据存储/加工逻辑/外部实体），消除二义性、支撑一致性检验。</li>
 </ul>
+<h3 id="e-结构化分析sa-知识补全">E. 结构化分析（SA）· 知识补全</h3>
+<p><strong>SA（答卷·定义）</strong>：结构化分析是面向数据流、自顶向下逐层分解的需求分析方法，以 DFD（功能模型）+ 数据字典（数据词典）+ STD（行为模型）为核心。<strong>作用</strong>：理清数据从哪来、经何加工、存何处，形成分层可验证的分析模型。</p>
+<p><strong>四要素与命名改错（改错题常考）</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>要素</th>
+<th>图形</th>
+<th>命名要点</th>
+<th>错误示例（改错题）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>外部实体</td>
+<td>矩形 □</td>
+<td>名词，且在系统边界<strong>外</strong>（供应商✓）；内部模块画成实体 ✗</td>
+<td>「订单模块」当外部实体</td>
+</tr>
+<tr>
+<td>加工</td>
+<td>圆角矩形</td>
+<td><strong>动宾短语</strong>（校验订单✓）</td>
+<td>「订单」「数据」当加工名 ✗</td>
+</tr>
+<tr>
+<td>数据存储</td>
+<td>开口矩形</td>
+<td>名词（订单库✓）</td>
+<td>无名存储 ✗</td>
+</tr>
+<tr>
+<td>数据流</td>
+<td>带箭头实线</td>
+<td>具体名词短语（合格订单✓）</td>
+<td>「流」「信息」空洞名 ✗</td>
+</tr>
+</tbody></table></div>
+<p><strong>口诀</strong>：加工必动宾，数据流有名，外部在界外，存储可读写。</p>
+<p><strong>分层图（0 层 vs 1 层）</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>层次</th>
+<th>别名</th>
+<th>画什么</th>
+<th>加工编号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0 层</td>
+<td>上下文/顶层图</td>
+<td>整系统当一个加工，只连外部实体与数据流</td>
+<td>0 或系统名</td>
+</tr>
+<tr>
+<td>1 层</td>
+<td>首次分解</td>
+<td>拆成子加工+数据存储</td>
+<td>1、2、3…</td>
+</tr>
+<tr>
+<td>2 层及以下</td>
+<td>继续分解</td>
+<td>某 1 层加工展开成子图</td>
+<td>1.1、1.2…</td>
+</tr>
+</tbody></table></div>
+<p><strong>作用口径</strong>：0 层界定<strong>系统边界</strong>；1 层把黑盒打开看清内部功能与存储。</p>
+<p><strong>数据字典六类条目 + 数据结构符号（填空常考）</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>=</code></td>
+<td>由…组成</td>
+</tr>
+<tr>
+<td><code>+</code></td>
+<td>同时出现（与）</td>
+</tr>
+<tr>
+<td><code>[A|B]</code></td>
+<td>A 或 B 选一（任选）</td>
+</tr>
+<tr>
+<td><code>{…}</code></td>
+<td>必选项</td>
+</tr>
+<tr>
+<td><code>{…}*</code>（或 m{…}n）</td>
+<td>重复 0..n 次（指定次数）</td>
+</tr>
+</tbody></table></div>
+<p>示例：<code>订单 = 订单号 + 顾客名 + 日期 + {明细}</code>。<strong>四作用</strong>：列表、相互参照、内容检索、<strong>一致性检验</strong>（专人/数据管理员维护）。</p>
+<p><strong>SA 三模型关系（选择/简答）</strong>：</p>
+<ul>
+<li><strong>功能模型</strong>：DFD——系统「做什么、数据怎么流」</li>
+<li><strong>行为模型</strong>：STD / 控制规格说明——状态如何随事件迁移</li>
+<li><strong>数据模型</strong>：E-R 图 + 数据字典——数据长什么样
+三模型相互印证，共同构成分析说明书。</li>
+</ul>
+<p><strong>改错清单（案例画图题按此排查）</strong>：父子图不平衡、黑洞、奇迹、多余连线、加工用名词命名、数据流无名、外部实体直连数据存储、菱形/泳道混入 DFD（那些是流程图/活动图元素，<strong>不是 DFD</strong>）。</p>
+<h3 id="f-面向对象分析ooa-知识补全">F. 面向对象分析（OOA）· 知识补全</h3>
+<p><strong>OOA（答卷·定义）</strong>：面向对象分析是从参与者目标与问题域对象职责的视角建立分析模型的方法，以用例模型与分析类模型为核心。<strong>作用</strong>：理清谁用系统、系统为谁完成何目标、对象如何协作。</p>
+<p><strong>系统分析建模（答卷·整段可背）</strong>：</p>
+<ul>
+<li><strong>定义</strong>：系统分析建模是在系统分析（需求分析）阶段，用图形与文字模型描述待建系统的功能、数据或对象及其关系与行为，以准确理解问题域并形成可交付分析模型的过程。</li>
+<li><strong>作用</strong>：澄清并结构化用户需求；发现遗漏、冲突与二义性；在干系人与开发方之间建立对「系统做什么」的共同理解；为设计、实现与测试提供可跟踪依据。</li>
+</ul>
+<p><strong>OO 建立系统分析模型四步（案例高频·必背）</strong>：</p>
+<ol>
+<li>定义概念类；</li>
+<li>确定类之间的关系；</li>
+<li>为类添加职责；</li>
+<li>建立交互图。</li>
+</ol>
+<p><strong>前三步合称 CRC（类–责任–协作者）建模</strong>；第四步用交互图（序列图）描述动态协作。CRC 卡三栏=类名/职责/协作者。</p>
+<p><strong>用例模型三要素</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>要素</th>
+<th>含义</th>
+<th>命名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>参与者 Actor</td>
+<td>与系统交互的外部角色（人、外部系统、设备、时钟）</td>
+<td>名词：收银员、支付网关</td>
+</tr>
+<tr>
+<td>用例 Use Case</td>
+<td>系统为参与者完成的<strong>有价值目标</strong>的一次完整交互</td>
+<td>动宾：提交订单</td>
+</tr>
+<tr>
+<td>通信关联</td>
+<td>参与者与用例的交互线</td>
+<td>箭头指向<strong>主动发起方</strong></td>
+</tr>
+</tbody></table></div>
+<p><strong>业务用例 vs 系统用例（易混必背）</strong>：业务用例站在组织视角（「客户完成门店退货」），系统用例站在软件边界内（「系统记录退货单并回写库存」）；一个业务用例可对应多个系统用例。用例内的「步骤 1/2/3」不是子用例。</p>
+<p><strong>OOA 产物清单（交卷口径）</strong>：用例模型（用例图+用例规约）→ 分析类模型（领域类图 + BCE 职责划分）→ 交互图（序列图描述用例流程）。</p>
+<p><strong>SA vs OOA 怎么选（题干信号）</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>题干信号</th>
+<th>选谁</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>给 DFD 图让补全/改错、强调数据流与加工</td>
+<td><strong>SA</strong>（结构化分析）</td>
+</tr>
+<tr>
+<td>给用例图/类图、强调参与者目标与对象职责、需求易变、交互密集</td>
+<td><strong>OOA</strong></td>
+</tr>
+<tr>
+<td>数据流清晰的批处理/传统 MIS</td>
+<td>SA 更顺手</td>
+</tr>
+<tr>
+<td>界面交互复杂、业务对象多、团队面向对象技术栈</td>
+<td>OOA 更顺手</td>
+</tr>
+</tbody></table></div>
+<p><strong>对比一句（答卷）</strong>：SA 以加工与数据流为中心，OOA 以对象与职责为中心；二者都服务于「系统做什么」的分析结论，可按题干信号择一并说明理由。</p>
 <hr>
 <h2 id="三uml-与用例--定义--作用--用法--效果试题一-oo-线">三、UML 与用例 · 定义 / 作用 / 用法 / 效果（试题一 OO 线）</h2>
 <h3 id="a-uml-总览">A. UML 总览</h3>
@@ -771,7 +945,7 @@
 </tr>
 <tr>
 <td>15 min</td>
-<td>§二 试题一：五法四维表 + DFD 纠错四类 + 三件套选型</td>
+<td>§二 试题一：五法四维表 + DFD 纠错四类 + SA/OOA 补全（字典符号、四步/CRC、选型信号）</td>
 </tr>
 </tbody></table></div>
 <p><strong>睡前最后一眼</strong>：防超卖三连（原子扣减/条件更新/MQ 削峰）+ 微服务五件套——两块都是采分词密集区。</p>
