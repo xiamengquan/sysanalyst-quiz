@@ -2,7 +2,7 @@
 <blockquote>
 <p><strong>docType</strong>：howto · 场景：考前一晚 60–90 分钟定向过卡（也可慢慢精读）<br><strong>选题前提</strong>：嵌入式放养；选答锁定 <strong>数据库 + Web/微服务</strong>，规划计算保底<br><strong>关联</strong>：<a href="/kb/quick-exam-7d/" class="kb-ref" data-kb-id="quick-exam-7d" title="预览：考前 7 天背诵清单">考前7天背诵清单</a> · <a href="/kb/quick-req-five/" class="kb-ref" data-kb-id="quick-req-five" title="预览：案例必答 · 需求获取五法对比卡">需求获取五法对比卡</a> · <a href="/kb/quick-req-tools/" class="kb-ref" data-kb-id="quick-req-tools" title="预览：需求分析工具 · 定义与用法速查">需求分析工具速查</a> · <a href="/kb/quick-microservice-case/" class="kb-ref" data-kb-id="quick-microservice-case" title="预览：微服务系统 · 案例考点速查">微服务案例速查</a> · <a href="/kb/quick-web-case/" class="kb-ref" data-kb-id="quick-web-case" title="预览：Web应用案例分析 · 考点速查">Web应用案例速查</a></p>
 </blockquote>
-<p><strong>可检索摘要</strong>：考前一晚完整冲刺——①卷面规则与选题策略；②试题一必答：需求获取七法定义/用法/效果与四维对比、需求三层、需求管理三件（基线/CCB/跟踪矩阵）、加工逻辑三件套（结构化语言/判定表/判定树）、DFD 定义绘制纠错；③Web 高并发：CDN/LB/网关/缓存/Redis/MQ/分库分表逐项定义与效果，防超卖、幂等、超时释放机制；④微服务：拆分策略、治理五件套、单体对比五维、最终一致性机制；⑤数据库：范式判定、三类异常、SQL 关键字、反规范化与索引；⑥回收期/NPV/可行性公式；⑦90 分钟时间表。</p>
+<p><strong>可检索摘要</strong>：考前一晚完整冲刺——①卷面规则与选题策略；②试题一必答：需求获取七法定义/用法/效果与四维对比、需求三层、需求管理三件（基线/CCB/跟踪矩阵）、加工逻辑三件套（结构化语言/判定表/判定树）、DFD 定义绘制纠错；③UML 与用例：UML 总览、用例图四阶段与 include/extend、类图六关系与 BCE、序列图三大/四大口径、状态机图、活动图分支分叉之辨、选图口诀；④Web 高并发：CDN/LB/网关/缓存/Redis/MQ/分库分表逐项定义与效果，防超卖、幂等、超时释放机制；⑤微服务：拆分策略、治理五件套、单体对比五维、最终一致性机制；⑥数据库：范式判定、三类异常、SQL 关键字、反规范化与索引；⑦回收期/NPV/可行性公式；⑧90 分钟时间表。</p>
 <hr>
 <h2 id="一卷面规则与选题策略先定心">一、卷面规则与选题策略（先定心）</h2>
 <div class="table-wrap"><table>
@@ -225,7 +225,193 @@
 <li><strong>配套</strong>：数据字典 DD 精确定义六类条目（数据元素/数据结构/数据流/数据存储/加工逻辑/外部实体），消除二义性、支撑一致性检验。</li>
 </ul>
 <hr>
-<h2 id="三web-高并发--逐项定义与效果">三、Web 高并发 · 逐项定义与效果</h2>
+<h2 id="三uml-与用例--定义--作用--用法--效果试题一-oo-线">三、UML 与用例 · 定义 / 作用 / 用法 / 效果（试题一 OO 线）</h2>
+<h3 id="a-uml-总览">A. UML 总览</h3>
+<ul>
+<li><strong>定义（答卷）</strong>：统一建模语言（UML）是用标准化图形符号对软件系统进行可视化建模的规范语言。</li>
+<li><strong>作用（答卷）</strong>：统一分析与设计的表达口径；<strong>结构看静态（结构图）、行为看动态（行为图）</strong>，图随问题选。</li>
+<li><strong>用法</strong>：需求阶段用用例图定功能范围；分析阶段用类图/序列图/状态图/活动图建分析模型；设计阶段延伸到组件图/部署图。</li>
+</ul>
+<h3 id="b-用例图-必考">B. 用例图（★★★★★ 必考）</h3>
+<ul>
+<li><strong>定义（答卷）</strong>：用例图是描述系统边界外<strong>参与者</strong>与系统内<strong>用例</strong>及其关系的行为图。</li>
+<li><strong>作用（答卷）</strong>：界定系统功能范围，说明「谁与系统交互、系统为参与者完成哪些有价值目标」。</li>
+<li><strong>用法（构建四阶段）</strong>：识别参与者 → 合并需求获用例 → 细化用例描述 → 调整模型。</li>
+<li><strong>元素</strong>：参与者（人 / 外部系统 / 硬件设备 / 时钟）、用例（椭圆，命名「动词短语+名词短语」）、通信关联、系统边界框。</li>
+<li><strong>效果</strong>：需求阶段与用户对齐功能范围；用例宜<strong>编号</strong>，便于需求跟踪。</li>
+</ul>
+<p><strong>include vs extend（答卷必背）</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>定义</th>
+<th>作用</th>
+<th>箭头方向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>«include»</strong></td>
+<td>基用例<strong>必然</strong>包含另一用例的行为</td>
+<td>抽取每次都必须执行的公共子流程（如身份认证）</td>
+<td>基用例 → 被包含用例</td>
+</tr>
+<tr>
+<td><strong>«extend»</strong></td>
+<td>特定条件下由扩展用例为基用例<strong>增加</strong>行为</td>
+<td>表示可选增值或条件触发的扩展（如发送短信）</td>
+<td>扩展用例 → 基用例</td>
+</tr>
+</tbody></table></div>
+<p><strong>用例规约六段（案例简答标准答）</strong>：①名称 ②参与者 ③前置条件 ④基本事件流 ⑤备选/异常事件流 ⑥后置条件。</p>
+<p><strong>案例填空三看</strong>：边界外空白 → <strong>参与者</strong>；椭圆空白 → <strong>用例名</strong>（动宾）；虚线旁 → 先判必经/可选，再写 include 或 extend。</p>
+<p><strong>易错</strong>：用例 ≠ 界面按钮级操作步骤（用例是目标导向的完整交互）；区分业务用例与系统用例；include/extend 箭头方向勿画反。</p>
+<h3 id="c-类图-必考">C. 类图（★★★★★ 必考）</h3>
+<ul>
+<li><strong>定义（答卷）</strong>：类图是描述类、接口及其属性、操作与静态关系的结构图。</li>
+<li><strong>作用（答卷）</strong>：展示问题域或设计中的概念结构，说明有哪些类、类之间如何关联；<strong>静态结构首选</strong>。</li>
+<li><strong>用法</strong>：类盒三格（类名 / 属性 / 操作()）；可见性 <code>+</code> public、<code>-</code> private、<code>#</code> protected；<strong>多重性写在对方端</strong>，读法=「一个本端对应几个对端」（如家属 1..* ↔ 老人）。</li>
+</ul>
+<p><strong>六种关系（定义 · 作用 · 符号）</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>关系</th>
+<th>定义（答卷）</th>
+<th>作用（答卷）</th>
+<th>符号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>关联</strong></td>
+<td>分类器间结构关系，实例经链接相连</td>
+<td>表达实例间稳定结构连接</td>
+<td>实线</td>
+</tr>
+<tr>
+<td><strong>依赖</strong></td>
+<td>客户端对供应者的较弱使用/创建/调用关系</td>
+<td>表示临时使用，不强调长期持有</td>
+<td>虚线开放箭头</td>
+</tr>
+<tr>
+<td><strong>泛化</strong></td>
+<td>一般与特殊的 is-a 关系，子继承父并可特化</td>
+<td>建立类型层次与多态</td>
+<td><strong>实线</strong>空心三角（三角在父端）</td>
+</tr>
+<tr>
+<td><strong>实现</strong></td>
+<td>实现端兑现规约端契约（类实现接口）</td>
+<td>表示实现与规约的对应</td>
+<td><strong>虚线</strong>空心三角（三角在接口端）</td>
+</tr>
+<tr>
+<td><strong>聚合</strong></td>
+<td>弱拥有：整体不负责部分生命周期，部分可独立、可共享</td>
+<td>可分离的整—部分关系</td>
+<td>实线<strong>空心</strong>菱形在整体端</td>
+</tr>
+<tr>
+<td><strong>组合</strong></td>
+<td>强拥有：整体负责部分存在与存储，生命周期绑定</td>
+<td>表示构成关系，部分不能独立存在</td>
+<td>实线<strong>实心</strong>菱形在整体端</td>
+</tr>
+</tbody></table></div>
+<p><strong>强度排序（答卷可写）</strong>：依赖 &lt; 关联 &lt; 聚合 &lt; 组合；<strong>菱形永远画在整体一端</strong>。</p>
+<p><strong>判定口诀</strong>：部分随整体销毁 → <strong>组合</strong>（如订单与明细、档案与老人）；可收回再分配 → <strong>聚合</strong>（如手环与老人）；各自独立存在 → <strong>关联</strong>；「用一下」→ 依赖；「是一种」→ 泛化；「兑现接口」→ 实现。</p>
+<p><strong>分析类 BCE 三角色（答卷·定义/作用）</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>角色</th>
+<th>定义</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>边界 Boundary</td>
+<td>系统与参与者（外部系统/设备）之间的交互接口类</td>
+<td>收发输入输出、适配交互，隔离系统内外</td>
+</tr>
+<tr>
+<td>控制 Control</td>
+<td>协调某一用例控制流程的编排类</td>
+<td>按顺序调度对象、处理分支异常；不持久保存数据</td>
+</tr>
+<tr>
+<td>实体 Entity</td>
+<td>问题域中具持久业务意义的信息及规则载体</td>
+<td>保存业务状态与约束，供控制类读写</td>
+</tr>
+</tbody></table></div>
+<p><strong>口诀</strong>：界面收发、控制编排、实体存业务；一条用例常对应 1 边界 + 1 控制 + 若干实体。</p>
+<h3 id="d-序列图-必考">D. 序列图（★★★★★ 必考）</h3>
+<ul>
+<li><strong>定义（答卷）</strong>：序列图是按时间顺序描述对象之间消息交互的行为图（教材别名「顺序图」）。</li>
+<li><strong>作用（答卷）</strong>：说明某一场景下对象如何依次发消息、协作完成一次交互。</li>
+<li><strong>用法/口径（必记）</strong>：<ul>
+<li><strong>选择题答「三大」</strong>：对象、生命线、消息（2014 上午真题口径）</li>
+<li><strong>案例简答答「四大」</strong>：<strong>参与者</strong>、对象、生命线、消息（2026 上案例真题口径；参与者作为消息发起/接收源头、界定系统边界）</li>
+</ul>
+</li>
+<li><strong>易错</strong>：<strong>泳道是活动图元素</strong>，不属于序列图基本构成（经典干扰项）。</li>
+</ul>
+<h3 id="e-状态机图">E. 状态机图（★★★★）</h3>
+<ul>
+<li><strong>定义（答卷）</strong>：状态机图是描述某一个对象在生命周期中状态及迁移的行为图（旧称状态图）。</li>
+<li><strong>作用（答卷）</strong>：说明对象在何种事件下从一状态转到另一状态。</li>
+<li><strong>用法</strong>：先列状态清单与事件清单 → 画迁移弧并标注触发事件/条件/动作 → 检查不可达与无出口状态。</li>
+<li><strong>适用效果</strong>：事件驱动、状态复杂的对象（订单：待支付→已支付→已完成/已取消）。</li>
+<li><strong>易混</strong>：DFD 管「数据怎么流」，状态图管「状态怎么变」；与 STD 同源。</li>
+</ul>
+<h3 id="f-活动图">F. 活动图（★★★★）</h3>
+<ul>
+<li><strong>定义（答卷）</strong>：活动图是描述业务流程中动作、分支、合并与并行的行为图。</li>
+<li><strong>作用（答卷）</strong>：说明工作如何推进、何处分支或并行、角色如何分工。</li>
+<li><strong>用法</strong>：动作节点 + 分支/合并（菱形）+ 分叉/汇合（粗横线）+ 泳道（按角色/对象划分职责）。</li>
+<li><strong>易混（必背）</strong>：<strong>分支/合并 = 选一个做</strong>（条件判断，菱形）；<strong>分叉/汇合 = 同时做</strong>（并发，粗横线）。</li>
+</ul>
+<h3 id="g-选图口诀题干信号--选图">G. 选图口诀（题干信号 → 选图）</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>题干问什么</th>
+<th>选什么图</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>系统功能范围、谁用什么</td>
+<td><strong>用例图</strong></td>
+</tr>
+<tr>
+<td>概念类、属性、多重性、静态关系</td>
+<td><strong>类图</strong></td>
+</tr>
+<tr>
+<td>按时间顺序的对象交互</td>
+<td><strong>序列图</strong></td>
+</tr>
+<tr>
+<td>对象状态随事件迁移</td>
+<td><strong>状态机图</strong></td>
+</tr>
+<tr>
+<td>流程步骤、并行、泳道分工</td>
+<td><strong>活动图</strong></td>
+</tr>
+<tr>
+<td>组件封装与接口</td>
+<td>组件图</td>
+</tr>
+<tr>
+<td>软硬件部署</td>
+<td>部署图</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="四web-高并发--逐项定义与效果">四、Web 高并发 · 逐项定义与效果</h2>
 <h3 id="-架构链从外到内每件是什么干什么">① 架构链（从外到内，每件「是什么+干什么」）</h3>
 <div class="table-wrap"><table>
 <thead>
@@ -344,7 +530,7 @@
 <li><strong>超时释放</strong>（15 分钟未支付订单归还号源）：延迟队列或 Redis ZSet 按到期时间检查 + 支付/取消用条件更新 + 定时对账兜底。<strong>效果</strong>：号源及时回流，极端漏单可对账修复。</li>
 </ol>
 <hr>
-<h2 id="四微服务--逐项定义与效果">四、微服务 · 逐项定义与效果</h2>
+<h2 id="五微服务--逐项定义与效果">五、微服务 · 逐项定义与效果</h2>
 <p><strong>微服务（总定义）</strong>：把单一应用拆为一组小型服务，每个服务独立进程、独立数据库、围绕业务能力构建，轻量通信（通常 REST/RPC/消息）协作。</p>
 <h3 id="-拆分策略定义效果">① 拆分策略（定义+效果）</h3>
 <div class="table-wrap"><table>
@@ -459,7 +645,7 @@
 <li><strong>现象</strong>：跨服务数据不一致 → <strong>改法</strong>：最终一致性——本地消息表 / MQ 事务消息 + 定时对账补偿；强一致场景用分布式事务（TCC/Seata）并说明代价。</li>
 </ul>
 <hr>
-<h2 id="五数据库--一条龙套路定义全补">五、数据库 · 一条龙套路（定义全补）</h2>
+<h2 id="六数据库--一条龙套路定义全补">六、数据库 · 一条龙套路（定义全补）</h2>
 <h3 id="-范式定义判定">① 范式（定义+判定）</h3>
 <div class="table-wrap"><table>
 <thead>
@@ -519,7 +705,7 @@
 <p>⚠️ <strong>一致性保障三句缺一扣分</strong>：同一事务内更新两处、触发器联动、定期对账。</p>
 <p><strong>索引</strong>：定义=加速查询的有序数据结构（B+树）。<strong>用法</strong>：对高频查询条件建<strong>联合索引</strong>（如 <code>(会员号,预约时间)</code>、<code>(课程号,签到状态)</code>）。<strong>效果</strong>：等值/范围查询走索引；<strong>最左前缀原则</strong>——只查第二列无法用上该联合索引。</p>
 <hr>
-<h2 id="六规划计算--公式保底定义全补">六、规划计算 · 公式保底（定义全补）</h2>
+<h2 id="七规划计算--公式保底定义全补">七、规划计算 · 公式保底（定义全补）</h2>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -555,7 +741,7 @@
 </tr>
 </tbody></table></div>
 <hr>
-<h2 id="七今晚时间表90-分钟版">七、今晚时间表（90 分钟版）</h2>
+<h2 id="八今晚时间表90-分钟版">八、今晚时间表（90 分钟版）</h2>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -564,24 +750,28 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>30 min</td>
-<td>§三 Web 逐项过一遍 + 四段骨架各默写一次</td>
+<td>25 min</td>
+<td>§四 Web 逐项过一遍 + 四段骨架各默写一次</td>
 </tr>
 <tr>
-<td>20 min</td>
-<td>§四 微服务五件套 + 对比五维默写</td>
+<td>15 min</td>
+<td>§五 微服务五件套 + 对比五维默写</td>
 </tr>
 <tr>
-<td>20 min</td>
-<td>§五 数据库一条龙走一遍</td>
-</tr>
-<tr>
-<td>10 min</td>
-<td>§六 公式 + §一 选题策略确认</td>
+<td>15 min</td>
+<td>§六 数据库一条龙走一遍</td>
 </tr>
 <tr>
 <td>10 min</td>
-<td>§二 试题一：五法四维表 + DFD 纠错四类</td>
+<td>§三 UML：用例规约六段 + 六关系口诀 + 选图口诀</td>
+</tr>
+<tr>
+<td>10 min</td>
+<td>§七 公式 + §一 选题策略确认</td>
+</tr>
+<tr>
+<td>15 min</td>
+<td>§二 试题一：五法四维表 + DFD 纠错四类 + 三件套选型</td>
 </tr>
 </tbody></table></div>
 <p><strong>睡前最后一眼</strong>：防超卖三连（原子扣减/条件更新/MQ 削峰）+ 微服务五件套——两块都是采分词密集区。</p>
@@ -592,6 +782,8 @@
 <li>速查：<a href="/kb/quick-req-tools/" class="kb-ref" data-kb-id="quick-req-tools" title="预览：需求分析工具 · 定义与用法速查">《需求分析工具 · 定义与用法速查》</a></li>
 <li>速查：<a href="/kb/quick-case-four-types/" class="kb-ref" data-kb-id="quick-case-four-types" title="预览：案例分析四类题型导航（2026 考纲）">《案例分析四类题型导航（2026 考纲）》</a></li>
 <li>速查：<a href="/kb/quick-exam-7d/" class="kb-ref" data-kb-id="quick-exam-7d" title="预览：考前 7 天背诵清单">《考前 7 天背诵清单》</a></li>
+<li>速查：<a href="/kb/quick-uml-learn/" class="kb-ref" data-kb-id="quick-uml-learn" title="预览：UML · 体系化学习指南（由简入深）">《UML · 体系化学习指南（由简入深）》</a></li>
+<li>速查：<a href="/kb/quick-sao-learn/" class="kb-ref" data-kb-id="quick-sao-learn" title="预览：结构化与面向对象分析 · 体系化学习路径（L0→L4）">《结构化与面向对象分析 · 体系化学习路径（L0→L4）》</a></li>
 <li>考点：<a href="/kb/quick-web-case/" class="kb-ref" data-kb-id="quick-web-case" title="预览：Web应用案例分析 · 考点速查">《Web应用案例分析 · 考点速查》</a></li>
 <li>考点：<a href="/kb/quick-microservice-case/" class="kb-ref" data-kb-id="quick-microservice-case" title="预览：微服务系统 · 案例考点速查">《微服务系统 · 案例考点速查》</a></li>
 </ul>
