@@ -1,0 +1,294 @@
+<h1 id="速查--考前最后一晚--定向冲刺web微服务线">速查 · 考前最后一晚 · 定向冲刺（Web/微服务线）</h1>
+<blockquote>
+<p><strong>docType</strong>：howto · 场景：考前一晚 60–90 分钟定向过卡<br><strong>选题前提</strong>：嵌入式放养；选答锁定 <strong>数据库 + Web/微服务</strong>，规划计算保底<br><strong>关联</strong>：<a href="/kb/quick-exam-7d/" class="kb-ref" data-kb-id="quick-exam-7d" title="预览：考前 7 天背诵清单">考前7天背诵清单</a> · <a href="/kb/quick-req-five/" class="kb-ref" data-kb-id="quick-req-five" title="预览：案例必答 · 需求获取五法对比卡">需求获取五法对比卡</a> · <a href="/kb/quick-microservice-case/" class="kb-ref" data-kb-id="quick-microservice-case" title="预览：微服务系统 · 案例考点速查">微服务案例速查</a> · <a href="/kb/quick-web-case/" class="kb-ref" data-kb-id="quick-web-case" title="预览：Web应用案例分析 · 考点速查">Web应用案例速查</a></p>
+</blockquote>
+<p><strong>可检索摘要</strong>：考前一晚按五段过卡——①选题策略与卷面规则；②试题一必答（需求获取五法四维 + 加工逻辑三件套/判定表 + DFD 纠错四类）；③Web 高并发四段骨架（架构链/负载均衡/缓存三问题/防超卖幂等超时释放）；④微服务骨架（拆分策略/治理五件套/单体对比五维）；⑤数据库套路与回收期 NPV 公式。最后一眼：防超卖三连 + 微服务五件套。</p>
+<hr>
+<h2 id="一卷面规则与选题策略先定心">一、卷面规则与选题策略（先定心）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>时长 / 满分</td>
+<td>90 分钟 · 75 分</td>
+</tr>
+<tr>
+<td>题量</td>
+<td>5 大题 → 实答 3 道（试题一必答 + 四选二），每题 25 分约 30 分钟</td>
+</tr>
+<tr>
+<td>机考</td>
+<td>连续机考：综合知识交卷后直接进案例，注意体力分配</td>
+</tr>
+</tbody></table></div>
+<p><strong>本线选题表</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>题位</th>
+<th>策略</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>试题一（必答）</td>
+<td>需求获取选型 + DFD/类图填空</td>
+</tr>
+<tr>
+<td>选答 1</td>
+<td><strong>数据库</strong>（3NF/SQL/反规范化）——年年出，必拿</td>
+</tr>
+<tr>
+<td>选答 2</td>
+<td><strong>Web 高并发 或 微服务</strong>（出哪道答哪道；都出则选更有把握的）</td>
+</tr>
+<tr>
+<td>兜底</td>
+<td>Web/微服务都没出 → 转答「规划与可行性计算」（公式保底）或移动问题诊断</td>
+</tr>
+</tbody></table></div>
+<h2 id="二试题一必答--两手准备">二、试题一必答 · 两手准备</h2>
+<h3 id="a-需求获取五法--四维默写用">A. 需求获取五法 × 四维（默写用）</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>广度</th>
+<th>深度</th>
+<th>信息集成</th>
+<th>用户参与</th>
+<th>一句用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>访谈</td>
+<td>中</td>
+<td><strong>高</strong></td>
+<td>中</td>
+<td>中高</td>
+<td>深挖特定角色任务与痛点</td>
+</tr>
+<tr>
+<td>JRP/JAD</td>
+<td>中高</td>
+<td>高</td>
+<td><strong>高（当场冲突）</strong></td>
+<td><strong>高</strong></td>
+<td>当场对齐、消冲突、快共识</td>
+</tr>
+<tr>
+<td>问卷</td>
+<td><strong>高</strong></td>
+<td>低</td>
+<td>低</td>
+<td>中（间接）</td>
+<td>扩样本、看共性倾向</td>
+</tr>
+<tr>
+<td>文档分析</td>
+<td>中</td>
+<td>中</td>
+<td>中</td>
+<td>低</td>
+<td>低成本复用书面规则</td>
+</tr>
+<tr>
+<td>观察</td>
+<td>低中</td>
+<td><strong>高</strong></td>
+<td>中</td>
+<td>中</td>
+<td>发现「说不清」的真实做法</td>
+</tr>
+<tr>
+<td>采样</td>
+<td>中～高</td>
+<td>低中</td>
+<td>低</td>
+<td>中（间接）</td>
+<td>控成本、样本推断总体</td>
+</tr>
+<tr>
+<td>情节串联板</td>
+<td>低中</td>
+<td>中高</td>
+<td>中</td>
+<td>中高</td>
+<td>对齐界面与流程想象</td>
+</tr>
+</tbody></table></div>
+<p><strong>答卷套路</strong>：先问卷（+采样）扩面 → 访谈/观察加深 → 情节串联板或原型对齐界面 → JAD 收敛冲突；每点回扣题干约束（工期/成本/地理分布/说法冲突）。</p>
+<p><strong>需求管理三件</strong>（问到就写）：评审批准后建立<strong>需求基线</strong>；<strong>CCB 变更控制</strong>（影响分析+审批）；<strong>需求跟踪矩阵</strong>（需求↔设计↔实现↔测试，正向+反向）。</p>
+<h3 id="b-加工逻辑三件套判表判树结构化语言">B. 加工逻辑三件套（判表/判树/结构化语言）</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>工具</th>
+<th>适用</th>
+<th>口诀</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>判定表</td>
+<td>条件多、组合复杂</td>
+<td>表达最严谨、不遗漏不重复</td>
+</tr>
+<tr>
+<td>判定树</td>
+<td>分支层次清晰</td>
+<td>直观易画好交流；组合多会爆炸</td>
+</tr>
+<tr>
+<td>结构化语言</td>
+<td>含顺序/判断/循环</td>
+<td>伪码只写 IF-ELSE 与 WHILE</td>
+</tr>
+</tbody></table></div>
+<p>三者描述<strong>同一加工逻辑</strong>，可互相转换；写在数据字典「加工逻辑」条目。</p>
+<h3 id="c-dfd-纠错四类案例填空常客">C. DFD 纠错四类（案例填空常客）</h3>
+<ol>
+<li><strong>父子图不平衡</strong>——子图输入输出与父图对不上</li>
+<li><strong>黑洞</strong>——加工只有输入无输出</li>
+<li><strong>奇迹</strong>——加工只有输出无输入</li>
+<li><strong>多余连线</strong>——外部实体与数据存储直接连线（必须经加工）</li>
+</ol>
+<p>绘制四步：画系统输入输出（边缘标出）→ 画内部连处理 → 数据流命名（避免空洞词）→ 加工命名（<strong>动宾短语</strong>）。</p>
+<h2 id="三web-高并发--四段骨架过-3-遍">三、Web 高并发 · 四段骨架（过 3 遍）</h2>
+<h3 id="-架构填空链从外到内">① 架构填空链（从外到内）</h3>
+<blockquote>
+<p>CDN（静态）→ 负载均衡 LB → API 网关（鉴权/路由/限流）→ 应用集群（注册中心）→ Redis 缓存 → MQ 削峰 → 分库分表</p>
+</blockquote>
+<p>⚠️ <strong>动态实时数据不放 CDN</strong>，CDN 只放静态资源。</p>
+<h3 id="-负载均衡">② 负载均衡</h3>
+<ul>
+<li>四算法：加权轮询（性能差异大）、最少连接（长短混杂）、源地址哈希（会话粘滞）、一致性哈希（扩缩容迁移少）</li>
+<li>四层（IP/端口，LVS）vs 七层（HTTP 内容，Nginx）；经典组合 <strong>LVS + Nginx</strong></li>
+</ul>
+<h3 id="-缓存三问题技术方案论证高频">③ 缓存三问题（技术方案论证高频）</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>场景</th>
+<th>对策</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>穿透</td>
+<td>查不存在的 key</td>
+<td>布隆过滤器 / 空值缓存</td>
+</tr>
+<tr>
+<td>击穿</td>
+<td>热点 key 过期瞬间</td>
+<td>互斥锁 / 逻辑过期</td>
+</tr>
+<tr>
+<td>雪崩</td>
+<td>大量 key 同时过期</td>
+<td>过期时间加随机抖动 / 多级缓存</td>
+</tr>
+</tbody></table></div>
+<h3 id="-业务一致性三连10-分大题">④ 业务一致性三连（10 分大题）</h3>
+<ul>
+<li><strong>防超卖</strong>：Redis 原子扣减（Lua/DECR）+ DB <code>剩余&gt;0</code> 条件更新 + MQ 异步落库削峰</li>
+<li><strong>防重复</strong>：前端防连点 + 幂等令牌（SETNX）/ 唯一索引（至少写两种）</li>
+<li><strong>超时释放</strong>（15 分钟未支付）：延迟队列或 Redis ZSet 到期检查 + 支付/取消条件更新 + 对账兜底</li>
+</ul>
+<h2 id="四微服务--骨架">四、微服务 · 骨架</h2>
+<h3 id="-拆分策略诊断建模必写">① 拆分策略（诊断/建模必写）</h3>
+<blockquote>
+<p>按业务能力拆 / 按 DDD 限界上下文拆 / 按变更频率与团队拓扑拆（康威定律）</p>
+</blockquote>
+<p>⚠️ 反面素材：按 UI/API/DB 技术层拆 = <strong>分布式单体</strong>，诊断题见此必写。</p>
+<h3 id="-治理五件套缺一扣分">② 治理五件套（缺一扣分）</h3>
+<ol>
+<li><strong>注册发现</strong>：实例上下线、健康检查</li>
+<li><strong>API 网关</strong>：统一鉴权、路由、限流、协议转换</li>
+<li><strong>配置中心</strong>：动态配置、灰度发布</li>
+<li><strong>熔断/降级</strong>：超时→熔断→降级→限流，依赖故障不拖垮全链路</li>
+<li><strong>Service Mesh</strong>：流量/安全/可观测下沉 Sidecar</li>
+</ol>
+<h3 id="-单体-vs-微服务对比五维论证题万能表">③ 单体 vs 微服务对比五维（论证题万能表）</h3>
+<blockquote>
+<p>耦合度 · 独立部署 · 数据一致性 · 运维复杂度 · 团队自治 —— 结论必须回扣题干（工期/遗留系统/峰值流量）</p>
+</blockquote>
+<h3 id="-典型诊断句式">④ 典型诊断句式</h3>
+<ul>
+<li>拆分过细、链路雪崩 → 熔断+降级+限流+超时重试（幂等前提）</li>
+<li>数据不一致 → 最终一致性：本地消息表 / MQ 事务消息 + 对账补偿</li>
+</ul>
+<h2 id="五数据库--一条龙套路选答必拿">五、数据库 · 一条龙套路（选答必拿）</h2>
+<ol>
+<li><strong>规范化</strong>：找候选键 → 判部分依赖（1NF→2NF）→ 判传递依赖（→3NF）；各举插入/删除/修改异常一例</li>
+<li><strong>SQL 填空</strong>：DDL 三件 <code>CHECK / PRIMARY KEY / REFERENCES</code>；统计三件 <code>JOIN / GROUP BY / HAVING / ORDER BY</code></li>
+<li><strong>性能</strong>：反规范化三手段（冗余列、派生列、汇总表）+ <strong>一致性保障三句</strong>（同一事务更新、触发器、定期对账，缺一扣分）+ 联合索引<strong>最左前缀</strong>（如 <code>(会员号,预约时间)</code>、<code>(课程号,签到状态)</code>）</li>
+</ol>
+<h2 id="六规划计算--公式保底10-分钟">六、规划计算 · 公式保底（10 分钟）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>公式</th>
+<th>写法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>静态回收期</td>
+<td>累计净现金流由负转正之年：<code>整数年 + 上年缺口/当年净流</code>（如 3 + 30/150 = 3.2 年）</td>
+</tr>
+<tr>
+<td>动态回收期</td>
+<td>同上但用<strong>现值累计</strong>（折现后），结果 ≥ 静态回收期</td>
+</tr>
+<tr>
+<td>NPV</td>
+<td>各年净现金流折现求和 − 初始投资；<strong>NPV &gt; 0 → 经济可行</strong></td>
+</tr>
+<tr>
+<td>可行性分类</td>
+<td>技术 / 经济 / 法律社会 / 操作（用户使用）/ 组织政策</td>
+</tr>
+</tbody></table></div>
+<h2 id="七今晚时间表90-分钟版">七、今晚时间表（90 分钟版）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>时段</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>30 min</td>
+<td>§三 Web 四段骨架各默写一遍</td>
+</tr>
+<tr>
+<td>20 min</td>
+<td>§四 微服务五件套 + 对比五维默写</td>
+</tr>
+<tr>
+<td>20 min</td>
+<td>§五 数据库一条龙走一遍</td>
+</tr>
+<tr>
+<td>10 min</td>
+<td>§六 公式抄一遍 + §一 选题策略确认</td>
+</tr>
+<tr>
+<td>10 min</td>
+<td>§二 试题一：五法四维表 + DFD 纠错四类</td>
+</tr>
+</tbody></table></div>
+<p><strong>睡前最后一眼</strong>：防超卖三连（原子扣减/条件更新/MQ 削峰）+ 微服务五件套——两块都是采分词密集区。</p>
+<hr>
+<h2 id="相关考点">相关考点</h2>
+<ul>
+<li>速查：<a href="/kb/quick-req-five/" class="kb-ref" data-kb-id="quick-req-five" title="预览：案例必答 · 需求获取五法对比卡">《案例必答 · 需求获取五法对比卡》</a></li>
+<li>速查：<a href="/kb/quick-req-tools/" class="kb-ref" data-kb-id="quick-req-tools" title="预览：需求分析工具 · 定义与用法速查">《需求分析工具 · 定义与用法速查》</a></li>
+<li>速查：<a href="/kb/quick-case-four-types/" class="kb-ref" data-kb-id="quick-case-four-types" title="预览：案例分析四类题型导航（2026 考纲）">《案例分析四类题型导航（2026 考纲）》</a></li>
+<li>速查：<a href="/kb/quick-exam-7d/" class="kb-ref" data-kb-id="quick-exam-7d" title="预览：考前 7 天背诵清单">《考前 7 天背诵清单》</a></li>
+<li>考点：<a href="/kb/quick-web-case/" class="kb-ref" data-kb-id="quick-web-case" title="预览：Web应用案例分析 · 考点速查">《Web应用案例分析 · 考点速查》</a></li>
+<li>考点：<a href="/kb/quick-microservice-case/" class="kb-ref" data-kb-id="quick-microservice-case" title="预览：微服务系统 · 案例考点速查">《微服务系统 · 案例考点速查》</a></li>
+</ul>

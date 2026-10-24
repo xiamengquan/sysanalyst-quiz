@@ -2709,6 +2709,15 @@
           "note": "加工三件套/DFD/DD/E-R/STD/Petri/UML/因果图 · 对齐第11章"
         },
         {
+          "id": "quick-exam-eve",
+          "title": "考前最后一晚 · 定向冲刺（Web/微服务线）",
+          "path": "速查/考前最后一晚-定向冲刺-Web微服务线.md",
+          "status": "正式",
+          "kind": "quick",
+          "docType": "howto",
+          "note": "试题一两手准备 + Web/微服务/数据库骨架 + 公式保底 + 90 分钟时间表"
+        },
+        {
           "id": "quick-uml-learn",
           "title": "UML · 体系化学习指南（由简入深）",
           "path": "速查/UML-体系化学习指南.md",
